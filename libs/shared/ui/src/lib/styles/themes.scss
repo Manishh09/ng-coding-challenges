@@ -1,4 +1,4 @@
-// ng-challenges Material Design 3 Theme Configuration
+// ng-coding-challenges Material Design 3 Theme Configuration
 @use '@angular/material' as mat;
 @use 'sass:map';
 
@@ -6,7 +6,7 @@
 @include mat.core();
 
 // Define custom color palettes
-$ng-challenges-primary: mat.m2-define-palette((
+$ng-coding-challenges-primary: mat.m2-define-palette((
   50: #e3f2fd,
   100: #bbdefb,
   200: #90caf9,
@@ -39,7 +39,7 @@ $ng-challenges-primary: mat.m2-define-palette((
   )
 ), 700);
 
-$ng-challenges-accent: mat.m2-define-palette((
+$ng-coding-challenges-accent: mat.m2-define-palette((
   50: #fce4ec,
   100: #f8bbd9,
   200: #f48fb1,
@@ -72,36 +72,36 @@ $ng-challenges-accent: mat.m2-define-palette((
   )
 ), 500);
 
-$ng-challenges-warn: mat.m2-define-palette(mat.$m2-red-palette);
+$ng-coding-challenges-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Light theme
-$ng-challenges-light-theme: mat.m2-define-light-theme((
+$ng-coding-challenges-light-theme: mat.m2-define-light-theme((
   color: (
-    primary: $ng-challenges-primary,
-    accent: $ng-challenges-accent,
-    warn: $ng-challenges-warn,
+    primary: $ng-coding-challenges-primary,
+    accent: $ng-coding-challenges-accent,
+    warn: $ng-coding-challenges-warn,
   ),
   typography: mat.m2-define-typography-config(),
   density: 0,
 ));
 
 // Dark theme
-$ng-challenges-dark-theme: mat.m2-define-dark-theme((
+$ng-coding-challenges-dark-theme: mat.m2-define-dark-theme((
   color: (
-    primary: $ng-challenges-primary,
-    accent: $ng-challenges-accent,
-    warn: $ng-challenges-warn,
+    primary: $ng-coding-challenges-primary,
+    accent: $ng-coding-challenges-accent,
+    warn: $ng-coding-challenges-warn,
   ),
   typography: mat.m2-define-typography-config(),
   density: 0,
 ));
 
 // Default light theme
-@include mat.all-component-themes($ng-challenges-light-theme);
+@include mat.all-component-themes($ng-coding-challenges-light-theme);
 
 // Dark theme styles
 .dark-theme {
-  @include mat.all-component-colors($ng-challenges-dark-theme);
+  @include mat.all-component-colors($ng-coding-challenges-dark-theme);
   
   // Custom dark theme variables
   --surface-color: #121212;
@@ -150,7 +150,7 @@ $ng-challenges-dark-theme: mat.m2-define-dark-theme((
 }
 
 // Custom component styles
-.ng-challenges-card {
+.ng-coding-challenges-card {
   background-color: var(--surface-color);
   color: var(--on-surface-color);
   border: 1px solid var(--outline-color);
@@ -163,7 +163,7 @@ $ng-challenges-dark-theme: mat.m2-define-dark-theme((
   }
 }
 
-.ng-challenges-surface {
+.ng-coding-challenges-surface {
   background-color: var(--surface-variant-color);
   color: var(--on-surface-color);
 }

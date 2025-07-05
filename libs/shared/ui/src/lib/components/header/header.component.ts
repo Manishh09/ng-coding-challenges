@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
-  selector: 'ng-challenges-header',
+  selector: 'ng-coding-challenges-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +21,6 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   ]
 })
 export class HeaderComponent {
-  appName = input('ng-challenges');
+  appName = input('ng-coding-challenges');
   showMobileMenu = input(true);
 }

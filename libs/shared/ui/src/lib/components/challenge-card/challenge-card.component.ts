@@ -20,7 +20,7 @@ export interface ChallengeCardData {
 }
 
 @Component({
-  selector: 'ng-challenges-challenge-card',
+  selector: 'ng-coding-challenges-challenge-card',
   standalone: true,
   imports: [
     CommonModule,

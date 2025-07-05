@@ -6,7 +6,7 @@ import { ThemeType } from '../interfaces/theme.interface';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly THEME_STORAGE_KEY = 'ng-challenges-theme';
+  private readonly THEME_STORAGE_KEY = 'ng-coding-challenges-theme';
   private readonly platformId = inject(PLATFORM_ID);
   
   // Signal-based reactive state

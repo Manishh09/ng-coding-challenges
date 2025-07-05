@@ -25,7 +25,7 @@ describe('FooterComponent', () => {
 
   it('should render app name', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.footer-logo-text')?.textContent).toContain('ng-challenges');
+    expect(compiled.querySelector('.footer-logo-text')?.textContent).toContain('ng-coding-challenges');
   });
 
   it('should render description', () => {

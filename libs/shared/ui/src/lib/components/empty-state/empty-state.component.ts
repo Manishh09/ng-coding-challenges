@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'ng-challenges-empty-state',
+  selector: 'ng-coding-challenges-empty-state',
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule],
   template: `

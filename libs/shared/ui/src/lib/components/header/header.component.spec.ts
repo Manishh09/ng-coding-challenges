@@ -27,7 +27,7 @@ describe('HeaderComponent', () => {
 
   it('should render app name', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.logo-text')?.textContent).toContain('ng-challenges');
+    expect(compiled.querySelector('.logo-text')?.textContent).toContain('ng-coding-challenges');
   });
 
   it('should render logo icon', () => {
@@ -44,7 +44,7 @@ describe('HeaderComponent', () => {
 
   it('should render theme toggle', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const themeToggle = compiled.querySelector('ng-challenges-theme-toggle');
+    const themeToggle = compiled.querySelector('ng-coding-challenges-theme-toggle');
     expect(themeToggle).toBeTruthy();
   });
 
@@ -69,7 +69,7 @@ describe('HeaderComponent', () => {
   it('should have proper aria-label for logo link', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const logoLink = compiled.querySelector('.logo-link');
-    expect(logoLink?.getAttribute('aria-label')).toBe('Go to ng-challenges home page');
+    expect(logoLink?.getAttribute('aria-label')).toBe('Go to ng-coding-challenges home page');
   });
 
   it('should accept custom app name', () => {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent, HeaderComponent } from '@ng-challenges/shared/ui';
+import { FooterComponent, HeaderComponent } from '@ng-coding-challenges/shared/ui';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,5 @@ import { FooterComponent, HeaderComponent } from '@ng-challenges/shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'ng-challenges';
+  title = 'ng-coding-challenges';
 }

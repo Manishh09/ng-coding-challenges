@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, input } from '@angular/core'
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'ng-challenges-page-container',
+  selector: 'ng-coding-challenges-page-container',
   templateUrl: './page-container.component.html',
   styleUrl: './page-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

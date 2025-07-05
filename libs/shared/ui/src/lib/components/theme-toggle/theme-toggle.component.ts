@@ -5,7 +5,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
-  selector: 'ng-challenges-theme-toggle',
+  selector: 'ng-coding-challenges-theme-toggle',
   templateUrl: './theme-toggle.component.html',
   styleUrl: './theme-toggle.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,5 +1,5 @@
 /*
- * Public API Surface of @ng-challenges/shared/ui
+ * Public API Surface of @ng-coding-challenges/shared/ui
  */
 
 // Theming

@@ -4,14 +4,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'ng-challenges-footer',
+  selector: 'ng-coding-challenges-footer',
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterModule, MatIconModule, MatButtonModule]
 })
 export class FooterComponent {
-  appName = input('ng-challenges');
+  appName = input('ng-coding-challenges');
   description = input('Master Angular development through hands-on coding challenges.');
   angularVersion = input('19');
   

@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { PageContainerComponent } from '@ng-challenges/shared/ui';
+import { PageContainerComponent } from '@ng-coding-challenges/shared/ui';
 
 @Component({
-  selector: 'ng-challenges-home',
+  selector: 'ng-coding-challenges-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
