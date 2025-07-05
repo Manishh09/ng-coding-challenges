@@ -1,0 +1,48 @@
+<footer class="footer">
+  <div class="footer-content">
+    <!-- Brand Section -->
+    <div class="footer-section brand-section">
+      <div class="footer-logo">
+        <mat-icon class="footer-logo-icon">code</mat-icon>
+        <span class="footer-logo-text">{{ appName() }}</span>
+      </div>
+      <p class="footer-description">
+        {{ description() }}
+      </p>
+    </div>
+    
+    <!-- Links Sections -->
+    <div class="footer-section">
+      <h3 class="footer-title">Quick Links</h3>
+      <nav class="footer-nav">
+        <ng-content select="[slot=quick-links]"></ng-content>
+      </nav>
+    </div>
+    
+    <div class="footer-section">
+      <h3 class="footer-title">Categories</h3>
+      <nav class="footer-nav">
+        <ng-content select="[slot=categories]"></ng-content>
+      </nav>
+    </div>
+    
+    <div class="footer-section">
+      <h3 class="footer-title">Community</h3>
+      <div class="social-links">
+        <ng-content select="[slot=social-links]"></ng-content>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-content">
+      <p class="copyright">
+        © {{ currentYear() }} {{ appName() }}. Built with Angular {{ angularVersion() }}.
+      </p>
+      <div class="footer-bottom-links">
+        <ng-content select="[slot=legal-links]"></ng-content>
+      </div>
+    </div>
+  </div>
+</footer>

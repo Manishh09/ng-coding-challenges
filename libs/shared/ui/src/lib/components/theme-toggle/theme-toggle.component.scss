@@ -1,0 +1,21 @@
+ .theme-toggle-btn {
+   transition: transform 0.3s ease-in-out;
+
+ }
+
+ .theme-toggle-btn.dark-mode {
+   background-color: var(--primary-color);
+   color: white;
+ }
+
+ .theme-toggle-btn:hover {
+   transform: scale(1.1);
+ }
+
+ .theme-toggle-btn mat-icon {
+   transition: transform 0.3s ease-in-out;
+ }
+
+ .theme-toggle-btn:active mat-icon {
+   transform: rotate(180deg);
+ }

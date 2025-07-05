@@ -1,0 +1,40 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <div class="header-container">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <a routerLink="/" class="logo-link" [attr.aria-label]="'Go to ' + appName() + ' home page'">
+        <mat-icon class="logo-icon">code</mat-icon>
+        <span class="logo-text">{{ appName() }}</span>
+      </a>
+    </div>
+    
+    <!-- Desktop Navigation -->
+    <nav class="nav-section" [class.desktop-only]="showMobileMenu()">
+      <ng-content select="[slot=nav-items]"></ng-content>
+    </nav>
+    
+    <!-- Actions Section -->
+    <div class="actions-section">
+      <ng-challenges-theme-toggle></ng-challenges-theme-toggle>
+      
+      <!-- Mobile Menu Button -->
+      @if (showMobileMenu()) {
+        <button 
+          mat-icon-button 
+          [matMenuTriggerFor]="mobileMenu"
+          class="mobile-menu-btn mobile-only"
+          aria-label="Open mobile menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+      
+      <!-- Custom Action Buttons -->
+      <ng-content select="[slot=actions]"></ng-content>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!-- Mobile Navigation Menu -->
+<mat-menu #mobileMenu="matMenu">
+  <ng-content select="[slot=mobile-nav]"></ng-content>
+</mat-menu>

@@ -1,0 +1,32 @@
+<div class="empty-state-container" [class]="containerClass">
+  @if (icon) {
+    <div class="empty-state-icon">
+      <mat-icon>{{ icon }}</mat-icon>
+    </div>
+  }
+  
+  <div class="empty-state-content">
+    @if (title) {
+      <h3 class="empty-state-title">{{ title }}</h3>
+    }
+    @if (message) {
+      <p class="empty-state-message">{{ message }}</p>
+    }
+    
+    <ng-content></ng-content>
+    
+    @if (actionText && actionHandler) {
+      <div class="empty-state-actions">
+        <button 
+          mat-raised-button 
+          [color]="actionColor"
+          (click)="actionHandler()">
+          @if (actionIcon) {
+            <mat-icon>{{ actionIcon }}</mat-icon>
+          }
+          {{ actionText }}
+        </button>
+      </div>
+    }
+  </div>
+</div>

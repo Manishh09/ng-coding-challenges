@@ -1,0 +1,216 @@
+// ng-challenges Material Design 3 Theme Configuration
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define custom color palettes
+$ng-challenges-primary: mat.m2-define-palette((
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: #2196f3,
+  600: #1e88e5,
+  700: #1976d2,
+  800: #1565c0,
+  900: #0d47a1,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+), 700);
+
+$ng-challenges-accent: mat.m2-define-palette((
+  50: #fce4ec,
+  100: #f8bbd9,
+  200: #f48fb1,
+  300: #f06292,
+  400: #ec407a,
+  500: #e91e63,
+  600: #d81b60,
+  700: #c2185b,
+  800: #ad1457,
+  900: #880e4f,
+  A100: #ff80ab,
+  A200: #ff4081,
+  A400: #f50057,
+  A700: #c51162,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+), 500);
+
+$ng-challenges-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Light theme
+$ng-challenges-light-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $ng-challenges-primary,
+    accent: $ng-challenges-accent,
+    warn: $ng-challenges-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+// Dark theme
+$ng-challenges-dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $ng-challenges-primary,
+    accent: $ng-challenges-accent,
+    warn: $ng-challenges-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+// Default light theme
+@include mat.all-component-themes($ng-challenges-light-theme);
+
+// Dark theme styles
+.dark-theme {
+  @include mat.all-component-colors($ng-challenges-dark-theme);
+  
+  // Custom dark theme variables
+  --surface-color: #121212;
+  --surface-variant-color: #1e1e1e;
+  --on-surface-color: #ffffff;
+  --on-surface-variant-color: #e0e0e0;
+  --outline-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+// Light theme variables
+.light-theme {
+  // Custom light theme variables
+  --surface-color: #ffffff;
+  --surface-variant-color: #f5f5f5;
+  --on-surface-color: #212121;
+  --on-surface-variant-color: #616161;
+  --outline-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+// Default to light theme if no class is specified
+:root {
+  --surface-color: #ffffff;
+  --surface-variant-color: #f5f5f5;
+  --on-surface-color: #212121;
+  --on-surface-variant-color: #616161;
+  --outline-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+// Common spacing system
+:root {
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  
+  // Border radius system
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+}
+
+// Custom component styles
+.ng-challenges-card {
+  background-color: var(--surface-color);
+  color: var(--on-surface-color);
+  border: 1px solid var(--outline-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: all 0.3s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+}
+
+.ng-challenges-surface {
+  background-color: var(--surface-variant-color);
+  color: var(--on-surface-color);
+}
+
+// Animation utilities
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.5s ease-out;
+}
+
+// Responsive breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}

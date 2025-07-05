@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+// Import shared theme styles
+@import '../../../libs/shared/ui/src/lib/styles/themes.scss';
+
+// Application-specific styles
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  background-color: var(--surface-color);
+  color: var(--on-surface-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

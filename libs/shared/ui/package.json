@@ -1,0 +1,16 @@
+{
+  "name": "@ng-challenges/shared/ui",
+  "version": "1.0.0",
+  "description": "Shared UI components library for ng-challenges monorepo",
+  "peerDependencies": {
+    "@angular/animations": "^19.2.0",
+    "@angular/cdk": "^19.2.0",
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/material": "^19.2.19"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

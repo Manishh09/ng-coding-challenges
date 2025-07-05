@@ -4,16 +4,21 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:challenge-01": "ng serve challenge-01-async-data-fetch",
+    "build:challenge-01": "ng build challenge-01-async-data-fetch",
+    "build:libs": "ng build shared-ui && ng build shared-models && ng build shared-services",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^19.2.19",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
     "@angular/forms": "^19.2.0",
+    "@angular/material": "^19.2.19",
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
@@ -22,6 +27,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.15",
     "@angular/cli": "^19.2.12",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",

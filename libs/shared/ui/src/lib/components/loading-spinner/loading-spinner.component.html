@@ -1,0 +1,16 @@
+<div class="loading-container" [class]="containerClass()">
+  <mat-spinner 
+    [diameter]="diameter()" 
+    [strokeWidth]="strokeWidth()"
+    [color]="color()">
+  </mat-spinner>
+  
+  @if (message() || hasContent()) {
+    <div class="loading-content">
+      @if (message()) {
+        <p class="loading-message">{{ message() }}</p>
+      }
+      <ng-content></ng-content>
+    </div>
+  }
+</div>
