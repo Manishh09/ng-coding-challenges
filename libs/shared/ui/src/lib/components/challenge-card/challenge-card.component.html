@@ -1,65 +1,21 @@
-<mat-card class="challenge-card" [class.featured]="challenge.isFeatured" [class.completed]="challenge.isCompleted">
+<mat-card class="challenge-card">
   <mat-card-header>
     <mat-card-title>{{ challenge.title }}</mat-card-title>
-    <mat-card-subtitle>
-      <div class="card-meta">
-        <span class="category">{{ challenge.category }}</span>
-        <span class="difficulty" [class]="'difficulty-' + challenge.difficulty">
-          {{ challenge.difficulty | titlecase }}
-        </span>
-      </div>
-    </mat-card-subtitle>
   </mat-card-header>
   
   <mat-card-content>
-    <p class="description">{{ challenge.description }}</p>
-    
-    @if (challenge.tags.length > 0) {
-      <div class="tags-container">
-        <mat-chip-set>
-          @for (tag of challenge.tags.slice(0, 3); track tag) {
-            <mat-chip>{{ tag }}</mat-chip>
-          }
-          @if (challenge.tags.length > 3) {
-            <mat-chip class="more-tags">
-              +{{ challenge.tags.length - 3 }} more
-            </mat-chip>
-          }
-        </mat-chip-set>
-      </div>
-    }
-    
-    <div class="card-footer">
-      <div class="time-estimate">
-        <mat-icon>schedule</mat-icon>
-        <span>{{ challenge.estimatedTime }}min</span>
-      </div>
-      
-      @if (challenge.isCompleted) {
-        <div class="status-indicator">
-          <mat-icon class="completed-icon">check_circle</mat-icon>
-          <span>Completed</span>
-        </div>
-      }
-    </div>
+    <mat-card-subtitle class="subtitle">Description:</mat-card-subtitle>
+    <span class="description">{{ challenge.description }}</span>
   </mat-card-content>
   
   <mat-card-actions align="end">
-    <button mat-button color="primary" [routerLink]="['/challenges', challenge.id]">
-      <mat-icon>play_arrow</mat-icon>
-      {{ challenge.isCompleted ? 'Review' : 'Start Challenge' }}
+        <button mat-button color="secondary" [routerLink]="[challenge.link]" >
+      <!-- <mat-icon matTooltip="Go to Challenge" [matTooltipPosition]="'above'">forward_arrow</mat-icon> -->
+    Go to Challenge
     </button>
-    
-    <button mat-icon-button [attr.aria-label]="'Bookmark ' + challenge.title">
-      <mat-icon>bookmark_border</mat-icon>
-    </button>
+    <a mat-button color="primary" href="{{ challenge.gitHub }}" target="_blank">
+      <!-- <mat-icon matTooltip="View Source Code" [matTooltipPosition]="'above'">folder_code</mat-icon> -->
+      View Source Code
+    </a>
   </mat-card-actions>
-  
-  <!-- Featured Badge -->
-  @if (challenge.isFeatured) {
-    <div class="featured-badge">
-      <mat-icon>star</mat-icon>
-      <span>Featured</span>
-    </div>
-  }
 </mat-card>

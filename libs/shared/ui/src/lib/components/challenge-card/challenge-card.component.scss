@@ -6,33 +6,17 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 1px solid var(--outline-color);
-}
+  max-width: 500px;
+  
+ }
 
 .challenge-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px var(--shadow-color);
 }
+ 
 
-.challenge-card.featured {
-  border-color: #ffd54f;
-  background: linear-gradient(135deg, rgba(255, 213, 79, 0.05) 0%, rgba(255, 138, 101, 0.05) 100%);
-}
-
-.challenge-card.completed {
-  opacity: 0.8;
-}
-
-.challenge-card.completed::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
-  pointer-events: none;
-}
-
+ 
 mat-card-header {
   padding-bottom: var(--spacing-sm);
 }
@@ -45,74 +29,19 @@ mat-card-title {
   color: var(--on-surface-color);
 }
 
-.card-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
-
-.category {
+mat-card-subtitle {
   font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-xs);
   color: var(--on-surface-variant-color);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 500;
-}
-
-.difficulty {
-  padding: 2px 8px;
-  border-radius: var(--border-radius-sm);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.difficulty-beginner {
-  background-color: #e8f5e8;
-  color: #2e7d32;
-}
-
-.difficulty-intermediate {
-  background-color: #fff3e0;
-  color: #f57c00;
-}
-
-.difficulty-advanced {
-  background-color: #fce4ec;
-  color: #c2185b;
-}
-
-.difficulty-expert {
-  background-color: #f3e5f5;
-  color: #7b1fa2;
-}
-
-.dark-theme .difficulty-beginner {
-  background-color: rgba(46, 125, 50, 0.2);
-  color: #81c784;
-}
-
-.dark-theme .difficulty-intermediate {
-  background-color: rgba(245, 124, 0, 0.2);
-  color: #ffb74d;
-}
-
-.dark-theme .difficulty-advanced {
-  background-color: rgba(194, 24, 91, 0.2);
-  color: #f48fb1;
-}
-
-.dark-theme .difficulty-expert {
-  background-color: rgba(123, 31, 162, 0.2);
-  color: #ce93d8;
 }
 
 mat-card-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--spacing-md);
 }
 
@@ -122,106 +51,54 @@ mat-card-content {
   margin: 0;
   flex-grow: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+ 
   overflow: hidden;
 }
 
-.tags-container {
-  margin-top: auto;
-}
-
-.tags-container mat-chip {
-  font-size: 0.75rem;
-  height: 24px;
-}
-
-.more-tags {
-  background-color: var(--surface-variant-color) !important;
-  color: var(--on-surface-variant-color) !important;
-}
-
+ 
 .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: var(--spacing-sm);
 }
-
-.time-estimate {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  color: var(--on-surface-variant-color);
-  font-size: 0.875rem;
-}
-
-.time-estimate mat-icon {
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
-}
-
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  color: #4caf50;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.completed-icon {
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
-}
-
+ 
 mat-card-actions {
   padding: var(--spacing-md) var(--spacing-lg);
   border-top: 1px solid var(--outline-color);
   margin: 0;
 }
+ 
 
-.featured-badge {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  background: linear-gradient(135deg, #ffd54f, #ff8a65);
-  color: white;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-lg);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(255, 213, 79, 0.3);
-}
-
-.featured-badge mat-icon {
-  font-size: 14px;
-  width: 14px;
-  height: 14px;
-}
-
-/* Responsive Design */
+ 
+/* Responsive Design (Refined for better mobile experience) */
 @media (max-width: 768px) {
-  .card-footer {
+  .challenge-card {
+    border-radius: var(--border-radius-md); /* Slightly less rounded on smaller screens */
+  }
+
+  mat-card-header {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+  }
+
+  mat-card-title {
+    font-size: 1.4rem; /* Slightly smaller title on mobile */
+  }
+
+  mat-card-content {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+
+  mat-card-actions {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
   }
-  
-  .featured-badge {
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    padding: var(--spacing-xs);
-  }
-  
-  .featured-badge span {
-    display: none;
+
+  mat-icon {
+    font-size: 1.6rem; /* Slightly smaller icons on mobile */
+    width: 1.6rem;
+    height: 1.6rem;
   }
 }
