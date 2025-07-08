@@ -1,21 +1,38 @@
 <mat-card class="challenge-card">
+  <div class="card-banner"></div>
   <mat-card-header>
     <mat-card-title>{{ challenge.title }}</mat-card-title>
+    <div class="challenge-indicator">
+      <mat-icon class="challenge-icon" matTooltip="Coding Challenge" [matTooltipPosition]="'above'">code</mat-icon>
+    </div>
   </mat-card-header>
-  
+
   <mat-card-content>
-    <mat-card-subtitle class="subtitle">Description:</mat-card-subtitle>
-    <span class="description">{{ challenge.description }}</span>
+    <p class="description">{{ challenge.description }}</p>
   </mat-card-content>
-  
-  <mat-card-actions align="end">
-        <button mat-button color="secondary" [routerLink]="[challenge.link]" >
-      <!-- <mat-icon matTooltip="Go to Challenge" [matTooltipPosition]="'above'">forward_arrow</mat-icon> -->
-    Go to Challenge
+
+  <mat-card-actions>
+    <div class="action-buttons">
+      <a mat-stroked-button color="primary" href="{{ challenge.requirement }}" target="_blank">
+        <mat-icon>description</mat-icon>
+        <span>Requirements</span>
+      </a>
+      <a mat-flat-button color="primary" [routerLink]="[challenge.link]">
+        <mat-icon>play_arrow</mat-icon>
+        <span>View</span>
+      </a>
+    </div>
+
+    @if(false){<button mat-icon-button class="more-options" [matMenuTriggerFor]="menu" matTooltip="More Options">
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <a mat-button color="primary" href="{{ challenge.gitHub }}" target="_blank">
-      <!-- <mat-icon matTooltip="View Source Code" [matTooltipPosition]="'above'">folder_code</mat-icon> -->
-      View Source Code
-    </a>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item href="{{ challenge.gitHub }}" target="_blank">
+        <mat-icon>code</mat-icon>
+        <span>View Source Code</span>
+      </a>
+    </mat-menu>}
   </mat-card-actions>
+
+  <div class="card-footer-indicator"></div>
 </mat-card>

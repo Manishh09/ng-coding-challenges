@@ -12,9 +12,6 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withViewTransitions()
     ),
-    provideHttpClient(
-      withFetch(),
-      withInterceptorsFromDi()
-    ),
+    provideHttpClient(),
   ]
 };

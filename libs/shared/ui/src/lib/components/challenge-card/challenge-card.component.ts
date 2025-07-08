@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 export interface ChallengeCardData {
   id: string;
@@ -28,6 +29,8 @@ export interface Challenge {
 
   link: string;
 
+  requirement: string;
+
   gitHub: string;
 }
 
@@ -43,6 +46,7 @@ export interface Challenge {
     MatChipsModule,
     MatBadgeModule,
     MatTooltipModule,
+    MatMenuModule,
     RouterLink
   ],
  templateUrl: './challenge-card.component.html',

@@ -13,28 +13,3 @@
      flex-direction: column;
      overflow: auto;
  }
-
- 
-
-
-
- .hero-section {
-     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-     color: white;
-     padding: var(--spacing-xxl) var(--spacing-md);
-     text-align: center;
-     position: relative;
-     overflow: hidden;
-     height: 50vh;
- }
-
- .hero-section::before {
-     content: '';
-     position: absolute;
-     top: 0;
-     left: 0;
-     right: 0;
-     bottom: 0;
-     background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-     pointer-events: none;
- }

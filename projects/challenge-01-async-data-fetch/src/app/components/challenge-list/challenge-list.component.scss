@@ -1,0 +1,102 @@
+.challenge-list-container {
+  width: 100%;
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  min-height: 400px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  border-radius: 3px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no-challenges {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-challenges p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Add a staggered entry effect for the cards */
+ng-coding-challenges-challenge-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered delay for each card */
+ng-coding-challenges-challenge-card:nth-child(1) { animation-delay: 0.1s; }
+ng-coding-challenges-challenge-card:nth-child(2) { animation-delay: 0.2s; }
+ng-coding-challenges-challenge-card:nth-child(3) { animation-delay: 0.3s; }
+ng-coding-challenges-challenge-card:nth-child(4) { animation-delay: 0.4s; }
+ng-coding-challenges-challenge-card:nth-child(5) { animation-delay: 0.5s; }
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+}

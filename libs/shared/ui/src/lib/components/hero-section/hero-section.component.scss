@@ -1,0 +1,89 @@
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-color, #667eea) 0%, var(--secondary-color, #764ba2) 100%);
+  color: white;
+  padding: var(--spacing-xxl, 3rem) var(--spacing-md, 1.5rem) var(--spacing-xl, 2rem);
+  text-align: center;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-section h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero-section p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 0.5rem;
+  opacity: 0.9;
+}
+
+.explore-btn {
+  margin-top: 24px;
+  background: white;
+  color: var(--secondary-color, #764ba2);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 8px;
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.explore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background: #f8f8f8;
+}
+
+.explore-btn:hover .btn-icon {
+  transform: translateY(2px);
+}
+
+.explore-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .hero-section h2 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .explore-btn {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+  }
+}

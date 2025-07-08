@@ -5,68 +5,171 @@
   position: relative;
   transition: all 0.3s ease;
   cursor: pointer;
-  border: 1px solid var(--outline-color);
+  border: none;
   max-width: 500px;
-  
- }
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
 
 .challenge-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px var(--shadow-color);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px var(--shadow-color);
 }
- 
 
- 
+.card-banner {
+  height: 6px;
+  background: linear-gradient(to right, #6200ee, #3700b3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.card-footer-indicator {
+  height: 4px;
+  background: linear-gradient(to right, rgba(98, 0, 238, 0.1), rgba(55, 0, 179, 0.2));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 mat-card-header {
-  padding-bottom: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.challenge-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.challenge-icon {
+  color: var(--primary-color);
+  background-color: rgba(98, 0, 238, 0.1);
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 mat-card-title {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: var(--spacing-xs);
   color: var(--on-surface-color);
-}
-
-mat-card-subtitle {
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: var(--spacing-xs);
-  color: var(--on-surface-variant-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 85%;
 }
 
 mat-card-content {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--spacing-md);
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  color: var(--on-surface-variant-color);
 }
 
 .description {
-  color: var(--on-surface-variant-color);
+  font-size: 1rem;
   line-height: 1.5;
-  margin: 0;
-  flex-grow: 1;
+  color: var(--on-surface-variant-color);
+  opacity: 0.9;
   display: -webkit-box;
- 
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  margin: 0;
 }
 
- 
-.card-footer {
+.action-buttons {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
- 
+
 mat-card-actions {
   padding: var(--spacing-md) var(--spacing-lg);
-  border-top: 1px solid var(--outline-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Add icons and improved button styling */
+mat-card-actions a mat-icon,
+mat-card-actions button mat-icon {
+  margin-right: 8px;
+  font-size: 18px;
+  vertical-align: text-bottom;
+}
+
+.more-options {
+  margin-left: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .challenge-card {
+    border-radius: 8px;
+  }
+
+  mat-card-header {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+  }
+
+  mat-card-title {
+    font-size: 1.2rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  mat-card-content {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+
+  .description {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-xs);
+  }
+
+  mat-card-actions {
+    flex-wrap: wrap;
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-xs);
+  }
+
+  /* Make buttons more touch-friendly */
+  mat-card-actions a,
+  mat-card-actions button {
+    min-height: 42px;
+  }
+
+  .more-options {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-xs);
+  }
 }
  
 

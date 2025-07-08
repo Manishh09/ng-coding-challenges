@@ -1,0 +1,16 @@
+<section class="hero-section">
+  <h2>{{ title }}</h2>
+  @for (paragraph of description; track $index) {
+    <p>{{ paragraph }}</p>
+  }
+  
+  <button class="explore-btn" (click)="onToggle()">
+    @if (!isExpanded) {
+      <span>{{ buttonText }}</span>
+      <span class="btn-icon">↓</span>
+    } @else {
+      <span>{{ hideButtonText }}</span>
+      <span class="btn-icon">↑</span>
+    }
+  </button>
+</section>

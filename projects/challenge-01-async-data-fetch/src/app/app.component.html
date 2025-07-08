@@ -1,22 +1,35 @@
-<div class="app-layout">
-  <!-- Header -->
-  <ng-coding-challenges-header [appName]="title" [showMobileMenu]="true"></ng-coding-challenges-header>
+@if (showLayout()) {
+  <div class="app-layout">
+    <!-- Header -->
+    <ng-coding-challenges-header [appName]="title" [showMobileMenu]="true"></ng-coding-challenges-header>
 
-  <!-- hero Section -->
-  <section class="hero-section">
-    <h2>Welcome to the Angular Challenges</h2>
-    <p>Get ready to enhance your skills with hands-on coding challenges.</p>
-  </section>
+    <!-- Hero Section -->
+    <ng-coding-challenges-hero-section
+      [title]="'Welcome to the Angular Challenges'"
+      [description]="heroParagraphs"
+      [isExpanded]="showChallenges()"
+      (toggleExpand)="toggleChallenges($event)"
+    ></ng-coding-challenges-hero-section>
+    
+    @if (showChallenges()) {
+      <ng-coding-challenges-challenge-list 
+        [challenges]="challenges"
+        title="Angular Coding Challenges" 
+      />
+    }
 
-  <!-- Main Content -->
-  <main class="main-content">  
+    <!-- Footer -->
+    <ng-coding-challenges-footer 
+      [appName]="title"
+      description="Master Angular development through hands-on coding challenges. Practice async data fetching with RxJS, signals, and modern Angular patterns."
+      angularVersion="19">
+    </ng-coding-challenges-footer>
+  </div>
+ 
+} @else {
+  <!-- Only Main Content (for specific routes) -->
+  <main class="main-content">
     <router-outlet></router-outlet>
   </main>
-
-  <!-- Footer -->
-  <ng-coding-challenges-footer 
-    [appName]="title"
-    description="Master Angular development through hands-on coding challenges. Practice async data fetching with RxJS, signals, and modern Angular patterns."
-    angularVersion="19">
-  </ng-coding-challenges-footer>
-</div>
+}
+ 

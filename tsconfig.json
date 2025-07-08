@@ -40,6 +40,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "strictStandalone": true
+    "strictStandalone": true,
+    "controlFlow": true
   }
 }

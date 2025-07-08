@@ -1,0 +1,12 @@
+<div class="challenge-list-container">
+  <h3 class="section-title">Available Challenges</h3>
+  <div class="cards">
+    @for (challenge of challenges; track challenge.id) {
+      <ng-coding-challenges-challenge-card [challenge]="challenge" />
+    } @empty {
+      <div class="no-challenges">
+        <p>No challenges available at the moment.</p>
+      </div>
+    }
+  </div>
+</div>
