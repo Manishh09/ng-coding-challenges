@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { NavigationService } from '../../services/navigation/navigation.service';
+import { NotificationService } from '../../services/notification/notification.service';
 
 export interface ChallengeCardData {
   id: string;
@@ -54,4 +56,50 @@ export interface Challenge {
 })
 export class ChallengeCardComponent {
   @Input({ required: true }) challenge!: Challenge;
+  
+  private navigationService = inject(NavigationService);
+  private notificationService = inject(NotificationService);
+
+  /**
+   * Navigates to the challenge requirement document
+   * @param requirementUrl - URL to the requirement document
+   */
+  async goToChallenge(requirementUrl: string): Promise<void> {
+    try {
+      const success = await this.navigationService.openChallengeRequirement(requirementUrl);
+      
+      if (!success) {
+        this.notificationService.error('Unable to open challenge requirement. Please check if popups are blocked.');
+      }
+    } catch (error) {
+      console.error('Error navigating to challenge:', error);
+      this.notificationService.error('An error occurred while opening the challenge requirement.');
+    }
+  }
+
+  /**
+   * Opens GitHub repository in a new tab
+   * @param githubUrl - URL to the GitHub repository
+   */
+  async openGitHub(githubUrl: string): Promise<void> {
+    try {
+      const success = await this.navigationService.openExternalLink(githubUrl);
+      
+      if (!success) {
+        this.notificationService.error('Unable to open GitHub repository. Please check if popups are blocked.');
+      }
+    } catch (error) {
+      console.error('Error opening GitHub:', error);
+      this.notificationService.error('An error occurred while opening the GitHub repository.');
+    }
+  }
+
+  /**
+   * Gets the domain name for display purposes
+   * @param url - URL to extract domain from
+   * @returns string - domain name
+   */
+  getDomain(url: string): string {
+    return this.navigationService.getHostname(url);
+  }
 }

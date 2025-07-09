@@ -8,6 +8,10 @@ export * from './lib/services/theme.service';
 // Data Services
 export * from './lib/services/challenges/challenges.service';
 
+// Utility Services
+export * from './lib/services/navigation/navigation.service';
+export * from './lib/services/notification/notification.service';
+
 // Layout Components
 export * from './lib/components/header/header.component';
 export * from './lib/components/home/home.component';

@@ -3,7 +3,16 @@
   <mat-card-header>
     <mat-card-title>{{ challenge.title }}</mat-card-title>
     <div class="challenge-indicator">
-      <mat-icon class="challenge-icon" matTooltip="Coding Challenge" [matTooltipPosition]="'above'">code</mat-icon>
+      <button 
+        mat-icon-button 
+        (click)="openGitHub(challenge.gitHub)" 
+        matTooltip="Open Source Code" 
+        [matTooltipPosition]="'above'"
+        [disabled]="!challenge.gitHub"
+        class="challenge-button"
+        aria-label="Open Source Code">
+        <mat-icon class="challenge-icon">code</mat-icon>
+      </button>
     </div>
   </mat-card-header>
 
@@ -13,25 +22,28 @@
 
   <mat-card-actions>
     <div class="action-buttons">
-      <a mat-stroked-button color="primary" href="{{ challenge.requirement }}" target="_blank">
-        <mat-icon>description</mat-icon>
-        <span>Requirements</span>
-      </a>
-      <a mat-flat-button color="primary" [routerLink]="[challenge.link]">
+      <button 
+        matTooltip="View Requirements Document" 
+        [matTooltipPosition]="'above'"
+        mat-icon-button 
+        color="primary" 
+        (click)="goToChallenge(challenge.requirement)"
+        [disabled]="!challenge.requirement"
+        class="requirement-button"
+        aria-label="View Requirements Document">
+        <mat-icon>assignment</mat-icon>
+      </button>
+      <a 
+        matTooltip="Try Challenge" 
+        [matTooltipPosition]="'above'"
+        mat-icon-button 
+        color="primary" 
+        [routerLink]="[challenge.link]"
+        class="view-button"
+        aria-label="Try Challenge">
         <mat-icon>play_arrow</mat-icon>
-        <span>View</span>
       </a>
     </div>
-
-    @if(false){<button mat-icon-button class="more-options" [matMenuTriggerFor]="menu" matTooltip="More Options">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <a mat-menu-item href="{{ challenge.gitHub }}" target="_blank">
-        <mat-icon>code</mat-icon>
-        <span>View Source Code</span>
-      </a>
-    </mat-menu>}
   </mat-card-actions>
 
   <div class="card-footer-indicator"></div>

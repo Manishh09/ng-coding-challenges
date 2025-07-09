@@ -3,12 +3,56 @@
 @import '../../../libs/shared/ui/src/lib/styles/themes.scss';
 
 // Application-specific styles
-body {
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.6;
   background-color: var(--surface-color);
   color: var(--on-surface-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure app-root takes full height */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix for extra space at bottom */
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Additional fixes for bottom spacing */
+body, html, app-root, .app-layout, .footer, .footer-bottom {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Fix for specific browsers that might add extra space */
+body::after {
+  content: none;
+}
+
+/* Ensure no extra white space at the bottom of the page */
+.mat-typography {
+  margin: 0;
+  padding: 0;
 }

@@ -8,12 +8,14 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   imports: [RouterModule, MatIconModule, MatButtonModule]
 })
 export class FooterComponent {
   appName = input('ng-coding-challenges');
   description = input('Master Angular development through hands-on coding challenges.');
   angularVersion = input('19');
+  showNewsletter = input(false);
   
   readonly currentYear = computed(() => new Date().getFullYear());
 }

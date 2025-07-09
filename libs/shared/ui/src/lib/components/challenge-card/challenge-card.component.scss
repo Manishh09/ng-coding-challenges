@@ -49,17 +49,43 @@ mat-card-header {
   margin-left: auto;
 }
 
+.challenge-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover:not(:disabled) {
+    transform: scale(1.1);
+    background-color: rgba(98, 0, 238, 0.1);
+    box-shadow: 0 2px 8px rgba(98, 0, 238, 0.2);
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(1.05);
+  }
+  
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+}
+
 .challenge-icon {
   color: var(--primary-color);
-  background-color: rgba(98, 0, 238, 0.1);
-  border-radius: 50%;
-  padding: 6px;
   font-size: 20px;
-  height: 20px;
   width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 mat-card-title {
@@ -97,7 +123,39 @@ mat-card-content {
 
 .action-buttons {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.requirement-button {
+  transition: all 0.2s ease;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.view-button {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.domain-indicator {
+  font-size: 0.8em;
+  opacity: 0.6;
+  margin-left: auto;
 }
 
 mat-card-actions {
@@ -105,16 +163,69 @@ mat-card-actions {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   margin: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.02);
+  
+  .action-buttons {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }
 
-/* Add icons and improved button styling */
-mat-card-actions a mat-icon,
-mat-card-actions button mat-icon {
-  margin-right: 8px;
-  font-size: 18px;
-  vertical-align: text-bottom;
+/* Enhanced button styling for mat-card-actions */
+.requirement-button,
+.view-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+  }
+  
+  // Add subtle background on focus for accessibility
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+}
+
+/* Remove the old icon margin styles that were causing issues */
+mat-card-actions button mat-icon,
+mat-card-actions a mat-icon {
+  margin-right: 0;
+  font-size: 24px;
+  vertical-align: middle;
 }
 
 .more-options {
@@ -135,6 +246,7 @@ mat-card-actions button mat-icon {
     font-size: 1.2rem;
     -webkit-line-clamp: 2;
     line-clamp: 2;
+    max-width: 80%;
   }
 
   mat-card-content {
@@ -147,61 +259,74 @@ mat-card-actions button mat-icon {
     line-clamp: 2;
   }
 
-  .action-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: var(--spacing-xs);
-  }
-
   mat-card-actions {
-    flex-wrap: wrap;
     padding: var(--spacing-sm) var(--spacing-md);
-    gap: var(--spacing-xs);
+    
+    .action-buttons {
+      gap: var(--spacing-md);
+    }
   }
 
-  /* Make buttons more touch-friendly */
-  mat-card-actions a,
-  mat-card-actions button {
-    min-height: 42px;
+  .requirement-button,
+  .view-button {
+    width: 44px;
+    height: 44px;
+    
+    mat-icon {
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
   }
 
-  .more-options {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-xs);
+  .challenge-button {
+    width: 36px;
+    height: 36px;
+    
+    .challenge-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
   }
 }
- 
 
- 
-/* Responsive Design (Refined for better mobile experience) */
-@media (max-width: 768px) {
-  .challenge-card {
-    border-radius: var(--border-radius-md); /* Slightly less rounded on smaller screens */
+/* High contrast mode improvements */
+@media (prefers-contrast: high) {
+  .requirement-button,
+  .view-button,
+  .challenge-button {
+    border: 2px solid var(--primary-color);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--primary-color);
+      color: white;
+      
+      mat-icon {
+        color: white;
+      }
+    }
+    
+    &:disabled {
+      border-color: rgba(0, 0, 0, 0.3);
+      opacity: 0.6;
+    }
   }
+}
 
-  mat-card-header {
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
-  }
-
-  mat-card-title {
-    font-size: 1.4rem; /* Slightly smaller title on mobile */
-  }
-
-  mat-card-content {
-    padding: 0 var(--spacing-md) var(--spacing-md);
-  }
-
-  mat-card-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-
-  mat-icon {
-    font-size: 1.6rem; /* Slightly smaller icons on mobile */
-    width: 1.6rem;
-    height: 1.6rem;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .requirement-button,
+  .view-button,
+  .challenge-button {
+    transition: none;
+    
+    &:hover:not(:disabled) {
+      transform: none;
+    }
+    
+    &:active:not(:disabled) {
+      transform: none;
+    }
   }
 }

@@ -1,0 +1,195 @@
+/* Notification Service Styles */
+/* Base notification styles */
+.notification-success,
+.notification-error,
+.notification-warning,
+.notification-info,
+.notification-loading {
+  font-family: var(--font-family, 'Roboto', sans-serif);
+  font-size: 14px;
+  line-height: 1.4;
+  border-radius: 8px !important;
+  min-width: 300px;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  
+  .mat-mdc-snack-bar-container {
+    border-radius: 8px !important;
+  }
+  
+  .mat-mdc-snack-bar-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Icon styling */
+    .material-icons {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+  }
+  
+  .mat-mdc-snack-bar-actions {
+    .mat-mdc-button {
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+/* Success notifications */
+.notification-success {
+  background-color: #4caf50 !important;
+  color: white !important;
+  
+  .mat-mdc-snack-bar-actions .mat-mdc-button {
+    color: rgba(255, 255, 255, 0.9) !important;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+}
+
+/* Error notifications */
+.notification-error {
+  background-color: #f44336 !important;
+  color: white !important;
+  
+  .mat-mdc-snack-bar-actions .mat-mdc-button {
+    color: rgba(255, 255, 255, 0.9) !important;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+}
+
+/* Warning notifications */
+.notification-warning {
+  background-color: #ff9800 !important;
+  color: white !important;
+  
+  .mat-mdc-snack-bar-actions .mat-mdc-button {
+    color: rgba(255, 255, 255, 0.9) !important;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+}
+
+/* Info notifications */
+.notification-info {
+  background-color: #2196f3 !important;
+  color: white !important;
+  
+  .mat-mdc-snack-bar-actions .mat-mdc-button {
+    color: rgba(255, 255, 255, 0.9) !important;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+}
+
+/* Loading notifications */
+.notification-loading {
+  background-color: #607d8b !important;
+  color: white !important;
+  
+  .mat-mdc-snack-bar-label {
+    .material-icons {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .notification-success,
+  .notification-error,
+  .notification-warning,
+  .notification-info,
+  .notification-loading {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .notification-success,
+  .notification-error,
+  .notification-warning,
+  .notification-info,
+  .notification-loading {
+    min-width: 280px;
+    max-width: 90vw;
+    font-size: 14px;
+    
+    .mat-mdc-snack-bar-label {
+      .material-icons {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .notification-success {
+    background-color: #2e7d32 !important;
+    border: 2px solid #1b5e20 !important;
+  }
+  
+  .notification-error {
+    background-color: #c62828 !important;
+    border: 2px solid #b71c1c !important;
+  }
+  
+  .notification-warning {
+    background-color: #ef6c00 !important;
+    border: 2px solid #e65100 !important;
+  }
+  
+  .notification-info {
+    background-color: #1565c0 !important;
+    border: 2px solid #0d47a1 !important;
+  }
+  
+  .notification-loading {
+    background-color: #455a64 !important;
+    border: 2px solid #263238 !important;
+  }
+}
+
+/* Animation improvements */
+.mat-mdc-snack-bar-container {
+  animation-duration: 0.3s !important;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Focus styles for accessibility */
+.mat-mdc-snack-bar-actions .mat-mdc-button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5) !important;
+  outline-offset: 2px !important;
+}
+
+/* Custom positioning for top notifications */
+.mat-mdc-snack-bar-container {
+  &.notification-success,
+  &.notification-error,
+  &.notification-warning,
+  &.notification-info,
+  &.notification-loading {
+    margin-top: 16px;
+  }
+}

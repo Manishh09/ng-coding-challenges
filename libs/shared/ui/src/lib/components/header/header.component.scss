@@ -44,6 +44,15 @@
   height: 28px;
 }
 
+/* Add styling for the logo image */
+.logo-link img {
+  width: 28px;
+  height: 28px;
+  margin-right: var(--spacing-sm);
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 .nav-section {
   display: flex;
   align-items: center;

@@ -2,8 +2,23 @@
   background-color: var(--surface-variant-color);
   border-top: 1px solid var(--outline-color);
   margin-top: auto;
-  //background: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
-
+  
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  bottom: 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #673ab7, #9c27b0, #673ab7);
+    opacity: 0.8;
+  }
 }
 
 .footer-content {
@@ -18,6 +33,7 @@
 .footer-section {
   display: flex;
   flex-direction: column;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .brand-section {
@@ -29,6 +45,18 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--on-surface-color);
+  position: relative;
+  padding-bottom: 8px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #673ab7;
+  }
 }
 
 .footer-logo {
@@ -40,7 +68,12 @@
 .footer-logo-icon {
   margin-right: var(--spacing-sm);
   font-size: 24px;
-  color: #1976d2;
+  color: #673ab7;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: rotate(20deg);
+  }
 }
 
 .footer-logo-text {
@@ -52,29 +85,79 @@
 .footer-description {
   color: var(--on-surface-variant-color);
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 var(--spacing-md) 0;
   font-size: 0.95rem;
+}
+
+.newsletter-section {
+  margin-top: var(--spacing-md);
+}
+
+.newsletter-form {
+  margin-top: var(--spacing-sm);
 }
 
 .footer-nav {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  
+  ::ng-deep a {
+    color: var(--on-surface-variant-color);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+    position: relative;
+    padding: 3px 0;
+    
+    &:hover {
+      color: #673ab7;
+      transform: translateX(4px);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: #673ab7;
+      transition: width 0.3s ease;
+    }
+    
+    &:hover::after {
+      width: 100%;
+    }
+  }
 }
 
 .social-links {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
   flex-wrap: wrap;
+  
+  ::ng-deep a, ::ng-deep button {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.85;
+    
+    &:hover {
+      transform: translateY(-3px);
+      opacity: 1;
+    }
+  }
 }
 
 .footer-bottom {
   background-color: var(--surface-color);
   border-top: 1px solid var(--outline-color);
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .footer-bottom .footer-content {
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-md) 0;
+   
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,15 +166,50 @@
 }
 
 .copyright {
-  margin: 0;
+  margin: 0 0 var(--spacing-md) 0;
   color: var(--on-surface-variant-color);
   font-size: 0.875rem;
+  padding-bottom: 0;
+}
+
+.heart-icon {
+  color: #e91e63;
+  display: inline-block;
+  animation: heartbeat 1.5s infinite;
+  margin: 0 3px;
 }
 
 .footer-bottom-links {
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: wrap;
+  margin: 0 0 var(--spacing-md) 0;
+  padding-bottom: 0;
+  
+  ::ng-deep a {
+    color: var(--on-surface-variant-color);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #673ab7;
+    }
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.2); }
+  70% { transform: scale(1); }
 }
 
 /* Responsive Design */
@@ -117,5 +235,35 @@
     flex-direction: column;
     text-align: center;
     gap: var(--spacing-sm);
+  }
+  
+  .footer-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .footer-section {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-description {
+    text-align: center;
+  }
+  
+  .footer-nav {
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .footer-section, .heart-icon, .footer-logo-icon, .footer-nav ::ng-deep a, .social-links ::ng-deep a {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+  
+  .footer-nav ::ng-deep a:hover, .social-links ::ng-deep a:hover {
+    transform: none;
   }
 }

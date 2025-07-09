@@ -28,6 +28,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'ng-coding-challenges';
+  logo = 'favicon.ico';  // Path relative to the public folder defined in assets
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
 

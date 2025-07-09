@@ -3,7 +3,8 @@
     <!-- Logo Section -->
     <div class="logo-section">
       <a routerLink="/" class="logo-link" [attr.aria-label]="'Go to ' + appName() + ' home page'">
-        <mat-icon class="logo-icon">code</mat-icon>
+        <!-- <mat-icon class="logo-icon">code</mat-icon> -->
+         <img [src]="logoUrl()" alt="Logo">
         <span class="logo-text">{{ appName() }}</span>
       </a>
     </div>
@@ -33,6 +34,11 @@
     </div>
   </div>
 </mat-toolbar>
+
+<!-- Mobile Navigation Menu -->
+<mat-menu #mobileMenu="matMenu">
+  <ng-content select="[slot=mobile-nav]"></ng-content>
+</mat-menu>
 
 <!-- Mobile Navigation Menu -->
 <mat-menu #mobileMenu="matMenu">

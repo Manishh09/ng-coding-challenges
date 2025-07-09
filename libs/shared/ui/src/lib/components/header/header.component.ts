@@ -21,6 +21,8 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   ]
 })
 export class HeaderComponent {
-  appName = input('ng-coding-challenges');
+  appName = input('');
   showMobileMenu = input(true);
+
+  logoUrl = input('');
 }

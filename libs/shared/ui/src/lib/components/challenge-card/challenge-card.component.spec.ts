@@ -1,35 +1,55 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ChallengeCardComponent, ChallengeCardData } from './challenge-card.component';
+import { ChallengeCardComponent, Challenge } from './challenge-card.component';
+import { NavigationService } from '../../services/navigation/navigation.service';
+import { NotificationService } from '../../services/notification/notification.service';
 
 describe('ChallengeCardComponent', () => {
   let component: ChallengeCardComponent;
   let fixture: ComponentFixture<ChallengeCardComponent>;
+  let navigationService: jasmine.SpyObj<NavigationService>;
+  let notificationService: jasmine.SpyObj<NotificationService>;
 
-  const mockChallenge: ChallengeCardData = {
-    id: '1',
+  const mockChallenge: Challenge = {
+    id: 1,
     title: 'Test Challenge',
     description: 'This is a test challenge description',
-    difficulty: 'intermediate',
-    category: 'RxJS',
-    tags: ['rxjs', 'observables', 'operators'],
-    estimatedTime: 30,
-    isCompleted: false,
-    isFeatured: false
+    link: '/test-challenge',
+    requirement: 'https://github.com/test/repo/blob/master/README.md',
+    gitHub: 'https://github.com/test/repo'
   };
 
   beforeEach(async () => {
+    const navigationServiceSpy = jasmine.createSpyObj('NavigationService', [
+      'openChallengeRequirement', 
+      'openExternalLink', 
+      'getHostname'
+    ]);
+    const notificationServiceSpy = jasmine.createSpyObj('NotificationService', [
+      'error', 
+      'success', 
+      'info', 
+      'warning'
+    ]);
+
     await TestBed.configureTestingModule({
       imports: [
         ChallengeCardComponent,
         RouterTestingModule,
         NoopAnimationsModule
+      ],
+      providers: [
+        { provide: NavigationService, useValue: navigationServiceSpy },
+        { provide: NotificationService, useValue: notificationServiceSpy }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChallengeCardComponent);
     component = fixture.componentInstance;
+    navigationService = TestBed.inject(NavigationService) as jasmine.SpyObj<NavigationService>;
+    notificationService = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
+    
     component.challenge = mockChallenge;
     fixture.detectChanges();
   });
@@ -49,101 +69,114 @@ describe('ChallengeCardComponent', () => {
       .toContain('This is a test challenge description');
   });
 
-  it('should render difficulty badge', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const difficultyBadge = compiled.querySelector('.difficulty');
-    expect(difficultyBadge?.textContent).toContain('Intermediate');
-    expect(difficultyBadge?.classList.contains('difficulty-intermediate')).toBeTruthy();
+  describe('goToChallenge', () => {
+    it('should call navigationService.openChallengeRequirement with correct URL', async () => {
+      navigationService.openChallengeRequirement.and.returnValue(Promise.resolve(true));
+      
+      await component.goToChallenge(mockChallenge.requirement);
+      
+      expect(navigationService.openChallengeRequirement).toHaveBeenCalledWith(mockChallenge.requirement);
+    });
+
+    it('should show error notification when navigation fails', async () => {
+      navigationService.openChallengeRequirement.and.returnValue(Promise.resolve(false));
+      
+      await component.goToChallenge(mockChallenge.requirement);
+      
+      expect(notificationService.error).toHaveBeenCalledWith(
+        'Unable to open challenge requirement. Please check if popups are blocked.'
+      );
+    });
+
+    it('should handle navigation service errors with error notification', async () => {
+      navigationService.openChallengeRequirement.and.returnValue(Promise.reject(new Error('Test error')));
+      
+      await component.goToChallenge(mockChallenge.requirement);
+      
+      expect(notificationService.error).toHaveBeenCalledWith(
+        'An error occurred while opening the challenge requirement.'
+      );
+    });
   });
 
-  it('should render category', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.category')?.textContent).toContain('RxJS');
+  describe('openGitHub', () => {
+    it('should call navigationService.openExternalLink with correct URL', async () => {
+      navigationService.openExternalLink.and.returnValue(Promise.resolve(true));
+      
+      await component.openGitHub(mockChallenge.gitHub);
+      
+      expect(navigationService.openExternalLink).toHaveBeenCalledWith(mockChallenge.gitHub);
+    });
+
+    it('should show error notification when GitHub navigation fails', async () => {
+      navigationService.openExternalLink.and.returnValue(Promise.resolve(false));
+      
+      await component.openGitHub(mockChallenge.gitHub);
+      
+      expect(notificationService.error).toHaveBeenCalledWith(
+        'Unable to open GitHub repository. Please check if popups are blocked.'
+      );
+    });
+
+    it('should handle GitHub navigation errors with error notification', async () => {
+      navigationService.openExternalLink.and.returnValue(Promise.reject(new Error('Test error')));
+      
+      await component.openGitHub(mockChallenge.gitHub);
+      
+      expect(notificationService.error).toHaveBeenCalledWith(
+        'An error occurred while opening the GitHub repository.'
+      );
+    });
   });
 
-  it('should render tags', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const chips = compiled.querySelectorAll('mat-chip');
-    expect(chips.length).toBe(3); // All 3 tags should be shown
+  describe('getDomain', () => {
+    it('should return hostname from navigationService', () => {
+      navigationService.getHostname.and.returnValue('github.com');
+      
+      const result = component.getDomain('https://github.com/test/repo');
+      
+      expect(result).toBe('github.com');
+      expect(navigationService.getHostname).toHaveBeenCalledWith('https://github.com/test/repo');
+    });
   });
 
-  it('should render estimated time', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.time-estimate span')?.textContent).toContain('30min');
-  });
+  describe('UI interactions', () => {
+    it('should call goToChallenge when challenge button is clicked', () => {
+      spyOn(component, 'goToChallenge');
+      
+      const button = fixture.nativeElement.querySelector('.challenge-button');
+      button.click();
+      
+      expect(component.goToChallenge).toHaveBeenCalledWith(mockChallenge.requirement);
+    });
 
-  it('should render start button for uncompleted challenge', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const button = compiled.querySelector('mat-card-actions button');
-    expect(button?.textContent).toContain('Start Challenge');
-  });
+    it('should disable challenge button when no requirement URL', () => {
+      component.challenge = { ...mockChallenge, requirement: '' };
+      fixture.detectChanges();
+      
+      const button = fixture.nativeElement.querySelector('.challenge-button');
+      expect(button.disabled).toBe(true);
+    });
 
-  it('should render review button for completed challenge', () => {
-    component.challenge = { ...mockChallenge, isCompleted: true };
-    fixture.detectChanges();
-    
-    const compiled = fixture.nativeElement as HTMLElement;
-    const button = compiled.querySelector('mat-card-actions button');
-    expect(button?.textContent).toContain('Review');
-  });
+    it('should disable requirements button when no requirement URL', () => {
+      component.challenge = { ...mockChallenge, requirement: '' };
+      fixture.detectChanges();
+      
+      const button = fixture.nativeElement.querySelector('.requirement-button');
+      expect(button.disabled).toBe(true);
+    });
 
-  it('should show completed status for completed challenge', () => {
-    component.challenge = { ...mockChallenge, isCompleted: true };
-    fixture.detectChanges();
-    
-    const compiled = fixture.nativeElement as HTMLElement;
-    const statusIndicator = compiled.querySelector('.status-indicator');
-    expect(statusIndicator?.textContent).toContain('Completed');
-  });
+    it('should show more options menu when GitHub URL is available', () => {
+      const menuTrigger = fixture.nativeElement.querySelector('.more-options');
+      expect(menuTrigger).toBeTruthy();
+    });
 
-  it('should show featured badge for featured challenge', () => {
-    component.challenge = { ...mockChallenge, isFeatured: true };
-    fixture.detectChanges();
-    
-    const compiled = fixture.nativeElement as HTMLElement;
-    const featuredBadge = compiled.querySelector('.featured-badge');
-    expect(featuredBadge?.textContent).toContain('Featured');
-  });
-
-  it('should not show featured badge for non-featured challenge', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const featuredBadge = compiled.querySelector('.featured-badge');
-    expect(featuredBadge).toBeFalsy();
-  });
-
-  it('should show more tags indicator when there are more than 3 tags', () => {
-    component.challenge = { 
-      ...mockChallenge, 
-      tags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'] 
-    };
-    fixture.detectChanges();
-    
-    const compiled = fixture.nativeElement as HTMLElement;
-    const moreTagsChip = compiled.querySelector('.more-tags');
-    expect(moreTagsChip?.textContent).toContain('+2 more');
-  });
-
-  it('should have proper router link', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const button = compiled.querySelector('button[routerLink]');
-    expect(button?.getAttribute('ng-reflect-router-link')).toBe('/challenges,1');
-  });
-
-  it('should apply completed class when challenge is completed', () => {
-    component.challenge = { ...mockChallenge, isCompleted: true };
-    fixture.detectChanges();
-    
-    const compiled = fixture.nativeElement as HTMLElement;
-    const card = compiled.querySelector('.challenge-card');
-    expect(card?.classList.contains('completed')).toBeTruthy();
-  });
-
-  it('should apply featured class when challenge is featured', () => {
-    component.challenge = { ...mockChallenge, isFeatured: true };
-    fixture.detectChanges();
-    
-    const compiled = fixture.nativeElement as HTMLElement;
-    const card = compiled.querySelector('.challenge-card');
-    expect(card?.classList.contains('featured')).toBeTruthy();
+    it('should not show more options menu when no GitHub URL', () => {
+      component.challenge = { ...mockChallenge, gitHub: '' };
+      fixture.detectChanges();
+      
+      const menuTrigger = fixture.nativeElement.querySelector('.more-options');
+      expect(menuTrigger).toBeFalsy();
+    });
   });
 });

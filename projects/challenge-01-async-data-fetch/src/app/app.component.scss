@@ -1,15 +1,14 @@
- .app-layout {
-     min-height: 100vh;
-     display: flex;
-     flex-direction: column;
-     overflow-y: hidden;
-     overflow-x: hidden;
-     position: relative;
- }
+.app-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
 
- .main-content {
-     flex-grow: 1;
-     display: flex;
-     flex-direction: column;
-     overflow: auto;
- }
+.main-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 64px); /* Adjust based on header height */
+}
