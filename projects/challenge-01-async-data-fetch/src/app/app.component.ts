@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { 
   Challenge, 
-  ChallengeCardComponent, 
   ChallengeListComponent, 
   FooterComponent, 
   HeaderComponent, 
@@ -11,6 +10,7 @@ import {
 } from '@ng-coding-challenges/shared/ui';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +21,13 @@ import { filter, takeUntil } from 'rxjs/operators';
     RouterOutlet, 
     HeaderComponent, 
     FooterComponent, 
-    ChallengeCardComponent, 
     ChallengeListComponent,
-    HeroSectionComponent
+    HeroSectionComponent,
+    MatIconModule
   ],
 })
 export class AppComponent {
-  title = 'ng-coding-challenges';
+  title = 'ngular coding challenges';
   logo = 'favicon.ico';  // Path relative to the public folder defined in assets
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
@@ -40,8 +40,8 @@ export class AppComponent {
 
   // Hero section description paragraphs
   protected heroParagraphs = [
-    'Get ready to enhance your skills with hands-on coding challenges.',
-    'Practice async data fetching with RxJS, signals, and modern Angular patterns.'
+    'Sharpen your skills and get job-ready with practical Angular challenges focused on real-world interview scenarios.',
+    'Master the concepts that employers look for: RxJS, Signals, State Management, Performance, and modern Angular patterns.'
   ];
 
   // Get challenges from the service
@@ -80,9 +80,34 @@ export class AppComponent {
   toggleChallenges(isExpanded?: boolean) {
     if (isExpanded !== undefined) {
       this.showChallenges.set(isExpanded);
+      
+      // If challenges are being shown, scroll to the challenges section
+      if (isExpanded) {
+        this.scrollToChallenges();
+      }
+      this.scrollToTop()
     } else {
       this.showChallenges.update(current => !current);
     }
+  }
+  
+  /**
+   * Scrolls to the top of the page
+   */
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /**
+   * Scrolls to the challenges section
+   */
+  scrollToChallenges() {
+    setTimeout(() => {
+      const challengesSection = document.getElementById('challenges-section');
+      if (challengesSection) {
+        challengesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100); // Small delay to ensure DOM is updated
   }
 
   // clear subscriptions on destroy

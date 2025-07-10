@@ -4,6 +4,10 @@
   z-index: 1000;
   background: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 0;
+  height: 64px;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .header-container {
@@ -13,8 +17,9 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
-  gap: var(--spacing-md);
+  padding: 0 16px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .logo-section {
@@ -64,8 +69,19 @@
 .actions-section {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 8px;
   flex-shrink: 0;
+  height: 100%;
+  padding-right: 8px;
+  margin-left: auto;
+}
+
+/* Add specific styling for theme toggle component */
+ng-coding-challenges-theme-toggle {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 4px;
 }
 
 /* Responsive Design */
@@ -79,7 +95,19 @@
   }
   
   .header-container {
-    padding: 0 var(--spacing-sm);
+    padding: 0 12px;
+  }
+  
+  .actions-section {
+    //padding-right: 4px;
+  }
+  
+  .header-toolbar {
+    height: 56px;
+  }
+
+  ng-coding-challenges-theme-toggle {
+    margin-right: 0;
   }
 }
 
