@@ -12,8 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [RouterModule, MatIconModule, MatButtonModule]
 })
 export class FooterComponent {
-  appName = input('ng-coding-challenges');
-  description = input('Master Angular development through hands-on coding challenges.');
+  appName = input('angular-coding-challenges');
+  description = input('Practice. Learn. Succeed');
   angularVersion = input('19');
   showNewsletter = input(false);
   

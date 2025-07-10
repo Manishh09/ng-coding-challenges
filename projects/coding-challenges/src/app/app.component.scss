@@ -26,10 +26,11 @@
     gap: 0.75rem;
   }
 
+
   .footer-link {
-    display: flex;
+    display: flex !important;
     align-items: center;
-    gap: 1rem; /* Increased spacing between icon and text */
+    gap: 0.5rem; /* Increased spacing between icon and text */
     transition: all 0.2s ease-in-out;
     padding: 0.5rem 0;
     cursor: pointer; /* Add hand cursor */

@@ -4,22 +4,25 @@
     <div class="footer-section brand-section">
       <div class="footer-logo">
         <mat-icon class="footer-logo-icon" aria-hidden="true">code</mat-icon>
-        <span class="footer-logo-text">{{ appName() }}</span>
+        <span class="footer-logo-text">{{ description() }}</span>
       </div>
-      <p class="footer-description">
+      <!-- <p class="footer-description">
         {{ description() }}
+      </p> -->
+      <p class="footer-tagline">
+         Hands-on Angular challenges to master key concepts and crack your next Angular interview.
       </p>
       <!-- Newsletter subscription form could be added here -->
       @if (showNewsletter()) {
-        <div class="newsletter-section">
-          <h3 class="footer-title">Stay Updated</h3>
-          <div class="newsletter-form">
-            <ng-content select="[slot=newsletter]"></ng-content>
-          </div>
+      <div class="newsletter-section">
+        <h3 class="footer-title">Stay Updated</h3>
+        <div class="newsletter-form">
+          <ng-content select="[slot=newsletter]"></ng-content>
         </div>
+      </div>
       }
     </div>
-    
+
     <!-- Links Sections -->
     <div class="footer-section">
       <h3 class="footer-title">Quick Links</h3>
@@ -27,7 +30,7 @@
         <ng-content select="[slot=quick-links]"></ng-content>
       </nav>
     </div>
-    
+
     <div class="footer-section">
       <h3 class="footer-title">Community</h3>
       <div class="social-links" aria-label="Social media links">
@@ -35,12 +38,13 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="footer-content">
       <p class="copyright">
-        © {{ currentYear() }} {{ appName() }}. Built with <span class="heart-icon" aria-hidden="true">❤</span> and Angular {{ angularVersion() }}.
+        © {{ currentYear() }} {{ appName() }}. Built with <span class="heart-icon" aria-hidden="true">❤</span> and
+        Angular {{ angularVersion() }}.
       </p>
       <div class="footer-bottom-links">
         <ng-content select="[slot=legal-links]"></ng-content>

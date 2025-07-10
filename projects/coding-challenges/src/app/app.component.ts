@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
 })
 export class AppComponent {
-  title = 'ngular coding challenges';
+  title = 'ngular Quest';
   logo = 'favicon.ico';  // Path relative to the public folder defined in assets
   #router = inject(Router);
   #challengesService = inject(ChallengesService);

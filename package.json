@@ -1,11 +1,11 @@
 {
-  "name": "ng-coding-coding-challenges",
+  "name": "ng-coding-challenges",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:challenge-01": "ng serve challenge-01-async-data-fetch",
-    "build:challenge-01": "ng build challenge-01-async-data-fetch",
+    "start:challenges": "ng serve coding-challenges",
+    "build:challenges": "ng build coding-challenges",
     "build:libs": "ng build shared-ui && ng build shared-models && ng build shared-services",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

@@ -3,37 +3,37 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "challenge-01-async-data-fetch": {
+    "coding-challenges": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/challenge-01-async-data-fetch",
-      "sourceRoot": "projects/challenge-01-async-data-fetch/src",
+      "root": "projects/coding-challenges",
+      "sourceRoot": "projects/coding-challenges/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/challenge-01-async-data-fetch",
-            "index": "projects/challenge-01-async-data-fetch/src/index.html",
-            "browser": "projects/challenge-01-async-data-fetch/src/main.ts",
+            "outputPath": "dist/coding-challenges",
+            "index": "projects/coding-challenges/src/index.html",
+            "browser": "projects/coding-challenges/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/challenge-01-async-data-fetch/tsconfig.app.json",
+            "tsConfig": "projects/coding-challenges/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/challenge-01-async-data-fetch/public"
+                "input": "projects/coding-challenges/public"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "projects/challenge-01-async-data-fetch/src/styles.scss"
+              "projects/coding-challenges/src/styles.scss"
             ],
             "scripts": []
           },
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "challenge-01-async-data-fetch:build:production"
+              "buildTarget": "coding-challenges:build:production"
             },
             "development": {
-              "buildTarget": "challenge-01-async-data-fetch:build:development"
+              "buildTarget": "coding-challenges:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,17 +83,17 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/challenge-01-async-data-fetch/tsconfig.spec.json",
+            "tsConfig": "projects/coding-challenges/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/challenge-01-async-data-fetch/public"
+                "input": "projects/coding-challenges/public"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "projects/challenge-01-async-data-fetch/src/styles.scss"
+              "projects/coding-challenges/src/styles.scss"
             ],
             "scripts": []
           }
