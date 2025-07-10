@@ -15,8 +15,8 @@ export class ChallengeListComponent {
       title: "Challenge 01: Async Data Fetching",
       description: "Fetch Products data from a fake API and display data in a Table using RxJS and Angular's HttpClient.",
       link: "/products",
-      requirement: 'https://github.com/Manishh09/ng-coding-challenges/tree/master/projects/coding-challenges/src/README.md',
-      gitHub: 'https://github.com/Manishh09/ng-coding-challenges/tree/master/projects/coding-challenges'
+      requirement: 'https://github.com/Manishh09/ng-coding-challenges/tree/develop/projects/coding-challenges/src/README.md',
+      gitHub: 'https://github.com/Manishh09/ng-coding-challenges/tree/develop/projects/coding-challenges'
     },
     {
       id: 2,
