@@ -1,7 +1,10 @@
 <mat-card class="challenge-card">
   <div class="card-banner" aria-hidden="true"></div>
   <mat-card-header>
-    <mat-card-title>{{ challenge.title }}</mat-card-title>
+    <mat-card-title 
+    [matTooltip]="challenge.title"
+    matTooltipPosition="above"
+    >{{ challenge.title }}</mat-card-title>
     <div class="challenge-indicator">
       <button 
         mat-icon-button 
