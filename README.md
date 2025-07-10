@@ -1,59 +1,128 @@
-# NgChallenges
+# NgCodingChallenges
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+An interactive platform for Angular coding challenges designed to help developers improve their Angular skills through practical exercises. This project features a modern UI inspired by angular.dev, with responsive design and theming capabilities.
 
-## Development server
+## 🚀 Project Overview
 
-To start a local development server, run:
+NgCodingChallenges provides a collection of practical Angular coding challenges with increasing complexity. Each challenge focuses on specific Angular concepts and features, allowing developers to:
+
+- Practice real-world Angular development scenarios
+- Learn modern Angular best practices
+- Understand reactive programming with RxJS
+- Master Angular's component architecture
+- Build responsive and accessible UIs
+
+The platform includes a clean, modern UI with light/dark theme support, responsive design, and Angular Material integration.
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm (v9 or higher recommended)
+- Angular CLI (v19.2.12 or compatible)
+
+### Installation
 
 ```bash
+# Clone the repository (if not already done)
+git clone https://your-repository-url/ng-coding-challenges.git
+cd ng-coding-challenges
+
+#checkout develop
+git checkout develop
+
+#pull changes
+git pull
+
+# Install dependencies
+npm install
+
+# if any issues, remove package-lock.json file and run `npm install`
+```
+
+## 🚀 Running the Application
+
+### Development Server
+
+To start the main application development server:
+
+```bash
+npm start
+# or
 ng serve
+```
+
+To specifically run the coding challenges application:
+
+```bash
+npm run start:challenges
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+### Building the Project
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To build the entire project:
 
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
-
-To build the project run:
+To build only the coding challenges application:
 
 ```bash
-ng build
+npm run build:challenges
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+To build the shared libraries:
 
 ```bash
-ng test
+npm run build:libs
 ```
 
-## Running end-to-end tests
+Build artifacts will be stored in the `dist/` directory.
 
-For end-to-end (e2e) testing, run:
+## 🧪 Running Tests
+
+To execute unit tests with Karma:
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🧭 Navigating the Application
 
-## Additional Resources
+Once the application is running, you can:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. View the homepage with the challenge list
+2. Click on any challenge card to navigate to that specific challenge
+3. Read the challenge requirements and instructions
+4. Implement your solution in the designated component
+5. Test your implementation against the provided requirements
+6. Toggle between light and dark themes using the theme toggle button in the header
+
+## 📂 Project Structure
+
+The project follows a modular architecture:
+
+- `projects/coding-challenges/` - The main application
+- `projects/challenge-01-async-data-fetch/` - Example challenge implementation
+- `libs/shared/ui/` - Shared UI components, services, and styles
+- `libs/shared/models/` - Shared data models and interfaces
+- `libs/shared/services/` - Shared services for data access and business logic
+
+## 🤝 Contributing
+
+We welcome contributions to NgCodingChallenges! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines on how to contribute.
+
+## 📚 Additional Resources
+
+- [Angular Documentation](https://angular.dev/)
+- [Angular CLI Documentation](https://angular.dev/tools/cli)
+- [RxJS Documentation](https://rxjs.dev/)
+- [Angular Material](https://material.angular.io/)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
