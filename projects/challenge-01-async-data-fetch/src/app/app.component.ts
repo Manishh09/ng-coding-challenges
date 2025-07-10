@@ -40,8 +40,8 @@ export class AppComponent {
 
   // Hero section description paragraphs
   protected heroParagraphs = [
-    'Sharpen your skills and get job-ready with practical Angular challenges focused on real-world interview scenarios.',
-    'Master the concepts that employers look for: RxJS, Signals, State Management, Performance, and modern Angular patterns.'
+    'Sharpen your skills and get ready with practical Angular challenges focused on real-world interview scenarios.',
+    // 'Master the concepts: RxJS, Signals, Performance, and modern Angular patterns.'
   ];
 
   // Get challenges from the service
@@ -104,6 +104,18 @@ export class AppComponent {
   scrollToChallenges() {
     setTimeout(() => {
       const challengesSection = document.getElementById('challenges-section');
+      if (challengesSection) {
+        challengesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100); // Small delay to ensure DOM is updated
+  }
+
+    /**
+   * Scrolls to the challenges section
+   */
+  scrollToHome() {
+    setTimeout(() => {
+      const challengesSection = document.getElementById('header-section');
       if (challengesSection) {
         challengesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }

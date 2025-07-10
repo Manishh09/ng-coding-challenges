@@ -3,10 +3,11 @@
 @import '../../../libs/shared/ui/src/lib/styles/themes.scss';
 
 // Application-specific styles
-html, body {
+html,
+body {
   height: 100%;
-  margin: 0;
-  padding: 0;
+  inset: 0;
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 
@@ -34,7 +35,12 @@ app-root {
 }
 
 /* Fix for extra space at bottom */
-body, html, app-root, .app-layout, .footer, .footer-bottom {
+body,
+html,
+app-root,
+.app-layout,
+.footer,
+.footer-bottom {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }

@@ -1,82 +1,79 @@
 @if (showLayout()) {
-  <div class="app-layout">
-    <!-- Header -->
-    <ng-coding-challenges-header [logoUrl]="logo" [appName]="title" [showMobileMenu]="true"></ng-coding-challenges-header>
+<div class="app-layout">
+  <!-- Header -->
+  <ng-coding-challenges-header id="header-section" [logoUrl]="logo" [appName]="title"
+    [showMobileMenu]="true"></ng-coding-challenges-header>
 
-    <!-- Hero Section -->
-    <ng-coding-challenges-hero-section
-      [title]="'Master Angular & Ace Your Next Tech Interview'"
-      [description]="heroParagraphs"
-      [isExpanded]="showChallenges()"
-      [buttonText]="'Start Practicing Now'"
-      [hideButtonText]="'Hide Challenges'"
-      (toggleExpand)="toggleChallenges($event)"
-    ></ng-coding-challenges-hero-section>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-      @if (showChallenges()) {
-        <div id="challenges-section">
-          <ng-coding-challenges-challenge-list 
-            [challenges]="challenges"
-            title="Angular Coding Challenges" 
-          />
-        </div>
-      }
-      <router-outlet></router-outlet>
-    </main>
+  <!-- Hero Section -->
+  <ng-coding-challenges-hero-section [title]="'Learn Angular. Solve Challenges. Crack Interviews.'"
+    [description]="heroParagraphs" [isExpanded]="showChallenges()" [buttonText]="'Start Practicing Now'"
+    [hideButtonText]="'Hide Challenges'" (toggleExpand)="toggleChallenges($event)"></ng-coding-challenges-hero-section>
 
-    <!-- Footer -->
-    <ng-coding-challenges-footer 
-      [appName]="title"
-      description="Master Angular development through hands-on coding challenges. Practice async data fetching with RxJS, signals, and modern Angular patterns."
-      angularVersion="19">
-      
-      <!-- Quick Links Section -->
-      <div slot="quick-links" class="footer-links-grid">
-        <a (click)="scrollToTop()" class="footer-link">
-          <mat-icon aria-hidden="true">home</mat-icon>
-          <span>Home</span>
-        </a>
-        <a (click)="showChallenges.set(true); scrollToChallenges()" class="footer-link">
-          <mat-icon aria-hidden="true">code</mat-icon>
-          <span>Challenges</span>
-        </a>
-        <a routerLink="/roadmap" class="footer-link">
-          <mat-icon aria-hidden="true">map</mat-icon>
-          <span>Roadmap</span>
-        </a>
-        <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" rel="noopener noreferrer" class="footer-link">
-          <mat-icon aria-hidden="true">code_off</mat-icon>
-          <span>GitHub</span>
-        </a>
-        <a href="https://github.com/Manishh09/ng-coding-challenges" class="footer-link">
-          <mat-icon aria-hidden="true">volunteer_activism</mat-icon>
-          <span>Contribute</span>
-        </a>
-      </div>
-      
-      <!-- Community Section -->
-      <div slot="social-links" class="social-links-grid">
-        <a href="https://www.linkedin.com/in/manishboge" target="_blank" rel="noopener noreferrer" class="social-link linkedin" aria-label="Follow on LinkedIn">
-          <mat-icon aria-hidden="true">person</mat-icon>
-          <span>Follow on LinkedIn</span>
-        </a>
-        <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" rel="noopener noreferrer" class="social-link github" aria-label="Star on GitHub">
-          <mat-icon aria-hidden="true">star</mat-icon>
-          <span>Star on GitHub</span>
-        </a>
-      </div>
-      
-      <!-- Legal Links -->
-      <div slot="legal-links" class="legal-links">
-        <a href="#" class="legal-link">Terms</a>
-        <a href="#" class="legal-link">Privacy</a>
-        <a href="#" class="legal-link">Cookie Policy</a>
-      </div>
-    </ng-coding-challenges-footer>
+  <!-- Challenges List Section-->
+
+  @if (showChallenges()) {
+  <div id="challenges-section">
+    <ng-coding-challenges-challenge-list [challenges]="challenges" title="Angular Coding Challenges" />
   </div>
+  }
+
+
+
+  <!-- Footer -->
+  <ng-coding-challenges-footer [appName]="title"
+    description="Master Angular development through hands-on coding challenges. Practice async data fetching with RxJS, signals, and modern Angular patterns."
+    angularVersion="19">
+
+    <!-- Quick Links Section -->
+    <div slot="quick-links" class="footer-links-grid">
+      <a (click)="scrollToHome()" class="footer-link">
+        <mat-icon aria-hidden="true">home</mat-icon>
+        <span>Home</span>
+      </a>
+      <a (click)="showChallenges.set(true); scrollToChallenges()" class="footer-link">
+        <mat-icon aria-hidden="true">code</mat-icon>
+        <span>Challenges</span>
+      </a>
+      <a routerLink="/roadmap" class="footer-link">
+        <mat-icon aria-hidden="true">map</mat-icon>
+        <span>Roadmap</span>
+      </a>
+      <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" rel="noopener noreferrer"
+        class="footer-link">
+        <mat-icon aria-hidden="true">code_off</mat-icon>
+        <span>GitHub</span>
+      </a>
+      <a href="https://github.com/Manishh09/ng-coding-challenges" class="footer-link">
+        <mat-icon aria-hidden="true">volunteer_activism</mat-icon>
+        <span>Contribute</span>
+      </a>
+    </div>
+
+    <!-- Community Section -->
+    <div slot="social-links" class="social-links-grid">
+      <a href="https://www.linkedin.com/in/manishboge" target="_blank" rel="noopener noreferrer"
+        class="social-link linkedin" aria-label="Follow on LinkedIn">
+        <mat-icon aria-hidden="true">person</mat-icon>
+        <span>Follow on LinkedIn</span>
+      </a>
+      <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" rel="noopener noreferrer"
+        class="social-link github" aria-label="Star on GitHub">
+        <mat-icon aria-hidden="true">star</mat-icon>
+        <span>Star on GitHub</span>
+      </a>
+    </div>
+
+    <!-- Legal Links -->
+    <div slot="legal-links" class="legal-links">
+      <a href="#" class="legal-link">Terms</a>
+      <a href="#" class="legal-link">Privacy</a>
+      <a href="#" class="legal-link">Cookie Policy</a>
+    </div>
+  </ng-coding-challenges-footer>
+</div>
 } @else {
-  <!-- Only Main Content (for specific routes) -->
+<!-- Only Main Content (for specific routes) -->
+<main class="main-content">
   <router-outlet></router-outlet>
+</main>
 }

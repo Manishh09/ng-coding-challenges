@@ -24,7 +24,7 @@ export interface ChallengeCardData {
 }
 
 export interface Challenge {
-  
+
   id: number;
   title: string;
   description: string;
@@ -51,12 +51,12 @@ export interface Challenge {
     MatMenuModule,
     RouterLink
   ],
- templateUrl: './challenge-card.component.html',
- styleUrl: './challenge-card.component.scss'
+  templateUrl: './challenge-card.component.html',
+  styleUrl: './challenge-card.component.scss'
 })
 export class ChallengeCardComponent {
   @Input({ required: true }) challenge!: Challenge;
-  
+
   private navigationService = inject(NavigationService);
   private notificationService = inject(NotificationService);
 
@@ -64,10 +64,10 @@ export class ChallengeCardComponent {
    * Navigates to the challenge requirement document
    * @param requirementUrl - URL to the requirement document
    */
-  async goToChallenge(requirementUrl: string): Promise<void> {
+  async goToChallengeV2(requirementUrl: string): Promise<void> {
     try {
-      const success = await this.navigationService.openChallengeRequirement(requirementUrl);
-      
+      const success = await this.navigationService.openExternalLink(requirementUrl);
+
       if (!success) {
         this.notificationService.error('Unable to open challenge requirement. Please check if popups are blocked.');
       }
@@ -81,10 +81,10 @@ export class ChallengeCardComponent {
    * Opens GitHub repository in a new tab
    * @param githubUrl - URL to the GitHub repository
    */
-  async openGitHub(githubUrl: string): Promise<void> {
+  async openGitHubV2(githubUrl: string): Promise<void> {
     try {
-      const success = await this.navigationService.openExternalLink(githubUrl);
-      
+      const success = await this.navigationService.openExternalLinkV2(githubUrl);
+
       if (!success) {
         this.notificationService.error('Unable to open GitHub repository. Please check if popups are blocked.');
       }
@@ -93,6 +93,36 @@ export class ChallengeCardComponent {
       this.notificationService.error('An error occurred while opening the GitHub repository.');
     }
   }
+
+  /**
+   * Opens GitHub repository in a new tab
+   * @param githubUrl - URL to the GitHub repository
+   */
+  openGitHub(githubUrl: string): void {
+    const success = this.navigationService.openExternalLink(githubUrl);
+
+    if (!success) {
+      this.notificationService.error(
+        'Unable to open GitHub repository. Please check if popups are blocked.'
+      );
+    }
+  }
+
+
+  /**
+   * Navigates to the challenge requirement document
+   * @param requirementUrl - URL to the requirement document
+   */
+  goToChallenge(requirementUrl: string): void {
+    const success = this.navigationService.openExternalLink(requirementUrl);
+
+    if (!success) {
+      this.notificationService.error(
+        'Unable to open challenge requirement. Please check if popups are blocked.'
+      );
+    }
+  }
+
 
   /**
    * Gets the domain name for display purposes
