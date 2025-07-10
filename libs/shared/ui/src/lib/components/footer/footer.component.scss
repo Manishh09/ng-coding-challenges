@@ -12,7 +12,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #673ab7, #9c27b0, #673ab7);
+    background: var(--brand-gradient-footer);
   }
 }
 
@@ -23,13 +23,12 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: var(--spacing-xl);
-  
 }
 
 .footer-section {
   display: flex;
   flex-direction: column;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.5s var(--animation-easing);
 }
 
 .brand-section {
@@ -40,9 +39,12 @@
   margin: 0 0 var(--spacing-md) 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--on-surface-color);
   position: relative;
   padding-bottom: 8px;
+  background: var(--brand-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 
   &::after {
     content: '';
@@ -50,8 +52,14 @@
     bottom: 0;
     left: 0;
     width: 40px;
-    height: 2px;
-    background-color: #673ab7;
+    height: 3px;
+    background: var(--brand-gradient-primary);
+    border-radius: 3px;
+    transition: width 0.3s var(--animation-easing);
+  }
+  
+  &:hover::after {
+    width: 60px;
   }
 }
 
@@ -64,8 +72,8 @@
 .footer-logo-icon {
   margin-right: var(--spacing-sm);
   font-size: 24px;
-  color: #673ab7;
-  transition: transform 0.3s ease;
+  color: var(--primary-color, #dd0031);
+  transition: transform 0.3s var(--animation-easing);
 
   &:hover {
     transform: rotate(20deg);
@@ -75,7 +83,7 @@
 .footer-logo-text {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #673ab7;
+  color: var(--primary-color, #dd0031);
 }
 
 .footer-description {
@@ -107,14 +115,14 @@
   ::ng-deep a {
     color: var(--on-surface-variant-color);
     text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s var(--animation-easing);
     display: inline-block;
     position: relative;
-    padding: 3px 0;
+    padding: 6px 0;
     cursor: pointer;
 
     &:hover {
-      color: #673ab7;
+      color: var(--primary-color, #dd0031);
       transform: translateX(4px);
     }
 
@@ -122,15 +130,21 @@
       content: '';
       position: absolute;
       width: 0;
-      height: 1px;
+      //height: 1px;
       bottom: 0;
       left: 0;
-      background-color: #673ab7;
-      transition: width 0.3s ease;
+      background: var(--brand-gradient-primary);
+      transition: width 0.3s var(--animation-easing);
     }
 
     &:hover::after {
       width: 100%;
+    }
+    
+    // Improve icon alignment when icons are present
+    ::ng-deep mat-icon {
+      vertical-align: middle;
+      margin-right: var(--spacing-sm);
     }
   }
 }
@@ -141,13 +155,26 @@
   flex-wrap: wrap;
 
   ::ng-deep a, ::ng-deep button {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: all 0.3s var(--animation-easing);
     opacity: 0.85;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
     &:hover {
       transform: translateY(-3px);
       opacity: 1;
+    }
+    
+    ::ng-deep mat-icon {
+      margin-right: var(--spacing-sm);
+      vertical-align: middle;
+      font-size: 1.15rem;
+      transition: transform 0.3s var(--animation-easing);
+    }
+    
+    &:hover ::ng-deep mat-icon {
+      transform: scale(1.1);
     }
   }
 }
@@ -166,7 +193,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #673ab7, #9c27b0, #673ab7);
+    background: var(--brand-gradient-section);
     opacity: 0.8;
   }
 }
@@ -180,131 +207,11 @@
   gap: var(--spacing-xl);
 }
 
-.footer-section {
-  display: flex;
-  flex-direction: column;
-  animation: fadeIn 0.5s ease-in-out;
-}
+// This section was removed as it was duplicated from earlier in the file
 
-.brand-section {
-  max-width: 350px;
-}
+// This section was removed as it was duplicated from earlier in the file
 
-.footer-title {
-  margin: 0 0 var(--spacing-md) 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--on-surface-color);
-  position: relative;
-  padding-bottom: 8px;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: #673ab7;
-  }
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--spacing-md);
-}
-
-.footer-logo-icon {
-  margin-right: var(--spacing-sm);
-  font-size: 24px;
-  color: #673ab7;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: rotate(20deg);
-  }
-}
-
-.footer-logo-text {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #673ab7;
-}
-
-.footer-description {
-  color: var(--on-surface-variant-color);
-  line-height: 1.6;
-  margin: 0 0 var(--spacing-md) 0;
-  font-size: 0.95rem;
-}
-
-.footer-tagline {
-  color: var(--on-surface-variant-color);
-  font-size: 0.875rem;
-  margin: 0 0 var(--spacing-md) 0;
-}
-
-.newsletter-section {
-  margin-top: var(--spacing-md);
-}
-
-.newsletter-form {
-  margin-top: var(--spacing-sm);
-}
-
-.footer-nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  
-  ::ng-deep a {
-    color: var(--on-surface-variant-color);
-    text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
-    display: inline-block;
-    position: relative;
-    padding: 3px 0;
-    cursor: pointer;
-    
-    &:hover {
-      color: #673ab7;
-      transform: translateX(4px);
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: 0;
-      left: 0;
-      background-color: #673ab7;
-      transition: width 0.3s ease;
-    }
-    
-    &:hover::after {
-      width: 100%;
-    }
-  }
-}
-
-.social-links {
-  display: flex;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
-  
-  ::ng-deep a, ::ng-deep button {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0.85;
-    cursor: pointer;
-    
-    &:hover {
-      transform: translateY(-3px);
-      opacity: 1;
-    }
-  }
-}
+// This section was removed as it was duplicated from earlier in the file
 
 .footer-bottom {
   background-color: var(--surface-color);
@@ -315,7 +222,6 @@
 
 .footer-bottom .footer-content {
   padding: var(--spacing-md) var(--spacing-md) 0;
-   
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -331,7 +237,7 @@
 }
 
 .heart-icon {
-  color: #e91e63;
+  color: var(--primary-color, #dd0031);
   display: inline-block;
   animation: heartbeat 1.5s infinite;
   margin: 0 3px;
@@ -348,10 +254,165 @@
     color: var(--on-surface-variant-color);
     font-size: 0.875rem;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.3s var(--animation-easing);
+    position: relative;
+    padding: 2px 0;
     
     &:hover {
-      color: #673ab7;
+      color: var(--primary-color, #dd0031);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background: var(--brand-gradient-primary);
+      transition: width 0.3s var(--animation-easing);
+    }
+    
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+/* Footer Link Components Styling */
+::ng-deep .footer-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+::ng-deep .footer-link {
+  display: flex !important;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s var(--animation-easing);
+  padding: 0.5rem 0;
+  cursor: pointer;
+  position: relative;
+  
+  mat-icon {
+    font-size: 1.25rem;
+    height: 1.25rem;
+    width: 1.25rem;
+    background: var(--brand-gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.85;
+    transition: all 0.3s var(--animation-easing);
+  }
+  
+  span {
+    position: relative;
+    transition: all 0.3s var(--animation-easing);
+  }
+  
+  &:hover {
+    transform: translateX(6px);
+    
+    mat-icon {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    span::after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  
+  span::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--brand-gradient-primary);
+    transition: width 0.3s var(--animation-easing), opacity 0.3s var(--animation-easing);
+    opacity: 0;
+  }
+}
+
+/* Social Links Grid Styling */
+::ng-deep .social-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+::ng-deep .social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-md);
+  background-color: rgba(var(--surface-variant-color-rgb, 0, 0, 0), 0.05);
+  transition: all 0.3s var(--animation-easing);
+  cursor: pointer;
+  border: 1px solid var(--outline-color);
+  
+  mat-icon {
+    font-size: 1.25rem;
+    height: 1.25rem;
+    width: 1.25rem;
+    transition: transform 0.3s var(--animation-easing);
+  }
+  
+  span {
+    font-weight: 500;
+    transition: transform 0.3s var(--animation-easing);
+  }
+  
+  &.linkedin {
+    color: #0077B5;
+    
+    &:hover {
+      background-color: rgba(0, 119, 181, 0.1);
+      
+      mat-icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  &.github {
+    color: var(--on-surface-color, #333);
+    
+    &:hover {
+      background-color: rgba(var(--on-surface-color-rgb, 0, 0, 0), 0.1);
+      
+      mat-icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-color, #dd0031);
+  }
+}
+
+/* Legal Links */
+::ng-deep .legal-links {
+  display: flex;
+  gap: 1.5rem;
+  
+  .legal-link {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -405,23 +466,47 @@
     text-align: center;
   }
   
-  .footer-description {
+  .footer-tagline {
     text-align: center;
+    max-width: 400px;
   }
   
   .footer-nav {
     align-items: center;
   }
+  
+  .social-links {
+    justify-content: center;
+  }
 }
 
+@media (max-width: 480px) {
+  .footer-content {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  }
+  
+  .footer-logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .footer-title {
+    font-size: 1rem;
+  }
+  
+  .footer-tagline {
+    font-size: 0.8rem;
+  }
+}
+
+/* Accessibility - Respect reduced motion preferences */
 @media (prefers-reduced-motion) {
   .footer-section, .heart-icon, .footer-logo-icon, .footer-nav ::ng-deep a, .social-links ::ng-deep a {
-    animation: none;
-    transition: none;
-    transform: none;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
   
   .footer-nav ::ng-deep a:hover, .social-links ::ng-deep a:hover {
-    transform: none;
+    transform: none !important;
   }
 }

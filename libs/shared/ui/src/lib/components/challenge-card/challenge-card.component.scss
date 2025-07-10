@@ -3,23 +3,24 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.3s var(--animation-easing);
   cursor: pointer;
   border: none;
   max-width: 500px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-}
-
-.challenge-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px var(--shadow-color);
+  background-color: var(--surface-color);
+  
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px var(--shadow-color);
+  }
 }
 
 .card-banner {
   height: 6px;
-  background: linear-gradient(to right, #6200ee, #3700b3);
+  background: var(--brand-gradient-primary);
   position: absolute;
   top: 0;
   left: 0;
@@ -28,7 +29,7 @@
 
 .card-footer-indicator {
   height: 4px;
-  background: linear-gradient(to right, rgba(98, 0, 238, 0.1), rgba(55, 0, 179, 0.2));
+  background: var(--brand-gradient-section);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -53,12 +54,12 @@ mat-card-header {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s var(--animation-easing);
   
   &:hover:not(:disabled) {
     transform: scale(1.1);
-    background-color: rgba(98, 0, 238, 0.1);
-    box-shadow: 0 2px 8px rgba(98, 0, 238, 0.2);
+    background-color: rgba(221, 0, 49, 0.1);
+    box-shadow: 0 2px 8px rgba(221, 0, 49, 0.2);
   }
   
   &:active:not(:disabled) {
@@ -72,20 +73,20 @@ mat-card-header {
   }
   
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: 2px solid var(--primary-color, #dd0031);
     outline-offset: 2px;
   }
 }
 
 .challenge-icon {
-  color: var(--primary-color);
+  color: var(--primary-color, #dd0031);
   font-size: 20px;
   width: 20px;
   height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.2s var(--animation-easing);
 }
 
 mat-card-title {
@@ -129,33 +130,33 @@ mat-card-content {
   width: 100%;
 }
 
-.requirement-button {
-  transition: all 0.2s ease;
-  
-  &:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+/* Remove the old icon margin styles that were causing issues */
+mat-card-actions button mat-icon,
+mat-card-actions a mat-icon {
+  margin-right: 0;
+  font-size: 24px;
+  vertical-align: middle;
 }
 
-.view-button {
-  transition: all 0.2s ease;
-  
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-}
-
-.domain-indicator {
-  font-size: 0.8em;
-  opacity: 0.6;
+.more-options {
   margin-left: auto;
+}
+
+/* Add a subtle animation to the card when it appears */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:host {
+  animation: cardAppear 0.5s var(--animation-easing) forwards;
+  display: block;
 }
 
 mat-card-actions {
@@ -165,7 +166,7 @@ mat-card-actions {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: var(--surface-variant-color, rgba(0, 0, 0, 0.02));
   
   .action-buttons {
     display: flex;
@@ -182,18 +183,18 @@ mat-card-actions {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s var(--animation-easing);
   position: relative;
   
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    background-color: rgba(0, 0, 0, 0.04);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(221, 0, 49, 0.15);
+    background-color: rgba(221, 0, 49, 0.04);
   }
   
   &:active:not(:disabled) {
     transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(221, 0, 49, 0.1);
   }
   
   &:disabled {
@@ -210,13 +211,32 @@ mat-card-actions {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
+    color: var(--primary-color, #dd0031);
   }
   
   // Add subtle background on focus for accessibility
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: 2px solid var(--primary-color, #dd0031);
     outline-offset: 2px;
+  }
+  
+  // Add a subtle animation effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--brand-gradient-primary);
+    z-index: -1;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s var(--animation-easing);
+  }
+  
+  &:hover::before {
+    opacity: 0.1;
   }
 }
 
@@ -289,6 +309,41 @@ mat-card-actions a mat-icon {
       height: 18px;
     }
   }
+  
+  .card-banner {
+    height: 4px;
+  }
+  
+  .card-footer-indicator {
+    height: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .challenge-card {
+    border-radius: 6px;
+  }
+  
+  mat-card-title {
+    font-size: 1.1rem;
+    max-width: 75%;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .requirement-button,
+  .view-button {
+    width: 40px;
+    height: 40px;
+    
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 /* High contrast mode improvements */
@@ -296,10 +351,10 @@ mat-card-actions a mat-icon {
   .requirement-button,
   .view-button,
   .challenge-button {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--primary-color, #dd0031);
     
     &:hover:not(:disabled) {
-      background-color: var(--primary-color);
+      background-color: var(--primary-color, #dd0031);
       color: white;
       
       mat-icon {
@@ -311,6 +366,10 @@ mat-card-actions a mat-icon {
       border-color: rgba(0, 0, 0, 0.3);
       opacity: 0.6;
     }
+  }
+  
+  .card-banner {
+    height: 8px;
   }
 }
 
@@ -328,5 +387,13 @@ mat-card-actions a mat-icon {
     &:active:not(:disabled) {
       transform: none;
     }
+  }
+  
+  .challenge-card:hover {
+    transform: none;
+  }
+  
+  :host {
+    animation: none;
   }
 }

@@ -2,12 +2,17 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  background: var(--brand-gradient-section);
+  //background: rgba(var(--surface-color-rgb, 255, 255, 255), 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(var(--outline-color-rgb, 224, 224, 224), 0.5);
   padding: 0;
   height: 64px;
   width: 100%;
   overflow-x: hidden;
+  transition: background var(--animation-duration-standard) var(--animation-easing),
+              box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
 
 .header-container {
@@ -35,27 +40,26 @@
   color: inherit;
   font-weight: 600;
   font-size: 1.25rem;
-  transition: opacity 0.2s ease-in-out;
+  transition: transform var(--animation-duration-fast) var(--animation-easing),
+              opacity var(--animation-duration-fast) var(--animation-easing);
+  overflow: visible;
 }
 
 .logo-link:hover {
-  opacity: 0.8;
+  opacity: 0.95;
+  transform: scale(1.02);
 }
 
-.logo-icon {
-  margin-right: var(--spacing-sm);
-  font-size: 28px;
-  width: 28px;
+/* Special styling for the Angular logo */
+.angular-logo {
   height: 28px;
-}
-
-/* Add styling for the logo image */
-.logo-link img {
   width: 28px;
-  height: 28px;
-  margin-right: var(--spacing-sm);
   object-fit: contain;
   vertical-align: middle;
+  margin-right: 8px;
+  transition: all 0.3s var(--animation-easing);
+  filter: drop-shadow(0 2px 4px var(--logo-shadow-color, rgba(0, 0, 0, 0.15))) var(--logo-filter, none);
+  mix-blend-mode: var(--logo-blend-mode, normal);
 }
 
 .nav-section {
@@ -98,10 +102,6 @@ ng-coding-challenges-theme-toggle {
     padding: 0 12px;
   }
   
-  .actions-section {
-    //padding-right: 4px;
-  }
-  
   .header-toolbar {
     height: 56px;
   }
@@ -116,3 +116,36 @@ ng-coding-challenges-theme-toggle {
     display: none !important;
   }
 }
+
+  .angular-gradient-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: 0.25rem;
+    background: linear-gradient(120deg, #dd0031, #c3002f, #dd0031);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 8s ease infinite;
+    letter-spacing: -0.02em;
+    font-family: 'Inter', 'Roboto', sans-serif;
+  }
+  
+  /* Style the "ng" prefix like angular.dev */
+  .ng-prefix {
+    font-weight: 400;
+    opacity: 1;
+    margin-right: 1px;
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

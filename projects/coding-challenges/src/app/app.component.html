@@ -13,61 +13,57 @@
 
   @if (showChallenges()) {
   <div id="challenges-section">
-    <ng-coding-challenges-challenge-list [challenges]="challenges" title="Angular Coding Challenges" />
+    <ng-coding-challenges-challenge-list [challenges]="challenges" />
   </div>
   }
 
 
 
   <!-- Footer -->
-  <ng-coding-challenges-footer [appName]="title"
+  <ng-coding-challenges-footer id="footer-section" [appName]="title"
     description="Practice. Learn. Succeed."
     angularVersion="19">
 
     <!-- Quick Links Section -->
     <div slot="quick-links" class="footer-links-grid">
-      <a (click)="scrollToHome()" class="footer-link">
-        <mat-icon aria-hidden="true">home</mat-icon>
-        <span>Home</span>
-      </a>
-      <a (click)="showChallenges.set(true); scrollToChallenges()" class="footer-link">
-        <mat-icon aria-hidden="true">code</mat-icon>
-        <span>Challenges</span>
-      </a>
-      <a routerLink="/roadmap" class="footer-link">
-        <mat-icon aria-hidden="true">map</mat-icon>
-        <span>Roadmap</span>
-      </a>
-      <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" rel="noopener noreferrer"
-        class="footer-link">
-        <mat-icon aria-hidden="true">code_off</mat-icon>
-        <span>GitHub</span>
-      </a>
-      <a href="https://github.com/Manishh09/ng-coding-challenges" class="footer-link">
-        <mat-icon aria-hidden="true">volunteer_activism</mat-icon>
-        <span>Contribute</span>
-      </a>
+      @for (link of quickLinks(); track link.text) {
+        @if (link.url && !link.action) {
+          @if (link.external) {
+            <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+              <span>{{ link.text }}</span>
+            </a>
+          } @else {
+            <a href="javascript:void(0)" (click)="navigateToRoute(link.url)" class="footer-link">
+              <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+              <span>{{ link.text }}</span>
+            </a>
+          }
+        } @else {
+          <a (click)="link.action && link.action()" class="footer-link">
+            <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+            <span>{{ link.text }}</span>
+          </a>
+        }
+      }
     </div>
 
     <!-- Community Section -->
     <div slot="social-links" class="social-links-grid">
-      <a href="https://www.linkedin.com/in/manishboge" target="_blank" rel="noopener noreferrer"
-        class="social-link linkedin" aria-label="Follow on LinkedIn">
-        <mat-icon aria-hidden="true">person</mat-icon>
-        <span>Follow on LinkedIn</span>
-      </a>
-      <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" rel="noopener noreferrer"
-        class="social-link github" aria-label="Star on GitHub">
-        <mat-icon aria-hidden="true">star</mat-icon>
-        <span>Star on GitHub</span>
-      </a>
+      @for (link of socialLinks(); track link.text) {
+        <a [href]="link.url" target="_blank" rel="noopener noreferrer"
+          class="social-link {{ link.cssClass }}" [attr.aria-label]="link.text">
+          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+          <span>{{ link.text }}</span>
+        </a>
+      }
     </div>
 
     <!-- Legal Links -->
     <div slot="legal-links" class="legal-links">
-      <a href="#" class="legal-link">Terms</a>
-      <a href="#" class="legal-link">Privacy</a>
-      <a href="#" class="legal-link">Cookie Policy</a>
+      @for (link of legalLinks(); track link.text) {
+        <a [href]="link.url" class="legal-link">{{ link.text }}</a>
+      }
     </div>
   </ng-coding-challenges-footer>
 </div>

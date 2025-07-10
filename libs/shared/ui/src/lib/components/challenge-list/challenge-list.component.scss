@@ -1,23 +1,30 @@
 .challenge-list-container {
   width: 100%;
-  padding: 40px 0;
-  background-color: var(--surface-variant-color, #f8f9fa);
+  padding: 60px 0;
+  background: var(--brand-gradient-section);
   min-height: 400px;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition: opacity 0.4s var(--animation-easing), 
+              transform 0.4s var(--animation-easing);
 }
 
 .section-title {
   text-align: center;
   margin-bottom: 32px;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--on-surface-color, #333);
   position: relative;
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
+  background: var(--brand-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s var(--animation-easing);
+  animation: fadeIn 0.8s var(--animation-easing) forwards;
 }
 
 .section-title::after {
@@ -27,8 +34,18 @@
   left: 25%;
   width: 50%;
   height: 3px;
-  background: linear-gradient(to right, var(--primary-color, #667eea), var(--secondary-color, #764ba2));
+  background: var(--brand-gradient-primary);
   border-radius: 3px;
+  transition: width 0.3s var(--animation-easing);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .cards {
@@ -40,6 +57,26 @@
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  
+  /* Add staggered animation for cards */
+  & > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardAppear 0.5s var(--animation-easing) forwards;
+  }
+  
+  @for $i from 1 through 12 {
+    & > *:nth-child(#{$i}) {
+      animation-delay: #{0.1 * $i}s;
+    }
+  }
+}
+
+@keyframes cardAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .no-challenges {

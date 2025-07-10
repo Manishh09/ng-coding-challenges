@@ -63,7 +63,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   
   /* Angular.dev style background effect */
-  &::before {
+  &::before, &::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -74,47 +74,16 @@
     opacity: 0.2;
     background-size: cover;
     animation: pulse 10s ease-in-out infinite alternate;
+  }
+  
+  &::before {
     background: radial-gradient(circle at 20% 50%, rgba(255, 61, 95, 0.5) 0%, transparent 50%);
     filter: blur(40px);
   }
   
-  /* Add a ribbon badge */
-  .ribbon-badge {
-    position: absolute;
-    top: 48px;
-    right: -45px;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--primary-color, #dd0031);
-    padding: 8px 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    transform: rotate(45deg);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
-    z-index: 3;
-    letter-spacing: 1px;
-    width: 180px;
-    text-align: center;
-    pointer-events: none;
-    transition: all 0.3s var(--animation-easing);
-    border-radius: 2px;
-    text-transform: uppercase;
-    
-    &::before, &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background-color: rgba(255, 255, 255, 0.7);
-    }
-    
-    &::before {
-      left: 8px;
-    }
-    
-    &::after {
-      right: 8px;
-    }
+  &::after {
+    background: radial-gradient(circle at 80% 50%, rgba(195, 0, 47, 0.5) 0%, transparent 50%);
+    filter: blur(40px);
   }
 }
 
@@ -181,10 +150,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  color: white;
-  letter-spacing: 0.3px;
   
-  /* Glassmorphism effect with better contrast */
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
@@ -192,7 +158,6 @@
     border-color: rgba(255, 255, 255, 0.3);
   }
   
-  /* Angular.dev-inspired shine effect */
   &::before {
     content: '';
     position: absolute;
@@ -200,38 +165,14 @@
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     z-index: -1;
     transform: rotate(45deg) translateX(-100%);
-    transition: transform 0.6s var(--animation-easing);
+    transition: transform 0.5s var(--animation-easing);
   }
   
   &:hover::before {
     transform: rotate(45deg) translateX(100%);
-  }
-  
-  /* Additional inner highlight for depth */
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 24px; 
-    padding: 1px;
-    background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1));
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.4;
-    transition: opacity 0.3s var(--animation-easing);
-  }
-  
-  &:hover::after {
-    opacity: 0.7;
   }
 }
 
@@ -261,8 +202,8 @@
   
   &:hover {
     background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
   
   &:active {
@@ -289,145 +230,15 @@
   &:hover::before {
     transform: translateX(100%);
   }
-  
-  span {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .btn-icon {
-    transition: transform 0.3s var(--animation-easing);
-    font-size: 1.3rem;
-    position: relative;
-    z-index: 2;
-  }
-  
-  &:hover .btn-icon {
-    animation: bounce 1s infinite;
-  }
 }
 
-/* Code pattern background overlay for subtle texture */
-.pattern-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 50 L50 0 L100 50 L50 100 z' /%3E%3C/g%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.2;
-  z-index: 1;
+.btn-icon {
+  transition: transform 0.3s var(--animation-easing);
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 2;
 }
 
-@media (max-width: 768px) {
-  .hero-section h2 {
-    font-size: 2.2rem;
-  }
-
-  .hero-section p {
-    font-size: 1.1rem;
-  }
-
-  .explore-btn {
-    padding: 12px 28px;
-    font-size: 1rem;
-  }
-  
-  .ribbon-badge {
-    font-size: 0.7rem;
-    right: -50px;
-    top: 12px;
-    padding: 6px 50px;
-    width: 160px;
-    
-    &::before, &::after {
-      width: 3px;
-    }
-    
-    &::before {
-      left: 6px;
-    }
-    
-    &::after {
-      right: 6px;
-    }
-  }
-  
-  .skills-badges {
-    gap: 8px;
-  }
-  
-  .skill-badge {
-    padding: 5px 12px;
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-section h2 {
-    font-size: 1.8rem;
-  }
-
-  .hero-section p {
-    font-size: 1rem;
-  }
-  
-  .hero-section {
-    padding: var(--spacing-xl, 2.5rem) var(--spacing-md, 1rem) var(--spacing-lg, 2rem);
-  }
-  
-  .skills-badges {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-  }
-  
-  .skill-badge {
-    padding: 4px 10px;
-    font-size: 0.75rem;
-  }
-  
-  .ribbon-badge {
-    font-size: 0.65rem;
-    right: -55px;
-    top: 10px;
-    padding: 5px 50px;
-    width: 150px;
-    
-    &::before, &::after {
-      width: 2px;
-    }
-    
-    &::before {
-      left: 5px;
-    }
-    
-    &::after {
-      right: 5px;
-    }
-  }
-}
-
-/* Accessibility - Respect reduced motion preferences */
-@media (prefers-reduced-motion) {
-  .hero-section h2,
-  .description-container,
-  .skills-badges,
-  .explore-btn,
-  .btn-icon {
-    animation: none !important;
-    transition: none !important;
-  }
-  
-  .explore-btn:hover {
-    transform: none !important;
-  }
-  
-  .skill-badge:hover {
-    transform: none !important;
-  }
+.explore-btn:hover .btn-icon {
+  animation: bounce 1s infinite;
 }

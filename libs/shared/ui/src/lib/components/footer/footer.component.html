@@ -17,6 +17,13 @@
       <div class="newsletter-section">
         <h3 class="footer-title">Stay Updated</h3>
         <div class="newsletter-form">
+          <!-- 
+            Content projection slot for newsletter form
+            Expected structure: 
+            <form slot="newsletter" class="newsletter-form">
+              (Email input and submit button)
+            </form>
+          -->
           <ng-content select="[slot=newsletter]"></ng-content>
         </div>
       </div>
@@ -27,6 +34,17 @@
     <div class="footer-section">
       <h3 class="footer-title">Quick Links</h3>
       <nav class="footer-nav" aria-label="Quick links navigation">
+        <!-- 
+          Content projection slot for quick links
+          Expected structure: 
+          <div slot="quick-links" class="footer-links-grid">
+            <a class="footer-link">
+              <mat-icon aria-hidden="true">icon_name</mat-icon>
+              <span>Link Text</span>
+            </a>
+            ...more links...
+          </div>
+        -->
         <ng-content select="[slot=quick-links]"></ng-content>
       </nav>
     </div>
@@ -34,6 +52,17 @@
     <div class="footer-section">
       <h3 class="footer-title">Community</h3>
       <div class="social-links" aria-label="Social media links">
+        <!-- 
+          Content projection slot for social links
+          Expected structure: 
+          <div slot="social-links" class="social-links-grid">
+            <a class="social-link linkedin|github|etc">
+              <mat-icon aria-hidden="true">icon_name</mat-icon>
+              <span>Link Text</span>
+            </a>
+            ...more links...
+          </div>
+        -->
         <ng-content select="[slot=social-links]"></ng-content>
       </div>
     </div>
@@ -47,6 +76,15 @@
         Angular {{ angularVersion() }}.
       </p>
       <div class="footer-bottom-links">
+        <!-- 
+          Content projection slot for legal links
+          Expected structure: 
+          <div slot="legal-links" class="legal-links">
+            <a href="#" class="legal-link">Terms</a>
+            <a href="#" class="legal-link">Privacy</a>
+            ...more links...
+          </div>
+        -->
         <ng-content select="[slot=legal-links]"></ng-content>
       </div>
     </div>

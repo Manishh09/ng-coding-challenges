@@ -2,6 +2,9 @@
 // Import shared theme styles
 @import '../../../libs/shared/ui/src/lib/styles/themes.scss';
 
+// Import Inter font for modern Angular.dev styling
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 // Application-specific styles
 html,
 body {
@@ -12,7 +15,7 @@ body {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', 'Roboto', sans-serif;
   line-height: 1.6;
   background-color: var(--surface-color);
   color: var(--on-surface-color);
@@ -49,4 +52,15 @@ app-root,
 .mat-typography {
   margin: 0;
   padding: 0;
+}
+
+/* styles.scss or styles.css */
+
+.mat-mdc-tooltip {
+  background-color: white !important;
+  color: red !important;
+  font-size: 14px;
+  border: 1px solid red;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(154, 64, 64, 0.2);
 }
