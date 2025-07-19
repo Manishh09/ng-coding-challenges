@@ -8,33 +8,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { NavigationService } from '../../../../../services/src/lib/navigation/navigation.service';
-import { NotificationService } from '../../../../../services/src/lib/notification/notification.service';
-
-export interface ChallengeCardData {
-  id: string;
-  title: string;
-  description: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert';
-  category: string;
-  tags: string[];
-  estimatedTime: number;
-  isCompleted?: boolean;
-  isFeatured?: boolean;
-}
-
-export interface Challenge {
-
-  id: number;
-  title: string;
-  description: string;
-
-  link: string;
-
-  requirement: string;
-
-  gitHub: string;
-}
+import { NavigationService, NotificationService } from '@ng-coding-challenges/shared/services';
+import { Challenge } from '@ng-coding-challenges/shared/models';
+ 
 
 @Component({
   selector: 'ng-coding-challenges-challenge-card',

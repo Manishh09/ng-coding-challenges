@@ -1,6 +1,6 @@
 import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { ThemeType } from '../../../../models/src/lib/theme.model';
+import { ThemeType } from '@ng-coding-challenges/shared/models';
 
 @Injectable({
   providedIn: 'root'

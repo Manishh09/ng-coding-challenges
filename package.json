@@ -6,7 +6,7 @@
     "start": "ng serve",
     "start:challenges": "ng serve coding-challenges",
     "build:challenges": "ng build coding-challenges",
-    "build:libs": "ng build shared-ui && ng build shared-models && ng build shared-services",
+    "build:libs": "ng build shared-models && ng build shared-services && ng build shared-ui",
     "build": "npm run build:libs && ng build",
     "build:all": "npm run build:libs && npm run build:challenges",
     "watch": "ng build --watch --configuration development",

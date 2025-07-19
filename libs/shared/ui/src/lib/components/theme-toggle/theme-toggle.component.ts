@@ -2,8 +2,8 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ThemeService } from '../../../../../services/src/lib/theme/theme.service';
-
+import { ThemeService } from '@ng-coding-challenges/shared/services';
+ 
 @Component({
   selector: 'ng-coding-challenges-theme-toggle',
   templateUrl: './theme-toggle.component.html',

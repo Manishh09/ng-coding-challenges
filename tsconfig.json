@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
+    "rootDir": ".",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -42,5 +43,6 @@
     "strictTemplates": true,
     "strictStandalone": true,
     "controlFlow": true
-  }
+  },
+   "exclude": ["node_modules", "tmp"]
 }

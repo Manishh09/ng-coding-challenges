@@ -1,7 +1,6 @@
 import { Component, inject, signal, type Signal } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import {
-  Challenge,
   ChallengeListComponent,
   FooterComponent,
   HeaderComponent,
@@ -12,6 +11,7 @@ import { Subject, timer } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
+import { Challenge } from '@ng-coding-challenges/shared/models';
 
 @Component({
   selector: 'app-root',

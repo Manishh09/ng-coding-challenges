@@ -2,5 +2,7 @@
  * Public API Surface of shared-models
  */
 
-export * from './lib/theme.model';
 // Add exports for other shared models here
+export * from './lib/theme.model';
+export * from './lib/challenge.model';
+
