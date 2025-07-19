@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Challenge } from '../../components/challenge-card/challenge-card.component';
+import { Challenge } from '../../../../ui/src/lib/components/challenge-card/challenge-card.component';
 
 @Injectable({
   providedIn: 'root'

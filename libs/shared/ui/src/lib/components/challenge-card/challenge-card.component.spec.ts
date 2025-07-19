@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ChallengeCardComponent, Challenge } from './challenge-card.component';
-import { NavigationService } from '../../services/navigation/navigation.service';
-import { NotificationService } from '../../services/notification/notification.service';
+import { NavigationService } from '../../../../../services/src/lib/navigation/navigation.service';
+import { NotificationService } from '../../../../../services/src/lib/notification/notification.service';
 
 describe('ChallengeCardComponent', () => {
   let component: ChallengeCardComponent;
@@ -22,14 +22,14 @@ describe('ChallengeCardComponent', () => {
 
   beforeEach(async () => {
     const navigationServiceSpy = jasmine.createSpyObj('NavigationService', [
-      'openChallengeRequirement', 
-      'openExternalLink', 
+      'openChallengeRequirement',
+      'openExternalLink',
       'getHostname'
     ]);
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', [
-      'error', 
-      'success', 
-      'info', 
+      'error',
+      'success',
+      'info',
       'warning'
     ]);
 
@@ -49,7 +49,7 @@ describe('ChallengeCardComponent', () => {
     component = fixture.componentInstance;
     navigationService = TestBed.inject(NavigationService) as jasmine.SpyObj<NavigationService>;
     notificationService = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
-    
+
     component.challenge = mockChallenge;
     fixture.detectChanges();
   });
@@ -72,17 +72,17 @@ describe('ChallengeCardComponent', () => {
   describe('goToChallenge', () => {
     it('should call navigationService.openChallengeRequirement with correct URL', async () => {
       navigationService.openChallengeRequirement.and.returnValue(Promise.resolve(true));
-      
+
       await component.goToChallenge(mockChallenge.requirement);
-      
+
       expect(navigationService.openChallengeRequirement).toHaveBeenCalledWith(mockChallenge.requirement);
     });
 
     it('should show error notification when navigation fails', async () => {
       navigationService.openChallengeRequirement.and.returnValue(Promise.resolve(false));
-      
+
       await component.goToChallenge(mockChallenge.requirement);
-      
+
       expect(notificationService.error).toHaveBeenCalledWith(
         'Unable to open challenge requirement. Please check if popups are blocked.'
       );
@@ -90,9 +90,9 @@ describe('ChallengeCardComponent', () => {
 
     it('should handle navigation service errors with error notification', async () => {
       navigationService.openChallengeRequirement.and.returnValue(Promise.reject(new Error('Test error')));
-      
+
       await component.goToChallenge(mockChallenge.requirement);
-      
+
       expect(notificationService.error).toHaveBeenCalledWith(
         'An error occurred while opening the challenge requirement.'
       );
@@ -102,17 +102,17 @@ describe('ChallengeCardComponent', () => {
   describe('openGitHub', () => {
     it('should call navigationService.openExternalLink with correct URL', async () => {
       navigationService.openExternalLink.and.returnValue(Promise.resolve(true));
-      
+
       await component.openGitHub(mockChallenge.gitHub);
-      
+
       expect(navigationService.openExternalLink).toHaveBeenCalledWith(mockChallenge.gitHub);
     });
 
     it('should show error notification when GitHub navigation fails', async () => {
       navigationService.openExternalLink.and.returnValue(Promise.resolve(false));
-      
+
       await component.openGitHub(mockChallenge.gitHub);
-      
+
       expect(notificationService.error).toHaveBeenCalledWith(
         'Unable to open GitHub repository. Please check if popups are blocked.'
       );
@@ -120,9 +120,9 @@ describe('ChallengeCardComponent', () => {
 
     it('should handle GitHub navigation errors with error notification', async () => {
       navigationService.openExternalLink.and.returnValue(Promise.reject(new Error('Test error')));
-      
+
       await component.openGitHub(mockChallenge.gitHub);
-      
+
       expect(notificationService.error).toHaveBeenCalledWith(
         'An error occurred while opening the GitHub repository.'
       );
@@ -132,9 +132,9 @@ describe('ChallengeCardComponent', () => {
   describe('getDomain', () => {
     it('should return hostname from navigationService', () => {
       navigationService.getHostname.and.returnValue('github.com');
-      
+
       const result = component.getDomain('https://github.com/test/repo');
-      
+
       expect(result).toBe('github.com');
       expect(navigationService.getHostname).toHaveBeenCalledWith('https://github.com/test/repo');
     });
@@ -143,17 +143,17 @@ describe('ChallengeCardComponent', () => {
   describe('UI interactions', () => {
     it('should call goToChallenge when challenge button is clicked', () => {
       spyOn(component, 'goToChallenge');
-      
+
       const button = fixture.nativeElement.querySelector('.challenge-button');
       button.click();
-      
+
       expect(component.goToChallenge).toHaveBeenCalledWith(mockChallenge.requirement);
     });
 
     it('should disable challenge button when no requirement URL', () => {
       component.challenge = { ...mockChallenge, requirement: '' };
       fixture.detectChanges();
-      
+
       const button = fixture.nativeElement.querySelector('.challenge-button');
       expect(button.disabled).toBe(true);
     });
@@ -161,7 +161,7 @@ describe('ChallengeCardComponent', () => {
     it('should disable requirements button when no requirement URL', () => {
       component.challenge = { ...mockChallenge, requirement: '' };
       fixture.detectChanges();
-      
+
       const button = fixture.nativeElement.querySelector('.requirement-button');
       expect(button.disabled).toBe(true);
     });
@@ -174,7 +174,7 @@ describe('ChallengeCardComponent', () => {
     it('should not show more options menu when no GitHub URL', () => {
       component.challenge = { ...mockChallenge, gitHub: '' };
       fixture.detectChanges();
-      
+
       const menuTrigger = fixture.nativeElement.querySelector('.more-options');
       expect(menuTrigger).toBeFalsy();
     });

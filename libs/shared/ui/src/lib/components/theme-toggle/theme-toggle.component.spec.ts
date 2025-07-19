@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemeToggleComponent } from './theme-toggle.component';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '../../../../../services/src/lib/theme/theme.service';
 
 describe('ThemeToggleComponent', () => {
   let component: ThemeToggleComponent;
@@ -42,7 +42,7 @@ describe('ThemeToggleComponent', () => {
   it('should show dark_mode icon when in light mode', () => {
     themeService.isDarkMode.and.returnValue(false);
     fixture.detectChanges();
-    
+
     const compiled = fixture.nativeElement as HTMLElement;
     const icon = compiled.querySelector('mat-icon');
     expect(icon?.textContent).toContain('dark_mode');
@@ -51,7 +51,7 @@ describe('ThemeToggleComponent', () => {
   it('should show light_mode icon when in dark mode', () => {
     themeService.isDarkMode.and.returnValue(true);
     fixture.detectChanges();
-    
+
     const compiled = fixture.nativeElement as HTMLElement;
     const icon = compiled.querySelector('mat-icon');
     expect(icon?.textContent).toContain('light_mode');
@@ -60,7 +60,7 @@ describe('ThemeToggleComponent', () => {
   it('should call toggleTheme when button is clicked', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const button = compiled.querySelector('.theme-toggle-btn') as HTMLButtonElement;
-    
+
     button.click();
     expect(themeService.toggleTheme).toHaveBeenCalled();
   });

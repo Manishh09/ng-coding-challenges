@@ -8,8 +8,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { NavigationService } from '../../services/navigation/navigation.service';
-import { NotificationService } from '../../services/notification/notification.service';
+import { NavigationService } from '../../../../../services/src/lib/navigation/navigation.service';
+import { NotificationService } from '../../../../../services/src/lib/notification/notification.service';
 
 export interface ChallengeCardData {
   id: string;
