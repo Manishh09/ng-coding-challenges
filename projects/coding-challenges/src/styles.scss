@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 // Import shared theme styles
-@import '../../../libs/shared/ui/src/lib/styles/themes.scss';
+@use '../../../libs/shared/ui/src/lib/styles/themes.scss' as themes;
 
 // Import Inter font for modern Angular.dev styling
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
