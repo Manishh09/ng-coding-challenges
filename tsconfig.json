@@ -27,13 +27,13 @@
     ],
     "paths": {
       "@ng-coding-challenges/shared/ui": [
-        "libs/shared/ui/src/public-api.ts"
+        "dist/shared/ui/public-api.js"
       ],
       "@ng-coding-challenges/shared/models": [
-        "libs/shared/models/src/public-api.ts"
+        "dist/shared/models/public-api.js"
       ],
       "@ng-coding-challenges/shared/services": [
-        "libs/shared/services/src/public-api.ts"
+        "dist/shared/services/public-api.js"
       ]
     }
   },
