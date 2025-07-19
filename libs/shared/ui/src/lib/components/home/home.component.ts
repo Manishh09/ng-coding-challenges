@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { PageContainerComponent } from '@ng-coding-challenges/shared/ui';
 
 @Component({
   selector: 'ng-coding-challenges-home',
@@ -17,7 +16,6 @@ import { PageContainerComponent } from '@ng-coding-challenges/shared/ui';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    // PageContainerComponent
   ]
 })
 export class HomeComponent {}
