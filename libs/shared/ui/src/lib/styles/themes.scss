@@ -126,22 +126,22 @@ $ng-coding-challenges-dark-theme: mat.m2-define-dark-theme((
 // Dark theme styles
 .dark-theme {
   @include mat.all-component-colors($ng-coding-challenges-dark-theme);
-  
-  // Custom dark theme variables
-  --surface-color: #121212;
-  --surface-color-rgb: 18, 18, 18;
-  --surface-variant-color: #1e1e1e;
-  --surface-variant-color-rgb: 30, 30, 30;
-  --on-surface-color: #ffffff;
-  --on-surface-color-rgb: 255, 255, 255;
-  --on-surface-variant-color: #e0e0e0;
-  --outline-color: #404040;
-  --outline-color-rgb: 64, 64, 64;
-  
-  // Logo theme integration variables
-  --logo-filter: brightness(0.95) contrast(0.9);
-  --logo-blend-mode: screen;
-  --logo-shadow-color: rgba(221, 0, 49, 0.2);
+  // Move CSS variable declarations above nested rules for future compatibility
+  & {
+    --surface-color: #121212;
+    --surface-color-rgb: 18, 18, 18;
+    --surface-variant-color: #1e1e1e;
+    --surface-variant-color-rgb: 30, 30, 30;
+    --on-surface-color: #ffffff;
+    --on-surface-color-rgb: 255, 255, 255;
+    --on-surface-variant-color: #e0e0e0;
+    --outline-color: #404040;
+    --outline-color-rgb: 64, 64, 64;
+    // Logo theme integration variables
+    --logo-filter: brightness(0.95) contrast(0.9);
+    --logo-blend-mode: screen;
+    --logo-shadow-color: rgba(221, 0, 49, 0.2);
+  }
 }
 
 // Light theme variables

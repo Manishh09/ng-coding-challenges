@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
+    "rootDir": ".",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -19,19 +20,23 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "ES2022",
       "dom"
     ],
     "paths": {
       "@ng-coding-challenges/shared/ui": [
-        "libs/shared/ui/src/public-api.ts"
+        "dist/shared/ui",
+        "libs/shared-ui/src/public-api.ts"
       ],
       "@ng-coding-challenges/shared/models": [
-        "libs/shared/models/src/public-api.ts"
+        "dist/shared/models",
+        "libs/shared-models/src/public-api.ts"
       ],
       "@ng-coding-challenges/shared/services": [
-        "libs/shared/services/src/public-api.ts"
+        "dist/shared/services",
+        "libs/shared-services/src/public-api.ts"
       ]
     }
   },
@@ -42,5 +47,9 @@
     "strictTemplates": true,
     "strictStandalone": true,
     "controlFlow": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

@@ -1,17 +1,17 @@
 import { Component, inject, signal, type Signal } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
-import { 
-  Challenge, 
-  ChallengeListComponent, 
-  FooterComponent, 
-  HeaderComponent, 
+import {
+  ChallengeListComponent,
+  FooterComponent,
+  HeaderComponent,
   HeroSectionComponent,
-  ChallengesService,
   FooterLink
 } from '@ng-coding-challenges/shared/ui';
 import { Subject, timer } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
+import { ChallengesService } from '@ng-coding-challenges/shared/services';
+import { Challenge } from '@ng-coding-challenges/shared/models';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +19,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './app.component.scss',
   standalone: true,
   imports: [
-    RouterOutlet, 
-    HeaderComponent, 
-    FooterComponent, 
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
     ChallengeListComponent,
     HeroSectionComponent,
     MatIconModule
@@ -55,7 +55,7 @@ export class AppComponent {
    * Angular lifecycle hook that is called after component initialization.
    * This method is invoked after Angular has initialized all data-bound properties
    * and input bindings of the component.
-   * 
+   *
    * @requires The component class must implement OnInit interface
    */
   ngOnInit(): void {
@@ -81,7 +81,7 @@ export class AppComponent {
   toggleChallenges(isExpanded?: boolean) {
     if (isExpanded !== undefined) {
       this.showChallenges.set(isExpanded);
-      
+
       // If challenges are being shown, scroll to the challenges section
       if (isExpanded) {
         this.scrollToSection('challenges-section');
@@ -91,7 +91,7 @@ export class AppComponent {
       this.showChallenges.update(current => !current);
     }
   }
-  
+
   /**
    * Scrolls to the top of the page
    */
@@ -110,7 +110,7 @@ export class AppComponent {
    * Scrolls to the challenges section
    */
   scrollToSection(sectionName: string) {
-   
+
     timer(100).pipe(takeUntil(this.#destroy$)).subscribe(() => {
       const section = document.getElementById(sectionName);
       if (section) {
