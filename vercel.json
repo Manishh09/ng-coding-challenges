@@ -1,18 +1,8 @@
 {
   "version": 2,
   "buildCommand": "npm run build:all",
-
-  "builds": [
-    {
-      "src": "angular.json",
-      "use": "@vercel/angular"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "outputDirectory": "dist/coding-challenges"
+  "outputDirectory": "dist/coding-challenges",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
