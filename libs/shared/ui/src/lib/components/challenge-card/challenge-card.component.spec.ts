@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ChallengeCardComponent, Challenge } from './challenge-card.component';
-import { NavigationService } from '@coding-challenges/shared/services/navigation.service';
-import { NotificationService } from '@coding-challenges/shared/services/notification.service';
+import { ChallengeCardComponent } from './challenge-card.component';
+import { Challenge } from '@ng-coding-challenges/shared/models';
+import { NavigationService, NotificationService } from '@ng-coding-challenges/shared/services';
 describe('ChallengeCardComponent', () => {
   let component: ChallengeCardComponent;
   let fixture: ComponentFixture<ChallengeCardComponent>;
