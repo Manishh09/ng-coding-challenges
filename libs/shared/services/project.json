@@ -6,21 +6,13 @@
   "prefix": "lib",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "executor": "@nx/angular:package",
+      "dependsOn": [
+        "^build"
+      ],
       "options": {
         "project": "libs/shared/services/ng-package.json"
-
       },
-
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/shared/services/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/shared/services/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production",
       "outputs": [
         "{workspaceRoot}/dist/shared/services"
       ]
@@ -35,5 +27,8 @@
         ]
       }
     }
-  }
+  },
+  "tags": [],
+  "implicitDependencies": ["shared-models"]
+
 }

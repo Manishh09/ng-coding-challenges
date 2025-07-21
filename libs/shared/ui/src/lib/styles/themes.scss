@@ -13,15 +13,15 @@
   --brand-gradient-secondary: linear-gradient(120deg, #dd0031, #a82731);
   --brand-gradient-footer: linear-gradient(120deg, #dd0031, #c3002f);
   --brand-gradient-section: linear-gradient(120deg, rgba(221, 0, 49, 0.05), rgba(195, 0, 47, 0.05));
-  
+
   // RGB values for dynamic opacity control
   --primary-color-rgb: 221, 0, 49;
-  
+
   // Additional gradients for special UI elements
   --brand-gradient-button: linear-gradient(120deg, #dd0031, #c2002e);
   --brand-gradient-card: linear-gradient(120deg, rgba(221, 0, 49, 0.03), rgba(195, 0, 47, 0.03));
   --brand-gradient-highlight: linear-gradient(120deg, rgba(221, 0, 49, 0.1), rgba(195, 0, 47, 0.1));
-  
+
   // Animation properties
   --animation-duration-fast: 200ms;
   --animation-duration-standard: 300ms;
@@ -159,7 +159,7 @@ $ng-coding-challenges-dark-theme: mat.m2-define-dark-theme((
   --shadow-color: rgba(0, 0, 0, 0.12);
   --primary-color: #dd0031;
   --primary-color-rgb: 221, 0, 49;
-  
+
   // Logo theme integration variables
   --logo-filter: none;
   --logo-blend-mode: multiply;
@@ -188,7 +188,7 @@ $ng-coding-challenges-dark-theme: mat.m2-define-dark-theme((
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
-  
+
   // Border radius system
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
@@ -203,7 +203,7 @@ $ng-coding-challenges-dark-theme: mat.m2-define-dark-theme((
   border: 1px solid var(--outline-color);
   box-shadow: 0 2px 4px var(--shadow-color);
   transition: all 0.3s ease-in-out;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px var(--shadow-color);
@@ -270,7 +270,7 @@ $breakpoints: (
   --light-brand-gradient-hero: linear-gradient(120deg, #dd0031, #c3002f, #b80623);
   --light-brand-gradient-footer: linear-gradient(120deg, #dd0031, #c3002f);
   --light-brand-gradient-section: linear-gradient(120deg, rgba(221, 0, 49, 0.05), rgba(195, 0, 47, 0.05));
-  
+
   // Dark theme variables
   --dark-brand-gradient-primary: linear-gradient(120deg, #ff3d5f, #dd0031);
   --dark-brand-gradient-secondary: linear-gradient(120deg, #ff3d5f, #c3002f);

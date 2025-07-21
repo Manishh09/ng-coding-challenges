@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../../dist/out-tsc/lib",
     "declaration": true,
@@ -8,8 +8,14 @@
     "types": [],
     "forceConsistentCasingInFileNames": true
   },
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "compilationMode": "partial"
+  },
   "exclude": [
     "**/*.spec.ts"
   ],
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts"
+  ]
 }

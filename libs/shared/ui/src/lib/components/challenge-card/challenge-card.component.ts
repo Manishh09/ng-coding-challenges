@@ -10,8 +10,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationService, NotificationService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
- 
-
 @Component({
   selector: 'ng-coding-challenges-challenge-card',
   standalone: true,
