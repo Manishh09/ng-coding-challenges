@@ -27,13 +27,16 @@
     ],
     "paths": {
       "@ng-coding-challenges/shared/ui": [
-        "dist/shared/ui/public-api.js"
+        "dist/shared/ui",
+        "libs/shared-ui/src/public-api.ts"
       ],
       "@ng-coding-challenges/shared/models": [
-        "dist/shared/models/public-api.js"
+        "dist/shared/models",
+        "libs/shared-models/src/public-api.ts"
       ],
       "@ng-coding-challenges/shared/services": [
-        "dist/shared/services/public-api.js"
+        "dist/shared/services",
+        "libs/shared-services/src/public-api.ts"
       ]
     }
   },
@@ -45,5 +48,8 @@
     "strictStandalone": true,
     "controlFlow": true
   },
-   "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

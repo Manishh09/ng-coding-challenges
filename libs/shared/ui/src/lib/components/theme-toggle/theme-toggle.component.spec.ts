@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemeToggleComponent } from './theme-toggle.component';
-import { ThemeService } from '../../../../../services/src/lib/theme/theme.service';
-
+import { ThemeService } from '@coding-challenges/shared/services/theme.service';
 describe('ThemeToggleComponent', () => {
   let component: ThemeToggleComponent;
   let fixture: ComponentFixture<ThemeToggleComponent>;

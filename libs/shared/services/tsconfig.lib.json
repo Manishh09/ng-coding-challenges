@@ -1,13 +1,13 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../out-tsc/lib",
+    "outDir": "../../../dist/out-tsc",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
     "types": [],
     "forceConsistentCasingInFileNames": true
-     
+
   },
   "exclude": [
     "**/*.spec.ts"

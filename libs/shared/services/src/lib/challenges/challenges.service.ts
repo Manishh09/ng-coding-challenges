@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Challenge } from '@ng-coding-challenges/shared/models';
-   @Injectable({
+@Injectable({
   providedIn: 'root'
 })
 export class ChallengesService {
