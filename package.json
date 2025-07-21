@@ -12,7 +12,6 @@
     "build:services": "ng build shared-services",
     "build:ui": "ng build shared-ui",
     "build": "ng build",
-    "vercel-build": "npm run build:libs && ng build coding-challenges --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "create:challenge": "node scripts/create-challenge.js",
