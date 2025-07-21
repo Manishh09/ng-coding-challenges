@@ -24,13 +24,13 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@ng-coding-challenges/shared/ui": [
-        "libs/shared-ui/src/public-api.ts"
+        "libs/shared/ui/src/public-api.ts"
       ],
       "@ng-coding-challenges/shared/models": [
-        "libs/shared-models/src/public-api.ts"
+        "libs/shared/models/src/public-api.ts"
       ],
       "@ng-coding-challenges/shared/services": [
-        "libs/shared-services/src/public-api.ts"
+        "libs/shared/services/src/public-api.ts"
       ]
     }
   },
