@@ -21,10 +21,7 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
       "@ng-coding-challenges/shared/ui": [
         "libs/shared-ui/src/public-api.ts"
@@ -45,8 +42,5 @@
     "strictStandalone": true,
     "controlFlow": true
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

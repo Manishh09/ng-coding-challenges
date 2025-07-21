@@ -1,6 +1,7 @@
 {
   "name": "ng-coding-challenges",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,15 +12,15 @@
     "build:models": "ng build shared-models",
     "build:services": "ng build shared-services",
     "build:ui": "ng build shared-ui",
-    "build":"npm run build:libs && ng build coding-challenges",
+    "build": "npm run build:all",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:all": "ng test --projects=shared-ui,shared-models,shared-services,coding-challenges",
     "create:challenge": "node scripts/create-challenge.js",
-    "start:all": "concurrently \"npm run build:libs\" \"npm run start:challenges\"",
-    "test:all": "ng test --projects=shared-ui,shared-models,shared-services,coding-challenges"
+    "start:all": "concurrently \"npm run build:libs\" \"npm run start:challenges\""
   },
-  "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.0",
     "@angular/cdk": "^19.2.19",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
@@ -48,7 +49,6 @@
     "ng-packagr": "^19.2.2",
     "typescript": "~5.7.2"
   },
-
   "resolutions": {
     "wcwidth": "^1.0.1"
   },
