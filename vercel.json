@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm run build:all",
+  "outputDirectory": "dist/coding-challenges",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
