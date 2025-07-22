@@ -1,97 +1,114 @@
 #!/usr/bin/env node
 
 /**
- * This script helps to create a new challenge application in the monorepo.
- * It creates the necessary folder structure and configuration files.
- * 
- * Usage: node scripts/create-challenge.js challenge-name "Challenge Title"
+ * scaffold-challenge.js (no external dependencies)
+ * Usage: node scaffold-challenge.js
+ *
+ * Interactively scaffolds a challenge inside an existing Angular app category.
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
+const readline = require("readline");
 
-// Get challenge name from command line arguments
-const challengeName = process.argv[2];
-const challengeTitle = process.argv[3] || `${challengeName.charAt(0).toUpperCase() + challengeName.slice(1)} Challenge`;
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-if (!challengeName) {
-  console.error('Please provide a challenge name!');
-  console.log('Usage: node scripts/create-challenge.js challenge-name "Challenge Title"');
-  process.exit(1);
+function prompt(question) {
+  return new Promise((resolve) =>
+    rl.question(question, (answer) => resolve(answer.trim()))
+  );
 }
 
-// Paths
-const projectRoot = path.resolve(__dirname, '..');
-const challengeDir = path.join(projectRoot, 'projects', challengeName);
+const isKebabCase = (str) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(str);
 
-// Check if challenge already exists
-if (fs.existsSync(challengeDir)) {
-  console.error(`Challenge "${challengeName}" already exists!`);
-  process.exit(1);
+async function main() {
+  let category = "";
+
+  while (true) {
+    category = await prompt("Enter the category app name: ");
+    if (!isKebabCase(category)) {
+      console.log("❌ Must be in kebab-case. Try again.");
+      continue;
+    }
+
+    const categoryPath = path.join("projects", category);
+    if (!fs.existsSync(categoryPath)) {
+      console.log(
+        `❌ Category '${category}' not found in projects/. Try again.`
+      );
+    } else {
+      break;
+    }
+  }
+
+  let challenge = "";
+  while (true) {
+    challenge = await prompt("Enter challenge name (kebab-case): ");
+    if (isKebabCase(challenge)) break;
+    console.log("❌ Challenge name must be in kebab-case.");
+  }
+
+  const componentsInput = await prompt(
+    "Enter component names (comma-separated): "
+  );
+  const servicesInput = await prompt("Enter service names (comma-separated): ");
+
+  const components = componentsInput
+    .split(",")
+    .map((c) => c.trim())
+    .filter(Boolean);
+
+  const services = servicesInput
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const basePath = path.join(
+    "projects",
+    category,
+    "src",
+    "app",
+    "challenges",
+    challenge
+  );
+  fs.mkdirSync(basePath, { recursive: true });
+
+  // Components
+  for (const comp of components) {
+    const cmd = `ng generate component challenges/${challenge}/${comp} --project=${category} --standalone`;
+    console.log(`\n⚙️  Generating component: ${comp}`);
+    execSync(cmd, { stdio: "inherit" });
+  }
+
+  // Services
+  for (const serv of services) {
+    const cmd = `ng generate service challenges/${challenge}/services/${serv}/${serv} --project=${category}`;
+    console.log(`\n⚙️  Generating service: ${serv}`);
+    execSync(cmd, { stdio: "inherit" });
+  }
+
+  // REQUIREMENT.md
+  const requirementFile = path.join(basePath, "REQUIREMENT.md");
+  if (!fs.existsSync(requirementFile)) {
+    fs.writeFileSync(
+      requirementFile,
+      `# ${challenge.replace(/-/g, " ").toUpperCase()}
+
+## Problem Statement
+
+(Describe the challenge requirements here)
+`
+    );
+  }
+
+  console.log(`\n✅ Challenge '${challenge}' scaffolded under '${category}'`);
+  console.log(`\n📄 REQUIREMENT.md created at: ${requirementFile}`);
+
+  rl.close();
 }
 
-// Create challenge using Angular CLI
-console.log(`Creating new challenge: ${challengeName}`);
-try {
-  execSync(`npx ng generate application ${challengeName} --routing=true --style=scss --project-root=projects/${challengeName}`, { 
-    stdio: 'inherit', 
-    cwd: projectRoot 
-  });
-} catch (error) {
-  console.error('Failed to create challenge application:', error);
-  process.exit(1);
-}
-
-// Create REQUIREMENT.md template
-const requirementContent = `# ${challengeTitle} - Requirements
-
-## Title: ${challengeTitle}
-
-## Description
-[Add a brief description of the challenge]
-
-## 1. Goal
-[Describe the primary goal of this challenge]
-
-## 2. Core Features / Requirements
-[List the core features and requirements]
-
-## 3. Technical Requirements
-[List any specific technical requirements or constraints]
-
-## 4. Evaluation Criteria
-[Describe how the solution will be evaluated]
-`;
-
-fs.writeFileSync(
-  path.join(challengeDir, 'src', 'REQUIREMENT.md'),
-  requirementContent
-);
-
-// Update package.json with new scripts
-const packageJsonPath = path.join(projectRoot, 'package.json');
-const packageJson = require(packageJsonPath);
-
-packageJson.scripts[`start:${challengeName}`] = `ng serve ${challengeName}`;
-packageJson.scripts[`build:${challengeName}`] = `ng build ${challengeName}`;
-packageJson.scripts[`test:${challengeName}`] = `ng test ${challengeName}`;
-
-fs.writeFileSync(
-  packageJsonPath,
-  JSON.stringify(packageJson, null, 2)
-);
-
-console.log(`
-Challenge "${challengeName}" created successfully!
-
-Added scripts to package.json:
-- npm run start:${challengeName}
-- npm run build:${challengeName}
-- npm run test:${challengeName}
-
-Don't forget to:
-1. Update the REQUIREMENT.md with the challenge details
-2. Import any required shared libraries in your app.module.ts
-3. Configure the components, services, and routes for your challenge
-`);
+main();
