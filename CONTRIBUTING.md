@@ -46,7 +46,7 @@ Enhancement suggestions are tracked as GitHub issues. Create an issue and provid
 
 We welcome contributions of new coding challenges. To add a new challenge:
 
-1. Create a new branch from `develop`: `git checkout -b add-challenge-[challenge-name]`
+1. Create a new branch from `develop`: `git checkout -b <branch-name>`; [Branch Naming Guide](./docs/BRANCH_NAMING_GUIDE.md)
 2. Follow the challenge structure pattern in the existing challenges
 3. Create a new folder in `projects/` with the pattern `challenge-XX-name-of-challenge`
 4. Include a detailed `Requirement.md` file following the format used in existing challenges
