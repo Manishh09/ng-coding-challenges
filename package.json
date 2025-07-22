@@ -19,6 +19,9 @@
     
     "create:category-app": "node scripts/create-category-app.js",
     "create:challenge": "node scripts/create-challenge.js",
+
+    "start:ngc-rxjs": "ng serve ngc-rxjs",
+    "build:ngc-rxjs": "ng build ngc-rxjs",
     "start:all": "concurrently \"npm run build:libs\" \"npm run start:challenges\""
   },
   "dependencies": {
