@@ -1,66 +1,119 @@
 # Challenge App Template
 
-This document provides the structure and steps for creating a new challenge app in the monorepo.
+This document outlines the standard structure and steps to create a new **challenge** under the `ngc-rxjs` application in the monorepo.
 
-## Directory Structure
+---
 
-For each new challenge, create the following structure:
+## 🗂 Directory Structure
+
+All RXJS-related challenges are organized inside the `ngc-rxjs` app under `src/app/challenges/`. Each challenge has its own folder with feature components, services, and models.
 
 ```
 projects/
-  challenge-name/
-    public/
-      favicon.ico
-      assets/
+  ngc-rxjs/
     src/
       app/
-        components/
-        services/
-        models/
-      index.html
-      main.ts
-      styles.scss
-      REQUIREMENT.md  (Challenge-specific requirements)
-    tsconfig.app.json
-    tsconfig.spec.json
+        challenges/
+          01-async-data-fetch/
+            components/
+            services/
+            models/
+            challenge.component.ts
+            challenge.component.html
+            challenge.component.scss
+            REQUIREMENT.md ← Challenge-specific requirements
 ```
 
-## Steps to Create a New Challenge
+---
 
-1. Use Angular CLI to generate a new application:
-   ```
-   ng generate application challenge-name --project-root=projects/challenge-name
-   ```
+## ✅ Steps to Create a New Challenge
 
-2. Update angular.json to include the new project configuration
+> 💡 Make sure `ngc-rxjs` Angular app already exists.
 
-3. Add routing if needed:
-   ```
-   ng generate module app-routing --flat --project=challenge-name
-   ```
+### 1. Navigate to the `ngc-rxjs` app
 
-4. Create component(s) for the challenge:
-   ```
-   ng generate component components/feature-name --project=challenge-name
-   ```
+```bash
+cd projects/ngc-rxjs/src/app/challenges
+```
 
-5. Create service(s) if needed:
-   ```
-   ng generate service services/service-name --project=challenge-name
-   ```
+Create a new folder for the challenge:
+```bash
+mkdir 01-async-data-fetch
+cd 01-async-data-fetch
+```
 
-6. Update the package.json scripts to include commands for the new challenge:
-   ```json
-   "start:challenge-name": "ng serve challenge-name",
-   "build:challenge-name": "ng build challenge-name"
-   ```
+---
 
-7. Copy the REQUIREMENT.md template and customize it for the specific challenge
+### 2. Generate standalone component
 
-## Shared Libraries
+Use the standalone API for each challenge’s entry component:
 
-Leverage the shared libraries for common functionality:
+```bash
+ng generate component challenges/01-async-data-fetch/challenge --project=ngc-rxjs --standalone
+```
 
-- `shared-ui`: For common UI components
-- `shared-models`: For common data models
-- `shared-services`: For common services (API clients, utilities, etc.)
+This creates a `challenge.component.ts` as the entry point of the challenge.
+
+---
+
+### 3. Add child components/services (if needed)
+
+```bash
+
+# Generate a component for displaying data
+ng generate component challenges/01-async-data-fetch/components/data-table --project=ngc-rxjs --standalone
+
+# Generate a service for data fetching
+ng generate service challenges/01-async-data-fetch/services/data --project=ngc-rxjs
+```
+
+---
+
+### 4. Add `REQUIREMENT.md`
+
+Create and customize a requirement file for the challenge:
+```
+projects/ngc-rxjs/src/app/challenges/01-async-data-fetch/REQUIREMENT.md
+```
+
+---
+
+### 5. Register challenge route (if routing is used)
+
+Edit `app.routes.ts` or wherever you're managing routing to lazy-load the challenge:
+
+```ts
+{
+  path: 'rxjs/01-async-data-fetch',
+  loadComponent: () =>
+    import('./challenges/01-async-data-fetch/challenge.component').then(m => m.ChallengeComponent)
+}
+```
+
+---
+
+## 📦 Shared Libraries
+
+Use existing shared libraries to avoid code duplication:
+
+| Library           | Purpose                             |
+|------------------|-------------------------------------|
+| `shared-ui`       | Common UI components                |
+| `shared-models`   | Shared interfaces and types         |
+| `shared-services` | Common API services/utilities       |
+
+You can import them via aliases defined in `tsconfig.base.json`.
+
+---
+
+## 🚀 Naming Conventions
+
+| Entity             | Convention Example              |
+|--------------------|----------------------------------|
+| Challenge Folder   | `01-async-data-fetch`           |
+| Entry Component    | `challenge.component.ts`        |
+| Route Path         | `rxjs/01-async-data-fetch`      |
+
+This keeps all challenges well-organized under a single Angular app.
+
+---

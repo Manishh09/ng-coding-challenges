@@ -16,6 +16,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:all": "ng test --projects=shared-ui,shared-models,shared-services,coding-challenges",
+    
+    "create:category-app": "node scripts/create-category-app.js",
     "create:challenge": "node scripts/create-challenge.js",
     "start:all": "concurrently \"npm run build:libs\" \"npm run start:challenges\""
   },

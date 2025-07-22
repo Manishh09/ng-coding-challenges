@@ -1,42 +1,38 @@
-# Monorepo Architecture Decision
+# Monorepo Architecture Overview
 
 ## Context
 
-The NgCodingChallenges project is designed to contain multiple Angular coding challenges of varying complexity. As the number of challenges grows, we need a scalable architecture that supports independent development, testing, and deployment of each challenge while maintaining a cohesive developer experience.
+The `ng-coding-challenges` project is a scalable platform for hosting multiple Angular coding challenges. As the project expands, it requires an architecture that enables independent development, testing, and deployment for each challenge, while promoting code reuse and a unified developer experience.
 
-## Decision
+## Architectural Decision
 
-We've decided to structure this project as a monorepo with:
+We have adopted a monorepo structure, leveraging Angular's workspace capabilities to organize:
 
-1. Individual, standalone Angular applications for each coding challenge
-2. Shared libraries for common components, services, and models
-3. A main application that serves as a challenge browser
+1. **Standalone Angular applications** for each coding challenge
+2. **Shared libraries** for reusable components, services, and models
+3. **A main application** that acts as a challenge browser and entry point
 
-## Benefits
+## Key Benefits
 
-This architecture provides several benefits:
+- **Challenge Isolation:** Each challenge is self-contained, with its own dependencies and configuration.
+- **Independent Deployment:** Challenges can be built, tested, and deployed separately.
+- **Clear Separation:** Prevents accidental code coupling between challenges.
+- **Improved Organization:** Facilitates navigation and maintenance of individual challenges.
+- **Parallel Development:** Multiple contributors can work concurrently with minimal merge conflicts.
+- **Targeted Testing:** Enables focused testing for each challenge.
+- **Code Reuse:** Shared libraries promote reuse of common logic and UI.
+- **Consistent User Experience:** Shared UI components ensure uniformity across challenges.
 
-- **Isolation**: Each challenge can have its own dependencies and configuration
-- **Independent deployment**: Challenges can be built and deployed separately
-- **Clear boundaries**: Prevents unintended code sharing between challenges
-- **Better organization**: Makes it easier to find and work on specific challenges
-- **Parallel development**: Multiple developers can work on different challenges with fewer conflicts
-- **Simplified testing**: Easier to write and run tests for each challenge in isolation
-- **Code sharing**: Common code can be shared through libraries
-- **Consistent UX**: Shared UI components ensure a consistent user experience
-
-## Implementation
-
-The monorepo is structured as follows:
+## Directory Structure
 
 ```
 ng-coding-challenges/
-├── projects/                 # Individual challenge applications
+├── projects/
 │   ├── coding-challenges/    # Main application (challenge browser)
-│   ├── challenge-1/          # Individual challenge application
-│   ├── challenge-2/          # Individual challenge application
-│   └── ...
-├── libs/                     # Shared libraries
+│   ├── challenge-1/          # Individual challenge app
+│   ├── challenge-2/          # Individual challenge app
+│   └── ...                   # More challenges
+├── libs/
 │   └── shared/
 │       ├── ui/               # Shared UI components
 │       ├── models/           # Shared data models
@@ -45,40 +41,36 @@ ng-coding-challenges/
 
 ### Shared Libraries
 
-- **shared-ui**: Common UI components like headers, footers, challenge cards, etc.
-- **shared-models**: Common data models and interfaces
-- **shared-services**: Common services for API clients, utilities, etc.
+- **shared/ui:** Common UI elements (headers, footers, challenge cards, etc.)
+- **shared/models:** Shared interfaces and data models
+- **shared/services:** Reusable services (API clients, utilities, etc.)
 
 ### Challenge Applications
 
-Each challenge is a standalone Angular application with:
+Each challenge resides in its own Angular application, featuring:
 
-- Its own routing configuration
+- Dedicated routing
 - Challenge-specific components, services, and models
-- A REQUIREMENT.md file describing the challenge
+- A `REQUIREMENT.md` file outlining the challenge details
 
 ### Main Application
 
-The coding-challenges application serves as a hub/browser for all available challenges, with:
+The `coding-challenges` app serves as the central hub, providing:
 
-- A home page listing all challenges
-- Navigation to individual challenges
-- Shared UI elements (header, footer, theme toggle)
+- A dashboard listing all challenges
+- Navigation to individual challenge apps
+- Shared UI (header, footer, theme toggle)
 
-## Tooling
+## Tooling & Workflow
 
-To support this architecture, we've added:
+- CLI scripts for scaffolding new challenges
+- Build/test scripts for individual apps and the entire monorepo
+- Contributor documentation for onboarding and challenge creation
 
-- Scripts for creating new challenges
-- Build and test scripts for individual challenges and the entire monorepo
-- Documentation on how to create and contribute challenges
+## Alternatives Considered
 
-## Alternative Considerations
+- **Single app with feature modules:** Simpler, but less isolation and higher risk of code conflicts
+- **Separate repositories:** Maximum isolation, but harder to maintain consistency and share code
+- **Nx workspace:** Advanced tooling, but adds complexity and a steeper learning curve
 
-We considered alternative approaches:
-
-1. **Single application with feature modules**: Less overhead but less isolation and more potential for conflicts
-2. **Completely separate repositories**: Better isolation but more difficult to maintain consistency and share code
-3. **Nx workspace**: More powerful but introduces additional complexity and learning curve
-
-The current approach balances isolation with ease of development and maintenance.
+Our chosen monorepo approach provides a balanced solution for scalability, maintainability, and developer productivity.
