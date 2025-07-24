@@ -29,7 +29,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
 })
 export class AppComponent {
   title = 'ngular Quest';
-  logo = 'favicon.ico';  // Path to the favicon in the public folder
+  logo = 'logo.png';  // Path to the favicon in the public folder
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
 

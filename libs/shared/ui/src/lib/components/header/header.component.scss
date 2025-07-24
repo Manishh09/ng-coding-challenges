@@ -52,14 +52,16 @@
 
 /* Special styling for the Angular logo */
 .angular-logo {
-  height: 28px;
-  width: 28px;
+  height: 64px;
+  width: 64px;
   object-fit: contain;
   vertical-align: middle;
-  margin-right: 8px;
+  // margin-right: 8px;
+  margin-top: 6px;
   transition: all 0.3s var(--animation-easing);
   filter: drop-shadow(0 2px 4px var(--logo-shadow-color, rgba(0, 0, 0, 0.15))) var(--logo-filter, none);
   mix-blend-mode: var(--logo-blend-mode, normal);
+  filter: brightness(1);
 }
 
 .nav-section {
@@ -93,6 +95,13 @@ ng-coding-challenges-theme-toggle {
   .desktop-only {
     display: none !important;
   }
+
+  .ng-prefix {
+    display: none;
+  }
+  .angular-logo{
+    width: 24px;
+  }
   
   .logo-text {
     display: none;
@@ -117,7 +126,7 @@ ng-coding-challenges-theme-toggle {
   }
 }
 
-  .angular-gradient-text {
+  .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
     margin-left: 0.25rem;
