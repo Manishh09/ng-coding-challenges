@@ -1,4 +1,4 @@
-import { Component, inject, signal, type Signal } from '@angular/core';
+import { Component, inject, signal, type Signal, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import {
   ChallengeListComponent,
@@ -27,7 +27,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
     MatIconModule
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'ngular Quest';
   logo = 'logo.png';  // Path to the favicon in the public folder
   #router = inject(Router);
@@ -60,6 +60,9 @@ export class AppComponent {
    */
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
+    // Initialize layout visibility based on current route
+    // const currentUrl = this.#router.url;
+    // this.#handleRouteChange(currentUrl);
   }
 
   #updateLayoutOnRouteChange() {
@@ -68,11 +71,26 @@ export class AppComponent {
       .subscribe({
         next: (event: NavigationEnd) => {
           if (event) {
-            const simpleRoutes = ['/products'];
-            this.showLayout.set(!simpleRoutes.includes(event.urlAfterRedirects));
+            this.#handleRouteChange(event.urlAfterRedirects);
           }
         }
       });
+  }
+
+  #handleRouteChange(url: string) {
+    // Routes where we show individual challenge components only
+    const challengeRoutes = ['/challenges/fetch-products', '/challenges/handle-parallel-apis'];
+    
+    // Check if current route is a specific challenge page
+    const isChallengePage = challengeRoutes.includes(url);
+    
+    // Show layout for the challenges landing page (/challenges), hide for specific challenge pages
+    this.showLayout.set(!isChallengePage);
+    
+    // Auto-show challenges list when on challenges landing page
+    if (url === '/challenges' || url === '/') {
+      this.showChallenges.set(true);
+    }
   }
 
   /**
@@ -128,7 +146,7 @@ export class AppComponent {
 
   // Signals for footer links
   protected readonly quickLinks = signal<FooterLink[]>([
-    { text: 'Home', icon: 'home', action: () => this.scrollToSection('header-section') },
+    { text: 'Home', icon: 'home', url: '/challenges' },
     { text: 'Challenges', icon: 'code', action: () => { this.showChallenges.set(true); this.scrollToSection('challenges-section'); } },
     { text: 'Roadmap', icon: 'map', url: '/roadmap' },
     { text: 'GitHub', icon: 'code_off', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true },

@@ -1,9 +1,9 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Product } from '../../shared/models/product';
-import {  Subject, takeUntil } from 'rxjs';
+ import {  Subject, takeUntil } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
+import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-
+ 
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -37,7 +37,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
    * @returns {void}
    * @memberof ProductListComponent
    */
-  #getProducts() {
+  #getProducts(): void {
     this.#productService.getProducts().pipe(takeUntil(this.#destroy$)).subscribe({
       next: (products) => {
         if (products) {
