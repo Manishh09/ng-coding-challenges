@@ -49,7 +49,7 @@ We welcome contributions of new coding challenges. To add a new challenge:
 1. Create a new branch from `develop`: `git checkout -b add-challenge-[challenge-name]`
 2. Follow the challenge structure pattern in the existing challenges
 3. Create a new folder in `projects/` with the pattern `challenge-XX-name-of-challenge`
-4. Include a detailed `Requirement.md` file following the format used in existing challenges
+4. Include a detailed `CH-XX-REQUIREMENT.md` file following the format used in existing challenges
 5. Add a starter implementation with appropriate placeholder comments
 6. Update the challenge list in the main application
 7. Submit a pull request with your changes
@@ -65,7 +65,7 @@ The process described here has several goals:
 
 Please follow these steps to have your contribution considered by the maintainers:
 
-1. Follow all instructions in the PR template
+1. Follow all instructions in the PR template [Pull Request Template](./PULL_REQUEST_TEMPLATE.md)
 2. After you submit your pull request, verify that all status checks are passing
 3. If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated.
 

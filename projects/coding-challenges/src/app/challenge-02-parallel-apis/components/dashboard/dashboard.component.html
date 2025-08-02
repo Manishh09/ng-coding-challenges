@@ -1,0 +1,25 @@
+@if (loading) {
+<div>Loading...</div>
+}
+
+@if (error) {
+<div>Error loading dashboard data.</div>
+}
+
+@if (!loading && !error) {
+<div>
+    <h2>Users</h2>
+    <ul>
+        @for (user of users; track user.id) {
+        <li>{{ user.name }}</li>
+        }
+    </ul>
+
+    <h2>Posts</h2>
+    <ul>
+        @for (post of posts; track post.id) {
+        <li>{{ post.title }}</li>
+        }
+    </ul>
+</div>
+}

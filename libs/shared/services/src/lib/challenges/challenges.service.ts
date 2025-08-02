@@ -7,20 +7,20 @@ export class ChallengesService {
   private challenges: Challenge[] = [
     {
       id: 1,
-      title: "Challenge 01: Async Data Fetching",
+      title: "Challenge 01: Fetch Products",
       description: "Fetch Products data from a fake API and display data in a Table using RxJS and Angular's HttpClient.",
-      link: "/products",
+      link: "/challenges/fetch-products",
       requirement: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects%2Fcoding-challenges%2Fsrc%2FRequirement.md',
       gitHub: 'https://github.com/Manishh09/ng-coding-challenges/tree/develop/projects/coding-challenges'
     },
-    // {
-    //   id: 2,
-    //   title: "Challenge 02: State Management",
-    //   description: "Implement state management using NgRx or Signals to manage application state across components.",
-    //   link: "/state",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // },
+    {
+      id: 2,
+      title: "Challenge 02: Parallel API Calls",
+      description: "Handle parallel API calls in Angular using RxJS. Fetch data from multiple endpoints and display the combined results.",
+      link: "/challenges/handle-parallel-apis",
+      requirement: 'https://github.com/Manishh09/ng-coding-challenges',
+      gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
+    },
     // {
     //   id: 3,
     //   title: "Challenge 03: Form Validation",
