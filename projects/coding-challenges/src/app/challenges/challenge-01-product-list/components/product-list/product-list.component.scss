@@ -4,15 +4,22 @@
   flex-direction: column;
   align-items: center;
   min-height: 400px;
+  color: var(--on-surface-color, #212121);
+
+  h2 {
+    color: var(--on-surface-color, #212121);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
 }
 
 .product-count {
   width: 70%;
   margin-bottom: 1rem;
-  
+
   p {
     font-size: 1rem;
-    color: #3f51b5
+    color: var(--primary-color, #3f51b5);
   }
 }
 
@@ -20,14 +27,16 @@
   width: 70%;
   border-collapse: collapse;
   margin: 0 auto;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--shadow-color, rgba(0, 0, 0, 0.1));
   border-radius: 4px;
   overflow: hidden;
+  color: var(--on-surface-color, #212121);
+  background-color: var(--surface-color, #ffffff);
 }
 
 th,
 td {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--outline-color, #e0e0e0);
   padding: 0.75rem;
   text-align: left;
 }
@@ -38,18 +47,18 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color:   #f9f9f9;
+  background-color: var(--surface-variant-color, #f9f9f9);
 }
 
 tr:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: var(--hover-color, rgba(0, 0, 0, 0.02));
 }
 
 .category-badge {
   display: inline-block;
   padding: 4px 8px;
-  background-color: #e8eaf6;
-  color: #3f51b5;
+  background-color: var(--surface-variant-color, #e8eaf6);
+  color: var(--primary-color, #3f51b5);
   border-radius: 16px;
   font-size: 0.8rem;
   text-transform: capitalize;
@@ -59,23 +68,24 @@ tr:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
+
   .rating-value {
     font-weight: 500;
     color: var(--secondary-color, #f57c00);
   }
-  
+
   .rating-count {
     color: var(--on-surface-variant-color, #757575);
     font-size: 0.85rem;
   }
 }
 
- 
 
- 
+
+
 .empty {
   text-align: center;
   font-size: 1.1rem;
   margin-top: 2rem;
+  color: var(--on-surface-color, #212121);
 }

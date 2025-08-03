@@ -1,15 +1,15 @@
 <mat-card class="challenge-card">
   <div class="card-banner" aria-hidden="true"></div>
   <mat-card-header>
-    <mat-card-title 
+    <mat-card-title
     [matTooltip]="challenge.title"
     matTooltipPosition="above"
     >{{ challenge.title }}</mat-card-title>
     <div class="challenge-indicator">
-      <button 
-        mat-icon-button 
-        (click)="openGitHub(challenge.gitHub)" 
-        matTooltip="Open Source Code" 
+      <button
+        mat-icon-button
+        (click)="openGitHub(challenge.gitHub)"
+        matTooltip="Open Source Code"
         [matTooltipPosition]="'above'"
         [disabled]="!challenge.gitHub"
         class="challenge-button"
@@ -25,22 +25,33 @@
 
   <mat-card-actions>
     <div class="action-buttons">
-      <button 
-        matTooltip="View Requirements Document" 
+      <button
+        matTooltip="View Requirements Document"
         [matTooltipPosition]="'above'"
-        mat-icon-button 
-        color="primary" 
+        mat-icon-button
+        color="primary"
         (click)="goToChallenge(challenge.requirement)"
         [disabled]="!challenge.requirement"
         class="requirement-button"
         aria-label="View Requirements Document">
         <mat-icon>assignment</mat-icon>
       </button>
-      <a 
-        matTooltip="Try Challenge" 
+      <button
+        matTooltip="View Solution Guide"
         [matTooltipPosition]="'above'"
-        mat-icon-button 
-        color="primary" 
+        mat-icon-button
+        color="primary"
+        (click)="goToChallenge(challenge.solutionGuide)"
+        [disabled]="!challenge.solutionGuide"
+        class="solution-button"
+        aria-label="View Solution Guide">
+        <mat-icon>help</mat-icon>
+      </button>
+      <a
+        matTooltip="Try Challenge"
+        [matTooltipPosition]="'above'"
+        mat-icon-button
+        color="primary"
         [routerLink]="[challenge.link]"
         class="view-button"
         aria-label="Try Challenge">

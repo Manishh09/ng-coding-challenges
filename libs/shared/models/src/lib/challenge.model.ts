@@ -8,6 +8,8 @@ export interface Challenge {
 
   requirement: string;
 
+  solutionGuide: string;
+
   gitHub: string;
 }
 

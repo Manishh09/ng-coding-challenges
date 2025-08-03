@@ -1,9 +1,10 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
- import {  Subject, takeUntil } from 'rxjs';
+import { Component, inject, OnDestroy, OnInit, HostBinding } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
- 
+import { ThemeService } from '@ng-coding-challenges/shared/services';
+
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -17,6 +18,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // inject ProductService
   #productService = inject(ProductService);
+  #themeService = inject(ThemeService);
+
+  // Add host class binding for theming
+  // @HostBinding('class.dark-mode')
+  // get isDarkMode() {
+  //   return this.#themeService.isDarkMode();
+  // }
 
   // clear subscription on destroy
   #destroy$ = new Subject<void>();
@@ -32,7 +40,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
    * Fetches products from the product service and updates the component's product list.
    * The observable subscription is automatically cleaned up when the component is destroyed
    * using the takeUntil operator with the destroy$ subject.
-   * 
+   *
    * @private
    * @returns {void}
    * @memberof ProductListComponent

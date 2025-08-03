@@ -39,6 +39,10 @@ export class AppComponent implements OnInit, OnDestroy {
   // Signal to control the visibility of the challenges list
   protected showChallenges = signal(false);
 
+  // Signals to control visibility of specific layout components
+  protected showHeader = signal(true);
+  protected showHeroSection = signal(true);
+  protected showFooter = signal(true);
   // Hero section description paragraphs
   protected heroParagraphs = [
     'Sharpen your skills and get ready with practical Angular challenges focused on real-world interview scenarios.',
@@ -82,11 +86,25 @@ export class AppComponent implements OnInit, OnDestroy {
     const challengeRoutes = ['/challenges/fetch-products', '/challenges/handle-parallel-apis'];
     // Check if current route is a specific challenge page
     const isChallengePage = challengeRoutes.includes(url);
-    // Show layout for the challenges landing page (/challenges), hide for specific challenge pages
-    this.showLayout.set(!isChallengePage);
+
+    if (isChallengePage) {
+      // For challenge pages, show layout with header and footer but hide hero section
+      this.showLayout.set(true);
+      this.showHeader.set(true);
+      this.showHeroSection.set(false);
+      this.showChallenges.set(false);
+      this.showFooter.set(false);
+    } else {
+      // For landing page, show everything
+      this.showLayout.set(true);
+      this.showHeader.set(true);
+      this.showHeroSection.set(true);
+      this.showFooter.set(true);
+    }
+
     // Auto-show challenges list when on challenges landing page
     if (url === '/challenges' || url === '/') {
-     // this.showChallenges.set(true);
+      // this.showChallenges.set(true);
     }
   }
 

@@ -11,7 +11,7 @@
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   background-color: var(--surface-color);
-  
+
   &:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 28px var(--shadow-color);
@@ -51,27 +51,27 @@ mat-card-header {
 }
 
 .challenge-button {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   transition: all 0.2s var(--animation-easing);
-  
+
   &:hover:not(:disabled) {
     transform: scale(1.1);
     background-color: rgba(221, 0, 49, 0.1);
     box-shadow: 0 2px 8px rgba(221, 0, 49, 0.2);
   }
-  
+
   &:active:not(:disabled) {
     transform: scale(1.05);
   }
-  
+
   &:disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none;
   }
-  
+
   &:focus-visible {
     outline: 2px solid var(--primary-color, #dd0031);
     outline-offset: 2px;
@@ -80,9 +80,9 @@ mat-card-header {
 
 .challenge-icon {
   color: var(--primary-color, #dd0031);
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 22px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,11 +167,11 @@ mat-card-actions {
   justify-content: center;
   align-items: center;
   background-color: var(--surface-variant-color, rgba(0, 0, 0, 0.02));
-  
+
   .action-buttons {
     display: flex;
     gap: var(--spacing-lg);
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
   }
@@ -179,31 +179,32 @@ mat-card-actions {
 
 /* Enhanced button styling for mat-card-actions */
 .requirement-button,
+.solution-button,
 .view-button {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   transition: all 0.3s var(--animation-easing);
   position: relative;
-  
+
   &:hover:not(:disabled) {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(221, 0, 49, 0.15);
     background-color: rgba(221, 0, 49, 0.04);
   }
-  
+
   &:active:not(:disabled) {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(221, 0, 49, 0.1);
   }
-  
+
   &:disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
   }
-  
+
   mat-icon {
     font-size: 24px;
     width: 24px;
@@ -213,13 +214,13 @@ mat-card-actions {
     justify-content: center;
     color: var(--primary-color, #dd0031);
   }
-  
+
   // Add subtle background on focus for accessibility
   &:focus-visible {
     outline: 2px solid var(--primary-color, #dd0031);
     outline-offset: 2px;
   }
-  
+
   // Add a subtle animation effect
   &::before {
     content: '';
@@ -234,7 +235,7 @@ mat-card-actions {
     opacity: 0;
     transition: opacity 0.3s var(--animation-easing);
   }
-  
+
   &:hover::before {
     opacity: 0.1;
   }
@@ -281,17 +282,18 @@ mat-card-actions a mat-icon {
 
   mat-card-actions {
     padding: var(--spacing-sm) var(--spacing-md);
-    
+
     .action-buttons {
       gap: var(--spacing-md);
     }
   }
 
   .requirement-button,
+  .solution-button,
   .view-button {
     width: 44px;
     height: 44px;
-    
+
     mat-icon {
       font-size: 22px;
       width: 22px;
@@ -300,20 +302,20 @@ mat-card-actions a mat-icon {
   }
 
   .challenge-button {
-    width: 36px;
-    height: 36px;
-    
+    width: 40px;
+    height: 40px;
+
     .challenge-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
     }
   }
-  
+
   .card-banner {
     height: 4px;
   }
-  
+
   .card-footer-indicator {
     height: 3px;
   }
@@ -323,21 +325,21 @@ mat-card-actions a mat-icon {
   .challenge-card {
     border-radius: 6px;
   }
-  
+
   mat-card-title {
     font-size: 1.1rem;
     max-width: 75%;
   }
-  
+
   .description {
     font-size: 0.9rem;
   }
-  
+
   .requirement-button,
   .view-button {
     width: 40px;
     height: 40px;
-    
+
     mat-icon {
       font-size: 20px;
       width: 20px;
@@ -352,22 +354,22 @@ mat-card-actions a mat-icon {
   .view-button,
   .challenge-button {
     border: 2px solid var(--primary-color, #dd0031);
-    
+
     &:hover:not(:disabled) {
       background-color: var(--primary-color, #dd0031);
       color: white;
-      
+
       mat-icon {
         color: white;
       }
     }
-    
+
     &:disabled {
       border-color: rgba(0, 0, 0, 0.3);
       opacity: 0.6;
     }
   }
-  
+
   .card-banner {
     height: 8px;
   }
@@ -379,20 +381,20 @@ mat-card-actions a mat-icon {
   .view-button,
   .challenge-button {
     transition: none;
-    
+
     &:hover:not(:disabled) {
       transform: none;
     }
-    
+
     &:active:not(:disabled) {
       transform: none;
     }
   }
-  
+
   .challenge-card:hover {
     transform: none;
   }
-  
+
   :host {
     animation: none;
   }
