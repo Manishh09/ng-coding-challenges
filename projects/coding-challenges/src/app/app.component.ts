@@ -28,7 +28,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'ngular Quest';
+  title = 'ngQuest';
   logo = 'logo.png';  // Path to the favicon in the public folder
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
@@ -80,16 +80,13 @@ export class AppComponent implements OnInit, OnDestroy {
   #handleRouteChange(url: string) {
     // Routes where we show individual challenge components only
     const challengeRoutes = ['/challenges/fetch-products', '/challenges/handle-parallel-apis'];
-    
     // Check if current route is a specific challenge page
     const isChallengePage = challengeRoutes.includes(url);
-    
     // Show layout for the challenges landing page (/challenges), hide for specific challenge pages
     this.showLayout.set(!isChallengePage);
-    
     // Auto-show challenges list when on challenges landing page
     if (url === '/challenges' || url === '/') {
-      this.showChallenges.set(true);
+     // this.showChallenges.set(true);
     }
   }
 
@@ -103,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
       // If challenges are being shown, scroll to the challenges section
       if (isExpanded) {
         this.scrollToSection('challenges-section');
-      }
+       }
       this.scrollToTop()
     } else {
       this.showChallenges.update(current => !current);

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './challenge-01-product-list/components/product-list/product-list.component';
-import { DashboardComponent } from './challenge-02-parallel-apis/components/dashboard/dashboard.component';
+import { ProductListComponent } from './challenges/challenge-01-product-list/components/product-list/product-list.component';
+import { DashboardComponent } from './challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -25,7 +25,6 @@ export const routes: Routes = [
    {
       path: '**',
       redirectTo: '',
-      
    }
 
 ];
