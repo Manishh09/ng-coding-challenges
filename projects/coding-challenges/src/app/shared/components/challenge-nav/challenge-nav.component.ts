@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ActionStateService } from '../../services/action-state.service';
 
 @Component({
   selector: 'app-challenge-nav',
