@@ -1,4 +1,6 @@
-# 🧭 Solution Approach: Async Data Fetching in Angular
+# Challenge 01: Fetch Product List 
+
+## 🧭 Solution Approach
 
 This guide walks through the solution for Challenge 01 in **clear, logical steps**, explaining how to implement asynchronous data fetching from an API using **Angular + RxJS best practices**.
 

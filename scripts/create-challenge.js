@@ -1,15 +1,7 @@
 #!/usr/bin/env node
 
-/**
- * scaffold-challenge.js (no external dependencies)
- * Usage: node scaffold-challenge.js
- *
- * Interactively scaffolds a challenge inside an existing Angular app category.
- */
-
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
 const readline = require("readline");
 
 const rl = readline.createInterface({
@@ -17,98 +9,106 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-function prompt(question) {
-  return new Promise((resolve) =>
-    rl.question(question, (answer) => resolve(answer.trim()))
-  );
+// Delay for smoother UX
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Base path to challenge folder in monorepo
+const BASE_PATH = path.join(__dirname, "../projects/coding-challenges/src/app/challenges");
+
+// Helper: Get next challenge number
+function getNextChallengeNumber() {
+  if (!fs.existsSync(BASE_PATH)) return 1;
+  const dirs = fs.readdirSync(BASE_PATH).filter((name) => /^challenge-\d+/.test(name));
+  const numbers = dirs.map((name) => {
+    const match = name.match(/^challenge-(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  });
+  return numbers.length ? Math.max(...numbers) + 1 : 1;
 }
 
-const isKebabCase = (str) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(str);
+// Helper: Yes/No prompt
+function askYesNo(question) {
+  return new Promise((resolve) => {
+    rl.question(`${question} (y/n): `, (answer) => {
+      resolve(answer.trim().toLowerCase() === "y");
+    });
+  });
+}
 
+// Main function
 async function main() {
-  let category = "";
-
-  while (true) {
-    category = await prompt("Enter the category app name: ");
-    if (!isKebabCase(category)) {
-      console.log("❌ Must be in kebab-case. Try again.");
-      continue;
+  rl.question("Enter the challenge name (e.g., product-list): ", async (inputName) => {
+    if (!inputName.trim()) {
+      console.log("❌ Challenge name is required!");
+      rl.close();
+      return;
     }
 
-    const categoryPath = path.join("projects", category);
-    if (!fs.existsSync(categoryPath)) {
-      console.log(
-        `❌ Category '${category}' not found in projects/. Try again.`
+    const challengeNumber = getNextChallengeNumber();
+    const paddedNum = String(challengeNumber).padStart(2, "0");
+    const folderName = `challenge-${paddedNum}-${inputName.trim().toLowerCase().replace(/\s+/g, "-")}`;
+    const challengePath = path.join(BASE_PATH, folderName);
+
+    console.log(`\n⚙️  Creating challenge "${folderName}"...`);
+    await wait(300);
+
+    if (fs.existsSync(challengePath)) {
+      console.log(`❌ Challenge "${folderName}" already exists. Please choose a different name.`);
+      rl.close();
+      return;
+    }
+
+    // Ask for optional folders
+    const includeComponents = await askYesNo("➕ Include components folder?");
+    const includeModels = await askYesNo("➕ Include models folder?");
+    const includeServices = await askYesNo("➕ Include services folder?");
+    await wait(300);
+
+    const folders = ["docs"];
+    if (includeComponents) folders.push("components");
+    if (includeModels) folders.push("models");
+    if (includeServices) folders.push("services");
+
+    try {
+      fs.mkdirSync(challengePath, { recursive: true });
+
+      for (const folder of folders) {
+        const folderPath = path.join(challengePath, folder);
+        fs.mkdirSync(folderPath);
+        console.log(`📁 Created folder: ${folder}`);
+        await wait(200);
+      }
+
+      // Docs
+      const docsPath = path.join(challengePath, "docs");
+
+      console.log(`\n📝 Generating CH-${paddedNum}-REQUIREMENT.md...`);
+      await wait(300);
+      fs.writeFileSync(
+        path.join(docsPath, `CH-${paddedNum}-REQUIREMENT.md`),
+        `# Challenge ${paddedNum} - Requirement\n\nDescribe the problem for "${inputName}" here...`
       );
-    } else {
-      break;
+      console.log(`✅ CH-${paddedNum}-REQUIREMENT.md created.`);
+      await wait(200);
+
+      console.log(`\n📝 Generating CH-${paddedNum}-SOLUTION_GUIDE.md...`);
+      await wait(300);
+      fs.writeFileSync(
+        path.join(docsPath, `CH-${paddedNum}-SOLUTION_GUIDE.md`),
+        `# Challenge ${paddedNum} - Solution Guide\n\nExplain the solution for "${inputName}" here...`
+      );
+      console.log(`✅ CH-${paddedNum}-SOLUTION_GUIDE.md created.`);
+
+      await wait(200);
+      console.log(`\n🚀 Challenge "${folderName}" created successfully at:`);
+      console.log(`   → ${challengePath}\n`);
+    } catch (err) {
+      console.error("❌ Error creating challenge:", err);
     }
-  }
 
-  let challenge = "";
-  while (true) {
-    challenge = await prompt("Enter challenge name (kebab-case): ");
-    if (isKebabCase(challenge)) break;
-    console.log("❌ Challenge name must be in kebab-case.");
-  }
-
-  const componentsInput = await prompt(
-    "Enter component names (comma-separated): "
-  );
-  const servicesInput = await prompt("Enter service names (comma-separated): ");
-
-  const components = componentsInput
-    .split(",")
-    .map((c) => c.trim())
-    .filter(Boolean);
-
-  const services = servicesInput
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-
-  const basePath = path.join(
-    "projects",
-    category,
-    "src",
-    "app",
-    "challenges",
-    challenge
-  );
-  fs.mkdirSync(basePath, { recursive: true });
-
-  // Components
-  for (const comp of components) {
-    const cmd = `ng generate component challenges/${challenge}/${comp} --project=${category} --standalone`;
-    console.log(`\n⚙️  Generating component: ${comp}`);
-    execSync(cmd, { stdio: "inherit" });
-  }
-
-  // Services
-  for (const serv of services) {
-    const cmd = `ng generate service challenges/${challenge}/services/${serv}/${serv} --project=${category}`;
-    console.log(`\n⚙️  Generating service: ${serv}`);
-    execSync(cmd, { stdio: "inherit" });
-  }
-
-  // REQUIREMENT.md
-  const requirementFile = path.join(basePath, "REQUIREMENT.md");
-  if (!fs.existsSync(requirementFile)) {
-    fs.writeFileSync(
-      requirementFile,
-      `# ${challenge.replace(/-/g, " ").toUpperCase()}
-
-## Problem Statement
-
-(Describe the challenge requirements here)
-`
-    );
-  }
-
-  console.log(`\n✅ Challenge '${challenge}' scaffolded under '${category}'`);
-  console.log(`\n📄 REQUIREMENT.md created at: ${requirementFile}`);
-
-  rl.close();
+    rl.close();
+  });
 }
 
+// Start the script
 main();

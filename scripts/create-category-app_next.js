@@ -8,7 +8,8 @@
  *
  * This script runs Angular CLI command to generate a new standalone Angular application
  * under projects/<category-name> and creates a 'challenges' folder inside src/app.
- */
+ * cmd:  "node scripts/create-category-app.js",
+*/
 
 const { execSync } = require("child_process");
 const fs = require("fs");
