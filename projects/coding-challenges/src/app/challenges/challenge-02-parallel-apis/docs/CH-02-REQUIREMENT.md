@@ -44,7 +44,7 @@ Each dataset comes from a separate API and is **independent**, but should be **f
   - (Optional) Show **first 3 Photos** (Thumbnail + Title)
 - On failure:
   - Show an **error message** per failed API
-  - Continue rendering successful data
+  - Continue rendering successful data (The UI must wait for all API responses to be received before rendering the combined results)
 
 ---
 

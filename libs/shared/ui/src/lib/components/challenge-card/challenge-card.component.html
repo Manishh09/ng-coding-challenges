@@ -2,7 +2,7 @@
   <div class="card-banner" aria-hidden="true"></div>
   <mat-card-header>
     <mat-card-title
-    [matTooltip]="challenge.title"
+    [matTooltip]="challenge.title.length > 30 ? challenge.title : ''"
     matTooltipPosition="above"
     >{{ challenge.title }}</mat-card-title>
     <div class="challenge-indicator">
@@ -20,7 +20,9 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p class="description">{{ challenge.description }}</p>
+    <p class="description"
+    [matTooltip]="challenge.description.length > 100 ? challenge.description : ''"
+    >{{ challenge.description }}</p>
   </mat-card-content>
 
   <mat-card-actions>
