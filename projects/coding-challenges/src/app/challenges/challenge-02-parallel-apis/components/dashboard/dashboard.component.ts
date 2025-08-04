@@ -5,10 +5,12 @@ import { Post } from '../../models/post';
 import { User } from '../../models/user';
 import { DashboardResponse } from '../../models/dasboard';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChallengeNavComponent } from '../../../../shared/components/challenge-nav/challenge-nav.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  standalone: true,
+  imports: [ChallengeNavComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

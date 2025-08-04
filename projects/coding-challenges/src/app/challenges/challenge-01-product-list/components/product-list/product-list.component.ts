@@ -4,11 +4,12 @@ import { CurrencyPipe } from '@angular/common';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { ThemeService } from '@ng-coding-challenges/shared/services';
+import { ChallengeNavComponent } from '../../../../shared/components/challenge-nav/challenge-nav.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ChallengeNavComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })

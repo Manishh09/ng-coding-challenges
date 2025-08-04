@@ -8,9 +8,9 @@
 
   <!-- Hero Section -->
    @if(showHeroSection()) {
-     <ng-coding-challenges-hero-section [title]="'Learn Angular. Solve Challenges. Crack Interviews.'"
-       [description]="heroParagraphs" [isExpanded]="showChallenges()" [buttonText]="'Start Practicing Now'"
-       [hideButtonText]="'Hide Challenges'" (toggleExpand)="toggleChallenges($event)"></ng-coding-challenges-hero-section>
+     <ng-coding-challenges-hero-section [title]="heroTitle"
+       [description]="heroParagraphs" [isExpanded]="showChallenges()" [buttonText]="startButtonText"
+       [hideButtonText]="hideButtonText" (toggleExpand)="toggleChallenges($event)"></ng-coding-challenges-hero-section>
    }
 
   <!-- Challenges List Section-->
@@ -33,8 +33,8 @@
 
 
   <ng-coding-challenges-footer id="footer-section" [appName]="title"
-    description="Practice. Learn. Succeed."
-    angularVersion="19">
+    [description]="footerDescription"
+    [angularVersion]="angularVersion">
 
     <!-- Quick Links Section -->
     <div slot="quick-links" class="footer-links-grid">
