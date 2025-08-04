@@ -1,8 +1,10 @@
-# 🧭 Solution Approach: Parallel API Calls in Angular using `forkJoin`
+# 🧭 Solution Approach: Dashboard with Parallel API Calls
 
 This guide walks through the solution in **clear, logical steps**, explaining what to build, in what order, and how to wire everything together using **Angular + RxJS best practices**.
 
 ---
+
+`Hint:` Use ForkJoin for this scenario to handle parallel api calls which are independent
 
 ## Steps
 1. Create Models (Interfaces)

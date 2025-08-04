@@ -2,24 +2,47 @@
 <div>Loading...</div>
 }
 
-@if (error) {
-<div>Error loading dashboard data.</div>
+@if (errorObj.hasError) {
+<div class="error-message">
+  <p>Error: {{ errorObj.message }}</p>
+</div>
 }
 
-@if (!loading && !error) {
-<div>
+
+@if (!loading && !errorObj.hasError) {
+
+
+<div class="dashboard-header">
+  <h2>Dashboard Overview</h2>
+  <p>Users and Posts fetched from parallel APIs.</p>
+  <p>Total Users: {{ users.length }}</p>
+  <p>Total Posts: {{ posts.length }}</p>
+</div>
+
+<div class="dashboard-container">
+  <div class="user-list">
+
     <h2>Users</h2>
     <ul>
-        @for (user of users; track user.id) {
-        <li>{{ user.name }}</li>
-        }
+      @for (user of users; track user.id) {
+      <li>{{ user.name }}</li>
+      }
+      @empty {
+      <li>No users available.</li>
+      }
     </ul>
+  </div>
+  <div class="post-list">
 
     <h2>Posts</h2>
     <ul>
-        @for (post of posts; track post.id) {
-        <li>{{ post.title }}</li>
-        }
+      @for (post of posts; track post.id) {
+      <li>{{ post.title }}</li>
+      }
+      @empty {
+      <li>No posts available.</li>
+      }
     </ul>
+  </div>
 </div>
 }

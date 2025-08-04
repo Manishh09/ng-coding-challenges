@@ -1,6 +1,5 @@
-# Challenge 01: Async Data Fetching - Detailed Requirements
+# Challenge 01: Fetch Products 
 
-## Title: Async Data Fetching
 
 ## Description
 Fetch Product List from a fake API and display data asynchronously using RxJS and Angular's HttpClient.

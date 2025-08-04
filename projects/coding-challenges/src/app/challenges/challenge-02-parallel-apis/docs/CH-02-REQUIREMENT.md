@@ -1,25 +1,28 @@
-# Challenge-02: Parallel API Calls with forkJoin
+# 🚀 Challenge 02: Dashboard with Parallel API Calls
 
-## Objective
-
-Build a `DashboardComponent` that loads and displays **three independent datasets** using **parallel API calls** with **RxJS `forkJoin`**.
+Build a `DashboardComponent` that loads and displays **independent datasets** using **parallel API calls** with RxJS's `forkJoin`.
 
 ---
 
-## Use Case: Home Page Dashboard
+## 🎯 Objective
 
-You are tasked with building a **dashboard page** that aggregates three types of data:
-
-- 👤 Users
-- 📝 Posts
-
-Each dataset is **independent** and should be **fetched in parallel** when the component initializes.
+Create a dashboard that fetches and displays data from multiple REST APIs **in parallel**, handling loading, success, and error states effectively.
 
 ---
 
-## APIs to Use (from JSONPlaceholder)
+## 📚 Use Case: Home Page Dashboard
 
-These are public fake REST APIs:
+When the dashboard loads, it should display:
+
+- 👤 A list of **Users**
+- 📝 A list of **Posts**
+- 🖼️ (Optional) A set of **Photos**
+
+Each dataset comes from a separate API and is **independent**, but should be **fetched in parallel** on component initialization.
+
+---
+
+## 🌐 APIs to Use (JSONPlaceholder)
 
 | Data Type | Endpoint |
 |-----------|----------|
@@ -29,46 +32,65 @@ These are public fake REST APIs:
 
 ---
 
-## Requirements
+## ✅ Requirements
 
 ### On Component Initialization
 
-- Fetch all three APIs **in parallel** using `forkJoin`
-- Show a **loading indicator** while the data is being fetched
-- Display the following on success:
-  - **First 5 Users**: Name & Email
-  - **First 5 Posts**: Post Title
-- If **any** API call fails, show an error message:
-
+- Fetch all APIs **in parallel** using `forkJoin()`
+- Display a **loading indicator** while data is being fetched
+- On success:
+  - Show the **first 5 Users** (Name + Email)
+  - Show the **first 5 Posts** (Post Title)
+  - (Optional) Show **first 3 Photos** (Thumbnail + Title)
+- On failure:
+  - Show an **error message** per failed API
+  - Continue rendering successful data (The UI must wait for all API responses to be received before rendering the combined results)
 
 ---
 
-## Technical Constraints
+## 🧱 Technical Constraints
 
 - Use `HttpClient` for all API calls
-- Use `RxJS forkJoin()` for parallel execution
-- Properly handle loading, success, and error states
-- Keep component and service logic **separated**
-- Use **type-safe interfaces** (`User`, `Post`, `Photo`)
+- Use `forkJoin()` for parallel API execution
+- Handle loading, success, and error states
+- Maintain separation of concerns (service vs component)
+- Use type-safe models (`User`, `Post`, `Photo`)
+- No external libraries (except Angular & RxJS)
 
 ---
 
-## Optional
+## ✨ Optional
 
 - Use `async` pipe instead of manual `subscribe()`
-- Unsubscribe using `takeUntilDestroyed()` if subscribing manually
-- Add artificial delays using `delay(1000)` for realism
-- Use a service method like `getDashboardData()` to return all 3 results together
-- Split each widget into its own child component
+- Use `takeUntilDestroyed()` if manually subscribing
+- Simulate delay with `delay(1000)` for realism
+- Break UI into child components (`UserListComponent`, `PostListComponent`)
+- Add loading skeletons for each widget
 
 ---
 
-## Suggested Folder Structure
+## 🧾 Example Interface Models
 
-src/app/dashboard/
-├── dashboard.component.ts
-├── dashboard.component.html
-├── dashboard.component.scss
-├── dashboard.service.ts
+```ts
+// user.model.ts
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
+// post.model.ts
+export interface Post {
+  id: number;
+  title: string;
+}
 
+// photo.model.ts
+export interface Photo {
+  id: number;
+  thumbnailUrl: string;
+  title: string;
+}
+```
+
+---
