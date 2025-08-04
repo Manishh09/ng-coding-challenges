@@ -1,4 +1,4 @@
-import { Component, inject, signal, type Signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import {
   ChallengeListComponent,
@@ -49,6 +49,15 @@ export class AppComponent implements OnInit, OnDestroy {
     // 'Master the concepts: RxJS, Signals, Performance, and modern Angular patterns.'
   ];
 
+  // Hero section texts
+  protected heroTitle = 'Learn Angular. Solve Challenges. Crack Interviews.';
+  protected startButtonText = 'Start Practicing Now';
+  protected hideButtonText = 'Hide Challenges';
+
+  // Footer texts
+  protected footerDescription = 'Practice. Learn. Succeed.';
+  protected angularVersion = VERSION.major;
+
   // Get challenges from the service
   protected challenges: Challenge[] = this.#challengesService.getChallenges();
 
@@ -62,12 +71,21 @@ export class AppComponent implements OnInit, OnDestroy {
    *
    * @requires The component class must implement OnInit interface
    */
+ 
+
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
-    // Initialize layout visibility based on current route
-    // const currentUrl = this.#router.url;
-    // this.#handleRouteChange(currentUrl);
+    // Listen for custom events to show challenges
+     window.addEventListener('showChallenges', this.#showChallengesHandler);
   }
+
+   // Event handler for showChallenges custom event
+  #showChallengesHandler = ((e: CustomEvent) => {
+    this.showChallenges.set(e.detail);
+    if (e.detail) {
+      setTimeout(() => this.scrollToSection('challenges-section'), 200);
+    }
+  }) as EventListener;
 
   #updateLayoutOnRouteChange() {
     this.#router.events
@@ -118,7 +136,7 @@ export class AppComponent implements OnInit, OnDestroy {
       // If challenges are being shown, scroll to the challenges section
       if (isExpanded) {
         this.scrollToSection('challenges-section');
-       }
+      }
       this.scrollToTop()
     } else {
       this.showChallenges.update(current => !current);
@@ -181,8 +199,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // clear subscriptions on destroy
   ngOnDestroy(): void {
+    // Remove event listener using the same handler reference
+    window.removeEventListener('showChallenges', this.#showChallengesHandler);
+
     // Called once, before the instance is destroyed.
-    // Add 'implements OnDestroy' to the class.
     this.#destroy$.next();
     this.#destroy$.complete();
     console.log('AppComponent destroyed');
