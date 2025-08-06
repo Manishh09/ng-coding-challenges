@@ -39,48 +39,70 @@ export interface Post {
 
 ## Step 2: Create a Service to Fetch API Data
 
-**Purpose**: Encapsulate the logic to make 3 **independent HTTP calls** using `forkJoin`.
+**Purpose**: Encapsulate the logic to make **independent HTTP calls** using `forkJoin`.
 
-```ts
-@Injectable({...})
-export class DashboardService{
-    // inject http client
+```typescript
+// Import necessary modules
+import { Injectable, inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { forkJoin } from "rxjs";
 
-    getDashboardData() {
-      return forkJoin({
-        users: this.http.get<User[]>('.../users'),
-        posts: this.http.get<Post[]>('.../posts'),
+@Injectable({
+  providedIn: "root",
+})
+export class DashboardService {
+  private http = inject(HttpClient);
 
-      });
-    }
+  getDashboardData() {
+    // Use forkJoin to make parallel API calls
+    return forkJoin({
+      users: this.http.get<User[]>("USERS_API_ENDPOINT"),
+      posts: this.http.get<Post[]>("POSTS_API_ENDPOINT"),
+    });
+  }
 }
 ```
 
-`Note:` All APIs are fired in parallel. Result is returned only when all 2 complete successfully.
+`Note:` All APIs are fired in parallel. Result is returned only when all calls complete successfully.
 
 ---
 
 ## Step 3: Create the Dashboard Component
 
-```ts
-// Inject Dashboard Service using inject function
-private dashboardService = inject(DashboardService);
+```typescript
+// Import necessary Angular modules and RxJS operators
+import { Component, OnInit, inject } from "@angular/core";
+import { finalize, tap } from "rxjs";
 
-// ngOnInit lifecycle hook
-ngOnInit() {
-  this.loading = true;
+@Component({
+  /*
+  Component MetaData
+  */
+})
+export class DashboardComponent implements OnInit {
+  // Component properties
+  // loading, error, data Properties
 
-  this.dashboardService.getDashboardData()
-    .pipe(tap(() => this.loading = false))
-    .subscribe({
-      next: (data) => {
-        this.users = data.users.slice(0, 5);
-        this.posts = data.posts.slice(0, 5);
-      },
-      error: () => this.error = true
-    });
+  // Inject Dashboard Service using inject function
+  private dashboardService = inject(DashboardService);
+
+  // ngOnInit lifecycle hook
+  ngOnInit() {
+    this.dashboardService
+      .getDashboardData()
+      .pipe(finalize(() => (
+        // Handle loading state
+      )))
+      .subscribe({
+        next: (data) => {
+          // Handle successful response - limit to first 5 items
+        },
+        error: () => {
+          // Handle error response
+        },
+      });
+  }
 }
-
 ```
 
 `Note:` Component stays clean — only focuses on UI logic and state management.
@@ -93,14 +115,15 @@ ngOnInit() {
 <!-- dashboard.component.html -->
 
 @if (loading) {
-<div>Loading...</div>
+  <!-- Show Loading text / Loader -->
 } @if (error) {
-<div>Error loading dashboard data.</div>
-} @if (!loading && !error) {
+  <!-- Show error messages -->
+ } @if (!loading && !error) {
 <div>
   <h2>Users</h2>
   <ul>
     @for (user of users; track user.id) {
+      <!-- User Data -->
     <li>{{ user.name }}</li>
     }
   </ul>
@@ -108,6 +131,7 @@ ngOnInit() {
   <h2>Posts</h2>
   <ul>
     @for (post of posts; track post.id) {
+      <!-- Posts Data -->
     <li>{{ post.title }}</li>
     }
   </ul>
@@ -133,27 +157,37 @@ Even though `forkJoin()` completes after emitting once, it’s still a good prac
 The modern, recommended approach using `DestroyRef`.
 
 ```ts
-@Component({...})
+@Component({
+  /*
+  Metadata
+  */
+})
 export class DashboardComponent {
-  loading = false;
+  // Component Properties
+  // loading, error, data Properties
+
   // prefer inject over constructor DI
   private dashboardService = inject(DashboardService);
   private destroyRef = inject(DestroyRef);
 
   loadData() {
-    this.loading = true;
-    this.dashboardService.getDashboardData().pipe(
-      // ...other operators
-      finalize(() => this.loading = false),
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe({
-      next: data => {
-        // handle data
-      },
-      error: err => {
-        // handle error
-      }
-    });
+     this.dashboardService
+      .getDashboardData()
+      .pipe(
+        // ...other operators
+        finalize(() => (
+          // Handle loading state
+        )),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe({
+        next: (data) => {
+          // handle data
+        },
+        error: (err) => {
+          // handle error
+        },
+      });
   }
 }
 ```
@@ -167,6 +201,9 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 export class DashboardComponent implements OnInit, OnDestroy {
+  // Component Properties
+
+  // Subject to clear subscription
   private destroy$ = new Subject<void>();
 
   ngOnInit() {
@@ -174,19 +211,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .getDashboardData()
       .pipe(
         takeUntil(this.destroy$),
-        finalize(() => (this.loading = false))
+        finalize(() => (
+          // Handle loading state
+        ))
       )
       .subscribe({
         next: (data) => {
-          /* handle data */
+          // Handle successful response
         },
         error: (err) => {
-          /* handle error */
+          // Handle error response
         },
       });
   }
 
   ngOnDestroy() {
+    // Clean up subscriptions to prevent memory leaks
     this.destroy$.next();
     this.destroy$.complete();
   }
