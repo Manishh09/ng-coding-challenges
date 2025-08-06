@@ -42,20 +42,22 @@ export interface Product {
 `product.service.ts` — Service to get products from API:
 
 ```typescript
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product } from './product';
+// Import necessary Angular and RxJS modules
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+// ... other imports
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: "root",
 })
 export class ProductService {
-  private apiUrl = 'https://fakestoreapi.com/products';
+  private apiUrl = "API_ENDPOINT_URL";
 
-  constructor(private http: HttpClient) {}
+  // inject http client using inject function
+  private http = inject(HttpClient);
 
   getProducts(): Observable<Product[]> {
+    // Make HTTP GET request to fetch products
     return this.http.get<Product[]>(this.apiUrl);
   }
 }
@@ -66,41 +68,41 @@ export class ProductService {
 `product-list.component.ts` — Component to display products:
 
 ```typescript
+// Import necessary Angular modules and RxJS operators
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ProductService } from './product.service';
-import { Product } from './product';
-import { Subject, takeUntil } from 'rxjs';
+// ... other imports
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  templateUrl: './product-list.component.html',
+   /*Metadata*/
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-  productList: Product[] = [];
-  loading = false;
-  error = false;
+
+
 
   private destroy$ = new Subject<void>();
   private productService = inject(ProductService);
 
   ngOnInit(): void {
-    this.loading = true;
+    // Set loading state
+
+
+    // Call service method to get products
     this.productService.getProducts()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (products) => {
-          this.productList = products;
-          this.loading = false;
-        },
+          // Handle successful response
+          //  Handle Loading State
+
         error: () => {
-          this.error = true;
-          this.loading = false;
+          // Handle error response
+
         }
       });
   }
 
   ngOnDestroy(): void {
+    // Clean up subscriptions to prevent memory leaks
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -115,39 +117,41 @@ export class ProductListComponent implements OnInit, OnDestroy {
 <section>
   <h2>Product List</h2>
 
+  <!-- Show loading state -->
   @if (loading) {
-    <div>Loading products...</div>
+  <div>Loading products...</div>
   }
-  
+
+  <!-- Show error state -->
   @if (error) {
-    <div>Failed to load products. Please try again later.</div>
+  <div>Failed to load products. Please try again later.</div>
   }
 
+  <!-- Show empty state -->
   @if (!loading && !error && productList.length === 0) {
-    <div>No Products Available</div>
+  <div>No Products Available</div>
   }
 
+  <!-- Show products table when data is available -->
   @if (!loading && !error && productList.length > 0) {
-    <table border="1">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Category</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (product of productList; track product.id) {
-          <tr>
-            <td>{{ product.id }}</td>
-            <td>{{ product.title }}</td>
-            <td>{{ product.price | currency }}</td>
-            <td>{{ product.category }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Column Headers</th>
+        <!-- Add other column headers -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through products -->
+      @for (product of productList; track product.id) {
+      <tr>
+        <td>{{ product.propertyName }}</td>
+        <td>{{ product.price | currency }}</td>
+        <!-- Display other product properties -->
+      </tr>
+      }
+    </tbody>
+  </table>
   }
 </section>
 ```
@@ -177,4 +181,3 @@ export class ProductListComponent implements OnInit, OnDestroy {
 8. **On component destruction**, subscriptions are cleaned up
 
 ---
-
