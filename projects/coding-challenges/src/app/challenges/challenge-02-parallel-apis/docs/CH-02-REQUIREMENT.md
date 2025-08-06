@@ -1,28 +1,23 @@
-# 🚀 Challenge 02: Dashboard with Parallel API Calls
+# Challenge 02: Dashboard with Parallel API Calls
 
+## Task
 Build a `DashboardComponent` that loads and displays **independent datasets** using **parallel API calls** with RxJS's `forkJoin`.
 
 ---
 
-## 🎯 Objective
+## Objective
 
-Create a dashboard that fetches and displays data from multiple REST APIs **in parallel**, handling loading, success, and error states effectively.
-
----
-
-## 📚 Use Case: Home Page Dashboard
-
-When the dashboard loads, it should display:
-
-- 👤 A list of **Users**
-- 📝 A list of **Posts**
-- 🖼️ (Optional) A set of **Photos**
-
-Each dataset comes from a separate API and is **independent**, but should be **fetched in parallel** on component initialization.
+- Fetch data from multiple REST APIs **simultaneously on component initialization**.
+- Handle **loading**, **success**, and **error** states for each dataset.
+- Render all datasets only **after all API calls have completed**.
+- Display partial data from each dataset as specified.
+- Show error messages per failed API without blocking successful data from rendering.
 
 ---
 
-## 🌐 APIs to Use (JSONPlaceholder)
+
+
+## APIs to Use (JSONPlaceholder)
 
 | Data Type | Endpoint |
 |-----------|----------|
@@ -32,9 +27,7 @@ Each dataset comes from a separate API and is **independent**, but should be **f
 
 ---
 
-## ✅ Requirements
-
-### On Component Initialization
+## Requirements
 
 - Fetch all APIs **in parallel** using `forkJoin()`
 - Display a **loading indicator** while data is being fetched
@@ -43,12 +36,14 @@ Each dataset comes from a separate API and is **independent**, but should be **f
   - Show the **first 5 Posts** (Post Title)
   - (Optional) Show **first 3 Photos** (Thumbnail + Title)
 - On failure:
-  - Show an **error message** per failed API
+  - Show an **error message** for each failed API
   - Continue rendering successful data (The UI must wait for all API responses to be received before rendering the combined results)
 
 ---
 
-## 🧱 Technical Constraints
+`Hint:` Handle errors inside each API call stream so that forkJoin can emit combined results even if some calls fail
+
+## Technical Constraints
 
 - Use `HttpClient` for all API calls
 - Use `forkJoin()` for parallel API execution
@@ -56,20 +51,23 @@ Each dataset comes from a separate API and is **independent**, but should be **f
 - Maintain separation of concerns (service vs component)
 - Use type-safe models (`User`, `Post`, `Photo`)
 - No external libraries (except Angular & RxJS)
+- Use `takeUntilDestroyed()` if manually subscribing
 
 ---
 
-## ✨ Optional
+## Optional
 
 - Use `async` pipe instead of manual `subscribe()`
 - Use `takeUntilDestroyed()` if manually subscribing
 - Simulate delay with `delay(1000)` for realism
-- Break UI into child components (`UserListComponent`, `PostListComponent`)
+- Break UI into child components (`UserListComponent`, `PostListComponent`, `PhotoListComponent`)
 - Add loading skeletons for each widget
 
 ---
 
-## 🧾 Example Interface Models
+
+
+## Example Interface Models
 
 ```ts
 // user.model.ts
