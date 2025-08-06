@@ -1,35 +1,72 @@
-# Challenge 01: Fetch Products 
+# Challenge 01: Fetch and Display Products
 
+**Task:**  
+Build a simple Angular feature to fetch and display a list of products from a fake REST API using Angular’s HttpClient and RxJS.
 
-## Description
-Fetch Product List from a fake API and display data asynchronously using RxJS and Angular's HttpClient.
+## Requirements
 
-## 1. Goal
-The primary goal of this challenge is to demonstrate the ability to fetch data from a remote API endpoint asynchronously and display it in an Angular component, leveraging best practices for reactive programming with RxJS and Angular's HttpClient.
+### 1. API Endpoint
+- Use this endpoint to fetch all products:  
+  `https://fakestoreapi.com/products`
 
-## 2. Core Features / Requirements
+### 2. Service Layer (`ProductService`)
+- Create an Angular service (`ProductService`) with a method `getProducts()`.
+- `getProducts()` must call the above API using `HttpClient` and return `Observable<Product[]>`.
+- Define a `Product` interface representing the structure of product data (`id`, `title`, `price`, `category`, `rating`, etc.).
 
-### Data Source:
-- Fetch a list of "products" from a publicly available fake REST API. A good example is JSONPlaceholder or FakeStoreAPI.
-- Recommended API: FakeStoreAPI for products.
-    - Get all products: `https://fakestoreapi.com/products`
+### 3. Component (`ProductListComponent`)
+- Create a component to show the products list.
+- Inject `ProductService` and fetch products in `ngOnInit()`.
+- In the template, use the `async` pipe to subscribe and display the products cleanly (avoid manual subscription in `.ts`).
 
-### Angular Service (ProductService):
-- Create a dedicated Angular service (e.g., `ProductService`) to handle all API interactions related to products.
-- This service should contain a method (e.g., `getProducts()`) that makes the HTTP GET request to the fake API.
-- The `getProducts()` method must return an `Observable<Product[]>` where `Product` is an interface defining the structure of your product data (e.g., id, title, price, description, category, image, rating).
+### 4. Data Display
+- Above the table, show the total product count (e.g., “Total Products: 20”).
+- Use an HTML `<table>` to display:
+    - Product Title
+    - Category
+    - Price (with currency formatting)
+    - Rating (show both rate and count)
 
-### Angular Component (ProductListComponent):
-- Create a component (e.g., `ProductListComponent`) that will display the fetched product data.
+---
+## Concepts Covered
 
-### Data Fetching:
-- Inject the `ProductService` into this component.
-- Call the `getProducts()` method from the `ProductService` when the component initializes (e.g., in `ngOnInit`).
-- Asynchronous Handling (RxJS): The component should subscribe to the Observable returned by `getProducts()` to receive the data.
-- Recommended approach: Use the async pipe in the component's template to handle the subscription and unsubscription automatically, making the component's TypeScript logic cleaner and preventing memory leaks.
+This challenge helps reinforce and assess several key Angular and web development concepts:
 
-### Data Display:
-- Render the fetched list of products in the component's template.
-- Use a standard HTML <table> with <thead> (header row) and <tbody> (data rows) for view.
-- Display the dynamic count of all products above the table (e.g., "Total Products: [Count]").
-- For each product row, include columns for Title, Category, Price (with currency formatting), and Rating (showing both rate and count).
+- **Consuming REST APIs with HttpClient**  
+  Learn to perform HTTP GET requests and handle external data sources in Angular.
+
+- **Observables & RxJS**  
+  Work with asynchronous data streams using Observables and manage them using Angular’s reactive programming paradigms.
+
+- **Service-Oriented Architecture**  
+  Organize API logic in reusable Angular services to promote maintainability and separation of concerns.
+
+- **Component Lifecycle (`ngOnInit`)**  
+  Understand when and how to fetch data within Angular’s component initialization lifecycle.
+
+- **Using the Async Pipe**  
+  Implement the `async` pipe in templates to auto-subscribe to Observables, simplifying component code and preventing memory leaks.
+
+- **Interface Usage for Type Safety**  
+  Define TypeScript interfaces to provide structure and type safety when handling complex API data.
+
+- **Angular Templates and Data Binding**  
+  Use Angular’s template syntax to display dynamic lists of data and computed values, such as the total count.
+
+- **Basic HTML Table Rendering**  
+  Practice rendering data in an organized, accessible `<table>` format.
+  
+___
+
+## Summary Table
+
+| Layer                  | Requirement                                                     |
+|------------------------|-----------------------------------------------------------------|
+| ProductService         | Fetch data from API, return Observable<Product[]>               |
+| ProductListComponent   | Fetch products on init, use async pipe                          |
+| Template               | Show total count above table, display Title, Category, Price, Rating |
+
+**Additional Hints:**  
+- Use Angular’s best practices: services for API logic, Observables for async work, and `async` pipe in templates.
+- Focus on clean, idiomatic Angular code.
+
