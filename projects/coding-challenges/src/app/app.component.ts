@@ -101,7 +101,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   #handleRouteChange(url: string) {
     // Routes where we show individual challenge components only
-    const challengeRoutes = ['/challenges/fetch-products', '/challenges/handle-parallel-apis'];
+    const challengeRoutes = [
+      '/challenges/fetch-products',
+      '/challenges/handle-parallel-apis',
+      '/challenges/client-side-search'
+    ];
     // Check if current route is a specific challenge page
     const isChallengePage = challengeRoutes.includes(url);
 
