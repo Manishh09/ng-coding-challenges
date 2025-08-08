@@ -4,24 +4,34 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   providedIn: 'root'
 })
 export class ChallengesService {
+  private repoUrl = 'https://github.com/Manishh09/ng-coding-challenges';
   private challenges: Challenge[] = [
     {
       id: 1,
       title: "Challenge-01: Fetch Products",
       description: "Fetch Products data from a fake API and display data in a Table using RxJS and Angular's HttpClient.",
       link: "/challenges/fetch-products",
-      requirement: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-REQUIREMENT.md',
-      solutionGuide: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-SOLUTION_GUIDE.md',
-      gitHub: 'https://github.com/Manishh09/ng-coding-challenges/tree/develop/projects/coding-challenges/src/app/challenges/challenge-01-product-list'
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-01-product-list`
     },
     {
       id: 2,
       title: "Challenge-02: Dashboard Data - Parallel API Calls",
       description: "Learn how to perform parallel API calls in Angular using RxJS's forkJoin. In this challenge, you'll fetch data from multiple independent endpoints and render the results in the UI only after all responses are received.",
       link: "/challenges/handle-parallel-apis",
-      requirement: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-REQUIREMENT.md',
-      solutionGuide: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-SOLUTION_GUIDE.md',
-      gitHub: 'https://github.com/Manishh09/ng-coding-challenges/tree/develop/projects/coding-challenges/src/app/challenges/challenge-02-parallel-apis'
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-02-parallel-apis`
+    },
+    {
+      id: 3,
+      title: "Challenge 03: Client-Side User Search",
+      description: "Implement a client-side search for users using Angular's Reactive Forms and RxJS with dummy API data",
+      link: "/challenges/client-side-search",
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-03-client-side-search`
     },
     // {
     //   id: 3,
