@@ -10,6 +10,6 @@ export class UserService {
     private http = inject(HttpClient);
 
     getUsers(): Observable<User[]> {
-        return throwError(() => new Error('Method not implemented.')) as Observable<User[]>;
+        return this.http.get<User[]>(this.apiUrl);
     }
 }
