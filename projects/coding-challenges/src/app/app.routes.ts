@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ProductListComponent } from './challenges/challenge-01-product-list/components/product-list/product-list.component';
 import { DashboardComponent } from './challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component';
 import { ClientSideSearchComponent } from './challenges/challenge-03-client-side-search/components/client-side-search/client-side-search.component';
+import { ServerSideSearchComponent } from './challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component';
 
 export const routes: Routes = [
 
@@ -24,6 +25,10 @@ export const routes: Routes = [
          {
             path: 'client-side-search',
             component: ClientSideSearchComponent
+         },
+         {
+            path: 'server-side-search',
+            component: ServerSideSearchComponent
          }
       ]
    },

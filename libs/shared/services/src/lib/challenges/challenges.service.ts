@@ -33,6 +33,15 @@ export class ChallengesService {
       solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-SOLUTION_GUIDE.md`,
       gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-03-client-side-search`
     },
+    {
+      id: 4,
+      title: "Challenge 04: Server-Side User Search",
+      description: "Implement a server-side search for users using Angular's Reactive Forms and RxJS with dummy API data",
+      link: "/challenges/server-side-search",
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-04-server-side-search`
+    },
     // {
     //   id: 3,
     //   title: "Challenge 03: Form Validation",
