@@ -111,8 +111,6 @@ export class ClientSideSearchComponent {
 
 ## Working Flow
 
-## Working Flow
-
 1. **Component Initialization**
 
    - When the component initializes (`ngOnInit`), it triggers a call to the `UserService` to fetch the list of users from the API.
