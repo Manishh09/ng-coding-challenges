@@ -1,0 +1,28 @@
+<app-challenge-nav></app-challenge-nav>
+
+<!-- Header -->
+<div class="header">
+    <h2>Client-Side User Search</h2>
+</div>
+
+<div class="search-container">
+    <input type="text" [formControl]="searchControl" placeholder="Search users..." class="search-input" />
+
+    @if (loading()) {
+    <p class="loading">Loading...</p>
+    }
+
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
+    }
+
+    @if (!loading() && users().length) {
+    <ul>
+        @for (user of users(); track user.id) {
+        <li>{{ user.firstName }} {{ user.lastName }}</li>
+        }
+    </ul>
+    } @else if (!loading() && users().length === 0 && hasSearched()) {
+    <p class="no-results">No results found.</p>
+    }
+</div>

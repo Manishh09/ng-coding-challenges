@@ -1,0 +1,47 @@
+ .challenge-nav {
+     display: flex;
+     gap: 16px;
+     padding: 0px 0px 0px 16px;
+     margin-bottom: 16px;
+
+
+     .nav-button {
+         display: flex;
+         align-items: center;
+         gap: 8px;
+         transition: all 0.2s ease;
+         border-radius: 4px;
+         font-weight: 500;
+
+         &:hover {
+             border-color: var(--primary-color, #dd0031);
+             border: 1px solid var(--primary-color, #dd0031);
+             background-color: var(--hover-bg-color, rgba(0, 0, 0, 0.04));
+         }
+
+         mat-icon {
+             margin-right: 4px;
+             color: var(--primary-color, #3f51b5);
+         }
+
+         .button-label {
+             color: var(--primary-color, #3f51b5);
+
+         }
+
+     }
+
+
+ }
+
+
+ // Responsive styles
+ @media (max-width: 599px) {
+     .challenge-nav {
+         justify-content: space-between;
+
+         .nav-button {
+             flex: 1;
+         }
+     }
+ }

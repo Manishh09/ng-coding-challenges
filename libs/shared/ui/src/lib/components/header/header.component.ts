@@ -22,7 +22,7 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 })
 export class HeaderComponent {
   appName = input('');
-  showMobileMenu = input(true);
+  showMobileMenu = input(false);
 
   logoUrl = input('');
 }

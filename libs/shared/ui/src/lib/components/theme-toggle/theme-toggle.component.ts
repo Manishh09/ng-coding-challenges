@@ -2,7 +2,7 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '@ng-coding-challenges/shared/services';
 
 @Component({
   selector: 'ng-coding-challenges-theme-toggle',
@@ -13,10 +13,10 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class ThemeToggleComponent {
   readonly themeService = inject(ThemeService);
-  
-  protected readonly themeIcon = () => 
+
+  protected readonly themeIcon = () =>
     this.themeService.isDarkMode() ? 'light_mode' : 'dark_mode';
-  
-  protected readonly tooltipText = () =>
+
+   readonly tooltipText = () =>
     `Switch to ${this.themeService.isDarkMode() ? 'light' : 'dark'} theme`;
 }

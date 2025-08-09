@@ -5,7 +5,8 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*.ts"
@@ -13,6 +14,5 @@
   "exclude": [
     "src/**/*.spec.ts",
     "src/test.ts",
-    "**/*.spec.ts"
   ]
 }

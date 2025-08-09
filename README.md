@@ -1,10 +1,10 @@
-# NgCodingChallenges
+# Angular Coding Challenges
 
-An interactive platform for Angular coding challenges designed to help developers improve their Angular skills through practical exercises. This project features a modern UI inspired by angular.dev, with responsive design and theming capabilities.
+**ngQuest** is an interactive platform designed to help Angular developers master key concepts through practical, hands-on coding challenges. Each challenge focuses on real-world scenarios that you'll encounter in professional Angular development, from basic component communication to advanced state management patterns.
 
 ## 🚀 Project Overview
 
-NgCodingChallenges provides a collection of practical Angular coding challenges with increasing complexity. Each challenge focuses on specific Angular concepts and features, allowing developers to:
+**ngQuest** provides a collection of practical Angular coding challenges with increasing complexity. Each challenge focuses on specific Angular concepts and features, allowing developers to:
 
 - Practice real-world Angular development scenarios
 - Learn modern Angular best practices
@@ -13,6 +13,30 @@ NgCodingChallenges provides a collection of practical Angular coding challenges 
 - Build responsive and accessible UIs
 
 The platform includes a clean, modern UI with light/dark theme support, responsive design, and Angular Material integration.
+
+## 📦 Monorepo Architecture
+
+This project is structured as a monorepo with:
+
+- **Individual challenge apps**: Each coding challenge is a standalone Angular application
+- **Shared libraries**: Common components, services, and models used across multiple challenges
+
+```
+ng-coding-challenges/
+├── projects/                 # Individual challenge applications
+│   ├── coding-challenges/    # Main application (challenge browser)
+│   ├── challenge-1/          # Individual challenge application
+│   ├── challenge-2/          # Individual challenge application
+│   └── ...
+├── libs/                     # Shared libraries
+│   └── shared/
+│       ├── ui/               # Shared UI components
+│       ├── models/           # Shared data models
+│       └── services/         # Shared services
+└── docs/                     # Documentation
+    ├── CHALLENGE_TEMPLATE.md # Template for creating new challenges
+    └── MIGRATION_GUIDE.md    # Guide for migrating existing challenges
+```
 
 ## 🛠️ Getting Started
 
@@ -29,10 +53,10 @@ The platform includes a clean, modern UI with light/dark theme support, responsi
 git clone https://your-repository-url/ng-coding-challenges.git
 cd ng-coding-challenges
 
-#checkout develop
+# checkout develop
 git checkout develop
 
-#pull changes
+# pull changes
 git pull
 
 # Install dependencies
@@ -40,89 +64,91 @@ npm install
 
 # if any issues, remove package-lock.json file and run `npm install`
 ```
+## Development Workflow
 
-## 🚀 Running the Application
+### 🚀 Running the Application
 
-### Development Server
 
 To start the main application development server:
 
 ```bash
-npm start
+npm run start:main
 # or
 ng serve
 ```
 
-To specifically run the coding challenges application:
-
+To run a specific challenge application:
 ```bash
-npm run start:challenges
-```
+npm run start:challenge-name
+# For example:
+npm run start:challenge-1
+
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
+```
 ### Building the Project
 
 To build the entire project:
 
 ```bash
-npm run build
+npm run build:all
 ```
 
-To build only the coding challenges application:
-
-```bash
-npm run build:challenges
-```
-
-To build the shared libraries:
+To build only the shared libraries:
 
 ```bash
 npm run build:libs
+```
+
+To build a specific challenge application:
+
+```bash
+npm run build:challenge-name
+# For example:
+npm run build:challenge-01
 ```
 
 Build artifacts will be stored in the `dist/` directory.
 
 ## 🧪 Running Tests
 
-To execute unit tests with Karma:
+To execute unit tests for all projects:
 
 ```bash
-npm test
+npm run test:all
 ```
 
-## 🧭 Navigating the Application
+To test a specific challenge application:
 
-Once the application is running, you can:
+```bash
+npm run test:challenge-name
+# For example:
+npm run test:challenge-01
+```
 
-1. View the homepage with the challenge list
-2. Click on any challenge card to navigate to that specific challenge
-3. Read the challenge requirements and instructions
-4. Implement your solution in the designated component
-5. Test your implementation against the provided requirements
-6. Toggle between light and dark themes using the theme toggle button in the header
+## 🚀 Creating a New Challenge
 
-## 📂 Project Structure
+To create a new challenge application:
 
-The project follows a modular architecture:
+```bash
+npm run create:challenge challenge-name "Challenge Title"
+# For example:
+npm run create:challenge data-binding "Two-way Data Binding"
+```
 
-- `projects/coding-challenges/` - The main application
-- `projects/challenge-01-async-data-fetch/` - Example challenge implementation
-- `libs/shared/ui/` - Shared UI components, services, and styles
-- `libs/shared/models/` - Shared data models and interfaces
-- `libs/shared/services/` - Shared services for data access and business logic
+This will:
+1. Generate a new Angular application in the projects directory
+2. Add necessary configuration files
+3. Create a REQUIREMENT.md template
+4. Add npm scripts for the new challenge
+
+See `docs/CHALLENGE_TEMPLATE.md` for more details on challenge structure.
+
+## 📚 Documentation
+
+- `docs/CHALLENGE_TEMPLATE.md` - Template and guidelines for creating new challenges
+- `docs/MIGRATION_GUIDE.md` - Guide for migrating existing challenges to standalone apps
 
 ## 🤝 Contributing
 
-We welcome contributions to NgCodingChallenges! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines on how to contribute.
-
-## 📚 Additional Resources
-
-- [Angular Documentation](https://angular.dev/)
-- [Angular CLI Documentation](https://angular.dev/tools/cli)
-- [RxJS Documentation](https://rxjs.dev/)
-- [Angular Material](https://material.angular.io/)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+Contributions are welcome! Please see the `CONTRIBUTING.md` file for guidelines.

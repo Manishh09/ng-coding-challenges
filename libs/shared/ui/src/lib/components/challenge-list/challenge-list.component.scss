@@ -1,11 +1,11 @@
 .challenge-list-container {
   width: 100%;
-  padding: 60px 0;
+  padding: 40px 0;
   background: var(--brand-gradient-section);
   min-height: 400px;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.4s var(--animation-easing), 
+  transition: opacity 0.4s var(--animation-easing),
               transform 0.4s var(--animation-easing);
 }
 
@@ -53,18 +53,18 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
   padding: 24px;
-  width: 100%;
+  // width: 100%;
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  
+
   /* Add staggered animation for cards */
   & > * {
     opacity: 0;
     transform: translateY(20px);
     animation: cardAppear 0.5s var(--animation-easing) forwards;
   }
-  
+
   @for $i from 1 through 12 {
     & > *:nth-child(#{$i}) {
       animation-delay: #{0.1 * $i}s;
@@ -120,7 +120,7 @@
     gap: 16px;
     padding: 16px;
   }
-  
+
   .section-title {
     font-size: 1.5rem;
     margin-bottom: 24px;
@@ -132,7 +132,7 @@
     grid-template-columns: 1fr;
     padding: 12px;
   }
-  
+
   .section-title {
     font-size: 1.4rem;
   }

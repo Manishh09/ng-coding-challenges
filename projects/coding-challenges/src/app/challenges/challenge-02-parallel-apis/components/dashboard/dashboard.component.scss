@@ -1,0 +1,62 @@
+:host {
+  padding: 20px;
+  // display: block;
+}
+
+h2 {
+  margin: 20px 0 10px 0;
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--primary-color, #007bff);
+  padding-bottom: 5px;
+  color: var(--on-surface-color, #212121);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+li {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: var(--surface-variant-color, #f8f9fa);
+  border-left: 4px solid var(--primary-color, #007bff);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  color: var(--on-surface-color, #212121);
+
+  &:hover {
+    background-color: var(--hover-color, #e9ecef);
+  }
+
+  :host-context(.dark-theme) &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+div {
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 20px;
+  color: var(--on-surface-color, #212121);
+}
+
+// Loading state
+:host:has([data-loading]) div:first-child {
+  color: var(--primary-color, #007bff);
+}
+
+// Error state
+:host:has([data-error]) div:first-child {
+  color: var(--warn-color, #dc3545);
+  background-color: var(--error-bg, #f8d7da);
+  border: 1px solid var(--error-border, #f5c6cb);
+  border-radius: 4px;
+}
+
+// Dark theme adjustments
+:host-context(.dark-theme):has([data-error]) div:first-child {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: rgba(220, 53, 69, 0.4);
+}
