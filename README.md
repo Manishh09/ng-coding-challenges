@@ -26,18 +26,22 @@ This project is structured as a monorepo with:
 ```
 ng-coding-challenges/
 ├── projects/                 # Individual challenge applications
-│   ├── coding-challenges/    # Main application (challenge browser)
-│   ├── challenge-1/          # Individual challenge application
-│   ├── challenge-2/          # Individual challenge application
-│   └── ...
+│   └── coding-challenges/    # Main application (challenge browser)
+│       └── src/
+│           └── app/
+│               └── challenges/
+│                   ├── challenge-01/   # Individual challenge folder
+│                   ├── challenge-02/   # Individual challenge folder
+│                   └── ...
 ├── libs/                     # Shared libraries
 │   └── shared/
 │       ├── ui/               # Shared UI components
 │       ├── models/           # Shared data models
 │       └── services/         # Shared services
 └── docs/                     # Documentation
-    ├── CREATE_CHALLENGE.md # Template for creating new challenges
-    └── CONTRIBUTION.md    # Guide for contribution
+    ├── CREATE_CHALLENGE.md   # Template for creating new challenges
+    └── CONTRIBUTION.md       # Guide for contribution
+
 ```
 
 See the Architecture Guide [ARCHITECTURE.md](docs/ARCHITECTURE.md) for more details.
