@@ -1,17 +1,17 @@
-import { Component, inject, signal, type Signal } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
-import { 
-  Challenge, 
-  ChallengeListComponent, 
-  FooterComponent, 
-  HeaderComponent, 
+import {
+  ChallengeListComponent,
+  FooterComponent,
+  HeaderComponent,
   HeroSectionComponent,
-  ChallengesService,
   FooterLink
 } from '@ng-coding-challenges/shared/ui';
 import { Subject, timer } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
+import { ChallengesService } from '@ng-coding-challenges/shared/services';
+import { Challenge } from '@ng-coding-challenges/shared/models';
 
 @Component({
   selector: 'app-root',
@@ -19,17 +19,17 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './app.component.scss',
   standalone: true,
   imports: [
-    RouterOutlet, 
-    HeaderComponent, 
-    FooterComponent, 
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
     ChallengeListComponent,
     HeroSectionComponent,
     MatIconModule
   ],
 })
-export class AppComponent {
-  title = 'ngular Quest';
-  logo = 'favicon.ico';  // Path to the favicon in the public folder
+export class AppComponent implements OnInit, OnDestroy {
+  title = 'ngQuest';
+  logo = 'logo.png';  // Path to the favicon in the public folder
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
 
@@ -39,11 +39,24 @@ export class AppComponent {
   // Signal to control the visibility of the challenges list
   protected showChallenges = signal(false);
 
+  // Signals to control visibility of specific layout components
+  protected showHeader = signal(true);
+  protected showHeroSection = signal(true);
+  protected showFooter = signal(true);
   // Hero section description paragraphs
   protected heroParagraphs = [
     'Sharpen your skills and get ready with practical Angular challenges focused on real-world interview scenarios.',
     // 'Master the concepts: RxJS, Signals, Performance, and modern Angular patterns.'
   ];
+
+  // Hero section texts
+  protected heroTitle = 'Learn Angular. Solve Challenges. Ace Interviews.';
+  protected startButtonText = 'Start Practicing Now';
+  protected hideButtonText = 'Hide Challenges';
+
+  // Footer texts
+  protected footerDescription = 'Practice. Learn. Succeed.';
+  protected angularVersion = VERSION.major;
 
   // Get challenges from the service
   protected challenges: Challenge[] = this.#challengesService.getChallenges();
@@ -55,12 +68,24 @@ export class AppComponent {
    * Angular lifecycle hook that is called after component initialization.
    * This method is invoked after Angular has initialized all data-bound properties
    * and input bindings of the component.
-   * 
+   *
    * @requires The component class must implement OnInit interface
    */
+ 
+
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
+    // Listen for custom events to show challenges
+     window.addEventListener('showChallenges', this.#showChallengesHandler);
   }
+
+   // Event handler for showChallenges custom event
+  #showChallengesHandler = ((e: CustomEvent) => {
+    this.showChallenges.set(e.detail);
+    if (e.detail) {
+      setTimeout(() => this.scrollToSection('challenges-section'), 200);
+    }
+  }) as EventListener;
 
   #updateLayoutOnRouteChange() {
     this.#router.events
@@ -68,11 +93,42 @@ export class AppComponent {
       .subscribe({
         next: (event: NavigationEnd) => {
           if (event) {
-            const simpleRoutes = ['/products'];
-            this.showLayout.set(!simpleRoutes.includes(event.urlAfterRedirects));
+            this.#handleRouteChange(event.urlAfterRedirects);
           }
         }
       });
+  }
+
+  #handleRouteChange(url: string) {
+    // Routes where we show individual challenge components only
+    const challengeRoutes = [
+      '/challenges/fetch-products',
+      '/challenges/handle-parallel-apis',
+      '/challenges/client-side-search',
+      '/challenges/server-side-search'
+    ];
+    // Check if current route is a specific challenge page
+    const isChallengePage = challengeRoutes.includes(url);
+
+    if (isChallengePage) {
+      // For challenge pages, show layout with header and footer but hide hero section
+      this.showLayout.set(true);
+      this.showHeader.set(true);
+      this.showHeroSection.set(false);
+      this.showChallenges.set(false);
+      this.showFooter.set(false);
+    } else {
+      // For landing page, show everything
+      this.showLayout.set(true);
+      this.showHeader.set(true);
+      this.showHeroSection.set(true);
+      this.showFooter.set(true);
+    }
+
+    // Auto-show challenges list when on challenges landing page
+    if (url === '/challenges' || url === '/') {
+      // this.showChallenges.set(true);
+    }
   }
 
   /**
@@ -81,7 +137,7 @@ export class AppComponent {
   toggleChallenges(isExpanded?: boolean) {
     if (isExpanded !== undefined) {
       this.showChallenges.set(isExpanded);
-      
+
       // If challenges are being shown, scroll to the challenges section
       if (isExpanded) {
         this.scrollToSection('challenges-section');
@@ -91,7 +147,7 @@ export class AppComponent {
       this.showChallenges.update(current => !current);
     }
   }
-  
+
   /**
    * Scrolls to the top of the page
    */
@@ -110,7 +166,7 @@ export class AppComponent {
    * Scrolls to the challenges section
    */
   scrollToSection(sectionName: string) {
-   
+
     timer(100).pipe(takeUntil(this.#destroy$)).subscribe(() => {
       const section = document.getElementById(sectionName);
       if (section) {
@@ -128,11 +184,11 @@ export class AppComponent {
 
   // Signals for footer links
   protected readonly quickLinks = signal<FooterLink[]>([
-    { text: 'Home', icon: 'home', action: () => this.scrollToSection('header-section') },
+    { text: 'Home', icon: 'home', url: '/challenges' },
     { text: 'Challenges', icon: 'code', action: () => { this.showChallenges.set(true); this.scrollToSection('challenges-section'); } },
     { text: 'Roadmap', icon: 'map', url: '/roadmap' },
     { text: 'GitHub', icon: 'code_off', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true },
-    { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/CONTRIBUTING.md', external: true }
+    { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md', external: true }
   ]);
 
   protected readonly socialLinks = signal<FooterLink[]>([
@@ -148,8 +204,10 @@ export class AppComponent {
 
   // clear subscriptions on destroy
   ngOnDestroy(): void {
+    // Remove event listener using the same handler reference
+    window.removeEventListener('showChallenges', this.#showChallengesHandler);
+
     // Called once, before the instance is destroyed.
-    // Add 'implements OnDestroy' to the class.
     this.#destroy$.next();
     this.#destroy$.complete();
     console.log('AppComponent destroyed');

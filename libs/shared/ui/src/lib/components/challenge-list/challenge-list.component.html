@@ -2,7 +2,9 @@
   <h3 class="section-title">{{ title }}</h3>
   <div class="cards">
     @for (challenge of challenges; track challenge.id) {
-      <ng-coding-challenges-challenge-card [challenge]="challenge" />
+      <div class="card-wrapper">
+        <ng-coding-challenges-challenge-card [challenge]="challenge" />
+      </div>
     } @empty {
       <div class="no-challenges">
         <p>No challenges available at the moment.</p>
