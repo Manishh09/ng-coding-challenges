@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.3s var(--animation-easing);
-  cursor: pointer;
+  transition: transform 0.3s var(--animation-easing),
+              box-shadow 0.3s var(--animation-easing);
   border: none;
   width: 100%;
   max-width: 100%;
@@ -19,6 +19,7 @@
   }
 }
 
+// Card decorative elements
 .card-banner {
   height: 6px;
   background: var(--brand-gradient-primary);
@@ -37,6 +38,7 @@
   right: 0;
 }
 
+// Card header
 mat-card-header {
   padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
   display: flex;
@@ -44,6 +46,7 @@ mat-card-header {
   align-items: flex-start;
 }
 
+// Icon container
 .challenge-indicator {
   display: flex;
   align-items: center;
@@ -51,16 +54,19 @@ mat-card-header {
   margin-left: auto;
 }
 
+// Action buttons
 .challenge-button {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  transition: all 0.2s var(--animation-easing);
+  transition: transform 0.2s var(--animation-easing),
+              background-color 0.2s var(--animation-easing),
+              box-shadow 0.2s var(--animation-easing);
 
   &:hover:not(:disabled) {
     transform: scale(1.1);
-    background-color: rgba(221, 0, 49, 0.1);
-    box-shadow: 0 2px 8px rgba(221, 0, 49, 0.2);
+    background-color: rgba(var(--primary-color-rgb, 221, 0, 49), 0.1);
+    box-shadow: 0 2px 8px rgba(var(--primary-color-rgb, 221, 0, 49), 0.2);
   }
 
   &:active:not(:disabled) {
@@ -69,8 +75,7 @@ mat-card-header {
 
   &:disabled {
     opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
+    pointer-events: none;
   }
 
   &:focus-visible {
@@ -81,17 +86,12 @@ mat-card-header {
 
 .challenge-icon {
   color: var(--primary-color, #dd0031);
-  font-size: 22px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s var(--animation-easing);
+  font-size: 20px;
+  transition: transform 0.2s var(--animation-easing);
 }
 
 mat-card-title {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: var(--spacing-xs);
@@ -418,11 +418,5 @@ mat-card-actions a mat-icon {
     margin-bottom: var(--spacing-sm);
     width: 100%;
     box-sizing: border-box;
-  }
-  
-  .challenge-card {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
   }
 }

@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   // Hero section texts
-  protected heroTitle = 'Learn Angular. Solve Challenges. Crack Interviews.';
+  protected heroTitle = 'Learn Angular. Solve Challenges. Ace Interviews.';
   protected startButtonText = 'Start Practicing Now';
   protected hideButtonText = 'Hide Challenges';
 

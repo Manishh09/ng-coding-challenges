@@ -1,111 +1,65 @@
-import { Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
 import { NavigationService, NotificationService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
- 
 
+/**
+ * Component for displaying a challenge card with actions
+ */
 @Component({
   selector: 'ng-coding-challenges-challenge-card',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule,
-    MatBadgeModule,
     MatTooltipModule,
-    MatMenuModule,
     RouterLink
   ],
   templateUrl: './challenge-card.component.html',
-  styleUrl: './challenge-card.component.scss'
+  styleUrl: './challenge-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChallengeCardComponent {
   @Input({ required: true }) challenge!: Challenge;
 
-  private navigationService = inject(NavigationService);
-  private notificationService = inject(NotificationService);
+  private readonly navigationService = inject(NavigationService);
+  private readonly notificationService = inject(NotificationService);
 
+ 
   /**
-   * Navigates to the challenge requirement document
-   * @param requirementUrl - URL to the requirement document
+   * Opens an external URL in a new window/tab and handles potential failures.
+   * 
+   * @param url - The URL to open externally
+   * @param type - The type of link being opened, affects the error message shown on failure
+   * @returns void
+   * 
+   * @remarks
+   * If the URL is empty/falsy, the method show a validation message
+   * If the navigation service fails to open the link (e.g., due to popup blockers), 
+   * an appropriate error notification is displayed based on the link type.
    */
-  async goToChallengeV2(requirementUrl: string): Promise<void> {
-    try {
-      const success = await this.navigationService.openExternalLink(requirementUrl);
+  openURL(url: string, type: "github" | "requirement" | "solution"): void {
+    const errorMessage = type === "github"
+      ? 'Unable to open GitHub repository. Please check if popups are blocked.'
+      : type === "requirement"
+      ? 'Unable to open challenge requirement doc. Please check if popups are blocked.'
+      : 'Unable to open solution guide. Please check if popups are blocked.';
 
-      if (!success) {
-        this.notificationService.error('Unable to open challenge requirement. Please check if popups are blocked.');
-      }
-    } catch (error) {
-      console.error('Error navigating to challenge:', error);
-      this.notificationService.error('An error occurred while opening the challenge requirement.');
+    if (!url) {
+      this.notificationService.error('No URL provided to open.');
+      return;
     }
-  }
 
-  /**
-   * Opens GitHub repository in a new tab
-   * @param githubUrl - URL to the GitHub repository
-   */
-  async openGitHubV2(githubUrl: string): Promise<void> {
-    try {
-      const success = await this.navigationService.openExternalLinkV2(githubUrl);
-
-      if (!success) {
-        this.notificationService.error('Unable to open GitHub repository. Please check if popups are blocked.');
-      }
-    } catch (error) {
-      console.error('Error opening GitHub:', error);
-      this.notificationService.error('An error occurred while opening the GitHub repository.');
-    }
-  }
-
-  /**
-   * Opens GitHub repository in a new tab
-   * @param githubUrl - URL to the GitHub repository
-   */
-  openGitHub(githubUrl: string): void {
-    const success = this.navigationService.openExternalLink(githubUrl);
+    const success = this.navigationService.openExternalLink(url);
 
     if (!success) {
-      this.notificationService.error(
-        'Unable to open GitHub repository. Please check if popups are blocked.'
-      );
+      this.notificationService.error(errorMessage);
     }
-  }
-
-
-  /**
-   * Navigates to the challenge requirement document
-   * @param requirementUrl - URL to the requirement document
-   */
-  goToChallenge(requirementUrl: string): void {
-    const success = this.navigationService.openExternalLink(requirementUrl);
-
-    if (!success) {
-      this.notificationService.error(
-        'Unable to open challenge requirement. Please check if popups are blocked.'
-      );
-    }
-  }
-
-
-  /**
-   * Gets the domain name for display purposes
-   * @param url - URL to extract domain from
-   * @returns string - domain name
-   */
-  getDomain(url: string): string {
-    return this.navigationService.getHostname(url);
   }
 }

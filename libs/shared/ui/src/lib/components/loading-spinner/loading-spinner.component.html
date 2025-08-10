@@ -1,8 +1,9 @@
-<div class="loading-container" [class]="containerClass()">
+<div class="loading-container" [class]="containerClass()" role="status">
   <mat-spinner 
     [diameter]="diameter()" 
     [strokeWidth]="strokeWidth()"
-    [color]="color()">
+    [color]="color()"
+    aria-label="Loading">
   </mat-spinner>
   
   @if (message() || hasContent()) {

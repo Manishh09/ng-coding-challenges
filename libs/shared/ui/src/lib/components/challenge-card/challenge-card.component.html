@@ -2,15 +2,17 @@
   <div class="card-banner" aria-hidden="true"></div>
   <mat-card-header>
     <mat-card-title
-    [matTooltip]="challenge.title.length > 30 ? challenge.title : ''"
-    matTooltipPosition="above"
-    >{{ challenge.title }}</mat-card-title>
+      [matTooltip]="challenge.title.length > 30 ? challenge.title : ''"
+      matTooltipPosition="above"
+    >
+      {{ challenge.title }}
+    </mat-card-title>
     <div class="challenge-indicator">
       <button
         mat-icon-button
-        (click)="openGitHub(challenge.gitHub)"
+        (click)="openURL(challenge.gitHub, 'github')"
         matTooltip="Open Source Code"
-        [matTooltipPosition]="'above'"
+        matTooltipPosition="above"
         [disabled]="!challenge.gitHub"
         class="challenge-button"
         aria-label="Open Source Code">
@@ -21,18 +23,21 @@
 
   <mat-card-content>
     <p class="description"
-    [matTooltip]="challenge.description.length > 98 ? challenge.description : ''"
-    >{{ challenge.description }}</p>
+      [matTooltip]="challenge.description.length > 98 ? challenge.description : ''"
+      matTooltipPosition="above"
+    >
+      {{ challenge.description }}
+    </p>
   </mat-card-content>
 
   <mat-card-actions>
     <div class="action-buttons">
       <button
         matTooltip="View Requirements Document"
-        [matTooltipPosition]="'above'"
+        matTooltipPosition="above"
         mat-icon-button
         color="primary"
-        (click)="goToChallenge(challenge.requirement)"
+        (click)="openURL(challenge.requirement, 'requirement')"
         [disabled]="!challenge.requirement"
         class="requirement-button"
         aria-label="View Requirements Document">
@@ -40,10 +45,10 @@
       </button>
       <button
         matTooltip="View Solution Guide"
-        [matTooltipPosition]="'above'"
+        matTooltipPosition="above"
         mat-icon-button
         color="primary"
-        (click)="goToChallenge(challenge.solutionGuide)"
+        (click)="openURL(challenge.solutionGuide, 'solution')"
         [disabled]="!challenge.solutionGuide"
         class="solution-button"
         aria-label="View Solution Guide">
@@ -51,7 +56,7 @@
       </button>
       <a
         matTooltip="Try Challenge"
-        [matTooltipPosition]="'above'"
+        matTooltipPosition="above"
         mat-icon-button
         color="primary"
         [routerLink]="[challenge.link]"
