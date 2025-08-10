@@ -14,7 +14,7 @@
 
 The platform includes a clean, modern UI with light/dark theme support, responsive design, and Angular Material integration.
 
-___
+---
 
 ## 📦 Monorepo Architecture
 
@@ -39,8 +39,10 @@ ng-coding-challenges/
     ├── CREATE_CHALLENGE.md # Template for creating new challenges
     └── CONTRIBUTION.md    # Guide for contribution
 ```
+
 See the Architecture Guide [ARCHITECTURE.md](docs/ARCHITECTURE.md) for more details.
-___
+
+---
 
 ## 🛠️ Getting Started
 
@@ -54,7 +56,7 @@ ___
 
 ```bash
 # Clone the repository (if not already done)
-git clone https://your-repository-url/ng-coding-challenges.git
+git clone https://github.com/Manishh09/ng-coding-challenges.git
 
 # navigate to project directory
 cd ng-coding-challenges
@@ -70,7 +72,8 @@ npm install
 
 # if any issues, remove package-lock.json file and run `npm install`
 ```
-___
+
+---
 
 ## Development Workflow
 
@@ -108,7 +111,7 @@ npm run create:challenge
 
 See [CREATE CHALLENGE TEMPLATE](docs/CREATE_CHALLENGE.md) for more details on challenge structure.
 
-___
+---
 
 ## 📚 Documentation
 
