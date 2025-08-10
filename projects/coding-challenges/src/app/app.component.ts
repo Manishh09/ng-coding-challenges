@@ -188,7 +188,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { text: 'Challenges', icon: 'code', action: () => { this.showChallenges.set(true); this.scrollToSection('challenges-section'); } },
     { text: 'Roadmap', icon: 'map', url: '/roadmap' },
     { text: 'GitHub', icon: 'code_off', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true },
-    { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/CONTRIBUTING.md', external: true }
+    { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md', external: true }
   ]);
 
   protected readonly socialLinks = signal<FooterLink[]>([
