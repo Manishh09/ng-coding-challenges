@@ -1,9 +1,9 @@
+// Header styles
 .header-toolbar {
   position: sticky;
   top: 0;
   z-index: 1000;
   background: var(--brand-gradient-section);
-  //background: rgba(var(--surface-color-rgb, 255, 255, 255), 0.95);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 rgba(var(--outline-color-rgb, 224, 224, 224), 0.5);
@@ -15,6 +15,7 @@
               box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
 
+// Container for header content
 .header-container {
   display: flex;
   align-items: center;
@@ -27,12 +28,14 @@
   overflow: hidden;
 }
 
+// Logo container
 .logo-section {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
+// Logo link styling
 .logo-link {
   display: flex;
   align-items: center;
@@ -42,28 +45,33 @@
   font-size: 1.25rem;
   transition: transform var(--animation-duration-fast) var(--animation-easing),
               opacity var(--animation-duration-fast) var(--animation-easing);
-  overflow: visible;
+  
+  &:hover {
+    opacity: 0.95;
+    transform: scale(1.02);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--primary-color, #dd0031);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
-.logo-link:hover {
-  opacity: 0.95;
-  transform: scale(1.02);
-}
-
-/* Special styling for the Angular logo */
+// Angular logo styling
 .angular-logo {
   height: 64px;
   width: 64px;
   object-fit: contain;
   vertical-align: middle;
-  // margin-right: 8px;
   margin-top: 6px;
-  transition: all 0.3s var(--animation-easing);
-  filter: drop-shadow(0 2px 4px var(--logo-shadow-color, rgba(0, 0, 0, 0.15))) var(--logo-filter, none);
+  transition: transform 0.3s var(--animation-easing),
+              filter 0.3s var(--animation-easing);
+  filter: drop-shadow(0 2px 4px var(--logo-shadow-color, rgba(0, 0, 0, 0.15)));
   mix-blend-mode: var(--logo-blend-mode, normal);
-  filter: brightness(1);
 }
 
+// Navigation section
 .nav-section {
   display: flex;
   align-items: center;
@@ -72,6 +80,7 @@
   justify-content: center;
 }
 
+// Actions section (theme toggle, buttons)
 .actions-section {
   display: flex;
   align-items: center;
@@ -82,7 +91,7 @@
   margin-left: auto;
 }
 
-/* Add specific styling for theme toggle component */
+// Theme toggle component
 ng-coding-challenges-theme-toggle {
   display: flex;
   align-items: center;
@@ -90,7 +99,42 @@ ng-coding-challenges-theme-toggle {
   margin-right: 4px;
 }
 
-/* Responsive Design */
+// Logo text styling
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-left: 0.25rem;
+  background: linear-gradient(120deg, #dd0031, #c3002f, #dd0031);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 8s ease infinite;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+// Style the "ng" prefix
+.ng-prefix {
+  font-weight: 400;
+  opacity: 1;
+  margin-right: 1px;
+}
+
+// Animation for gradient text
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Responsive design for mobile devices
 @media (max-width: 768px) {
   .desktop-only {
     display: none !important;
@@ -99,8 +143,10 @@ ng-coding-challenges-theme-toggle {
   .ng-prefix {
     display: none;
   }
-  .angular-logo{
+  
+  .angular-logo {
     width: 40px;
+    height: 40px;
   }
 
   .logo-text {
@@ -120,41 +166,9 @@ ng-coding-challenges-theme-toggle {
   }
 }
 
+// Hide mobile elements on larger screens
 @media (min-width: 769px) {
   .mobile-only {
     display: none !important;
   }
 }
-
-  .logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-left: 0.25rem;
-    background: linear-gradient(120deg, #dd0031, #c3002f, #dd0031);
-    background-size: 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientMove 8s ease infinite;
-    letter-spacing: -0.02em;
-    font-family: 'Inter', 'Roboto', sans-serif;
-  }
-
-  /* Style the "ng" prefix like angular.dev */
-  .ng-prefix {
-    font-weight: 400;
-    opacity: 1;
-    margin-right: 1px;
-  }
-
-  @keyframes gradientMove {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }

@@ -2,10 +2,10 @@
   mat-icon-button 
   (click)="themeService.toggleTheme()" 
   [matTooltip]="tooltipText()" 
+  matTooltipPosition="below"
   class="theme-toggle-btn"
   [class.dark-mode]="themeService.isDarkMode()" 
   [attr.aria-pressed]="themeService.isDarkMode()"
-  [attr.aria-label]="tooltipText()" 
-  aria-label="Toggle theme">
+  [attr.aria-label]="tooltipText()">
   <mat-icon>{{ themeIcon() }}</mat-icon>
 </button>

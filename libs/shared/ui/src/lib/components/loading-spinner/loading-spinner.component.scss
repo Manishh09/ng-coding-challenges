@@ -1,32 +1,36 @@
+// Base container styles
 .loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-lg);
+  gap: var(--spacing-md, 16px);
+  padding: var(--spacing-lg, 24px);
 }
 
+// Layout variants
 .loading-container.inline {
   flex-direction: row;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-sm, 8px);
 }
 
 .loading-container.minimal {
-  padding: var(--spacing-sm);
-  gap: var(--spacing-sm);
+  padding: var(--spacing-sm, 8px);
+  gap: var(--spacing-sm, 8px);
 }
 
 .loading-container.fullscreen {
   min-height: 50vh;
-  padding: var(--spacing-xxl);
+  padding: var(--spacing-xxl, 48px);
 }
 
+// Content container
 .loading-content {
   text-align: center;
   max-width: 300px;
 }
 
+// Message styling
 .loading-message {
   margin: 0;
   color: var(--on-surface-variant-color);

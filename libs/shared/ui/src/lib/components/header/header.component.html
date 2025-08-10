@@ -3,7 +3,15 @@
     <!-- Logo Section -->
     <div class="logo-section">
       <a routerLink="/" class="logo-link" [attr.aria-label]="'Go to ' + appName() + ' home page'">
-        <img loading="lazy" [src]="logoUrl()" alt="Angular Logo" class="angular-logo">
+        <img 
+          alt="Angular logo"
+          loading="lazy" 
+          [src]="logoUrl()" 
+          [alt]="appName() + ' logo'"
+          [title]="appName() + ' logo'"
+          class="angular-logo"
+          width="64" 
+          height="64">
         <span class="logo-text"><span class="ng-prefix">ng</span>Quest</span>
       </a>
     </div>
@@ -35,6 +43,6 @@
 </mat-toolbar>
 
 <!-- Mobile Navigation Menu -->
-<mat-menu #mobileMenu="matMenu">
+<mat-menu #mobileMenu="matMenu" aria-label="Mobile Navigation">
   <ng-content select="[slot=mobile-nav]"></ng-content>
 </mat-menu>
