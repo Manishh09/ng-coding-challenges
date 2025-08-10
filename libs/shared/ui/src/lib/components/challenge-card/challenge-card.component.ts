@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavigationService, NotificationService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
- 
+
 /**
  * Component for displaying a challenge card with actions
  */
@@ -31,49 +31,35 @@ export class ChallengeCardComponent {
   private readonly navigationService = inject(NavigationService);
   private readonly notificationService = inject(NotificationService);
 
+ 
   /**
-   * Opens an external URL with error handling
-   * @param url - URL to open
-   * @param errorMessage - Custom error message to show if opening fails
+   * Opens an external URL in a new window/tab and handles potential failures.
+   * 
+   * @param url - The URL to open externally
+   * @param type - The type of link being opened, affects the error message shown on failure
+   * @returns void
+   * 
+   * @remarks
+   * If the URL is empty/falsy, the method show a validation message
+   * If the navigation service fails to open the link (e.g., due to popup blockers), 
+   * an appropriate error notification is displayed based on the link type.
    */
-  private async openExternalUrl(url: string, errorMessage: string): Promise<void> {
-    try {
-      const success = await this.navigationService.openExternalLink(url);
-      
-      if (!success) {
-        this.notificationService.error(errorMessage);
-      }
-    } catch (error) {
-      console.error('Error opening external URL:', error);
-      this.notificationService.error('An error occurred while opening the external link.');
+  openURL(url: string, type: "github" | "requirement" | "solution"): void {
+    const errorMessage = type === "github"
+      ? 'Unable to open GitHub repository. Please check if popups are blocked.'
+      : type === "requirement"
+      ? 'Unable to open challenge requirement doc. Please check if popups are blocked.'
+      : 'Unable to open solution guide. Please check if popups are blocked.';
+
+    if (!url) {
+      this.notificationService.error('No URL provided to open.');
+      return;
+    }
+
+    const success = this.navigationService.openExternalLink(url);
+
+    if (!success) {
+      this.notificationService.error(errorMessage);
     }
   }
-
-  /**
-   * Opens GitHub repository in a new tab
-   * @param githubUrl - URL to the GitHub repository
-   */
-  openGitHub(githubUrl: string): void {
-    if (!githubUrl) return;
-    
-    this.openExternalUrl(
-      githubUrl, 
-      'Unable to open GitHub repository. Please check if popups are blocked.'
-    );
-  }
-
-  /**
-   * Navigates to the challenge requirement document
-   * @param requirementUrl - URL to the requirement document
-   */
-  goToChallenge(requirementUrl: string): void {
-    if (!requirementUrl) return;
-    
-    this.openExternalUrl(
-      requirementUrl, 
-      'Unable to open challenge requirement. Please check if popups are blocked.'
-    );
-  }
-
-  // No additional methods needed
 }

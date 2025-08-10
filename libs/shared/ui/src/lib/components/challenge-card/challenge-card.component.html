@@ -10,7 +10,7 @@
     <div class="challenge-indicator">
       <button
         mat-icon-button
-        (click)="openGitHub(challenge.gitHub)"
+        (click)="openURL(challenge.gitHub, 'github')"
         matTooltip="Open Source Code"
         matTooltipPosition="above"
         [disabled]="!challenge.gitHub"
@@ -37,7 +37,7 @@
         matTooltipPosition="above"
         mat-icon-button
         color="primary"
-        (click)="goToChallenge(challenge.requirement)"
+        (click)="openURL(challenge.requirement, 'requirement')"
         [disabled]="!challenge.requirement"
         class="requirement-button"
         aria-label="View Requirements Document">
@@ -48,7 +48,7 @@
         matTooltipPosition="above"
         mat-icon-button
         color="primary"
-        (click)="goToChallenge(challenge.solutionGuide)"
+        (click)="openURL(challenge.solutionGuide, 'solution')"
         [disabled]="!challenge.solutionGuide"
         class="solution-button"
         aria-label="View Solution Guide">
