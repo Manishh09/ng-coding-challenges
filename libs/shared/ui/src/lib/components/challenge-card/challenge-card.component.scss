@@ -1,12 +1,13 @@
 .challenge-card {
-  // height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   transition: all 0.3s var(--animation-easing);
   cursor: pointer;
   border: none;
-  max-width: 400px;
+  width: 100%;
+  max-width: 100%;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
@@ -397,5 +398,31 @@ mat-card-actions a mat-icon {
 
   :host {
     animation: none;
+  }
+  
+  mat-card-header {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+  }
+  
+  mat-card-title {
+    font-size: 1.2rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    width: 100%;
+  }
+  
+  .description {
+    padding: var(--spacing-xs) var(--spacing-md);
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    margin-bottom: var(--spacing-sm);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .challenge-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
   }
 }
