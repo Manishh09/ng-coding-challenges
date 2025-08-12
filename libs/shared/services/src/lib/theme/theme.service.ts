@@ -99,18 +99,20 @@ export class ThemeService {
 
     const body = document.body;
 
-    // Remove existing theme classes
-    body.classList.remove('light-theme', 'dark-theme');
+    // Remove existing theme classes (both old and new)
+    body.classList.remove('light-theme', 'dark-theme', 'dark-mode', 'docs-dark-mode');
 
-    // Add new theme class
-    body.classList.add(`${theme}-theme`);
+    // Add new theme class using angular.dev naming convention
+    const themeClass = theme === 'dark' ? 'docs-dark-mode' : 'dark-mode';
+    body.classList.add(themeClass);
 
     // Update meta theme-color for mobile browsers
     this.updateMetaThemeColor(theme);
   }
 
   private updateMetaThemeColor(theme: ThemeType): void {
-    const themeColor = theme === 'dark' ? '#121212' : '#1976d2';
+    // Use the extracted color tokens for theme colors
+    const themeColor = theme === 'dark' ? '#0a0a0a' : '#3b82f6'; // gray-950 for dark, bright-blue for light
 
     let metaThemeColor = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement;
 

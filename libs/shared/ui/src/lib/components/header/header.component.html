@@ -3,39 +3,44 @@
     <!-- Logo Section -->
     <div class="logo-section">
       <a routerLink="/" class="logo-link" [attr.aria-label]="'Go to ' + appName() + ' home page'">
-        <img 
-          alt="Angular logo"
-          loading="lazy" 
-          [src]="logoUrl()" 
-          [alt]="appName() + ' logo'"
-          [title]="appName() + ' logo'"
-          class="angular-logo"
-          width="64" 
-          height="64">
+        <span class="logo-image-wrap">
+          <span class="angular-logo-gradient" role="img"
+                [attr.aria-label]="appName() + ' logo'"
+                [style.--logo-src]="'url(' + logoUrl() + ')'"></span>
+          <img
+            alt="Angular logo"
+            loading="lazy"
+            [src]="logoUrl()"
+            [alt]="appName() + ' logo'"
+            [title]="appName() + ' logo'"
+            class="angular-logo-img"
+            width="64"
+            height="64">
+        </span>
         <span class="logo-text"><span class="ng-prefix">ng</span>Quest</span>
       </a>
     </div>
-    
+
     <!-- Desktop Navigation -->
     <nav class="nav-section" [class.desktop-only]="showMobileMenu()">
       <ng-content select="[slot=nav-items]"></ng-content>
     </nav>
-    
+
     <!-- Actions Section -->
     <div class="actions-section">
       <ng-coding-challenges-theme-toggle></ng-coding-challenges-theme-toggle>
-      
+
       <!-- Mobile Menu Button -->
       @if (showMobileMenu()) {
-        <button 
-          mat-icon-button 
+        <button
+          mat-icon-button
           [matMenuTriggerFor]="mobileMenu"
           class="mobile-menu-btn mobile-only"
           aria-label="Open mobile menu">
           <mat-icon>menu</mat-icon>
         </button>
       }
-      
+
       <!-- Custom Action Buttons -->
       <ng-content select="[slot=actions]"></ng-content>
     </div>

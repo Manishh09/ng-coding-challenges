@@ -1,0 +1,79 @@
+@use '@angular/material' as mat;
+@use '@angular/material/core/theming/palettes' as palettes;
+
+// Light theme CSS variables aligned with angular.dev
+@mixin light-theme-vars() {
+  --surface-primary: var(--gray-50);
+  --surface-secondary: #ffffff;
+  --surface-tertiary: var(--gray-100);
+
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-700);
+  --text-tertiary: var(--gray-500);
+
+  --border-primary: var(--gray-200);
+  --border-secondary: var(--gray-300);
+
+  --background-primary: #ffffff;
+  --background-secondary: var(--gray-50);
+
+  --interactive-primary: var(--electric-violet);
+  --interactive-primary-hover: #7c3aed; // violet-600
+  --interactive-secondary: var(--gray-100);
+  --interactive-secondary-hover: var(--gray-200);
+
+  // Gradients and brands
+  --gradient-primary: linear-gradient(135deg, var(--vivid-pink), var(--electric-violet));
+  --gradient-secondary: linear-gradient(135deg, var(--bright-blue), var(--electric-violet));
+  --brand-gradient-primary: var(--gradient-primary);
+  --brand-gradient-hero: var(--gradient-primary);
+  --brand-gradient-footer: var(--gradient-primary);
+  --brand-gradient-section: linear-gradient(120deg, rgba(139, 92, 246, 0.06), rgba(236, 72, 153, 0.06));
+
+  // Aliases for component usage
+  --color-primary: var(--electric-violet);
+  --color-accent: var(--vivid-pink);
+  --color-bg: var(--background-primary);
+  --color-fg: var(--text-primary);
+  --color-surface: var(--surface-secondary);
+
+  // Legacy compatibility aliases
+  --surface-color: var(--surface-secondary);
+  --surface-variant-color: var(--surface-tertiary);
+  --surface-variant-color-rgb: 245,245,245;
+  --on-surface-color: var(--text-primary);
+  --on-surface-variant-color: var(--text-secondary);
+  --outline-color: var(--border-primary);
+  --outline-color-rgb: 224,224,224;
+  --primary-color: var(--electric-violet);
+  --primary-color-rgb: 139, 92, 246;
+  --shadow-color: rgba(0,0,0,0.12);
+
+  // Logo theming (preserve original gradient in light mode)
+  --logo-filter: none;
+  --logo-blend-mode: normal;
+  --logo-shadow-color: rgba(139, 92, 246, 0.18);
+}
+
+// Material 3 light theme
+@mixin light-material-theme() {
+  // Pull M3 palettes
+  $primary-palette: palettes.$violet-palette; // M3 violet aligns with angular.dev primary
+  $tertiary-palette: palettes.$rose-palette;  // M3 rose aligns with vivid-pink accents
+
+  $theme: mat.define-theme((
+    color: (
+      theme-type: light,
+      primary: $primary-palette,
+      tertiary: $tertiary-palette,
+      use-system-variables: true,
+    ),
+    density: (
+      scale: 0,
+    ),
+  ));
+
+  // Emit system tokens and component styles (must be inside a selector at call site)
+  @include mat.theme($theme);
+  @include mat.all-component-themes($theme);
+}

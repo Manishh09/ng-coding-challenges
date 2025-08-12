@@ -71,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
    *
    * @requires The component class must implement OnInit interface
    */
- 
+
 
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
@@ -105,7 +105,8 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/fetch-products',
       '/challenges/handle-parallel-apis',
       '/challenges/client-side-search',
-      '/challenges/server-side-search'
+      '/challenges/server-side-search',
+      '/theme-demo'
     ];
     // Check if current route is a specific challenge page
     const isChallengePage = challengeRoutes.includes(url);

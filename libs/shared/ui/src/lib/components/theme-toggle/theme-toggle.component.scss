@@ -1,47 +1,128 @@
-// Button styling
 .theme-toggle-btn {
-  transition: transform 0.3s var(--animation-easing, ease-in-out),
-              background-color 0.3s var(--animation-easing, ease-in-out);
-  height: 36px;
-  width: 36px;
-  min-width: 36px;
-  line-height: 36px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin: 0;
-  
-  // Dark mode specific styles
-  &.dark-mode {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-  }
-  
-  // Hover state
+  // Angular.dev inspired styling
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  transition: all var(--animation-duration-standard) var(--animation-easing);
+
   &:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.25);
+    background: var(--interactive-secondary);
+    border-color: var(--interactive-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
   }
-  
-  // Focus state for accessibility
-  &:focus-visible {
-    outline: 2px solid var(--primary-color, #dd0031);
+
+  &:focus {
+    outline: 2px solid var(--interactive-primary);
     outline-offset: 2px;
   }
-  
+
   // Icon styling
   mat-icon {
-    transition: transform 0.3s var(--animation-easing, ease-in-out);
-    height: 24px;
-    width: 24px;
     font-size: 20px;
-    line-height: 24px;
+    width: 20px;
+    height: 20px;
+    transition: transform var(--animation-duration-standard) var(--animation-easing);
+  }
+
+  // Hover effect on icon
+  &:hover mat-icon {
+    transform: scale(1.1);
+  }
+
+  // Active state
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+
+  // Dark mode specific adjustments
+  dark-mode & {
+    background: var(--surface-tertiary);
+    border-color: var(--border-secondary);
+
+    &:hover {
+      background: var(--interactive-secondary);
+      border-color: var(--interactive-primary);
+    }
+  }
+
+  // Light mode specific adjustments
+  .dark-mode & {
+    background: var(--surface-secondary);
+    border-color: var(--border-primary);
+
+    &:hover {
+      background: var(--interactive-secondary);
+      border-color: var(--interactive-primary);
+    }
   }
 }
 
-// Active state animation
-.theme-toggle-btn:active mat-icon {
-  transform: rotate(180deg);
+// Animation for theme transition
+.theme-toggle-btn mat-icon {
+  &.light_mode,
+  &.dark_mode {
+    animation: rotateIn var(--animation-duration-standard) var(--animation-easing);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    padding: 8px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .theme-toggle-btn {
+    border-width: 2px;
+
+    &:focus {
+      outline-width: 3px;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn {
+    transition: none;
+
+    mat-icon {
+      transition: none;
+    }
+
+    &:hover mat-icon {
+      transform: none;
+    }
+  }
+
+  @keyframes rotateIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }

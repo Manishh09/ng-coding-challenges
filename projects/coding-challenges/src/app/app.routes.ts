@@ -3,6 +3,7 @@ import { ProductListComponent } from './challenges/challenge-01-product-list/com
 import { DashboardComponent } from './challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component';
 import { ClientSideSearchComponent } from './challenges/challenge-03-client-side-search/components/client-side-search/client-side-search.component';
 import { ServerSideSearchComponent } from './challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component';
+import { ThemeDemoComponent } from './components/theme-demo/theme-demo.component';
 
 export const routes: Routes = [
 
@@ -31,6 +32,10 @@ export const routes: Routes = [
             component: ServerSideSearchComponent
          }
       ]
+   },
+   {
+      path: 'theme-demo',
+      component: ThemeDemoComponent
    },
    {
       path: '**',

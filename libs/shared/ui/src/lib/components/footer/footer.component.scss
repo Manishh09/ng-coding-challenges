@@ -4,6 +4,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  padding: 8px;
 
   &::before {
     content: '';
@@ -57,7 +58,7 @@
     border-radius: 3px;
     transition: width 0.3s var(--animation-easing);
   }
-  
+
   &:hover::after {
     width: 60px;
   }
@@ -72,8 +73,10 @@
 .footer-logo-icon {
   margin-right: var(--spacing-sm);
   font-size: 24px;
-  color: var(--primary-color, #dd0031);
-  transition: transform 0.3s var(--animation-easing);
+  color: var(--color-primary);
+  filter: drop-shadow(0 2px 4px var(--logo-shadow-color));
+  transition: transform .3s var(--animation-easing);
+
 
   &:hover {
     transform: rotate(20deg);
@@ -82,8 +85,13 @@
 
 .footer-logo-text {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--primary-color, #dd0031);
+  font-weight: 700;
+  background: var(--brand-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
+
 }
 
 .footer-description {
@@ -140,7 +148,7 @@
     &:hover::after {
       width: 100%;
     }
-    
+
     // Improve icon alignment when icons are present
     ::ng-deep mat-icon {
       vertical-align: middle;
@@ -165,14 +173,14 @@
       transform: translateY(-3px);
       opacity: 1;
     }
-    
+
     ::ng-deep mat-icon {
       margin-right: var(--spacing-sm);
       vertical-align: middle;
       font-size: 1.15rem;
       transition: transform 0.3s var(--animation-easing);
     }
-    
+
     &:hover ::ng-deep mat-icon {
       transform: scale(1.1);
     }
@@ -185,7 +193,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -249,7 +257,7 @@
   flex-wrap: wrap;
   margin: 0 0 var(--spacing-md) 0;
   padding-bottom: 0;
-  
+
   ::ng-deep a {
     color: var(--on-surface-variant-color);
     font-size: 0.875rem;
@@ -257,11 +265,11 @@
     transition: all 0.3s var(--animation-easing);
     position: relative;
     padding: 2px 0;
-    
+
     &:hover {
       color: var(--primary-color, #dd0031);
     }
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -272,7 +280,7 @@
       background: var(--brand-gradient-primary);
       transition: width 0.3s var(--animation-easing);
     }
-    
+
     &:hover::after {
       width: 100%;
     }
@@ -294,7 +302,7 @@
   padding: 0.5rem 0;
   cursor: pointer;
   position: relative;
-  
+
   mat-icon {
     font-size: 1.25rem;
     height: 1.25rem;
@@ -306,26 +314,26 @@
     opacity: 0.85;
     transition: all 0.3s var(--animation-easing);
   }
-  
+
   span {
     position: relative;
     transition: all 0.3s var(--animation-easing);
   }
-  
+
   &:hover {
     transform: translateX(6px);
-    
+
     mat-icon {
       opacity: 1;
       transform: scale(1.1);
     }
-    
+
     span::after {
       width: 100%;
       opacity: 1;
     }
   }
-  
+
   span::after {
     content: '';
     position: absolute;
@@ -356,43 +364,43 @@
   transition: all 0.3s var(--animation-easing);
   cursor: pointer;
   border: 1px solid var(--outline-color);
-  
+
   mat-icon {
     font-size: 1.25rem;
     height: 1.25rem;
     width: 1.25rem;
     transition: transform 0.3s var(--animation-easing);
   }
-  
+
   span {
     font-weight: 500;
     transition: transform 0.3s var(--animation-easing);
   }
-  
+
   &.linkedin {
     color: #0077B5;
-    
+
     &:hover {
       background-color: rgba(0, 119, 181, 0.1);
-      
+
       mat-icon {
         transform: scale(1.1);
       }
     }
   }
-  
+
   &.github {
     color: var(--on-surface-color, #333);
-    
+
     &:hover {
       background-color: rgba(var(--on-surface-color-rgb, 0, 0, 0), 0.1);
-      
+
       mat-icon {
         transform: scale(1.1);
       }
     }
   }
-  
+
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -404,13 +412,13 @@
 ::ng-deep .legal-links {
   display: flex;
   gap: 1.5rem;
-  
+
   .legal-link {
     font-size: 0.75rem;
     opacity: 0.7;
     transition: opacity 0.2s ease;
     cursor: pointer;
-    
+
     &:hover {
       opacity: 1;
     }
@@ -455,26 +463,26 @@
     text-align: center;
     gap: var(--spacing-sm);
   }
-  
+
   .footer-title::after {
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   .footer-section {
     align-items: center;
     text-align: center;
   }
-  
+
   .footer-tagline {
     text-align: center;
     max-width: 400px;
   }
-  
+
   .footer-nav {
     align-items: center;
   }
-  
+
   .social-links {
     justify-content: center;
   }
@@ -484,15 +492,15 @@
   .footer-content {
     padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
   }
-  
+
   .footer-logo-text {
     font-size: 1.1rem;
   }
-  
+
   .footer-title {
     font-size: 1rem;
   }
-  
+
   .footer-tagline {
     font-size: 0.8rem;
   }
@@ -505,7 +513,7 @@
     transition: none !important;
     transform: none !important;
   }
-  
+
   .footer-nav ::ng-deep a:hover, .social-links ::ng-deep a:hover {
     transform: none !important;
   }
