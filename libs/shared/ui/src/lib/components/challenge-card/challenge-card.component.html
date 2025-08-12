@@ -1,5 +1,14 @@
 <mat-card class="challenge-card">
   <div class="card-banner" aria-hidden="true"></div>
+
+  <!-- New Badge -->
+  @if (challenge.isFeatured) {
+    <div class="featured-badge" aria-label="New Challenge">
+      <mat-icon>new_releases</mat-icon>
+      New
+    </div>
+  }
+
   <mat-card-header>
     <mat-card-title
       [matTooltip]="challenge.title.length > 30 ? challenge.title : ''"
@@ -28,6 +37,66 @@
     >
       {{ challenge.description }}
     </p>
+
+    <!-- Challenge Metadata -->
+    <div class="challenge-metadata">
+      <!-- Difficulty Badge -->
+      <div class="metadata-item difficulty">
+        <span class="difficulty-badge" [class]="challenge.difficulty">
+          {{ challenge.difficulty }}
+        </span>
+      </div>
+
+      <!-- Category -->
+      @if (challenge.category) {
+        <div class="metadata-item category">
+          <mat-icon>category</mat-icon>
+          <span>{{ challenge.category | titlecase }}</span>
+        </div>
+      }
+
+      <!-- Estimated Time -->
+      @if (challenge.estimatedTime) {
+        <div class="metadata-item time">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ challenge.estimatedTime }} min</span>
+        </div>
+      }
+
+      <!-- Completion Status -->
+      @if (challenge.isCompleted !== undefined) {
+        <div class="metadata-item completion">
+          <mat-icon [class]="challenge.isCompleted ? 'completed' : 'pending'">
+            {{ challenge.isCompleted ? 'check_circle' : 'pending' }}
+          </mat-icon>
+          <span>{{ challenge.isCompleted ? 'Completed' : 'Pending' }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Tags -->
+    @if (challenge.tags && challenge.tags.length > 0) {
+      <div class="tags-section">
+        @for (tag of challenge.tags; track tag) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+    }
+
+    <!-- Prerequisites -->
+    @if (challenge.prerequisites && challenge.prerequisites.length > 0) {
+      <div class="prerequisites-section">
+        <h4 class="prerequisites-title">
+          <mat-icon>school</mat-icon>
+          Prerequisites
+        </h4>
+        <ul class="prerequisites-list">
+          @for (prereq of challenge.prerequisites; track prereq) {
+            <li>{{ prereq }}</li>
+          }
+        </ul>
+      </div>
+    }
   </mat-card-content>
 
   <mat-card-actions>

@@ -1,14 +1,330 @@
 <div class="challenge-list-container">
-  <h3 class="section-title">{{ title }}</h3>
-  <div class="cards">
-    @for (challenge of challenges; track challenge.id) {
-      <div class="card-wrapper">
-        <ng-coding-challenges-challenge-card [challenge]="challenge" />
+  <!-- Header Section -->
+  <div class="header-section">
+    <h3 class="section-title">{{ title() }}</h3>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <span class="stat-item">
+        <mat-icon>code</mat-icon>
+        {{ totalChallenges() }} Total Challenges
+      </span>
+      @if (hasActiveFilters()) {
+        <span class="stat-item filtered">
+          <mat-icon>filter_list</mat-icon>
+          {{ filteredCount() }} Results
+        </span>
+      }
+      @if (showProgress()) {
+        <span class="stat-item progress">
+          <mat-icon>trending_up</mat-icon>
+          {{ getCompletedCount() }} Completed
+        </span>
+      }
+    </div>
+  </div>
+
+  <!-- View Controls -->
+  <div class="view-controls">
+    <div class="view-mode-selector">
+      <span class="view-label">View:</span>
+      <div class="view-buttons">
+        <button
+          mat-icon-button
+          [class.active]="viewMode() === 'cards'"
+          (click)="onViewModeChange('cards')"
+          matTooltip="Card View"
+        >
+          <mat-icon>view_module</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [class.active]="viewMode() === 'list'"
+          (click)="onViewModeChange('list')"
+          matTooltip="List View"
+        >
+          <mat-icon>view_list</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [class.active]="viewMode() === 'grid'"
+          (click)="onViewModeChange('grid')"
+          matTooltip="Grid View"
+        >
+          <mat-icon>grid_view</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [class.active]="viewMode() === 'timeline'"
+          (click)="onViewModeChange('timeline')"
+          matTooltip="Timeline View"
+        >
+          <mat-icon>timeline</mat-icon>
+        </button>
       </div>
-    } @empty {
-      <div class="no-challenges">
-        <p>No challenges available at the moment.</p>
+    </div>
+
+    <div class="display-options">
+      <button
+        mat-button
+        [class.active]="showCompleted()"
+        (click)="toggleShowCompleted()"
+        class="toggle-button"
+      >
+        <mat-icon>{{ showCompleted() ? 'visibility' : 'visibility_off' }}</mat-icon>
+        Show Completed
+      </button>
+      <button
+        mat-button
+        [class.active]="showProgress()"
+        (click)="toggleShowProgress()"
+        class="toggle-button"
+      >
+        <mat-icon>{{ showProgress() ? 'trending_up' : 'trending_down' }}</mat-icon>
+        Show Progress
+      </button>
+    </div>
+  </div>
+
+  <!-- Filters Section -->
+  @if (showFilters()) {
+    <div class="filters-section">
+      <div class="filters-row">
+        <!-- Search Bar -->
+        @if (showSearch()) {
+          <mat-form-field class="search-field" appearance="outline">
+            <mat-label>Search challenges...</mat-label>
+            <input
+              matInput
+              type="text"
+              [value]="searchQuery()"
+              (input)="onSearchChange($any($event.target).value)"
+              placeholder="Search by title, description, or tags"
+            >
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        }
+
+        <!-- Difficulty Filter -->
+        <mat-form-field class="filter-field" appearance="outline">
+          <mat-label>Difficulty</mat-label>
+          <mat-select [value]="selectedDifficulty()" (selectionChange)="onDifficultyChange($event.value)">
+            @for (difficulty of availableDifficulties(); track difficulty) {
+              <mat-option [value]="difficulty">
+                @if (difficulty === 'all') {
+                  All Difficulties
+                } @else {
+                  <span class="difficulty-option">
+                    <span class="difficulty-badge" [class]="difficulty">{{ difficulty }}</span>
+                    {{ difficulty | titlecase }}
+                  </span>
+                }
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Category Filter -->
+        <mat-form-field class="filter-field" appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [value]="selectedCategory()" (selectionChange)="onCategoryChange($event.value)">
+            @for (category of availableCategories(); track category) {
+              <mat-option [value]="category">
+                @if (category === 'all') {
+                  All Categories
+                } @else {
+                  {{ category | titlecase }}
+                }
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Sort Options -->
+        <mat-form-field class="filter-field" appearance="outline">
+          <mat-label>Sort By</mat-label>
+          <mat-select [value]="sortBy()" (selectionChange)="onSortChange($event.value)">
+            <mat-option value="title">Title</mat-option>
+            <mat-option value="difficulty">Difficulty</mat-option>
+            <mat-option value="estimatedTime">Time</mat-option>
+            <mat-option value="id">Order</mat-option>
+          </mat-select>
+          <button
+            matSuffix
+            mat-icon-button
+            (click)="onSortChange(sortBy())"
+            [matTooltip]="'Toggle sort order'"
+          >
+            <mat-icon>{{ sortOrder() === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <!-- Tags Filter -->
+      @if (availableTags().length > 0) {
+        <div class="tags-section">
+          <h4 class="tags-title">Filter by Tags:</h4>
+          <div class="tags-container">
+            @for (tag of availableTags(); track tag) {
+              <mat-chip
+                [color]="selectedTags().includes(tag) ? 'primary' : 'default'"
+                (click)="onTagToggle(tag)"
+                class="filter-chip"
+                [matTooltip]="'Click to toggle filter'"
+              >
+                {{ tag }}
+              </mat-chip>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Clear Filters -->
+      @if (hasActiveFilters()) {
+        <div class="clear-filters">
+          <button
+            mat-button
+            color="warn"
+            (click)="clearFilters()"
+            class="clear-button"
+          >
+            <mat-icon>clear_all</mat-icon>
+            Clear All Filters
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Progress Overview -->
+  @if (showProgress()) {
+    <div class="progress-overview">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="getProgressPercentage()"></div>
+      </div>
+      <div class="progress-stats">
+        <span>{{ getCompletedCount() }} of {{ totalChallenges() }} completed</span>
+        <span>{{ getProgressPercentage() }}%</span>
+      </div>
+    </div>
+  }
+
+  <!-- Challenges Display -->
+  <div class="challenges-display" [class]="'view-' + viewMode()">
+    @if (viewMode() === 'cards') {
+      <!-- Cards View -->
+      <div class="cards">
+        @for (challenge of filteredChallenges(); track challenge.id) {
+          <div class="card-wrapper">
+            <ng-coding-challenges-challenge-card [challenge]="challenge" />
+          </div>
+        } @empty {
+          <div class="no-challenges">
+            <mat-icon class="no-results-icon">search_off</mat-icon>
+            <h3>No challenges found</h3>
+            @if (hasActiveFilters()) {
+              <p>Try adjusting your filters or search terms.</p>
+              <button
+                mat-button
+                color="primary"
+                (click)="clearFilters()"
+                class="clear-and-show-all"
+              >
+                <mat-icon>refresh</mat-icon>
+                Show All Challenges
+              </button>
+            } @else {
+              <p>No challenges are currently available.</p>
+            }
+          </div>
+        }
+      </div>
+    } @else if (viewMode() === 'list') {
+      <!-- List View -->
+      <div class="list-view">
+        @for (challenge of filteredChallenges(); track challenge.id) {
+          <div class="list-item">
+            <div class="item-header">
+              <div class="item-title">
+                <h4>{{ challenge.title }}</h4>
+                @if (challenge.isFeatured) {
+                  <span class="new-badge">New</span>
+                }
+              </div>
+              <div class="item-actions">
+                <button mat-icon-button (click)="openURL(challenge.gitHub, 'github')" [disabled]="!challenge.gitHub">
+                  <mat-icon>code</mat-icon>
+                </button>
+                <a mat-icon-button [routerLink]="[challenge.link]">
+                  <mat-icon>play_arrow</mat-icon>
+                </a>
+              </div>
+            </div>
+            <p class="item-description">{{ challenge.description }}</p>
+            <div class="item-metadata">
+              <span class="difficulty-badge" [class]="challenge.difficulty">{{ challenge.difficulty }}</span>
+              <span class="category">{{ challenge.category | titlecase }}</span>
+              <span class="time">{{ challenge.estimatedTime }} min</span>
+              @if (challenge.tags && challenge.tags.length > 0) {
+                <div class="tags">
+                  @for (tag of challenge.tags; track tag) {
+                    <span class="tag">{{ tag }}</span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    } @else if (viewMode() === 'grid') {
+      <!-- Grid View (Compact) -->
+      <div class="grid-view">
+        @for (challenge of filteredChallenges(); track challenge.id) {
+          <div class="grid-item">
+            <div class="grid-header">
+              <h4>{{ challenge.title }}</h4>
+              @if (challenge.isFeatured) {
+                <span class="new-badge">New</span>
+              }
+            </div>
+            <div class="grid-content">
+              <span class="difficulty-badge" [class]="challenge.difficulty">{{ challenge.difficulty }}</span>
+              <span class="time">{{ challenge.estimatedTime }} min</span>
+            </div>
+            <div class="grid-actions">
+              <a mat-button [routerLink]="[challenge.link]">Start</a>
+            </div>
+          </div>
+        }
+      </div>
+    } @else if (viewMode() === 'timeline') {
+      <!-- Timeline View -->
+      <div class="timeline-view">
+        @for (challenge of filteredChallenges(); track challenge.id) {
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <mat-icon>{{ challenge.isCompleted ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </div>
+            <div class="timeline-content">
+              <h4>{{ challenge.title }}</h4>
+              <p>{{ challenge.description }}</p>
+              <div class="timeline-metadata">
+                <span class="difficulty-badge" [class]="challenge.difficulty">{{ challenge.difficulty }}</span>
+                <span class="time">{{ challenge.estimatedTime }} min</span>
+              </div>
+            </div>
+          </div>
+        }
       </div>
     }
   </div>
+
+  <!-- Load More Section (for future pagination) -->
+  @if (filteredChallenges().length > 0 && filteredChallenges().length < totalChallenges()) {
+    <div class="load-more-section">
+      <p class="results-info">
+        Showing {{ filteredCount() }} of {{ totalChallenges() }} challenges
+      </p>
+    </div>
+  }
 </div>

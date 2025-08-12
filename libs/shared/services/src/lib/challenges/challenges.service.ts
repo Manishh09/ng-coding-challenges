@@ -13,7 +13,15 @@ export class ChallengesService {
       link: "/challenges/fetch-products",
       requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-REQUIREMENT.md`,
       solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-SOLUTION_GUIDE.md`,
-      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-01-product-list`
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-01-product-list`,
+      difficulty: 'beginner',
+      category: 'http',
+      estimatedTime: 30,
+      tags: ['HttpClient', 'RxJS', 'Observables', 'Async Pipe'],
+      isCompleted: false,
+      isFeatured: true,
+      lastUpdated: new Date('2024-01-15'),
+      prerequisites: ['Basic Angular knowledge', 'TypeScript fundamentals']
     },
     {
       id: 2,
@@ -22,7 +30,15 @@ export class ChallengesService {
       link: "/challenges/handle-parallel-apis",
       requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-REQUIREMENT.md`,
       solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-SOLUTION_GUIDE.md`,
-      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-02-parallel-apis`
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-02-parallel-apis`,
+      difficulty: 'intermediate',
+      category: 'http',
+      estimatedTime: 45,
+      tags: ['forkJoin', 'Parallel APIs', 'Dashboard', 'Error Handling'],
+      isCompleted: false,
+      isFeatured: true,
+      lastUpdated: new Date('2024-01-20'),
+      prerequisites: ['Challenge-01 completion', 'RxJS basics', 'Promise handling']
     },
     {
       id: 3,
@@ -31,7 +47,15 @@ export class ChallengesService {
       link: "/challenges/client-side-search",
       requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-REQUIREMENT.md`,
       solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-SOLUTION_GUIDE.md`,
-      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-03-client-side-search`
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-03-client-side-search`,
+      difficulty: 'intermediate',
+      category: 'forms',
+      estimatedTime: 40,
+      tags: ['Reactive Forms', 'Search', 'Filtering', 'Client-side'],
+      isCompleted: false,
+      isFeatured: false,
+      lastUpdated: new Date('2024-01-25'),
+      prerequisites: ['Reactive Forms basics', 'RxJS operators', 'Array methods']
     },
     {
       id: 4,
@@ -40,32 +64,16 @@ export class ChallengesService {
       link: "/challenges/server-side-search",
       requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-REQUIREMENT.md`,
       solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-SOLUTION_GUIDE.md`,
-      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-04-server-side-search`
-    },
-    // {
-    //   id: 3,
-    //   title: "Challenge 03: Form Validation",
-    //   description: "Create complex forms with dynamic validation using Angular's Reactive Forms.",
-    //   link: "/forms",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // },
-    // {
-    //   id: 4,
-    //   title: "Challenge 04: Component Communication",
-    //   description: "Implement parent-child and sibling component communication using various Angular patterns.",
-    //   link: "/components",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // },
-    // {
-    //   id: 5,
-    //   title: "Challenge 05: Routing & Navigation",
-    //   description: "Build a multi-level navigation system with route guards and lazy loading.",
-    //   link: "/routing",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // }
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-04-server-side-search`,
+      difficulty: 'advanced',
+      category: 'http',
+      estimatedTime: 60,
+      tags: ['Server-side Search', 'Debouncing', 'API Integration', 'Performance'],
+      isCompleted: false,
+      isFeatured: false,
+      lastUpdated: new Date('2024-01-30'),
+      prerequisites: ['Challenge-03 completion', 'HTTP interceptors', 'Performance optimization']
+    }
   ];
 
   getChallenges(): Challenge[] {

@@ -1,0 +1,97 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Use Modern Angular syntax
+
+## Use Modern Signal Syntax
+
+Always use signal based syntax for the following cases when creating new components or directives.
+
+- Signal based Inputs. For both components and directives, when you need to create an input use the signal-based inputs as follows. Avoid using Decorator based Inputs
+
+`mySignal = input<string>('default');`
+
+- If you want to use a View Child or View Children query in a component - use the signal based alternative as follows:
+
+```ts
+divElRequired = viewChild.required<ElementRef>("el");
+divEls = viewChildren<ElementRef>("el");
+```
+
+- For all state in components and directives, use a signal instead of a class property. For example:
+
+`counter = signal<number>(0);`
+
+- For derived state from an existing signal, use computeds as follows.
+
+`doubleCounter = computed(() => this.counter() * 2);`
+
+- Use linkedSignal for writable signals derived from input signals.
+If a writable signal's initial value comes from an input signal (e.g., for form fields), use linkedSignal to keep it in sync with the input while allowing local edits.
+
+`writableInputSignal = linkedSignal(() => this.inputSignal()) `
+
+- Use signal effect rarely. DONT use signal effect for updating other signals. This is an anti pattern. If you want to update a signal based on the value of another signal (e.g. input signal in a component), make the dependent signal as a linkedSignal as follows.
+
+`mySignal = linkedSignal(() => this.anotherSignal()) `
+
+- Use the resource API for when you want to get an external resource e.g. from an API call. Give the parameter to be sent in the request of the resource as a signal like this to make it reactive.
+
+```ts
+import {resource, Signal} from '@angular/core';
+const userId: Signal<string> = getUserId();
+const userResource = resource({
+  // Define a reactive request computation.
+  // The request value recomputes whenever any read signals change.
+  request: () => ({id: userId()}),
+  // Define an async loader that retrieves data.
+  // The resource calls this function every time the `request` value changes.
+  loader: ({request}) => fetchUser(request),
+});
+// Create a computed signal based on the result of the resource's loader function.
+const firstName = computed(() => userResource.value().firstName); 
+```
+
+- For Angular 19.2 and above, use the httpResource API for HttpClient requests. Use this particularly when you want the http client interceptor functions to run on each API call.
+
+```ts
+import { httpResource } from "@angular/common/http";
+
+httpUsers = httpResource<User[]>(() => `${API_URL}/search?q=${this.query()}`);
+```
+
+## Use Modern Output syntax
+
+- When outputs are needed for a component, use the `output()` function instead of the `@Output()` decorator. Example:
+
+```ts
+
+buttonClicked = output();
+
+clickHandler() {
+  this.buttonClicked.emit();
+}
+
+```
+
+## Use Modern Dependency Injection Syntax
+
+- Whenever you have to inject a dependency using Angular DI system, use the `inject` function instead of constructor based injection.This will apply to injecting services and tokens in components, services and directives.
+
+## Use Modern Control Flow Syntax
+
+- Instead of *ngIf structural directive for conditional rendering in templates, use @if control flow.
+- Instead of *ngFor structural directive for looping in templates, use @for control flow
+
+## Use standalone components
+
+- Always use standalone components. Avoid using NgModules.
+- For Angular 19 and later, don't add the standalone flag in Component Decorator meta data, because it is true by default.
+
+## Modern Routing with Lazy Loading
+
+- Always use loadComponent for lazy loading standalone components or groups of component routes
+
+- For accessing route parameter in component, use withComponentInputBinding function with provideRouter in the app.config. Then you can use the same name parameter in the components as an input signal

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { TitleCasePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +16,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   standalone: true,
   imports: [
     RouterModule,
+    TitleCasePipe,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
