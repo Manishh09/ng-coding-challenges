@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 html, body { height: 100%; }
-body { margin: 0; background: var(--background-primary); color: var(--text-primary); }
+body { margin: 0; background: var(--background-primary); color: var(--text-primary); padding-top: 64px; }
 
 /* Ensure app-root takes full height */
 app-root {
@@ -44,8 +44,8 @@ app-root,
   background-color: var(--surface-secondary) !important;
   color: var(--text-primary) !important;
   font-size: 14px;
-  border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-md);
+  border: 1px solid var(--vivid-pink) !important;
+  border-radius: 5px;
   box-shadow: var(--shadow-lg);
   font-family: var(--font-family-primary);
 }

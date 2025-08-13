@@ -1,8 +1,10 @@
 // Header styles
 .header-toolbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 1100;
   background: var(--surface-secondary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -135,6 +137,13 @@ ng-coding-challenges-theme-toggle {
   margin-right: 1px;
   font-weight: 700;
 }
+
+// Github logo styling
+.github-logo-link { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; background: transparent; border: none; border-radius: var(--border-radius-md); box-shadow: none; text-decoration: none; }
+.github-svg { width: 20px; height: 20px; fill: var(--text-primary); display: block; }
+body.dark-mode .github-svg { fill: var(--text-primary); }
+
+@media (max-width: 768px) { .github-logo-link { width: 32px; height: 32px; } .github-svg { width: 18px; height: 18px; } }
 
 // Animation for gradient text
 @keyframes gradientMove {

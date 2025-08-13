@@ -55,19 +55,19 @@
 }
 
 // Dark mode: only colors get overridden under body class
-dark-mode {
+body.dark-mode {
   @include dark.dark-theme-vars();
   @include dark.dark-material-theme();
 }
 
 // Fallback to system preference for first paint if no class
 @media (prefers-color-scheme: dark) {
-  body:not(.dark-mode):not(dark-mode) {
+  body:not(.dark-mode) {
     @include dark.dark-theme-vars();
   }
 }
 @media (prefers-color-scheme: light) {
-  body:not(.dark-mode):not(dark-mode) {
+  body:not(.dark-mode) {
     @include light.light-theme-vars();
   }
 }
