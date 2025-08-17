@@ -1,91 +1,64 @@
 <footer class="footer" role="contentinfo" aria-label="Site footer">
   <div class="footer-content">
     <!-- Brand Section -->
-    <div class="footer-section brand-section">
+    <div class="brand-section">
       <div class="footer-logo">
         <mat-icon class="footer-logo-icon" aria-hidden="true">code</mat-icon>
-        <span class="footer-logo-text">{{ description() }}</span>
+        <span class="footer-logo-text">{{ description }}</span>
       </div>
-      <!-- <p class="footer-description">
-        {{ description() }}
-      </p> -->
+
       <p class="footer-tagline">
-         Hands-on Angular challenges to master key concepts and crack your next Angular interview.
+        Hands-on Angular challenges to master key concepts and crack your next Angular interview.
       </p>
-      <!-- Newsletter subscription form could be added here -->
-      @if (showNewsletter()) {
-      <div class="newsletter-section">
-        <h3 class="footer-title">Stay Updated</h3>
-        <div class="newsletter-form">
-          <!-- 
-            Content projection slot for newsletter form
-            Expected structure: 
-            <form slot="newsletter" class="newsletter-form">
-              (Email input and submit button)
-            </form>
-          -->
-          <ng-content select="[slot=newsletter]"></ng-content>
-        </div>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="quick-links-section">
+      <h3 class="section-title">Quick Links</h3>
+      <div class="footer-links">
+        @for (link of quickLinks(); track link.text) {
+
+            @if (link.external) {
+              <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
+                <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+                <span>{{ link.text }}</span>
+              </a>
+            } @else {
+            <a (click)="onLinkClick(link)" class="footer-link">
+              <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+              <span>{{ link.text }}</span>
+            </a>
+          }
+        }
       </div>
-      }
     </div>
 
-    <!-- Links Sections -->
-    <div class="footer-section">
-      <h3 class="footer-title">Quick Links</h3>
-      <nav class="footer-nav" aria-label="Quick links navigation">
-        <!-- 
-          Content projection slot for quick links
-          Expected structure: 
-          <div slot="quick-links" class="footer-links-grid">
-            <a class="footer-link">
-              <mat-icon aria-hidden="true">icon_name</mat-icon>
-              <span>Link Text</span>
-            </a>
-            ...more links...
-          </div>
-        -->
-        <ng-content select="[slot=quick-links]"></ng-content>
-      </nav>
-    </div>
-
-    <div class="footer-section">
-      <h3 class="footer-title">Community</h3>
-      <div class="social-links" aria-label="Social media links">
-        <!-- 
-          Content projection slot for social links
-          Expected structure: 
-          <div slot="social-links" class="social-links-grid">
-            <a class="social-link linkedin|github|etc">
-              <mat-icon aria-hidden="true">icon_name</mat-icon>
-              <span>Link Text</span>
-            </a>
-            ...more links...
-          </div>
-        -->
-        <ng-content select="[slot=social-links]"></ng-content>
+    <!-- Community Links -->
+    <div class="community-section">
+      <h3 class="section-title">Community</h3>
+      <div class="footer-links">
+        @for (link of socialLinks(); track link.text) {
+          <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link {{ link.cssClass }}"
+            [attr.aria-label]="link.text">
+            <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+            <span>{{ link.text }}</span>
+          </a>
+        }
       </div>
     </div>
   </div>
 
   <!-- Footer Bottom -->
   <div class="footer-bottom">
-    <div class="footer-content">
+    <div class="footer-bottom-content">
       <p class="copyright">
         © {{ currentYear() }} {{ appName() }}. Built with <span class="heart-icon" aria-hidden="true">❤</span> and
-        Angular {{ angularVersion() }}.
+        {{ angularVersion }}
       </p>
-      <div class="footer-bottom-links">
-        <!-- 
-          Content projection slot for legal links
-          Expected structure: 
-          <div slot="legal-links" class="legal-links">
-            <a href="#" class="legal-link">Terms</a>
-            <a href="#" class="legal-link">Privacy</a>
-            ...more links...
-          </div>
-        -->
-        <ng-content select="[slot=legal-links]"></ng-content>
+      <div class="legal-links">
+        @for (link of legalLinks(); track link.text) {
+          <a [href]="link.url" class="footer-link">{{ link.text }}</a>
+        }
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ app-root,
 // MATERIAL DESIGN OVERRIDES
 // ============================================================================
 
-/* Custom tooltip styles with Angular.dev theme support */
+/* Custom tooltip styles with angular.dev theme support */
 .mat-mdc-tooltip {
   background-color: var(--surface-secondary) !important;
   color: var(--text-primary) !important;
@@ -50,7 +50,7 @@ app-root,
   font-family: var(--font-family-primary);
 }
 
-/* Material button overrides for Angular.dev styling */
+/* Material button overrides for angular.dev styling */
 .mat-mdc-raised-button.mat-primary {
   background: var(--gradient-primary) !important;
   border: none !important;
@@ -236,21 +236,6 @@ app-root,
         color: var(--interactive-primary);
       }
     }
-  }
-}
-
-/* Footer styling */
-.footer {
-  background: var(--surface-tertiary);
-  border-top: 1px solid var(--border-primary);
-  padding: var(--spacing-xl) var(--spacing-lg);
-  margin-top: auto;
-
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    color: var(--text-secondary);
   }
 }
 

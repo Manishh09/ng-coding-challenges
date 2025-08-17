@@ -184,25 +184,17 @@ export class AppComponent implements OnInit, OnDestroy {
     this.#router.navigateByUrl(route);
   }
 
-  // Signals for footer links
-  protected readonly quickLinks = signal<FooterLink[]>([
-    { text: 'Home', icon: 'home', url: '/challenges', action: () => { this.scrollToSection('header-section'); } },
-    { text: 'Challenges', icon: 'code', action: () => { this.showChallenges.set(true); this.scrollToSection('challenges-section'); } },
-    // { text: 'Roadmap', icon: 'map', url: '/roadmap' },
-    { text: 'GitHub', icon: 'code_off', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true },
-    { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md', external: true }
-  ]);
-
-  protected readonly socialLinks = signal<FooterLink[]>([
-    { text: 'Follow on LinkedIn', icon: 'person', url: 'https://www.linkedin.com/in/manishboge', external: true, cssClass: 'linkedin' },
-    { text: 'Star on GitHub', icon: 'star', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true, cssClass: 'github' }
-  ]);
-
-  protected readonly legalLinks = signal<FooterLink[]>([
-    { text: 'Terms', url: '#' },
-    { text: 'Privacy', url: '#' },
-    { text: 'Cookie Policy', url: '#' }
-  ]);
+  // Handle footer link clicks
+  onFooterLinkClick(link: FooterLink) {
+    if (link.section) {
+      this.showChallenges.set(link.section === 'challenges' ||  this.showChallenges());
+      this.scrollToSection(link.section === 'home' ? 'header-section' : link.section === 'challenges' ? 'challenges-section' : 'home-section');
+      return;
+    }
+    if (link.url) {
+      this.navigateToRoute(link.url);
+    }
+  }
 
   // clear subscriptions on destroy
   ngOnDestroy(): void {

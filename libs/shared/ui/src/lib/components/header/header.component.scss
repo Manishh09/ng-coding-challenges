@@ -14,7 +14,7 @@
   width: 100%;
   overflow-x: hidden;
   transition: background var(--animation-duration-standard) var(--animation-easing),
-              box-shadow var(--animation-duration-standard) var(--animation-easing);
+    box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
 
 // Container for header content
@@ -45,7 +45,7 @@
   color: inherit;
   text-decoration: none;
   transition: transform var(--animation-duration-fast) var(--animation-easing),
-              opacity var(--animation-duration-fast) var(--animation-easing);
+    opacity var(--animation-duration-fast) var(--animation-easing);
 
   &:hover {
     opacity: 0.95;
@@ -65,18 +65,47 @@
   width: auto;
   vertical-align: middle;
   transition: transform 0.3s var(--animation-easing),
-              filter 0.3s var(--animation-easing);
+    filter 0.3s var(--animation-easing);
   filter: var(--logo-filter);
   mix-blend-mode: var(--logo-blend-mode);
   image-rendering: -webkit-optimize-contrast;
 }
 
 // Gradient masked logo implementation
-.logo-image-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; }
-.angular-logo-gradient { width: 100%; height: 100%; display: inline-block; background: var(--brand-gradient-primary); -webkit-mask: var(--logo-src) center/contain no-repeat; mask: var(--logo-src) center/contain no-repeat; }
+.logo-image-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.angular-logo-gradient {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: var(--brand-gradient-primary);
+  -webkit-mask: var(--logo-src) center/contain no-repeat;
+  mask: var(--logo-src) center/contain no-repeat;
+}
+
 // Fallback raster image (hidden if mask is supported)
-.angular-logo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: var(--logo-filter); mix-blend-mode: var(--logo-blend-mode); }
-@supports (mask: url(#mask)) or (-webkit-mask: url(#mask)) { .angular-logo-img { display: none; } }
+.angular-logo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: var(--logo-filter);
+  mix-blend-mode: var(--logo-blend-mode);
+}
+
+@supports (mask: url(#mask)) or (-webkit-mask: url(#mask)) {
+  .angular-logo-img {
+    display: none;
+  }
+}
 
 // Navigation section
 .nav-section {
@@ -120,7 +149,7 @@ ng-coding-challenges-theme-toggle {
 
 // Style the "ng" prefix
 .ng-prefix {
-  font-weight: 600;
+  font-weight: 400 !important;
   opacity: 0.9;
   margin-right: 1px;
 }
@@ -139,20 +168,53 @@ ng-coding-challenges-theme-toggle {
 }
 
 // Github logo styling
-.github-logo-link { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; background: transparent; border: none; border-radius: var(--border-radius-md); box-shadow: none; text-decoration: none; }
-.github-svg { width: 20px; height: 20px; fill: var(--text-primary); display: block; }
-body.dark-mode .github-svg { fill: var(--text-primary); }
+.github-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: none;
+  text-decoration: none;
+}
 
-@media (max-width: 768px) { .github-logo-link { width: 32px; height: 32px; } .github-svg { width: 18px; height: 18px; } }
+.github-svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-primary);
+  display: block;
+}
+
+body.dark-mode .github-svg {
+  fill: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .github-logo-link {
+    width: 32px;
+    height: 32px;
+  }
+
+  .github-svg {
+    width: 18px;
+    height: 18px;
+  }
+}
 
 // Animation for gradient text
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -189,7 +251,10 @@ body.dark-mode .github-svg { fill: var(--text-primary); }
     margin-right: 0;
   }
 
-  .logo-image-wrap { width: 32px; height: 32px; }
+  .logo-image-wrap {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 // Hide mobile elements on larger screens

@@ -43,6 +43,8 @@
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
   --border-radius-xl: 16px;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
 
   // Typography vars
   @include typo.typography-css-vars();
@@ -79,7 +81,7 @@ body.dark-mode {
 // CUSTOM COMPONENT STYLES
 // ============================================================================
 
-// Angular.dev inspired card styles
+// angular.dev inspired card styles
 .angular-dev-card {
   background: var(--surface-secondary);
   border: 1px solid var(--border-primary);
@@ -97,7 +99,7 @@ body.dark-mode {
   }
 }
 
-// Angular.dev inspired button styles
+// angular.dev inspired button styles
 .angular-dev-button {
   background: var(--gradient-primary);
   border: none;
@@ -122,7 +124,7 @@ body.dark-mode {
   }
 }
 
-// Angular.dev inspired surface styles
+// angular.dev inspired surface styles
 .angular-dev-surface {
   background: var(--surface-primary);
   color: var(--text-primary);
@@ -196,7 +198,6 @@ $breakpoints: (
 // ============================================================================
 // ANIMATIONS
 // ============================================================================
-
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -1,4 +1,4 @@
-# Angular.dev Theme System
+# angular.dev Theme System
 
 This document describes the comprehensive theming system that replicates angular.dev's visual design using CSS variables and Angular Material theming.
 
@@ -162,7 +162,7 @@ Use the provided utility classes for consistent styling:
 ```
 
 ### Custom Component Styling
-Use the Angular.dev inspired component classes:
+Use the angular.dev inspired component classes:
 
 ```html
 <!-- Card styling -->
