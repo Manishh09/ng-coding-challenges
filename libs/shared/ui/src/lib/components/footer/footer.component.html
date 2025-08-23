@@ -1,4 +1,6 @@
 <footer class="footer" role="contentinfo" aria-label="Site footer">
+
+  @if(showFooterLinks()) {
   <div class="footer-content">
     <!-- Brand Section -->
     <div class="brand-section">
@@ -18,17 +20,17 @@
       <div class="footer-links">
         @for (link of quickLinks(); track link.text) {
 
-            @if (link.external) {
-              <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
-                <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-                <span>{{ link.text }}</span>
-              </a>
-            } @else {
-            <a (click)="onLinkClick(link)" class="footer-link">
-              <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-              <span>{{ link.text }}</span>
-            </a>
-          }
+        @if (link.external) {
+        <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
+          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+          <span>{{ link.text }}</span>
+        </a>
+        } @else {
+        <a (click)="onLinkClick(link)" class="footer-link">
+          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+          <span>{{ link.text }}</span>
+        </a>
+        }
         }
       </div>
     </div>
@@ -38,15 +40,16 @@
       <h3 class="section-title">Community</h3>
       <div class="footer-links">
         @for (link of socialLinks(); track link.text) {
-          <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link {{ link.cssClass }}"
-            [attr.aria-label]="link.text">
-            <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-            <span>{{ link.text }}</span>
-          </a>
+        <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link {{ link.cssClass }}"
+          [attr.aria-label]="link.text">
+          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+          <span>{{ link.text }}</span>
+        </a>
         }
       </div>
     </div>
   </div>
+  }
 
   <!-- Footer Bottom -->
   <div class="footer-bottom">
@@ -57,7 +60,7 @@
       </p>
       <div class="legal-links">
         @for (link of legalLinks(); track link.text) {
-          <a [href]="link.url" class="footer-link">{{ link.text }}</a>
+        <a [href]="link.url" class="footer-link">{{ link.text }}</a>
         }
       </div>
     </div>

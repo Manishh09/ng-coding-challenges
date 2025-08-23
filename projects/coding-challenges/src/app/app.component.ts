@@ -4,7 +4,7 @@ import {
   ChallengeListComponent,
   FooterComponent,
   HeaderComponent,
-  HeroSectionComponent,
+  LandingPageComponent,
   FooterLink
 } from '@ng-coding-challenges/shared/ui';
 import { Subject, timer } from 'rxjs';
@@ -22,14 +22,13 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    ChallengeListComponent,
-    HeroSectionComponent,
+    LandingPageComponent,
     MatIconModule
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'ngQuest';
-  logo = 'logo.png';  // Path to the favicon in the public folder
+  logo = '/application-logo.png';  // Path to the favicon in the public folder
   githubLogo = 'github-logo.png';
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
@@ -44,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   protected showHeader = signal(true);
   protected showHeroSection = signal(true);
   protected showFooter = signal(true);
+  protected showFooterLinks = signal(true);
   // Hero section description paragraphs
   protected heroParagraphs = [
     'Sharpen your skills and get ready with practical Angular challenges focused on real-world interview scenarios.',
@@ -77,10 +77,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
     // Listen for custom events to show challenges
-     window.addEventListener('showChallenges', this.#showChallengesHandler);
+    window.addEventListener('showChallenges', this.#showChallengesHandler);
   }
 
-   // Event handler for showChallenges custom event
+  // Event handler for showChallenges custom event
   #showChallengesHandler = ((e: CustomEvent) => {
     this.showChallenges.set(e.detail);
     if (e.detail) {
@@ -89,6 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }) as EventListener;
 
   #updateLayoutOnRouteChange() {
+    this.showHeroSection.set(false);
     this.#router.events
       .pipe(takeUntil(this.#destroy$), filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe({
@@ -114,22 +115,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (isChallengePage) {
       // For challenge pages, show layout with header and footer but hide hero section
-      this.showLayout.set(true);
-      this.showHeader.set(true);
       this.showHeroSection.set(false);
       this.showChallenges.set(false);
-      this.showFooter.set(false);
-    } else {
-      // For landing page, show everything
-      this.showLayout.set(true);
-      this.showHeader.set(true);
-      this.showHeroSection.set(true);
-      this.showFooter.set(true);
-    }
+      this.showFooterLinks.set(false);
 
-    // Auto-show challenges list when on challenges landing page
-    if (url === '/challenges' || url === '/') {
-      // this.showChallenges.set(true);
+    } else if (url === '/challenges') {
+      // For challenges list page
+      this.showHeroSection.set(false);
+      this.showChallenges.set(true);
+      this.showFooterLinks.set(false);
+
+    } else {
+      // For landing page (root path), show everything
+      this.showHeroSection.set(true);
+      this.showChallenges.set(false);
+      this.showFooterLinks.set(true);
     }
   }
 
@@ -187,12 +187,33 @@ export class AppComponent implements OnInit, OnDestroy {
   // Handle footer link clicks
   onFooterLinkClick(link: FooterLink) {
     if (link.section) {
-      this.showChallenges.set(link.section === 'challenges' ||  this.showChallenges());
-      this.scrollToSection(link.section === 'home' ? 'header-section' : link.section === 'challenges' ? 'challenges-section' : 'home-section');
+      if (link.section === 'challenges') {
+        this.navigateToRoute('/challenges');
+        return;
+      }
+
+      this.scrollToSection(link.section === 'home' ? 'header-section' : 'home-section');
       return;
     }
     if (link.url) {
       this.navigateToRoute(link.url);
+    }
+  }
+
+  // Handle landing page events
+  onStartPracticing(): void {
+    this.navigateToRoute('/challenges');
+  }
+
+  onExploreChallenges(): void {
+    this.navigateToRoute('/challenges');
+  }
+
+  onTryLatestChallenge(): void {
+    // Navigate to the latest challenge - for now, navigate to the first challenge
+    const latestChallenge = this.challenges[0];
+    if (latestChallenge?.link) {
+      this.navigateToRoute(latestChallenge.link);
     }
   }
 

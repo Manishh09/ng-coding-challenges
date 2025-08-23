@@ -1,57 +1,34 @@
-@if (showLayout()) {
-<div class="app-layout">
+ <div class="app-layout">
   <!-- Header -->
-   @if(showHeader()) {
-     <ng-coding-challenges-header
-      id="header-section"
-      [logoUrl]="logo"
-      [appName]="title"
-      [githubLogoUrl]="githubLogo"
-      [showMobileMenu]="false">
-    </ng-coding-challenges-header>
-   }
 
-  <!-- Hero Section -->
-   @if(showHeroSection()) {
-    <ng-coding-challenges-hero-section
-      id="hero-section"
-      [title]="heroTitle"
-      [description]="heroParagraphs"
-      [isExpanded]="showChallenges()"
-      [buttonText]="startButtonText"
-      [hideButtonText]="hideButtonText"
-      (toggleExpand)="toggleChallenges($event)">
-    </ng-coding-challenges-hero-section>
-   }
+  <ng-coding-challenges-header id="header-section" [logoUrl]="logo" [appName]="title" [githubLogoUrl]="githubLogo"
+    [showMobileMenu]="false">
+  </ng-coding-challenges-header>
 
-  <!-- Challenges List Section-->
-  @if (showChallenges()) {
-  <div id="challenges-section">
-    <ng-coding-challenges-challenge-list [challenges]="challenges" />
-  </div>
+
+  <!-- Landing Page Section - only shown on root path -->
+  @if(showHeroSection()) {
+  <ng-coding-challenges-landing-page id="landing-section" (startPracticing)="onStartPracticing()"
+    (exploreChallenges)="onExploreChallenges()" (tryLatestChallenge)="onTryLatestChallenge()">
+  </ng-coding-challenges-landing-page>
   }
+
+
 
   <!-- Challenge Content Section (when showing individual challenges) -->
-  @if (!showHeroSection() && !showChallenges()) {
-  <div class="challenge-content">
+  @if (!showHeroSection()) {
+  <main class="main-content">
     <router-outlet></router-outlet>
-  </div>
+  </main>
   }
 
-
-  <!-- Footer -->
-   @if(showFooter()) {
-
+  <!-- Footer - always visible -->
 
   <ng-coding-challenges-footer id="footer-section"
-  [appName]="title" (linkClicked)="onFooterLinkClick($event)" >
-
+  [appName]="title"
+  (linkClicked)="onFooterLinkClick($event)"
+  [showFooterLinks]="showFooterLinks()"
+  >
   </ng-coding-challenges-footer>
-}
+
 </div>
-} @else {
-<!-- Only Main Content (for specific routes) -->
-<main class="main-content">
-  <router-outlet></router-outlet>
-</main>
-}

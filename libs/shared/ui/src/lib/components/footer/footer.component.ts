@@ -23,6 +23,8 @@ export interface FooterLink {
 export class FooterComponent {
   appName = input<string>('');
 
+  showFooterLinks = input<boolean>(true);
+
   linkClicked = output<FooterLink>();
 
   description = 'Practice. Learn. Succeed';

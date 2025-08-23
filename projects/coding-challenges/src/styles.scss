@@ -169,7 +169,7 @@ app-root,
 /* Challenge card styling */
 .challenge-card {
   @extend .angular-dev-card;
-  padding: var(--spacing-lg);
+  //padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
 
   h3 {

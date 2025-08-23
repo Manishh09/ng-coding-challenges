@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgOptimizedImage } from "@angular/common";
 
 /**
  * Header component with responsive design
@@ -23,8 +24,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatMenuModule,
     ThemeToggleComponent,
-    MatTooltipModule
-  ],
+    MatTooltipModule,
+    NgOptimizedImage
+],
   standalone: true
 })
 export class HeaderComponent {

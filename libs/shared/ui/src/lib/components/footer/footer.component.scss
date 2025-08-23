@@ -5,7 +5,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: var(--spacing-sm);
+ // padding: var(--spacing-sm);
   color: var(--on-surface-color);
 
   &::before {
@@ -179,7 +179,7 @@
   border-top: 1px solid var(--outline-color);
   width: 100%;
   position: relative;
-  margin-top: var(--spacing-lg);
+ // margin-top: var(--spacing-lg);
 
   &::before {
     content: '';
