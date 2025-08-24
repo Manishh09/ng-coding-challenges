@@ -16,6 +16,8 @@ export class LandingPageComponent {
 
   // Input properties for dynamic content
   cardLogo = '/angular_gradient_logo.png';
+  logo = '/coding-window.webp';
+
 
   onStartPracticing(): void {
     this.startPracticing.emit();

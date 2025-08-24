@@ -121,10 +121,17 @@
 }
 
 .hero-illustration {
+
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+
+  .hero-logo {
+    border-radius: 16px;
+    filter: var(--logo-filter);
+    mix-blend-mode: var(--logo-blend-mode);
+  }
 }
 
 .code-window {
@@ -367,12 +374,10 @@
   left: 50%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 27, 141, 0.15) 0%,
-    rgba(147, 51, 234, 0.1) 30%,
-    transparent 70%
-  );
+  background: radial-gradient(circle at center,
+      rgba(255, 27, 141, 0.15) 0%,
+      rgba(147, 51, 234, 0.1) 30%,
+      transparent 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   animation: pulseSpotlight 4s ease-in-out infinite;
@@ -380,10 +385,13 @@
 }
 
 @keyframes pulseSpotlight {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.6;
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1.1);
     opacity: 0.8;

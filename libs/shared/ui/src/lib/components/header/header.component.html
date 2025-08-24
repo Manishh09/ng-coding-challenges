@@ -6,8 +6,8 @@
         <span class="logo-image-wrap">
           <span class="angular-logo-gradient" role="img" [attr.aria-label]="appName() + ' logo'"
             [style.--logo-src]="'url(' + logoUrl() + ')'"></span>
-          <img alt="Angular logo" loading="lazy" [ngSrc]="logoUrl()" [alt]="appName() + ' logo'"
-            [title]="appName() + ' logo'" class="angular-logo-img" width="64" height="64">
+          <img alt="Angular logo" [ngSrc]="logoUrl()" [alt]="appName() + ' logo'" width="64" height="42"  priority="high"
+            [title]="appName() + ' logo'" class="angular-logo-img">
         </span>
         <span class="logo-text"><span class="ng-prefix">ng</span>Quest</span>
       </a>
@@ -23,18 +23,19 @@
       <ng-coding-challenges-theme-toggle></ng-coding-challenges-theme-toggle>
 
       <a href="https://github.com/Manishh09/ng-coding-challenges" target="_blank" class="github-logo-link"
-         aria-label="Open GitHub repository">
+        aria-label="Open GitHub repository">
         <svg class="github-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M12 2C6.477 2 2 6.486 2 12.021c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.699-2.782.605-3.369-1.343-3.369-1.343-.455-1.16-1.11-1.47-1.11-1.47-.907-.62.069-.607.069-.607 1.003.071 1.531 1.03 1.531 1.03.892 1.532 2.341 1.089 2.91.833.091-.648.35-1.089.636-1.34-2.221-.253-4.555-1.113-4.555-4.95 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.27.098-2.647 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.91-1.296 2.748-1.026 2.748-1.026.546 1.377.202 2.394.1 2.647.64.7 1.028 1.595 1.028 2.688 0 3.846-2.338 4.695-4.566 4.944.359.31.678.92.678 1.854 0 1.337-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.02 10.02 0 0 0 22 12.02C22 6.486 17.523 2 12 2z"/>
+          <path
+            d="M12 2C6.477 2 2 6.486 2 12.021c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.699-2.782.605-3.369-1.343-3.369-1.343-.455-1.16-1.11-1.47-1.11-1.47-.907-.62.069-.607.069-.607 1.003.071 1.531 1.03 1.531 1.03.892 1.532 2.341 1.089 2.91.833.091-.648.35-1.089.636-1.34-2.221-.253-4.555-1.113-4.555-4.95 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.27.098-2.647 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.91-1.296 2.748-1.026 2.748-1.026.546 1.377.202 2.394.1 2.647.64.7 1.028 1.595 1.028 2.688 0 3.846-2.338 4.695-4.566 4.944.359.31.678.92.678 1.854 0 1.337-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.02 10.02 0 0 0 22 12.02C22 6.486 17.523 2 12 2z" />
         </svg>
       </a>
 
       <!-- Mobile Menu Button -->
       @if (showMobileMenu()) {
-        <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="mobile-menu-btn mobile-only"
-          aria-label="Open mobile menu">
-          <mat-icon>menu</mat-icon>
-        </button>
+      <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="mobile-menu-btn mobile-only"
+        aria-label="Open mobile menu">
+        <mat-icon>menu</mat-icon>
+      </button>
       }
 
       <!-- Custom Action Buttons -->

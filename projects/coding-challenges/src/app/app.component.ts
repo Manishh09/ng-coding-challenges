@@ -28,7 +28,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'ngQuest';
-  logo = '/application-logo.png';  // Path to the favicon in the public folder
+  logo = '/application-logo.webp';  // Path to the favicon in the public folder
   githubLogo = 'github-logo.png';
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
