@@ -21,3 +21,4 @@ export * from './lib/components/challenge-list/challenge-list.component';
 export * from './lib/components/loading-spinner/loading-spinner.component';
 export * from './lib/components/empty-state/empty-state.component';
 export * from './lib/components/theme-toggle/theme-toggle.component';
+export * from './lib/components/latest-challenge/latest-challenge.component';

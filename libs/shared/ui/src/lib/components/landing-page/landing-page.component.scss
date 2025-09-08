@@ -274,38 +274,12 @@
   }
 }
 
-.latest-challenge-card {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
+/* Styles moved to latest-challenge component */
+::ng-deep ng-coding-challenges-latest-challenge {
   margin: 40px auto 0;
+  display: block;
   max-width: 1000px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 3;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.challenge-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--brand-gradient-highlight);
-  color: var(--primary-color, #DD0031);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  border: 1px solid rgba(221, 0, 49, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.challenge-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
+  width: 100%;
 }
 
 .challenge-info {

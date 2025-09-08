@@ -41,28 +41,8 @@
     </div>
 
     <!-- Latest Challenge Card -->
-    <div class="latest-challenge-card">
-      <div class="challenge-badge">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M8 0L10.154 5.846L16 8L10.154 10.154L8 16L5.846 10.154L0 8L5.846 5.846L8 0Z" fill="#F97316"/>
-        </svg>
-        Latest Challenge
-      </div>
-      <div class="challenge-content">
-        <div class="challenge-info">
-          <h3 class="challenge-title">Build a Dynamic Table Component</h3>
-          <p class="challenge-description">Practice Angular standalone components and signals with this challenge.</p>
-        </div>
-        <button
-          class="try-now-btn"
-          (click)="onTryLatestChallenge()"
-          type="button">
-          Try Now
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="arrow-icon">
-            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-    </div>
+    <ng-coding-challenges-latest-challenge
+      (tryLatestChallenge)="onTryLatestChallenge()">
+    </ng-coding-challenges-latest-challenge>
   </section>
 </div>

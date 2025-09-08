@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import {
   ChallengeListComponent,
@@ -19,6 +20,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   styleUrl: './app.component.scss',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
