@@ -131,7 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
       // For landing page (root path), show everything
       this.showHeroSection.set(true);
       this.showChallenges.set(false);
-      this.showFooterLinks.set(true);
+      this.showFooterLinks.set(false);
     }
   }
 
@@ -213,7 +213,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onTryLatestChallenge(): void {
     // Navigate to the latest challenge - for now, navigate to the first challenge
-    const latestChallenge = this.challenges[0];
+    const latestChallenge = this.challenges.at(-1);
     if (latestChallenge?.link) {
       this.navigateToRoute(latestChallenge.link);
     }

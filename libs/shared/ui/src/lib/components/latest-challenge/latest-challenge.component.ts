@@ -2,12 +2,14 @@ import { Component, OnInit, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Challenge } from '@ng-coding-challenges/shared/models';
-import { ChallengesService } from '@ng-coding-challenges/shared/services';
+import { ChallengesService, NavigationService } from '@ng-coding-challenges/shared/services';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'ng-coding-challenges-latest-challenge',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLink],
+  imports: [CommonModule, RouterModule, RouterLink, MatIconModule, MatButtonModule],
   templateUrl: './latest-challenge.component.html',
   styleUrl: './latest-challenge.component.scss'
 })
@@ -17,6 +19,8 @@ export class LatestChallengeComponent implements OnInit {
 
   private readonly challengesService = inject(ChallengesService);
 
+  private readonly navigationService = inject(NavigationService);
+
   ngOnInit(): void {
     // Get all challenges and find the one with the highest ID (latest)
     const challenges = this.challengesService.getChallenges();
@@ -25,6 +29,10 @@ export class LatestChallengeComponent implements OnInit {
         return (prev.id > current.id) ? prev : current;
       });
     }
+  }
+
+  openURL(url: string): void {
+   this.navigationService.openExternalLink(url);
   }
 
   onTryLatestChallenge(): void {

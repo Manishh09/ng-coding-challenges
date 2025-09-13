@@ -1,51 +1,55 @@
-<app-challenge-nav></app-challenge-nav>
+<div class="challenege-container">
 
-<div class="client-search-container">
+  <app-challenge-nav></app-challenge-nav>
 
-  <!-- Header -->
-  <div class="header">
-    <h2>Client-Side User Search</h2>
-  </div>
+  <div class="client-search-container">
 
-  <!-- Search Input -->
-  <div class="search-container">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Search users</mat-label>
-      <input matInput [formControl]="searchControl" placeholder="Name" />
-    </mat-form-field>
-  </div>
+    <!-- Header -->
+    <div class="header">
+      <h2>Client-Side User Search</h2>
+    </div>
 
-  @if (loading) {
-<div>Loading...</div>
-}
+    <!-- Search Input -->
+    <div class="search-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Search users</mat-label>
+        <input matInput [formControl]="searchControl" placeholder="Search Users..e.g: Nic"  />
+      </mat-form-field>
+    </div>
 
-@if (error) {
-<div class="error-message">
-  <p>Error: {{ error }}</p>
-</div>
-}
-  <!-- User List -->
-  @if (filteredUsers$ | async; as filteredUsers) {
-  @if (filteredUsers.length > 0) {
-  <div class="user-list">
-    @for (user of filteredUsers; track user.id) {
-    <mat-card class="user-card">
-      <mat-card-title class="user-name">{{ user.name }}</mat-card-title>
-      <!-- Can be displayed if needed -->
-      <!-- <mat-card-content>
-                <p>Email: {{ user.email }}</p>
-                <p>Phone: {{ user.phone }}</p>
-                <p>Website: {{ user.website }}</p>
-              </mat-card-content> -->
-    </mat-card>
+    @if (loading) {
+    <div>Loading...</div>
     }
-  </div>
-  } @else {
+
+    @if (error) {
+    <div class="error-message">
+      <p>Error: {{ error }}</p>
+    </div>
+    }
+    <!-- User List -->
+    @if (filteredUsers$ | async; as filteredUsers) {
+    @if (filteredUsers.length > 0) {
+    <div class="user-list">
+      @for (user of filteredUsers; track user.id) {
+      <mat-card class="user-card">
+        <mat-card-title class="user-name">{{ user.name }}</mat-card-title>
+        <!-- Can be displayed if needed -->
+        <!-- <mat-card-content>
+                  <p>Email: {{ user.email }}</p>
+                  <p>Phone: {{ user.phone }}</p>
+                  <p>Website: {{ user.website }}</p>
+                </mat-card-content> -->
+      </mat-card>
+      }
+    </div>
+    } @else {
 
     @if(!error){
 
-      <p class="no-results">No users found.</p>
+    <p class="no-results">No users found.</p>
     }
-  }
-  }
+    }
+    }
+  </div>
+
 </div>

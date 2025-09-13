@@ -170,8 +170,7 @@ ng-coding-challenges-theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+
   padding: 0;
   background: transparent;
   border: none;
@@ -180,9 +179,16 @@ ng-coding-challenges-theme-toggle {
   text-decoration: none;
 }
 
-.github-svg {
+.github-svg, .linkedin-svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+  display: block;
+}
+
+.linkedin-svg {
   width: 20px;
-  height: 20px;
+  height:24px;
   fill: var(--text-primary);
   display: block;
 }
@@ -191,15 +197,16 @@ body.dark-mode .github-svg {
   fill: var(--text-primary);
 }
 
-@media (max-width: 768px) {
-  .github-logo-link {
-    width: 32px;
-    height: 32px;
-  }
+body.dark-mode .linkedin-svg {
+  fill: var(--text-primary);
+}
 
-  .github-svg {
-    width: 18px;
-    height: 18px;
+
+@media (max-width: 768px) {
+
+  .github-svg, .linkedin-svg {
+    width: 20px;
+    height: 24px;
   }
 }
 
