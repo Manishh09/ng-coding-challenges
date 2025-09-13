@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Signals to control visibility of specific layout components
   protected showHeader = signal(true);
-  protected showHeroSection = signal(true);
+  protected showLandingPage = signal(true);
   protected showFooter = signal(true);
   protected showFooterLinks = signal(true);
   // Hero section description paragraphs
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }) as EventListener;
 
   #updateLayoutOnRouteChange() {
-    this.showHeroSection.set(false);
+    this.showLandingPage.set(false);
     this.#router.events
       .pipe(takeUntil(this.#destroy$), filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe({
@@ -117,21 +117,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (isChallengePage) {
       // For challenge pages, show layout with header and footer but hide hero section
-      this.showHeroSection.set(false);
-      this.showChallenges.set(false);
+      this.showLandingPage.set(false);
+      // this.showChallenges.set(false);
       this.showFooterLinks.set(false);
+      this.showFooter.set(false);
 
     } else if (url === '/challenges') {
-      // For challenges list page
-      this.showHeroSection.set(false);
-      this.showChallenges.set(true);
-      this.showFooterLinks.set(false);
+      this.showLandingPage.set(false);
+      this.showFooter.set(false);
 
     } else {
       // For landing page (root path), show everything
-      this.showHeroSection.set(true);
-      this.showChallenges.set(false);
-      this.showFooterLinks.set(false);
+      this.showLandingPage.set(true);
+      this.showFooter.set(true);
     }
   }
 

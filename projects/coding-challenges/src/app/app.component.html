@@ -7,7 +7,7 @@
 
 
   <!-- Landing Page Section - only shown on root path -->
-  @if(showHeroSection()) {
+  @if(showLandingPage()) {
   <ng-coding-challenges-landing-page id="landing-section" (startPracticing)="onStartPracticing()"
     (exploreChallenges)="onExploreChallenges()" (tryLatestChallenge)="onTryLatestChallenge()">
   </ng-coding-challenges-landing-page>
@@ -16,19 +16,20 @@
 
 
   <!-- Challenge Content Section (when showing individual challenges) -->
-  @if (!showHeroSection()) {
-  <main class="main-content">
+  @if (!showLandingPage()) {
+  <main class="main-content" [style.height]="showLandingPage() ? 'calc(100dvh - 80px)' : '100dvh'">
     <router-outlet></router-outlet>
   </main>
   }
 
   <!-- Footer - always visible -->
-
-  <ng-coding-challenges-footer id="footer-section"
-  [appName]="title"
-  (linkClicked)="onFooterLinkClick($event)"
-  [showFooterLinks]="showFooterLinks()"
-  >
-  </ng-coding-challenges-footer>
+  @if(showFooter()){
+    <ng-coding-challenges-footer id="footer-section"
+      [appName]="title"
+      (linkClicked)="onFooterLinkClick($event)"
+      [showFooterLinks]="showFooterLinks()"
+      >
+    </ng-coding-challenges-footer>
+  }
 
 </div>

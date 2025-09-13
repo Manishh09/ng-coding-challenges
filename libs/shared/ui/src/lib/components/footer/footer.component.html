@@ -15,25 +15,27 @@
     </div>
 
     <!-- Quick Links Section -->
-    <div class="quick-links-section">
-      <h3 class="section-title">Quick Links</h3>
-      <div class="footer-links">
-        @for (link of quickLinks(); track link.text) {
+     @if(false) {
+       <div class="quick-links-section">
+         <h3 class="section-title">Quick Links</h3>
+         <div class="footer-links">
+           @for (link of quickLinks(); track link.text) {
 
-        @if (link.external) {
-        <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
-          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-          <span>{{ link.text }}</span>
-        </a>
-        } @else {
-        <a (click)="onLinkClick(link)" class="footer-link">
-          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-          <span>{{ link.text }}</span>
-        </a>
-        }
-        }
-      </div>
-    </div>
+           @if (link.external) {
+           <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
+             <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+             <span>{{ link.text }}</span>
+           </a>
+           } @else {
+           <a (click)="onLinkClick(link)" class="footer-link">
+             <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+             <span>{{ link.text }}</span>
+           </a>
+           }
+           }
+         </div>
+       </div>
+     }
 
     <!-- Community Links -->
     <div class="community-section">
@@ -58,11 +60,14 @@
         © {{ currentYear() }} {{ appName() }}. Built with <span class="heart-icon" aria-hidden="true">❤</span> and
         {{ angularVersion }}
       </p>
-      <div class="legal-links">
-        @for (link of legalLinks(); track link.text) {
-        <a [href]="link.url" class="footer-link">{{ link.text }}</a>
-        }
-      </div>
+      @if(false){
+
+        <div class="legal-links">
+          @for (link of legalLinks(); track link.text) {
+          <a [href]="link.url" class="footer-link">{{ link.text }}</a>
+          }
+        </div>
+      }
     </div>
   </div>
 </footer>

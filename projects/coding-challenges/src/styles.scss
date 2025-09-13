@@ -307,3 +307,13 @@ app-root,
     --shadow-lg: 0 10px 15px -3px var(--text-primary);
   }
 }
+
+.challenge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
