@@ -1,0 +1,47 @@
+.get-started-container {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 1rem;
+
+  h1 {
+    text-align: left;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: linear-gradient(to right, #822dba, #e91e63) !important;
+  }
+
+  .intro-text {
+    // text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+  }
+
+  .step-card {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border-left: 6px solid #C11C84 !important;
+    background-color: var(--color-surface);
+    h2 {
+      font-size: 1.5rem;
+     
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--brand-gradient-primary) !important;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+
+    button, a {
+      margin-top: 1rem;
+    }
+  }
+
+  .explore-link {
+    color: #C11C84;
+  }
+}

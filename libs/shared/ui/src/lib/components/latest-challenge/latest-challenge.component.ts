@@ -5,11 +5,12 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
 import { ChallengesService, NavigationService } from '@ng-coding-challenges/shared/services';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'ng-coding-challenges-latest-challenge',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLink, MatIconModule, MatButtonModule],
+  imports: [CommonModule, RouterModule, RouterLink, MatIconModule, MatButtonModule, MatTooltipModule],
   templateUrl: './latest-challenge.component.html',
   styleUrl: './latest-challenge.component.scss'
 })

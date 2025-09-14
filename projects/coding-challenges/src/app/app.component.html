@@ -8,16 +8,14 @@
 
   <!-- Landing Page Section - only shown on root path -->
   @if(showLandingPage()) {
-  <ng-coding-challenges-landing-page id="landing-section" (startPracticing)="onStartPracticing()"
+  <ng-coding-challenges-landing-page id="landing-section" (getStarted)="onGetStarted()"
     (exploreChallenges)="onExploreChallenges()" (tryLatestChallenge)="onTryLatestChallenge()">
   </ng-coding-challenges-landing-page>
   }
 
-
-
   <!-- Challenge Content Section (when showing individual challenges) -->
   @if (!showLandingPage()) {
-  <main class="main-content" [style.height]="showLandingPage() ? 'calc(100dvh - 80px)' : '100dvh'">
+  <main class="main-content" [style.height]="'100dvh'">
     <router-outlet></router-outlet>
   </main>
   }

@@ -34,8 +34,8 @@ export class FooterComponent {
 
   // Signals for footer links
   protected readonly quickLinks = signal<FooterLink[]>([
-    { text: 'Home', icon: 'home', url: '/challenges', external: false, section: 'home' },
-    { text: 'Challenges', icon: 'code', url: '/challenges', external: false, section: 'challenges' },
+    // { text: 'Home', icon: 'home', url: '/challenges', external: false, section: 'home' },
+    // { text: 'Challenges', icon: 'code', url: '/challenges', external: false, section: 'challenges' },
     { text: 'GitHub', icon: 'code_off', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true, section: 'github' },
     { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md', external: true, section: 'contribute' }
   ]);

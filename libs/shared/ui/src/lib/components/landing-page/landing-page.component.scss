@@ -38,10 +38,13 @@
   align-items: center;
   position: relative;
   z-index: 2;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  text-align: left;
 }
 
-.hero-text {
-  color: white;
+.hero-text-content {
+  // color: white;
 }
 
 .hero-title {
@@ -50,7 +53,7 @@
   line-height: 1.1;
   margin: 0 0 24px 0;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.9) 100%);
+  background: white;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -66,6 +69,11 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
+.intro-text {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
 .hero-buttons {
   display: flex;
   gap: 16px;
@@ -75,7 +83,7 @@
 .btn {
   padding: 14px 28px;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -83,6 +91,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 24px;
   min-height: 48px;
   text-decoration: none;
   white-space: nowrap;
@@ -98,17 +107,29 @@
 }
 
 .btn-primary {
-  background: var(--brand-gradient-button);
+  background: linear-gradient(45deg, #3f51b5, #ff4081);
   color: white;
-  backdrop-filter: blur(10px);
+
   border: 1px solid rgba(255, 255, 255, 0.2);
 
   &:hover {
-    background: var(--brand-gradient-primary);
+    //background: var(--brand-gradient-primary);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(221, 0, 49, 0.3);
   }
 }
+
+.btn-primary {
+  mat-icon {
+
+    // animation: floatRight 3s ease-in-out infinite;
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: 0 8px 25px rgba(221, 0, 49, 0.3);
+    }
+  }
+}
+
 
 .btn-secondary {
   background: transparent;
@@ -323,14 +344,14 @@
 @media (max-width: 768px) {
   .hero-section {
     padding: 60px 24px 32px;
-    min-height: calc(100vh - 100px);
+    //min-height: calc(100vh - 100px);
   }
 
   .hero-content {
     margin-top: 24px;
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 40px;
-    text-align: center;
+    //text-align: center;
   }
 
   .hero-title {
@@ -441,5 +462,19 @@
 
   .latest-challenge-card {
     border: 2px solid black;
+  }
+}
+
+@keyframes floatRight {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(12px); // move right
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }

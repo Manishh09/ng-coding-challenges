@@ -1,9 +1,5 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './challenges/challenge-01-product-list/components/product-list/product-list.component';
-import { DashboardComponent } from './challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component';
-import { ClientSideSearchComponent } from './challenges/challenge-03-client-side-search/components/client-side-search/client-side-search.component';
-import { ServerSideSearchComponent } from './challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component';
-import { ThemeDemoComponent } from './components/theme-demo/theme-demo.component';
+
 import { ChallengeListComponent, LandingPageComponent } from '@ng-coding-challenges/shared/ui';
 
 export const routes: Routes = [
@@ -15,6 +11,10 @@ export const routes: Routes = [
       // Component is handled via conditional template in AppComponent
    },
    {
+      path: 'getting-started',
+      loadComponent: () => import('./components/get-started/get-started.component').then(m => m.GetStartedComponent)
+   },
+   {
       path: 'challenges',
       children: [
          {
@@ -23,9 +23,10 @@ export const routes: Routes = [
             // This path will show the challenges list page
             // Component is handled via conditional template in AppComponent
          },
+
          {
             path: 'fetch-products',
-           loadComponent: () => import('./challenges/challenge-01-product-list/components/product-list/product-list.component').then(m => m.ProductListComponent)
+            loadComponent: () => import('./challenges/challenge-01-product-list/components/product-list/product-list.component').then(m => m.ProductListComponent)
          },
          {
             path: 'handle-parallel-apis',

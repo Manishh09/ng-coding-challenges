@@ -2,13 +2,16 @@
 <div class="latest-challenge-card">
   <div class="challenge-header">
     <div class="challenge-badge">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <!-- <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M8 0L10.154 5.846L16 8L10.154 10.154L8 16L5.846 10.154L0 8L5.846 5.846L8 0Z" fill="#F97316" />
-      </svg>
-      Latest Challenge
+      </svg> -->
+      ⭐ Latest Challenge
     </div>
-    <div class="source-code-button">
-      <button matTooltip="Open Source Code" mat-icon-button (click)="openURL(latestChallenge.gitHub)" >
+    <div class="source-code" >
+      <button class="source-code-button" 
+      matTooltip="Open Source Code"
+      matTooltipPosition="above"
+      mat-icon-button (click)="openURL(latestChallenge.gitHub)" >
         <mat-icon>code</mat-icon>
       </button>
     </div>

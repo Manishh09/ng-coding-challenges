@@ -20,15 +20,15 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 })
 export class LandingPageComponent {
   // Output Signals
-  startPracticing = output<void>();
+  getStarted = output<void>();
   exploreChallenges = output<void>();
   tryLatestChallenge = output<void>();
 
   // Input properties for dynamic content
   logo = '/coding-window.webp';
 
-  onStartPracticing(): void {
-    this.startPracticing.emit();
+  onGetStarted(): void {
+    this.getStarted.emit();
   }
 
   onExploreChallenges(): void {

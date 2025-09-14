@@ -110,27 +110,31 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/handle-parallel-apis',
       '/challenges/client-side-search',
       '/challenges/server-side-search',
-      '/theme-demo'
+      '/theme-demo',
+      '/getting-started'
     ];
     // Check if current route is a specific challenge page
     const isChallengePage = challengeRoutes.includes(url);
-
     if (isChallengePage) {
-      // For challenge pages, show layout with header and footer but hide hero section
       this.showLandingPage.set(false);
-      // this.showChallenges.set(false);
       this.showFooterLinks.set(false);
       this.showFooter.set(false);
+      return;
 
-    } else if (url === '/challenges') {
-      this.showLandingPage.set(false);
-      this.showFooter.set(false);
-
-    } else {
-      // For landing page (root path), show everything
-      this.showLandingPage.set(true);
-      this.showFooter.set(true);
     }
+    // Check if current route is the challenges list page
+    if (url === '/challenges') {
+      this.showLandingPage.set(false);
+      this.showFooterLinks.set(false);
+      this.showFooter.set(true);
+      return;
+
+    }
+    // For all other routes, show full layout
+    this.showLandingPage.set(true);
+    this.showFooter.set(true);
+    this.showFooterLinks.set(true);
+    this.showChallenges.set(false);
   }
 
   /**
@@ -201,8 +205,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   // Handle landing page events
-  onStartPracticing(): void {
-    this.navigateToRoute('/challenges');
+  onGetStarted(): void {
+    this.navigateToRoute('/getting-started');
   }
 
   onExploreChallenges(): void {
