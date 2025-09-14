@@ -1,5 +1,5 @@
 .latest-challenge-card {
-  background: white;
+  background: var(--surface-secondary);
   border-radius: 16px;
   padding: 24px;
   margin: 40px auto 0;
@@ -34,7 +34,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   border: 1px solid rgba(221, 0, 49, 0.2);
-  backdrop-filter: blur(10px);
+   
   animation: pulse 2s infinite;
 }
 
