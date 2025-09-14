@@ -1,9 +1,9 @@
  .challenge-nav {
      display: flex;
      gap: 16px;
-     padding: 0px 0px 0px 16px;
+     //padding: 0px 0px 0px 16px;
      margin-bottom: 16px;
-
+     justify-content: flex-start;
 
      .nav-button {
          display: flex;

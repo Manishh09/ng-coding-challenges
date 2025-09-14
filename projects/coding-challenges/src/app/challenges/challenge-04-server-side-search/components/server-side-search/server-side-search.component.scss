@@ -1,133 +1,161 @@
+.challenge-nav {
+  margin-top: 100px;
+  margin-left: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .challenge-nav {
+    margin-left: 0px;
+
+  }
+
+}
+
+
+@media screen and (max-width: 484px) {
+  .challenge-nav {
+    margin-left: 0px;
+
+  }
+
+}
+
 /* server-side-search.component.scss */
 .header {
-    text-align: center;
-    margin-top: 48px;
+  text-align: center;
+  margin-top: 48px;
 
-    h2 {
-        color: var(--on-surface-color, #212121);
-    }
+  h2 {
+    color: var(--on-surface-color, #212121);
+  }
 }
 
 .search-container {
-    width: 85%;
-    margin: 2rem auto;
-    padding: 1rem;
-    border: 1px solid var(--outline-color, #e0e0e0);
-    border-radius: 8px;
-    background-color: var(--surface-color, #ffffff);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    box-sizing: border-box; /* Ensures padding doesn't increase width */
+  width: 85%;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid var(--outline-color, #e0e0e0);
+  border-radius: 8px;
+  background-color: var(--surface-color, #ffffff);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  /* Ensures padding doesn't increase width */
 
-    /* Fix for potential overflow issues */
-    display: flex;
-    flex-direction: column;
+  /* Fix for potential overflow issues */
+  display: flex;
+  flex-direction: column;
 
 
 }
 
 .search-input {
-    width: 100%;
-    max-width: 100%;
-    padding: 0.6rem 0.8rem;
-    font-size: 1rem;
-    border: 1px solid var(--outline-color, #e0e0e0);
-    border-radius: 4px;
-    outline: none;
-    background-color: var(--surface-color, #ffffff);
-    color: var(--on-surface-color, #212121);
-    box-sizing: border-box; /* Critical fix: includes padding in width calculation */
-    display: block; /* Ensures proper block display */
-    min-width: 0; /* Prevents input from extending beyond container */
-    flex: 1 1 auto; /* Allows input to shrink if needed */
+  width: 100%;
+  max-width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid var(--outline-color, #e0e0e0);
+  border-radius: 4px;
+  outline: none;
+  background-color: var(--surface-color, #ffffff);
+  color: var(--on-surface-color, #212121);
+  box-sizing: border-box;
+  /* Critical fix: includes padding in width calculation */
+  display: block;
+  /* Ensures proper block display */
+  min-width: 0;
+  /* Prevents input from extending beyond container */
+  flex: 1 1 auto;
+  /* Allows input to shrink if needed */
 
 
 
-    &::placeholder {
-        color: var(--on-surface-variant-color, #616161);
-    }
+  &::placeholder {
+    color: var(--on-surface-variant-color, #616161);
+  }
 }
 
 .search-input:focus {
-    border-color: var(--primary-color, #dd0031);
-    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 221, 0, 49), 0.1);
+  border-color: var(--primary-color, #dd0031);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 221, 0, 49), 0.1);
 }
 
 ul {
-    list-style: none;
-    margin: 1rem 0 0 0;
-    padding: 0;
+  list-style: none;
+  margin: 1rem 0 0 0;
+  padding: 0;
 }
 
 li {
-    padding: 0.5rem;
-    border-bottom: 1px solid var(--outline-color, #e0e0e0);
-    transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--outline-color, #e0e0e0);
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
 
-    // Use on-surface-color in light mode
-    color: var(--on-surface-color, #212121);
+  // Use on-surface-color in light mode
+  color: var(--on-surface-color, #212121);
 
-    &:hover {
-        background-color: rgba(var(--on-surface-color-rgb, 33, 33, 33), 0.05);
-    }
+  &:hover {
+    background-color: rgba(var(--on-surface-color-rgb, 33, 33, 33), 0.05);
+  }
 }
 
 li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 p {
-    margin-top: 0.8rem;
-    font-size: 0.95rem;
-    color: var(--on-surface-color, #212121);
-    transition: color 0.3s ease;
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--on-surface-color, #212121);
+  transition: color 0.3s ease;
 }
 
 .error {
-    color: var(--warn-color, #f44336);
-    font-weight: bold;
-    margin-top: 0.5rem;
+  color: var(--warn-color, #f44336);
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
 
 // Use on-surface-color in light mode
-.loading,.error,
+.loading,
+.error,
 .no-results {
-    color: var(--on-surface-variant-color, #616161);
+  color: var(--on-surface-variant-color, #616161);
 }
 
 /* Dark theme specific styles */
 :host-context(.dark-theme) {
-    li {
-        color: var(--primary-color, #dd0031);
+  li {
+    color: var(--primary-color, #dd0031);
 
-        &:hover {
-            background-color: rgba(var(--primary-color-rgb, 221, 0, 49), 0.05);
-        }
+    &:hover {
+      background-color: rgba(var(--primary-color-rgb, 221, 0, 49), 0.05);
     }
+  }
 
-    .loading,.error,
-    .no-results {
-        color: var(--primary-color, #dd0031);
-    }
+  .loading,
+  .error,
+  .no-results {
+    color: var(--primary-color, #dd0031);
+  }
 }
 
- // Simple responsive adjustment
-    @media (max-width: 768px) {
+// Simple responsive adjustment
+@media (max-width: 768px) {
 
-      .header {
-        margin-top: 48px;
-        margin-bottom: 24px;
-      }
+  .header {
+    margin-top: 48px;
+    margin-bottom: 24px;
+  }
 
-      .search-container{
+  .search-container {
 
-        margin: 1rem auto;
-        padding: 0.75rem;
-        width: 90%;
-      }
+    margin: 1rem auto;
+    padding: 0.75rem;
+    width: 90%;
+  }
 
-      .search-input {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.7rem;
-      }
-    }
-
+  .search-input {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+  }
+}

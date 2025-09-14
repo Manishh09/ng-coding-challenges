@@ -311,9 +311,10 @@ app-root,
 .challenge-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  //align-items: center;
   padding: 20px;
-  flex-wrap: wrap;
-  min-height: 100vh;
+  // flex-wrap: wrap;
+  // min-height: 100vh;
   box-sizing: border-box;
+  margin-top: 100px !important;
 }

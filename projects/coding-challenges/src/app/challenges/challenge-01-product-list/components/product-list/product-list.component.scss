@@ -1,3 +1,25 @@
+.challenge-nav {
+
+  margin-left: 224px;
+}
+
+@media screen and (max-width: 768px) {
+  .challenge-nav {
+    margin-left: 0px;
+
+  }
+
+}
+
+
+@media screen and (max-width: 484px) {
+  .challenge-nav {
+    margin-left: 0px;
+
+  }
+
+}
+
 .product-list-container {
   padding: 2rem;
   display: flex;

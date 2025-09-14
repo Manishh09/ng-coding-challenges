@@ -28,7 +28,7 @@ export class ChallengeNavComponent {
    */
   navigateToChallenges(): void {
     // Navigate to home first
-    this.router.navigate(['/']);
+    this.router.navigate(['/challenges']);
     
     // Then trigger showing challenges list with a slight delay to ensure navigation completes
     setTimeout(() => {
