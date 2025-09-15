@@ -1,27 +1,11 @@
-.challenge-nav {
-  margin-top: 100px;
-  margin-left: 200px;
-}
-
-@media screen and (max-width: 768px) {
-  .challenge-nav {
-    margin-left: 0px;
-  }
-
-}
-
-
-@media screen and (max-width: 484px) {
-  .challenge-nav {
-    margin-left: 0px;
-  }
-
+.challenge-nav{
+  margin-top: 100px !important;
 }
 
 .client-search-container {
 
   padding: 16px;
-  border: 1px solid var(--outline-color, #e0e0e0);
+  border-top: 1px solid var(--outline-color, #e0e0e0);
   border-radius: 4px;
   display: flex;
   flex-direction: column;

@@ -1,9 +1,8 @@
  .challenge-nav {
-     display: flex;
-     gap: 16px;
-     //padding: 0px 0px 0px 16px;
+      
      margin-bottom: 16px;
-     justify-content: flex-start;
+     //margin-top: 100px;
+     margin-left: 32px;
 
      .nav-button {
          display: flex;
@@ -30,18 +29,19 @@
          }
 
      }
-
-
  }
 
 
  // Responsive styles
- @media (max-width: 599px) {
-     .challenge-nav {
-         justify-content: space-between;
 
-         .nav-button {
-             flex: 1;
-         }
+ @media (max-width: 768px) {
+     .challenge-nav {
+         margin-left: 16px;
+     }
+ }
+
+ @media (max-width: 484px) {
+     .challenge-nav {
+         margin-left: 16px;
      }
  }

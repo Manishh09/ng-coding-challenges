@@ -1,26 +1,12 @@
-.challenge-nav {
-  margin-top: 100px;
-  margin-left: 200px;
+.challenge-nav{
+  margin-top: 100px !important;
 }
 
-@media screen and (max-width: 768px) {
-  .challenge-nav {
-    margin-left: 0px;
-
-  }
-
+.server-search-container{
+   border-top: 1px solid var(--outline-color, #e0e0e0);
 }
 
 
-@media screen and (max-width: 484px) {
-  .challenge-nav {
-    margin-left: 0px;
-
-  }
-
-}
-
-/* server-side-search.component.scss */
 .header {
   text-align: center;
   margin-top: 48px;
@@ -31,7 +17,7 @@
 }
 
 .search-container {
-  width: 85%;
+  width: 72%;
   margin: 2rem auto;
   padding: 1rem;
   border: 1px solid var(--outline-color, #e0e0e0);
