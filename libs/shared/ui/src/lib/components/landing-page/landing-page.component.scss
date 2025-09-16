@@ -6,7 +6,7 @@
 
 .hero-section {
   //background: var(--brand-gradient-hero);
-  background: linear-gradient(45deg, #3f51b5, #ff4081);
+  background: linear-gradient(60deg, #313c7a, #ff4081);
 
   padding: 80px 32px 40px;
   position: relative;
@@ -107,15 +107,16 @@
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #3f51b5, #ff4081);
+  background: linear-gradient(90deg,#672fc7, #6f59e1);
   color: white;
 
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  // border: 1px solid rgba(255, 255, 255, 0.2);
 
   &:hover {
-    //background: var(--brand-gradient-primary);
+    // background: var(--brand-gradient-primary);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(221, 0, 49, 0.3);
+    background: linear-gradient(90deg, #6A5DF0, #A084FF);
   }
 }
 
