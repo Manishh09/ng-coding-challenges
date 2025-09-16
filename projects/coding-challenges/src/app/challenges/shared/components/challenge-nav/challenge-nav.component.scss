@@ -1,9 +1,7 @@
  .challenge-nav {
       
-     margin-bottom: 16px;
-     //margin-top: 100px;
      margin-left: 32px;
-
+ 
      .nav-button {
          display: flex;
          align-items: center;
@@ -37,11 +35,13 @@
  @media (max-width: 768px) {
      .challenge-nav {
          margin-left: 16px;
+           
      }
  }
 
  @media (max-width: 484px) {
      .challenge-nav {
          margin-left: 16px;
+         
      }
  }

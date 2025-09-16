@@ -1,3 +1,15 @@
+.challenge-nav {
+ margin-left:  64px !important;
+
+}
+
+@media (max-width: 768px) {
+
+  .challenge-nav {
+     margin-left: 0px !important;
+  }
+}
+
 .product-list-container {
   padding: 2rem;
   display: flex;
@@ -6,7 +18,7 @@
   min-height: 400px;
   color: var(--on-surface-color, #212121);
   border-top: 1px solid var(--outline-color, #e0e0e0);
-  
+
   h2 {
     color: var(--on-surface-color, #212121);
     margin-bottom: 1.5rem;
@@ -15,7 +27,7 @@
 }
 
 .product-count {
-  width: 70%;
+  width: 90%;
   margin-bottom: 1rem;
 
   p {
@@ -25,7 +37,7 @@
 }
 
 .product-table {
-  width: 70%;
+  width: 90%;
   border-collapse: collapse;
   margin: 0 auto;
   box-shadow: 0 2px 5px var(--shadow-color, rgba(0, 0, 0, 0.1));

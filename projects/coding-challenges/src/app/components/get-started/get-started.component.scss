@@ -1,13 +1,17 @@
 .get-started-container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 4rem auto;
   padding: 1rem;
-
+ 
   h1 {
     text-align: left;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: linear-gradient(to right, #822dba, #e91e63) !important;
+    color: #C11C84;
+  }
+
+  .start-text{
+     color: #C11C84;
   }
 
   .intro-text {
@@ -43,5 +47,28 @@
 
   .explore-link {
     color: #C11C84;
+  }
+}
+
+@media (max-width: 768px) {
+  .get-started-container {
+    margin: 4rem auto;
+    padding: 2rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .step-card {
+      padding: 1rem;
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
   }
 }
