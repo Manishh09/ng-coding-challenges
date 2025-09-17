@@ -1,18 +1,20 @@
 // Header styles
 .header-toolbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
-  background: var(--brand-gradient-section);
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: var(--surface-secondary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(var(--outline-color-rgb, 224, 224, 224), 0.5);
+  box-shadow: 0 1px 0 var(--border-primary);
   padding: 0;
   height: 64px;
   width: 100%;
   overflow-x: hidden;
   transition: background var(--animation-duration-standard) var(--animation-easing),
-              box-shadow var(--animation-duration-standard) var(--animation-easing);
+    box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
 
 // Container for header content
@@ -21,9 +23,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 16px;
+  
+  padding: 0 32px;
   height: 100%;
   overflow: hidden;
 }
@@ -37,22 +38,21 @@
 
 // Logo link styling
 .logo-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  text-decoration: none;
+  gap: 8px;
   color: inherit;
-  font-weight: 600;
-  font-size: 1.25rem;
+  text-decoration: none;
   transition: transform var(--animation-duration-fast) var(--animation-easing),
-              opacity var(--animation-duration-fast) var(--animation-easing);
-  
+  opacity var(--animation-duration-fast) var(--animation-easing);
+
   &:hover {
     opacity: 0.95;
     transform: scale(1.02);
   }
-  
+
   &:focus-visible {
-    outline: 2px solid var(--primary-color, #dd0031);
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -60,15 +60,48 @@
 
 // Angular logo styling
 .angular-logo {
-  height: 64px;
-  width: 64px;
-  object-fit: contain;
+  height: 40px;
+  width: auto;
   vertical-align: middle;
-  margin-top: 6px;
   transition: transform 0.3s var(--animation-easing),
-              filter 0.3s var(--animation-easing);
-  filter: drop-shadow(0 2px 4px var(--logo-shadow-color, rgba(0, 0, 0, 0.15)));
-  mix-blend-mode: var(--logo-blend-mode, normal);
+    filter 0.3s var(--animation-easing);
+  filter: var(--logo-filter);
+  mix-blend-mode: var(--logo-blend-mode);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+// Gradient masked logo implementation
+.logo-image-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+.angular-logo-gradient {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: var(--brand-gradient-primary);
+  -webkit-mask: var(--logo-src) center/contain no-repeat;
+  mask: var(--logo-src) center/contain no-repeat;
+}
+
+// Fallback raster image (hidden if mask is supported)
+.angular-logo-img {
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+  filter: var(--logo-filter);
+  mix-blend-mode: var(--logo-blend-mode);
+}
+
+@supports (mask: url(#mask)) or (-webkit-mask: url(#mask)) {
+  .angular-logo-img {
+    display: none;
+  }
 }
 
 // Navigation section
@@ -101,24 +134,79 @@ ng-coding-challenges-theme-toggle {
 
 // Logo text styling
 .logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-left: 0.25rem;
-  background: linear-gradient(120deg, #dd0031, #c3002f, #dd0031);
-  background-size: 200%;
+  font-size: 2rem;
+  font-weight: 800;
+
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
-  animation: gradientMove 8s ease infinite;
-  letter-spacing: -0.02em;
-  font-family: 'Inter', 'Roboto', sans-serif;
 }
 
 // Style the "ng" prefix
 .ng-prefix {
-  font-weight: 400;
+  font-weight: 500 !important;
+  opacity: 0.9;
+  margin-right: 1px;
+}
+
+// Ensure nested prefix inherits gradient fill
+.logo-text .ng-prefix {
+  display: inline;
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   opacity: 1;
   margin-right: 1px;
+  font-weight: 700;
+}
+
+// Github logo styling
+.github-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.github-svg, .linkedin-svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+  display: block;
+}
+
+.linkedin-svg {
+  width: 20px;
+  height:24px;
+  fill: var(--text-primary);
+  display: block;
+}
+
+body.dark-mode .github-svg {
+  fill: var(--text-primary);
+}
+
+body.dark-mode .linkedin-svg {
+  fill: var(--text-primary);
+}
+
+
+@media (max-width: 768px) {
+
+  .github-svg, .linkedin-svg {
+    width: 20px;
+    height: 24px;
+  }
 }
 
 // Animation for gradient text
@@ -126,9 +214,11 @@ ng-coding-challenges-theme-toggle {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -140,17 +230,17 @@ ng-coding-challenges-theme-toggle {
     display: none !important;
   }
 
-  .ng-prefix {
-    display: none;
-  }
-  
   .angular-logo {
-    width: 40px;
-    height: 40px;
+    height: 48px;
   }
 
   .logo-text {
-    display: none;
+    display: inline-block;
+    font-size: 1.5rem;
+  }
+
+  .logo-text .ng-prefix {
+    display: inline;
   }
 
   .header-container {
@@ -163,6 +253,11 @@ ng-coding-challenges-theme-toggle {
 
   ng-coding-challenges-theme-toggle {
     margin-right: 0;
+  }
+
+  .logo-image-wrap {
+    width: 48px;
+    height: 48px;
   }
 }
 

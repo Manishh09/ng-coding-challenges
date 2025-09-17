@@ -1,0 +1,199 @@
+<div class="theme-demo-container">
+  <!-- Header with theme toggle -->
+  <div class="demo-header">
+    <h1>angular.dev Theme System Demo</h1>
+    <ng-coding-challenges-theme-toggle></ng-coding-challenges-theme-toggle>
+  </div>
+
+  <!-- Hero section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2>Experience the angular.dev Design System</h2>
+      <p>This demo showcases the complete theming system with CSS variables, Material Design integration, and smooth transitions.</p>
+    </div>
+  </section>
+
+  <!-- Main content grid -->
+  <div class="demo-grid">
+    <!-- Color tokens showcase -->
+    <mat-card class="demo-card">
+      <mat-card-header>
+        <mat-card-title>Color Tokens</mat-card-title>
+        <mat-card-subtitle>Extracted from angular.dev</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="color-grid">
+          <div class="color-item">
+            <div class="color-swatch" style="background: var(--bright-blue)"></div>
+            <span>Bright Blue</span>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: var(--electric-violet)"></div>
+            <span>Electric Violet</span>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: var(--vivid-pink)"></div>
+            <span>Vivid Pink</span>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: var(--hot-pink)"></div>
+            <span>Hot Pink</span>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: var(--hot-red)"></div>
+            <span>Hot Red</span>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: var(--super-green)"></div>
+            <span>Super Green</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Interactive elements -->
+    <mat-card class="demo-card">
+      <mat-card-header>
+        <mat-card-title>Interactive Elements</mat-card-title>
+        <mat-card-subtitle>Material Design with angular.dev styling</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="interactive-demo">
+          <mat-form-field appearance="outline" class="demo-input">
+            <mat-label>Sample Input</mat-label>
+            <input matInput [(ngModel)]="sampleText" placeholder="Type something...">
+          </mat-form-field>
+
+          <div class="button-group">
+            <button mat-raised-button color="primary" class="angular-dev-button">
+              Primary Button
+            </button>
+            <button mat-raised-button color="accent" class="angular-dev-button">
+              Accent Button
+            </button>
+            <button mat-stroked-button class="angular-dev-button secondary">
+              Secondary Button
+            </button>
+          </div>
+
+          <div class="chips-section">
+            <h4>Select Technologies:</h4>
+            <mat-chip-listbox>
+              <mat-chip-option
+                *ngFor="let chip of availableChips"
+                [selected]="isSelected(chip)"
+                (click)="toggleChip(chip)"
+                class="demo-chip">
+                {{ chip }}
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Surface variations -->
+    <mat-card class="demo-card">
+      <mat-card-header>
+        <mat-card-title>Surface Variations</mat-card-title>
+        <mat-card-subtitle>Different surface levels and styling</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="surface-demo">
+          <div class="surface-item surface-primary">
+            <h4>Primary Surface</h4>
+            <p>Main background surface with subtle styling</p>
+          </div>
+          <div class="surface-item surface-secondary">
+            <h4>Secondary Surface</h4>
+            <p>Elevated surface for cards and panels</p>
+          </div>
+          <div class="surface-item surface-tertiary">
+            <h4>Tertiary Surface</h4>
+            <p>Higher elevation for modals and overlays</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Code syntax highlighting -->
+    <mat-card class="demo-card">
+      <mat-card-header>
+        <mat-card-title>Code Syntax Highlighting</mat-card-title>
+        <mat-card-subtitle>angular.dev code styling</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="angular-dev-code">
+          <div class="code-line">
+            <span class="keyword">import</span>
+            <span class="string">'angular/core'</span>
+            <span class="keyword">from</span>
+            <span class="string">'angular'</span>;
+          </div>
+          <div class="code-line">
+            <span class="keyword">export class</span>
+            <span class="function">MyComponent</span> {{ '{' }}
+          </div>
+          <div class="code-line comment">  // Component logic here</div>
+          <div class="code-line">
+            &nbsp;&nbsp;<span class="keyword">constructor</span>() {{ '{' }}
+          </div>
+          <div class="code-line">
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span>
+            <span class="function">value</span> =
+            <span class="number">42</span>;
+          </div>
+          <div class="code-line">&nbsp;&nbsp;{{ '}' }}</div>
+          <div class="code-line">{{ '}' }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Typography showcase -->
+    <mat-card class="demo-card">
+      <mat-card-header>
+        <mat-card-title>Typography</mat-card-title>
+        <mat-card-subtitle>Text hierarchy and styling</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="typography-demo">
+          <h1 class="text-primary">Heading 1 - Primary Text</h1>
+          <h2 class="text-secondary">Heading 2 - Secondary Text</h2>
+          <h3 class="text-tertiary">Heading 3 - Tertiary Text</h3>
+          <p class="text-primary">This is primary body text with good readability and contrast.</p>
+          <p class="text-secondary">This is secondary text for less important information.</p>
+          <p class="text-accent">This is accent text for highlighting important elements.</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Animation showcase -->
+    <mat-card class="demo-card">
+      <mat-card-header>
+        <mat-card-title>Animations & Transitions</mat-card-title>
+        <mat-card-subtitle>Smooth interactions and micro-animations</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="animation-demo">
+          <div class="animated-element fade-in">
+            <mat-icon>favorite</mat-icon>
+            <span>Fade In Animation</span>
+          </div>
+          <div class="animated-element slide-in-up">
+            <mat-icon>star</mat-icon>
+            <span>Slide Up Animation</span>
+          </div>
+          <div class="animated-element pulse">
+            <mat-icon>notifications</mat-icon>
+            <span>Pulse Animation</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Footer -->
+  <footer class="demo-footer">
+    <p>Built with Angular 19, Material Design, and the angular.dev theme system</p>
+  </footer>
+</div>

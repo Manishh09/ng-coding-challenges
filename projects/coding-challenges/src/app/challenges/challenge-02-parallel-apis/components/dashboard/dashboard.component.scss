@@ -1,6 +1,38 @@
-:host {
-  padding: 20px;
-  // display: block;
+.challenge-nav {
+  margin-left:  80px !important;
+  
+}
+
+@media (max-width: 768px) {
+
+  .challenge-nav{
+      margin-left: 0px !important;
+  }
+
+   
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--outline-color, #e0e0e0);
+  color: var(--on-surface-color, #212121);
+   margin: auto;
+   
+  width: 91%;
+}
+
+.dashboard-header {
+  width: 91%;
+  text-align: center;
+}
+
+.user-list,
+.post-list {
+  width: 100%;
+  text-align: center;
 }
 
 h2 {
@@ -15,6 +47,7 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0 0 30px 0;
+
 }
 
 li {
@@ -35,12 +68,7 @@ li {
   }
 }
 
-div {
-  font-size: 1.1rem;
-  text-align: center;
-  padding: 20px;
-  color: var(--on-surface-color, #212121);
-}
+ 
 
 // Loading state
 :host:has([data-loading]) div:first-child {

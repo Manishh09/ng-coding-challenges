@@ -1,153 +1,104 @@
+.challenge-nav {
+  margin-top: 80px !important;
+  margin-left: 92px !important;
+ 
+}
+
+@media (max-width: 768px) {
+
+  .challenge-nav{
+     margin-left: 16px !important;
+  }
+
+  .search-container {
+    mat-form-field {
+      width: 90%;
+    }
+
+    .user-list {
+      width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 484px) {
+   
+
+  .search-container {
+    mat-form-field {
+      width: 90%;
+    }
+
+    .user-list {
+      width: 100% !important;
+    }
+  }
+}
+
 .client-search-container {
 
-    padding: 16px;
-    border: 1px solid var(--outline-color, #e0e0e0);
-    border-radius: 4px;
+  padding: 16px;
+  border-top: 1px solid var(--outline-color, #e0e0e0);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 32px;
+  text-align: center;
+  margin-bottom: 32px;
 }
 
 
 h2 {
-    margin: 20px 0 10px 0;
-    font-size: 1.5rem;
-    padding-bottom: 5px;
-    color: var(--on-surface-color, #212121);
+  margin: 20px 0 10px 0;
+  font-size: 1.5rem;
+  padding-bottom: 5px;
+  color: var(--on-surface-color, #212121);
 }
 
 .user-name {
-    font-weight: 200 !important;
+  font-weight: 200 !important;
+  font-size: medium;
 }
 
 .error-message {
-    color: var(--warn-color, #dc3545);
+  color: var(--warn-color, #dc3545);
 }
 
-:host ::ng-deep mat-form-field {
-    // Set width to 100%
-    width: 100%;
 
-    // Input text styling
-    .mat-mdc-input-element {
-        color: var(--on-surface-color, #212121);
-        caret-color: var(--primary-color, #dd0031); // Cursor color
-    }
-
-    // Label styling for normal and floating state
-    .mat-mdc-floating-label {
-        color: var(--on-surface-variant-color, #616161);
-
-        &.mdc-floating-label--float-above {
-            color: var(--primary-color, #dd0031);
-        }
-    }
-
-    // Border styling (outline)
-    .mdc-notched-outline__leading,
-    .mdc-notched-outline__notch,
-    .mdc-notched-outline__trailing {
-        border-color: var(--outline-color, #e0e0e0);
-        transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    // Focused state styling
-    &.mat-focused {
-
-        // Text selection color
-        ::selection {
-            background-color: rgba(var(--primary-color-rgb, 221, 0, 49), 0.2);
-        }
-
-        // Change label color to primary when focused
-        .mat-mdc-floating-label {
-            color: var(--primary-color, #dd0031) !important;
-        }
-
-        // Change border to primary color when focused
-        .mdc-notched-outline__leading,
-        .mdc-notched-outline__notch,
-        .mdc-notched-outline__trailing {
-            border-color: var(--primary-color, #dd0031) !important;
-            border-width: 2px;
-        }
-
-        // Input line ripple effect for standard appearance
-        .mat-mdc-form-field-ripple {
-            background-color: var(--primary-color, #dd0031);
-        }
-    }
-
-    // Hover state
-    &:not(.mat-focused):hover {
-
-        .mdc-notched-outline__leading,
-        .mdc-notched-outline__notch,
-        .mdc-notched-outline__trailing {
-            border-color: var(--on-surface-color, #212121);
-        }
-    }
-
-    // Error state styling
-    &.mat-form-field-invalid {
-        .mat-mdc-floating-label {
-            color: var(--warn-color, #f44336) !important;
-        }
-
-        .mat-mdc-input-element {
-            caret-color: var(--warn-color, #f44336);
-        }
-
-        .mdc-notched-outline__leading,
-        .mdc-notched-outline__notch,
-        .mdc-notched-outline__trailing {
-            border-color: var(--warn-color, #f44336) !important;
-        }
-
-        .mat-error {
-            color: var(--warn-color, #f44336);
-        }
-    }
-
-    // Disabled state
-    &.mat-form-field-disabled {
-        opacity: 0.6;
-
-        .mat-mdc-floating-label,
-        .mat-mdc-input-element {
-            color: var(--on-surface-variant-color, #616161);
-        }
-    }
-
-    // Placeholder styling
-    .mat-mdc-input-element::placeholder {
-        // color: var(--primary-color, #dd0031) !important;
-        transition: color 0.2s ease;
-    }
-}
 
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .search-container {
-    margin-bottom: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+  text-align: center;
+
+  mat-form-field {
+    width: 85%;
+  }
 }
 
 .user-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 85%;
 }
 
 .user-card {
-    padding: 12px;
+  width: 100%;
+  padding: 12px;
+
 }
 
 .no-results {
-    color: #888;
-    font-style: italic;
-    margin-top: 20px;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
 }

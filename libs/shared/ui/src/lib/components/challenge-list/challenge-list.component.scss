@@ -1,22 +1,22 @@
 .challenge-list-container {
   width: 100%;
-  padding: 40px 0;
+  padding: 80px 0 0 0;
   background: var(--brand-gradient-section);
-  min-height: 400px;
+  //min-height: 400px;
+  height: 100dvh;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.4s var(--animation-easing),
-              transform 0.4s var(--animation-easing);
+  transition: opacity 0.4s var(--animation-easing), transform 0.4s var(--animation-easing);
   box-sizing: border-box;
-  overflow-x: hidden; /* Prevents horizontal scrolling */
+  overflow-x: hidden;
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 32px;
+  margin: 32px;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--on-surface-color, #333);
+  color: var(--color-fg);
   position: relative;
   display: inline-block;
   left: 50%;
@@ -45,6 +45,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -61,15 +62,12 @@
   margin-right: auto;
   box-sizing: border-box;
 
-  /* Add staggered animation for cards */
-  & > * {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: cardAppear 0.5s var(--animation-easing) forwards;
+  &>* {
+    animation: cardAppear 0.5s var(--animation-easing) both;
   }
-  
+
   @for $i from 1 through 12 {
-    & > *:nth-child(#{$i}) {
+    &>*:nth-child(#{$i}) {
       animation-delay: #{0.1 * $i}s;
     }
   }
@@ -82,6 +80,11 @@
 }
 
 @keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -92,45 +95,25 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 48px;
-  background: var(--surface-color, white);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px var(--shadow-color, rgba(0, 0, 0, 0.1));
+  background: var(--color-surface);
+  color: var(--color-fg);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
   width: 100%;
   box-sizing: border-box;
 }
 
 .no-challenges p {
   font-size: 1.2rem;
-  color: var(--on-surface-variant-color, #666);
+  color: var(--text-secondary);
 }
 
-/* Add a staggered entry effect for the cards */
-::ng-deep ng-coding-challenges-challenge-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Staggered delay for each card */
-::ng-deep ng-coding-challenges-challenge-card:nth-child(1) { animation-delay: 0.1s; }
-::ng-deep ng-coding-challenges-challenge-card:nth-child(2) { animation-delay: 0.2s; }
-::ng-deep ng-coding-challenges-challenge-card:nth-child(3) { animation-delay: 0.3s; }
-::ng-deep ng-coding-challenges-challenge-card:nth-child(4) { animation-delay: 0.4s; }
-::ng-deep ng-coding-challenges-challenge-card:nth-child(5) { animation-delay: 0.5s; }
-
-/* Tablet - Medium screens */
+/* Responsive breakpoints */
 @media (max-width: 1024px) {
   .challenge-list-container {
     padding: 35px 0;
   }
-  
+
   .cards {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
@@ -143,12 +126,11 @@
   }
 }
 
-/* Small tablets and large phones */
 @media (max-width: 768px) {
   .challenge-list-container {
-    padding: 30px 0;
+    //padding: 30px 0;
   }
-  
+
   .cards {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 16px;
@@ -159,25 +141,24 @@
     font-size: 1.5rem;
     margin-bottom: 24px;
   }
-  
+
   .card-wrapper {
     width: 100%;
   }
 }
 
-/* Small phones */
 @media (max-width: 480px) {
   .challenge-list-container {
-    padding: 20px 0;
+    //padding: 20px 0;
     margin: 0;
     width: 100%;
   }
-  
+
   .cards {
     grid-template-columns: 1fr;
     padding: 10px;
     gap: 16px;
-    width: calc(100% - 20px); /* Account for padding */
+    width: calc(100% - 20px);
     margin: 0 auto;
   }
 
@@ -187,25 +168,8 @@
     width: 100%;
     left: 50%;
   }
-  
+
   .no-challenges {
     padding: 20px;
-    width: 100%;
-  }
-  
-  .card-wrapper {
-    max-width: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  
-  ::ng-deep ng-coding-challenges-challenge-card {
-    width: 100%;
-  }
-  
-  ::ng-deep .challenge-card {
-    margin: 0;
-    width: 100%;
   }
 }
