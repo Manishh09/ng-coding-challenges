@@ -1,0 +1,11 @@
+<mat-card class="summary-card">
+  <h3>Category Summary</h3>
+  <p>Total Categories: {{ categories().length }}</p>
+
+  <h3>Category List</h3>
+  <ul>
+    @for (cat of categories(); track cat.id) {
+      <li>{{ cat.name }}</li>
+    }
+  </ul>
+</mat-card>

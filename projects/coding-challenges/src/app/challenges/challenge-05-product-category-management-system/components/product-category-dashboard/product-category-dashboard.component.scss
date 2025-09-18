@@ -1,0 +1,39 @@
+.challenge-nav {
+  margin-top: 80px !important;
+  margin-left: 80px !important;
+}
+
+h2 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.product-dashboard-container {
+  width: 80%;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid var(--outline-color, #e0e0e0);
+  border-radius: 8px;
+  background-color: var(--surface-color, #ffffff);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.child-sections {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+
+  .challenge-nav {
+    margin-left: 12px !important;
+  }
+}

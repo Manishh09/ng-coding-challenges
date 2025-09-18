@@ -110,6 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/handle-parallel-apis',
       '/challenges/client-side-search',
       '/challenges/server-side-search',
+      '/challenges/product-category-management',
       '/theme-demo',
       '/getting-started'
     ];

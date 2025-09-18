@@ -1,0 +1,9 @@
+<h3>Product Filter</h3>
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Filter by Category</mat-label>
+  <mat-select [value]="selectedCategory()">
+    @for (category of categories(); track category.id) {
+    <mat-option [value]="category.id">{{ category.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
