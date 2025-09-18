@@ -39,6 +39,10 @@ export const routes: Routes = [
          {
             path: 'server-side-search',
             loadComponent: () => import('./challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component').then(m => m.ServerSideSearchComponent)
+         },
+         {
+          path: 'product-category-management',
+          loadComponent: () => import('./challenges/challenge-05-product-category-management-system/components/product-category-dashboard/product-category-dashboard.component').then(m => m.ProductCategoryDashboardComponent)
          }
       ]
    },

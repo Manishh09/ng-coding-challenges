@@ -42,6 +42,17 @@ export class ChallengesService {
       solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-SOLUTION_GUIDE.md`,
       gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-04-server-side-search`
     },
+    {
+      id: 5,
+      title: "Challenge 05: Product Category Management System",
+      description: "Build a product category management system where multiple Angular components share a list of product categories efficiently using Signals and RxJS shareReplay.",
+      link: "/challenges/product-category-management",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-05-product-category-management-system"
+    },
+
+
     // {
     //   id: 3,
     //   title: "Challenge 03: Form Validation",
