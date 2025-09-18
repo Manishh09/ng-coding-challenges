@@ -113,7 +113,6 @@ class CategorySummaryComponent {
 
 ---
 
-
 ### Follow-up Interview Questions:
 
 **1. Difference between shareReplay(1) and shareReplay({ bufferSize: 1, refCount: true })**
@@ -128,9 +127,8 @@ class CategorySummaryComponent {
 - Will unsubscribe from the source observable when there are no subscribers
 - This can be more efficient in certain cases, especially with long-lived streams.
 
-
 **2. DO you need Subscription Cleanup ?**
- 
+
 Example Component Code:
 
 ```typescript
@@ -141,20 +139,23 @@ Example Component Code:
   }
 
 ```
+
 **Answer:**
 
-It depends on the **observable**:
+### Answer
 
-- getCategories() with `shareReplay({ bufferSize: 1, refCount: true })`
+It depends on the **observable type**:
 
-- The source `(HttpClient.get)` completes after emitting once.
+- **Case 1: `getCategories()` with `shareReplay({ bufferSize: 1, refCount: true })`**
 
-That means the subscription will `auto-complete`.
+  - The source (`HttpClient.get`) **completes after emitting once**.
+  - The subscription will **auto-complete**.
+  - **No manual cleanup required**.
 
-So No manual cleanup required.
-
-That’s why you often see people safely using subscribe() with HTTP calls.
-
-- If you later switch getCategories() to a long-lived observable (like `BehaviorSubject`, `interval`, `websocket`, etc.)
-
-- Then your component would leak memory unless you unsubscribe (using `takeUntilDestroyed`, `async pipe`, or manual unsubscribe).
+- **Case 2: If `getCategories()` later switches to a long-lived observable**  
+  (e.g., `BehaviorSubject`, `interval`, etc.)
+  - Then your component would **leak memory** unless you unsubscribe.
+  - Solutions:
+    - Use `takeUntilDestroyed()` (Angular 16+)
+    - Use `async` pipe in the template
+    - Or unsubscribe manually in `ngOnDestroy`
