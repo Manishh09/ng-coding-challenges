@@ -111,6 +111,11 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/client-side-search',
       '/challenges/server-side-search',
       '/challenges/product-category-management',
+      '/challenges/user-todos-filter',
+      // Add future challenge routes here..
+      // Exclude non-challenge routes
+      '/challenges',
+      '/home',
       '/theme-demo',
       '/getting-started'
     ];

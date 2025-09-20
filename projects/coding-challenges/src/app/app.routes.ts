@@ -41,9 +41,15 @@ export const routes: Routes = [
             loadComponent: () => import('./challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component').then(m => m.ServerSideSearchComponent)
          },
          {
-          path: 'product-category-management',
-          loadComponent: () => import('./challenges/challenge-05-product-category-management-system/components/product-category-dashboard/product-category-dashboard.component').then(m => m.ProductCategoryDashboardComponent)
+            path: 'product-category-management',
+            loadComponent: () => import('./challenges/challenge-05-product-category-management-system/components/product-category-dashboard/product-category-dashboard.component').then(m => m.ProductCategoryDashboardComponent)
+         },
+         {
+            path: 'user-todos-filter',
+            loadComponent: () => import('./challenges/challenge-06-user-todos-filter/components/user-todos/user-todos.component').then(m => m.UserTodosComponent)
          }
+         // Add future challenge routes here..
+          
       ]
    },
    {

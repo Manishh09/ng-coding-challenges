@@ -51,7 +51,15 @@ export class ChallengesService {
       solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-SOLUTION_GUIDE.md",
       gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-05-product-category-management-system"
     },
-
+    {
+      id: 6,
+      title: "Challenge 06: User Todos with Status Filter",
+      description: "Build an Angular component that fetches todos and users from a Fake API, merges them using RxJS combineLatest, and displays a table enriched with user names. Implement a status filter (All / Completed / Pending) and display the filtered results.",
+      link: "/challenges/user-todos-filter",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-06-user-todos-filter"
+    }
 
     // {
     //   id: 3,

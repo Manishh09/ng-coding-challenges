@@ -1,0 +1,120 @@
+.challenge-nav {
+    margin-top: 80px !important;
+    margin-left: 80px !important;
+}
+
+h2,
+h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.user-todos-container {
+    border-top: 1px solid var(--outline-color);
+    padding: 1rem;
+
+    width: 85%;
+    margin: auto;
+   // box-shadow: 0 2px 5px var(--shadow-color);
+    background-color: var(--surface-color);
+
+    .filter-container {
+        margin: 1rem 0;
+        text-align: left;
+        background-color: var(--surface-color);
+
+        mat-select {
+            color: var(--text-primary);
+            outline: none;
+            background-color: var(--surface-color);
+
+        }
+    }
+
+    .view-mode {
+        margin: 1rem 0;
+        text-align: left;
+        background-color: var(--surface-color) !important;
+        color: var(--text-primary);
+
+        span {
+            color: var(--text-primary);
+            margin-right: 1rem;
+        }
+
+        mat-radio-button {
+            margin-right: 1rem;
+            outline: none;
+            
+            ::ng-deep .mdc-form-field {
+                color: var(--text-primary);
+            }
+            
+            ::ng-deep .mdc-radio .mdc-radio__background {
+                border-color: var(--text-primary);
+            }
+            
+        }
+    }
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    border-radius: 4px;
+    overflow: hidden;
+    color: var(--on-surface-color);
+    background-color: var(--surface-color);
+
+
+    th,
+    td {
+        border: 1px solid var(--outline-color);
+        padding: 0.75rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: var(--surface-variant-color);
+        font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--surface-variant-color);
+    }
+
+    tr:hover {
+        background-color: var(--interactive-secondary-hover);
+    }
+
+    tbody {
+        .completed {
+            color: var(--status-success, #4caf50);
+        }
+
+        .pending {
+            color: var(--status-error, #f44336);
+        }
+    }
+
+
+}
+
+
+
+@media (max-width: 768px) {
+
+    .challenge-nav {
+        margin-left: 12px !important;
+    }
+
+    .view-mode {
+        display: flex;
+        flex-direction: column;
+    }
+}
