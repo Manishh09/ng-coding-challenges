@@ -4,13 +4,14 @@
 
 ## Task Description
 
-You are building an **User & Posts Dashboard** for a blogging platform that needs to display users and their related posts in a single view.
+You are building a User & Posts Dashboard for a blogging platform. The dashboard should display a list of users along with their associated posts in a single view.
 
-For each user, identify which posts belong to them and combine this data. The final result should be displayed in a simple HTML table, showing each user along with the titles of their posts.
+For each user, fetch their posts and combine this data so that each user’s row in the table shows their details and the titles of their posts. The final result should be rendered in a simple HTML table, clearly showing the relationship between users and their posts.
 
 **APIs to Use:**
   Users: `https://dummyjson.com/users`
   Posts: `https://dummyjson.com/posts`
+  PostWithUserID: `https://dummyjson.com/posts/user/1` - 1 is userId here
 
 `Hint`: Handling dependent API calls
 
