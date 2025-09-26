@@ -4,7 +4,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   providedIn: 'root'
 })
 export class ChallengesService {
-  private repoUrl = 'https://github.com/Manishh09/ng-coding-challenges';
+  private readonly repoUrl = 'https://github.com/Manishh09/ng-coding-challenges';
   private challenges: Challenge[] = [
     {
       id: 1,
@@ -65,36 +65,20 @@ export class ChallengesService {
       title: "Challenge 07: User Posts Dashboard - Dependent API Calls",
       description: "Build an Angular component that fetches users and their posts from the DummyJSON API using RxJS mergeMap for dependent API calls. Display the the combined results in a simple HTML table (User → Post Titles) with loading and error states.",
       link: "/challenges/user-posts-dashboard",
-      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap/docs/CH-07-REQUIREMENT.md",
-      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap/docs/CH-07-SOLUTION_GUIDE.md",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-SOLUTION_GUIDE.md",
       gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap"
     },
-
-
-    // {
-    //   id: 3,
-    //   title: "Challenge 03: Form Validation",
-    //   description: "Create complex forms with dynamic validation using Angular's Reactive Forms.",
-    //   link: "/forms",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // },
-    // {
-    //   id: 4,
-    //   title: "Challenge 04: Component Communication",
-    //   description: "Implement parent-child and sibling component communication using various Angular patterns.",
-    //   link: "/components",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // },
-    // {
-    //   id: 5,
-    //   title: "Challenge 05: Routing & Navigation",
-    //   description: "Build a multi-level navigation system with route guards and lazy loading.",
-    //   link: "/routing",
-    //   requirement: 'https://github.com/Manishh09/ng-coding-challenges',
-    //   gitHub: 'https://github.com/Manishh09/ng-coding-challenges'
-    // }
+    {
+      id: 8,
+      title: "Challenge 08: E-Commerce Checkout Process",
+      description: "Implement a simplified e-commerce checkout process in Angular using RxJS. The challenge involves fetching products from a fake API, allowing users to select products, placing an order, updating product inventory, and processing payment. You'll use RxJS operators like concatMap to handle sequential API calls and manage loading and error states effectively.",
+      link: "/challenges/ecommerce-checkout",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout"
+    },
+    // Add future challenges here..
   ];
 
   getChallenges(): Challenge[] {

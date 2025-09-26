@@ -1,13 +1,13 @@
 .challenge-nav {
-    margin-top: 80px !important;
-    margin-left: 80px !important;
+  margin-top: 80px !important;
+  margin-left: 80px !important;
 }
 
 h2,
 h3 {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-align: center;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .user-posts-dashboard-container {
@@ -56,34 +56,34 @@ h2 {
 
 /* Table styling */
 .users-table {
-   width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    box-shadow: 0 2px 5px var(--shadow-color);
-    border-radius: 4px;
-    overflow: hidden;
-    color: var(--on-surface-color);
-    background-color: var(--surface-color);
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
 
 
-    th,
-    td {
-        border: 1px solid var(--outline-color);
-        padding: 0.75rem;
-    }
+  th,
+  td {
+    border: 1px solid var(--outline-color);
+    padding: 0.75rem;
+  }
 
-    th {
-        background-color: var(--surface-variant-color);
-        font-weight: 600;
-    }
+  th {
+    background-color: var(--surface-variant-color);
+    font-weight: 600;
+  }
 
-    tr:nth-child(even) {
-        background-color: var(--surface-variant-color);
-    }
+  tr:nth-child(even) {
+    background-color: var(--surface-variant-color);
+  }
 
-    tr:hover {
-        background-color: var(--interactive-secondary-hover);
-    }
+  tr:hover {
+    background-color: var(--interactive-secondary-hover);
+  }
 
   .count {
     text-align: center;
@@ -104,5 +104,12 @@ h2 {
   .no-posts {
     color: #999;
     font-style: italic;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .challenge-nav {
+    margin-left: 12px !important;
   }
 }
