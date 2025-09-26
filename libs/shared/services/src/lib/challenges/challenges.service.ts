@@ -35,7 +35,7 @@ export class ChallengesService {
     },
     {
       id: 4,
-      title: "Challenge 04: Server-Side User Search",
+      title: "Challenge 04: Server-Side User Search (AutoComplete)",
       description: "Implement a server-side search for users using Angular's Reactive Forms and RxJS with dummy API data",
       link: "/challenges/server-side-search",
       requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-REQUIREMENT.md`,
@@ -44,7 +44,7 @@ export class ChallengesService {
     },
     {
       id: 5,
-      title: "Challenge 05: Product Category Management System",
+      title: "Challenge 05: Product Category Management System - shareReplay",
       description: "Build a product category management system where multiple Angular components share a list of product categories efficiently using Signals and RxJS shareReplay.",
       link: "/challenges/product-category-management",
       requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md",
@@ -53,7 +53,7 @@ export class ChallengesService {
     },
     {
       id: 6,
-      title: "Challenge 06: User Todos with Status Filter",
+      title: "Challenge 06: User Todos with Status Filter - combineLatest",
       description: "Build an Angular component that fetches todos and users from a Fake API, merges them using RxJS combineLatest, and displays a table enriched with user names. Implement a status filter (All / Completed / Pending) and display the filtered results.",
       link: "/challenges/user-todos-filter",
       requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
