@@ -71,7 +71,7 @@ export class ChallengesService {
     },
     {
       id: 8,
-      title: "Challenge 08: E-Commerce Checkout Process",
+      title: "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
       description: "Implement a simplified e-commerce checkout process in Angular using RxJS. The challenge involves fetching products from a fake API, allowing users to select products, placing an order, updating product inventory, and processing payment. You'll use RxJS operators like concatMap to handle sequential API calls and manage loading and error states effectively.",
       link: "/challenges/ecommerce-checkout",
       requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
