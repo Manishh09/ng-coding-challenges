@@ -59,7 +59,17 @@ export class ChallengesService {
       requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
       solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-SOLUTION_GUIDE.md",
       gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-06-user-todos-filter"
-    }
+    },
+    {
+      id: 7,
+      title: "Challenge 07: User Posts Dashboard - Dependent API Calls",
+      description: "Build an Angular component that fetches users and their posts from the DummyJSON API using RxJS mergeMap for dependent API calls. Display the the combined results in a simple HTML table (User → Post Titles) with loading and error states.",
+      link: "/challenges/user-posts-dashboard",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap/docs/CH-07-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap/docs/CH-07-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap"
+    },
+
 
     // {
     //   id: 3,
