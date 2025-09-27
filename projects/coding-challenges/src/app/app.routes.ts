@@ -48,11 +48,15 @@ export const routes: Routes = [
             path: 'user-todos-filter',
             loadComponent: () => import('./challenges/challenge-06-user-todos-filter/components/user-todos/user-todos.component').then(m => m.UserTodosComponent)
          },
-         // Add future challenge routes here..
          {
-          path: 'user-posts-dashboard',
-          loadComponent: () => import('./challenges/challenge-07-dependent-apis/components/user-posts-dashboard/user-posts-dashboard.component').then(m => m.UserPostsDashboardComponent)
+            path: 'user-posts-dashboard',
+            loadComponent: () => import('./challenges/challenge-07-dependent-apis/components/user-posts-dashboard/user-posts-dashboard.component').then(m => m.UserPostsDashboardComponent)
+         },
+         {
+            path: 'ecommerce-checkout',
+            loadComponent: () => import('./challenges/challenge-08-ecommerce-checkout/components/checkout/checkout.component').then(m => m.CheckoutComponent)
          }
+         // Add future challenge routes here..
 
       ]
    },
