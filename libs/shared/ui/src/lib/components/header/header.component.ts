@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgOptimizedImage } from "@angular/common";
 
 /**
  * Header component with responsive design
@@ -21,17 +23,22 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    ThemeToggleComponent
-  ],
+    ThemeToggleComponent,
+    MatTooltipModule,
+    NgOptimizedImage
+],
   standalone: true
 })
 export class HeaderComponent {
   /** Application name for accessibility and branding */
   appName = input<string>('');
-  
+
   /** Control visibility of mobile menu button */
   showMobileMenu = input<boolean>(false);
-  
+
   /** Logo image URL */
   logoUrl = input<string>('');
+
+  /** Github  logo */
+  githubLogoUrl = input<string>('');
 }

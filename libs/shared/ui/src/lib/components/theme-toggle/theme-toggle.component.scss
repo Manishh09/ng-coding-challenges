@@ -1,47 +1,41 @@
-// Button styling
 .theme-toggle-btn {
-  transition: transform 0.3s var(--animation-easing, ease-in-out),
-              background-color 0.3s var(--animation-easing, ease-in-out);
-  height: 36px;
-  width: 36px;
-  min-width: 36px;
-  line-height: 36px;
-  padding: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  margin: 0;
-  
-  // Dark mode specific styles
-  &.dark-mode {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-  }
-  
-  // Hover state
-  &:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.25);
-  }
-  
-  // Focus state for accessibility
-  &:focus-visible {
-    outline: 2px solid var(--primary-color, #dd0031);
-    outline-offset: 2px;
-  }
-  
-  // Icon styling
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
+
   mat-icon {
-    transition: transform 0.3s var(--animation-easing, ease-in-out);
-    height: 24px;
-    width: 24px;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 22px;
+    width: 20px;
+    height: 20px;
+    transition: none;
+    color: var(--text-primary);
   }
+
+  &:hover { background: transparent; border: none; transform: none; box-shadow: none; }
+  &:focus, &:focus-visible { outline: none; box-shadow: none; }
+  &:active { transform: none; box-shadow: none; }
 }
 
-// Active state animation
-.theme-toggle-btn:active mat-icon {
-  transform: rotate(180deg);
+/* Dark mode retains same minimal style */
+body.dark-mode .theme-toggle-btn { background: transparent; border: none; }
+
+/* Remove animation */
+.theme-toggle-btn mat-icon.light_mode,
+.theme-toggle-btn mat-icon.dark_mode { animation: none; }
+
+@media (max-width: 768px) {
+  .theme-toggle-btn { width: 32px; height: 32px; }
+  .theme-toggle-btn mat-icon { font-size: 24px; width: 24px; height: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn, .theme-toggle-btn mat-icon { transition: none; }
 }

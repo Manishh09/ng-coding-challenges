@@ -1,0 +1,244 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use 'sass:color';
+@use './_typography.scss' as typo;
+@use './_light-theme.scss' as light;
+@use './_dark-theme.scss' as dark;
+
+// Core Material
+@include mat.core();
+
+// Base tokens (CSS variables shared by both themes)
+:root {
+  // Brand tokens (OKLCH is fine in CSS vars)
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --vivid-pink: oklch(65.71% 0.277 342.55);
+  --hot-pink: oklch(58.11% 0.238 342.55);
+  --hot-red: oklch(58.11% 0.238 15.55);
+  --orange-red: oklch(58.11% 0.238 25.55);
+  --super-green: oklch(58.11% 0.238 142.55);
+  --ruby-red: #E0115F;
+  --dark-pink: #C11C84;
+
+  // Gray scale
+  --gray-50: oklch(98.5% 0.003 240);
+  --gray-100: oklch(96.5% 0.003 240);
+  --gray-200: oklch(92.5% 0.003 240);
+  --gray-300: oklch(87.5% 0.003 240);
+  --gray-400: oklch(80.5% 0.003 240);
+  --gray-500: oklch(70.5% 0.003 240);
+  --gray-600: oklch(60.5% 0.003 240);
+  --gray-700: oklch(45.5% 0.003 240);
+  --gray-800: oklch(30.5% 0.003 240);
+  --gray-900: oklch(15.5% 0.003 240);
+  --gray-950: oklch(8.5% 0.003 240);
+
+  // Spacing & radii
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+
+  // Typography vars
+  @include typo.typography-css-vars();
+}
+
+// Apply light theme tokens and Material styles under :root
+:root {
+  @include light.light-theme-vars();
+  @include light.light-material-theme();
+}
+
+// Dark mode: only colors get overridden under body class
+body.dark-mode {
+  @include dark.dark-theme-vars();
+  @include dark.dark-material-theme();
+}
+
+// Fallback to system preference for first paint if no class
+@media (prefers-color-scheme: dark) {
+  body:not(.dark-mode) {
+    @include dark.dark-theme-vars();
+  }
+}
+@media (prefers-color-scheme: light) {
+  body:not(.dark-mode) {
+    @include light.light-theme-vars();
+  }
+}
+
+// Apply global typography
+@include typo.apply-typography();
+
+// ============================================================================
+// CUSTOM COMPONENT STYLES
+// ============================================================================
+
+// angular.dev inspired card styles
+.angular-dev-card {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--animation-duration-standard) var(--animation-easing);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &.elevated {
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+// angular.dev inspired button styles
+.angular-dev-button {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: white;
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  transition: all var(--animation-duration-standard) var(--animation-easing);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &.secondary {
+    background: var(--interactive-secondary);
+    color: var(--text-primary);
+
+    &:hover {
+      background: var(--interactive-secondary-hover);
+    }
+  }
+}
+
+// angular.dev inspired surface styles
+.angular-dev-surface {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+}
+
+// Code block styling
+.angular-dev-code {
+  background: var(--code-background);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family-mono);
+  padding: var(--spacing-md);
+
+  .keyword { color: var(--code-keyword); }
+  .string { color: var(--code-string); }
+  .comment { color: var(--code-comment); }
+  .function { color: var(--code-function); }
+  .number { color: var(--code-number); }
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Text utilities
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-accent { color: var(--accent-color); }
+
+// Background utilities
+.bg-primary { background: var(--background-primary); }
+.bg-secondary { background: var(--background-secondary); }
+.bg-surface { background: var(--surface-secondary); }
+
+// Border utilities
+.border-primary { border-color: var(--border-primary); }
+.border-secondary { border-color: var(--border-secondary); }
+
+// Shadow utilities
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+// Animation utilities
+.transition-fast { transition-duration: var(--animation-duration-fast); }
+.transition-standard { transition-duration: var(--animation-duration-standard); }
+.transition-slow { transition-duration: var(--animation-duration-slow); }
+
+// ============================================================================
+// RESPONSIVE BREAKPOINTS
+// ============================================================================
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
+}
+
+.slide-in-up {
+  animation: slideInUp var(--animation-duration-slow) var(--animation-easing);
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

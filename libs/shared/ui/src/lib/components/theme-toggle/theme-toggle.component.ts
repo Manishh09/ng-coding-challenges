@@ -6,7 +6,7 @@ import { ThemeService } from '@ng-coding-challenges/shared/services';
 
 /**
  * Theme toggle button component
- * Toggles between light and dark mode
+ * Toggles between light and dark mode using angular.dev theme system
  */
 @Component({
   selector: 'ng-coding-challenges-theme-toggle',
@@ -21,7 +21,7 @@ export class ThemeToggleComponent {
   readonly themeService = inject(ThemeService);
 
   /** Computed icon based on current theme */
-  readonly themeIcon = computed(() => 
+  readonly themeIcon = computed(() =>
     this.themeService.isDarkMode() ? 'light_mode' : 'dark_mode'
   );
 
@@ -29,4 +29,11 @@ export class ThemeToggleComponent {
   readonly tooltipText = computed(() =>
     `Switch to ${this.themeService.isDarkMode() ? 'light' : 'dark'} theme`
   );
+
+  /**
+   * Handle theme toggle with smooth transition
+   */
+  onToggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 }

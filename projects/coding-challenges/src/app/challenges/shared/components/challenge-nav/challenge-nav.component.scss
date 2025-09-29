@@ -1,10 +1,7 @@
  .challenge-nav {
-     display: flex;
-     gap: 16px;
-     padding: 0px 0px 0px 16px;
-     margin-bottom: 16px;
-
-
+      
+     margin-left: 32px;
+ 
      .nav-button {
          display: flex;
          align-items: center;
@@ -12,6 +9,7 @@
          transition: all 0.2s ease;
          border-radius: 4px;
          font-weight: 500;
+         font-size: 16px;
 
          &:hover {
              border-color: var(--primary-color, #dd0031);
@@ -30,18 +28,21 @@
          }
 
      }
-
-
  }
 
 
  // Responsive styles
- @media (max-width: 599px) {
-     .challenge-nav {
-         justify-content: space-between;
 
-         .nav-button {
-             flex: 1;
-         }
+ @media (max-width: 768px) {
+     .challenge-nav {
+         margin-left: 16px;
+           
+     }
+ }
+
+ @media (max-width: 484px) {
+     .challenge-nav {
+         margin-left: 16px;
+         
      }
  }

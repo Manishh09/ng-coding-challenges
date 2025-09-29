@@ -1,9 +1,12 @@
+// Main footer container
 .footer {
   background: var(--surface-color);
   border-top: 1px solid var(--outline-color);
   width: 100%;
   position: relative;
   overflow: hidden;
+  // padding: var(--spacing-sm);
+  color: var(--on-surface-color);
 
   &::before {
     content: '';
@@ -16,18 +19,28 @@
   }
 }
 
+// Content layout
 .footer-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-xl);
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--spacing-xl);
+  padding: 24px 48px !important;
+  //padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-xl);
+  // display: grid;
+  // grid-template-columns: 2fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  //gap: var(--spacing-xl);
+
 }
 
-.footer-section {
+// Shared section styles
+.brand-section,
+.quick-links-section,
+.community-section {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   animation: fadeIn 0.5s var(--animation-easing);
 }
 
@@ -35,7 +48,8 @@
   max-width: 350px;
 }
 
-.footer-title {
+// Section title styling
+.section-title {
   margin: 0 0 var(--spacing-md) 0;
   font-size: 1.1rem;
   font-weight: 600;
@@ -51,18 +65,20 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 40px;
+    width: 50px;
     height: 3px;
     background: var(--brand-gradient-primary);
     border-radius: 3px;
     transition: width 0.3s var(--animation-easing);
   }
-  
+
   &:hover::after {
     width: 60px;
   }
 }
 
+
+// Logo styling
 .footer-logo {
   display: flex;
   align-items: center;
@@ -72,7 +88,8 @@
 .footer-logo-icon {
   margin-right: var(--spacing-sm);
   font-size: 24px;
-  color: var(--primary-color, #dd0031);
+  color: var(--primary-color);
+  filter: drop-shadow(0 2px 4px var(--logo-shadow-color));
   transition: transform 0.3s var(--animation-easing);
 
   &:hover {
@@ -82,359 +99,179 @@
 
 .footer-logo-text {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--primary-color, #dd0031);
-}
-
-.footer-description {
-  color: var(--on-surface-variant-color);
-  line-height: 1.6;
-  margin: 0 0 var(--spacing-md) 0;
-  font-size: 0.95rem;
+  font-weight: 700;
+  background: var(--brand-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
 }
 
 .footer-tagline {
   color: var(--on-surface-variant-color);
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0 0 var(--spacing-md) 0;
+  line-height: 1.6;
 }
 
-.newsletter-section {
-  margin-top: var(--spacing-md);
-}
-
-.newsletter-form {
-  margin-top: var(--spacing-sm);
-}
-
-.footer-nav {
+// Links container
+.footer-links {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--spacing-sm);
+}
 
-  ::ng-deep a {
-    color: var(--on-surface-variant-color);
-    text-decoration: none;
+// General link styling
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--on-surface-variant-color);
+  text-decoration: none;
+  transition: all 0.3s var(--animation-easing);
+  padding: 0.5rem 0;
+  cursor: pointer;
+  position: relative;
+
+  .mat-icon {
+    font-size: 1.25rem;
+    height: 1.25rem;
+    width: 1.25rem;
+    color: var(--primary-color);
+    opacity: 0.85;
     transition: all 0.3s var(--animation-easing);
-    display: inline-block;
-    position: relative;
-    padding: 6px 0;
-    cursor: pointer;
+  }
 
-    &:hover {
-      color: var(--primary-color, #dd0031);
-      transform: translateX(4px);
-    }
+  span {
+    position: relative;
+    transition: all 0.3s var(--animation-easing);
 
     &::after {
       content: '';
       position: absolute;
-      width: 0;
-      //height: 1px;
-      bottom: 0;
+      bottom: -2px;
       left: 0;
+      width: 0;
+      height: 1px;
       background: var(--brand-gradient-primary);
-      transition: width 0.3s var(--animation-easing);
-    }
-
-    &:hover::after {
-      width: 100%;
-    }
-    
-    // Improve icon alignment when icons are present
-    ::ng-deep mat-icon {
-      vertical-align: middle;
-      margin-right: var(--spacing-sm);
+      transition: width 0.3s var(--animation-easing), opacity 0.3s var(--animation-easing);
+      opacity: 0;
     }
   }
-}
 
-.social-links {
-  display: flex;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
+  &:hover {
+    color: var(--primary-color);
+    transform: translateX(4px);
 
-  ::ng-deep a, ::ng-deep button {
-    transition: all 0.3s var(--animation-easing);
-    opacity: 0.85;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-
-    &:hover {
-      transform: translateY(-3px);
+    .mat-icon {
       opacity: 1;
     }
-    
-    ::ng-deep mat-icon {
-      margin-right: var(--spacing-sm);
-      vertical-align: middle;
-      font-size: 1.15rem;
-      transition: transform 0.3s var(--animation-easing);
-    }
-    
-    &:hover ::ng-deep mat-icon {
-      transform: scale(1.1);
+
+    span::after {
+      width: 100%;
+      opacity: 1;
     }
   }
+
 }
 
+
+
+// Footer bottom section
 .footer-bottom {
-  background-color: var(--surface-color);
   border-top: 1px solid var(--outline-color);
   width: 100%;
   position: relative;
-  overflow: hidden;
-  
+  // margin-top: var(--spacing-lg);
+
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 2px;
     background: var(--brand-gradient-section);
     opacity: 0.8;
   }
 }
 
-.footer-content {
+.footer-bottom-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-xl);
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--spacing-xl);
-}
-
-// This section was removed as it was duplicated from earlier in the file
-
-// This section was removed as it was duplicated from earlier in the file
-
-// This section was removed as it was duplicated from earlier in the file
-
-.footer-bottom {
-  background-color: var(--surface-color);
-  border-top: 1px solid var(--outline-color);
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.footer-bottom .footer-content {
-  padding: var(--spacing-md) var(--spacing-md) 0;
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  grid-template-columns: none;
   gap: var(--spacing-md);
 }
 
 .copyright {
-  margin: 0 0 var(--spacing-md) 0;
+  text-align: center;
+  margin: 0;
   color: var(--on-surface-variant-color);
-  font-size: 0.875rem;
-  padding-bottom: 0;
+  font-size: 0.9rem;
+}
+.created-by {
+  color: var(--primary-color);
 }
 
 .heart-icon {
-  color: var(--primary-color, #dd0031);
+  color: var(--primary-color);
   display: inline-block;
   animation: heartbeat 1.5s infinite;
   margin: 0 3px;
 }
 
-.footer-bottom-links {
+// Legal links
+.legal-links {
   display: flex;
+  flex-direction: row;
   gap: var(--spacing-md);
-  flex-wrap: wrap;
-  margin: 0 0 var(--spacing-md) 0;
-  padding-bottom: 0;
-  
-  ::ng-deep a {
-    color: var(--on-surface-variant-color);
-    font-size: 0.875rem;
-    text-decoration: none;
-    transition: all 0.3s var(--animation-easing);
-    position: relative;
-    padding: 2px 0;
-    
-    &:hover {
-      color: var(--primary-color, #dd0031);
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: -2px;
-      left: 0;
-      background: var(--brand-gradient-primary);
-      transition: width 0.3s var(--animation-easing);
-    }
-    
-    &:hover::after {
-      width: 100%;
-    }
-  }
+  font-size: 0.875rem;
 }
 
-/* Footer Link Components Styling */
-::ng-deep .footer-links-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-::ng-deep .footer-link {
-  display: flex !important;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.3s var(--animation-easing);
-  padding: 0.5rem 0;
-  cursor: pointer;
-  position: relative;
-  
-  mat-icon {
-    font-size: 1.25rem;
-    height: 1.25rem;
-    width: 1.25rem;
-    background: var(--brand-gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0.85;
-    transition: all 0.3s var(--animation-easing);
-  }
-  
-  span {
-    position: relative;
-    transition: all 0.3s var(--animation-easing);
-  }
-  
-  &:hover {
-    transform: translateX(6px);
-    
-    mat-icon {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-    
-    span::after {
-      width: 100%;
-      opacity: 1;
-    }
-  }
-  
-  span::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--brand-gradient-primary);
-    transition: width 0.3s var(--animation-easing), opacity 0.3s var(--animation-easing);
-    opacity: 0;
-  }
-}
-
-/* Social Links Grid Styling */
-::ng-deep .social-links-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-::ng-deep .social-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--border-radius-md);
-  background-color: rgba(var(--surface-variant-color-rgb, 0, 0, 0), 0.05);
-  transition: all 0.3s var(--animation-easing);
-  cursor: pointer;
-  border: 1px solid var(--outline-color);
-  
-  mat-icon {
-    font-size: 1.25rem;
-    height: 1.25rem;
-    width: 1.25rem;
-    transition: transform 0.3s var(--animation-easing);
-  }
-  
-  span {
-    font-weight: 500;
-    transition: transform 0.3s var(--animation-easing);
-  }
-  
-  &.linkedin {
-    color: #0077B5;
-    
-    &:hover {
-      background-color: rgba(0, 119, 181, 0.1);
-      
-      mat-icon {
-        transform: scale(1.1);
-      }
-    }
-  }
-  
-  &.github {
-    color: var(--on-surface-color, #333);
-    
-    &:hover {
-      background-color: rgba(var(--on-surface-color-rgb, 0, 0, 0), 0.1);
-      
-      mat-icon {
-        transform: scale(1.1);
-      }
-    }
-  }
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-color: var(--primary-color, #dd0031);
-  }
-}
-
-/* Legal Links */
-::ng-deep .legal-links {
-  display: flex;
-  gap: 1.5rem;
-  
-  .legal-link {
-    font-size: 0.75rem;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-    cursor: pointer;
-    
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heartbeat {
-  0% { transform: scale(1); }
-  14% { transform: scale(1.2); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.2); }
-  70% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.2);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.2);
+  }
+
+  70% {
+    transform: scale(1);
+  }
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer-content {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
     gap: var(--spacing-lg);
   }
 
@@ -446,67 +283,90 @@
 
 @media (max-width: 768px) {
   .footer-content {
-    grid-template-columns: 1fr;
-    padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+    flex-direction: column;
+    padding: var(--spacing-md);
   }
 
-  .footer-bottom .footer-content {
+  .footer-bottom-content {
     flex-direction: column;
     text-align: center;
     gap: var(--spacing-sm);
   }
-  
-  .footer-title::after {
+
+  .section-title::after {
     left: 50%;
     transform: translateX(-50%);
   }
-  
-  .footer-section {
+
+  .brand-section,
+  .quick-links-section,
+  .community-section {
     align-items: center;
     text-align: center;
   }
-  
+
   .footer-tagline {
     text-align: center;
     max-width: 400px;
   }
-  
-  .footer-nav {
-    align-items: center;
-  }
-  
-  .social-links {
+
+  .footer-links {
     justify-content: center;
   }
+
+
 }
 
 @media (max-width: 480px) {
-  .footer-content {
-    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  .footer {
+    padding: var(--spacing-xs);
   }
-  
+
+  .footer-content {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-lg);
+  }
+
   .footer-logo-text {
     font-size: 1.1rem;
   }
-  
-  .footer-title {
+
+  .section-title {
     font-size: 1rem;
   }
-  
+
   .footer-tagline {
     font-size: 0.8rem;
+  }
+
+  .footer-link {
+    font-size: 0.9rem;
+  }
+
+  .legal-links {
+    flex-direction: column;
+    gap: var(--spacing-sm);
   }
 }
 
 /* Accessibility - Respect reduced motion preferences */
 @media (prefers-reduced-motion) {
-  .footer-section, .heart-icon, .footer-logo-icon, .footer-nav ::ng-deep a, .social-links ::ng-deep a {
+
+  .brand-section,
+  .quick-links-section,
+  .community-section,
+  .heart-icon,
+  .footer-logo-icon {
     animation: none !important;
     transition: none !important;
+  }
+
+  .footer-link:hover,
+  .footer-logo-icon:hover {
     transform: none !important;
   }
-  
-  .footer-nav ::ng-deep a:hover, .social-links ::ng-deep a:hover {
-    transform: none !important;
+
+  .heart-icon {
+    animation: none !important;
   }
 }

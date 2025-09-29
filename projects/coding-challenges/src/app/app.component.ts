@@ -1,10 +1,11 @@
 import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import {
   ChallengeListComponent,
   FooterComponent,
   HeaderComponent,
-  HeroSectionComponent,
+  LandingPageComponent,
   FooterLink
 } from '@ng-coding-challenges/shared/ui';
 import { Subject, timer } from 'rxjs';
@@ -19,17 +20,18 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   styleUrl: './app.component.scss',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    ChallengeListComponent,
-    HeroSectionComponent,
+    LandingPageComponent,
     MatIconModule
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'ngQuest';
-  logo = 'logo.png';  // Path to the favicon in the public folder
+  logo = '/application-logo.webp';  // Path to the favicon in the public folder
+  githubLogo = 'github-logo.png';
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
 
@@ -41,8 +43,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Signals to control visibility of specific layout components
   protected showHeader = signal(true);
-  protected showHeroSection = signal(true);
+  protected showLandingPage = signal(true);
   protected showFooter = signal(true);
+  protected showFooterLinks = signal(true);
   // Hero section description paragraphs
   protected heroParagraphs = [
     'Sharpen your skills and get ready with practical Angular challenges focused on real-world interview scenarios.',
@@ -71,15 +74,15 @@ export class AppComponent implements OnInit, OnDestroy {
    *
    * @requires The component class must implement OnInit interface
    */
- 
+
 
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
     // Listen for custom events to show challenges
-     window.addEventListener('showChallenges', this.#showChallengesHandler);
+    window.addEventListener('showChallenges', this.#showChallengesHandler);
   }
 
-   // Event handler for showChallenges custom event
+  // Event handler for showChallenges custom event
   #showChallengesHandler = ((e: CustomEvent) => {
     this.showChallenges.set(e.detail);
     if (e.detail) {
@@ -88,6 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }) as EventListener;
 
   #updateLayoutOnRouteChange() {
+    this.showLandingPage.set(false);
     this.#router.events
       .pipe(takeUntil(this.#destroy$), filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe({
@@ -105,30 +109,41 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/fetch-products',
       '/challenges/handle-parallel-apis',
       '/challenges/client-side-search',
-      '/challenges/server-side-search'
+      '/challenges/server-side-search',
+      '/challenges/product-category-management',
+      '/challenges/user-todos-filter',
+      '/challenges/user-posts-dashboard',
+      '/challenges/ecommerce-checkout',
+      // Add future challenge routes here..
+      
+      // Exclude non-challenge routes
+      '/challenges',
+      '/home',
+      '/theme-demo',
+      '/getting-started'
     ];
     // Check if current route is a specific challenge page
     const isChallengePage = challengeRoutes.includes(url);
-
     if (isChallengePage) {
-      // For challenge pages, show layout with header and footer but hide hero section
-      this.showLayout.set(true);
-      this.showHeader.set(true);
-      this.showHeroSection.set(false);
-      this.showChallenges.set(false);
+      this.showLandingPage.set(false);
+      this.showFooterLinks.set(false);
       this.showFooter.set(false);
-    } else {
-      // For landing page, show everything
-      this.showLayout.set(true);
-      this.showHeader.set(true);
-      this.showHeroSection.set(true);
-      this.showFooter.set(true);
-    }
+      return;
 
-    // Auto-show challenges list when on challenges landing page
-    if (url === '/challenges' || url === '/') {
-      // this.showChallenges.set(true);
     }
+    // Check if current route is the challenges list page
+    if (url === '/challenges') {
+      this.showLandingPage.set(false);
+      this.showFooterLinks.set(false);
+      this.showFooter.set(true);
+      return;
+
+    }
+    // For all other routes, show full layout
+    this.showLandingPage.set(true);
+    this.showFooter.set(true);
+    this.showFooterLinks.set(true);
+    this.showChallenges.set(false);
   }
 
   /**
@@ -182,25 +197,38 @@ export class AppComponent implements OnInit, OnDestroy {
     this.#router.navigateByUrl(route);
   }
 
-  // Signals for footer links
-  protected readonly quickLinks = signal<FooterLink[]>([
-    { text: 'Home', icon: 'home', url: '/challenges', action: () => { this.scrollToSection('header-section'); } },
-    { text: 'Challenges', icon: 'code', action: () => { this.showChallenges.set(true); this.scrollToSection('challenges-section'); } },
-    // { text: 'Roadmap', icon: 'map', url: '/roadmap' },
-    { text: 'GitHub', icon: 'code_off', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true },
-    { text: 'Contribute', icon: 'volunteer_activism', url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md', external: true }
-  ]);
+  // Handle footer link clicks
+  onFooterLinkClick(link: FooterLink) {
+    if (link.section) {
+      if (link.section === 'challenges') {
+        this.navigateToRoute('/challenges');
+        return;
+      }
 
-  protected readonly socialLinks = signal<FooterLink[]>([
-    { text: 'Follow on LinkedIn', icon: 'person', url: 'https://www.linkedin.com/in/manishboge', external: true, cssClass: 'linkedin' },
-    { text: 'Star on GitHub', icon: 'star', url: 'https://github.com/Manishh09/ng-coding-challenges', external: true, cssClass: 'github' }
-  ]);
+      this.scrollToSection(link.section === 'home' ? 'header-section' : 'home-section');
+      return;
+    }
+    if (link.url) {
+      this.navigateToRoute(link.url);
+    }
+  }
 
-  protected readonly legalLinks = signal<FooterLink[]>([
-    { text: 'Terms', url: '#' },
-    { text: 'Privacy', url: '#' },
-    { text: 'Cookie Policy', url: '#' }
-  ]);
+  // Handle landing page events
+  onGetStarted(): void {
+    this.navigateToRoute('/getting-started');
+  }
+
+  onExploreChallenges(): void {
+    this.navigateToRoute('/challenges');
+  }
+
+  onTryLatestChallenge(): void {
+    // Navigate to the latest challenge - for now, navigate to the first challenge
+    const latestChallenge = this.challenges.at(-1);
+    if (latestChallenge?.link) {
+      this.navigateToRoute(latestChallenge.link);
+    }
+  }
 
   // clear subscriptions on destroy
   ngOnDestroy(): void {

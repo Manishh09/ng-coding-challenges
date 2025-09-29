@@ -1,5 +1,10 @@
 <mat-card class="challenge-card">
   <div class="card-banner" aria-hidden="true"></div>
+  @if (hasNewBadge) {
+    <div class="new-badge-container">
+      <span class="new-badge">New</span>
+    </div>
+  }
   <mat-card-header>
     <mat-card-title
       [matTooltip]="challenge.title.length > 30 ? challenge.title : ''"

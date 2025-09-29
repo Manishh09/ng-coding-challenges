@@ -1,0 +1,115 @@
+.challenge-nav {
+  margin-top: 80px !important;
+  margin-left: 80px !important;
+}
+
+h2,
+h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.user-posts-dashboard-container {
+
+
+  border-top: 1px solid var(--outline-color);
+  padding: 1rem;
+
+  width: 85%;
+  margin: auto;
+  // box-shadow: 0 2px 5px var(--shadow-color);
+  background-color: var(--surface-color);
+
+
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* Status messages */
+.status {
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+
+  &.loading {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+
+  &.error {
+    background: #ffebee;
+    color: #c62828;
+  }
+
+  &.empty {
+    background: #f5f5f5;
+    color: #666;
+  }
+}
+
+/* Table styling */
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
+
+
+  th,
+  td {
+    border: 1px solid var(--outline-color);
+    padding: 0.75rem;
+  }
+
+  th {
+    background-color: var(--surface-variant-color);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--surface-variant-color);
+  }
+
+  tr:hover {
+    background-color: var(--interactive-secondary-hover);
+  }
+
+  .count {
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+/* Posts list inside table cell */
+.posts-list {
+  margin: 0;
+  padding-left: 1rem;
+
+  li {
+    margin: 2px 0;
+    font-size: 0.85rem;
+  }
+
+  .no-posts {
+    color: #999;
+    font-style: italic;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .challenge-nav {
+    margin-left: 12px !important;
+  }
+}

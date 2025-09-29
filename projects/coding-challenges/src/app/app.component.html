@@ -1,88 +1,33 @@
-@if (showLayout()) {
-<div class="app-layout">
+ <div class="app-layout">
   <!-- Header -->
-   @if(showHeader()) {
-     <ng-coding-challenges-header id="header-section" [logoUrl]="logo" [appName]="title"
-       [showMobileMenu]="false"></ng-coding-challenges-header>
-   }
 
-  <!-- Hero Section -->
-   @if(showHeroSection()) {
-     <ng-coding-challenges-hero-section [title]="heroTitle"
-       [description]="heroParagraphs" [isExpanded]="showChallenges()" [buttonText]="startButtonText"
-       [hideButtonText]="hideButtonText" (toggleExpand)="toggleChallenges($event)"></ng-coding-challenges-hero-section>
-   }
+  <ng-coding-challenges-header id="header-section" [logoUrl]="logo" [appName]="title" [githubLogoUrl]="githubLogo"
+    [showMobileMenu]="false">
+  </ng-coding-challenges-header>
 
-  <!-- Challenges List Section-->
-  @if (showChallenges()) {
-  <div id="challenges-section">
-    <ng-coding-challenges-challenge-list [challenges]="challenges" />
-  </div>
+
+  <!-- Landing Page Section - only shown on root path -->
+  @if(showLandingPage()) {
+  <ng-coding-challenges-landing-page id="landing-section" (getStarted)="onGetStarted()"
+    (exploreChallenges)="onExploreChallenges()" (tryLatestChallenge)="onTryLatestChallenge()">
+  </ng-coding-challenges-landing-page>
   }
 
   <!-- Challenge Content Section (when showing individual challenges) -->
-  @if (!showHeroSection() && !showChallenges()) {
-  <div class="challenge-content">
+  @if (!showLandingPage()) {
+  <main class="main-content" >
     <router-outlet></router-outlet>
-  </div>
+  </main>
   }
 
+  <!-- Footer - always visible -->
+  @if(showFooter()){
+    <ng-coding-challenges-footer id="footer-section"
+      [appName]="title"
+      (linkClicked)="onFooterLinkClick($event)"
+      [showFooterLinks]="showFooterLinks()"
+      >
+    </ng-coding-challenges-footer>
+  }
 
-  <!-- Footer -->
-   @if(showFooter()) {
-
-
-  <ng-coding-challenges-footer id="footer-section" [appName]="title"
-    [description]="footerDescription"
-    [angularVersion]="angularVersion">
-
-    <!-- Quick Links Section -->
-    <div slot="quick-links" class="footer-links-grid">
-      @for (link of quickLinks(); track link.text) {
-        @if (link.url && !link.action) {
-          @if (link.external) {
-            <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
-              <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-              <span>{{ link.text }}</span>
-            </a>
-          } @else {
-            <a href="javascript:void(0)" (click)="navigateToRoute(link.url)" class="footer-link">
-              <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-              <span>{{ link.text }}</span>
-            </a>
-          }
-        } @else {
-          <a (click)="link.action && link.action()" class="footer-link">
-            <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-            <span>{{ link.text }}</span>
-          </a>
-        }
-      }
-    </div>
-
-    <!-- Community Section -->
-    <div slot="social-links" class="social-links-grid">
-      @for (link of socialLinks(); track link.text) {
-        <a [href]="link.url" target="_blank" rel="noopener noreferrer"
-          class="social-link {{ link.cssClass }}" [attr.aria-label]="link.text">
-          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
-          <span>{{ link.text }}</span>
-        </a>
-      }
-    </div>
-
-    <!-- Legal Links -->
-    <div slot="legal-links" class="legal-links">
-      @for (link of legalLinks(); track link.text) {
-        <a [href]="link.url" class="legal-link">{{ link.text }}</a>
-      }
-    </div>
-  </ng-coding-challenges-footer>
-}
 </div>
-} @else {
-<!-- Only Main Content (for specific routes) -->
-<main class="main-content">
-  <router-outlet></router-outlet>
-</main>
-}
