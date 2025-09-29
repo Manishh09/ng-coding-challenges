@@ -15,3 +15,7 @@ export * from './lib/challenges/challenges.service';
 // Utility Services
 export * from './lib/navigation/navigation.service';
 export * from './lib/notification/notification.service';
+export * from './lib/stackblitz/stackblitz.service';
+export * from './lib/stackblitz/stackblitz.service';
+
+// Add future services here...
