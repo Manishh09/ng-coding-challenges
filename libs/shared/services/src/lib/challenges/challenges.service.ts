@@ -67,7 +67,7 @@ export class ChallengesService {
       link: "/challenges/user-posts-dashboard",
       requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md",
       solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-SOLUTION_GUIDE.md",
-      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-07-dependent-apis-mergemap"
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-07-dependent-apis"
     },
     {
       id: 8,
