@@ -107,3 +107,17 @@ ___
 5. The `switchMap` operator cancels any previous API calls if a new query is received.
 6. The results are processed and displayed in the UI.
 7. The user can refine their search by modifying the input, which triggers the above flow again.
+
+--- 
+
+### Why `switchMap` is used
+
+- `switchMap` is used to switch to a new observable whenever the search term changes.
+- This is useful for:
+  - Ensuring proper sequencing: load → then search.
+  - Canceling previous search requests if the user is typing quickly.
+  - Ensuring that only the latest search result is considered.
+- Example: If a user types "John", then quickly types "Doe", only the search for "Doe" will be processed.
+- Without `switchMap`, you might end up with multiple filter operations running simultaneously, leading to inconsistent results.
+
+---

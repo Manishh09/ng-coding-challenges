@@ -1,93 +1,118 @@
-# Challenge 03 - Client-Side User Search
+# Challenge 03: Client-Side User Search
 
-## Task
+## Description
 
-Build an **Angular component** that allows users to **search through a list of users in real-time** using data from the [JSONPlaceholder Users API](https://jsonplaceholder.typicode.com/users).
-
-This challenge evaluates your ability to work with **Reactive Forms**, **RxJS operators**, **HTTP integration**, and proper **state handling** in an Angular application.
+Create an Angular component that enables users to perform **real-time search** over a list of users fetched from a fake API.
 
 ---
 
 ## Requirements
 
-### Functional Requirements
+### APIs
 
-1. **User List Fetching**
+- Fetch user data from the following API endpoint on component initialization:  
+  `GET https://jsonplaceholder.typicode.com/users`
 
-   - On component initialization, fetch the user list from:
-     - `GET https://jsonplaceholder.typicode.com/users`
-   - Show a loading indicator while data is being fetched.
+- Define a `User` TypeScript interface to strongly type the fetched data structure.
 
-2. **Search Input**
+- **Example Model**
 
-   - Add a **search box** powered by `FormControl` from Angular Reactive Forms.
-   - Implement **real-time filtering** of the fetched users **as the user types**.
-   - Do **not** use a submit button.
-   - Load predefined user data into the UI and display respective data as user searches
-
-3. **Filtering Behavior**
-
-   - Use **RxJS operators** like:
-     - `debounceTime`
-     - `distinctUntilChanged`
-     - `map` / `filter`
-   - Perform **client-side filtering** by matching the search query against the user’s:
-     - `name`
-     - `username`
-     - `email`
-
-4. **Search Results Display**
-
-   - Show a list of users matching the search query.
-   - Each user should display:
-     - Full Name
-     - Optional:
-       - Username
-       - Email
-   - If no results match, show a “No users found” message.
-
-5. **Error Handling**
-
-   - If the user fetch fails, show an appropriate error message.
-
-6. **Clean-Up**
-   - Ensure all subscriptions (e.g., from `valueChanges` or HTTP calls) are **properly cleaned up** on component destroy using techniques like:
-     - `takeUntil`
-     - `takeUntilDestroyed`
-     - `Subscription` management
+  ```ts
+  export interface User {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    phone: string;
+    website: string;
+  }
+  ```
 
 ---
 
-### Project Structure Requirements
+## Functional Requirements
 
-To promote clean architecture and maintainability, candidates must follow Angular best practices:
+### User List Fetching
 
-- **Component**:  
-  Create a dedicated component (e.g., `user-search.component.ts`) to encapsulate UI and search logic.
+- Fetch the full list of users on component initialization.
+- Display a loading indicator while fetching data.
+- If fetching fails, show an appropriate error message.
 
-- **Service**:  
-  Create a service (e.g., `user.service.ts`) responsible for fetching user data via HTTP.
+### Real-Time Search Input
 
-- **Model**:  
-  Define a `User` interface (e.g., `user.model.ts`) to strongly type the user data structure returned from the API.
+- Implement a search input using Angular Reactive Forms `FormControl`.
+- Filtering should be reactive and update results in real time as the user types (no submit button).
+- Use RxJS operators such as `debounceTime`, `distinctUntilChanged` and `map`/`filter` to optimize search.
+
+### Filtering Behavior
+
+- Filter the users client-side based on matching the search query against any of:
+  - `name`
+  - `username`
+  - `email`
+
+### Search Results Display
+
+- Display a list of filtered users showing at minimum:
+  - Full Name
+  - (Optional) Username and Email
+- If no matches are found, show a “No users found” message.
+
+### Cleanup & Memory Management
+
+- Properly handle subscription cleanup on component destroy using techniques like:
+  - `takeUntil`
+  - `takeUntilDestroyed`
+  - Proper `Subscription` management
 
 ---
 
-## Evaluation Criteria
+## Architecture
 
-| Area                    | Details                                                                 |
-| ----------------------- | ----------------------------------------------------------------------- |
-| Angular Proficiency     | Correct use of reactive forms, lifecycle hooks, and component structure |
-| RxJS Knowledge          | Usage of `debounceTime`, `distinctUntilChanged`, and proper operators   |
-| UI Responsiveness       | Real-time update of results without performance lag                     |
-| Code Quality            | Clean, readable, and maintainable code                                  |
-| Error & Empty State UX  | Graceful handling of no results and HTTP failures                       |
-| Unsubscription Strategy | Correct and memory-leak-safe RxJS cleanup                               |
+- **Service Layer**
+
+  - Create a service (e.g., `UserService`) responsible for fetching users via HTTP.
+
+- **Component Layer:**
+
+  - Create a dedicated component (e.g., `UserSearchComponent`) for encapsulating UI and search logic.
+
 
 ---
 
-## Optional
+## UI  Requirements
 
-- Add a loader spinner while the data is loading.
-- Highlight the matching text within the results.
-- Style the results using a component library or responsive CSS.
+- Show a search input box bound to a Reactive Form `FormControl`.
+- Display a loading spinner or indicator while fetching users.
+- Dynamically show filtered results as the user types.
+- Show meaningful messages for no results or errors.
+- Keep UI clean, responsive, and user-friendly.
+
+---
+## Constraints & Expectations
+
+- Use Angular’s `HttpClient` for all HTTP requests.
+- Manage loading, error, and empty states effectively.
+- Use Reactive Forms (`FormControl`) for the search input.
+- Apply RxJS operators like `debounceTime`, `distinctUntilChanged` to optimize real-time search.
+- Perform all filtering on the client using the fetched user list.
+- Show a loading indicator while fetching data.
+- Display user-friendly error messages if HTTP requests fail.
+- Properly clean up all RxJS subscriptions on component destroy (e.g., using `takeUntil` or `takeUntilDestroyed`).
+- Ensure the UI is responsive and handles empty states gracefully (e.g., show “No users found”).
+
+
+---
+
+## Best Practices
+
+- Prefer using the `async` pipe in templates instead of manual subscription management where possible.
+- Use RxJS operators such as `debounceTime` and `distinctUntilChanged` to optimize input streams and reduce unnecessary processing.
+- Unsubscribe from observables on component destruction to prevent memory leaks.
+- Encapsulate HTTP calls in services to maintain separation of concerns.
+- Keep components focused on presentation and interaction logic.
+- Provide clear user feedback during loading, error, and empty states.
+- Modularize UI components if the scope grows, for better maintainability and testability.
+- Write clean, readable, and maintainable TypeScript and template code.
+
+---

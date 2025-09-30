@@ -4,18 +4,6 @@ Even though client-side search filters data already loaded in memory, it’s sti
 
 ---
 
-### Why `switchMap` is used
-
-- `switchMap` is used to switch to a new observable whenever the search term changes.
-- This is useful for:
-  - Ensuring proper sequencing: load → then search.
-  - Canceling previous search requests if the user is typing quickly.
-  - Ensuring that only the latest search result is considered.
-- Example: If a user types "John", then quickly types "Doe", only the search for "Doe" will be processed.
-- Without `switchMap`, you might end up with multiple filter operations running simultaneously, leading to inconsistent results.
-
----
-
 ### `debounceTime`
 
 - **What it does**: Delays the emission of search terms until the user stops typing for a set period (e.g., 300ms).

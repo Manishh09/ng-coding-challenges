@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavigationService, NotificationService, ChallengesService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
+import { StackblitzService } from '@ng-coding-challenges/shared/services';
 
 /**
  * Component for displaying a challenge card with actions
@@ -21,19 +22,23 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    RouterLink
   ],
   templateUrl: './challenge-card.component.html',
   styleUrl: './challenge-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChallengeCardComponent implements OnInit {
+
   @Input({ required: true }) challenge!: Challenge;
   @Input() newBadgeChallengeIds: number[] = [];
 
   isLatestChallenge = false;
   hasNewBadge = false;
+
+  private readonly router = inject(Router);
   private readonly challengesService = inject(ChallengesService);
+
+  private readonly stackblitzService = inject(StackblitzService);
 
   ngOnInit(): void {
     // Check if this is the latest challenge
@@ -74,8 +79,8 @@ export class ChallengeCardComponent implements OnInit {
     const errorMessage = type === "github"
       ? 'Unable to open GitHub repository. Please check if popups are blocked.'
       : type === "requirement"
-      ? 'Unable to open challenge requirement doc. Please check if popups are blocked.'
-      : 'Unable to open solution guide. Please check if popups are blocked.';
+        ? 'Unable to open challenge requirement doc. Please check if popups are blocked.'
+        : 'Unable to open solution guide. Please check if popups are blocked.';
 
     if (!url) {
       this.notificationService.error('No URL provided to open.');
@@ -86,6 +91,15 @@ export class ChallengeCardComponent implements OnInit {
 
     if (!success) {
       this.notificationService.error(errorMessage);
+      ``
     }
+  }
+
+  async onTryChallenge(challenge: Challenge) {
+    await this.stackblitzService.openChallengeInStackblitz(challenge);
+  }
+
+  viewOutput(link: string) {
+    this.router.navigate([link]);
   }
 }

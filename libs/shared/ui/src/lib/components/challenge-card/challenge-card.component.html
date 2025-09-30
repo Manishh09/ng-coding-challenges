@@ -57,18 +57,29 @@
         [disabled]="!challenge.solutionGuide"
         class="solution-button"
         aria-label="View Solution Guide">
-        <mat-icon>help</mat-icon>
+        <mat-icon>help_center</mat-icon>
       </button>
-      <a
-        matTooltip="Try Challenge"
+       <button
+        matTooltip="Practice Challenge"
         matTooltipPosition="above"
         mat-icon-button
         color="primary"
-        [routerLink]="[challenge.link]"
-        class="view-button"
-        aria-label="Try Challenge">
+        (click)="onTryChallenge(challenge)"
+        [disabled]="!challenge.solutionGuide"
+        class="try-button"
+        aria-label="Practice Challenge">
         <mat-icon>play_arrow</mat-icon>
-      </a>
+      </button>
+      <button
+        matTooltip="View Output"
+        matTooltipPosition="above"
+        mat-icon-button
+        color="primary"
+        (click)="viewOutput(challenge.link)"
+        class="view-button"
+        aria-label="View Output">
+        <mat-icon>preview</mat-icon>
+      </button>
     </div>
   </mat-card-actions>
 
