@@ -55,10 +55,12 @@
     transform: scale(1);
     box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
   }
+
   50% {
     transform: scale(1.1);
     box-shadow: 0 2px 15px rgba(255, 61, 0, 0.6);
   }
+
   100% {
     transform: scale(1);
     box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
@@ -91,12 +93,19 @@ mat-card-header {
 }
 
 .challenge-indicator {
-  margin-left: auto;
+  // margin-left: auto;
   display: flex;
   align-items: center;
 }
 
-.challenge-button {
+
+
+.more-menu-button {
+  /* Ensure it stays on top right with spacing */
+  margin-left: auto;
+}
+
+.code-button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -121,7 +130,7 @@ mat-card-header {
   }
 }
 
-.challenge-icon {
+ .more-icon {
   color: var(--color-primary);
   font-size: 20px;
   transition: transform 0.2s var(--animation-easing);
@@ -187,7 +196,16 @@ mat-card-actions {
 
 .requirement-button,
 .solution-button,
+.help-icon,
+.requirement-icon {
+  color: var(--color-primary);
+}
+
+
+
 .try-button,
+.more-menu-button,
+.code-button,
 .view-button {
   width: 48px;
   height: 48px;
@@ -250,6 +268,7 @@ mat-card-actions {
   .challenge-card {
     border-radius: var(--border-radius-md);
   }
+
   .new-badge-container {
     top: 2px;
     right: 2px;
@@ -267,4 +286,15 @@ mat-card-actions {
   mat-card-content {
     padding: 0 var(--spacing-md) var(--spacing-md);
   }
+}
+
+.gradient-icon {
+  font-size: 48px;
+  /* icon size */
+  background: var(--brand-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* important: removes solid fallback color */
+  display: inline-block;
 }

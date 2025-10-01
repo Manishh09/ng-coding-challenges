@@ -55,7 +55,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
-  padding: 24px;
+  padding: 1rem 3rem;
   width: 100%;
   max-width: 1400px;
   margin-left: auto;
@@ -156,7 +156,7 @@
 
   .cards {
     grid-template-columns: 1fr;
-    padding: 10px;
+    padding: 16px;
     gap: 16px;
     width: calc(100% - 20px);
     margin: 0 auto;

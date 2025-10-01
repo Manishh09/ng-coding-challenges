@@ -5,7 +5,7 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { ThemeService } from '@ng-coding-challenges/shared/services';
 import { ChallengeNavComponent } from '../../../shared/components/challenge-nav/challenge-nav.component';
- 
+
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -19,13 +19,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // inject ProductService
   #productService = inject(ProductService);
-  #themeService = inject(ThemeService);
-
-  // Add host class binding for theming
-  // @HostBinding('class.dark-mode')
-  // get isDarkMode() {
-  //   return this.#themeService.isDarkMode();
-  // }
 
   // clear subscription on destroy
   #destroy$ = new Subject<void>();

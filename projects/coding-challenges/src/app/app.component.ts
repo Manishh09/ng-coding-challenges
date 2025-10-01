@@ -115,7 +115,7 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/user-posts-dashboard',
       '/challenges/ecommerce-checkout',
       // Add future challenge routes here..
-      
+
       // Exclude non-challenge routes
       '/challenges',
       '/home',
@@ -222,13 +222,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.navigateToRoute('/challenges');
   }
 
-  onTryLatestChallenge(): void {
-    // Navigate to the latest challenge - for now, navigate to the first challenge
-    const latestChallenge = this.challenges.at(-1);
-    if (latestChallenge?.link) {
-      this.navigateToRoute(latestChallenge.link);
-    }
-  }
 
   // clear subscriptions on destroy
   ngOnDestroy(): void {

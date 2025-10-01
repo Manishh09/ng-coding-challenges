@@ -161,8 +161,8 @@ app-root,
   p {
     font-size: 1.25rem;
     opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto var(--spacing-xl);
+   // max-width: 600px;
+    // margin: 0 auto var(--spacing-xl);
   }
 }
 
@@ -197,6 +197,21 @@ app-root,
       &.beginner { background: var(--status-success); color: white; }
       &.intermediate { background: var(--status-warning); color: white; }
       &.advanced { background: var(--status-error); color: white; }
+    }
+  }
+}
+
+
+.mat-mdc-menu-panel {
+  background: var(--surface-secondary) !important;
+   border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+
+  .mat-mdc-menu-item {
+    &:hover {
+      background: var(--interactive-secondary) !important;
+      color: var(--text-primary) !important;
     }
   }
 }

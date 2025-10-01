@@ -1,9 +1,9 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { LatestChallengeComponent } from '../latest-challenge/latest-challenge.component';
-import { f } from "../../../../../../../node_modules/@angular/material/icon-module.d-COXCrhrh";
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { Router, RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ChallengesService } from '@ng-coding-challenges/shared/services';
 
 @Component({
   selector: 'ng-coding-challenges-landing-page',
@@ -12,30 +12,37 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     CommonModule,
     NgOptimizedImage,
     RouterModule,
-    LatestChallengeComponent,
-    MatIconModule
-],
+    MatIconModule,
+    MatButtonModule
+  ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
-  // Output Signals
-  getStarted = output<void>();
-  exploreChallenges = output<void>();
-  tryLatestChallenge = output<void>();
+
+  private readonly router = inject(Router);
+
+  private challengesService = inject(ChallengesService);
 
   // Input properties for dynamic content
   logo = '/coding-window.webp';
 
   onGetStarted(): void {
-    this.getStarted.emit();
+    this.router.navigate(['/getting-started']);
   }
 
   onExploreChallenges(): void {
-    this.exploreChallenges.emit();
+    this.router.navigate(['/challenges']);
   }
 
-  onTryLatestChallenge(): void {
-    this.tryLatestChallenge.emit();
+  goToLatestChallenge(): void {
+    const latestChallenge = this.challengesService.getLatestChallenge();
+    if (latestChallenge) {
+      // Navigate to the latest challenge link
+      this.router.navigate([latestChallenge.link]);
+      return;
+    }
+    this.router.navigate(['/challenges']);
+
   }
 }
