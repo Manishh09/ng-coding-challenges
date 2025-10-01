@@ -1,33 +1,17 @@
-.challenge-nav {
- margin-left:  64px !important;
-
-}
-
-@media (max-width: 768px) {
-
-  .challenge-nav {
-     margin-left: 0px !important;
-  }
-}
-
 .product-list-container {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 400px;
+  justify-content: center;
   color: var(--on-surface-color, #212121);
-  border-top: 1px solid var(--outline-color, #e0e0e0);
+  margin: auto;
 
-  h2 {
-    color: var(--on-surface-color, #212121);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-  }
+  width: 85%;
 }
 
 .product-count {
-  width: 90%;
+  width: 100%;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 
   p {
@@ -36,8 +20,12 @@
   }
 }
 
-.product-table {
-  width: 90%;
+.product-table-wrapper {
+  width: 100%;
+}
+
+table {
+  width: 100%;
   border-collapse: collapse;
   margin: 0 auto;
   box-shadow: 0 2px 5px var(--shadow-color, rgba(0, 0, 0, 0.1));

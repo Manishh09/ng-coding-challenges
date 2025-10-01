@@ -17,12 +17,12 @@
       <button
         mat-icon-button
         [matMenuTriggerFor]="actionMenu"
-        aria-label="More actions"
+        aria-label="View Requirements and Solution Guide"
         matTooltip="More actions"
         matTooltipPosition="above"
         class="more-menu-button"
       >
-        <mat-icon class="more-icon">more_vert</mat-icon>
+        <mat-icon class="card-icon">more_vert</mat-icon>
       </button>
 
       <mat-menu #actionMenu="matMenu" class="custom-menu">
@@ -33,7 +33,7 @@
           class="requirement-button"
           aria-label="View Requirements Document"
         >
-          <mat-icon class="requirement-icon">assignment</mat-icon>
+          <mat-icon class="card-icon">assignment</mat-icon>
           <span>View Requirements Document</span>
         </button>
 
@@ -44,7 +44,7 @@
           aria-label="View Solution Guide"
           class="solution-button"
         >
-          <mat-icon class="help-icon">help_center</mat-icon>
+          <mat-icon class="card-icon">help_center</mat-icon>
           <span>View Solution Guide</span>
         </button>
       </mat-menu>
@@ -72,7 +72,7 @@
         class="code-button"
         aria-label="Open Source Code"
       >
-        <mat-icon class="code-icon">code</mat-icon>
+        <mat-icon class="card-icon">code</mat-icon>
       </button>
 
       <!-- Launch Challenge Button -->
@@ -85,7 +85,7 @@
         [disabled]="!challenge.solutionGuide"
         class="try-button"
         aria-label="Launch Challenge">
-        <mat-icon>rocket_launch</mat-icon>
+        <mat-icon class="card-icon">rocket_launch</mat-icon>
       </button>
       <!-- View Output Button -->
       <button
@@ -96,7 +96,7 @@
         (click)="viewOutput(challenge.link)"
         class="view-button"
         aria-label="View Output">
-        <mat-icon>preview</mat-icon>
+        <mat-icon class="card-icon">preview</mat-icon>
       </button>
     </div>
   </mat-card-actions>

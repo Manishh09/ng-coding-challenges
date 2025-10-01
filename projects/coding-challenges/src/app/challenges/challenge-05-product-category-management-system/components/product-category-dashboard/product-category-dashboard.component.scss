@@ -1,14 +1,3 @@
-.challenge-nav {
-  margin-top: 80px !important;
-  margin-left: 80px !important;
-}
-
-h2 {
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
 .product-dashboard-container {
   width: 80%;
   margin: 2rem auto;
@@ -33,7 +22,7 @@ h2 {
 
 @media (max-width: 768px) {
 
-  .challenge-nav {
-    margin-left: 12px !important;
+  .nav-wrapper {
+    margin-top: 0.5rem;
   }
 }

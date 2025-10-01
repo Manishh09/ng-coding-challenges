@@ -5,11 +5,12 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { ThemeService } from '@ng-coding-challenges/shared/services';
 import { ChallengeNavComponent } from '../../../shared/components/challenge-nav/challenge-nav.component';
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CurrencyPipe, ChallengeNavComponent],
+  imports: [CurrencyPipe, ChallengeHeaderComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })

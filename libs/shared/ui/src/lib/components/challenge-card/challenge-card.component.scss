@@ -130,12 +130,6 @@ mat-card-header {
   }
 }
 
- .more-icon {
-  color: var(--color-primary);
-  font-size: 20px;
-  transition: transform 0.2s var(--animation-easing);
-}
-
 mat-card-title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -193,15 +187,6 @@ mat-card-actions {
     align-items: center;
   }
 }
-
-.requirement-button,
-.solution-button,
-.help-icon,
-.requirement-icon {
-  color: var(--color-primary);
-}
-
-
 
 .try-button,
 .more-menu-button,
@@ -288,11 +273,11 @@ mat-card-actions {
   }
 }
 
-.gradient-icon {
-  font-size: 48px;
-  /* icon size */
+.card-icon {
+
   background: var(--brand-gradient-primary);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   /* important: removes solid fallback color */

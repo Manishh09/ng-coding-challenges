@@ -5,21 +5,22 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs';
 import { User } from '../../models/user.model';
 import { ChallengeNavComponent } from "../../../shared/components/challenge-nav/challenge-nav.component";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
 
 @Component({
   selector: 'app-server-side-search',
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    ChallengeNavComponent
-  ],
+    ChallengeHeaderComponent
+],
   templateUrl: './server-side-search.component.html',
   styleUrl: './server-side-search.component.scss'
 })
 export class ServerSideSearchComponent {
   hasSearched = signal(false);
   searchControl = new FormControl('');
-  
+
   // State variables
   users = signal<User[]>([]);
   loading = signal(false);
@@ -30,7 +31,7 @@ export class ServerSideSearchComponent {
 
   // DestroyRef
   private readonly destroyRef = inject(DestroyRef);
-  
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -46,7 +47,7 @@ export class ServerSideSearchComponent {
         switchMap(query =>
           this.userSearchService.searchUsers(query ?? '')
         ),
-        takeUntilDestroyed(this.destroyRef) // Ensure to unsubscribe on component destroy 
+        takeUntilDestroyed(this.destroyRef) // Ensure to unsubscribe on component destroy
       )
       .subscribe({
         next: (res) => {
@@ -59,4 +60,4 @@ export class ServerSideSearchComponent {
         }
       })
   }
-} 
+}

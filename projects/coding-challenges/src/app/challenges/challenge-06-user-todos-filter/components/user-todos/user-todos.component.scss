@@ -1,9 +1,13 @@
-.challenge-nav {
-    margin-top: 80px !important;
-    margin-left: 80px !important;
+.challenge-header {
+  text-align: center;
+  margin:1rem;
 }
 
-h2,
+h2 {
+  font-size: 1.5rem;
+  color: var(--on-surface-color, #212121);
+}
+
 h3 {
     font-weight: 600;
     margin-bottom: 1rem;
@@ -46,15 +50,15 @@ h3 {
         mat-radio-button {
             margin-right: 1rem;
             outline: none;
-            
+
             ::ng-deep .mdc-form-field {
                 color: var(--text-primary);
             }
-            
+
             ::ng-deep .mdc-radio .mdc-radio__background {
                 border-color: var(--text-primary);
             }
-            
+
         }
     }
 }
@@ -109,8 +113,8 @@ table {
 
 @media (max-width: 768px) {
 
-    .challenge-nav {
-        margin-left: 12px !important;
+    .nav-wrapper {
+        margin-top: 0.5rem;
     }
 
     .view-mode {

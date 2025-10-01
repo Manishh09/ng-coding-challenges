@@ -1,6 +1,6 @@
 .challenge-list-container {
   width: 100%;
-  padding: 80px 0 0 0;
+  margin-top: 4rem;
   background: var(--brand-gradient-section);
   //min-height: 400px;
   // height: 100dvh;
@@ -13,7 +13,7 @@
 
 .section-title {
   text-align: center;
-  margin: 32px;
+  margin: 16px auto 32px auto;
   font-size: 2rem;
   font-weight: 700;
   color: var(--color-fg);
@@ -122,6 +122,8 @@
 
   .section-title {
     font-size: 1.8rem;
+    text-align: center;
+    margin-top: 28px;
     margin-bottom: 28px;
   }
 }
@@ -139,6 +141,8 @@
 
   .section-title {
     font-size: 1.5rem;
+    text-align: center;
+    margin-top: 24px;
     margin-bottom: 24px;
   }
 
@@ -164,9 +168,10 @@
 
   .section-title {
     font-size: 1.3rem;
+    text-align: center;
+    margin-top: 40px;
     margin-bottom: 16px;
     width: 100%;
-    left: 50%;
   }
 
   .no-challenges {
