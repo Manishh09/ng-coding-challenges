@@ -8,12 +8,8 @@
   background-color: var(--surface-color, #ffffff);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
-  /* Ensures padding doesn't increase width */
-
-  /* Fix for potential overflow issues */
   display: flex;
   flex-direction: column;
-
 
 }
 
