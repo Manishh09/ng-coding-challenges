@@ -14,3 +14,23 @@
   width: 85%;
 }
 
+.product-selector, .product-display {
+  width: 40%;
+}
+
+@media (max-width: 484px) {
+  .product-dashboard-container {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .product-selector {
+    margin-bottom: 2rem;
+  }
+
+  .product-selector, .product-display {
+    width: 100%;
+  }
+}
+

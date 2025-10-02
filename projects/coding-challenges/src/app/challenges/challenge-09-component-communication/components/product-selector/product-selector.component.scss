@@ -25,3 +25,9 @@ mat-select, mat-label {
   outline: none;
   background-color: var(--surface-color);
 }
+
+@media (max-width: 484px) {
+  .product-selector {
+   gap: 0.5rem;
+  }
+}
