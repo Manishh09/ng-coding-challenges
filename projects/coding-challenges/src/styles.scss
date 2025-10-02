@@ -5,8 +5,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; background: var(--background-primary); color: var(--text-primary); padding-top: 64px; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  // padding-top: 64px;
+}
 
 /* Ensure app-root takes full height */
 app-root {
@@ -161,8 +170,8 @@ app-root,
   p {
     font-size: 1.25rem;
     opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto var(--spacing-xl);
+    // max-width: 600px;
+    // margin: 0 auto var(--spacing-xl);
   }
 }
 
@@ -194,50 +203,41 @@ app-root,
       font-size: 0.875rem;
       font-weight: 500;
 
-      &.beginner { background: var(--status-success); color: white; }
-      &.intermediate { background: var(--status-warning); color: white; }
-      &.advanced { background: var(--status-error); color: white; }
-    }
-  }
-}
+      &.beginner {
+        background: var(--status-success);
+        color: white;
+      }
 
-/* Navigation styling */
-.nav-container {
-  background: var(--surface-secondary);
-  border-bottom: 1px solid var(--border-primary);
-  padding: var(--spacing-md) var(--spacing-lg);
+      &.intermediate {
+        background: var(--status-warning);
+        color: white;
+      }
 
-  .nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .nav-logo {
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--text-primary);
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: var(--spacing-lg);
-
-    a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color var(--animation-duration-standard) var(--animation-easing);
-
-      &:hover {
-        color: var(--interactive-primary);
+      &.advanced {
+        background: var(--status-error);
+        color: white;
       }
     }
   }
 }
+
+
+.mat-mdc-menu-panel {
+  background: var(--surface-secondary) !important;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+
+  .mat-mdc-menu-item {
+    color: var(--text-primary) !important;
+
+    &:hover {
+      background: var(--interactive-secondary) !important;
+      color: var(--text-primary) !important;
+    }
+  }
+}
+
 
 // ============================================================================
 // RESPONSIVE DESIGN
@@ -289,6 +289,7 @@ app-root,
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -308,10 +309,11 @@ app-root,
   }
 }
 
+
+// ======================SHARED COMPONENT STYLES=========================//
 .challenge-container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   box-sizing: border-box;
-  margin-top: 48px !important;
+  width: 100%;
 }

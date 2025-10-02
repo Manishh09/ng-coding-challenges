@@ -5,8 +5,7 @@
       <!-- Left Content -->
       <div class="hero-text-content">
         <h1 class="hero-title">
-          Master Angular with<br>
-          Coding Challenges
+          Welcome to <span class="highlight">ngQuest</span>
         </h1>
         <!-- <p class="hero-subtitle">
           Learn Angular. Solve Challenges. Ace Interviews.
@@ -15,21 +14,29 @@
           Learn Angular best practices. Solve real-world coding challenges. Prepare to ace your next Angular interview.
         </p> -->
         <p class="intro-text">
-          Welcome to <strong>ngQuest</strong> - The hands-on Angular learning platform designed to fast-track your
+          The hands-on Angular learning platform designed to fast-track your
           skills through practical coding challenges.
         </p>
+
         <div class="hero-buttons">
+          <!-- Get Started Button -->
           <button class="btn btn-primary" (click)="onGetStarted()" type="button">
             Get Started
+
+          </button>
+          <!-- Latest Challenge Button -->
+          <button class="btn btn-secondary" (click)="goToLatestChallenge()" type="button">
+            Go to Latest Challenge
+            <span>
+              <mat-icon class="start-icon">rocket_launch</mat-icon>
+            </span>
+          </button>
+          <!-- Explore Challenges Button -->
+          <button class="btn btn-secondary" (click)="onExploreChallenges()" type="button">
+            Explore Challenges
             <span>
               <mat-icon class="start-icon">arrow_forward</mat-icon>
             </span>
-          </button>
-          <button
-            class="btn btn-secondary"
-            (click)="onExploreChallenges()"
-            type="button">
-            Explore Challenges
           </button>
         </div>
       </div>
@@ -38,14 +45,13 @@
       <!-- Right Illustration -->
       <div class="hero-illustration">
         <img [ngSrc]="logo" width="400" height="400" priority="high" class="hero-logo"
-        alt="Developer coding Angular challenges on laptop"
-        >
+          alt="Developer coding Angular challenges on laptop">
 
       </div>
     </div>
 
     <!-- Latest Challenge Card -->
-    <ng-coding-challenges-latest-challenge (tryLatestChallenge)="onTryLatestChallenge()">
-    </ng-coding-challenges-latest-challenge>
+    <!-- <ng-coding-challenges-latest-challenge>
+    </ng-coding-challenges-latest-challenge> -->
   </section>
 </div>

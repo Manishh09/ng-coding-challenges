@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavigationService, NotificationService, ChallengesService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { StackblitzService } from '@ng-coding-challenges/shared/services';
+import { MatMenuModule } from '@angular/material/menu';
 
 /**
  * Component for displaying a challenge card with actions
@@ -22,7 +23,8 @@ import { StackblitzService } from '@ng-coding-challenges/shared/services';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-  ],
+    MatMenuModule
+],
   templateUrl: './challenge-card.component.html',
   styleUrl: './challenge-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

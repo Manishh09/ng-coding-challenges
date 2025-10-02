@@ -1,22 +1,13 @@
-<div class="challenege-container">
-  <div class="challenge-nav">
+<app-challenge-header [title]="'Client-Side User Search'" />
 
-    <app-challenge-nav></app-challenge-nav>
-  </div>
-
-
+<div class="challenge-container">
+  <!-- Search Container -->
   <div class="client-search-container">
-
-    <!-- Header -->
-    <div class="header">
-      <h2>Client-Side User Search</h2>
-    </div>
-
     <!-- Search Input -->
     <div class="search-container">
       <mat-form-field appearance="outline">
         <mat-label>Search users</mat-label>
-        <input matInput [formControl]="searchControl" placeholder="Search Users..e.g: Nic"  />
+        <input matInput [formControl]="searchControl" placeholder="Search Users..e.g: Nic" />
       </mat-form-field>
     </div>
 

@@ -1,47 +1,25 @@
-.challenge-nav {
-  margin-left:  80px !important;
-  
-}
-
-@media (max-width: 768px) {
-
-  .challenge-nav{
-      margin-left: 0px !important;
-  }
-
-   
-}
-
 .dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid var(--outline-color, #e0e0e0);
   color: var(--on-surface-color, #212121);
-   margin: auto;
-   
-  width: 91%;
+  margin: auto;
+
+  width: 85%;
 }
 
-.dashboard-header {
-  width: 91%;
-  text-align: center;
+.stats-section {
+  margin: 20px 0;
+  width: 100%;
+  text-align: left;
 }
 
-.user-list,
-.post-list {
+.user-posts-container {
   width: 100%;
   text-align: center;
 }
 
-h2 {
-  margin: 20px 0 10px 0;
-  font-size: 1.5rem;
-  border-bottom: 2px solid var(--primary-color, #007bff);
-  padding-bottom: 5px;
-  color: var(--on-surface-color, #212121);
-}
 
 ul {
   list-style: none;
@@ -68,7 +46,7 @@ li {
   }
 }
 
- 
+
 
 // Loading state
 :host:has([data-loading]) div:first-child {

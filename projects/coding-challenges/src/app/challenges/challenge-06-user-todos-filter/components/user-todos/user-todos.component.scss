@@ -1,14 +1,3 @@
-.challenge-nav {
-    margin-top: 80px !important;
-    margin-left: 80px !important;
-}
-
-h2,
-h3 {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-align: center;
-}
 
 .user-todos-container {
     border-top: 1px solid var(--outline-color);
@@ -24,7 +13,7 @@ h3 {
         text-align: left;
         background-color: var(--surface-color);
 
-        mat-select {
+        mat-select, mat-label {
             color: var(--text-primary);
             outline: none;
             background-color: var(--surface-color);
@@ -46,15 +35,15 @@ h3 {
         mat-radio-button {
             margin-right: 1rem;
             outline: none;
-            
+
             ::ng-deep .mdc-form-field {
                 color: var(--text-primary);
             }
-            
+
             ::ng-deep .mdc-radio .mdc-radio__background {
                 border-color: var(--text-primary);
             }
-            
+
         }
     }
 }
@@ -109,8 +98,8 @@ table {
 
 @media (max-width: 768px) {
 
-    .challenge-nav {
-        margin-left: 12px !important;
+    .nav-wrapper {
+        margin-top: 0.5rem;
     }
 
     .view-mode {

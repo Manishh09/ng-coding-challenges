@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
 import { ChallengeNavComponent } from '../../../shared/components/challenge-nav/challenge-nav.component';
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
 @Component({
   selector: 'app-client-side-search',
   imports: [
@@ -18,8 +19,8 @@ import { ChallengeNavComponent } from '../../../shared/components/challenge-nav/
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    ChallengeNavComponent
-  ],
+    ChallengeHeaderComponent
+],
   templateUrl: './client-side-search.component.html',
   styleUrl: './client-side-search.component.scss'
 })
@@ -79,7 +80,7 @@ export class ClientSideSearchComponent {
     return this.users.filter(user =>
       user.name.toLowerCase().includes(query)
       // ||
-      // user.email.toLowerCase().includes(query) 
+      // user.email.toLowerCase().includes(query)
       // ||
       // user.username.toLowerCase().includes(query)
     );

@@ -1,0 +1,10 @@
+<h3 class="product-card-title">Received Product Details</h3>
+<mat-card class="product-card">
+  @if (product()?.category && product()?.name) {
+    <p>Category: {{ product()?.category }}</p>
+    <p>Product: {{ product()?.name }}</p>
+
+  } @else {
+    <p>No product selected yet.</p>
+  }
+</mat-card>

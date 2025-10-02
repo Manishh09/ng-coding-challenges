@@ -1,18 +1,19 @@
-<div class="challenge-nav">
-  <app-challenge-nav></app-challenge-nav>
-</div>
-<h2>Product Category Management System</h2>
-<div class="product-dashboard-container">
+<app-challenge-header [title]="'Product Category Management System'" />
 
+<div class="challenge-container">
 
-  <div class="child-sections">
+  <!-- Product Dashboard -->
+  <div class="product-dashboard-container">
 
-    <app-product-filter></app-product-filter>
+    <div class="child-sections">
 
-    <app-create-product></app-create-product>
+      <app-product-filter></app-product-filter>
 
-    <app-category-summary></app-category-summary>
+      <app-create-product></app-create-product>
 
+      <app-category-summary></app-category-summary>
+
+    </div>
   </div>
 
 </div>

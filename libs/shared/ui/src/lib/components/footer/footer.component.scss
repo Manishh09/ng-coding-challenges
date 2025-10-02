@@ -268,6 +268,27 @@
   }
 }
 
+.footer-link-icon, .footer-logo-icon, .heart-icon {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+}
+
+.footer-link {
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer-content {

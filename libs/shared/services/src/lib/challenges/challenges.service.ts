@@ -72,12 +72,21 @@ export class ChallengesService {
     {
       id: 8,
       title: "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
-      description: "Implement a simplified e-commerce checkout process in Angular using RxJS. The challenge involves fetching products from a fake API, allowing users to select products, placing an order, updating product inventory, and processing payment. You'll use RxJS operators like concatMap to handle sequential API calls and manage loading and error states effectively.",
+      description: "Implement a simplified e-commerce checkout process in Angular using RxJS. The challenge involves fetching products from a fake API, allowing users to select products, placing an order, updating product inventory, and processing payment.",
       link: "/challenges/ecommerce-checkout",
       requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
       solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md",
       gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout"
     },
+    {
+      id: 9,
+      title: "Challenge 09: Component Communication using Signals",
+      description: "Build a Product Dashboard in Angular demonstrating Communication between components using Signals and standalone components. Fetch product categories from an API, allow category selection or custom input, manage state in parent via signals, and display the selected product in a receiver component.",
+      link: "/challenges/component-communication",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-09-component-communication"
+    }
     // Add future challenges here..
   ];
 
@@ -88,4 +97,35 @@ export class ChallengesService {
   getChallengeById(id: number): Challenge | undefined {
     return this.challenges.find(challenge => challenge.id === id);
   }
+
+  /**
+   * Retrieves the most recent challenge from the collection.
+   *
+   * @returns The latest challenge in the collection, or `undefined` if the collection is empty
+   */
+  getLatestChallenge(): Challenge | undefined {
+    if (this.challenges.length === 0) {
+      return undefined;
+    }
+    return this.challenges.at(-1); // Assuming challenges are ordered by ID
+  }
+
+  /**
+   * Extracts the current challenge from a given URL by parsing the last URL segment
+   * and matching it against available challenges.
+   *
+   * @param url - The URL string to extract the challenge ID from
+   * @returns The matching Challenge object if found, otherwise null
+   */
+  getCurrentChallengeIdFromURL(url: string): Challenge | null {
+    const segments = url.split('/');
+    const lastSegment = segments.at(-1);
+    if (lastSegment) {
+      const challenge = this.challenges.find(c => c.link.includes(lastSegment));
+      return challenge ? challenge : null;
+    } else {
+      return null;
+    }
+  }
+
 }

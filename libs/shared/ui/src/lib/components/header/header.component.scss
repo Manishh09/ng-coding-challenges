@@ -23,7 +23,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  
+
   padding: 0 32px;
   height: 100%;
   overflow: hidden;
@@ -46,15 +46,19 @@
   transition: transform var(--animation-duration-fast) var(--animation-easing),
   opacity var(--animation-duration-fast) var(--animation-easing);
 
-  &:hover {
-    opacity: 0.95;
-    transform: scale(1.02);
-  }
+  // &:hover {
+  //   opacity: 0.95;
+  //   transform: scale(1.02);
+  // }
 
   &:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
     border-radius: 4px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 

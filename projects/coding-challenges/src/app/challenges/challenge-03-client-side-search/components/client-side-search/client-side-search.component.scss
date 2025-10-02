@@ -1,14 +1,57 @@
-.challenge-nav {
-  margin-top: 80px !important;
-  margin-left: 92px !important;
- 
+.client-search-container {
+
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto auto auto;
+  width: 85%;
 }
 
-@media (max-width: 768px) {
+.user-name {
+  font-weight: 200 !important;
+  font-size: medium;
+}
 
-  .challenge-nav{
-     margin-left: 16px !important;
+.error-message {
+  color: var(--warn-color, #dc3545);
+}
+
+
+.search-container {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 16px;
+
+  mat-form-field {
+    width: 100%;
   }
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.user-card {
+  width: 100%;
+  padding: 12px;
+
+}
+
+.no-results {
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+
+
+@media (max-width: 768px) {
 
   .search-container {
     mat-form-field {
@@ -22,83 +65,15 @@
 }
 
 @media (max-width: 484px) {
-   
+
 
   .search-container {
     mat-form-field {
-      width: 90%;
+      width: 100% !important;
     }
 
     .user-list {
       width: 100% !important;
     }
   }
-}
-
-.client-search-container {
-
-  padding: 16px;
-  border-top: 1px solid var(--outline-color, #e0e0e0);
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-
-h2 {
-  margin: 20px 0 10px 0;
-  font-size: 1.5rem;
-  padding-bottom: 5px;
-  color: var(--on-surface-color, #212121);
-}
-
-.user-name {
-  font-weight: 200 !important;
-  font-size: medium;
-}
-
-.error-message {
-  color: var(--warn-color, #dc3545);
-}
-
-
-
-.full-width {
-  width: 100%;
-}
-
-.search-container {
-  width: 100%;
-  margin-bottom: 16px;
-  text-align: center;
-
-  mat-form-field {
-    width: 85%;
-  }
-}
-
-.user-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 85%;
-}
-
-.user-card {
-  width: 100%;
-  padding: 12px;
-
-}
-
-.no-results {
-  color: #888;
-  font-style: italic;
-  margin-top: 20px;
 }

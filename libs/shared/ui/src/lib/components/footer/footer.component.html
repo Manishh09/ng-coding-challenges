@@ -15,7 +15,7 @@
     </div>
 
     <!-- Quick Links Section -->
-      
+
        <div class="quick-links-section">
          <h3 class="section-title">Quick Links</h3>
          <div class="footer-links">
@@ -23,19 +23,19 @@
 
            @if (link.external) {
            <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link">
-             <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+             <mat-icon class="footer-link-icon" aria-hidden="true">{{ link.icon }}</mat-icon>
              <span>{{ link.text }}</span>
            </a>
            } @else {
            <a (click)="onLinkClick(link)" class="footer-link">
-             <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+             <mat-icon class="footer-link-icon" aria-hidden="true">{{ link.icon }}</mat-icon>
              <span>{{ link.text }}</span>
            </a>
            }
            }
          </div>
        </div>
-     
+
 
     <!-- Community Links -->
     <div class="community-section">
@@ -44,7 +44,7 @@
         @for (link of socialLinks(); track link.text) {
         <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link {{ link.cssClass }}"
           [attr.aria-label]="link.text">
-          <mat-icon aria-hidden="true">{{ link.icon }}</mat-icon>
+          <mat-icon class="footer-link-icon" aria-hidden="true">{{ link.icon }}</mat-icon>
           <span>{{ link.text }}</span>
         </a>
         }
