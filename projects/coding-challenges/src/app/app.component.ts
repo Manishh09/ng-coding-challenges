@@ -114,6 +114,7 @@ export class AppComponent implements OnInit, OnDestroy {
       '/challenges/user-todos-filter',
       '/challenges/user-posts-dashboard',
       '/challenges/ecommerce-checkout',
+      '/challenges/component-communication',
       // Add future challenge routes here..
 
       // Exclude non-challenge routes

@@ -1,0 +1,27 @@
+.product-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+
+  .full-width {
+    width: 100%;
+  }
+
+  .custom-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .error {
+    color: red;
+    font-weight: 500;
+  }
+}
+
+mat-select, mat-label {
+  color: var(--text-primary);
+  outline: none;
+  background-color: var(--surface-color);
+}

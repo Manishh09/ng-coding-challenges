@@ -105,7 +105,7 @@
         height: 1rem;
       }
 
-      .button-label {
+      .button-label, .gradient-label {
         // Keep labels but reduce font size
         font-size: 0.75rem;
       }
@@ -122,7 +122,7 @@
     .nav-button {
       padding: 0.5rem 0.625rem;
 
-      .button-label {
+      .button-label, .gradient-label {
         font-size: 0.7rem;
       }
     }
@@ -142,7 +142,7 @@
       padding: 0.625rem 0.5rem;
       justify-content: center;
 
-      .button-label {
+      .button-label, .gradient-label {
         display: none; // Hide labels on very small screens
       }
 

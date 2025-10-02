@@ -78,6 +78,15 @@ export class ChallengesService {
       solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md",
       gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout"
     },
+    {
+      id: 9,
+      title: "Challenge 09: Component Communication using Signals",
+      description: "Build a Product Dashboard in Angular demonstrating Communication between components using Signals and standalone components. Fetch product categories from an API, allow category selection or custom input, manage state in parent via signals, and display the selected product in a receiver component.",
+      link: "/challenges/component-communication",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-09-component-communication"
+    }
     // Add future challenges here..
   ];
 

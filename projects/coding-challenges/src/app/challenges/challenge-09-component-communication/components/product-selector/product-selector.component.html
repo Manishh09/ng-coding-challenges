@@ -1,0 +1,38 @@
+<div class="product-selector">
+  <h3>Select a Category and Enter a Product Name</h3>
+
+  <!-- Loading -->
+  @if (loading()) {
+  <p>Loading categories...</p>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+  <p class="error">Failed to load categories. Try again later.</p>
+  }
+
+  <!-- Categories Dropdown -->
+  @if (!loading() && !error()) {
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Choose a category</mat-label>
+    <mat-select [value]="selectedCategory()" (selectionChange)="onCategoryChange($event.value)">
+      @for (cat of categories(); track cat) {
+      <mat-option [value]="cat">{{ cat | titlecase }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  }
+
+  <!-- Custom Product Input -->
+  <div class="custom-input">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Enter custom product</mat-label>
+      <input matInput [ngModel]="customProduct()" (ngModelChange)="customProduct.set($event)"
+        placeholder="E.g. Gaming Laptop" />
+    </mat-form-field>
+
+  </div>
+  <button [disabled]="!customProduct()" mat-raised-button (click)="sendCustomProduct()">
+    Submit
+  </button>
+</div>
