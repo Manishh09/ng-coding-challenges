@@ -1,9 +1,10 @@
-<div class="challenge-nav">
-  <app-challenge-nav></app-challenge-nav>
-</div>
-<div class="user-posts-dashboard-container">
-  
-  <h2>User Posts Dashboard</h2>
+<app-challenge-header [title]="'User Posts Dashboard - Dependent API Calls'" />
+
+<div class="challenge-container">
+
+  <!-- User Posts Dashboard Section -->
+  <div class="user-posts-dashboard-container">
+
   <!-- Loading -->
   @if(isLoading){
 
@@ -63,4 +64,5 @@
     No users available
   </div>
   }
+</div>
 </div>

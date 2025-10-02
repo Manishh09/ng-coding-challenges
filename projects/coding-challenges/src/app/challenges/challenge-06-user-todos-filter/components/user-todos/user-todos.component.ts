@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { UserTodoFacadeService } from '../../services/user-todo-facade.service';
@@ -7,11 +7,12 @@ import { ChallengeNavComponent } from "../../../shared/components/challenge-nav/
 import { CommonModule, NgClass } from "@angular/common";
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
 
 @Component({
   selector: 'app-user-todos',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, MatRadioModule, MatChipsModule, MatTableModule, MatSelectModule, ChallengeNavComponent, NgClass],
+  imports: [AsyncPipe, CommonModule, MatRadioModule, MatChipsModule, MatTableModule, MatSelectModule, NgClass, ChallengeHeaderComponent],
   templateUrl: './user-todos.component.html',
   styleUrls: ['./user-todos.component.scss']
 })
@@ -29,7 +30,7 @@ export class UserTodosComponent {
 
   // FOR UI SEPARATION ONLY - STARTS HERE
 
-   // Signal for view mode toggle
+  // Signal for view mode toggle
   viewMode = signal<'basic' | 'advanced'>('basic');
 
   // Handler for view mode change
@@ -39,7 +40,7 @@ export class UserTodosComponent {
 
   // FOR UI SEPARATION ONLY - ENDS HERE
 
- 
+
   // Handler for filter change
   onFilterChange(value: 'all' | 'completed' | 'pending') {
     this.filterStatus.set(value);

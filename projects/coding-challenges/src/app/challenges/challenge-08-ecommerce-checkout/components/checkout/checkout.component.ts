@@ -6,10 +6,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CheckoutFacadeService } from '../../services/checkuot-facade.service';
 import { ChallengeNavComponent } from "../../../shared/components/challenge-nav/challenge-nav.component";
 import { MatButtonModule } from '@angular/material/button';
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
 
 @Component({
   selector: 'app-checkout',
-  imports: [ChallengeNavComponent, MatButtonModule],
+  imports: [MatButtonModule, ChallengeHeaderComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
@@ -48,7 +49,7 @@ export class CheckoutComponent {
   onProductSelect(event: Event, product: Product): void {
     const input = event.target as HTMLInputElement;
 
- 
+
     if (input.checked) {
       // Add product if not already selected
       if (!this.selectedProducts().some(p => p.id === product.id)) {
@@ -67,8 +68,8 @@ export class CheckoutComponent {
     if (this.selectedProducts().length === 0){
       alert('No products selected for checkout. Please select products to proceed.');
       return;
-    } 
-      
+    }
+
     const order: Order = { products: this.selectedProducts() };
     this.isOrderLoading.set(true);
     this.error.set(null);

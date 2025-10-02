@@ -1,11 +1,12 @@
 import { Component, OnInit, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { ChallengesService, NavigationService } from '@ng-coding-challenges/shared/services';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { StackblitzService } from '@ng-coding-challenges/shared/services';
 
 @Component({
   selector: 'ng-coding-challenges-latest-challenge',
@@ -16,11 +17,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class LatestChallengeComponent implements OnInit {
   latestChallenge?: Challenge;
-  tryLatestChallenge = output<void>();
 
   private readonly challengesService = inject(ChallengesService);
 
   private readonly navigationService = inject(NavigationService);
+
+  private readonly stackblitzService = inject(StackblitzService);
+
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
     // Get all challenges and find the one with the highest ID (latest)
@@ -33,10 +37,14 @@ export class LatestChallengeComponent implements OnInit {
   }
 
   openURL(url: string): void {
-   this.navigationService.openExternalLink(url);
+    this.navigationService.openExternalLink(url);
   }
 
-  onTryLatestChallenge(): void {
-    this.tryLatestChallenge.emit();
+  viewOutput(link: string) {
+    this.router.navigate([link]);
+  }
+
+  async onTryLatestChallenge(challenge: Challenge) {
+    await this.stackblitzService.openChallengeInStackblitz(challenge);
   }
 }

@@ -1,11 +1,20 @@
 <section class="challenge-nav" aria-label="Challenge navigation">
+
+  <button mat-button   (click)="navigateToChallenges()" class="nav-button back-button" aria-label="View all challenges">
+    <mat-icon aria-hidden="true">arrow_back</mat-icon>
+    <span class="button-label">Back</span>
+  </button>
+
   <button mat-button   (click)="navigateToHome()" class="nav-button home-button" aria-label="Go to home">
     <mat-icon aria-hidden="true">home</mat-icon>
     <span class="button-label">Home</span>
   </button>
-  <button mat-button   (click)="navigateToChallenges()" class="nav-button challenges-button" aria-label="View all challenges">
-    <mat-icon aria-hidden="true">arrow_back</mat-icon>
-    <span class="button-label">Back To Challenges</span>
+
+
+  <button mat-button  class="primary"  (click)="launchChallenge()" class="nav-button launch-button" aria-label="Go to home">
+   <mat-icon aria-hidden="true" class="gradient-icon">rocket_launch</mat-icon>
+   <span class="gradient-label">Launch Challenge</span>
   </button>
+
 </section>
- 
+

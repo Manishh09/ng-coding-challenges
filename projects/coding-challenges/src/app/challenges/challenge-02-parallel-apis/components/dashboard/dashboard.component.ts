@@ -6,11 +6,12 @@ import { User } from '../../models/user';
 import { DashboardResponse } from '../../models/dasboard';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ChallengeNavComponent } from '../../../shared/components/challenge-nav/challenge-nav.component';
- 
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ChallengeNavComponent],
+  imports: [ChallengeHeaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

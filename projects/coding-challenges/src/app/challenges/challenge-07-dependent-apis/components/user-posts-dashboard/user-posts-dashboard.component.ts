@@ -4,10 +4,11 @@ import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { catchError, forkJoin, map, merge, mergeMap, of } from 'rxjs';
 import { ChallengeNavComponent } from "../../../shared/components/challenge-nav/challenge-nav.component";
+import { ChallengeHeaderComponent } from "../../../shared/components/challenge-header/challenge-header.component";
 
 @Component({
   selector: 'app-user-posts-dashboard',
-  imports: [ChallengeNavComponent],
+  imports: [ChallengeHeaderComponent],
   templateUrl: './user-posts-dashboard.component.html',
   styleUrl: './user-posts-dashboard.component.scss'
 })

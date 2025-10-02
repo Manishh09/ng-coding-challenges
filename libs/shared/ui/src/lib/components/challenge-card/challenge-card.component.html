@@ -13,16 +13,41 @@
       {{ challenge.title }}
     </mat-card-title>
     <div class="challenge-indicator">
+     <!-- More menu button replaces the previous code button here -->
       <button
         mat-icon-button
-        (click)="openURL(challenge.gitHub, 'github')"
-        matTooltip="Open Source Code"
+        [matMenuTriggerFor]="actionMenu"
+        aria-label="View Requirements and Solution Guide"
+        matTooltip="View Requirements and Solution Guide"
         matTooltipPosition="above"
-        [disabled]="!challenge.gitHub"
-        class="challenge-button"
-        aria-label="Open Source Code">
-        <mat-icon class="challenge-icon">code</mat-icon>
+        class="more-menu-button"
+      >
+        <mat-icon class="card-icon">more_vert</mat-icon>
       </button>
+
+      <mat-menu #actionMenu="matMenu" class="custom-menu">
+        <button
+          mat-menu-item
+          (click)="openURL(challenge.requirement, 'requirement')"
+          [disabled]="!challenge.requirement"
+          class="requirement-button"
+          aria-label="View Requirements Document"
+        >
+          <mat-icon class="card-icon">assignment</mat-icon>
+          <span>View Requirements Document</span>
+        </button>
+
+        <button
+          mat-menu-item
+          (click)="openURL(challenge.solutionGuide, 'solution')"
+          [disabled]="!challenge.solutionGuide"
+          aria-label="View Solution Guide"
+          class="solution-button"
+        >
+          <mat-icon class="card-icon">help_center</mat-icon>
+          <span>View Solution Guide</span>
+        </button>
+      </mat-menu>
     </div>
   </mat-card-header>
 
@@ -37,39 +62,32 @@
 
   <mat-card-actions>
     <div class="action-buttons">
+      <!-- GitHub Button -->
       <button
-        matTooltip="View Requirements Document"
-        matTooltipPosition="above"
         mat-icon-button
-        color="primary"
-        (click)="openURL(challenge.requirement, 'requirement')"
-        [disabled]="!challenge.requirement"
-        class="requirement-button"
-        aria-label="View Requirements Document">
-        <mat-icon>assignment</mat-icon>
-      </button>
-      <button
-        matTooltip="View Solution Guide"
+        (click)="openURL(challenge.gitHub, 'github')"
+        matTooltip="Open Source Code"
         matTooltipPosition="above"
-        mat-icon-button
-        color="primary"
-        (click)="openURL(challenge.solutionGuide, 'solution')"
-        [disabled]="!challenge.solutionGuide"
-        class="solution-button"
-        aria-label="View Solution Guide">
-        <mat-icon>help_center</mat-icon>
+        [disabled]="!challenge.gitHub"
+        class="code-button"
+        aria-label="Open Source Code"
+      >
+        <mat-icon class="card-icon">code</mat-icon>
       </button>
+
+      <!-- Launch Challenge Button -->
        <button
-        matTooltip="Practice Challenge"
+        matTooltip="Launch Challenge"
         matTooltipPosition="above"
         mat-icon-button
         color="primary"
         (click)="onTryChallenge(challenge)"
         [disabled]="!challenge.solutionGuide"
         class="try-button"
-        aria-label="Practice Challenge">
-        <mat-icon>play_arrow</mat-icon>
+        aria-label="Launch Challenge">
+        <mat-icon class="card-icon">rocket_launch</mat-icon>
       </button>
+      <!-- View Output Button -->
       <button
         matTooltip="View Output"
         matTooltipPosition="above"
@@ -78,7 +96,7 @@
         (click)="viewOutput(challenge.link)"
         class="view-button"
         aria-label="View Output">
-        <mat-icon>preview</mat-icon>
+        <mat-icon class="card-icon">preview</mat-icon>
       </button>
     </div>
   </mat-card-actions>
