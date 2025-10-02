@@ -13,7 +13,7 @@
         text-align: left;
         background-color: var(--surface-color);
 
-        mat-select {
+        mat-select, mat-label {
             color: var(--text-primary);
             outline: none;
             background-color: var(--surface-color);

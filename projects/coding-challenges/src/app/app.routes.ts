@@ -56,6 +56,10 @@ export const routes: Routes = [
         path: 'ecommerce-checkout',
         loadComponent: () => import('./challenges/challenge-08-ecommerce-checkout/components/checkout/checkout.component').then(m => m.CheckoutComponent)
       },
+      {
+        path: 'component-communication',
+        loadComponent: () => import('./challenges/challenge-09-component-communication/components/product-dashboard/product-dashboard.component').then(m => m.ProductDashboardComponent)
+      },
 
       // Add future challenge routes here..
 

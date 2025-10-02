@@ -1,0 +1,9 @@
+<app-challenge-header [title]="'Component Communication with Signals'" />
+<div class="challenge-container">
+  <div class="product-dashboard-container">
+    <app-product-selector
+      (productSelected)="onProductSelected($event)"
+    />
+
+    <app-product-display [product]="selectedProduct()" />
+  </div>

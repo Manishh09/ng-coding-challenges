@@ -1,0 +1,16 @@
+.product-dashboard-container {
+  padding: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+
+  background-color: var(--surface-color);
+
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 85%;
+}
+
