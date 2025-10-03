@@ -21,17 +21,12 @@
 
 // Content layout
 .footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
+
   padding: 24px 48px !important;
-  //padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-xl);
-  // display: grid;
-  // grid-template-columns: 2fr 1fr 1fr;
+
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  //gap: var(--spacing-xl);
-
 }
 
 // Shared section styles
@@ -213,6 +208,7 @@
   color: var(--on-surface-variant-color);
   font-size: 0.9rem;
 }
+
 .created-by {
   color: var(--primary-color);
 }
@@ -268,7 +264,9 @@
   }
 }
 
-.footer-link-icon, .footer-logo-icon, .heart-icon {
+.footer-link-icon,
+.footer-logo-icon,
+.heart-icon {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
@@ -367,6 +365,27 @@
   .legal-links {
     flex-direction: column;
     gap: var(--spacing-sm);
+  }
+}
+
+// iPad Air and similar tablets
+@media (max-width: 834px) and (min-width: 481px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 32px !important;
+  }
+
+}
+
+// iPadPro and similar tablets
+@media (max-width: 1024px) and (min-width: 835px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 40px !important;
   }
 }
 
