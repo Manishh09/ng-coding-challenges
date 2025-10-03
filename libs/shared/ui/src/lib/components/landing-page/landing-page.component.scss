@@ -1,5 +1,5 @@
 .landing-page {
-  min-height: 100vh;
+  // min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -8,14 +8,13 @@
   //background: var(--brand-gradient-hero);
   background: linear-gradient(60deg, #313c7a, #ff4081);
 
-  padding: 0 3rem;
+  padding: 7rem 3rem 4rem 3rem;
   position: relative;
   overflow: hidden;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: calc(100vh - 120px);
 
   &::before {
     content: '';
@@ -34,7 +33,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
- // align-items: center;
+  // align-items: center;
   position: relative;
   z-index: 2;
   margin-top: 24px;
@@ -98,7 +97,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(90deg,#672fc7, #6f59e1);
+  background: linear-gradient(90deg, #672fc7, #6f59e1);
   color: white;
 
   // border: 1px solid rgba(255, 255, 255, 0.2);
@@ -111,7 +110,8 @@
   }
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary,
+.btn-secondary {
   mat-icon {
 
     // animation: floatRight 3s ease-in-out infinite;
@@ -379,8 +379,7 @@
 
 @media (max-width: 480px) {
   .hero-section {
-
-    padding: 40px 16px 24px;
+    padding: 16px 24px 24px 24px;
   }
 
   .hero-content {
@@ -419,6 +418,45 @@
     max-width: 384px;
   }
 }
+
+// iPad Air and similar tablets
+// iPad Air and similar tablets
+@media (max-width: 834px) and (min-width: 481px) {
+  .hero-section {
+    padding: 48px 32px 32px;
+    margin-top: 32px;
+  }
+
+  .hero-content {
+    margin-top: 32px;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center; //  centers both text + illustration
+    text-align: center; // optional: centers text too
+  }
+
+  .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .hero-buttons {
+    justify-content: center; //  center buttons too
+    flex-wrap: wrap;
+  }
+
+  .hero-illustration {
+    width: 100%; // take full available width by default
+    max-width: 480px; // cap so it doesn’t blow up on large screens
+    margin: 0 auto; // center when stacked
+    display: flex;
+    justify-content: center;
+  }
+}
+
 
 // Accessibility improvements
 @media (prefers-reduced-motion: reduce) {
