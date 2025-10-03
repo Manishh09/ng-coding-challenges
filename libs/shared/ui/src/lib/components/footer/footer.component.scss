@@ -371,9 +371,22 @@
 // iPad Air and similar tablets
 @media (max-width: 834px) and (min-width: 481px) {
   .footer-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 24px 32px !important;
   }
 
+}
+
+// iPadPro and similar tablets
+@media (max-width: 1024px) and (min-width: 835px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 40px !important;
+  }
 }
 
 /* Accessibility - Respect reduced motion preferences */
