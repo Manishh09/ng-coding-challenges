@@ -11,6 +11,7 @@ export * from './lib/theme/theme.service';
 
 // Data Services
 export * from './lib/challenges/challenges.service';
+export * from './lib/challenges/challenge-category.service';
 
 // Utility Services
 export * from './lib/navigation/navigation.service';

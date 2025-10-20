@@ -1,16 +1,26 @@
-<div class="challenge-list-container">
-  <h3 class="section-title">{{ 'Available Challenges'  }}</h3>
-  <div class="cards">
-    @for (challenge of challenges; track challenge.id) {
+@if(!hasActiveChildRoute()) {
+  <div class="challenge-list-container">
+    <div class="header-section">
+      <button mat-button routerLink="/challenges" class="nav-button back-button" aria-label="Go back to home">
+        <mat-icon aria-hidden="true">arrow_back</mat-icon>
+        <span class="button-label">Back</span>
+      </button>
+      <h3 class="section-title">{{ title }}</h3>
+      <div class="spacer"></div> <!-- for flex alignment/right spacing if needed -->
+    </div>
+    <div class="cards">
+      @for (challenge of challenges; track challenge.id) {
       <div class="card-wrapper">
-        <ng-coding-challenges-challenge-card
-          [challenge]="challenge"
-          [newBadgeChallengeIds]="newBadgeChallengeIds" />
+        <ng-coding-challenges-challenge-card [challenge]="challenge" [newBadgeChallengeIds]="newBadgeChallengeIds" />
       </div>
-    } @empty {
+      } @empty {
       <div class="no-challenges">
         <p>No challenges available at the moment.</p>
       </div>
-    }
+      }
+    </div>
   </div>
-</div>
+} @else {
+
+<router-outlet />
+}

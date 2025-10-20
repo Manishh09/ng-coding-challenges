@@ -8,7 +8,7 @@
     "start:main": "ng serve coding-challenges",
     "build:main": "ng build coding-challenges",
     "build:libs": "ng build shared-models && ng build shared-services && ng build shared-ui",
-    "build:all": "npm run build:libs && ng build coding-challenges",
+    "build:all": "npm run build:libs && ng build ngc-rxjs && ng build ngc-core && ng build coding-challenges",
     "build:models": "ng build shared-models",
     "build:services": "ng build shared-services",
     "build:ui": "ng build shared-ui",

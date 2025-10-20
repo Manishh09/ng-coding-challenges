@@ -2,7 +2,7 @@ import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import {
-  ChallengeListComponent,
+
   FooterComponent,
   HeaderComponent,
   LandingPageComponent,
@@ -22,10 +22,10 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
   imports: [
     CommonModule,
     RouterOutlet,
+    MatIconModule,
     HeaderComponent,
-    FooterComponent,
     LandingPageComponent,
-    MatIconModule
+    FooterComponent
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -35,8 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
   #router = inject(Router);
   #challengesService = inject(ChallengesService);
 
-  // Signal that controls the visibility of the layout.
-  protected showLayout = signal(false);
+
 
   // Signal to control the visibility of the challenges list
   protected showChallenges = signal(false);
@@ -46,20 +45,10 @@ export class AppComponent implements OnInit, OnDestroy {
   protected showLandingPage = signal(true);
   protected showFooter = signal(true);
   protected showFooterLinks = signal(true);
-  // Hero section description paragraphs
-  protected heroParagraphs = [
-    'Sharpen your skills and get ready with practical Angular challenges focused on real-world interview scenarios.',
-    // 'Master the concepts: RxJS, Signals, Performance, and modern Angular patterns.'
-  ];
 
-  // Hero section texts
-  protected heroTitle = 'Learn Angular. Solve Challenges. Ace Interviews.';
-  protected startButtonText = 'Start Practicing Now';
-  protected hideButtonText = 'Hide Challenges';
 
-  // Footer texts
-  protected footerDescription = 'Practice. Learn. Succeed.';
-  protected angularVersion = VERSION.major;
+
+
 
   // Get challenges from the service
   protected challenges: Challenge[] = this.#challengesService.getChallenges();
@@ -105,64 +94,22 @@ export class AppComponent implements OnInit, OnDestroy {
 
   #handleRouteChange(url: string) {
     // Routes where we show individual challenge components only
-    const challengeRoutes = [
-      '/challenges/fetch-products',
-      '/challenges/handle-parallel-apis',
-      '/challenges/client-side-search',
-      '/challenges/server-side-search',
-      '/challenges/product-category-management',
-      '/challenges/user-todos-filter',
-      '/challenges/user-posts-dashboard',
-      '/challenges/ecommerce-checkout',
-      '/challenges/component-communication',
-      // Add future challenge routes here..
 
-      // Exclude non-challenge routes
-      '/challenges',
-      '/home',
-      '/theme-demo',
-      '/getting-started'
-    ];
     // Check if current route is a specific challenge page
-    const isChallengePage = challengeRoutes.includes(url);
+    const isChallengePage = url !== "/";
     if (isChallengePage) {
       this.showLandingPage.set(false);
       this.showFooterLinks.set(false);
       this.showFooter.set(false);
       return;
-
     }
-    // Check if current route is the challenges list page
-    if (url === '/challenges') {
-      this.showLandingPage.set(false);
-      this.showFooterLinks.set(false);
-      this.showFooter.set(true);
-      return;
-
-    }
-    // For all other routes, show full layout
     this.showLandingPage.set(true);
-    this.showFooter.set(true);
     this.showFooterLinks.set(true);
-    this.showChallenges.set(false);
+    this.showFooter.set(true);
+
   }
 
-  /**
-   * Toggles the visibility of challenges
-   */
-  toggleChallenges(isExpanded?: boolean) {
-    if (isExpanded !== undefined) {
-      this.showChallenges.set(isExpanded);
 
-      // If challenges are being shown, scroll to the challenges section
-      if (isExpanded) {
-        this.scrollToSection('challenges-section');
-      }
-      this.scrollToTop()
-    } else {
-      this.showChallenges.update(current => !current);
-    }
-  }
 
   /**
    * Scrolls to the top of the page

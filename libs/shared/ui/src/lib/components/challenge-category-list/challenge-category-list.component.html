@@ -1,0 +1,20 @@
+<div class="category-list-container">
+   <div class="header-section">
+    <button mat-button routerLink="/" class="nav-button back-button" aria-label="Go back to home">
+      <mat-icon aria-hidden="true">arrow_back</mat-icon>
+      <span class="button-label">Back</span>
+    </button>
+    <h3 class="section-title">Challenge Categories</h3>
+    <div class="spacer"></div> <!-- for flex alignment/right spacing if needed -->
+  </div>
+  <div class="category-cards">
+    @for (category of categories(); track category.id) {
+    <div class="card-wrapper">
+      <app-challenge-category-card [category]="category" [selected]="isSelected(category.id)()">
+      </app-challenge-category-card>
+    </div>
+    } @empty {
+    <p>No categories available at the moment.</p>
+    }
+  </div>
+</div>

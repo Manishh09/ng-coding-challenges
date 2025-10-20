@@ -3,14 +3,11 @@ export interface Challenge {
   id: number;
   title: string;
   description: string;
-
   link: string;
-
   requirement: string;
-
   solutionGuide: string;
-
   gitHub: string;
+  category: string;
 }
 
 

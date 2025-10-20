@@ -1,0 +1,27 @@
+<mat-card class="category-card">
+  <div class="card-banner" aria-hidden="true"></div>
+  <mat-card-header>
+    @if (category().icon) {
+    <mat-icon>{{ category().icon }}</mat-icon>
+    }
+    <mat-card-title>{{ category().name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ category().description }}</p>
+  </mat-card-content>
+  <!-- @if (category().newBadgeCount) {
+    <mat-badge [content]="category().newBadgeCount" matBadgeColor="warn"></mat-badge>
+  } -->
+
+  <mat-card-actions>
+    <button
+      class="view-challenges-btn"
+      mat-button
+      (click)="goToChallenges(category().id)"
+      [attr.aria-label]="'View Challenges in ' + category().name"
+    >
+     View Challenges
+    </button>
+  </mat-card-actions>
+
+</mat-card>

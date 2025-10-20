@@ -11,7 +11,7 @@ import { StackblitzService } from '@ng-coding-challenges/shared/services';
 @Component({
   selector: 'ng-coding-challenges-latest-challenge',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLink, MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatButtonModule, MatTooltipModule],
   templateUrl: './latest-challenge.component.html',
   styleUrl: './latest-challenge.component.scss'
 })
