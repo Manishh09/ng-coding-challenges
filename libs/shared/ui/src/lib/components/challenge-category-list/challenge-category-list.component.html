@@ -1,11 +1,12 @@
 <div class="category-list-container">
-   <div class="header-section">
-    <button mat-button routerLink="/" class="nav-button back-button" aria-label="Go back to home">
-      <mat-icon aria-hidden="true">arrow_back</mat-icon>
-      <span class="button-label">Back</span>
-    </button>
-    <h3 class="section-title">Challenge Categories</h3>
-    <div class="spacer"></div> <!-- for flex alignment/right spacing if needed -->
+  <div class="header-section">
+    <div class="header-content">
+      <button mat-button routerLink="/" class="nav-button back-button" aria-label="Go back to home">
+        <mat-icon aria-hidden="true">arrow_back</mat-icon>
+        <span class="button-label">Back</span>
+      </button>
+      <h3 class="section-title">Challenge Categories</h3>
+    </div>
   </div>
   <div class="category-cards">
     @for (category of categories(); track category.id) {

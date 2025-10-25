@@ -17,12 +17,19 @@
 
 // Routed Components
 .main-content {
-  // flex: 1 0 auto;
-  // display: flex;
-  // flex-direction: column;
-  // width: 100%;
-  // max-height: 100vh;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   overflow-y: auto;
-  //height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px); // Account for header height
 
+  // Ensure proper spacing and responsiveness
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 70px); // Adjust for smaller header on mobile
+  }
+
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 60px);
+  }
 }
