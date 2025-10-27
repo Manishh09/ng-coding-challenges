@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './challenges/challenge-01-product-list/components/product-list/product-list.component';
 import { ChallengeListComponent } from '@ng-coding-challenges/shared/ui';
 
-export const NGC_RXJS_ROUTES: Routes = [
+export const NGC_RXJS_API_ROUTES: Routes = [
   {
     path: '',
     component: ChallengeListComponent,

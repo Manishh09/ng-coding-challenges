@@ -37,7 +37,7 @@
         "dist/shared/services",
         "libs/shared/services/src/public-api.ts"
       ],
-      "@ngc-rxjs": ["projects/ngc-rxjs/src/public-api.ts"],
+      "@ngc-rxjs-api": ["projects/ngc-rxjs-api/src/public-api.ts"],
       "@ng-core": ["projects/ngc-core/src/public-api.ts"],
     }
   },

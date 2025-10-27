@@ -28,7 +28,7 @@ export const routes: Routes = [
 
       {
         path: 'rxjs-api',
-        loadChildren: () => import('@ngc-rxjs').then(m => m.NGC_RXJS_ROUTES)
+        loadChildren: () => import('@ngc-rxjs-api').then(m => m.NGC_RXJS_API_ROUTES)
       },
       {
         path: 'angular-core',

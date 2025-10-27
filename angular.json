@@ -200,36 +200,36 @@
         }
       }
     },
-    "ngc-rxjs": {
+    "ngc-rxjs-api": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/ngc-rxjs",
-      "sourceRoot": "projects/ngc-rxjs/src",
+      "root": "projects/ngc-rxjs-api",
+      "sourceRoot": "projects/ngc-rxjs-api/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngc-rxjs",
-            "index": "projects/ngc-rxjs/src/index.html",
-            "browser": "projects/ngc-rxjs/src/main.ts",
+            "outputPath": "dist/ngc-rxjs-api",
+            "index": "projects/ngc-rxjs-api/src/index.html",
+            "browser": "projects/ngc-rxjs-api/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/ngc-rxjs/tsconfig.app.json",
+            "tsConfig": "projects/ngc-rxjs-api/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/ngc-rxjs/public"
+                "input": "projects/ngc-rxjs-api/public"
               }
             ],
             "styles": [
-              "projects/ngc-rxjs/src/styles.scss"
+              "projects/ngc-rxjs-api/src/styles.scss"
             ],
             "scripts": []
           },
@@ -261,10 +261,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ngc-rxjs:build:production"
+              "buildTarget": "ngc-rxjs-api:build:production"
             },
             "development": {
-              "buildTarget": "ngc-rxjs:build:development"
+              "buildTarget": "ngc-rxjs-api:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -279,16 +279,16 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/ngc-rxjs/tsconfig.spec.json",
+            "tsConfig": "projects/ngc-rxjs-api/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/ngc-rxjs/public"
+                "input": "projects/ngc-rxjs-api/public"
               }
             ],
             "styles": [
-              "projects/ngc-rxjs/src/styles.scss"
+              "projects/ngc-rxjs-api/src/styles.scss"
             ],
             "scripts": []
           }
