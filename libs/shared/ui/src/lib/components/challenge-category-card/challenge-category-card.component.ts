@@ -6,18 +6,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
 import { A11yModule } from "@angular/cdk/a11y";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-challenge-category-card',
   templateUrl: './challenge-category-card.component.html',
   styleUrls: ['./challenge-category-card.component.scss'],
   standalone: true,
-  imports: [MatIconModule, MatCardModule, MatChipsModule, MatButtonModule, A11yModule],
+  imports: [MatIconModule, MatCardModule, MatChipsModule, MatButtonModule, MatTooltipModule, A11yModule],
 })
 export class ChallengeCategoryCardComponent {
 
 
   readonly category = input.required<ChallengeCategory>();
+
   readonly selected = input<boolean>(false);
 
   readonly router = inject(Router);

@@ -1,6 +1,6 @@
 import { Component, inject, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
@@ -22,6 +22,8 @@ export class LandingPageComponent {
 
   private readonly router = inject(Router);
 
+  private readonly route = inject(ActivatedRoute);
+
   private challengesService = inject(ChallengesService);
 
   // Input properties for dynamic content
@@ -39,7 +41,7 @@ export class LandingPageComponent {
     const latestChallenge = this.challengesService.getLatestChallenge();
     if (latestChallenge) {
       // Navigate to the latest challenge link
-      this.router.navigate([latestChallenge.link]);
+      this.router.navigate([`/challenges/${latestChallenge.category}/${latestChallenge.link}`]);
       return;
     }
     this.router.navigate(['/challenges']);

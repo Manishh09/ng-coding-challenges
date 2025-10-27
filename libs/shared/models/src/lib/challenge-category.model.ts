@@ -4,4 +4,5 @@ export interface ChallengeCategory {
   description?: string;
   icon?: string;
   newBadgeCount?: number;
+  challengeCount?: number;
 }

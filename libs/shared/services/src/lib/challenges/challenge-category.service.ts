@@ -34,4 +34,13 @@ export class ChallengeCategoryService {
     const category = this._categories().find(c => c.id === categoryId);
     return category ? category.name : null;
   }
+
+  mapCategoryIdToCount(categoryId: string, count: number): void {
+    const categories = [...this._categories()];
+    const index = categories.findIndex(c => c.id === categoryId);
+    if (index !== -1) {
+      categories[index] = { ...categories[index], challengeCount: count };
+      this._categories.set(categories);
+    }
+  }
 }
