@@ -1,5 +1,10 @@
-.host {
+/* ==========================================
+   Challenge Card Component Styles
+   ========================================== */
+
+:host {
   display: block;
+  animation: cardAppear 0.5s var(--animation-easing) forwards;
 }
 
 .mat-mdc-card.challenge-card,
@@ -9,15 +14,14 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: transform 0.3s var(--animation-easing),
-    box-shadow 0.3s var(--animation-easing);
   border: 1px solid var(--border-primary);
-  max-width: 100%;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   background-color: var(--color-surface);
   color: var(--color-fg);
+  transition: transform 0.3s var(--animation-easing),
+              box-shadow 0.3s var(--animation-easing);
 
   &:hover {
     transform: translateY(-6px);
@@ -25,6 +29,7 @@
   }
 }
 
+/* ---------- New Badge ---------- */
 .new-badge-container {
   position: absolute;
   top: 0px;
@@ -45,28 +50,11 @@
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
   letter-spacing: 0.05em;
-  // animation: pulseBadge 2s infinite;
   border: 1px solid rgba(255, 255, 255, 0.3);
   transform-origin: center;
 }
 
-@keyframes pulseBadge {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
-  }
-
-  50% {
-    transform: scale(1.1);
-    box-shadow: 0 2px 15px rgba(255, 61, 0, 0.6);
-  }
-
-  100% {
-    transform: scale(1);
-    box-shadow: 0 2px 10px rgba(255, 61, 0, 0.4);
-  }
-}
-
+/* ---------- Banner & Footer ---------- */
 .card-banner {
   height: 6px;
   background: var(--brand-gradient-primary);
@@ -85,51 +73,24 @@
   right: 0;
 }
 
+/* ---------- Header ---------- */
 mat-card-header {
-  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
 }
 
 .challenge-indicator {
-  // margin-left: auto;
   display: flex;
   align-items: center;
 }
 
-
-
 .more-menu-button {
-  /* Ensure it stays on top right with spacing */
   margin-left: auto;
 }
 
-.code-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: transform 0.2s var(--animation-easing),
-    background-color 0.2s var(--animation-easing),
-    box-shadow 0.2s var(--animation-easing);
-
-  &:hover:not(:disabled) {
-    transform: scale(1.08);
-    background-color: color-mix(in oklab, var(--color-primary), transparent 88%);
-    box-shadow: var(--shadow-sm);
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    pointer-events: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-  }
-}
-
+/* ---------- Card Title ---------- */
 mat-card-title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -138,12 +99,11 @@ mat-card-title {
   color: var(--color-fg);
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  // max-width: 85%;
 }
 
+/* ---------- Card Content ---------- */
 mat-card-content {
   flex-grow: 1;
   padding: 0 var(--spacing-lg) var(--spacing-lg);
@@ -157,30 +117,21 @@ mat-card-content {
   opacity: 0.95;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0;
 }
 
-.action-buttons {
-  display: flex;
-  gap: var(--spacing-lg);
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
+/* ---------- Action Buttons ---------- */
 mat-card-actions {
   padding: var(--spacing-md) var(--spacing-lg);
   border-top: 1px solid var(--border-primary);
-  margin: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  // background-color: var(--surface-variant-color);
 
   .action-buttons {
+    display: flex;
     gap: var(--spacing-lg);
     width: 100%;
     justify-content: flex-end;
@@ -195,8 +146,8 @@ mat-card-actions {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  transition: all 0.3s var(--animation-easing);
   position: relative;
+  transition: all 0.3s var(--animation-easing);
 
   &:hover:not(:disabled) {
     transform: translateY(-3px);
@@ -220,7 +171,6 @@ mat-card-actions {
     font-size: 24px;
     width: 24px;
     height: 24px;
-    align-items: center;
     color: var(--color-primary);
   }
 
@@ -230,25 +180,65 @@ mat-card-actions {
   }
 }
 
+/* ---------- Card Icon Gradient ---------- */
+.challenge-card-icon {
+  background: var(--brand-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
 @keyframes cardAppear {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-:host {
-  animation: cardAppear 0.5s var(--animation-easing) forwards;
+/* ==========================================
+   Responsive Styles for Challenge Card
+   ========================================== */
+@media (max-width: 1200px) {
+  .mat-mdc-card.challenge-card,
+  .challenge-card {
+    border-radius: calc(var(--border-radius-lg) - 2px);
+  }
+
+  mat-card-title {
+    font-size: 1.2rem;
+    max-width: 85%;
+  }
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  mat-card-title {
+    font-size: 1.15rem;
+    max-width: 80%;
+  }
 
+  mat-card-content {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+
+  .try-button,
+  .more-menu-button,
+  .code-button,
+  .view-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
   .mat-mdc-card.challenge-card,
   .challenge-card {
     border-radius: var(--border-radius-md);
@@ -261,25 +251,71 @@ mat-card-actions {
 
   mat-card-header {
     padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   mat-card-title {
-    font-size: 1.2rem;
-    max-width: 80%;
+    font-size: 1.1rem;
+    max-width: 100%;
   }
 
   mat-card-content {
-    padding: 0 var(--spacing-md) var(--spacing-md);
+    padding: 0 var(--spacing-sm) var(--spacing-sm);
+  }
+
+  .try-button,
+  .more-menu-button,
+  .code-button,
+  .view-button {
+    width: 40px;
+    height: 40px;
   }
 }
 
-.card-icon {
+@media (max-width: 480px) {
+  mat-card-header {
+    padding: var(--spacing-sm);
+  }
 
-  background: var(--brand-gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  /* important: removes solid fallback color */
-  display: inline-block;
+  mat-card-title {
+    font-size: 1rem;
+  }
+
+  mat-card-content {
+    padding: 0 var(--spacing-xs) var(--spacing-xs);
+  }
+
+  .try-button,
+  .more-menu-button,
+  .code-button,
+  .view-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .new-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  mat-card-title {
+    font-size: 0.95rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .try-button,
+  .more-menu-button,
+  .code-button,
+  .view-button {
+    width: 32px;
+    height: 32px;
+  }
 }

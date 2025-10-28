@@ -1,28 +1,36 @@
 <mat-card class="challenge-card">
+
+  <!-- Decorative Banner -->
   <div class="card-banner" aria-hidden="true"></div>
+
+  <!-- New Badge -->
   @if (hasNewBadge) {
     <div class="new-badge-container">
       <span class="new-badge">New</span>
     </div>
   }
+
+  <!-- Card Header -->
   <mat-card-header>
     <mat-card-title
-      [matTooltip]="challenge.title.length > 30 ? challenge.title : ''"
+      [matTooltip]="challenge.title.length > 30 ? challenge.title : null"
       matTooltipPosition="above"
     >
       {{ challenge.title }}
     </mat-card-title>
+
+    <!-- Challenge Menu -->
     <div class="challenge-indicator">
-     <!-- More menu button replaces the previous code button here -->
       <button
         mat-icon-button
         [matMenuTriggerFor]="actionMenu"
         aria-label="View Requirements and Solution Guide"
         matTooltip="View Requirements and Solution Guide"
         matTooltipPosition="above"
+        type="button"
         class="more-menu-button"
       >
-        <mat-icon class="card-icon">more_vert</mat-icon>
+        <mat-icon class="challenge-card-icon">more_vert</mat-icon>
       </button>
 
       <mat-menu #actionMenu="matMenu" class="custom-menu">
@@ -30,10 +38,11 @@
           mat-menu-item
           (click)="openURL(challenge.requirement, 'requirement')"
           [disabled]="!challenge.requirement"
-          class="requirement-button"
           aria-label="View Requirements Document"
+          type="button"
+          class="requirement-button"
         >
-          <mat-icon class="card-icon">assignment</mat-icon>
+          <mat-icon class="challenge-card-icon">assignment</mat-icon>
           <span>View Requirements Document</span>
         </button>
 
@@ -42,26 +51,29 @@
           (click)="openURL(challenge.solutionGuide, 'solution')"
           [disabled]="!challenge.solutionGuide"
           aria-label="View Solution Guide"
+          type="button"
           class="solution-button"
         >
-          <mat-icon class="card-icon">help_center</mat-icon>
+          <mat-icon class="challenge-card-icon">help_center</mat-icon>
           <span>View Solution Guide</span>
         </button>
       </mat-menu>
     </div>
   </mat-card-header>
 
+  <!-- Card Content -->
   <mat-card-content>
     <p class="description"
-      [matTooltip]="challenge.description.length > 98 ? challenge.description : ''"
-      matTooltipPosition="above"
+       [matTooltip]="challenge.description.length > 98 ? challenge.description : null"
+       matTooltipPosition="above"
     >
       {{ challenge.description }}
     </p>
   </mat-card-content>
 
+  <!-- Card Actions -->
   <mat-card-actions>
-    <div class="action-buttons">
+    <div class="action-buttons" role="group" aria-label="Challenge Actions">
       <!-- GitHub Button -->
       <button
         mat-icon-button
@@ -71,35 +83,42 @@
         [disabled]="!challenge.gitHub"
         class="code-button"
         aria-label="Open Source Code"
+        type="button"
       >
-        <mat-icon class="card-icon">code</mat-icon>
+        <mat-icon class="challenge-card-icon">code</mat-icon>
       </button>
 
       <!-- Launch Challenge Button -->
-       <button
-        matTooltip="Launch Challenge"
-        matTooltipPosition="above"
+      <button
         mat-icon-button
         color="primary"
         (click)="onTryChallenge(challenge)"
         [disabled]="!challenge.solutionGuide"
+        matTooltip="Launch Challenge"
+        matTooltipPosition="above"
         class="try-button"
-        aria-label="Launch Challenge">
-        <mat-icon class="card-icon">rocket_launch</mat-icon>
+        aria-label="Launch Challenge"
+        type="button"
+      >
+        <mat-icon class="challenge-card-icon">rocket_launch</mat-icon>
       </button>
+
       <!-- View Output Button -->
       <button
-        matTooltip="View Output"
-        matTooltipPosition="above"
         mat-icon-button
         color="primary"
         (click)="viewOutput(challenge.link)"
+        matTooltip="View Output"
+        matTooltipPosition="above"
         class="view-button"
-        aria-label="View Output">
-        <mat-icon class="card-icon">preview</mat-icon>
+        aria-label="View Output"
+        type="button"
+      >
+        <mat-icon class="challenge-card-icon">preview</mat-icon>
       </button>
     </div>
   </mat-card-actions>
 
+  <!-- Footer Indicator -->
   <div class="card-footer-indicator" aria-hidden="true"></div>
 </mat-card>

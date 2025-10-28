@@ -1,70 +1,41 @@
-.challenge-list-container {
-  width: 100%;
-  margin-top: 4rem;
-  background: var(--brand-gradient-section);
-  //min-height: 400px;
-  // height: 100dvh;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.4s var(--animation-easing), transform 0.4s var(--animation-easing);
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+/* ==========================================================================
+   Challenge List Component Styles
+   ========================================================================== */
 
-
-.challenge-list-container {
+/* ---------- Base Container ---------- */
+.challenge-list {
   width: 100%;
   margin-top: 4rem;
   background: var(--brand-gradient-section);
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.4s var(--animation-easing), transform 0.4s var(--animation-easing);
+  transition: opacity 0.4s var(--animation-easing),
+              transform 0.4s var(--animation-easing);
   box-sizing: border-box;
   overflow-x: hidden;
 }
 
-.header-section {
+/* ---------- Header Section ---------- */
+.challenge-list-header {
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
 
-  @media (max-width: 768px) {
-    padding: 1rem 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem 0.75rem;
-    margin-bottom: 1rem;
+  .challenge-list-header-content {
+    display: flex;
+     gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
   }
 }
 
-.header-content {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-
-  @media (max-width: 768px) {
-    gap: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  @media (max-width: 480px) {
-    gap: 0.75rem;
-  }
-}
-
-.nav-button.back-button {
+/* ---------- Back Button ---------- */
+.challenge-list-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
   min-height: 44px; // Accessible touch target size
-  transition: all 0.2s ease;
   border-radius: 8px;
   font-weight: 500;
   font-size: 0.9rem;
@@ -72,7 +43,8 @@
   background-color: transparent;
   cursor: pointer;
   white-space: nowrap;
-  flex-shrink: 0; // Prevent button from shrinking
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 
   &:hover {
     border-color: var(--primary-color, #dd0031);
@@ -89,33 +61,22 @@
     font-size: 1.25rem;
     width: 1.25rem;
     height: 1.25rem;
-    margin-right: 0;
     color: var(--primary-color, #3f51b5);
   }
 
-  .button-label {
+  .challenge-list-button-label {
     color: var(--primary-color, #3f51b5);
     font-size: inherit;
   }
-
-  @media (max-width: 768px) {
-    align-self: flex-start;
-    margin-bottom: 0.5rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.625rem 0.875rem;
-    font-size: 0.85rem;
-
-    mat-icon {
-      font-size: 1.125rem;
-      width: 1.125rem;
-      height: 1.125rem;
-    }
-  }
 }
 
-.section-title {
+/* Modifier for back button if needed */
+.challenge-list-button-back {
+  // Optional modifier styling
+}
+
+/* ---------- Section Title ---------- */
+.challenge-list-title {
   margin: 0;
   font-size: 2rem;
   font-weight: 700;
@@ -127,7 +88,6 @@
   transition: all 0.3s var(--animation-easing);
   animation: fadeIn 0.8s var(--animation-easing) forwards;
   position: relative;
-  // flex: 1;
   display: inline-block;
 
   &::after {
@@ -141,61 +101,25 @@
     border-radius: 3px;
     transition: width 0.3s var(--animation-easing);
   }
-
-  @media (max-width: 768px) {
-    font-size: 1.75rem;
-    align-self: flex-start;
-    margin-left: 1rem;
-
-    &::after {
-
-      bottom: -6px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.5rem;
-    margin-left: 1rem;
-
-    &::after {
-
-      height: 2px;
-      bottom: -5px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    font-size: 1.375rem;
-  }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.cards {
+/* ---------- Cards Section ---------- */
+.challenge-list-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
   padding: 1rem 3rem;
   width: 100%;
   max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   box-sizing: border-box;
 
-  &>* {
+  & > * {
     animation: cardAppear 0.5s var(--animation-easing) both;
   }
 
   @for $i from 1 through 12 {
-    &>*:nth-child(#{$i}) {
+    & > *:nth-child(#{$i}) {
       animation-delay: #{0.1 * $i}s;
     }
   }
@@ -207,19 +131,8 @@
   justify-content: center;
 }
 
-@keyframes cardAppear {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.no-challenges {
+/* ---------- Empty State ---------- */
+.challenge-list-empty {
   grid-column: 1 / -1;
   text-align: center;
   padding: 48px;
@@ -229,16 +142,54 @@
   box-shadow: var(--shadow-sm);
   width: 100%;
   box-sizing: border-box;
+
+  .challenge-list-empty-text {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
 }
 
-.no-challenges p {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
+/* ============================================================
+   Animations
+============================================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/* Responsive breakpoints */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Responsive Styles
+============================================================ */
+@media (max-width: 1200px) {
+  .challenge-list-header {
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .challenge-list-cards {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 22px;
+    padding: 22px;
+  }
+}
+
 @media (max-width: 1024px) {
-  .cards {
+  .challenge-list-cards {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px;
@@ -246,7 +197,18 @@
 }
 
 @media (max-width: 768px) {
-  .cards {
+  .challenge-list-header {
+    padding: 1rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .challenge-list-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .challenge-list-cards {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 16px;
     padding: 16px;
@@ -255,10 +217,24 @@
   .card-wrapper {
     width: 100%;
   }
+
+  .challenge-list-title {
+    font-size: 1.75rem;
+    margin-left: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .cards {
+  .challenge-list-header {
+    padding: 1rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .challenge-list-header-content {
+    gap: 0.75rem;
+  }
+
+  .challenge-list-cards {
     grid-template-columns: 1fr;
     padding: 16px;
     gap: 16px;
@@ -266,7 +242,27 @@
     margin: 0 auto;
   }
 
-  .no-challenges {
+  .card-wrapper {
+    width: 100%;
+  }
+
+  .challenge-list-title {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+
+    &::after {
+      height: 2px;
+      bottom: -5px;
+    }
+  }
+
+  .challenge-list-empty {
     padding: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .challenge-list-title {
+    font-size: 1.375rem;
   }
 }
