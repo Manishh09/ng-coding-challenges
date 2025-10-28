@@ -7,7 +7,6 @@
  * Components for overall page structure and layout
  */
 export * from './lib/components/header/header.component';
-export * from './lib/components/home/home.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/hero-section/hero-section.component';
 export * from './lib/components/landing-page/landing-page.component';
@@ -22,6 +21,4 @@ export * from './lib/components/challenge-category-list/challenge-category-list.
 export * from './lib/components/challenge-category-card/challenge-category-card.component';
 
 export * from './lib/components/loading-spinner/loading-spinner.component';
-export * from './lib/components/empty-state/empty-state.component';
 export * from './lib/components/theme-toggle/theme-toggle.component';
-export * from './lib/components/latest-challenge/latest-challenge.component';
