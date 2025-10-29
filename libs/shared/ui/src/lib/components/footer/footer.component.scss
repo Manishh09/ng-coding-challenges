@@ -1,12 +1,15 @@
-// Main footer container
+/* =========================================================
+   FOOTER COMPONENT STYLES
+   ========================================================= */
+
+/* Main footer container */
 .footer {
   background: var(--surface-color);
   border-top: 1px solid var(--outline-color);
   width: 100%;
   position: relative;
-  overflow: hidden;
-  // padding: var(--spacing-sm);
   color: var(--on-surface-color);
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -19,33 +22,30 @@
   }
 }
 
-// Content layout
-.footer-content {
-
-  padding: 24px 48px !important;
-
+/* Layout Containers */
+.footer-container {
+  padding: 24px 48px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  gap: var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-// Shared section styles
-.brand-section,
-.quick-links-section,
-.community-section {
+.footer-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  animation: fadeIn 0.5s var(--animation-easing);
+  animation: fadeIn 0.5s var(--animation-easing) forwards;
 }
 
 .brand-section {
   max-width: 350px;
 }
 
-// Section title styling
+/* Section Headings */
 .section-title {
-  margin: 0 0 var(--spacing-md) 0;
+  margin: 0 0 var(--spacing-md);
   font-size: 1.1rem;
   font-weight: 600;
   position: relative;
@@ -72,8 +72,7 @@
   }
 }
 
-
-// Logo styling
+/* Brand Section Styles */
 .footer-logo {
   display: flex;
   align-items: center;
@@ -82,42 +81,50 @@
 
 .footer-logo-icon {
   margin-right: var(--spacing-sm);
-  font-size: 24px;
+  font-size: 1.5rem;
   color: var(--primary-color);
   filter: drop-shadow(0 2px 4px var(--logo-shadow-color));
   transition: transform 0.3s var(--animation-easing);
+}
 
-  &:hover {
-    transform: rotate(20deg);
-  }
+.footer-logo-icon:hover {
+  transform: rotate(20deg);
 }
 
 .footer-logo-text {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   background: var(--brand-gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   letter-spacing: -0.02em;
+  margin: 0 !important;
 }
 
 .footer-tagline {
   color: var(--on-surface-variant-color);
   font-size: 1rem;
-  margin: 0 0 var(--spacing-md) 0;
   line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+  max-width: 320px;
 }
 
-// Links container
+/* Footer Links */
 .footer-links {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-// General link styling
+.footer-link-item {
+  display: flex;
+}
+
 .footer-link {
   display: flex;
   align-items: center;
@@ -131,11 +138,9 @@
 
   .mat-icon {
     font-size: 1.25rem;
-    height: 1.25rem;
-    width: 1.25rem;
     color: var(--primary-color);
     opacity: 0.85;
-    transition: all 0.3s var(--animation-easing);
+    transition: opacity 0.3s var(--animation-easing);
   }
 
   span {
@@ -169,16 +174,22 @@
     }
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
-
-
-// Footer bottom section
+/* Bottom Section */
 .footer-bottom {
   border-top: 1px solid var(--outline-color);
   width: 100%;
   position: relative;
-  // margin-top: var(--spacing-lg);
 
   &::before {
     content: '';
@@ -193,17 +204,16 @@
 }
 
 .footer-bottom-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .copyright {
-  text-align: center;
   margin: 0;
   color: var(--on-surface-variant-color);
   font-size: 0.9rem;
@@ -220,50 +230,6 @@
   margin: 0 3px;
 }
 
-// Legal links
-.legal-links {
-  display: flex;
-  flex-direction: row;
-  gap: var(--spacing-md);
-  font-size: 0.875rem;
-}
-
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-
-  14% {
-    transform: scale(1.2);
-  }
-
-  28% {
-    transform: scale(1);
-  }
-
-  42% {
-    transform: scale(1.2);
-  }
-
-  70% {
-    transform: scale(1);
-  }
-}
-
 .footer-link-icon,
 .footer-logo-icon,
 .heart-icon {
@@ -274,92 +240,81 @@
   color: transparent;
   display: inline-block;
 }
+ 
 
-.footer-link {
-  &:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-    border-radius: 4px;
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Responsive Design */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.2);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
 @media (max-width: 1024px) {
-  .footer-content {
-    flex-direction: row;
-    gap: var(--spacing-lg);
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 40px;
   }
 
   .brand-section {
-    grid-column: 1 / -1;
-    max-width: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    padding: var(--spacing-md);
-  }
-
-  .footer-bottom-content {
-    flex-direction: column;
-    text-align: center;
-    gap: var(--spacing-sm);
-  }
-
-  .section-title::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .brand-section,
-  .quick-links-section,
-  .community-section {
     align-items: center;
     text-align: center;
   }
 
   .footer-tagline {
     text-align: center;
-    max-width: 400px;
   }
 
-  .footer-links {
-    justify-content: center;
+  .footer-bottom-content {
+    flex-direction: column;
   }
-
-
 }
 
-@media (max-width: 480px) {
-  .footer {
-    padding: var(--spacing-xs);
+@media (max-width: 768px) {
+  .footer-container {
+    padding: var(--spacing-md);
   }
 
-  .footer-content {
-    padding: var(--spacing-sm);
-    gap: var(--spacing-lg);
-  }
-
-  .footer-logo-text {
-    font-size: 1.1rem;
+  .footer-tagline {
+    font-size: 0.9rem;
   }
 
   .section-title {
     font-size: 1rem;
-  }
+    text-align: center;
 
-  .footer-tagline {
-    font-size: 0.8rem;
-  }
-
-  .footer-link {
-    font-size: 0.9rem;
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   .legal-links {
@@ -368,33 +323,23 @@
   }
 }
 
-// iPad Air and similar tablets
-@media (max-width: 834px) and (min-width: 481px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 32px !important;
+@media (max-width: 480px) {
+  .footer-container {
+    padding: var(--spacing-sm);
   }
 
-}
+  .footer-logo-text {
+    font-size: 1.1rem;
+  }
 
-// iPadPro and similar tablets
-@media (max-width: 1024px) and (min-width: 835px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 40px !important;
+  .footer-link {
+    font-size: 0.9rem;
   }
 }
 
-/* Accessibility - Respect reduced motion preferences */
+/* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion) {
-
-  .brand-section,
-  .quick-links-section,
-  .community-section,
+  .footer-section,
   .heart-icon,
   .footer-logo-icon {
     animation: none !important;
@@ -404,9 +349,5 @@
   .footer-link:hover,
   .footer-logo-icon:hover {
     transform: none !important;
-  }
-
-  .heart-icon {
-    animation: none !important;
   }
 }

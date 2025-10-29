@@ -27,7 +27,7 @@ export class LandingPageComponent {
   private challengesService = inject(ChallengesService);
 
   // Input properties for dynamic content
-  logo = '/coding-window.webp';
+  heroIllustration = '/coding-window.webp';
 
   onGetStarted(): void {
     this.router.navigate(['/getting-started']);

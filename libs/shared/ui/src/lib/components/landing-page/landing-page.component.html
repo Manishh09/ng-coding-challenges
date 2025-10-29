@@ -1,57 +1,77 @@
 <div class="landing-page">
   <!-- Hero Section -->
-  <section class="hero-section">
+  <section class="hero-section" aria-labelledby="hero-title" role="region">
     <div class="hero-content">
       <!-- Left Content -->
       <div class="hero-text-content">
-        <h1 class="hero-title">
+        <h1 id="hero-title" class="hero-title">
           Welcome to <span class="highlight">ngQuest</span>
         </h1>
-        <!-- <p class="hero-subtitle">
-          Learn Angular. Solve Challenges. Ace Interviews.
-        </p> -->
-        <!-- <p class="sub-subtitle">
-          Learn Angular best practices. Solve real-world coding challenges. Prepare to ace your next Angular interview.
-        </p> -->
+
         <p class="intro-text">
           The hands-on Angular learning platform designed to fast-track your
           skills through practical coding challenges.
         </p>
 
-        <div class="hero-buttons">
-          <!-- Get Started Button -->
-          <button class="btn btn-primary" (click)="onGetStarted()" type="button">
+        <div class="hero-buttons" role="group" aria-label="Primary call to actions">
+          <button
+            class="btn btn-primary"
+            (click)="onGetStarted()"
+            type="button"
+            aria-describedby="get-started-desc"
+          >
             Get Started
-
           </button>
-          <!-- Latest Challenge Button -->
-          <button class="btn btn-secondary" (click)="goToLatestChallenge()" type="button">
+          <span id="get-started-desc" class="visually-hidden">
+            Begin your journey to master Angular with practical challenges
+          </span>
+
+          <button
+            class="btn btn-secondary"
+            (click)="goToLatestChallenge()"
+            type="button"
+            aria-describedby="latest-challenge-desc"
+          >
             Go to Latest Challenge
-            <span>
+            <span aria-hidden="true">
               <mat-icon class="start-icon">rocket_launch</mat-icon>
             </span>
           </button>
-          <!-- Explore Challenges Button -->
-          <button class="btn btn-secondary" (click)="onExploreChallenges()" type="button">
+          <span id="latest-challenge-desc" class="visually-hidden">
+            Open the most recent Angular coding challenge
+          </span>
+
+          <button
+            class="btn btn-secondary"
+            (click)="onExploreChallenges()"
+            type="button"
+            aria-describedby="explore-challenges-desc"
+          >
             Explore Challenges
-            <span>
+            <span aria-hidden="true">
               <mat-icon class="start-icon">arrow_forward</mat-icon>
             </span>
           </button>
+          <span id="explore-challenges-desc" class="visually-hidden">
+            Browse the list of available Angular challenges
+          </span>
         </div>
       </div>
 
-
       <!-- Right Illustration -->
-      <div class="hero-illustration">
-        <img [ngSrc]="logo" width="400" height="400" priority="high" class="hero-logo"
-          alt="Developer coding Angular challenges on laptop">
-
+      <div class="hero-illustration" aria-hidden="true">
+        <img
+          [ngSrc]="heroIllustration"
+          width="400"
+          height="400"
+          priority="high"
+          class="hero-logo"
+          alt="Developer coding Angular challenges on laptop"
+           
+        />
       </div>
     </div>
 
-    <!-- Latest Challenge Card -->
-    <!-- <ng-coding-challenges-latest-challenge>
-    </ng-coding-challenges-latest-challenge> -->
+     
   </section>
 </div>

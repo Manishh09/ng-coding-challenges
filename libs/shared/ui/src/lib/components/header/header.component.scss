@@ -23,7 +23,6 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-
   padding: 0 32px;
   height: 100%;
   overflow: hidden;
@@ -44,12 +43,7 @@
   color: inherit;
   text-decoration: none;
   transition: transform var(--animation-duration-fast) var(--animation-easing),
-  opacity var(--animation-duration-fast) var(--animation-easing);
-
-  // &:hover {
-  //   opacity: 0.95;
-  //   transform: scale(1.02);
-  // }
+    opacity var(--animation-duration-fast) var(--animation-easing);
 
   &:focus-visible {
     outline: 2px solid var(--color-primary);
@@ -140,7 +134,6 @@ ng-coding-challenges-theme-toggle {
 .logo-text {
   font-size: 2rem;
   font-weight: 800;
-
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
@@ -173,7 +166,6 @@ ng-coding-challenges-theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 0;
   background: transparent;
   border: none;
@@ -182,7 +174,8 @@ ng-coding-challenges-theme-toggle {
   text-decoration: none;
 }
 
-.github-svg, .linkedin-svg {
+.github-svg,
+.linkedin-svg {
   width: 24px;
   height: 24px;
   fill: var(--text-primary);
@@ -191,7 +184,7 @@ ng-coding-challenges-theme-toggle {
 
 .linkedin-svg {
   width: 20px;
-  height:24px;
+  height: 24px;
   fill: var(--text-primary);
   display: block;
 }
@@ -204,31 +197,6 @@ body.dark-mode .linkedin-svg {
   fill: var(--text-primary);
 }
 
-
-@media (max-width: 768px) {
-
-  .github-svg, .linkedin-svg {
-    width: 20px;
-    height: 24px;
-  }
-}
-
-// Animation for gradient text
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-// Responsive design for mobile devices
 @media (max-width: 768px) {
   .desktop-only {
     display: none !important;
@@ -263,11 +231,32 @@ body.dark-mode .linkedin-svg {
     width: 48px;
     height: 48px;
   }
+
+  .github-svg,
+  .linkedin-svg {
+    width: 20px;
+    height: 24px;
+  }
 }
 
 // Hide mobile elements on larger screens
 @media (min-width: 769px) {
   .mobile-only {
     display: none !important;
+  }
+}
+
+// Animation for gradient text
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }

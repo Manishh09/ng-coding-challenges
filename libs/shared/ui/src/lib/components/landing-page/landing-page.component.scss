@@ -1,13 +1,10 @@
 .landing-page {
-  // min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .hero-section {
-  //background: var(--brand-gradient-hero);
   background: linear-gradient(60deg, #313c7a, #ff4081);
-
   padding: 7rem 3rem 4rem 3rem;
   position: relative;
   overflow: hidden;
@@ -19,10 +16,7 @@
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
     pointer-events: none;
   }
@@ -33,39 +27,35 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // align-items: center;
   position: relative;
   z-index: 2;
   margin-top: 24px;
-  // margin-bottom: 16px;
   text-align: left;
+}
+
+.hero-text-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-title {
   font-size: 4rem;
   font-weight: 700;
   line-height: 1.6;
-  // margin: 0 0 24px 0;
-  //letter-spacing: -0.02em;
   background: white;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  // margin: 0 0 40px 0;
-  opacity: 0.95;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 24px 0;
 }
 
 .intro-text {
   font-size: 1.25rem;
   margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
 }
 
 .hero-buttons {
@@ -85,11 +75,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 8px;
   min-height: 48px;
-  text-decoration: none;
   white-space: nowrap;
-
 
   &:active {
     transform: translateY(1px);
@@ -100,230 +88,73 @@
   background: linear-gradient(90deg, #672fc7, #6f59e1);
   color: white;
 
-  // border: 1px solid rgba(255, 255, 255, 0.2);
-
-  &:hover {
-    // background: var(--brand-gradient-primary);
+  &:hover,
+  &:focus-visible {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(221, 0, 49, 0.3);
     background: linear-gradient(90deg, #6A5DF0, #A084FF);
+    outline: none;
   }
 }
-
-.btn-primary,
-.btn-secondary {
-  mat-icon {
-
-    // animation: floatRight 3s ease-in-out infinite;
-    &:hover {
-      transform: translateX(4px);
-      box-shadow: 0 8px 25px rgba(221, 0, 49, 0.3);
-    }
-  }
-}
-
 
 .btn-secondary {
   background: transparent;
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
+    outline: none;
   }
 }
 
-.hero-illustration {
+.btn mat-icon.start-icon {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
 
+.btn:hover mat-icon.start-icon,
+.btn:focus-visible mat-icon.start-icon {
+  transform: translateX(4px);
+}
+
+.hero-illustration {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  max-width: 480px;
 
   .hero-logo {
     border-radius: 16px;
     filter: var(--logo-filter);
     mix-blend-mode: var(--logo-blend-mode);
+    width: 100%;
+    height: auto;
+    max-width: 400px;
   }
 }
 
-.code-window {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
-  overflow: hidden;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), #1a1b1f);
-    border-radius: 16px;
-    pointer-events: none;
-  }
-}
-
-.window-header {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.window-controls {
-  display: flex;
-  gap: 8px;
-}
-
-.control-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-
-  &:nth-child(1) {
-    background: #FF5F56;
-  }
-
-  &:nth-child(2) {
-    background: #FFBD2E;
-  }
-
-  &:nth-child(3) {
-    background: #27CA3F;
-  }
-}
-
-.window-content {
-  padding: 24px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
-}
-
-.angular-logo {
-
-  filter: drop-shadow(0 4px 12px rgba(221, 0, 49, 0.3));
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05) rotate(5deg);
-  }
-}
-
-.code-editor {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.code-svg {
-  width: 100%;
-  height: auto;
-  max-width: 200px;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
-
-.code-lines rect {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.code-lines rect:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.code-lines rect:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.code-lines rect:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-.code-lines rect:nth-child(4) {
-  animation-delay: 0.6s;
-}
-
-.code-lines rect:nth-child(5) {
-  animation-delay: 0.8s;
-}
-
-.code-lines rect:nth-child(6) {
-  animation-delay: 1s;
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
-  }
+// This .visually-hidden class ensures that the element is visually invisible but remains accessible to screen readers
+.visually-hidden {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  width: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
 }
 
 
+/* Responsive Design */
 
-// Spotlight Background
-.spotlight-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle at center,
-      rgba(255, 27, 141, 0.15) 0%,
-      rgba(147, 51, 234, 0.1) 30%,
-      transparent 70%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: pulseSpotlight 4s ease-in-out infinite;
-  z-index: 2;
-}
-
-@keyframes pulseSpotlight {
-
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 0.8;
-  }
-}
-
-// Responsive Design
 @media (max-width: 1024px) {
   .hero-content {
     gap: 60px;
@@ -337,7 +168,6 @@
 @media (max-width: 768px) {
   .hero-section {
     padding: 60px 24px 32px;
-    //min-height: calc(100vh - 100px);
     margin-top: 32px;
   }
 
@@ -345,34 +175,20 @@
     margin-top: 32px;
     flex-direction: column;
     gap: 40px;
-    //text-align: center;
+    text-align: center;
+    align-items: center;
   }
 
   .hero-title {
     font-size: 2.5rem;
   }
 
-  .hero-subtitle {
+  .intro-text {
     font-size: 1.125rem;
+    margin-bottom: 2rem;
   }
 
   .hero-buttons {
-    justify-content: center;
-  }
-
-  .latest-challenge-card {
-    margin: 32px 16px 0;
-    padding: 20px;
-  }
-
-  .challenge-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .try-now-btn {
-    align-self: stretch;
     justify-content: center;
   }
 }
@@ -382,17 +198,12 @@
     padding: 16px 24px 24px 24px;
   }
 
-  .hero-content {
-    margin-top: 32px;
-  }
-
   .hero-title {
     font-size: 2rem;
     margin-bottom: 16px;
-
   }
 
-  .hero-subtitle {
+  .intro-text {
     font-size: 1rem;
     margin-bottom: 32px;
   }
@@ -406,104 +217,26 @@
     width: 100%;
     justify-content: center;
   }
-
-
-
-  .challenge-title {
-    font-size: 1.25rem;
-  }
-
-
-  .code-window {
-    max-width: 384px;
-  }
 }
 
-// iPad Air and similar tablets
-// iPad Air and similar tablets
-@media (max-width: 834px) and (min-width: 481px) {
-  .hero-section {
-    padding: 48px 32px 32px;
-    margin-top: 32px;
-  }
+/* Accessibility */
 
-  .hero-content {
-    margin-top: 32px;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center; //  centers both text + illustration
-    text-align: center; // optional: centers text too
-  }
-
-  .hero-title {
-    font-size: 2.75rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.125rem;
-  }
-
-  .hero-buttons {
-    justify-content: center; //  center buttons too
-    flex-wrap: wrap;
-  }
-
-  .hero-illustration {
-    width: 100%; // take full available width by default
-    max-width: 480px; // cap so it doesn’t blow up on large screens
-    margin: 0 auto; // center when stacked
-    display: flex;
-    justify-content: center;
-  }
-}
-
-
-// Accessibility improvements
 @media (prefers-reduced-motion: reduce) {
-  .code-lines rect {
-    animation: none;
-  }
 
   .btn,
-  .try-now-btn {
-    transition: none;
-  }
-
-  .arrow-icon {
-    transition: none;
+  .btn mat-icon {
+    transition: none !important;
   }
 }
 
-// High contrast mode
-@media (prefers-contrast: high) {
-  .hero-section {
-    background: linear-gradient(135deg, #000000 0%, #333333 100%);
-  }
-
-  .btn-primary {
-    background: white;
-    color: black;
-    border: 2px solid black;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
-  .latest-challenge-card {
-    border: 2px solid black;
-  }
-}
-
+/* Animation for icons */
 @keyframes floatRight {
   0% {
     transform: translateX(0);
   }
 
   50% {
-    transform: translateX(12px); // move right
+    transform: translateX(12px);
   }
 
   100% {
