@@ -6,8 +6,7 @@ import { UserTodoFacadeService } from '../../services/user-todo-facade.service';
  import { CommonModule, NgClass } from "@angular/common";
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
-import { ChallengeHeaderComponent } from 'projects/coding-challenges/src/app/challenges/shared/components/challenge-header/challenge-header.component';
-
+import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 @Component({
   selector: 'app-user-todos',
   standalone: true,

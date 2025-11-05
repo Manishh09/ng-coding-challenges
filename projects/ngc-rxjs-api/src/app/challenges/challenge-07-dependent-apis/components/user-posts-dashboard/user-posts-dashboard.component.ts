@@ -3,7 +3,7 @@ import { UserWithPosts } from '../../models/user-posts.model';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { catchError, forkJoin, map, merge, mergeMap, of } from 'rxjs';
-import { ChallengeHeaderComponent } from 'projects/coding-challenges/src/app/challenges/shared/components/challenge-header/challenge-header.component';
+import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 
 @Component({
   selector: 'app-user-posts-dashboard',

@@ -1,59 +1,78 @@
 import { Injectable } from '@angular/core';
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { CHALLENGE_DATA } from './challenge-data';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChallengesService {
+  /**
+   * Immutable collection of available challenges.
+   */
+  private readonly challenges: readonly Challenge[] = CHALLENGE_DATA;
 
-
-  private challenges: Challenge[] = CHALLENGE_DATA;
-
-
-  getChallenges(): Challenge[] {
+  /**
+   * Returns all challenges.
+   */
+  getChallenges(): readonly Challenge[] {
     return this.challenges;
   }
 
+  /**
+   * Finds a challenge by its unique ID.
+   * @param id - Challenge ID
+   * @returns The matching challenge, or undefined if not found
+   */
   getChallengeById(id: number): Challenge | undefined {
-    return this.challenges.find(challenge => challenge.id === id);
+    return this.challenges.find((challenge) => challenge.id === id);
   }
 
-  getChallengesByCategory(category: string): Challenge[] {
-    return this.challenges.filter(challenge => challenge.category === category);
+  /**
+   * Retrieves all challenges belonging to a specific category.
+   * @param category - Category name
+   * @returns An array of challenges under the given category
+   */
+  getChallengesByCategory(category: string): readonly Challenge[] {
+    if (!category) return [];
+    return this.challenges.filter(
+      (challenge) => challenge.category === category
+    );
   }
 
   /**
    * Retrieves the most recent challenge from the collection.
-   *
-   * @returns The latest challenge in the collection, or `undefined` if the collection is empty
+   * @returns The latest challenge, or undefined if the collection is empty
    */
   getLatestChallenge(): Challenge | undefined {
-    if (this.challenges.length === 0) {
-      return undefined;
-    }
-    return this.challenges.at(-1); // Assuming challenges are ordered by ID
+    return this.challenges.at(-1);
   }
 
   /**
-   * Extracts the current challenge from a given URL by parsing the last URL segment
-   * and matching it against available challenges.
+   * Finds a challenge based on a provided URL.
+   * Extracts the last segment and matches it with the challenge link.
    *
-   * @param url - The URL string to extract the challenge ID from
-   * @returns The matching Challenge object if found, otherwise null
+   * @param url - The full URL string
+   * @returns The matching challenge, or undefined if not found
    */
-  getCurrentChallengeIdFromURL(url: string): Challenge | null {
-    const segments = url.split('/');
-    const lastSegment = segments.at(-1);
-    if (lastSegment) {
-      const challenge = this.challenges.find(c => c.link.includes(lastSegment));
-      return challenge ? challenge : null;
-    } else {
-      return null;
-    }
+  getChallengeFromURL(url: string): Challenge | undefined {
+    if (!url) return undefined;
+    const lastSegment = url.split('/').at(-1);
+    return lastSegment
+      ? this.challenges.find((c) => c.link.includes(lastSegment))
+      : undefined;
   }
 
+  /**
+   * Returns grouped challenge data by category.
+   * @returns A Map of category name to challenge array
+   */
+  getChallengesGroupedByCategory(): Map<string, Challenge[]> {
+    return this.challenges.reduce((map, challenge) => {
+      if (!map.has(challenge.category)) {
+        map.set(challenge.category, []);
+      }
+      map.get(challenge.category)!.push(challenge);
+      return map;
+    }, new Map<string, Challenge[]>());
+  }
 }
-
-
-
-

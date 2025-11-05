@@ -322,7 +322,7 @@ libs/shared/ui/src/lib/styles/
 ├── theme.scss              # Main theme file
 └── themes.scss             # Legacy theme file (deprecated)
 
-projects/coding-challenges/src/
+projects/ngc-shell/src/
 ├── styles.scss             # Main application styles
 └── app/components/theme-demo/
     ├── theme-demo.component.ts

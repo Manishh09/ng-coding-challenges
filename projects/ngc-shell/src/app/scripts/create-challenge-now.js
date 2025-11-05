@@ -10,7 +10,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const BASE_PATH = path.join(__dirname, '../projects/coding-challenges/src/app/challenges');
+const BASE_PATH = path.join(__dirname, '../projects/ngc-shell/src/app/challenges');
 
 // Helper: Get next challenge number
 function getNextChallengeNumber() {

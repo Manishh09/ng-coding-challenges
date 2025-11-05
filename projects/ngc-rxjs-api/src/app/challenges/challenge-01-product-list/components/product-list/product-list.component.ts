@@ -3,8 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ThemeService } from '@ng-coding-challenges/shared/services';
-import { ChallengeHeaderComponent } from 'projects/coding-challenges/src/app/challenges/shared/components/challenge-header/challenge-header.component';
+import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 
 @Component({
   selector: 'app-product-list',

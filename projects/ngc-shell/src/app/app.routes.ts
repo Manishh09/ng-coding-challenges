@@ -32,7 +32,7 @@ export const routes: Routes = [
       },
       {
         path: 'angular-core',
-        loadChildren: () => import('@ng-core').then(m => m.NGC_CORE_ROUTES)
+        loadChildren: () => import('@ngc-core').then(m => m.NGC_CORE_ROUTES)
       }
 
 

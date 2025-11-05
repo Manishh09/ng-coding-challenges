@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -12,19 +12,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   selector: 'app-challenge-category-card',
   templateUrl: './challenge-category-card.component.html',
   styleUrls: ['./challenge-category-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [MatIconModule, MatCardModule, MatChipsModule, MatButtonModule, MatTooltipModule, A11yModule],
 })
 export class ChallengeCategoryCardComponent {
 
-
+  // Input properties
   readonly category = input.required<ChallengeCategory>();
+  readonly selected = input(false);
 
-  readonly selected = input<boolean>(false);
+  // Dependencies
+  private readonly router = inject(Router);
 
-  readonly router = inject(Router);
-
-  goToChallenges(challengeId: string): void {  // Navigation logic to go to the challenges of the selected category
-    this.router.navigate(['/challenges', challengeId]);
+  // Navigation with clear naming and typed argument
+  onNavigateToCategory(categoryId: string): void {
+    if (!categoryId) return;
+    this.router.navigate(['/challenges', categoryId]);
   }
 }

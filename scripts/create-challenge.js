@@ -13,7 +13,7 @@ const rl = readline.createInterface({
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Base path to challenge folder in monorepo
-const BASE_PATH = path.join(__dirname, "../projects/coding-challenges/src/app/challenges");
+const BASE_PATH = path.join(__dirname, "../projects/ngc-shell/src/app/challenges");
 
 // Helper: Get next challenge number
 function getNextChallengeNumber() {

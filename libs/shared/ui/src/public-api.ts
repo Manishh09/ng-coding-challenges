@@ -8,7 +8,6 @@
  */
 export * from './lib/components/header/header.component';
 export * from './lib/components/footer/footer.component';
-export * from './lib/components/hero-section/hero-section.component';
 export * from './lib/components/landing-page/landing-page.component';
 
 /**

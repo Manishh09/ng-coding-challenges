@@ -36,11 +36,7 @@ export class ChallengeNavComponent {
     // Navigate to home first
     this.router.navigate(['/challenges']);
 
-    // Then trigger showing challenges list with a slight delay to ensure navigation completes
-    setTimeout(() => {
-      // Dispatch a custom event to communicate with app component
-      window.dispatchEvent(new CustomEvent('showChallenges', { detail: true }));
-    }, 100);
+
   }
 
   /**
@@ -57,7 +53,7 @@ export class ChallengeNavComponent {
     const currentRoute = this.router.url;
 
     // Get the current challenge based on the URL
-    const currentChallenge: Challenge = this.challengeService.getCurrentChallengeIdFromURL(currentRoute) as Challenge;
+    const currentChallenge: Challenge = this.challengeService.getChallengeFromURL(currentRoute) as Challenge;
 
     if (!currentChallenge) {
       console.error('Current challenge not found');
@@ -65,6 +61,5 @@ export class ChallengeNavComponent {
     }
 
     this.stackblitzService.openChallengeInStackblitz(currentChallenge);
-    ;
   }
 }

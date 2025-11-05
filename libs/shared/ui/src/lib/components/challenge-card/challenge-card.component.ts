@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router,  RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,46 +24,44 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatTooltipModule,
     MatMenuModule
-],
+  ],
   templateUrl: './challenge-card.component.html',
   styleUrl: './challenge-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChallengeCardComponent implements OnInit {
+  // Input properties
+  readonly challenge = input.required<Challenge>();
+  readonly newBadgeChallengeIds = input<number[]>([]);
 
-  @Input({ required: true }) challenge!: Challenge;
-  @Input() newBadgeChallengeIds: number[] = [];
+  // Reactive signal to check if current challenge is the latest challenge
+  readonly isLatestChallenge = computed(() => {
+    const latest = this.challengesService.getLatestChallenge();
+    const current = this.challenge();
+    return !!latest && current.id === latest.id;
+  });
 
-  isLatestChallenge = false;
-  hasNewBadge = false;
+  // Reactive signal for new badge visibility
+  readonly hasNewBadge = computed(() => {
+    const newBadgeIds = this.newBadgeChallengeIds();
+    const currentId = this.challenge().id;
+    if (newBadgeIds?.length) {
+      return newBadgeIds.includes(currentId);
+    }
+    return this.isLatestChallenge();
+  });
 
+  // ---- Injected Services ----
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly challengesService = inject(ChallengesService);
-
+  private readonly navigationService = inject(NavigationService);
+  private readonly notificationService = inject(NotificationService);
   private readonly stackblitzService = inject(StackblitzService);
 
   ngOnInit(): void {
-    // Check if this is the latest challenge
-    const challenges = this.challengesService.getChallenges();
-    if (challenges.length > 0) {
-      const latestChallenge = challenges.reduce((prev, current) =>
-        (prev.id > current.id) ? prev : current
-      );
-      this.isLatestChallenge = this.challenge.id === latestChallenge.id;
-    }
-
-    // Check if this challenge should have a new badge based on the provided array
-    if (this.newBadgeChallengeIds && this.newBadgeChallengeIds.length > 0) {
-      this.hasNewBadge = this.newBadgeChallengeIds.includes(this.challenge.id);
-    } else {
-      // If no specific IDs are provided, use the latest challenge logic
-      this.hasNewBadge = this.isLatestChallenge;
-    }
+    // Initialization logic can go here if needed
   }
-
-  private readonly navigationService = inject(NavigationService);
-  private readonly notificationService = inject(NotificationService);
 
 
   /**
@@ -78,31 +76,29 @@ export class ChallengeCardComponent implements OnInit {
    * If the navigation service fails to open the link (e.g., due to popup blockers),
    * an appropriate error notification is displayed based on the link type.
    */
-  openURL(url: string, type: "github" | "requirement" | "solution"): void {
-    const errorMessage = type === "github"
-      ? 'Unable to open GitHub repository. Please check if popups are blocked.'
-      : type === "requirement"
-        ? 'Unable to open challenge requirement doc. Please check if popups are blocked.'
-        : 'Unable to open solution guide. Please check if popups are blocked.';
-
+  openURL(url: string, type: 'github' | 'requirement' | 'solution'): void {
     if (!url) {
       this.notificationService.error('No URL provided to open.');
       return;
     }
 
-    const success = this.navigationService.openExternalLink(url);
+    const errorMessages: Record<typeof type, string> = {
+      github: 'Unable to open GitHub repository. Please check if popups are blocked.',
+      requirement: 'Unable to open challenge requirement doc. Please check if popups are blocked.',
+      solution: 'Unable to open solution guide. Please check if popups are blocked.',
+    };
 
+    const success = this.navigationService.openExternalLink(url);
     if (!success) {
-      this.notificationService.error(errorMessage);
-      ``
+      this.notificationService.error(errorMessages[type]);
     }
   }
 
-  async onTryChallenge(challenge: Challenge) {
+  async onTryChallenge(challenge: Challenge): Promise<void> {
     await this.stackblitzService.openChallengeInStackblitz(challenge);
   }
 
-  viewOutput(link: string) {
+  viewOutput(link: string): void {
     this.router.navigate([link], { relativeTo: this.route });
   }
 }

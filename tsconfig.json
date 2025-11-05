@@ -38,7 +38,8 @@
         "libs/shared/services/src/public-api.ts"
       ],
       "@ngc-rxjs-api": ["projects/ngc-rxjs-api/src/public-api.ts"],
-      "@ng-core": ["projects/ngc-core/src/public-api.ts"],
+      "@ngc-core": ["projects/ngc-core/src/public-api.ts"],
+      "@ngc-routing": ["projects/ngc-routing/src/public-api.ts"],
     }
   },
   "angularCompilerOptions": {

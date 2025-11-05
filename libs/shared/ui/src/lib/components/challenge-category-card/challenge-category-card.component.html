@@ -6,30 +6,34 @@
         @if (category().icon) {
         <mat-icon class="category-icon">{{ category().icon }}</mat-icon>
         }
-        <mat-card-title class="category-title">{{ category().name }}</mat-card-title>
+        <mat-card-title class="category-title">{{
+          category().name
+        }}</mat-card-title>
       </div>
 
-      <mat-chip class="challenge-chip"   selected
-        [matTooltip]="'Total Challenges'" matTooltipPosition="above"
-        aria-label="Total Challenges">
+      <mat-chip
+        class="challenge-chip"
+        selected
+        [matTooltip]="'Total Challenges'"
+        matTooltipPosition="above"
+        aria-label="Total Challenges"
+      >
         {{ category().challengeCount }}
       </mat-chip>
     </div>
   </mat-card-header>
   <mat-card-content>
     <p>{{ category().description }}</p>
-
-
   </mat-card-content>
-  <!-- @if (category().newBadgeCount) {
-    <mat-badge [content]="category().newBadgeCount" matBadgeColor="warn"></mat-badge>
-  } -->
 
   <mat-card-actions>
-    <button class="view-challenges-btn" mat-button (click)="goToChallenges(category().id)"
-      [attr.aria-label]="'View Challenges in ' + category().name">
+    <button
+      class="view-challenges-btn"
+      mat-button
+      (click)="onNavigateToCategory(category().id)"
+      [attr.aria-label]="'View Challenges in ' + category().name"
+    >
       View Challenges
     </button>
   </mat-card-actions>
-
 </mat-card>

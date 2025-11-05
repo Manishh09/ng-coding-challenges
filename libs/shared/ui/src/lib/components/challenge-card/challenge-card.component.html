@@ -1,22 +1,21 @@
 <mat-card class="challenge-card">
-
   <!-- Decorative Banner -->
   <div class="card-banner" aria-hidden="true"></div>
 
   <!-- New Badge -->
-  @if (hasNewBadge) {
-    <div class="new-badge-container">
-      <span class="new-badge">New</span>
-    </div>
+  @if (hasNewBadge()) {
+  <div class="new-badge-container">
+    <span class="new-badge">New</span>
+  </div>
   }
 
   <!-- Card Header -->
   <mat-card-header>
     <mat-card-title
-      [matTooltip]="challenge.title.length > 30 ? challenge.title : null"
+      [matTooltip]="challenge().title.length > 30 ? challenge().title : null"
       matTooltipPosition="above"
     >
-      {{ challenge.title }}
+      {{ challenge().title }}
     </mat-card-title>
 
     <!-- Challenge Menu -->
@@ -36,8 +35,8 @@
       <mat-menu #actionMenu="matMenu" class="custom-menu">
         <button
           mat-menu-item
-          (click)="openURL(challenge.requirement, 'requirement')"
-          [disabled]="!challenge.requirement"
+          (click)="openURL(challenge().requirement, 'requirement')"
+          [disabled]="!challenge().requirement"
           aria-label="View Requirements Document"
           type="button"
           class="requirement-button"
@@ -48,8 +47,8 @@
 
         <button
           mat-menu-item
-          (click)="openURL(challenge.solutionGuide, 'solution')"
-          [disabled]="!challenge.solutionGuide"
+          (click)="openURL(challenge().solutionGuide, 'solution')"
+          [disabled]="!challenge().solutionGuide"
           aria-label="View Solution Guide"
           type="button"
           class="solution-button"
@@ -63,11 +62,14 @@
 
   <!-- Card Content -->
   <mat-card-content>
-    <p class="description"
-       [matTooltip]="challenge.description.length > 98 ? challenge.description : null"
-       matTooltipPosition="above"
+    <p
+      class="description"
+      [matTooltip]="
+        challenge().description.length > 98 ? challenge().description : null
+      "
+      matTooltipPosition="above"
     >
-      {{ challenge.description }}
+      {{ challenge().description }}
     </p>
   </mat-card-content>
 
@@ -77,10 +79,10 @@
       <!-- GitHub Button -->
       <button
         mat-icon-button
-        (click)="openURL(challenge.gitHub, 'github')"
+        (click)="openURL(challenge().gitHub, 'github')"
         matTooltip="Open Source Code"
         matTooltipPosition="above"
-        [disabled]="!challenge.gitHub"
+        [disabled]="!challenge().gitHub"
         class="code-button"
         aria-label="Open Source Code"
         type="button"
@@ -92,8 +94,8 @@
       <button
         mat-icon-button
         color="primary"
-        (click)="onTryChallenge(challenge)"
-        [disabled]="!challenge.solutionGuide"
+        (click)="onTryChallenge(challenge())"
+        [disabled]="!challenge().solutionGuide"
         matTooltip="Launch Challenge"
         matTooltipPosition="above"
         class="try-button"
@@ -107,7 +109,7 @@
       <button
         mat-icon-button
         color="primary"
-        (click)="viewOutput(challenge.link)"
+        (click)="viewOutput(challenge().link)"
         matTooltip="View Output"
         matTooltipPosition="above"
         class="view-button"

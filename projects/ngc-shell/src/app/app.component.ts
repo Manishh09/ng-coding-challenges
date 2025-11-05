@@ -12,7 +12,6 @@ import { Subject, timer } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
-import { Challenge } from '@ng-coding-challenges/shared/models';
 
 @Component({
   selector: 'app-root',
@@ -51,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   // Get challenges from the service
-  protected challenges: Challenge[] = this.#challengesService.getChallenges();
+  protected readonly challenges = this.#challengesService.getChallenges();
 
   // clear subscriptions on destroy
   #destroy$ = new Subject<void>();
@@ -67,18 +66,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.#updateLayoutOnRouteChange();
-    // Listen for custom events to show challenges
-    window.addEventListener('showChallenges', this.#showChallengesHandler);
+
   }
 
-  // Event handler for showChallenges custom event
-  #showChallengesHandler = ((e: CustomEvent) => {
-    this.showChallenges.set(e.detail);
-    if (e.detail) {
-      setTimeout(() => this.scrollToSection('challenges-section'), 200);
-    }
-  }) as EventListener;
 
+  // Update layout based on route changes
   #updateLayoutOnRouteChange() {
     this.showLandingPage.set(false);
     this.#router.events
@@ -92,6 +84,7 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
+  // Handle route changes to update layout visibility
   #handleRouteChange(url: string) {
     // Routes where we show individual challenge components only
 
@@ -173,8 +166,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // clear subscriptions on destroy
   ngOnDestroy(): void {
-    // Remove event listener using the same handler reference
-    window.removeEventListener('showChallenges', this.#showChallengesHandler);
 
     // Called once, before the instance is destroyed.
     this.#destroy$.next();

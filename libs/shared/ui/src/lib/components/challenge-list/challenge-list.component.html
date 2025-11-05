@@ -1,39 +1,44 @@
 @if (!hasActiveChildRoute()) {
-  <section class="challenge-list" id="challengeList" aria-labelledby="challengeList-title">
-    
-    <header class="challenge-list-header">
-      <div class="challenge-list-header-content">
-        <button 
-          mat-button 
-          routerLink="/challenges"
-          class="challenge-list-button challenge-list-button-back"
-          aria-label="Go back to Challenges"
-          type="button"
-        >
-          <mat-icon aria-hidden="true">arrow_back</mat-icon>
-          <span class="challenge-list-button-label">Back</span>
-        </button>
-        
-        <h2 class="challenge-list-title" id="challengeList-title">{{ title }}</h2>
-      </div>
-    </header>
+<section
+  class="challenge-list"
+  id="challengeList"
+  aria-labelledby="challengeList-title"
+>
+  <header class="challenge-list-header">
+    <div class="challenge-list-header-content">
+      <button
+        mat-button
+        routerLink="/challenges"
+        class="challenge-list-button challenge-list-button-back"
+        aria-label="Go back to Challenges"
+        type="button"
+      >
+        <mat-icon aria-hidden="true">arrow_back</mat-icon>
+        <span class="challenge-list-button-label">Back</span>
+      </button>
 
-    <div class="challenge-list-cards" [attr.role]="'list'">
-      @for (challenge of challenges; track challenge.id) {
-         
-          <ng-coding-challenges-challenge-card 
-            [challenge]="challenge" 
-            [newBadgeChallengeIds]="newBadgeChallengeIds">
-          </ng-coding-challenges-challenge-card>
-        
-      } @empty {
-        <div class="challenge-list-empty" role="status">
-          <p class="challenge-list-empty-text">No challenges available at the moment.</p>
-        </div>
-      }
+      <h2 class="challenge-list-title" id="challengeList-title">{{ title() }}</h2>
     </div>
+  </header>
 
-  </section>
+  <div class="challenge-list-cards" [attr.role]="'challenge-list'">
+    @for (challenge of challenges(); track challenge.id) {
+
+      <ng-coding-challenges-challenge-card
+        [challenge]="challenge"
+        [newBadgeChallengeIds]="newBadgeChallengeIds()"
+      >
+      </ng-coding-challenges-challenge-card>
+
+    } @empty {
+      <div class="challenge-list-empty" role="status">
+        <p class="challenge-list-empty-text">
+          No challenges available at the moment.
+        </p>
+      </div>
+    }
+  </div>
+</section>
 } @else {
   <router-outlet />
 }

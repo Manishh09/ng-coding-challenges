@@ -4,8 +4,8 @@ import { catchError, EMPTY, forkJoin, map, Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { Post } from '../models/post';
  import { DashboardResponse } from '../models/dasboard';
-import { ApiResponse } from 'projects/coding-challenges/src/app/challenges/shared/models/api-response';
-import { wrapApi } from 'projects/coding-challenges/src/app/challenges/shared/functions/wrapAPI';
+import { ApiResponse } from 'projects/ngc-shell/src/app/shared/models/api-response';
+import { wrapApi } from 'projects/ngc-shell/src/app/shared/functions/wrapAPI';
 
 @Injectable({
   providedIn: 'root'

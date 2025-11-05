@@ -16,7 +16,7 @@
   </div>
 
   <div class="category-cards">
-    @for (category of categories(); track category.id) {
+    @for (category of categoriesWithCount(); track category.id) {
       <div class="card-wrapper">
         <app-challenge-category-card
           [category]="category"
