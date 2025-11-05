@@ -9,7 +9,7 @@ export const NGC_CORE_ROUTES: Routes = [
     children: [
       {
         path: 'component-communication',
-        loadComponent: () => import('./challenges/challenge-01-component-communication/components/product-dashboard/product-dashboard.component').then(m => m.ProductDashboardComponent)
+        loadComponent: () => import('./challenges/challenge-09-component-communication/components/product-dashboard/product-dashboard.component').then(m => m.ProductDashboardComponent)
       },
     ]
   }

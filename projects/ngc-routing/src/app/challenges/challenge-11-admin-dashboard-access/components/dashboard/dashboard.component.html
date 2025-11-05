@@ -1,0 +1,16 @@
+<app-challenge-header [title]="'Admin Dashboard Access'" />
+
+<main class="admin-page" role="main" aria-labelledby="adminHeading">
+  <mat-card class="admin-card">
+    <h1 id="adminHeading">Admin Dashboard</h1>
+    <p>Welcome <strong>{{ auth.user()?.username }}</strong>. Manage application resources below.</p>
+
+
+    <nav aria-label="Admin navigation">
+      <ul class="admin-nav">
+        <li><a routerLink="/dashboard/users" id="link-users">Manage Users</a></li>
+        <li><a routerLink="/dashboard/posts" id="link-posts">Manage Posts</a></li>
+      </ul>
+    </nav>
+  </mat-card>
+</main>

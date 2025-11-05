@@ -1,7 +1,7 @@
 const BASE_REPO = 'https://github.com/Manishh09/ng-coding-challenges/blob/develop';
 const NGC_RXJS_API = `${BASE_REPO}/projects/ngc-rxjs-api/src/app/challenges`;
 const NGC_CORE = `${BASE_REPO}/projects/ngc-core/src/app/challenges`;
-
+const NGC_ROUTING = `${BASE_REPO}/projects/ngc-routing/src/app/challenges`;
 export const CHALLENGE_DATA = [
   {
     id: 1,
@@ -102,4 +102,26 @@ export const CHALLENGE_DATA = [
     solutionGuide: `${NGC_CORE}/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_CORE}/challenge-09-component-communication`,
   },
+  {
+    id: 10,
+    title: 'Challenge 10: Authorized Resource Access',
+    description:
+      'Implement a simple authentication system in Angular using Signals and route guards to protect authorized resources.',
+    link: 'authorized-resource-access',
+    category: 'angular-routing',
+    requirement: `${NGC_ROUTING}/challenge-10-authorized-resource-access/docs/CH-10-REQUIREMENT.md`,
+    solutionGuide: `${NGC_ROUTING}/challenge-10-authorized-resource-access/docs/CH-10-SOLUTION_GUIDE.md`,
+    gitHub: `${NGC_ROUTING}/challenge-10-authorized-resource-access`,
+  },
+  {
+    id: 11,
+    title: 'Challenge 11: Admin Dashboard Access',
+    description:
+      'Create an admin dashboard in Angular with role-based access control using Signals and route guards.',
+    link: 'admin-dashboard-access',
+    category: 'angular-routing',
+    requirement: `${NGC_ROUTING}/challenge-11-admin-dashboard-access/docs/CH-11-REQUIREMENT.md`,
+    solutionGuide: `${NGC_ROUTING}/challenge-11-admin-dashboard-access/docs/CH-11-SOLUTION_GUIDE.md`,
+    gitHub: `${NGC_ROUTING}/challenge-11-admin-dashboard-access`,
+  }
 ];

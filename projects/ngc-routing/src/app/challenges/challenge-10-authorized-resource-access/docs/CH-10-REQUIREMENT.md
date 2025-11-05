@@ -1,7 +1,7 @@
 # Challenge 10 - Secure Dashboard Page Access (CanActivate Guards)
 
 ##  Description
-Build a real-world authentication flow in Angular 19 where authenticated users can access `/dashboard` while unauthenticated users are redirected to `/login`. Logged-in users cannot access `/login` or `/register` again. Use standalone components, signals, Angular Material, and the new Angular control flow syntax.
+Build a real-world authentication flow in Angular 19 where authenticated users can access `/products` while unauthenticated users are redirected to `/login`. Logged-in users cannot access `/login` or `/register` again. Use standalone components, signals, Angular Material, and the new Angular control flow syntax.
 
 ## Requirements
 
@@ -16,11 +16,11 @@ Build a real-world authentication flow in Angular 19 where authenticated users c
 - Control flow syntax (`@if`, `@else`) in templates.
 - Redirection logic:
   - If not logged in → `/login`
-  - If already logged in → `/dashboard`
+  - If already logged in → `/products`
 
 ### UI Requirements
 - **Login Page:** `mat-card` with username/password fields and a login button.
-- **Dashboard Page:** Welcome message and logout button.
+- **Products Page:** Welcome message and logout button.
 - Optional: Responsive design and clean spacing.
 
 ## Architecture
@@ -34,7 +34,7 @@ Build a real-world authentication flow in Angular 19 where authenticated users c
 
 ### Component Layer
 - `LoginComponent`: Handles login UI and logic.
-- `DashboardComponent`: Displays secure content and logout.
+- `ProductListComponent`: Displays secure content and logout.
 - Routing configuration: Private and public routes with guards.
 
 ##  Constraints and Expectations

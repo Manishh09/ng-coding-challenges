@@ -70,7 +70,7 @@
         }
       }
     },
-     "shared-ui": {
+    "shared-ui": {
       "projectType": "library",
       "root": "libs/shared/ui",
       "sourceRoot": "libs/shared/ui/src",

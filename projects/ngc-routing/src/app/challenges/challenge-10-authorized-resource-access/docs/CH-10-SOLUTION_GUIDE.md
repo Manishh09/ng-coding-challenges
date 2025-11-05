@@ -32,8 +32,8 @@ This guide demonstrates how to implement a secure authentication flow in Angular
 - Standalone components with lazy-loaded `loadComponent`.
 
 ### 6. UI and User Experience
-- **Login Page:** Angular Material card with username/password fields and login button. Successful login updates the signal and navigates to `/dashboard`.
-- **Dashboard Page:** Displays a welcome message and logout button. Uses signal to dynamically show user info.
+- **Login Page:** Angular Material card with username/password fields and login button. Successful login updates the signal and navigates to `/products`.
+- **Products Page:** Displays a welcome message and logout button. Uses signal to dynamically show user info.
 
 ### 7. Logout Flow
 - Logout resets the signal to `false`.
@@ -44,10 +44,10 @@ This guide demonstrates how to implement a secure authentication flow in Angular
 ## Key Flow Steps
 | Step | Action | Guard | Behavior |
 |------|--------|-------|----------|
-| 1 | User opens `/dashboard` | AuthGuard | Redirects to `/login` if unauthenticated |
-| 2 | User logs in | — | Updates signal → redirects to `/dashboard` |
+| 1 | User opens `/products` | AuthGuard | Redirects to `/login` if unauthenticated |
+| 2 | User logs in | — | Updates signal → redirects to `/products` |
 | 3 | User refreshes page | — | Signal rehydrated from localStorage |
-| 4 | User tries `/login` | LoginGuard | Redirects to `/dashboard` |
+| 4 | User tries `/login` | LoginGuard | Redirects to `/products` |
 | 5 | User logs out | — | Clears signal → redirects to `/login` |
 
 ## Best Practices Demonstrated
