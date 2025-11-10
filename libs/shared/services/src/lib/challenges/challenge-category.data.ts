@@ -17,6 +17,12 @@ export const CHALLENGE_CATEGORIES = [
     description: 'Component communication, directives, pipes',
     challengeCount: 0
   },
+  {
+    id: 'angular-routing',
+    name: 'Angular Routing',
+    description: 'Routing, guards, lazy loading',
+    challengeCount: 2
+  }
 
   // Add future categories here..
 ];

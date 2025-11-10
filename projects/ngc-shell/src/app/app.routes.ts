@@ -33,7 +33,12 @@ export const routes: Routes = [
       {
         path: 'angular-core',
         loadChildren: () => import('@ngc-core').then(m => m.NGC_CORE_ROUTES)
+      },
+      {
+        path: 'angular-routing',
+        loadChildren: () => import('@ngc-routing').then(m => m.NGC_ROUTING_ROUTES)
       }
+
 
 
       // Add future challenge category routes here..
