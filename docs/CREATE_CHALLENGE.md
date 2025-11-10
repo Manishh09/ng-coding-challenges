@@ -4,40 +4,183 @@ This template outlines the steps for adding a new challenge using the automation
 
 ---
 
-## 1️. Run the Automation Script
-Navigate to the project root and run the challenge creation script:
-
-**Script Location:** `./scripts/create-challenge.js`
+## Step 1: Run the Challenge Creation Script
 
 ```bash
-# Using Node.js
-node ./scripts/create-challenge.js
+node scripts/create-challenge.js
 
-# OR Using npm
+# OR run below command
 npm run create:challenge
 ```
-___
 
-## 2. Script Prompts & Output
+## Step 2: Select Category
 
-Once you ran the command in terminal, it will ask you the following details one by one:
- 
- - 1. Challenge Name: Give the name of the challenge you will create
- - 2. Components Folder Creation - Give Y / N
- - 3. Service Folder Creation - Give Y / N
- - 4. Model Folder Creation - Give Y / N
- - 5. Shared Folder Creation - Give Y / N
+The script will:
 
-**The script will automatically:**
-- Create a requirements markdown file.
-- Create a solution guide markdown file.
- 
-  
-Sample Output of the command:
+1. **List Available Categories**: Shows all categories under `projects/` (excludes `ngc-shell`)
+2. **Prompt for Selection**: Ask you to choose which category to add the challenge to
 
-![Create Challenge](/scripts/create-challenge-output.png)
-___
+```text
+📦 Available App Categories:
+   - ngc-core
+   - ngc-routing
+   - ngc-rxjs-api
+   - [your-new-category]
 
-## 3. Add Challenge Implementation
-- Implement components, services, and models according to the requirements.
-- Follow the generated challenge markdown file as your guide.
+Note: 'ngc-shell' is the main app responsible for controlling the overall application.
+
+Enter the category app name: [selected-category]
+```
+
+## Step 3: Define Challenge
+
+Provide the following information:
+
+```text
+Enter challenge name (kebab-case): [challenge-name]
+Enter component names (comma-separated): comp1, comp2, ...
+Enter service names (comma-separated): service1, service2, ...
+➕ Would you like to include a models folder? (y/n): [y/n]
+```
+
+## Step 4: Auto-Generated Structure
+
+The script creates:
+
+```text
+projects/[category]/src/app/challenges/
+└── challenge-[XX]-[challenge-name]/
+    ├── components/
+    │   ├── [component1]/
+    │   └── [component2]/
+    ├── services/
+    │   ├── [service1]/
+    │   └── [service2]/
+    ├── models/                     # Optional
+    └── docs/
+        ├── CH-[XX]-REQUIREMENT.md
+        └── CH-[XX]-SOLUTION_GUIDE.md
+```
+
+**Key Features:**
+
+- **Auto-numbering**: Challenges are automatically numbered sequentially across ALL categories
+- **Angular CLI Integration**: Components and services are generated using Angular CLI
+- **Documentation**: Requirement and solution guides are auto-created
+- **Flexible Structure**: Optional models folder based on needs
+
+---
+
+## 📊 Challenge Numbering System
+
+### Global Sequential Numbering
+
+The `create-challenge-next.js` script implements a sophisticated numbering system:
+
+1. **Scans All Categories**: Examines all challenge folders across all category apps
+2. **Finds Maximum Number**: Identifies the highest existing challenge number
+3. **Increments**: Assigns the next sequential number (zero-padded to 2 digits)
+4. **Global Uniqueness**: Ensures no duplicate challenge numbers across the entire project
+
+### Example Numbering Flow
+
+```text
+Current State:
+├── ngc-core/challenges/challenge-01-component-basics/
+├── ngc-routing/challenges/challenge-02-route-guards/
+├── ngc-rxjs-api/challenges/challenge-03-observables/
+
+Next Challenge: challenge-04-[new-challenge-name]
+```
+
+---
+
+## 🔍 Script Analysis
+
+### create-category-app_next.js Features
+
+**Input Validation:**
+
+```javascript
+const isKebabCase = (str) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(str);
+```
+
+**Error Handling:**
+
+- Validates kebab-case format
+- Checks for existing directories
+- Handles Ctrl+C interruption gracefully
+- Provides clear error messages
+
+**Angular CLI Integration:**
+
+```javascript
+ng generate application ${category} 
+  --standalone 
+  --project-root=projects/${category} 
+  --routing 
+  --style=scss 
+  --no-ssr
+```
+
+### create-challenge-next.js Features
+
+**Smart Category Detection:**
+
+```javascript
+const availableCategories = fs
+  .readdirSync(projectsPath, { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .map((d) => d.name);
+```
+
+**Global Challenge Numbering:**
+
+```javascript
+function getNextChallengeNumber() {
+  // Scans all categories for existing challenges
+  // Returns next sequential number
+}
+```
+
+**Component/Service Generation:**
+
+```javascript
+const cmd = `ng generate component challenges/${fullChallengeName}/components/${comp} --project=${category} --standalone`;
+```
+
+---
+
+## 🎛️ Configuration & Customization
+
+### Angular CLI Configuration
+
+The generated apps use these configurations:
+
+- **Standalone Components**: Modern Angular approach
+- **SCSS Styling**: Enhanced CSS capabilities
+- **Routing Enabled**: Navigation support
+- **No SSR**: Client-side rendering
+- **Custom Project Root**: Organized under `projects/`
+
+### File Templates
+
+Both scripts generate documentation templates:
+
+**Requirement Template:**
+
+```markdown
+# Challenge [XX] - Requirement Guide
+
+Describe the requirements, constraints, and expected inputs/outputs for **[challenge-name]**.
+```
+
+**Solution Template:**
+
+```markdown
+# Challenge [XX] - Solution Guide
+
+Document the step-by-step solution approach, reasoning, and optimizations for **[challenge-name]**.
+```
+
+---

@@ -17,6 +17,7 @@
     "test": "ng test",
     "test:all": "ng test --projects=shared-ui,shared-models,shared-services,ngc-shell",
     "start:all": "concurrently \"npm run build:libs\" \"npm run start:challenges\"",
+    "create:category-app": "node scripts/create-category-app.js",
     "create:challenge": "node scripts/create-challenge.js"
   },
   "dependencies": {
