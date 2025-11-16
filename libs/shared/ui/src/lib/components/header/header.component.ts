@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,12 @@ import { NgOptimizedImage } from "@angular/common";
 /**
  * Header component with responsive design
  * Includes logo, navigation, theme toggle and mobile menu
+ *
+ * Features:
+ * - Dynamic mobile menu state management
+ * - Accessible ARIA attributes
+ * - Optimized images with priority loading
+ * - Theme toggle integration
  */
 @Component({
   selector: 'ng-coding-challenges-header',
@@ -41,4 +47,21 @@ export class HeaderComponent {
 
   /** Github  logo */
   githubLogoUrl = input<string>('');
+
+  /** Mobile menu open state */
+  readonly mobileMenuOpen = signal(false);
+
+  /**
+   * Toggle mobile menu state
+   */
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen.update(value => !value);
+  }
+
+  /**
+   * Close mobile menu
+   */
+  closeMobileMenu(): void {
+    this.mobileMenuOpen.set(false);
+  }
 }

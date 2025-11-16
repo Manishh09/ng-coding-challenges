@@ -17,6 +17,6 @@ export * from './lib/challenges/challenge-category.service';
 export * from './lib/navigation/navigation.service';
 export * from './lib/notification/notification.service';
 export * from './lib/stackblitz/stackblitz.service';
-export * from './lib/stackblitz/stackblitz.service';
+export * from './lib/loading/loading.service';
 
 // Add future services here...

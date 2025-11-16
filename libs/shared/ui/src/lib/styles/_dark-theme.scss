@@ -23,12 +23,12 @@
   --interactive-secondary-hover: var(--gray-700);
 
   // Gradients and brands
-  --gradient-primary: linear-gradient(135deg, var(--hot-red), var(--hot-pink), var(--electric-violet));
-  --gradient-secondary: linear-gradient(135deg, var(--bright-blue), #8b5cf6);
+  --gradient-primary: linear-gradient(135deg, var(--ruby-red), var(--dark-pink), var(--electric-violet));
+  --gradient-secondary: linear-gradient(135deg, var(--bright-blue), var(--electric-violet));
   --brand-gradient-primary: var(--gradient-primary);
   --brand-gradient-hero: var(--gradient-primary);
   --brand-gradient-footer: var(--gradient-primary);
-  --brand-gradient-section: linear-gradient(120deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.08));
+  --brand-gradient-section: linear-gradient(120deg, var(--color-primary-alpha-10), var(--color-secondary-alpha-10));
 
   // Aliases for component usage
   --color-primary: var(--electric-violet);

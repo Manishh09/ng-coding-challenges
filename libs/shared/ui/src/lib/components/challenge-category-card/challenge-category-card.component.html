@@ -1,39 +1,63 @@
-<mat-card class="category-card" id="category-card">
-  <div class="card-banner" aria-hidden="true"></div>
+<mat-card class="category-card" id="category-card" [class.category-card--selected]="selected()"
+  [style.--category-accent]="categoryMeta().accent">
+  <div class="category-card__halo" aria-hidden="true"></div>
+
   <mat-card-header>
-    <div class="header-content">
-      <div class="header-left">
-        @if (category().icon) {
-        <mat-icon class="category-icon">{{ category().icon }}</mat-icon>
-        }
-        <mat-card-title class="category-title">{{
-          category().name
-        }}</mat-card-title>
+    <div class="category-card__header">
+      <div class="category-card__header-top">
+        <div class="category-card__icon">
+          <mat-icon aria-hidden="true">{{ categoryMeta().icon }}</mat-icon>
+        </div>
+
+        <div class="category-card__titles">
+          <mat-card-title class="category-card__title">
+            {{ category().name }}
+          </mat-card-title>
+        </div>
       </div>
 
-      <mat-chip
-        class="challenge-chip"
-        selected
-        [matTooltip]="'Total Challenges'"
-        matTooltipPosition="above"
-        aria-label="Total Challenges"
-      >
-        {{ category().challengeCount }}
-      </mat-chip>
+      <span class="category-card__count">
+        {{ challengeCountLabel() }}
+      </span>
     </div>
+
+    @if (selected()) {
+    <span class="category-card__status">
+      <mat-icon aria-hidden="true">auto_fix_high</mat-icon>
+      Focus track
+    </span>
+    }
   </mat-card-header>
+
+  <mat-card-subtitle class="category-card__headline">{{ categoryMeta().headline }}</mat-card-subtitle>
+
   <mat-card-content>
-    <p>{{ category().description }}</p>
+    <!-- <p class="category-card__description">{{ category().description }}</p> -->
+
+    <div class="category-card__tags" aria-label="Skills covered">
+      @for (skill of categoryMeta().skills; track skill) {
+      <span class="category-card__tag">{{ skill }}</span>
+      }
+    </div>
   </mat-card-content>
 
   <mat-card-actions>
-    <button
-      class="view-challenges-btn"
-      mat-button
-      (click)="onNavigateToCategory(category().id)"
-      [attr.aria-label]="'View Challenges in ' + category().name"
+    <a
+      [routerLink]="['/challenges', category().id]"
+      mat-flat-button
+      color="primary"
+      class="category-card__cta"
+      [attr.aria-label]="'View ' + category().name + ' challenges'"
     >
-      View Challenges
-    </button>
+      Explore track
+      <mat-icon aria-hidden="true">arrow_outward</mat-icon>
+    </a>
+
+    @if (category().newBadgeCount) {
+    <span class="category-card__badge">
+      <mat-icon aria-hidden="true">fiber_new</mat-icon>
+      {{ category().newBadgeCount }} new
+    </span>
+    }
   </mat-card-actions>
 </mat-card>

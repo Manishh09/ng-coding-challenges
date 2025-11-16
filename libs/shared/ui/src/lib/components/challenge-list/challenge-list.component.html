@@ -22,20 +22,26 @@
   </header>
 
   <div class="challenge-list-cards" [attr.role]="'challenge-list'">
-    @for (challenge of challenges(); track challenge.id) {
+    @if (loading()) {
+      <!-- Skeleton loaders for loading state -->
+      @for (i of [1,2,3]; track i) {
+        <app-skeleton-loader variant="card"></app-skeleton-loader>
+      }
+    } @else {
+      @for (challenge of challenges(); track challenge.id) {
+        <ng-coding-challenges-challenge-card
+          [challenge]="challenge"
+          [newBadgeChallengeIds]="newBadgeChallengeIds()"
+        >
+        </ng-coding-challenges-challenge-card>
 
-      <ng-coding-challenges-challenge-card
-        [challenge]="challenge"
-        [newBadgeChallengeIds]="newBadgeChallengeIds()"
-      >
-      </ng-coding-challenges-challenge-card>
-
-    } @empty {
-      <div class="challenge-list-empty" role="status">
-        <p class="challenge-list-empty-text">
-          No challenges available at the moment.
-        </p>
-      </div>
+      } @empty {
+        <div class="challenge-list-empty" role="status">
+          <p class="challenge-list-empty-text">
+            No challenges available at the moment.
+          </p>
+        </div>
+      }
     }
   </div>
 </section>

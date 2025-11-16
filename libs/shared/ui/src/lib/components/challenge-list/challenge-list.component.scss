@@ -37,8 +37,8 @@
   padding: 0.75rem 1rem;
   min-height: 44px; // Accessible touch target size
   border-radius: 8px;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-button-small);
   border: 1px solid transparent;
   background-color: transparent;
   cursor: pointer;
@@ -47,10 +47,16 @@
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: var(--primary-color, #dd0031);
-    background-color: var(--hover-bg-color, rgba(221, 0, 49, 0.08));
+    border-color: var(--interactive-primary);
+    background-color: var(--state-hover-bg);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-alpha-60);
+    outline-offset: 2px;
+    border-color: var(--interactive-primary);
   }
 
   &:active {
@@ -58,14 +64,14 @@
   }
 
   mat-icon {
-    font-size: 1.25rem;
-    width: 1.25rem;
-    height: 1.25rem;
-    color: var(--primary-color, #3f51b5);
+    font-size: var(--icon-size-sm);
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+    color: var(--interactive-primary);
   }
 
   .challenge-list-button-label {
-    color: var(--primary-color, #3f51b5);
+    color: var(--interactive-primary);
     font-size: inherit;
   }
 }
@@ -78,8 +84,8 @@
 /* ---------- Section Title ---------- */
 .challenge-list-title {
   margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: var(--font-size-page-title);
+  font-weight: var(--font-weight-bold);
   color: var(--color-fg);
   background: var(--brand-gradient-primary);
   -webkit-background-clip: text;
@@ -101,6 +107,14 @@
     border-radius: 3px;
     transition: width 0.3s var(--animation-easing);
   }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-3xl);
+  }
+
+  @media (max-width: 480px) {
+    font-size: var(--font-size-page-title-mobile);
+  }
 }
 
 /* ---------- Cards Section ---------- */
@@ -116,6 +130,13 @@
 
   & > * {
     animation: cardAppear 0.5s var(--animation-easing) both;
+    transition: transform var(--animation-duration-fast) var(--animation-easing);
+  }
+
+  & > *:focus-within {
+    outline: 2px solid var(--color-primary-alpha-40);
+    outline-offset: 4px;
+    border-radius: var(--border-radius-xl);
   }
 
   @for $i from 1 through 12 {
@@ -144,7 +165,7 @@
   box-sizing: border-box;
 
   .challenge-list-empty-text {
-    font-size: 1.2rem;
+    font-size: var(--font-size-lg);
     color: var(--text-secondary);
   }
 }
@@ -219,7 +240,6 @@
   }
 
   .challenge-list-title {
-    font-size: 1.75rem;
     margin-left: 1rem;
   }
 }
@@ -247,7 +267,6 @@
   }
 
   .challenge-list-title {
-    font-size: 1.5rem;
     margin-left: 1rem;
 
     &::after {
@@ -263,6 +282,6 @@
 
 @media (max-width: 360px) {
   .challenge-list-title {
-    font-size: 1.375rem;
+    // Font size already handled by main selector media queries
   }
 }

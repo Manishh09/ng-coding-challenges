@@ -46,13 +46,17 @@
     opacity var(--animation-duration-fast) var(--animation-easing);
 
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 3px solid var(--state-focus-ring);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   &:focus:not(:focus-visible) {
     outline: none;
+  }
+
+  &:hover {
+    opacity: 0.9;
   }
 }
 
@@ -111,6 +115,33 @@
   justify-content: center;
 }
 
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--border-radius-pill);
+  transition: color var(--animation-duration-fast) var(--animation-easing),
+    background var(--animation-duration-fast) var(--animation-easing),
+    transform var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-primary);
+    background: var(--color-primary-alpha-10);
+    transform: translateY(-1px);
+    outline: none;
+  }
+}
+
+.nav-link--active {
+  color: var(--text-primary);
+  background: var(--color-primary-alpha-20);
+  box-shadow: inset 0 0 0 1px var(--color-primary-alpha-30);
+}
+
 // Actions section (theme toggle, buttons)
 .actions-section {
   display: flex;
@@ -120,6 +151,34 @@
   height: 100%;
   padding-right: 8px;
   margin-left: auto;
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--border-radius-pill);
+  background: var(--color-primary-alpha-20);
+  color: var(--electric-violet);
+  font-weight: 600;
+  border: 1px solid var(--color-primary-alpha-30);
+  cursor: pointer;
+  transition: transform var(--animation-duration-fast) var(--animation-easing),
+    box-shadow var(--animation-duration-fast) var(--animation-easing),
+    background var(--animation-duration-fast) var(--animation-easing);
+
+  mat-icon {
+    font-size: 1.1rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px var(--color-primary-alpha-20);
+    background: var(--color-primary-alpha-30);
+    outline: none;
+  }
 }
 
 // Theme toggle component

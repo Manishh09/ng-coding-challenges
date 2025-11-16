@@ -1,0 +1,104 @@
+/**
+ * Typography Design Tokens
+ *
+ * Defines the complete typography system including:
+ * - Font families
+ * - Font size scale
+ * - Font weights
+ * - Semantic typography tokens
+ * - Responsive typography
+ */
+
+// Font Families
+$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+// Font Size Scale (based on modular scale with 1.125 ratio)
+$font-size-xs: 0.75rem;    // 12px - captions, small labels
+$font-size-sm: 0.875rem;   // 14px - secondary text, badges
+$font-size-base: 1rem;     // 16px - body text (default)
+$font-size-lg: 1.125rem;   // 18px - emphasized body text
+$font-size-xl: 1.25rem;    // 20px - small headings
+$font-size-2xl: 1.5rem;    // 24px - section headings
+$font-size-3xl: 1.875rem;  // 30px - large headings
+$font-size-4xl: 2.25rem;   // 36px - page titles
+$font-size-5xl: 3rem;      // 48px - hero text
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Semantic Typography Tokens
+// These provide meaningful names for specific use cases
+$font-size-page-title: $font-size-4xl;        // 2.25rem - list page titles
+$font-size-page-title-mobile: $font-size-2xl; // 1.5rem - responsive page titles
+$font-size-card-title: $font-size-xl;         // 1.25rem - card headings
+$font-size-card-title-mobile: $font-size-lg;  // 1.125rem - responsive card titles
+$font-size-badge: $font-size-sm;              // 0.875rem - badges & tags
+$font-size-badge-small: $font-size-xs;        // 0.75rem - small badges
+$font-size-button: $font-size-base;           // 1rem - button text
+$font-size-button-small: $font-size-sm;       // 0.875rem - small buttons
+$font-size-body: $font-size-base;             // 1rem - body text
+$font-size-caption: $font-size-sm;            // 0.875rem - captions, help text
+
+/**
+ * Mixin: Apply typography CSS custom properties
+ *
+ * Defines CSS variables that can be used throughout the application.
+ * These variables provide runtime theming support.
+ */
+@mixin typography-css-vars() {
+  // Font families
+  --font-family-primary: #{$font-family-primary};
+  --font-family-mono: #{$font-family-mono};
+
+  // Font size scale
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+  --font-size-5xl: #{$font-size-5xl};
+
+  // Font weights
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+  --font-weight-extrabold: #{$font-weight-extrabold};
+
+  // Semantic typography
+  --font-size-page-title: var(--font-size-4xl);
+  --font-size-page-title-mobile: var(--font-size-2xl);
+  --font-size-card-title: var(--font-size-xl);
+  --font-size-card-title-mobile: var(--font-size-lg);
+  --font-size-badge: var(--font-size-sm);
+  --font-size-badge-small: var(--font-size-xs);
+  --font-size-button: var(--font-size-base);
+  --font-size-button-small: var(--font-size-sm);
+  --font-size-body: var(--font-size-base);
+  --font-size-caption: var(--font-size-sm);
+}
+
+/**
+ * Mixin: Apply global typography styles
+ *
+ * Sets up the base typography for the entire application.
+ * Should be applied to the root element.
+ */
+@mixin apply-typography() {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

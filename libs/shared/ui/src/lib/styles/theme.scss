@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 @use 'sass:color';
-@use './_typography.scss' as typo;
+@use './tokens/tokens' as tokens;
 @use './_light-theme.scss' as light;
 @use './_dark-theme.scss' as dark;
 
@@ -10,46 +10,91 @@
 
 // Base tokens (CSS variables shared by both themes)
 :root {
-  // Brand tokens (OKLCH is fine in CSS vars)
-  --bright-blue: oklch(51.01% 0.274 263.83);
-  --electric-violet: oklch(53.18% 0.28 296.97);
-  --vivid-pink: oklch(65.71% 0.277 342.55);
-  --hot-pink: oklch(58.11% 0.238 342.55);
-  --hot-red: oklch(58.11% 0.238 15.55);
-  --orange-red: oklch(58.11% 0.238 25.55);
-  --super-green: oklch(58.11% 0.238 142.55);
-  --ruby-red: #E0115F;
-  --dark-pink: #C11C84;
+  // Apply all design tokens from token registry
+  @include tokens.all-css-vars();
 
-  // Gray scale
-  --gray-50: oklch(98.5% 0.003 240);
-  --gray-100: oklch(96.5% 0.003 240);
-  --gray-200: oklch(92.5% 0.003 240);
-  --gray-300: oklch(87.5% 0.003 240);
-  --gray-400: oklch(80.5% 0.003 240);
-  --gray-500: oklch(70.5% 0.003 240);
-  --gray-600: oklch(60.5% 0.003 240);
-  --gray-700: oklch(45.5% 0.003 240);
-  --gray-800: oklch(30.5% 0.003 240);
-  --gray-900: oklch(15.5% 0.003 240);
-  --gray-950: oklch(8.5% 0.003 240);
+  // Additional alpha variants for semantic colors
+  --color-secondary-alpha-5: rgba(236, 72, 153, 0.05);
+  --color-secondary-alpha-10: rgba(236, 72, 153, 0.1);
+  --color-secondary-alpha-20: rgba(236, 72, 153, 0.2);
+  --color-secondary-alpha-30: rgba(236, 72, 153, 0.3);
+  --color-secondary-alpha-40: rgba(236, 72, 153, 0.4);
+  --color-secondary-alpha-50: rgba(236, 72, 153, 0.5);
+  --color-secondary-alpha-60: rgba(236, 72, 153, 0.6);
+  --color-secondary-alpha-70: rgba(236, 72, 153, 0.7);
+  --color-secondary-alpha-80: rgba(236, 72, 153, 0.8);
+  --color-secondary-alpha-90: rgba(236, 72, 153, 0.9);
 
-  // Spacing & radii
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
-  --border-radius-xl: 16px;
-  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --color-gray-alpha-5: rgba(148, 163, 184, 0.05);
+  --color-gray-alpha-10: rgba(148, 163, 184, 0.1);
+  --color-gray-alpha-20: rgba(148, 163, 184, 0.2);
+  --color-gray-alpha-30: rgba(148, 163, 184, 0.3);
+  --color-gray-alpha-40: rgba(148, 163, 184, 0.4);
+  --color-gray-alpha-50: rgba(148, 163, 184, 0.5);
+  --color-gray-alpha-60: rgba(148, 163, 184, 0.6);
+  --color-gray-alpha-70: rgba(148, 163, 184, 0.7);
+  --color-gray-alpha-80: rgba(148, 163, 184, 0.8);
+  --color-gray-alpha-90: rgba(148, 163, 184, 0.9);
 
+  // Glass surface effects
+  --glass-surface: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.32),
+      rgba(255, 255, 255, 0.12)
+    );
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-backdrop-blur: blur(22px);
 
-  // Typography vars
-  @include typo.typography-css-vars();
+  // ============================================================================
+  // STATUS & SEMANTIC COLORS
+  // ============================================================================
+
+  // Success (Green)
+  --status-success: #22c55e;
+  --status-success-light: #86efac;
+  --status-success-dark: #16a34a;
+  --status-success-alpha-10: rgba(34, 197, 94, 0.1);
+  --status-success-alpha-20: rgba(34, 197, 94, 0.2);
+
+  // Warning (Yellow/Amber)
+  --status-warning: #eab308;
+  --status-warning-light: #fde047;
+  --status-warning-dark: #ca8a04;
+  --status-warning-alpha-10: rgba(234, 179, 8, 0.1);
+  --status-warning-alpha-20: rgba(234, 179, 8, 0.2);
+
+  // Error (Red)
+  --status-error: #ef4444;
+  --status-error-light: #fca5a5;
+  --status-error-dark: #dc2626;
+  --status-error-alpha-10: rgba(239, 68, 68, 0.1);
+  --status-error-alpha-20: rgba(239, 68, 68, 0.2);
+
+  // Info (Blue)
+  --status-info: #3b82f6;
+  --status-info-light: #93c5fd;
+  --status-info-dark: #2563eb;
+  --status-info-alpha-10: rgba(59, 130, 246, 0.1);
+  --status-info-alpha-20: rgba(59, 130, 246, 0.2);
+
+  // Disabled state
+  --state-disabled-bg: var(--gray-100);
+  --state-disabled-text: var(--gray-400);
+  --state-disabled-border: var(--gray-200);
+  --state-disabled-alpha: rgba(148, 163, 184, 0.4);
+
+  // Selected/Active state
+  --state-selected-bg: var(--color-primary-alpha-10);
+  --state-selected-border: var(--electric-violet);
+  --state-selected-text: var(--electric-violet);
+
+  // Hover state
+  --state-hover-bg: var(--color-gray-alpha-5);
+  --state-hover-border: var(--gray-300);
+
+  // Focus state
+  --state-focus-ring: var(--electric-violet);
+  --state-focus-ring-alpha: var(--color-primary-alpha-30);
 }
 
 // Apply light theme tokens and Material styles under :root
@@ -76,8 +121,10 @@ body.dark-mode {
   }
 }
 
-// Apply global typography
-@include typo.apply-typography();
+// Apply global typography to body
+body {
+  @include tokens.apply-typography();
+}
 
 // ============================================================================
 // CUSTOM COMPONENT STYLES

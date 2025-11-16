@@ -100,10 +100,12 @@
         <button
           mat-icon-button
           [matMenuTriggerFor]="mobileMenu"
+          (menuOpened)="mobileMenuOpen.set(true)"
+          (menuClosed)="mobileMenuOpen.set(false)"
           class="mobile-menu-btn mobile-only"
           aria-label="Open mobile navigation menu"
           aria-controls="mobileMenu"
-          aria-expanded="false"
+          [attr.aria-expanded]="mobileMenuOpen()"
           type="button"
         >
           <mat-icon aria-hidden="true">menu</mat-icon>

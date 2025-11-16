@@ -8,8 +8,8 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: LandingPageComponent
-    // Empty path will show the landing page
-    // Component is handled via conditional template in AppComponent
+    // Component won't render because AppComponent hides router-outlet on root.
+    // This keeps the router config valid while AppComponent controls landing view.
   },
   {
     path: 'getting-started',

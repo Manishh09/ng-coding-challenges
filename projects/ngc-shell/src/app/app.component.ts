@@ -1,6 +1,12 @@
 import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  RouterOutlet,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import {
 
   FooterComponent,
@@ -72,7 +78,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Update layout based on route changes
   #updateLayoutOnRouteChange() {
-    this.showLandingPage.set(false);
+    // Set initial state based on current URL
+    this.#handleRouteChange(this.#router.url);
     this.#router.events
       .pipe(takeUntil(this.#destroy$), filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe({
@@ -86,19 +93,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Handle route changes to update layout visibility
   #handleRouteChange(url: string) {
-    // Routes where we show individual challenge components only
+    const isRoot = url === "/" || url === "";
+    const isChallengesRoot = url === "/challenges";
+    const isDeepChallenge = url.startsWith("/challenges/") && !isChallengesRoot;
 
-    // Check if current route is a specific challenge page
-    const isChallengePage = url !== "/";
-    if (isChallengePage) {
-      this.showLandingPage.set(false);
-      this.showFooterLinks.set(false);
-      this.showFooter.set(false);
-      return;
-    }
-    this.showLandingPage.set(true);
-    this.showFooterLinks.set(true);
+    // Landing page only on root
+    this.showLandingPage.set(isRoot);
+
+    // Footer always visible; optionally hide links on deep challenge routes
     this.showFooter.set(true);
+    this.showFooterLinks.set(true);
 
   }
 

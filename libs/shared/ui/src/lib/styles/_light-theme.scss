@@ -28,7 +28,7 @@
   --brand-gradient-primary: var(--gradient-primary);
   --brand-gradient-hero: var(--gradient-primary);
   --brand-gradient-footer: var(--gradient-primary);
-  --brand-gradient-section: linear-gradient(120deg, rgba(139, 92, 246, 0.06), rgba(236, 72, 153, 0.06));
+  --brand-gradient-section: linear-gradient(120deg, var(--color-primary-alpha-5), var(--color-secondary-alpha-5));
 
   // Aliases for component usage
   --color-primary: var(--electric-violet);

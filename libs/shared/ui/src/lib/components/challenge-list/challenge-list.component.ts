@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChallengeCardComponent } from '../challenge-card/challenge-card.component';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
@@ -8,7 +8,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
+import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
 
+/**
+ * Component for displaying a list of challenges for a specific category
+ *
+ * Features:
+ * - Reactive route parameter handling
+ * - Loading states with skeleton loaders
+ * - New badge highlighting
+ * - Nested routing support
+ */
 @Component({
   selector: 'ng-coding-challenges-challenge-list',
   templateUrl: './challenge-list.component.html',
@@ -16,9 +26,17 @@ import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services'
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 
-  imports: [RouterOutlet, CommonModule, MatButtonModule, RouterLink, MatIconModule, ChallengeCardComponent],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+    ChallengeCardComponent,
+    SkeletonLoaderComponent
+  ],
 })
-export class ChallengeListComponent implements OnInit {
+export class ChallengeListComponent {
 
   //  Dependencies
   private readonly challengeCategoryService = inject(ChallengeCategoryService);
@@ -61,17 +79,20 @@ export class ChallengeListComponent implements OnInit {
     return categoryName ? `${categoryName} - Challenges` : 'Available Challenges';
   });
 
+  // Loading state
+  readonly loading = signal(false);
+
   constructor() {
     // Reactive side effect to update selected category
     effect(() => {
       const id = this.categoryId();
-      if (id) this.challengeCategoryService.setSelectedCategory(id);
+      if (id) {
+        this.loading.set(true);
+        this.challengeCategoryService.setSelectedCategory(id);
+        // Simulate async loading (remove if you have real async data fetching)
+        setTimeout(() => this.loading.set(false), 300);
+      }
     });
-  }
-
-  ngOnInit(): void {
-    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    // Add 'implements OnInit' to the class.
   }
 
   // Check if there is an active child route

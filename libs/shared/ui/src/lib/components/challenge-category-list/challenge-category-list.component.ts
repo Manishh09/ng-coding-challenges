@@ -3,7 +3,6 @@ import {
   Component,
   computed,
   inject,
-  signal,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { RouterLink } from '@angular/router';
 
+/**
+ * Component for displaying a list of challenge categories
+ *
+ * Features:
+ * - Reactive category selection
+ * - Challenge count per category
+ * - Responsive grid layout
+ */
 @Component({
   selector: 'app-challenge-category-list',
   templateUrl: './challenge-category-list.component.html',
@@ -34,7 +41,6 @@ export class ChallengeCategoryListComponent {
 
   //  Signals exposed from services
   readonly categories = this.categoryService.categories;
-  readonly selectedCategoryId = this.categoryService.getSelectedCategoryId();
 
   // Computed signal for categories with challenge counts
   readonly categoriesWithCount = computed(() =>
@@ -45,11 +51,11 @@ export class ChallengeCategoryListComponent {
     }))
   );
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+  /**
+   * Check if a category is selected
+   * Returns a computed signal for reactive comparison
+   */
+  isSelected(categoryId: string) {
+    return computed(() => this.categoryService.getSelectedCategoryId() === categoryId);
   }
-
-  isSelected = (categoryId: string) =>
-    computed(() => this.selectedCategoryId === categoryId);
 }

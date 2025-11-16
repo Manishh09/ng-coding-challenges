@@ -60,12 +60,6 @@ const SOCIAL_LINKS: FooterLink[] = [
   },
 ];
 
-const LEGAL_LINKS: FooterLink[] = [
-  { text: 'Terms', url: '#' },
-  { text: 'Privacy', url: '#' },
-  { text: 'Cookie Policy', url: '#' },
-];
-
 // ============================
 // Footer Component
 // ============================
@@ -95,7 +89,6 @@ export class FooterComponent {
   // Signals (initialized from constants to avoid reallocation)
   readonly quickLinks = signal<FooterLink[]>(QUICK_LINKS);
   readonly socialLinks = signal<FooterLink[]>(SOCIAL_LINKS);
-  readonly legalLinks = signal<FooterLink[]>(LEGAL_LINKS);
 
   // Emit link click event
   onLinkClick(link: FooterLink): void {

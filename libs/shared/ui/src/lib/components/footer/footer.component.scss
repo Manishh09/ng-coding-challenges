@@ -4,33 +4,43 @@
 
 /* Main footer container */
 .footer {
-  background: var(--surface-color);
-  border-top: 1px solid var(--outline-color);
-  width: 100%;
   position: relative;
-  color: var(--on-surface-color);
+  width: 100%;
+  color: rgba(243, 244, 246, 0.92);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(76, 29, 149, 0.92));
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
   overflow: hidden;
+  isolation: isolate;
 
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--brand-gradient-footer);
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(129, 140, 248, 0.2), transparent 60%),
+      radial-gradient(circle at 80% 10%, rgba(236, 72, 153, 0.2), transparent 55%);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.35) 100%);
+    z-index: 0;
   }
 }
 
 /* Layout Containers */
 .footer-container {
-  padding: 24px 48px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: var(--spacing-lg);
-  max-width: 1400px;
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: var(--spacing-3xl) clamp(var(--spacing-md), 6vw, var(--spacing-3xl));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-xl);
+  backdrop-filter: blur(18px);
 }
 
 .footer-section {
@@ -50,25 +60,22 @@
   font-weight: 600;
   position: relative;
   padding-bottom: 8px;
-  background: var(--brand-gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: rgba(255, 255, 255, 0.92);
 
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 50px;
-    height: 3px;
-    background: var(--brand-gradient-primary);
+    width: 42px;
+    height: 2px;
+    background: rgba(165, 180, 252, 0.65);
     border-radius: 3px;
     transition: width 0.3s var(--animation-easing);
   }
 
   &:hover::after {
-    width: 60px;
+    width: 72px;
   }
 }
 
@@ -103,7 +110,7 @@
 }
 
 .footer-tagline {
-  color: var(--on-surface-variant-color);
+  color: rgba(226, 232, 240, 0.78);
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: var(--spacing-md);
@@ -129,7 +136,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--on-surface-variant-color);
+  color: rgba(226, 232, 240, 0.78);
   text-decoration: none;
   transition: all 0.3s var(--animation-easing);
   padding: 0.5rem 0;
@@ -138,7 +145,7 @@
 
   .mat-icon {
     font-size: 1.25rem;
-    color: var(--primary-color);
+    color: rgba(165, 180, 252, 0.85);
     opacity: 0.85;
     transition: opacity 0.3s var(--animation-easing);
   }
@@ -161,7 +168,7 @@
   }
 
   &:hover {
-    color: var(--primary-color);
+    color: rgba(255, 255, 255, 0.95);
     transform: translateX(4px);
 
     .mat-icon {
@@ -187,20 +194,11 @@
 
 /* Bottom Section */
 .footer-bottom {
-  border-top: 1px solid var(--outline-color);
-  width: 100%;
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--brand-gradient-section);
-    opacity: 0.8;
-  }
+  width: 100%;
+  border-top: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(16px);
 }
 
 .footer-bottom-content {
@@ -215,16 +213,16 @@
 
 .copyright {
   margin: 0;
-  color: var(--on-surface-variant-color);
+  color: rgba(226, 232, 240, 0.7);
   font-size: 0.9rem;
 }
 
 .created-by {
-  color: var(--primary-color);
+  color: rgba(165, 180, 252, 0.9);
 }
 
 .heart-icon {
-  color: var(--primary-color);
+  color: rgba(248, 113, 113, 0.9);
   display: inline-block;
   animation: heartbeat 1.5s infinite;
   margin: 0 3px;
@@ -240,7 +238,7 @@
   color: transparent;
   display: inline-block;
 }
- 
+
 
 /* =========================================================
    ANIMATIONS
@@ -279,9 +277,8 @@
    ========================================================= */
 @media (max-width: 1024px) {
   .footer-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 24px 40px;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
   .brand-section {
@@ -300,7 +297,7 @@
 
 @media (max-width: 768px) {
   .footer-container {
-    padding: var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-md);
   }
 
   .footer-tagline {

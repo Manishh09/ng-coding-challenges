@@ -34,11 +34,4 @@ export class ThemeToggleComponent {
   readonly tooltipText = computed(
     () => `Switch to ${this.themeService.isDarkMode() ? 'light' : 'dark'} theme`
   );
-
-  /**
-   * Handle theme toggle with smooth transition
-   */
-  onToggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -9,9 +9,16 @@ import { NavigationService, NotificationService, ChallengesService } from '@ng-c
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { StackblitzService } from '@ng-coding-challenges/shared/services';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 /**
  * Component for displaying a challenge card with actions
+ *
+ * Features:
+ * - Loading states for async operations
+ * - Accessibility with ARIA labels
+ * - Latest challenge highlighting
+ * - Docs and resources menu
  */
 @Component({
   selector: 'ng-coding-challenges-challenge-card',
@@ -23,7 +30,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './challenge-card.component.html',
   styleUrl: './challenge-card.component.scss',
@@ -33,6 +41,16 @@ export class ChallengeCardComponent implements OnInit {
   // Input properties
   readonly challenge = input.required<Challenge>();
   readonly newBadgeChallengeIds = input<number[]>([]);
+
+  readonly categoryLabel = computed(() =>
+    this.formatCategoryId(this.challenge().category)
+  );
+  readonly docsAvailable = computed(
+    () =>
+      !!this.challenge().requirement ||
+      !!this.challenge().solutionGuide ||
+      !!this.challenge().gitHub
+  );
 
   // Reactive signal to check if current challenge is the latest challenge
   readonly isLatestChallenge = computed(() => {
@@ -50,6 +68,9 @@ export class ChallengeCardComponent implements OnInit {
     }
     return this.isLatestChallenge();
   });
+
+  // Loading state for StackBlitz launch
+  readonly launching = signal(false);
 
   // ---- Injected Services ----
   private readonly router = inject(Router);
@@ -95,10 +116,25 @@ export class ChallengeCardComponent implements OnInit {
   }
 
   async onTryChallenge(challenge: Challenge): Promise<void> {
-    await this.stackblitzService.openChallengeInStackblitz(challenge);
+    this.launching.set(true);
+    try {
+      await this.stackblitzService.openChallengeInStackblitz(challenge);
+    } catch (error) {
+      this.notificationService.error('Failed to launch challenge. Please try again.');
+      console.error('Error launching challenge:', error);
+    } finally {
+      this.launching.set(false);
+    }
   }
 
   viewOutput(link: string): void {
     this.router.navigate([link], { relativeTo: this.route });
+  }
+
+  private formatCategoryId(categoryId: string): string {
+    return categoryId
+      .split('-')
+      .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+      .join(' ');
   }
 }
