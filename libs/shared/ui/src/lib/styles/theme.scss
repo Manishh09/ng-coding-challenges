@@ -45,6 +45,10 @@
   --glass-border: rgba(255, 255, 255, 0.35);
   --glass-backdrop-blur: blur(22px);
 
+  // Layout system
+  --header-height: 64px;
+  --header-height-mobile: 56px;
+
   // ============================================================================
   // STATUS & SEMANTIC COLORS
   // ============================================================================
@@ -288,4 +292,20 @@ $breakpoints: (
 
 .pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// Global Search Dialog Styles
+.global-search-dialog {
+  .mat-mdc-dialog-container {
+    padding: 0;
+    border-radius: var(--border-radius-lg);
+    background: var(--surface-primary);
+    box-shadow: var(--shadow-xl);
+
+    .mat-mdc-dialog-surface {
+      padding: 0;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+    }
+  }
 }

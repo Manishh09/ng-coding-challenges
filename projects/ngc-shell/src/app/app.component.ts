@@ -101,8 +101,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showLandingPage.set(isRoot);
 
     // Footer always visible; optionally hide links on deep challenge routes
-    this.showFooter.set(true);
-    this.showFooterLinks.set(true);
+    this.showFooter.set(!url.startsWith("/challenges"));
+    this.showFooterLinks.set(!url.startsWith("/challenges"));
 
   }
 

@@ -69,18 +69,7 @@
       </button>
     </div>
 
-    @if (docsAvailable()) {
-    <button
-      mat-button
-      type="button"
-      class="challenge-card__docs-button"
-      [matMenuTriggerFor]="docsMenu"
-      aria-haspopup="true"
-    >
-      Docs & resources
-      <mat-icon aria-hidden="true">expand_more</mat-icon>
-    </button>
-    }
+
   </mat-card-actions>
 
   <mat-menu #docsMenu="matMenu" class="challenge-card__menu">

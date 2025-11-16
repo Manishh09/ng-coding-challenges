@@ -1,4 +1,4 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, Signal, signal, computed } from '@angular/core';
 import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
 import { CHALLENGE_CATEGORIES } from './challenge-category.data';
 
@@ -18,9 +18,39 @@ export class ChallengeCategoryService {
   private readonly _selectedCategoryId = signal<string>(this._categories().length ? this._categories()[0].id : '');
 
   /**
+   * Internal reactive state for category search/filter term.
+   */
+  private readonly _categorySearchTerm = signal<string>('');
+
+  /**
   * Public readonly signals for reactive consumption in components.
   */
   readonly categories: Signal<ChallengeCategory[]> = this._categories;
+
+  /**
+   * Public readonly signal for selected category ID.
+   */
+  readonly selectedCategoryId: Signal<string> = this._selectedCategoryId.asReadonly();
+
+  /**
+   * Public readonly signal for category search term.
+   */
+  readonly categorySearchTerm: Signal<string> = this._categorySearchTerm.asReadonly();
+
+  /**
+   * Filtered categories based on search term.
+   */
+  readonly filteredCategories: Signal<ChallengeCategory[]> = computed(() => {
+    const searchTerm = this._categorySearchTerm().toLowerCase().trim();
+    if (!searchTerm) {
+      return this._categories();
+    }
+    return this._categories().filter(category =>
+      category.name.toLowerCase().includes(searchTerm) ||
+      category.id.toLowerCase().includes(searchTerm) ||
+      category.description?.toLowerCase().includes(searchTerm)
+    );
+  });
 
   /**
    * Updates the currently selected category if the provided ID exists.
@@ -70,6 +100,20 @@ export class ChallengeCategoryService {
 
   getSelectedCategoryId(): string {
     return this._selectedCategoryId();
+  }
+
+  /**
+   * Updates the category search term for filtering.
+   */
+  setCategorySearchTerm(term: string): void {
+    this._categorySearchTerm.set(term);
+  }
+
+  /**
+   * Clears the category search term.
+   */
+  clearCategorySearch(): void {
+    this._categorySearchTerm.set('');
   }
 
 }

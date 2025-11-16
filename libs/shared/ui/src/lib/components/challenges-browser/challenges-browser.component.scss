@@ -1,0 +1,205 @@
+@use '../../styles/theme.scss' as theme;
+
+.challenges-browser {
+  display: flex;
+  min-height: calc(100vh - var(--header-height));
+  background: var(--background-primary);
+}
+
+// Main content area
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-height));
+  transition: margin-left var(--animation-duration-standard) var(--animation-easing);
+
+  // Shifted for sidebar on desktop
+  &.shifted {
+    margin-left: 280px;
+  }
+}
+
+// Mobile top bar
+.mobile-top-bar {
+  position: fixed;
+  top: var(--header-height-mobile);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-primary);
+  z-index: 100;
+  height: 64px;
+
+  .menu-button {
+    flex-shrink: 0;
+    color: var(--text-primary);
+  }
+
+  .mobile-search {
+    flex: 1;
+  }
+}
+
+// Desktop header
+.content-header {
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-primary);
+  position: sticky;
+  top: var(--header-height);
+  z-index: 10;
+
+  .header-info {
+    margin-bottom: var(--spacing-md);
+
+    .category-title {
+      margin: 0 0 var(--spacing-xs) 0;
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .result-count {
+      margin: 0;
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+    }
+  }
+
+  .header-search {
+    max-width: 500px;
+  }
+}
+
+// Content container
+.content-container {
+  flex: 1;
+  padding: var(--spacing-xl);
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-md);
+    margin-top: 64px; // Mobile top bar height
+  }
+}
+
+// Challenges grid
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--spacing-lg);
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
+}
+
+.challenge-card-item {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
+  animation-fill-mode: both;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      animation-delay: calc(#{$i} * 50ms);
+    }
+  }
+}
+
+// Empty state
+.empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4xl) var(--spacing-lg);
+  text-align: center;
+  min-height: 400px;
+
+  .empty-icon {
+    font-size: 72px;
+    width: 72px;
+    height: 72px;
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  h3 {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0 0 var(--spacing-lg) 0;
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+  }
+
+  button {
+    margin-top: var(--spacing-md);
+  }
+}
+
+// Challenge detail view
+.challenge-detail-view {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .challenges-browser {
+    min-height: calc(100vh - var(--header-height-mobile));
+  }
+
+  .content-area {
+    min-height: calc(100vh - var(--header-height-mobile));
+  }
+
+  .content-header {
+    top: calc(var(--header-height-mobile) + 64px); // Account for mobile top bar
+  }
+}
+
+// Print styles
+@media print {
+  .mobile-top-bar,
+  .content-header .header-search {
+    display: none;
+  }
+
+  .challenges-grid {
+    grid-template-columns: 1fr;
+  }
+}

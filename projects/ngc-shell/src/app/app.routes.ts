@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ChallengeCategoryListComponent } from '@ng-coding-challenges/shared/ui';
+import { ChallengesBrowserComponent } from '@ng-coding-challenges/shared/ui';
 
 import { LandingPageComponent } from '@ng-coding-challenges/shared/ui';
 
@@ -21,9 +21,9 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ChallengeCategoryListComponent
-        // This path will show the challenge category list page
-        // Component is handled via conditional template in AppComponent
+        component: ChallengesBrowserComponent
+        // This path shows the new challenges browser with sidebar navigation
+        // and challenge grid based on selected category
       },
 
       {

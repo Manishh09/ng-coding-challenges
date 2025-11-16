@@ -25,7 +25,7 @@
   will-change: transform, box-shadow;
 
   &:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: var(--color-primary-alpha-40);
 

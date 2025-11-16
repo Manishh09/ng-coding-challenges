@@ -22,14 +22,21 @@
   flex-direction: column;
   width: 100%;
   overflow-y: auto;
-  min-height: calc(100vh - 80px); // Account for header height
+  min-height: calc(100vh - var(--header-height));
+  animation: fadeIn 0.3s var(--animation-easing);
 
   // Ensure proper spacing and responsiveness
   @media (max-width: 768px) {
-    min-height: calc(100vh - 70px); // Adjust for smaller header on mobile
+    min-height: calc(100vh - var(--header-height-mobile));
   }
+}
 
-  @media (max-width: 480px) {
-    min-height: calc(100vh - 60px);
+// Route transition animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

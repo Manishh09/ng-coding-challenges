@@ -1,0 +1,34 @@
+<div class="search-bar-container">
+  <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
+    @if (label()) {
+      <mat-label>{{ label() }}</mat-label>
+    }
+
+    <input
+      matInput
+      type="text"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [attr.aria-label]="ariaLabel()"
+      [value]="searchTerm()"
+      (input)="onSearchInput($any($event.target).value)"
+      class="search-input"
+    />
+
+    <mat-icon matPrefix class="search-icon">search</mat-icon>
+
+    @if (showClearButton()) {
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="clearSearch()"
+        [disabled]="disabled()"
+        aria-label="Clear search"
+        class="clear-button"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+</div>

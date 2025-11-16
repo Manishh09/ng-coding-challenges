@@ -10,9 +10,8 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 var(--border-primary);
   padding: 0;
-  height: 64px;
+  height: var(--header-height);
   width: 100%;
-  overflow-x: hidden;
   transition: background var(--animation-duration-standard) var(--animation-easing),
     box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
@@ -25,7 +24,6 @@
   width: 100%;
   padding: 0 32px;
   height: 100%;
-  overflow: hidden;
 }
 
 // Logo container
@@ -111,8 +109,74 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  flex-grow: 1;
+  flex-shrink: 0;
   justify-content: center;
+}
+
+// Search section (center position)
+.search-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 var(--spacing-lg);
+}
+
+// Search Trigger Button (looks like input)
+.search-trigger {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  background: var(--surface-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all var(--animation-duration-fast) var(--animation-easing);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+
+  &:hover {
+    background: var(--surface-secondary);
+    border-color: var(--border-secondary);
+    color: var(--text-secondary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--state-focus-ring);
+    outline-offset: 2px;
+    border-color: var(--state-focus-ring);
+  }
+
+  .search-trigger-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .search-trigger-text {
+    flex: 1;
+    text-align: left;
+    font-family: var(--font-family-base);
+    user-select: none;
+  }
+
+  .search-trigger-hint {
+    padding: 2px 6px;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    font-family: var(--font-family-mono);
+    flex-shrink: 0;
+  }
 }
 
 .nav-link {
@@ -142,15 +206,13 @@
   box-shadow: inset 0 0 0 1px var(--color-primary-alpha-30);
 }
 
-// Actions section (theme toggle, buttons)
+// Actions section (icons, theme toggle, buttons)
 .actions-section {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-sm);
   flex-shrink: 0;
   height: 100%;
-  padding-right: 8px;
-  margin-left: auto;
 }
 
 .header-cta {
@@ -279,7 +341,7 @@ body.dark-mode .linkedin-svg {
   }
 
   .header-toolbar {
-    height: 56px;
+    height: var(--header-height-mobile);
   }
 
   ng-coding-challenges-theme-toggle {
@@ -295,6 +357,10 @@ body.dark-mode .linkedin-svg {
   .linkedin-svg {
     width: 20px;
     height: 24px;
+  }
+
+  .search-section {
+    display: none;
   }
 }
 

@@ -45,6 +45,22 @@
         <ng-content select="[slot=nav-items]"></ng-content>
       </nav>
 
+      <!-- Search Trigger (Desktop) -->
+      @if (!isMobile()) {
+        <div class="search-section">
+          <button
+            class="search-trigger"
+            (click)="openGlobalSearch()"
+            aria-label="Open search"
+            type="button"
+          >
+            <mat-icon class="search-trigger-icon">search</mat-icon>
+            <span class="search-trigger-text">Search challenges...</span>
+            <kbd class="search-trigger-hint">/</kbd>
+          </button>
+        </div>
+      }
+
       <!-- Actions Section -->
       <div class="actions-section">
         <!-- GitHub: semantic, keyboard accessible -->
@@ -94,6 +110,19 @@
         <ng-coding-challenges-theme-toggle
           aria-label="Toggle dark and light theme"
         ></ng-coding-challenges-theme-toggle>
+
+        <!-- Mobile Search Button -->
+        @if (isMobile()) {
+          <button
+            mat-icon-button
+            (click)="openGlobalSearch()"
+            class="mobile-search-btn"
+            aria-label="Open search"
+            type="button"
+          >
+            <mat-icon aria-hidden="true">search</mat-icon>
+          </button>
+        }
 
         <!-- Mobile Menu Button: semantic, focusable, controlled -->
         @if (showMobileMenu()) {
