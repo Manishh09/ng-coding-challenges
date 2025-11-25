@@ -8,6 +8,17 @@ export interface Challenge {
   solutionGuide: string;
   gitHub: string;
   category: string;
+  // New fields for details page
+  longDescription?: string;
+  learningOutcomes?: string[];
+  techStack?: string[];
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  tags?: string[];
+  author?: {
+    name: string;
+    avatar?: string;
+    profileUrl?: string;
+  };
 }
 
 

@@ -22,6 +22,8 @@ export * from './lib/components/challenge-category-card/challenge-category-card.
 export * from './lib/components/search-bar/search-bar.component';
 export * from './lib/components/category-sidebar/category-sidebar.component';
 export * from './lib/components/challenges-browser/challenges-browser.component';
+export * from './lib/components/challenge-details/challenge-details.component';
+export * from './lib/components/breadcrumbs/breadcrumbs.component';
 export * from './lib/components/global-search/global-search.component';
 
 export * from './lib/components/loading-spinner/loading-spinner.component';

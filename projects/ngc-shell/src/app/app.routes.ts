@@ -25,6 +25,10 @@ export const routes: Routes = [
         // This path shows the new challenges browser with sidebar navigation
         // and challenge grid based on selected category
       },
+      {
+        path: ':categoryId/:id',
+        loadComponent: () => import('@ng-coding-challenges/shared/ui').then(m => m.ChallengeDetailsComponent)
+      },
 
       {
         path: 'rxjs-api',

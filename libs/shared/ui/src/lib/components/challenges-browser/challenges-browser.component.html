@@ -1,97 +1,63 @@
 <div class="challenges-browser">
   <!-- Category Sidebar -->
-  <app-category-sidebar
-    [isOpen]="isSidebarOpen()"
-    [isMobile]="isMobileView()"
-    (categorySelect)="onCategorySelect($event)"
-    (closeDrawer)="closeSidebar()"
-  />
+  <app-category-sidebar [isOpen]="isSidebarOpen()" [isMobile]="isMobileView()"
+    (categorySelect)="onCategorySelect($event)" (closeDrawer)="closeSidebar()" />
 
   <!-- Main Content Area -->
   <main class="content-area" [class.shifted]="!isMobileView()">
     <!-- Mobile Top Bar -->
     @if (isMobileView()) {
-      <div class="mobile-top-bar">
-        <button
-          mat-icon-button
-          (click)="toggleSidebar()"
-          aria-label="Toggle categories menu"
-          class="menu-button"
-        >
-          <mat-icon>menu</mat-icon>
-        </button>
-
-        <div class="mobile-search">
-          <app-search-bar
-            [placeholder]="'Search challenges...'"
-            [ariaLabel]="'Search challenges'"
-            (searchChange)="onChallengeSearchChange($event)"
-            (searchClear)="onChallengeSearchClear()"
-          />
-        </div>
-      </div>
+    <div class="mobile-top-bar">
+      <button mat-icon-button (click)="toggleSidebar()" aria-label="Toggle categories menu" class="menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
     }
 
     <!-- Desktop Header -->
     @if (!isMobileView()) {
-      <div class="content-header">
-        <div class="header-info">
-          <h1 class="category-title">{{ selectedCategoryName() }}</h1>
-          <p class="result-count">{{ resultCountText() }}</p>
-        </div>
-
-        <div class="header-search">
-          <app-search-bar
-            [placeholder]="'Search challenges...'"
-            [ariaLabel]="'Search challenges'"
-            (searchChange)="onChallengeSearchChange($event)"
-            (searchClear)="onChallengeSearchClear()"
-          />
-        </div>
+    <div class="content-header">
+      <div class="header-info">
+        <h1 class="category-title">{{ selectedCategoryName() }}</h1>
+        <p class="result-count">{{ resultCountText() }}</p>
       </div>
+    </div>
     }
 
     <!-- Content Container -->
     <div class="content-container">
       <!-- Challenge Grid (shown when no child route active) -->
       @if (!isChildRouteActive()) {
-        <div class="challenges-grid">
-          @if (filteredChallenges().length === 0) {
-            <div class="empty-state">
-              @if (challengeSearchTerm()) {
-                <mat-icon class="empty-icon">search_off</mat-icon>
-                <h3>No challenges found</h3>
-                <p>Try adjusting your search term</p>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  (click)="onChallengeSearchClear()"
-                >
-                  Clear Search
-                </button>
-              } @else {
-                <mat-icon class="empty-icon">inbox</mat-icon>
-                <h3>No challenges available</h3>
-                <p>Check back later for new challenges in this category</p>
-              }
-            </div>
+      <div class="challenges-grid">
+        @if (filteredChallenges().length === 0) {
+        <div class="empty-state">
+          @if (challengeSearchTerm()) {
+          <mat-icon class="empty-icon">search_off</mat-icon>
+          <h3>No challenges found</h3>
+          <p>Try adjusting your search term</p>
+          <button mat-raised-button color="primary" (click)="onChallengeSearchClear()">
+            Clear Search
+          </button>
           } @else {
-            @for (challenge of filteredChallenges(); track challenge.id) {
-              <ng-coding-challenges-challenge-card
-                [challenge]="challenge"
-                [newBadgeChallengeIds]="newBadgeChallengeIds()"
-                class="challenge-card-item fade-in"
-              />
-            }
+          <mat-icon class="empty-icon">inbox</mat-icon>
+          <h3>No challenges available</h3>
+          <p>Check back later for new challenges in this category</p>
           }
         </div>
+        } @else {
+        @for (challenge of filteredChallenges(); track challenge.id) {
+        <ng-coding-challenges-challenge-card [challenge]="challenge" [newBadgeChallengeIds]="newBadgeChallengeIds()"
+          class="challenge-card-item fade-in" />
+        }
+        }
+      </div>
       }
 
       <!-- Challenge Detail View (child route) -->
       @if (isChildRouteActive()) {
-        <div class="challenge-detail-view">
-          <router-outlet />
-        </div>
+      <div class="challenge-detail-view">
+        <router-outlet />
+      </div>
       }
     </div>
   </main>

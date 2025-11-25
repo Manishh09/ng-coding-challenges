@@ -3,7 +3,7 @@
 .challenges-browser {
   display: flex;
   min-height: calc(100vh - var(--header-height));
-  background: var(--background-primary);
+  background: var(--background-secondary);
 }
 
 // Main content area
@@ -171,6 +171,7 @@
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -194,6 +195,7 @@
 
 // Print styles
 @media print {
+
   .mobile-top-bar,
   .content-header .header-search {
     display: none;

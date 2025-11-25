@@ -3,7 +3,6 @@
 
   <div class="challenge-card__header">
     <div class="challenge-card__header-left">
-      <span class="challenge-card__category">{{ categoryLabel() }}</span>
       @if (hasNewBadge()) {
       <span class="challenge-card__badge">
         <mat-icon aria-hidden="true">sparkles</mat-icon>
@@ -11,19 +10,6 @@
       </span>
       }
     </div>
-
-    @if (docsAvailable()) {
-    <button
-      mat-icon-button
-      class="challenge-card__docs-trigger"
-      [matMenuTriggerFor]="docsMenu"
-      matTooltip="View docs & resources"
-      aria-label="View docs and resources"
-      type="button"
-    >
-      <mat-icon>menu_book</mat-icon>
-    </button>
-    }
   </div>
 
   <mat-card-title class="challenge-card__title">
@@ -37,71 +23,28 @@
   </mat-card-content>
 
   <mat-card-actions class="challenge-card__actions" role="group" aria-label="Challenge actions">
-    <div class="challenge-card__primary-actions">
-      <button
-        mat-flat-button
-        color="primary"
-        type="button"
-        (click)="onTryChallenge(challenge())"
-        [disabled]="launching()"
-        aria-label="Launch challenge in StackBlitz"
-      >
+    <button mat-flat-button color="primary" type="button" class="challenge-card__launch-btn"
+      [routerLink]="['/challenges', challenge().category, challenge().id]" aria-label="View challenge details">
+      <mat-icon aria-hidden="true">visibility</mat-icon>
+      View Details
+    </button>
+
+    <div class="challenge-card__secondary-actions">
+      <button mat-button type="button" class="challenge-card__secondary-btn" (click)="onTryChallenge(challenge())"
+        [disabled]="launching()" aria-label="Launch challenge in StackBlitz">
         @if (launching()) {
-          <mat-spinner diameter="20" aria-hidden="true"></mat-spinner>
-          Launching...
+        <mat-spinner diameter="16" aria-hidden="true"></mat-spinner>
         } @else {
-          <ng-container>
-            <mat-icon aria-hidden="true">rocket_launch</mat-icon>
-            Launch challenge
-          </ng-container>
+        <mat-icon aria-hidden="true">rocket_launch</mat-icon>
         }
+        Launch
       </button>
 
-      <button
-        mat-stroked-button
-        color="primary"
-        type="button"
-        (click)="viewOutput(challenge().link)"
-        aria-label="View reference implementation"
-      >
+      <button mat-button type="button" class="challenge-card__secondary-btn" (click)="viewOutput(challenge().link)"
+        aria-label="View reference implementation">
         <mat-icon aria-hidden="true">play_circle</mat-icon>
-        View reference
+        Solution
       </button>
     </div>
-
-
   </mat-card-actions>
-
-  <mat-menu #docsMenu="matMenu" class="challenge-card__menu">
-    @if (challenge().requirement) {
-      <button
-        mat-menu-item
-        type="button"
-        (click)="openURL(challenge().requirement, 'requirement')"
-      >
-        <mat-icon aria-hidden="true">assignment</mat-icon>
-        <span>Requirements</span>
-      </button>
-    }
-    @if (challenge().solutionGuide) {
-      <button
-        mat-menu-item
-        type="button"
-        (click)="openURL(challenge().solutionGuide, 'solution')"
-      >
-        <mat-icon aria-hidden="true">lightbulb</mat-icon>
-        <span>Solution guide</span>
-      </button>
-    }
-    @if (challenge().gitHub) {
-      <button
-        mat-menu-item
-        type="button"
-        (click)="openURL(challenge().gitHub, 'github')"
-      >
-        <mat-icon aria-hidden="true">code</mat-icon>
-        <span>GitHub source</span>
-      </button>
-    }
-  </mat-menu>
 </mat-card>

@@ -1,0 +1,113 @@
+@if (challengeDetails(); as c) {
+<div class="challenge-details-container fade-in">
+    <!-- Back Button -->
+    <button mat-button class="back-button" (click)="goBack()" aria-label="Go back to challenges list">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back to {{ categoryName() }} Challenges</span>
+    </button>
+
+    <!-- Breadcrumbs Component -->
+    <ng-coding-challenges-breadcrumbs [items]="breadcrumbItems()" />
+
+    <!-- Header -->
+    <header class="details-header">
+        <h1 class="title">{{ c.title }}</h1>
+        <div class="tags-row">
+            @if (c.difficulty) {
+            <span class="badge difficulty" [class]="c.difficulty.toLowerCase()">
+                {{ c.difficulty }}
+            </span>
+            }
+            <span class="badge category">{{ c.category }}</span>
+            @for (tag of c.tags; track tag) {
+            <span class="badge tag">{{ tag }}</span>
+            }
+        </div>
+    </header>
+
+    <div class="details-grid">
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="section about">
+                <h2>About this Challenge</h2>
+                <mat-divider></mat-divider>
+                <p class="description-text">{{ c.longDescription }}</p>
+            </section>
+
+            <section class="section requirements">
+                <h2>Requirements</h2>
+                <mat-divider></mat-divider>
+                <ul class="requirements-list">
+                    <li>Implement a service to manage the list of tasks using a <code>signal</code>.</li>
+                    <li>Create a component to display the list of tasks. Each task should have a "complete" button.</li>
+                    <li>Use a <code>computed</code> signal to calculate and display the number of remaining tasks.</li>
+                    <li>When a task is marked as complete, update the signal's state and ensure the UI reflects the
+                        change.</li>
+                </ul>
+                <a [href]="c.requirement" target="_blank" class="requirements-link">
+                    <span>See full requirements doc</span>
+                    <mat-icon>arrow_forward</mat-icon>
+                </a>
+            </section>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Launch Card -->
+            <div class="launch-card">
+                <button mat-flat-button color="warn" class="launch-btn" (click)="launchChallenge()">
+                    <mat-icon>rocket_launch</mat-icon>
+                    Launch in StackBlitz
+                </button>
+                <p class="launch-hint">Launches a ready-to-code environment.</p>
+            </div>
+
+            <!-- Learning Outcomes -->
+            <div class="sidebar-card">
+                <h3>Learning Outcomes</h3>
+                <ul class="outcomes-list">
+                    @for (outcome of c.learningOutcomes; track outcome) {
+                    <li>
+                        <mat-icon class="check-icon">check_circle_outline</mat-icon>
+                        <span>{{ outcome }}</span>
+                    </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="sidebar-card">
+                <h3>Tech Stack</h3>
+                <div class="tech-stack-list">
+                    @for (tech of c.techStack; track tech) {
+                    <div class="tech-item">
+                        <mat-icon class="code-icon">code</mat-icon>
+                        <span>{{ tech }}</span>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Author -->
+            @if (c.author) {
+            <div class="sidebar-card author-card">
+                <h3>Author</h3>
+                <div class="author-info">
+                    <div class="avatar-placeholder">
+                        {{ c.author.name.charAt(0) }}
+                    </div>
+                    <div class="author-details">
+                        <span class="author-name">{{ c.author.name }}</span>
+                        <a href="#" class="view-profile">View Profile</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </aside>
+    </div>
+</div>
+} @else {
+<div class="loading-state">
+    <p>Loading challenge details...</p>
+</div>
+}
