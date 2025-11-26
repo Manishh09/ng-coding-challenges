@@ -5,16 +5,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
+/* ==========================================
+   Global Base Styles - WCAG 2.1 AA Compliant
+   ========================================== */
+
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   background: var(--background-primary);
   color: var(--text-primary);
-  // padding-top: 64px;
+  // Ensure smooth font rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Ensure app-root takes full height */
@@ -25,6 +33,7 @@ app-root {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background: var(--background-primary);
 }
 
 /* Fix for extra space at bottom */
@@ -44,40 +53,57 @@ app-root,
   padding: 0;
 }
 
-// ============================================================================
-// ANGULAR.DEV SPECIFIC COMPONENT STYLES
-// ============================================================================
+/* ==========================================
+   Hero Section Styling - WCAG Compliant
+   ========================================== */
 
-/* Hero section styling */
 .hero-section {
   background: var(--gradient-primary);
-  color: white;
+  color: #ffffff;
   padding: var(--spacing-3xl) var(--spacing-lg);
   text-align: center;
+  position: relative;
+
+  // Ensure sufficient contrast overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.15), 
+      rgba(0, 0, 0, 0.05)
+    );
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   h1 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: var(--spacing-lg);
-    background: linear-gradient(135deg, white, rgba(255, 255, 255, 0.8));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   p {
-    font-size: 1.25rem;
-    opacity: 0.9;
-    // max-width: 600px;
-    // margin: 0 auto var(--spacing-xl);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   }
 }
 
-
-
-// ============================================================================
-// RESPONSIVE DESIGN
-// ============================================================================
+/* ==========================================
+   Responsive Design
+   ========================================== */
 
 @media (max-width: 768px) {
   .hero-section {
@@ -85,6 +111,7 @@ app-root,
 
     h1 {
       font-size: 2rem;
+      margin-bottom: var(--spacing-md);
     }
 
     p {
@@ -113,43 +140,204 @@ app-root,
   }
 }
 
-// ============================================================================
-// ACCESSIBILITY IMPROVEMENTS
-// ============================================================================
-
-/* Focus styles for better accessibility */
-*:focus {
-  outline: 2px solid var(--interactive-primary);
-  outline-offset: 2px;
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-section {
+    padding: var(--spacing-3xl) var(--spacing-xl);
+  }
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
+/* ==========================================
+   WCAG 2.1 AA Accessibility Standards
+   ========================================== */
 
+/* Enhanced focus styles for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--interactive-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+  transition: outline-offset 0.15s ease;
+}
+
+/* Ensure all interactive elements meet minimum touch target (48x48px) */
+button,
+a,
+input,
+select,
+textarea,
+[role="button"],
+[role="link"] {
+  min-height: 44px; // WCAG 2.5.5 Target Size
+  
+  @media (pointer: coarse) {
+    min-height: 48px; // Larger for touch devices
+  }
+}
+
+/* Skip to main content link for screen readers */
+.skip-to-main {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--interactive-primary);
+  color: #ffffff;
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 9999;
+  border-radius: 0 0 var(--border-radius-md) 0;
+
+  &:focus {
+    top: 0;
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: -3px;
+  }
+}
+
+/* Reduced motion support - WCAG 2.3.3 */
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in,
+  .slide-in-up,
+  .pulse {
+    animation: none !important;
   }
 }
 
-/* High contrast mode support */
+/* High contrast mode support - WCAG 1.4.3 */
 @media (prefers-contrast: high) {
   :root {
     --border-primary: var(--text-primary);
-    --shadow-sm: 0 1px 2px 0 var(--text-primary);
-    --shadow-md: 0 4px 6px -1px var(--text-primary);
-    --shadow-lg: 0 10px 15px -3px var(--text-primary);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 20px -3px rgba(0, 0, 0, 0.5);
+  }
+
+  button,
+  a,
+  input,
+  select {
+    border-width: 2px !important;
+  }
+
+  *:focus-visible {
+    outline-width: 4px;
+    outline-offset: 3px;
   }
 }
 
+/* Dark mode - ensure proper contrast ratios */
+body.dark-mode {
+  // Override any potential contrast issues
+  .hero-section {
+    &::before {
+      background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.25), 
+        rgba(0, 0, 0, 0.15)
+      );
+    }
+  }
+}
 
-// ======================SHARED COMPONENT STYLES=========================//
+/* Forced colors mode support (Windows High Contrast) */
+@media (forced-colors: active) {
+  * {
+    forced-color-adjust: auto;
+  }
+
+  button,
+  a {
+    border: 1px solid currentColor;
+  }
+}
+
+/* ==========================================
+   Screen Reader Only Content
+   ========================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ==========================================
+   Shared Component Styles
+   ========================================== */
+
 .challenge-container {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
+  background: var(--background-primary);
+}
+
+/* ==========================================
+   Text Selection
+   ========================================== */
+::selection {
+  background: var(--color-primary-alpha-30);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--color-primary-alpha-30);
+  color: var(--text-primary);
+}
+
+/* ==========================================
+   Print Styles
+   ========================================== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .hero-section {
+    background: none;
+    color: black;
+  }
+
+  button,
+  nav,
+  aside,
+  [role="navigation"],
+  [role="banner"] {
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+    color: black;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.875rem;
+  }
 }

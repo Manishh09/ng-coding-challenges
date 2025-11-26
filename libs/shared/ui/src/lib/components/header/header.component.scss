@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 32px;
+  padding: 0 var(--spacing-2xl);
   height: 100%;
 }
 
@@ -337,7 +337,7 @@ body.dark-mode .linkedin-svg {
   }
 
   .header-container {
-    padding: 0 12px;
+    padding: 0 var(--spacing-md);
   }
 
   .header-toolbar {

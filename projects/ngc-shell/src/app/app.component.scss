@@ -1,43 +1,69 @@
+/* ==========================================
+   App Layout Component
+   ========================================== */
+
 .app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
   position: relative;
+  background: var(--background-primary);
 }
 
-// Challenge content container
+/* ==========================================
+   Challenge Content Container
+   ========================================== */
 .challenge-content {
   flex: 1 0 auto;
   width: 100%;
-  padding: 2rem;
-  max-width: 1200px;
+  padding: var(--spacing-2xl);
+  max-width: 1400px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-lg);
+  }
 }
 
-// Routed Components
+/* ==========================================
+   Routed Components Container
+   ========================================== */
 .main-content {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
-  height: 100vh;
-  //min-height: calc(100vh - var(--header-height));
+  min-height: calc(100vh - var(--header-height));
   animation: fadeIn 0.3s var(--animation-easing);
 
-  // Ensure proper spacing and responsiveness
+  // Remove overflow-y to prevent double scrollbar
+  // The body will handle scrolling
+
   @media (max-width: 768px) {
     min-height: calc(100vh - var(--header-height-mobile));
   }
 }
 
-// Route transition animation
+/* ==========================================
+   Route Transition Animation
+   ========================================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   Accessibility
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  .main-content {
+    animation: none;
   }
 }

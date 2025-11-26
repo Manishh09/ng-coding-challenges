@@ -9,7 +9,7 @@
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 4rem);
+  padding: clamp(4rem, 8vw, 6rem) var(--spacing-2xl);
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
   background: var(--brand-gradient-hero);
   color: var(--color-white-alpha-90);
@@ -302,7 +302,7 @@
 .metrics-section,
 .featured-section,
 .latest-section {
-  padding: 0 clamp(1.5rem, 6vw, 4rem);
+  padding: 0 var(--spacing-2xl);
 }
 
 .metrics-grid {
@@ -528,7 +528,7 @@
   }
 
   .hero-section {
-    padding: var(--spacing-3xl) var(--spacing-lg);
+    padding: var(--spacing-3xl) var(--spacing-xl);
   }
 
   .hero-buttons {
@@ -538,7 +538,7 @@
   .metrics-section,
   .featured-section,
   .latest-section {
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--spacing-xl);
   }
 }
 

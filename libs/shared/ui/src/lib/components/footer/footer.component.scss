@@ -36,7 +36,7 @@
   z-index: 1;
   max-width: 1280px;
   margin: 0 auto;
-  padding: var(--spacing-3xl) clamp(var(--spacing-md), 6vw, var(--spacing-3xl));
+  padding: var(--spacing-3xl) var(--spacing-2xl);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--spacing-xl);
@@ -277,7 +277,7 @@
    ========================================================= */
 @media (max-width: 1024px) {
   .footer-container {
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-2xl) var(--spacing-xl);
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
@@ -322,7 +322,7 @@
 
 @media (max-width: 480px) {
   .footer-container {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
   }
 
   .footer-logo-text {
