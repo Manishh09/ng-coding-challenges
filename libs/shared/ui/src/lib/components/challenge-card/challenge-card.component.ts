@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -32,19 +32,13 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './challenge-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChallengeCardComponent implements OnInit {
+export class ChallengeCardComponent {
   // Input properties
   readonly challenge = input.required<Challenge>();
   readonly newBadgeChallengeIds = input<number[]>([]);
 
   readonly categoryLabel = computed(() =>
     this.formatCategoryId(this.challenge().category)
-  );
-  readonly docsAvailable = computed(
-    () =>
-      !!this.challenge().requirement ||
-      !!this.challenge().solutionGuide ||
-      !!this.challenge().gitHub
   );
 
   // Reactive signal to check if current challenge is the latest challenge
@@ -66,10 +60,6 @@ export class ChallengeCardComponent implements OnInit {
 
   // ---- Injected Services ----
   private readonly challengesService = inject(ChallengesService);
-
-  ngOnInit(): void {
-    // Initialization logic can go here if needed
-  }
 
   private formatCategoryId(categoryId: string): string {
     return categoryId
