@@ -120,8 +120,8 @@ export class LandingPageComponent {
     }
 
     // Construct dynamic route safely
-    const { category, link } = latestChallenge;
-    this.router.navigate([`${ROUTES.challenges}/${category}/${link}`]);
+    const { category, id } = latestChallenge;
+    this.router.navigate([`${ROUTES.challenges}/${category}/${id}`]);
   }
 
   navigateToCategory(categoryId: string): void {

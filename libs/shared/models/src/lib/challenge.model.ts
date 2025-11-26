@@ -1,35 +1,53 @@
-export interface Challenge {
+/**
+ * Represents the difficulty level of a challenge
+ */
+export type DifficultyLevel = 'Beginner' | 'Intermediate' | 'Advanced';
 
+/**
+ * Represents the category ID of a challenge
+ */
+export type ChallengeCategoryId = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'http';
+
+/**
+ * Represents the author information for a challenge
+ */
+export interface Author {
+  name: string;
+  avatar?: string;
+  profileUrl?: string;
+}
+
+/**
+ * Base challenge interface for lists and previews.
+ * Contains essential information needed for displaying challenges in cards or lists.
+ */
+export interface Challenge {
   id: number;
   title: string;
   description: string;
   link: string;
+  category: ChallengeCategoryId;
+  difficulty: DifficultyLevel;
+  tags?: string[];
+  // Optional properties used by some services
+  gitHub?: string;
+  requirement?: string;
+  solutionGuide?: string;
+}
+
+/**
+ * Extended challenge details interface.
+ * Contains comprehensive information for individual challenge detail pages.
+ * Extends the base Challenge interface with additional properties.
+ */
+export interface ChallengeDetails extends Challenge {
+  longDescription: string;
+  learningOutcomes: string[];
+  techStack: string[];
   requirement: string;
   solutionGuide: string;
   gitHub: string;
-  category: string;
-  // New fields for details page
-  longDescription?: string;
-  learningOutcomes?: string[];
-  techStack?: string[];
-  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
-  tags?: string[];
-  author?: {
-    name: string;
-    avatar?: string;
-    profileUrl?: string;
-  };
-}
-
-
-export interface ChallengeCardData {
-  id: string;
-  title: string;
-  description: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert';
-  category: string;
-  tags: string[];
-  estimatedTime: number;
-  isCompleted?: boolean;
-  isFeatured?: boolean;
+  author: Author;
+  estimatedTime?: string;
+  prerequisites?: string[];
 }

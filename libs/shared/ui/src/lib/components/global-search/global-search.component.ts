@@ -129,7 +129,7 @@ export class GlobalSearchComponent implements OnInit {
 
   selectResult(result: SearchResult): void {
     this.dialogRef.close();
-    this.router.navigate(['/challenges', result.category, result.link]);
+    this.router.navigate(['/challenges', result.category, result.id]);
   }
 
   closeSearch(): void {

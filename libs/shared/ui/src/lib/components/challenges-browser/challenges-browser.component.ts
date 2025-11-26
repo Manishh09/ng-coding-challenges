@@ -33,10 +33,8 @@ import { FooterComponent, FooterLink } from '../footer/footer.component';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    SearchBarComponent,
     CategorySidebarComponent,
     ChallengeCardComponent,
-    FooterComponent,
   ],
   templateUrl: './challenges-browser.component.html',
   styleUrl: './challenges-browser.component.scss',
@@ -155,23 +153,10 @@ export class ChallengesBrowserComponent {
 
   onCategorySelect(categoryId: string): void {
     // Update query params
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { category: categoryId },
-      queryParamsHandling: 'merge',
-    });
+    this.router.navigate([categoryId], { relativeTo: this.route });
+
   }
 
-  onChallengeSearchChange(term: string): void {
-    this.challengeSearchTerm.set(term);
-
-    // Update query params
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { search: term || null },
-      queryParamsHandling: 'merge',
-    });
-  }
 
   onChallengeSearchClear(): void {
     this.challengeSearchTerm.set('');
@@ -184,21 +169,5 @@ export class ChallengesBrowserComponent {
     });
   }
 
-  // Footer logic
-  readonly appName = 'ngQuest';
 
-  onFooterLinkClick(link: FooterLink): void {
-    if (link.section) {
-      if (link.section === 'challenges') {
-        // Already on challenges, maybe reset filters?
-        this.onChallengeSearchClear();
-        return;
-      }
-      this.router.navigate(['/']);
-      return;
-    }
-    if (link.url) {
-      this.router.navigateByUrl(link.url);
-    }
-  }
 }

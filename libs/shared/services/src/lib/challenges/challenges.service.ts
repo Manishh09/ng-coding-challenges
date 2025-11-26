@@ -1,6 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { Challenge, SearchResult } from '@ng-coding-challenges/shared/models';
-import { CHALLENGE_DATA } from './challenge-data';
+import {
+  Challenge,
+  ChallengeDetails,
+  SearchResult,
+  DifficultyLevel,
+  ChallengeCategoryId
+} from '@ng-coding-challenges/shared/models';
+import { CHALLENGES, CHALLENGE_DETAILS } from './challenge-data';
 import { ChallengeCategoryService } from './challenge-category.service';
 
 @Injectable({
@@ -8,25 +14,41 @@ import { ChallengeCategoryService } from './challenge-category.service';
 })
 export class ChallengesService {
   /**
-   * Immutable collection of available challenges.
+   * Immutable collection of available challenges (lightweight data for lists).
    */
-  private readonly challenges: readonly Challenge[] = CHALLENGE_DATA;
+  private readonly challenges: readonly Challenge[] = CHALLENGES;
+
+  /**
+   * Detailed challenge information (loaded on demand for detail pages).
+   */
+  private readonly challengeDetails: Readonly<Record<string | number, ChallengeDetails>> = CHALLENGE_DETAILS;
+
   private readonly categoryService = inject(ChallengeCategoryService);
 
   /**
-   * Returns all challenges.
+   * Returns all challenges (lightweight data).
    */
   getChallenges(): readonly Challenge[] {
     return this.challenges;
   }
 
   /**
-   * Finds a challenge by its unique ID.
+   * Finds a challenge by its unique ID (lightweight data).
    * @param id - Challenge ID
    * @returns The matching challenge, or undefined if not found
    */
   getChallengeById(id: number): Challenge | undefined {
     return this.challenges.find((challenge) => challenge.id === id);
+  }
+
+  /**
+   * Finds detailed challenge information by ID (for detail pages).
+   * Includes extended properties like longDescription, learningOutcomes, etc.
+   * @param id - Challenge ID
+   * @returns The detailed challenge data, or undefined if not found
+   */
+  getChallengeDetailsById(id: string | number): ChallengeDetails | undefined {
+    return this.challengeDetails[id];
   }
 
   /**
@@ -38,6 +60,29 @@ export class ChallengesService {
     if (!category) return [];
     return this.challenges.filter(
       (challenge) => challenge.category === category
+    );
+  }
+
+  /**
+   * Retrieves challenges by difficulty level.
+   * @param difficulty - Difficulty level
+   * @returns An array of challenges with the given difficulty
+   */
+  getChallengesByDifficulty(difficulty: DifficultyLevel): readonly Challenge[] {
+    return this.challenges.filter(
+      (challenge) => challenge.difficulty === difficulty
+    );
+  }
+
+  /**
+   * Retrieves challenges that have a specific tag.
+   * @param tag - Tag to filter by
+   * @returns An array of challenges with the given tag
+   */
+  getChallengesByTag(tag: string): readonly Challenge[] {
+    if (!tag) return [];
+    return this.challenges.filter(
+      (challenge) => challenge.tags?.includes(tag)
     );
   }
 
@@ -76,6 +121,82 @@ export class ChallengesService {
       map.get(challenge.category)!.push(challenge);
       return map;
     }, new Map<string, Challenge[]>());
+  }
+
+  /**
+   * Get the next challenge in the sequence.
+   * @param currentId - Current challenge ID
+   * @returns The next challenge, or undefined if at the end
+   */
+  getNextChallenge(currentId: number): Challenge | undefined {
+    const currentIndex = this.challenges.findIndex(c => c.id === currentId);
+    if (currentIndex === -1 || currentIndex === this.challenges.length - 1) {
+      return undefined;
+    }
+    return this.challenges[currentIndex + 1];
+  }
+
+  /**
+   * Get the previous challenge in the sequence.
+   * @param currentId - Current challenge ID
+   * @returns The previous challenge, or undefined if at the beginning
+   */
+  getPreviousChallenge(currentId: number): Challenge | undefined {
+    const currentIndex = this.challenges.findIndex(c => c.id === currentId);
+    if (currentIndex <= 0) {
+      return undefined;
+    }
+    return this.challenges[currentIndex - 1];
+  }
+
+  /**
+   * Get all unique tags across all challenges.
+   * @returns Array of unique tags, sorted alphabetically
+   */
+  getAllTags(): string[] {
+    const tags = new Set<string>();
+    this.challenges.forEach(c => c.tags?.forEach(tag => tags.add(tag)));
+    return Array.from(tags).sort();
+  }
+
+  /**
+   * Get all unique difficulty levels used in challenges.
+   * @returns Array of difficulty levels
+   */
+  getAllDifficulties(): DifficultyLevel[] {
+    const difficulties = new Set<DifficultyLevel>();
+    this.challenges.forEach(c => difficulties.add(c.difficulty));
+    return Array.from(difficulties);
+  }
+
+  /**
+   * Get challenge count by category.
+   * @returns Map of category to count
+   */
+  getChallengeCountByCategory(): Map<string, number> {
+    const countMap = new Map<string, number>();
+
+    this.challenges.forEach(challenge => {
+      const count = countMap.get(challenge.category) || 0;
+      countMap.set(challenge.category, count + 1);
+    });
+
+    return countMap;
+  }
+
+  /**
+   * Get challenge count by difficulty.
+   * @returns Map of difficulty to count
+   */
+  getChallengeCountByDifficulty(): Map<DifficultyLevel, number> {
+    const countMap = new Map<DifficultyLevel, number>();
+
+    this.challenges.forEach(challenge => {
+      const count = countMap.get(challenge.difficulty) || 0;
+      countMap.set(challenge.difficulty, count + 1);
+    });
+
+    return countMap;
   }
 
   /**
@@ -124,12 +245,14 @@ export class ChallengesService {
    * - Title contains term: 100 points per term
    * - Description contains term: 50 points per term
    * - Category contains term: 25 points per term
+   * - Tags contain term: 30 points per term
    */
   private calculateRelevanceScore(challenge: Challenge, searchTerms: string[]): number {
     let score = 0;
     const lowerTitle = challenge.title.toLowerCase();
     const lowerDescription = challenge.description.toLowerCase();
     const lowerCategory = challenge.category.toLowerCase();
+    const lowerTags = challenge.tags?.map(tag => tag.toLowerCase());
 
     searchTerms.forEach((term) => {
       // Exact title match bonus
@@ -155,6 +278,11 @@ export class ChallengesService {
       // Category contains term
       if (lowerCategory.includes(term)) {
         score += 25;
+      }
+
+      // Tags contain term
+      if (lowerTags?.some(tag => tag.includes(term))) {
+        score += 30;
       }
     });
 

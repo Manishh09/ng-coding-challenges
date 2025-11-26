@@ -1,29 +1,20 @@
 @use '../../styles/theme.scss' as theme;
 
-/* ==========================================
-   Challenges Browser Component
-   WCAG 2.1 AA Compliant Design
-   ========================================== */
-
 .challenges-browser {
   display: flex;
-  background: var(--background-primary);
+  //min-height: calc(100vh - var(--header-height));
+  background: var(--background-secondary);
   height: 100dvh;
-  min-height: 100dvh;
 }
 
-/* ==========================================
-   Main Content Area
-   ========================================== */
+// Main content area
 .content-area {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - var(--header-height));
-  margin-top: var(--header-height);
+  height: 100dvh;//calc(100vh - var(--header-height));
   overflow-y: auto;
   overflow-x: hidden;
-  background: var(--background-primary);
   transition: margin-left var(--animation-duration-standard) var(--animation-easing);
 
   // Shifted for sidebar on desktop
@@ -31,13 +22,9 @@
     margin-left: 280px;
   }
 
-  // Custom scrollbar (WCAG compliant colors)
+  // Custom scrollbar
   &::-webkit-scrollbar {
-    width: 12px;
-    
-    @media (max-width: 767px) {
-      width: 8px;
-    }
+    width: 8px;
   }
 
   &::-webkit-scrollbar-track {
@@ -45,23 +32,16 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--border-secondary);
-    border-radius: var(--border-radius-pill);
-    border: 2px solid var(--background-secondary);
+    background: var(--border-primary);
+    border-radius: var(--border-radius-full);
 
     &:hover {
-      background: var(--text-tertiary);
-    }
-
-    &:active {
-      background: var(--text-secondary);
+      background: var(--border-secondary);
     }
   }
 }
 
-/* ==========================================
-   Mobile Top Bar
-   ========================================== */
+// Mobile top bar
 .mobile-top-bar {
   position: fixed;
   top: var(--header-height-mobile);
@@ -69,24 +49,16 @@
   right: 0;
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
   z-index: 100;
   height: 64px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 
   .menu-button {
     flex-shrink: 0;
     color: var(--text-primary);
-    min-width: 48px; // WCAG minimum touch target
-    min-height: 48px;
-
-    &:focus-visible {
-      outline: 2px solid var(--interactive-primary);
-      outline-offset: 2px;
-    }
   }
 
   .mobile-search {
@@ -94,112 +66,85 @@
   }
 }
 
-/* ==========================================
-   Desktop Header
-   ========================================== */
+// Desktop header
 .content-header {
-  padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-md);
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
   position: sticky;
-  top: 0;
+  top: var(--header-height);
   z-index: 10;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-
-  @media (max-width: 767px) {
-    padding: var(--spacing-lg) var(--spacing-md);
-  }
 
   .header-info {
     margin-bottom: 0;
 
     .category-title {
-      margin: 0 0 var(--spacing-sm) 0;
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin: 0 0 var(--spacing-xs) 0;
+      font-size: var(--font-size-3xl);
       font-weight: var(--font-weight-bold);
       color: var(--text-primary);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
       position: relative;
-      padding-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
 
-      // WCAG AA contrast gradient accent
+      // Subtle gradient underline accent
       &::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 64px;
-        height: 4px;
-        background: var(--interactive-primary);
+        width: 60px;
+        height: 3px;
+        background: var(--gradient-primary);
         border-radius: 2px;
       }
     }
 
     .result-count {
       margin: 0;
-      font-size: var(--font-size-base);
+      font-size: var(--font-size-sm);
       color: var(--text-secondary);
-      font-weight: var(--font-weight-medium);
     }
   }
 
   .header-search {
-    max-width: 560px;
-    margin-top: var(--spacing-lg);
+    max-width: 500px;
   }
 }
 
-/* ==========================================
-   Content Container
-   ========================================== */
+// Content container
 .content-container {
   flex: 1;
-  padding: var(--spacing-2xl);
-  background: var(--background-primary);
-  overflow: visible;
+  padding: var(--spacing-xl);
+  overflow: visible; // Allow hover effects to show without clipping
 
   @media (max-width: 767px) {
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-md);
     margin-top: 64px; // Mobile top bar height
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    padding: var(--spacing-2xl) var(--spacing-xl);
   }
 }
 
-/* ==========================================
-   Challenges Grid
-   ========================================== */
+// Challenges grid
 .challenges-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: var(--spacing-xl);
   animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
   width: 100%;
-  align-items: start;
-  padding: 8px 0; // Prevent card hover shadow clipping
+  align-items: start; // Align cards to top of grid cells
+  padding: 6px 0; // Extra padding to prevent card hover clipping
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
-    padding: 6px 0;
   }
 
   @media (min-width: 768px) and (max-width: 1199px) {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--spacing-lg);
   }
 
-  @media (min-width: 1200px) and (max-width: 1599px) {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
-    gap: var(--spacing-2xl);
-  }
-
-  @media (min-width: 1600px) {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
-    gap: var(--spacing-2xl);
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   }
 }
 
@@ -207,93 +152,60 @@
   animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
   animation-fill-mode: both;
 
-  // Staggered animation for better UX
   @for $i from 1 through 20 {
     &:nth-child(#{$i}) {
-      animation-delay: calc(#{$i} * 40ms);
+      animation-delay: calc(#{$i} * 50ms);
     }
   }
 }
 
-/* ==========================================
-   Empty State - WCAG Compliant
-   ========================================== */
+// Empty state
 .empty-state {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-4xl) var(--spacing-xl);
+  padding: var(--spacing-4xl) var(--spacing-lg);
   text-align: center;
-  min-height: 480px;
-  background: var(--surface-secondary);
-  border-radius: var(--border-radius-lg);
-  border: 1px dashed var(--border-primary);
-
-  @media (max-width: 767px) {
-    min-height: 360px;
-    padding: var(--spacing-3xl) var(--spacing-lg);
-  }
+  min-height: 400px;
 
   .empty-icon {
-    font-size: 80px;
-    width: 80px;
-    height: 80px;
+    font-size: 72px;
+    width: 72px;
+    height: 72px;
     color: var(--text-tertiary);
-    margin-bottom: var(--spacing-xl);
-    opacity: 0.7;
-
-    @media (max-width: 767px) {
-      font-size: 64px;
-      width: 64px;
-      height: 64px;
-    }
+    margin-bottom: var(--spacing-lg);
   }
 
   h3 {
-    margin: 0 0 var(--spacing-md) 0;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: var(--font-weight-bold);
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
-    letter-spacing: -0.01em;
   }
 
   p {
-    margin: 0 0 var(--spacing-xl) 0;
-    font-size: var(--font-size-lg);
+    margin: 0 0 var(--spacing-lg) 0;
+    font-size: var(--font-size-base);
     color: var(--text-secondary);
-    max-width: 400px;
-    line-height: 1.6;
   }
 
   button {
     margin-top: var(--spacing-md);
-    min-height: 48px; // WCAG minimum touch target
-    padding: 12px 32px;
-    font-weight: var(--font-weight-semibold);
-
-    &:focus-visible {
-      outline: 2px solid var(--interactive-primary);
-      outline-offset: 2px;
-    }
   }
 }
 
-/* ==========================================
-   Challenge Detail View
-   ========================================== */
+// Challenge detail view
 .challenge-detail-view {
   animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
 }
 
-/* ==========================================
-   Animations
-   ========================================== */
+// Animations
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
 
   to {
@@ -302,61 +214,24 @@
   }
 }
 
-/* ==========================================
-   Responsive Adjustments
-   ========================================== */
+// Responsive adjustments
 @media (max-width: 767px) {
   .challenges-browser {
     min-height: calc(100vh - var(--header-height-mobile));
   }
 
   .content-area {
-    height: calc(100dvh - var(--header-height-mobile));
-    margin-top: var(--header-height-mobile);
+    height: calc(100vh - var(--header-height-mobile));
   }
 
   .content-header {
-    top: 64px; // Mobile top bar height
+    top: calc(var(--header-height-mobile) + 64px); // Account for mobile top bar
   }
 }
 
-/* ==========================================
-   Accessibility Enhancements
-   ========================================== */
-
-// High contrast mode support
-@media (prefers-contrast: high) {
-  .content-header {
-    border-bottom-width: 2px;
-  }
-
-  .empty-state {
-    border-width: 2px;
-  }
-
-  .challenges-grid {
-    gap: var(--spacing-2xl);
-  }
-}
-
-// Reduced motion support
-@media (prefers-reduced-motion: reduce) {
-  .challenges-grid,
-  .challenge-card-item,
-  .challenge-detail-view,
-  .content-area {
-    animation: none;
-  }
-
-  .content-area {
-    transition: none;
-  }
-}
-
-/* ==========================================
-   Print Styles
-   ========================================== */
+// Print styles
 @media print {
+
   .mobile-top-bar,
   .content-header .header-search {
     display: none;
@@ -364,19 +239,5 @@
 
   .challenges-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
   }
-
-  .content-container {
-    padding: 0;
-  }
-}
-
-/* ==========================================
-   Focus Management
-   ========================================== */
-*:focus-visible {
-  outline: 2px solid var(--interactive-primary);
-  outline-offset: 2px;
-  border-radius: 2px;
 }
