@@ -28,23 +28,5 @@
       <mat-icon aria-hidden="true">visibility</mat-icon>
       View Details
     </button>
-
-    <div class="challenge-card__secondary-actions">
-      <button mat-button type="button" class="challenge-card__secondary-btn" (click)="onTryChallenge(challenge())"
-        [disabled]="launching()" aria-label="Launch challenge in StackBlitz">
-        @if (launching()) {
-        <mat-spinner diameter="16" aria-hidden="true"></mat-spinner>
-        } @else {
-        <mat-icon aria-hidden="true">rocket_launch</mat-icon>
-        }
-        Launch
-      </button>
-
-      <button mat-button type="button" class="challenge-card__secondary-btn" (click)="viewOutput(challenge().link)"
-        aria-label="View reference implementation">
-        <mat-icon aria-hidden="true">play_circle</mat-icon>
-        Solution
-      </button>
-    </div>
   </mat-card-actions>
 </mat-card>

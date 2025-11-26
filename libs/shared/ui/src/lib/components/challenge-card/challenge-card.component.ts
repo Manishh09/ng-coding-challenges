@@ -1,24 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NavigationService, NotificationService, ChallengesService } from '@ng-coding-challenges/shared/services';
+import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
-import { StackblitzService } from '@ng-coding-challenges/shared/services';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 /**
  * Component for displaying a challenge card with actions
  *
  * Features:
- * - Loading states for async operations
  * - Accessibility with ARIA labels
  * - Latest challenge highlighting
- * - Docs and resources menu
  */
 @Component({
   selector: 'ng-coding-challenges-challenge-card',
@@ -30,8 +26,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatMenuModule,
-    MatProgressSpinnerModule
+    MatMenuModule
   ],
   templateUrl: './challenge-card.component.html',
   styleUrl: './challenge-card.component.scss',
@@ -69,66 +64,11 @@ export class ChallengeCardComponent implements OnInit {
     return this.isLatestChallenge();
   });
 
-  // Loading state for StackBlitz launch
-  readonly launching = signal(false);
-
   // ---- Injected Services ----
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
   private readonly challengesService = inject(ChallengesService);
-  private readonly navigationService = inject(NavigationService);
-  private readonly notificationService = inject(NotificationService);
-  private readonly stackblitzService = inject(StackblitzService);
 
   ngOnInit(): void {
     // Initialization logic can go here if needed
-  }
-
-
-  /**
-   * Opens an external URL in a new window/tab and handles potential failures.
-   *
-   * @param url - The URL to open externally
-   * @param type - The type of link being opened, affects the error message shown on failure
-   * @returns void
-   *
-   * @remarks
-   * If the URL is empty/falsy, the method show a validation message
-   * If the navigation service fails to open the link (e.g., due to popup blockers),
-   * an appropriate error notification is displayed based on the link type.
-   */
-  openURL(url: string, type: 'github' | 'requirement' | 'solution'): void {
-    if (!url) {
-      this.notificationService.error('No URL provided to open.');
-      return;
-    }
-
-    const errorMessages: Record<typeof type, string> = {
-      github: 'Unable to open GitHub repository. Please check if popups are blocked.',
-      requirement: 'Unable to open challenge requirement doc. Please check if popups are blocked.',
-      solution: 'Unable to open solution guide. Please check if popups are blocked.',
-    };
-
-    const success = this.navigationService.openExternalLink(url);
-    if (!success) {
-      this.notificationService.error(errorMessages[type]);
-    }
-  }
-
-  async onTryChallenge(challenge: Challenge): Promise<void> {
-    this.launching.set(true);
-    try {
-      await this.stackblitzService.openChallengeInStackblitz(challenge);
-    } catch (error) {
-      this.notificationService.error('Failed to launch challenge. Please try again.');
-      console.error('Error launching challenge:', error);
-    } finally {
-      this.launching.set(false);
-    }
-  }
-
-  viewOutput(link: string): void {
-    this.router.navigate([link], { relativeTo: this.route });
   }
 
   private formatCategoryId(categoryId: string): string {
