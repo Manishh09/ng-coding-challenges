@@ -1,0 +1,83 @@
+// ============================================================================
+// CUSTOM COMPONENT STYLES
+// ============================================================================
+
+// angular.dev inspired card styles
+.angular-dev-card {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--animation-duration-standard) var(--animation-easing);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    &.elevated {
+        box-shadow: var(--shadow-lg);
+    }
+}
+
+// angular.dev inspired button styles
+.angular-dev-button {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--border-radius-md);
+    color: white;
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    transition: all var(--animation-duration-standard) var(--animation-easing);
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+    }
+
+    &.secondary {
+        background: var(--interactive-secondary);
+        color: var(--text-primary);
+
+        &:hover {
+            background: var(--interactive-secondary-hover);
+        }
+    }
+}
+
+// angular.dev inspired surface styles
+.angular-dev-surface {
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+}
+
+// Code block styling
+.angular-dev-code {
+    background: var(--code-background);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-family-mono);
+    padding: var(--spacing-md);
+
+    .keyword {
+        color: var(--code-keyword);
+    }
+
+    .string {
+        color: var(--code-string);
+    }
+
+    .comment {
+        color: var(--code-comment);
+    }
+
+    .function {
+        color: var(--code-function);
+    }
+
+    .number {
+        color: var(--code-number);
+    }
+}

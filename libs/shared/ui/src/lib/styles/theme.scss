@@ -4,7 +4,8 @@
 @use './tokens/tokens' as tokens;
 @use './_light-theme.scss' as light;
 @use './_dark-theme.scss' as dark;
-
+@use './components';
+@use './material-overrides';
 // Core Material
 @include mat.core();
 
@@ -37,13 +38,31 @@
   --color-gray-alpha-90: rgba(148, 163, 184, 0.9);
 
   // Glass surface effects
-  --glass-surface: linear-gradient(
-      135deg,
+  --glass-surface: linear-gradient(135deg,
       rgba(255, 255, 255, 0.32),
-      rgba(255, 255, 255, 0.12)
-    );
+      rgba(255, 255, 255, 0.12));
   --glass-border: rgba(255, 255, 255, 0.35);
-  --glass-backdrop-blur: blur(22px);
+  --glass-backdrop-blur: blur(24px);
+  --glass-backdrop-saturate: saturate(180%);
+
+  // Angular.dev-style enhanced gradients
+  --gradient-hero-radial: radial-gradient(ellipse 80% 50% at 50% -20%,
+      hsl(258, 90%, 66%),
+      hsl(240, 56%, 12%));
+
+  --gradient-hero-radial-light: radial-gradient(ellipse 80% 50% at 50% -20%,
+      hsla(258, 90%, 96%, 1),
+      hsla(258, 90%, 99%, 1));
+
+  // Subtle card gradients
+  --gradient-card-hover: linear-gradient(135deg,
+      rgba(139, 92, 246, 0.05),
+      rgba(236, 72, 153, 0.05));
+
+  // Button gradient overlays
+  --gradient-button-overlay: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0));
 
   // Layout system
   --header-height: 64px;
@@ -119,6 +138,7 @@ body.dark-mode {
     @include dark.dark-theme-vars();
   }
 }
+
 @media (prefers-color-scheme: light) {
   body:not(.dark-mode) {
     @include light.light-theme-vars();
@@ -130,104 +150,73 @@ body {
   @include tokens.apply-typography();
 }
 
-// ============================================================================
-// CUSTOM COMPONENT STYLES
-// ============================================================================
 
-// angular.dev inspired card styles
-.angular-dev-card {
-  background: var(--surface-secondary);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--animation-duration-standard) var(--animation-easing);
 
-  &:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
 
-  &.elevated {
-    box-shadow: var(--shadow-lg);
-  }
-}
 
-// angular.dev inspired button styles
-.angular-dev-button {
-  background: var(--gradient-primary);
-  border: none;
-  border-radius: var(--border-radius-md);
-  color: white;
-  font-weight: 500;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  transition: all var(--animation-duration-standard) var(--animation-easing);
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  &.secondary {
-    background: var(--interactive-secondary);
-    color: var(--text-primary);
-
-    &:hover {
-      background: var(--interactive-secondary-hover);
-    }
-  }
-}
-
-// angular.dev inspired surface styles
-.angular-dev-surface {
-  background: var(--surface-primary);
+.text-primary {
   color: var(--text-primary);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
 }
 
-// Code block styling
-.angular-dev-code {
-  background: var(--code-background);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-md);
-  font-family: var(--font-family-mono);
-  padding: var(--spacing-md);
-
-  .keyword { color: var(--code-keyword); }
-  .string { color: var(--code-string); }
-  .comment { color: var(--code-comment); }
-  .function { color: var(--code-function); }
-  .number { color: var(--code-number); }
+.text-secondary {
+  color: var(--text-secondary);
 }
 
-// ============================================================================
-// UTILITY CLASSES
-// ============================================================================
+.text-tertiary {
+  color: var(--text-tertiary);
+}
 
-// Text utilities
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-tertiary { color: var(--text-tertiary); }
-.text-accent { color: var(--accent-color); }
+.text-accent {
+  color: var(--accent-color);
+}
 
 // Background utilities
-.bg-primary { background: var(--background-primary); }
-.bg-secondary { background: var(--background-secondary); }
-.bg-surface { background: var(--surface-secondary); }
+.bg-primary {
+  background: var(--background-primary);
+}
+
+.bg-secondary {
+  background: var(--background-secondary);
+}
+
+.bg-surface {
+  background: var(--surface-secondary);
+}
 
 // Border utilities
-.border-primary { border-color: var(--border-primary); }
-.border-secondary { border-color: var(--border-secondary); }
+.border-primary {
+  border-color: var(--border-primary);
+}
+
+.border-secondary {
+  border-color: var(--border-secondary);
+}
 
 // Shadow utilities
-.shadow-sm { box-shadow: var(--shadow-sm); }
-.shadow-md { box-shadow: var(--shadow-md); }
-.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
 
 // Animation utilities
-.transition-fast { transition-duration: var(--animation-duration-fast); }
-.transition-standard { transition-duration: var(--animation-duration-standard); }
-.transition-slow { transition-duration: var(--animation-duration-slow); }
+.transition-fast {
+  transition-duration: var(--animation-duration-fast);
+}
+
+.transition-standard {
+  transition-duration: var(--animation-duration-standard);
+}
+
+.transition-slow {
+  transition-duration: var(--animation-duration-slow);
+}
 
 // ============================================================================
 // RESPONSIVE BREAKPOINTS
@@ -256,6 +245,7 @@ $breakpoints: (
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -267,6 +257,7 @@ $breakpoints: (
     opacity: 0;
     transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -274,9 +265,12 @@ $breakpoints: (
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }

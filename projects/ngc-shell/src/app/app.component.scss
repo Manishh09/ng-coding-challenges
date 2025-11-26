@@ -22,7 +22,8 @@
   flex-direction: column;
   width: 100%;
   overflow-y: auto;
-  min-height: calc(100vh - var(--header-height));
+  height: 100vh;
+  //min-height: calc(100vh - var(--header-height));
   animation: fadeIn 0.3s var(--animation-easing);
 
   // Ensure proper spacing and responsiveness

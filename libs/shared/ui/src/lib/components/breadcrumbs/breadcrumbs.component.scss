@@ -17,9 +17,26 @@
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s ease;
+        border-radius: 1px;
+    }
 
     &:hover {
         color: var(--color-primary);
+
+        &::after {
+            width: 100%;
+        }
     }
 }
 

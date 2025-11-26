@@ -6,8 +6,8 @@
   right: 0;
   z-index: 1100;
   background: var(--surface-secondary);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
   box-shadow: 0 1px 0 var(--border-primary);
   padding: 0;
   height: var(--header-height);

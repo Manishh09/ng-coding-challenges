@@ -22,6 +22,7 @@ import { Challenge } from '@ng-coding-challenges/shared/models';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
 import { ChallengeCardComponent } from '../challenge-card/challenge-card.component';
+import { FooterComponent, FooterLink } from '../footer/footer.component';
 
 @Component({
   selector: 'app-challenges-browser',
@@ -35,6 +36,7 @@ import { ChallengeCardComponent } from '../challenge-card/challenge-card.compone
     SearchBarComponent,
     CategorySidebarComponent,
     ChallengeCardComponent,
+    FooterComponent,
   ],
   templateUrl: './challenges-browser.component.html',
   styleUrl: './challenges-browser.component.scss',
@@ -180,5 +182,23 @@ export class ChallengesBrowserComponent {
       queryParams: { search: null },
       queryParamsHandling: 'merge',
     });
+  }
+
+  // Footer logic
+  readonly appName = 'ngQuest';
+
+  onFooterLinkClick(link: FooterLink): void {
+    if (link.section) {
+      if (link.section === 'challenges') {
+        // Already on challenges, maybe reset filters?
+        this.onChallengeSearchClear();
+        return;
+      }
+      this.router.navigate(['/']);
+      return;
+    }
+    if (link.url) {
+      this.router.navigateByUrl(link.url);
+    }
   }
 }
