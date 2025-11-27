@@ -69,6 +69,21 @@
   --header-height-mobile: 56px;
 
   // ============================================================================
+  // CONTENT MAX-WIDTHS (Container Standards)
+  // ============================================================================
+  
+  // Pixel-based max-widths
+  --max-width-reading: 800px;      // Text-heavy pages (optimal reading, 60-75 chars)
+  --max-width-content: 1200px;     // Standard app content (forms, mixed content)
+  --max-width-wide: 1440px;        // Wide layouts (grids, dashboards, browser)
+  --max-width-section: 1280px;     // Landing page sections (Material Design standard)
+  
+  // Character-based constraints (for optimal reading)
+  --max-width-text-narrow: 65ch;   // ~60-70 characters per line
+  --max-width-text-normal: 75ch;   // ~70-80 characters per line
+  --max-width-text-wide: 85ch;     // ~80-90 characters per line
+
+  // ============================================================================
   // STATUS & SEMANTIC COLORS
   // ============================================================================
 

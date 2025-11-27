@@ -68,12 +68,23 @@
 
 // Desktop header
 .content-header {
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-md);
+  max-width: var(--max-width-wide); // 1440px - match content container
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-2xl) var(--spacing-md); // Match content container padding
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
   position: sticky;
   top: var(--header-height);
   z-index: 10;
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm); // 16px horizontal mobile
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-md); // 32px horizontal tablet
+  }
 
   .header-info {
     margin-bottom: 0;
@@ -114,37 +125,51 @@
 // Content container
 .content-container {
   flex: 1;
-  padding: var(--spacing-xl);
+  max-width: var(--max-width-wide); // 1440px - optimal for grid layouts
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--spacing-2xl); // 48px all sides desktop
   overflow: visible; // Allow hover effects to show without clipping
 
-  @media (max-width: 767px) {
-    padding: var(--spacing-md);
+  @media (max-width: 768px) {
+    padding: var(--spacing-md); // 16px mobile
     margin-top: 64px; // Mobile top bar height
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-xl); // 32px tablet
   }
 }
 
 // Challenges grid
 .challenges-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: var(--spacing-xl);
   animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
   width: 100%;
   align-items: start; // Align cards to top of grid cells
-  padding: 6px 0; // Extra padding to prevent card hover clipping
+  padding: 8px 0; // Extra padding to prevent card hover clipping
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
+    padding: 6px 0;
   }
 
-  @media (min-width: 768px) and (max-width: 1199px) {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  @media (min-width: 768px) and (max-width: 1023px) {
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: var(--spacing-lg);
   }
 
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+    gap: var(--spacing-2xl);
   }
 }
 

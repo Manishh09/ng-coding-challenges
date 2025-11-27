@@ -116,4 +116,16 @@ export class ChallengeCategoryService {
     this._categorySearchTerm.set('');
   }
 
+  /**
+   * Updates all categories with their respective challenge counts.
+   * @param countMap - Map of category ID to challenge count
+   */
+  updateAllChallengeCounts(countMap: Map<string, number>): void {
+    const updatedCategories = this._categories().map(category => ({
+      ...category,
+      challengeCount: countMap.get(category.id) || 0
+    }));
+    this._categories.set(updatedCategories);
+  }
+
 }

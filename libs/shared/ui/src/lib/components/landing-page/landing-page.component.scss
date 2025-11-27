@@ -9,7 +9,7 @@
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(4rem, 8vw, 6rem) var(--spacing-2xl);
+  padding: clamp(4rem, 8vw, 6rem) var(--spacing-2xl); // 48px horizontal desktop
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
   background: var(--brand-gradient-hero);
   color: var(--color-white-alpha-90);
@@ -43,6 +43,8 @@
 .hero-shell {
   position: relative;
   z-index: 1;
+  max-width: var(--max-width-section); // 1280px - standard for landing page sections
+  margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
   align-items: center;
@@ -302,7 +304,9 @@
 .metrics-section,
 .featured-section,
 .latest-section {
-  padding: 0 var(--spacing-2xl);
+  max-width: var(--max-width-section); // 1280px - standard for landing page sections
+  // margin: 0 auto;
+  padding: 0 var(--spacing-3xl); // 48px horizontal desktop for content sections
 }
 
 .metrics-grid {
@@ -430,6 +434,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
 }
 
 .latest-card {

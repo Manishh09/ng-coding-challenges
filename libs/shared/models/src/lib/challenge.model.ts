@@ -44,10 +44,11 @@ export interface ChallengeDetails extends Challenge {
   longDescription: string;
   learningOutcomes: string[];
   techStack: string[];
-  requirement: string;
+  requirementDoc: string;
   solutionGuide: string;
   gitHub: string;
   author: Author;
   estimatedTime?: string;
   prerequisites?: string[];
+  requirementsList?: string[];
 }

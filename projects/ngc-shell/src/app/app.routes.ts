@@ -42,6 +42,7 @@ export const routes: Routes = [
             loadChildren: () =>
               import('@ngc-routing').then(m => m.NGC_ROUTING_ROUTES),
           },
+
         ],
       },
 
@@ -57,9 +58,13 @@ export const routes: Routes = [
     ],
   },
 
+  // If not found
   {
     path: '**',
-    redirectTo: '',
+    loadComponent: () =>
+      import('@ng-coding-challenges/shared/ui').then(
+        m => m.ChallengeNotFoundComponent
+      ),
   },
 ];
 

@@ -1,10 +1,10 @@
 @if (challengeDetails(); as c) {
 <div class="challenge-details-container fade-in">
     <!-- Back Button -->
-    <button mat-button class="back-button" (click)="goBack()" aria-label="Go back to challenges list">
+    <!-- <button mat-button class="back-button" (click)="goBack()" aria-label="Go back to challenges list">
         <mat-icon>arrow_back</mat-icon>
         <span>Back to {{ categoryName() }} Challenges</span>
-    </button>
+    </button> -->
 
     <!-- Breadcrumbs Component -->
     <ng-coding-challenges-breadcrumbs [items]="breadcrumbItems()" />
@@ -37,14 +37,13 @@
             <section class="section requirements">
                 <h2>Requirements</h2>
                 <mat-divider></mat-divider>
-                <ul class="requirements-list">
-                    <li>Implement a service to manage the list of tasks using a <code>signal</code>.</li>
-                    <li>Create a component to display the list of tasks. Each task should have a "complete" button.</li>
-                    <li>Use a <code>computed</code> signal to calculate and display the number of remaining tasks.</li>
-                    <li>When a task is marked as complete, update the signal's state and ensure the UI reflects the
-                        change.</li>
+                @for(req of c.requirementsList; track req) {
+                 <ul class="requirements-list">
+                    <li>{{ req }}</li>
                 </ul>
-                <a [href]="c.requirement" target="_blank" class="requirements-link">
+                }
+                 
+                <a [href]="c.requirementDoc" target="_blank" class="requirements-link">
                     <span>See full requirements doc</span>
                     <mat-icon>arrow_forward</mat-icon>
                 </a>

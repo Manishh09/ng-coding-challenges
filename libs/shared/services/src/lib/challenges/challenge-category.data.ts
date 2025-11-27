@@ -21,7 +21,7 @@ export const CHALLENGE_CATEGORIES = [
     id: 'angular-routing',
     name: 'Angular Routing',
     description: 'Routing, guards, lazy loading',
-    challengeCount: 2
+    challengeCount: 0
   }
 
   // Add future categories here..

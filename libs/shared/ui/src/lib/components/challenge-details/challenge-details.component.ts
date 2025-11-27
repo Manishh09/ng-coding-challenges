@@ -93,6 +93,7 @@ export class ChallengeDetailsComponent {
     return id !== null && !challenge;
   });
 
+  // Unused - Remove Later
   goBack(): void {
     const c = this.challengeDetails();
     if (c) {

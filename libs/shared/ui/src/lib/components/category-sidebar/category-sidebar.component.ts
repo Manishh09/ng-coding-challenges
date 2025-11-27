@@ -6,7 +6,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatRippleModule } from '@angular/material/core';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-category-sidebar',
@@ -17,7 +16,6 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
     MatButtonModule,
     MatBadgeModule,
     MatRippleModule,
-    SearchBarComponent,
   ],
   templateUrl: './category-sidebar.component.html',
   styleUrl: './category-sidebar.component.scss',
@@ -43,14 +41,6 @@ export class CategorySidebarComponent {
   readonly hasNoResults: Signal<boolean> = computed(
     () => this.filteredCategories().length === 0
   );
-
-  onSearchChange(term: string): void {
-    this.categoryService.setCategorySearchTerm(term);
-  }
-
-  onSearchClear(): void {
-    this.categoryService.clearCategorySearch();
-  }
 
   selectCategory(categoryId: string): void {
     this.categoryService.setSelectedCategory(categoryId);

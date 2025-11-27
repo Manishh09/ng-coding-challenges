@@ -12,22 +12,23 @@
 }
 
 .challenge-details-container {
-    max-width: 1400px;
+    max-width: var(--max-width-section);
+    padding: var(--spacing-2xl); // 1200px - optimal for reading + sidebar
     margin: 0 auto;
-    padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-4xl);
+    padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-2xl) var(--spacing-2xl); // 48px horizontal desktop
     animation: fadeIn 0.4s var(--animation-easing);
 
     @media (max-width: 768px) {
-        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-3xl);
+        padding: var(--spacing-lg) var(--spacing-md) var(--spacing-3xl); // 16px horizontal mobile
     }
 
     @media (min-width: 769px) and (max-width: 1023px) {
-        padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-3xl);
+        padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-3xl); // 32px horizontal tablet
     }
 }
 
 /* ==========================================
-   Back Button
+   Back Button - UnUsed Remove Later
    ========================================== */
 .back-button {
     display: inline-flex;

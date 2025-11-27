@@ -110,6 +110,10 @@ export class ChallengesBrowserComponent {
   readonly isChildRouteActive = signal<boolean>(false);
 
   constructor() {
+    // Initialize challenge counts for all categories
+    const challengeCountMap = this.challengesService.getChallengeCountByCategory();
+    this.categoryService.updateAllChallengeCounts(challengeCountMap);
+
     // Monitor breakpoint changes for responsive behavior
     this.breakpointObserver
       .observe([Breakpoints.HandsetPortrait, '(max-width: 767px)'])

@@ -147,12 +147,17 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Implement loading and error states'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-01-product-list/docs/CH-01-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-01-product-list/docs/CH-01-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-01-product-list/docs/CH-01-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-01-product-list`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '30-45 minutes',
-    prerequisites: ['Basic Angular knowledge', 'TypeScript fundamentals']
+    prerequisites: ['Basic Angular knowledge', 'TypeScript fundamentals'],
+    requirementsList: [
+      'Create a service using HttpClient to fetch products from the Fake Store API endpoint: https://fakestoreapi.com/products.',
+      'Develop a component to display the list of products in a table format with columns for Product Name, Price, and Category.',
+      'Implement loading indicators while fetching data and error handling for failed requests.'
+    ]
   },
 
   2: {
@@ -170,12 +175,18 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Optimize API call performance'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-02-parallel-apis/docs/CH-02-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-02-parallel-apis/docs/CH-02-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-02-parallel-apis/docs/CH-02-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-02-parallel-apis`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '45-60 minutes',
-    prerequisites: ['Challenge 01 completed', 'Understanding of Observables']
+    prerequisites: ['Challenge 01 completed', 'Understanding of Observables'],
+    requirementsList: [
+      'Fetch product statistics from /products/stats endpoint.',
+      'Fetch recent orders from /orders/recent endpoint.',
+      'Fetch user activity data from /users/activity endpoint.',
+      'Combine all fetched data and display in a unified dashboard view.'
+    ]
   },
 
   3: {
@@ -192,12 +203,18 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Build responsive search interfaces'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-03-client-side-search/docs/CH-03-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-03-client-side-search/docs/CH-03-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-03-client-side-search/docs/CH-03-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-03-client-side-search`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '40-50 minutes',
-    prerequisites: ['Reactive Forms basics', 'Array manipulation in JavaScript']
+    prerequisites: ['Reactive Forms basics', 'Array manipulation in JavaScript'],
+    requirementsList: [
+      'Implement a search form using Angular Reactive Forms.',
+      'Fetch product data from the API based on user input.',
+      'Debounce user input to optimize API calls.',
+      'Display search results in real-time as the user types.'
+    ]
   },
 
   4: {
@@ -215,12 +232,18 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Optimize API call frequency'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-04-server-side-search/docs/CH-04-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-04-server-side-search/docs/CH-04-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-04-server-side-search/docs/CH-04-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-04-server-side-search`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '60-75 minutes',
-    prerequisites: ['Challenge 03 completed', 'Understanding of RxJS operators']
+    prerequisites: ['Challenge 03 completed', 'Understanding of RxJS operators'],
+    requirementsList: [
+      'Implement a search form using Angular Reactive Forms.',
+      'Fetch product data from the API based on user input.',
+      'Debounce user input to optimize API calls.',
+      'Display search results in real-time as the user types.'
+    ]
   },
 
   5: {
@@ -238,12 +261,19 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Build reactive component architectures'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-05-product-category-management-system/docs/CH-05-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-05-product-category-management-system`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '60-90 minutes',
-    prerequisites: ['Understanding of Signals', 'RxJS multicasting concepts']
+    prerequisites: ['Understanding of Signals', 'RxJS multicasting concepts'],
+    requirementsList: [
+      'Implement data caching with shareReplay',
+      'Share data across multiple components',
+      'Integrate Angular Signals with RxJS',
+      'Optimize API call performance',
+      'Build reactive component architectures'
+    ]
   },
 
   6: {
@@ -260,12 +290,18 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Build complex reactive data flows'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-06-user-todos-filter/docs/CH-06-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-06-user-todos-filter`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '75-90 minutes',
-    prerequisites: ['Understanding of combineLatest', 'Data transformation skills']
+    prerequisites: ['Understanding of combineLatest', 'Data transformation skills'],
+    requirementsList: [
+      'Fetch todos from /todos endpoint and users from /users endpoint.',
+      'Combine the data to create an enriched todo list with user names.',
+      'Implement a status filter to view All, Completed, and Pending todos.',
+      'Display the enriched and filtered todo list in a table format.'
+    ]
   },
 
   7: {
@@ -283,12 +319,16 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Optimize nested request patterns'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-07-dependent-apis/docs/CH-07-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-07-dependent-apis`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '90-120 minutes',
-    prerequisites: ['Understanding of higher-order observables', 'Advanced RxJS operators']
+    prerequisites: ['Understanding of higher-order observables', 'Advanced RxJS operators'],
+    requirementsList: [
+      'Fetch the list of users from /users endpoint.',
+      'For each user, fetch their posts from /posts?userId={userId} endpoint.',
+    ]
   },
 
   8: {
@@ -306,12 +346,19 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Build state machines with RxJS'
     ],
     techStack: COMMON_TECH_STACK.rxjsApi,
-    requirement: `${NGC_RXJS_API}/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md`,
+    requirementDoc: `${NGC_RXJS_API}/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md`,
     solutionGuide: `${NGC_RXJS_API}/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_RXJS_API}/challenge-08-ecommerce-checkout`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '120-150 minutes',
-    prerequisites: ['All previous RxJS challenges', 'Understanding of concatMap vs mergeMap']
+    prerequisites: ['All previous RxJS challenges', 'Understanding of concatMap vs mergeMap'],
+    requirementsList: [
+      'Create a multi-step checkout form with steps for Cart Review, Shipping Info, Payment Info, and Order Confirmation.',
+      'On form submission, perform the following API calls in sequence using concatMap:', 
+      '- Validate Cart: POST /checkout/validate',
+      '- Process Payment: POST /checkout/payment',
+      '- Confirm Order: POST /checkout/confirm',
+    ]
   },
 
   9: {
@@ -329,12 +376,17 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Handle component lifecycle with Signals'
     ],
     techStack: COMMON_TECH_STACK.core,
-    requirement: `${NGC_CORE}/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md`,
+    requirementDoc: `${NGC_CORE}/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md`,
     solutionGuide: `${NGC_CORE}/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_CORE}/challenge-09-component-communication`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '60-75 minutes',
-    prerequisites: ['Angular Signals basics', 'Standalone components']
+    prerequisites: ['Angular Signals basics', 'Standalone components'],
+    requirementsList: [
+      'Create a parent component that holds a list of products as a Signal.',
+      'Develop a child component to display individual product details, receiving data via input().',
+      'Implement an output() function in the child component to notify the parent when a product is selected.',
+    ]
   },
 
   10: {
@@ -352,12 +404,18 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Manage authentication state'
     ],
     techStack: COMMON_TECH_STACK.routing,
-    requirement: `${NGC_ROUTING}/challenge-10-authorized-resource-access/docs/CH-10-REQUIREMENT.md`,
+    requirementDoc: `${NGC_ROUTING}/challenge-10-authorized-resource-access/docs/CH-10-REQUIREMENT.md`,
     solutionGuide: `${NGC_ROUTING}/challenge-10-authorized-resource-access/docs/CH-10-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_ROUTING}/challenge-10-authorized-resource-access`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '90-120 minutes',
-    prerequisites: ['Angular Router basics', 'Understanding of guards']
+    prerequisites: ['Angular Router basics', 'Understanding of guards'],
+    requirementsList: [
+      'Create a simple login form that updates an authentication Signal upon successful login.',
+      'Implement a canActivate guard that checks the authentication Signal to allow or deny access to protected routes.',
+      'Set up routes for Login, Dashboard (protected), and Public pages.',
+      'Ensure unauthorized users are redirected to the Login page when trying to access protected routes.'
+    ]
   },
 
   11: {
@@ -375,11 +433,17 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
       'Implement redirect strategies'
     ],
     techStack: COMMON_TECH_STACK.routing,
-    requirement: `${NGC_ROUTING}/challenge-11-admin-dashboard-access/docs/CH-11-REQUIREMENT.md`,
+    requirementDoc: `${NGC_ROUTING}/challenge-11-admin-dashboard-access/docs/CH-11-REQUIREMENT.md`,
     solutionGuide: `${NGC_ROUTING}/challenge-11-admin-dashboard-access/docs/CH-11-SOLUTION_GUIDE.md`,
     gitHub: `${NGC_ROUTING}/challenge-11-admin-dashboard-access`,
     author: DEFAULT_AUTHOR,
     estimatedTime: '120-150 minutes',
-    prerequisites: ['Challenge 10 completed', 'Advanced routing concepts']
+    prerequisites: ['Challenge 10 completed', 'Advanced routing concepts'],
+    requirementsList: [
+      'Create a user authentication system that assigns roles (e.g., admin, user) upon login.',
+      'Implement a canActivate guard that checks the user role Signal to allow or deny access to admin routes.',
+      'Set up routes for Admin Dashboard (protected), User Dashboard (protected), and Public pages.',
+      'Ensure users without the admin role are redirected to an Unauthorized page when trying to access admin routes.'
+    ]
   }
 };
