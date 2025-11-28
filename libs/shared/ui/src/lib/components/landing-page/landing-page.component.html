@@ -7,7 +7,7 @@
       <div class="hero-copy">
         <p class="hero-eyebrow">Angular learning playground</p>
         <h1 id="hero-title" class="hero-title">
-          Master production-ready Angular with <span>ngQuest</span>
+          Master production-ready Angular with  <span>ng<span class="highlight-q">Q</span>uest</span>
         </h1>
 
         <p class="intro-text">
@@ -33,49 +33,36 @@
             class="btn btn-primary"
             type="button"
             (click)="onGetStarted()"
-            aria-describedby="cta-get-started"
+            aria-label="Start the guided path - Begin the onboarding guide to learn the platform"
           >
-            Start the guided path
+            <span>Start the guided path</span>
           </button>
-          <span id="cta-get-started" class="visually-hidden">
-            Begin the onboarding guide to learn the platform.
-          </span>
 
           <button
             class="btn btn-outline"
             type="button"
             (click)="onExploreChallenges()"
-            aria-describedby="cta-explore"
+            aria-label="Browse challenges - View all Angular challenge categories"
           >
-            Browse challenges
+            <span>Browse challenges</span>
             <mat-icon aria-hidden="true">arrow_outward</mat-icon>
           </button>
-          <span id="cta-explore" class="visually-hidden">
-            View all Angular challenge categories.
-          </span>
 
           <button
             class="btn btn-ghost"
             type="button"
             (click)="goToLatestChallenge()"
-            aria-describedby="cta-latest"
+            aria-label="Latest launch - Jump directly to the most recent Angular challenge"
           >
-            Latest launch
+            <span>Latest launch</span>
             <mat-icon aria-hidden="true">rocket_launch</mat-icon>
           </button>
-          <span id="cta-latest" class="visually-hidden">
-            Jump directly to the most recent Angular challenge.
-          </span>
         </div>
 
-        <div class="hero-stats" role="list" aria-label="Platform stats">
-          @for(stat of heroStatItems; track stat.label) {
-          <div class="hero-stat" role="listitem">
-            <span class="hero-stat__value">{{ stat.value }}</span>
-            <span class="hero-stat__label">{{ stat.label }}</span>
-          </div>
-          }
-        </div>
+        <ng-coding-challenges-hero-stats
+          [stats]="heroStatItems"
+          ariaLabel="Platform stats"
+        />
       </div>
 
       <div class="hero-visual" aria-hidden="true">
@@ -116,29 +103,22 @@
     aria-labelledby="metrics-title"
     role="region"
   >
-    <div class="section-heading">
-      <p class="section-eyebrow">Why teams choose ngQuest</p>
-      <h2 id="metrics-title">
-        Ship Angular features faster with focused practice
-      </h2>
-      <p class="section-summary">
-        Each challenge mirrors a production use-case and pairs it with solution
-        guides so you can understand the why, not just the how.
-      </p>
-    </div>
+    <ng-coding-challenges-section-header
+      eyebrow="Why teams choose ngQuest"
+      heading="Ship Angular features faster with focused practice"
+      summary="Each challenge mirrors a production use-case and pairs it with solution
+        guides so you can understand the why, not just the how."
+      headingId="metrics-title"
+    />
 
     <div class="metrics-grid">
       @for (metric of metrics; track metric.label) {
-      <article class="metric-card">
-        <div class="metric-icon" aria-hidden="true">
-          <mat-icon>{{ metric.icon }}</mat-icon>
-        </div>
-        <div class="metric-content">
-          <span class="metric-value">{{ metric.value }}</span>
-          <h3 class="metric-label">{{ metric.label }}</h3>
-          <p class="metric-helper">{{ metric.helper }}</p>
-        </div>
-      </article>
+        <ng-coding-challenges-metric-card
+          [icon]="metric.icon"
+          [value]="metric.value"
+          [label]="metric.label"
+          [helper]="metric.helper"
+        />
       }
     </div>
   </section>
@@ -148,38 +128,27 @@
     aria-labelledby="featured-title"
     role="region"
   >
-    <div class="section-heading">
-      <p class="section-eyebrow">Curated learning paths</p>
-      <h2 id="featured-title">Pick a track and go deep</h2>
-      <p class="section-summary">
-        Choose the Angular skill you want to master and follow a focused path of
-        challenges with increasing difficulty.
-      </p>
-    </div>
+    <ng-coding-challenges-section-header
+      eyebrow="Curated learning paths"
+      heading="Pick a track and go deep"
+      summary="Choose the Angular skill you want to master and follow a focused path of
+        challenges with increasing difficulty."
+      headingId="featured-title"
+    />
 
     <div class="featured-grid">
       @for (track of featuredTracks; track track.id) {
-      <button
-        type="button"
-        class="featured-card"
-        (click)="navigateToCategory(track.id)"
-        [attr.aria-label]="'Open ' + track.title + ' challenges'"
-      >
-        <div class="featured-card__header">
-          <div class="featured-icon" aria-hidden="true">
-            <mat-icon>{{ track.icon }}</mat-icon>
-          </div>
-          <span class="featured-count">{{ track.count }} challenges</span>
-        </div>
-        <h3>{{ track.title }}</h3>
-        <p>{{ track.description }}</p>
-        <span class="featured-cta">
-          Explore track
-          <mat-icon aria-hidden="true">chevron_right</mat-icon>
-        </span>
-      </button>
+        <ng-coding-challenges-feature-card
+          [icon]="track.icon"
+          [count]="track.count"
+          [title]="track.title"
+          [description]="track.description"
+          ctaText="Explore track"
+          [ariaLabel]="'Open ' + track.title + ' challenges'"
+          (cardClick)="navigateToCategory(track.id)"
+        />
       } @empty {
-      <p class="empty-state">New challenge tracks are on the way.</p>
+        <p class="empty-state">New challenge tracks are on the way.</p>
       }
     </div>
   </section>
@@ -189,37 +158,28 @@
     aria-labelledby="latest-title"
     role="region"
   >
-    <div class="section-heading">
-      <p class="section-eyebrow">Fresh drops</p>
-      <h2 id="latest-title">Launch the latest Angular challenges</h2>
-      <p class="section-summary">
-        Stay sharp with new problems sourced from real client work and Angular
-        community questions.
-      </p>
-    </div>
+    <ng-coding-challenges-section-header
+      eyebrow="Fresh drops"
+      heading="Launch the latest Angular challenges"
+      summary="Stay sharp with new problems sourced from real client work and Angular
+        community questions."
+      headingId="latest-title"
+    />
 
     <div class="latest-grid">
       @for (challenge of latestChallenges; track challenge.id) {
-      <article class="latest-card">
-        <div class="latest-card__pill">{{ challenge.categoryLabel }}</div>
-        <h3>{{ challenge.title }}</h3>
-        <p>{{ challenge.description }}</p>
-        <div class="latest-card__actions">
-          <button
-            mat-stroked-button
-            color="primary"
-            type="button"
-            (click)="launchChallenge(challenge.route)"
-          >
-            Launch challenge
-            <mat-icon aria-hidden="true">rocket_launch</mat-icon>
-          </button>
-        </div>
-      </article>
+        <ng-coding-challenges-latest-card
+          [categoryLabel]="challenge.categoryLabel"
+          [title]="challenge.title"
+          [description]="challenge.description"
+          buttonText="Launch challenge"
+          buttonIcon="rocket_launch"
+          (actionClick)="launchChallenge(challenge.route)"
+        />
       } @empty {
-      <div class="empty-state">
-        <p>No recent challenges right now. Check back soon!</p>
-      </div>
+        <div class="empty-state">
+          <p>No recent challenges right now. Check back soon!</p>
+        </div>
       }
     </div>
   </section>

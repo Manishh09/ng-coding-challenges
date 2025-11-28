@@ -34,6 +34,16 @@ export * from './lib/components/error-boundary/error-boundary.component';
 export * from './lib/components/skip-links/skip-links.component';
 
 /**
+ * Reusable Landing Page Components
+ * Composable UI components extracted from landing page patterns
+ */
+export * from './lib/components/section-header/section-header.component';
+export * from './lib/components/metric-card/metric-card.component';
+export * from './lib/components/feature-card/feature-card.component';
+export * from './lib/components/latest-card/latest-card.component';
+export * from './lib/components/hero-stats/hero-stats.component';
+
+/**
  * Pipes
  * Reusable transformation pipes
  */

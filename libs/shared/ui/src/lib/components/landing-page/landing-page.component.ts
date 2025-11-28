@@ -14,6 +14,11 @@ import {
   NotificationService,
 } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
+import { SectionHeaderComponent } from '../section-header/section-header.component';
+import { HeroStatsComponent } from '../hero-stats/hero-stats.component';
+import { MetricCardComponent } from '../metric-card/metric-card.component';
+import { FeatureCardComponent } from '../feature-card/feature-card.component';
+import { LatestCardComponent } from '../latest-card/latest-card.component';
 
 type LandingMetric = {
   icon: string;
@@ -57,6 +62,11 @@ const ROUTES = {
     RouterModule,
     MatIconModule,
     MatButtonModule,
+    SectionHeaderComponent,
+    HeroStatsComponent,
+    MetricCardComponent,
+    FeatureCardComponent,
+    LatestCardComponent
   ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
@@ -71,7 +81,7 @@ export class LandingPageComponent {
 
   // ========== Inputs ==========
   /** Hero illustration image path (configurable) */
-  readonly heroIllustration = input<string>('/coding-window.webp');
+  readonly heroIllustration = input<string>('/angular-mascot.webp');
 
   /** Hero illustration alt text for accessibility */
   readonly heroAltText = input<string>('Developer coding illustration');

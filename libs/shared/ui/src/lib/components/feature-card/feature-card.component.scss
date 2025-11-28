@@ -1,0 +1,195 @@
+@use '../../styles/theme' as theme;
+
+/**
+ * FeatureCard Component Styles
+ * 
+ * Interactive button-based card for features, tracks, and categories.
+ * Uses Material Design 3 principles with responsive design and accessibility.
+ */
+
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl);
+  background: var(--surface-container);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--animation-duration-normal) var(--animation-easing);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+ box-shadow: var(--shadow-md);
+  // Remove default button styles
+  appearance: none;
+  font-family: inherit;
+  color: inherit;
+
+  // Hover state
+  &:hover:not(:disabled) {
+    border-color: var(--color-primary);
+   
+    transform: translateY(-4px);
+
+    .featured-icon mat-icon {
+      transform: scale(1.1);
+    }
+
+    .featured-cta mat-icon {
+      transform: translateX(4px);
+    }
+  }
+
+  // Focus state
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  // Active state
+  &:active:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  // Disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.featured-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.featured-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--color-primary-alpha-10);
+  border-radius: var(--border-radius-md);
+  color: var(--color-primary);
+
+  mat-icon {
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    transition: transform var(--animation-duration-fast) var(--animation-easing);
+  }
+}
+
+.featured-count {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.featured-card__title {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.featured-card__description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1; // Push CTA to bottom
+}
+
+.featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: auto;
+
+  mat-icon {
+    font-size: 1.125rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    transition: transform var(--animation-duration-fast) var(--animation-easing);
+  }
+}
+
+// ========================================
+// Responsive Design
+// ========================================
+
+// Tablet and up
+@include theme.respond-to('tablet') {
+  .featured-card {
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+
+  .featured-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    mat-icon {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .featured-card__title {
+    font-size: 1.375rem;
+  }
+
+  .featured-card__description {
+    font-size: 1rem;
+  }
+}
+
+// Desktop
+@include theme.respond-to('desktop') {
+  .featured-card {
+    &:hover:not(:disabled) {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+}
+
+// ========================================
+// Accessibility
+// ========================================
+
+// Reduce motion
+@media (prefers-reduced-motion: reduce) {
+  .featured-card,
+  .featured-icon mat-icon,
+  .featured-cta mat-icon {
+    transition: none;
+  }
+
+  .featured-card:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .featured-card {
+    border-width: 2px;
+  }
+
+  .featured-icon {
+    border: 1px solid currentColor;
+  }
+}
