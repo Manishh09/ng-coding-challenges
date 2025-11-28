@@ -359,7 +359,8 @@
 }
 
 .launch-card {
-    background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover));
+    background: var(--gradient-primary);
+    //background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover));
     border: none;
     border-radius: var(--border-radius-xl);
     padding: var(--spacing-2xl);
