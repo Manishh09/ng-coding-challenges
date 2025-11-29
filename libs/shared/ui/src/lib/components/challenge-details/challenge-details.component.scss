@@ -359,8 +359,6 @@
 }
 
 .launch-card {
-    background: var(--gradient-primary);
-    //background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover));
     border: none;
     border-radius: var(--border-radius-xl);
     padding: var(--spacing-2xl);
@@ -374,8 +372,7 @@
         font-size: var(--font-size-lg);
         font-weight: var(--font-weight-bold);
         margin-bottom: var(--spacing-md);
-        background: white !important;
-        color: var(--interactive-primary) !important;
+        background: var(--gradient-primary) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         transition: transform var(--animation-duration-fast) var(--animation-easing),
                     box-shadow var(--animation-duration-fast) var(--animation-easing);
@@ -395,7 +392,7 @@
 
     .launch-hint {
         font-size: var(--font-size-sm);
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--text-secondary);
         margin: 0;
         font-weight: var(--font-weight-medium);
     }

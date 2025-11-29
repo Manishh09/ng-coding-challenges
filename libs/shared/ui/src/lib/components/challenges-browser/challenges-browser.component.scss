@@ -4,7 +4,7 @@
   display: flex;
   //min-height: calc(100vh - var(--header-height));
   background: var(--background-secondary);
-  height: 100dvh;
+
 }
 
 // Main content area
@@ -12,7 +12,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100dvh;//calc(100vh - var(--header-height));
   overflow-y: auto;
   overflow-x: hidden;
   transition: margin-left var(--animation-duration-standard) var(--animation-easing);
@@ -20,6 +19,7 @@
   // Shifted for sidebar on desktop
   &.shifted {
     margin-left: 280px;
+    gap: var(--spacing-3xl);
   }
 
   // Custom scrollbar
@@ -70,7 +70,7 @@
 .content-header {
   max-width: var(--max-width-wide); // 1440px - match content container
   margin: 0 auto;
-  width: 100%;
+  width: calc(100vw - 280px);
   padding: var(--spacing-xl) var(--spacing-2xl) var(--spacing-md); // Match content container padding
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
@@ -127,17 +127,17 @@
   flex: 1;
   max-width: var(--max-width-wide); // 1440px - optimal for grid layouts
   margin: 0 auto;
-  width: 100%;
-  padding: var(--spacing-2xl); // 48px all sides desktop
+  width: calc(100vw - 360px);
+  padding: var(--spacing-2xl) var(--spacing-2xl) calc(var(--spacing-2xl) + 16px); // Extra bottom padding for scroll clearance
   overflow: visible; // Allow hover effects to show without clipping
 
   @media (max-width: 768px) {
-    padding: var(--spacing-md); // 16px mobile
+    padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 16px); // Match header's mobile padding (16px)
     margin-top: 64px; // Mobile top bar height
   }
 
   @media (min-width: 769px) and (max-width: 1023px) {
-    padding: var(--spacing-xl); // 32px tablet
+    padding: var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 16px); // Match header's tablet padding (32px)
   }
 }
 
@@ -149,27 +149,30 @@
   animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
   width: 100%;
   align-items: start; // Align cards to top of grid cells
-  padding: 8px 0; // Extra padding to prevent card hover clipping
+  padding: 12px 4px; // Increased padding to prevent card hover clipping and scrollbar cut-off
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
-    padding: 6px 0;
+    padding: 10px 2px;
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: var(--spacing-lg);
+    padding: 12px 4px;
   }
 
   @media (min-width: 1024px) and (max-width: 1439px) {
     grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
     gap: var(--spacing-xl);
+    padding: 12px 4px;
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
     gap: var(--spacing-2xl);
+    padding: 12px 4px;
   }
 }
 

@@ -52,6 +52,20 @@ export class ChallengeCardComponent implements OnInit {
       !!this.challenge().gitHub
   );
 
+  // Extract challenge ID from title (e.g., "Challenge 01" from "Challenge 01: Fetch Products")
+  readonly challengeIdText = computed(() => {
+    const title = this.challenge().title;
+    const match = title.match(/^(Challenge\s+\d+):/i);
+    return match ? match[1] : `Challenge ${this.challenge().id.toString().padStart(2, '0')}`;
+  });
+
+  // Extract actual challenge name without the "Challenge XX:" prefix
+  readonly challengeName = computed(() => {
+    const title = this.challenge().title;
+    const match = title.match(/^Challenge\s+\d+:\s*(.+)$/i);
+    return match ? match[1].trim() : title;
+  });
+
   // Reactive signal to check if current challenge is the latest challenge
   readonly isLatestChallenge = computed(() => {
     const latest = this.challengesService.getLatestChallenge();

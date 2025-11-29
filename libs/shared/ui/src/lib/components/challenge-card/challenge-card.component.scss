@@ -78,16 +78,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 44px;
-  padding: var(--spacing-sm) var(--spacing-md);
+  gap: var(--spacing-md);
+  min-height: 52px;
+  padding: var(--spacing-md) var(--spacing-md);
   background: linear-gradient(to bottom, var(--surface-primary), transparent);
-  border-bottom: 1px solid rgba(224, 224, 224, 0.5); /* Fallback for older browsers */
-  border-bottom: 1px solid color-mix(in srgb, var(--border-primary) 50%, transparent 50%);
+  border-bottom: 1px solid var(--border-primary); /* Fallback for older browsers */
 }
 
 .challenge-card__header-left {
   display: flex;
   align-items: center;
+  flex: 1;
+  min-width: 0; // Allow text truncation
+}
+
+.challenge-card__header-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+// Challenge ID styling (e.g., "Challenge-01")
+.challenge-card__id {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-family: var(--font-family-mono, 'Courier New', monospace);
+
+  @media (min-width: 768px) {
+    font-size: 0.9375rem;
+  }
 }
 
 .challenge-card__badge {
@@ -104,6 +126,7 @@
   border-radius: var(--border-radius-pill);
   box-shadow: 0 2px 8px var(--color-primary-alpha-30);
   animation: pulse 2s ease-in-out infinite;
+  white-space: nowrap;
 
   mat-icon {
     font-size: 14px;
@@ -124,35 +147,42 @@
 }
 
 /* ==========================================
-   Title & Content
+   Body Section (Title & Description)
    ========================================== */
-.challenge-card__title {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-
-  @media (min-width: 768px) {
-    font-size: 1.375rem;
-    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-sm);
-  }
-}
-
-mat-card-content {
+.challenge-card__body {
   position: relative;
   z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 var(--spacing-md) var(--spacing-lg);
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
 
   @media (min-width: 768px) {
-    padding: 0 var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xl);
+  }
+}
+
+.challenge-card__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // Limit to 2 lines
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
   }
 }
 
@@ -161,6 +191,12 @@ mat-card-content {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; // Limit to 3 lines
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 
   @media (min-width: 768px) {
     font-size: 1rem;
@@ -190,7 +226,8 @@ mat-card-content {
   letter-spacing: 0.02em;
   padding: 14px 28px;
   border-radius: var(--border-radius-md);
-  background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover)) !important;
+  background: var(--electric-violet) !important;
+  //background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover)) !important;
   color: var(--text-on-primary) !important;
   box-shadow: 0 2px 8px var(--color-primary-alpha-30),
               inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -216,19 +253,7 @@ mat-card-content {
     transition: left 0.5s ease;
   }
 
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px var(--color-primary-alpha-40),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, 
-      var(--interactive-primary-hover), 
-      color-mix(in srgb, var(--interactive-primary-hover) 85%, #000 15%)
-    ) !important;
-
-    &::before {
-      left: 100%;
-    }
-  }
+   
 
   &:active:not(:disabled) {
     transform: translateY(0);

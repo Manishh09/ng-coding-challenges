@@ -5,7 +5,7 @@
 /* ---------- Base Container ---------- */
 .challenge-list {
   width: 100%;
-  background: var(--brand-gradient-section);
+  //background: var(--brand-gradient-section);
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.4s var(--animation-easing),
@@ -121,7 +121,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing-lg);
-  padding: var(--spacing-md) clamp(1.5rem, 6vw, 4rem);
+  // padding: var(--spacing-md) clamp(1.5rem, 6vw, 4rem);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;

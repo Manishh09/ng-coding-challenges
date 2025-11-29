@@ -34,9 +34,8 @@
 .footer-container {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
   margin: 0 auto;
-  padding: var(--spacing-3xl) var(--spacing-2xl);
+  padding: var(--spacing-3xl);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--spacing-xl);
