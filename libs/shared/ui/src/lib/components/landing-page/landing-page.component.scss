@@ -353,10 +353,20 @@
   padding: 0 var(--spacing-3xl); // 48px horizontal desktop for content sections
 }
 
+// Add extra bottom padding to latest section for breathing room
+.latest-section {
+  padding-bottom: var(--spacing-4xl); // 64px bottom spacing
+  
+  @media (max-width: 767px) {
+    padding-bottom: var(--spacing-3xl); // 48px on mobile
+  }
+}
+
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--spacing-lg);
+  align-items: stretch; // Ensure equal height cards
 }
 
 .metric-card {
@@ -403,6 +413,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--spacing-lg);
+  align-items: stretch; // Ensure equal height cards
 }
 
 .featured-card {
@@ -476,7 +487,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg);
-  padding-bottom: var(--spacing-lg);
+  align-items: stretch; // Ensure equal height cards
 }
 
 .latest-card {

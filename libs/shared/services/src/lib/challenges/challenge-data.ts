@@ -129,10 +129,11 @@ export const CHALLENGES: Challenge[] = [
 
 // ============================================
 // DETAILED CHALLENGE DATA (lazy loaded)
+// Keyed by challenge link/slug for efficient lookups in slug-based routing
 // ============================================
 
-export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
-  1: {
+export const CHALLENGE_DETAILS: Record<string, ChallengeDetails> = {
+  'fetch-products': {
     ...CHALLENGES[0],
     longDescription: `
       This challenge introduces you to Angular's HttpClient module and RxJS observables.
@@ -160,7 +161,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  2: {
+  'handle-parallel-apis': {
     ...CHALLENGES[1],
     longDescription: `
       Master parallel API calls using RxJS's forkJoin operator. This challenge simulates
@@ -189,7 +190,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  3: {
+  'client-side-search': {
     ...CHALLENGES[2],
     longDescription: `
       Build a client-side search feature using Angular Reactive Forms and RxJS operators.
@@ -217,7 +218,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  4: {
+  'server-side-search': {
     ...CHALLENGES[3],
     longDescription: `
       Implement a professional autocomplete search feature that queries a backend API.
@@ -246,7 +247,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  5: {
+  'product-category-management': {
     ...CHALLENGES[4],
     longDescription: `
       Build a product category management system that demonstrates efficient data sharing
@@ -276,7 +277,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  6: {
+  'user-todos-filter': {
     ...CHALLENGES[5],
     longDescription: `
       Create a todo management system that combines data from multiple sources and provides
@@ -304,7 +305,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  7: {
+  'user-posts-dashboard': {
     ...CHALLENGES[6],
     longDescription: `
       Tackle dependent API calls where the result of one request determines the next.
@@ -331,7 +332,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  8: {
+  'ecommerce-checkout': {
     ...CHALLENGES[7],
     longDescription: `
       Implement a multi-step checkout process with sequential API calls. Learn to use
@@ -361,7 +362,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  9: {
+  'component-communication': {
     ...CHALLENGES[8],
     longDescription: `
       Master modern Angular component communication using Signals. Build a product dashboard
@@ -389,7 +390,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  10: {
+  'authorized-resource-access': {
     ...CHALLENGES[9],
     longDescription: `
       Build a complete authentication system with protected routes. Learn to implement
@@ -418,7 +419,7 @@ export const CHALLENGE_DETAILS: Record<number, ChallengeDetails> = {
     ]
   },
 
-  11: {
+  'admin-dashboard-access': {
     ...CHALLENGES[10],
     longDescription: `
       Implement role-based access control (RBAC) for an admin dashboard. Learn advanced

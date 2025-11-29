@@ -1,12 +1,14 @@
 <div class="challenges-browser">
-  <!-- Category Sidebar -->
+  <!-- Category Sidebar (only shown in list view) -->
+  @if (shouldShowSidebar()) {
   <app-category-sidebar [isOpen]="isSidebarOpen()" [isMobile]="isMobileView()"
     (categorySelect)="onCategorySelect($event)" (closeDrawer)="closeSidebar()" />
+  }
 
   <!-- Main Content Area -->
-  <main class="content-area" [class.shifted]="!isMobileView()">
-    <!-- Mobile Top Bar -->
-    @if (isMobileView()) {
+  <main class="content-area" [class.shifted]="!isMobileView() && shouldShowSidebar()" [class.full-width]="!shouldShowSidebar()">
+    <!-- Mobile Top Bar (only in list view) -->
+    @if (isMobileView() && shouldShowSidebar()) {
     <div class="mobile-top-bar">
       <button mat-icon-button (click)="toggleSidebar()" aria-label="Toggle categories menu" class="menu-button">
         <mat-icon>menu</mat-icon>
@@ -14,8 +16,8 @@
     </div>
     }
 
-    <!-- Desktop Header -->
-    @if (!isMobileView()) {
+    <!-- Desktop Header (only in list view) -->
+    @if (!isMobileView() && shouldShowSidebar()) {
     <div class="content-header">
       <div class="header-info">
         <h1 class="category-title">{{ selectedCategoryName() }}</h1>
@@ -26,39 +28,8 @@
 
     <!-- Content Container -->
     <div class="content-container">
-      <!-- Challenge Grid (shown when no child route active) -->
-      @if (!isChildRouteActive()) {
-      <div class="challenges-grid">
-        @if (filteredChallenges().length === 0) {
-        <div class="empty-state">
-          @if (challengeSearchTerm()) {
-          <mat-icon class="empty-icon">search_off</mat-icon>
-          <h3>No challenges found</h3>
-          <p>Try adjusting your search term</p>
-          <button mat-raised-button color="primary" (click)="onChallengeSearchClear()">
-            Clear Search
-          </button>
-          } @else {
-          <mat-icon class="empty-icon">inbox</mat-icon>
-          <h3>No challenges available</h3>
-          <p>Check back later for new challenges in this category</p>
-          }
-        </div>
-        } @else {
-        @for (challenge of filteredChallenges(); track challenge.id) {
-        <ng-coding-challenges-challenge-card [challenge]="challenge" [newBadgeChallengeIds]="newBadgeChallengeIds()"
-          class="challenge-card-item fade-in" />
-        }
-        }
-      </div>
-      }
-
-      <!-- Challenge Detail View (child route) -->
-      @if (isChildRouteActive()) {
-      <div class="challenge-detail-view">
-        <router-outlet />
-      </div>
-      }
+      <!-- Router Outlet: Delegates to ChallengeListComponent or ChallengeDetailsComponent -->
+      <router-outlet />
     </div>
   </main>
 </div>

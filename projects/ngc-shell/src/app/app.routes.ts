@@ -1,15 +1,28 @@
 import { Routes } from '@angular/router';
-import { ChallengesBrowserComponent } from '@ng-coding-challenges/shared/ui';
+import { ChallengesBrowserComponent, LandingPageComponent } from '@ng-coding-challenges/shared/ui';
+import { challengeListResolver } from '@ng-coding-challenges/shared/services';
 
-import { LandingPageComponent } from '@ng-coding-challenges/shared/ui';
-
+/**
+ * Main application routes
+ * 
+ * Architecture:
+ * - Landing page at root
+ * - Three-level challenge routing:
+ *   Level 1: Category list (/challenges/rxjs-api)
+ *   Level 2: Challenge details (/challenges/rxjs-api/fetch-products)
+ *   Level 3: Challenge workspace (/challenges/rxjs-api/fetch-products/workspace)
+ * 
+ * Uses Route Resolvers for pre-fetching data
+ */
 export const routes: Routes = [
+  // Landing page
   {
     path: '',
     pathMatch: 'full',
     component: LandingPageComponent,
   },
 
+  // Getting started guide
   {
     path: 'getting-started',
     loadComponent: () =>
@@ -18,47 +31,51 @@ export const routes: Routes = [
       ),
   },
 
+  // Challenges section with shell layout
   {
     path: 'challenges',
+    component: ChallengesBrowserComponent,
     children: [
+      // Default route - show all challenges
       {
         path: '',
-        component: ChallengesBrowserComponent,
-        children: [
-
-          // CATEGORY ROUTES (direct mappings)
-          {
-            path: 'rxjs-api',
-            loadChildren: () =>
-              import('@ngc-rxjs-api').then(m => m.NGC_RXJS_API_ROUTES),
-          },
-          {
-            path: 'angular-core',
-            loadChildren: () =>
-              import('@ngc-core').then(m => m.NGC_CORE_ROUTES),
-          },
-          {
-            path: 'angular-routing',
-            loadChildren: () =>
-              import('@ngc-routing').then(m => m.NGC_ROUTING_ROUTES),
-          },
-
-        ],
-      },
-
-
-      // Challenge Details (common for all categories)
-      {
-        path: ':categoryId/:id',
         loadComponent: () =>
           import('@ng-coding-challenges/shared/ui').then(
-            m => m.ChallengeDetailsComponent
+            m => m.ChallengeListComponent
           ),
+        resolve: {
+          challenges: challengeListResolver
+        },
+        data: { categoryId: 'all', categoryName: 'All Challenges' }
+      },
+
+      // RxJS API Category (lazy loaded sub-app)
+      {
+        path: 'rxjs-api',
+        loadChildren: () =>
+          import('@ngc-rxjs-api').then(m => m.NGC_RXJS_API_ROUTES),
+        data: { categoryId: 'rxjs-api', categoryName: 'RxJS & API Challenges' }
+      },
+
+      // Angular Core Category (lazy loaded sub-app)
+      {
+        path: 'angular-core',
+        loadChildren: () =>
+          import('@ngc-core').then(m => m.NGC_CORE_ROUTES),
+        data: { categoryId: 'angular-core', categoryName: 'Angular Core Challenges' }
+      },
+
+      // Angular Routing Category (lazy loaded sub-app)
+      {
+        path: 'angular-routing',
+        loadChildren: () =>
+          import('@ngc-routing').then(m => m.NGC_ROUTING_ROUTES),
+        data: { categoryId: 'angular-routing', categoryName: 'Routing Challenges' }
       },
     ],
   },
 
-  // If not found
+  // 404 Not Found
   {
     path: '**',
     loadComponent: () =>

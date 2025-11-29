@@ -27,8 +27,13 @@
   </div>
 
   <mat-card-actions class="challenge-card__actions" role="group" aria-label="Challenge actions">
-    <button mat-flat-button color="primary" type="button" class="challenge-card__view-details-btn"
-      [routerLink]="['/challenges', challenge().category, challenge().id]" aria-label="View challenge details">
+    <button 
+      mat-flat-button 
+      color="primary" 
+      type="button" 
+      class="challenge-card__view-details-btn"
+      (click)="viewDetails()" 
+      aria-label="View challenge details">
       <mat-icon aria-hidden="true">visibility</mat-icon>
       View Details
     </button>

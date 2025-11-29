@@ -5,7 +5,7 @@ import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
@@ -17,7 +17,7 @@ import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.comp
  * - Reactive route parameter handling
  * - Loading states with skeleton loaders
  * - New badge highlighting
- * - Nested routing support
+ * - Clean separation: only shows list, no nested routing
  */
 @Component({
   selector: 'ng-coding-challenges-challenge-list',
@@ -27,7 +27,6 @@ import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 
   imports: [
-    RouterOutlet,
     CommonModule,
     MatButtonModule,
     RouterLink,
@@ -44,22 +43,30 @@ export class ChallengeListComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
 
-  // Reactive source for categoryId from route
-  private readonly routeCategoryId = toSignal(
-    this.activatedRoute.parent!.url.pipe(
+  // Reactive source for route data (contains resolved challenges from resolver)
+  private readonly routeData = toSignal(
+    this.activatedRoute.data.pipe(
       takeUntilDestroyed()
     ),
-    { initialValue: [] }
+    { initialValue: {} }
   );
 
   //  Derived signal: selected category ID
   readonly categoryId = computed(() => {
-    const segments = this.routeCategoryId();
-    return segments.length ? segments[0].path : '';
+    const data = this.routeData() as { categoryId?: string };
+    return data.categoryId || '';
   });
 
-  //  Derived signal: list of challenges for this category
+  //  Derived signal: list of challenges (from resolver or fallback to service)
   readonly challenges = computed<Challenge[]>(() => {
+    const data = this.routeData() as { challenges?: readonly Challenge[] };
+    
+    // If resolver provided the data, use it
+    if (data.challenges) {
+      return Array.from(data.challenges);
+    }
+
+    // Fallback: manual lookup (for backwards compatibility)
     const id = this.categoryId();
     if (!id) return [];
     return Array.from(this.challengesService.getChallengesByCategory(id));
@@ -93,10 +100,5 @@ export class ChallengeListComponent {
         setTimeout(() => this.loading.set(false), 300);
       }
     });
-  }
-
-  // Check if there is an active child route
-  hasActiveChildRoute(): boolean {
-    return this.activatedRoute.children.some(child => child.outlet === 'primary');
   }
 }

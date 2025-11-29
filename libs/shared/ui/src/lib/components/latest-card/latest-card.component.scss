@@ -11,19 +11,20 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-xl);
   background: var(--surface-container);
   border-radius: var(--border-radius-lg);
-  border: 1px solid var(--border-subtle);
-   box-shadow: var(--shadow-sm);
-  transition: all var(--animation-duration-normal) var(--animation-easing);
+  border: 2px solid var(--border-primary);
+  box-shadow: var(--shadow-md);
+  transition: all var(--animation-duration-standard) var(--animation-easing);
   height: 100%;
+  min-height: 240px; // Consistent with other cards
 
   // Hover state for visual feedback
   &:hover {
     border-color: var(--border-emphasis);
-   
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-4px);
   }
 
   // Focus-within for accessibility
@@ -48,7 +49,7 @@
 }
 
 .latest-card__title {
-  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
   font-weight: 600;
   line-height: 1.3;
   margin: 0;
@@ -60,7 +61,7 @@
   line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
-  flex: 1; // Push actions to bottom
+  flex: 1; // Push actions to bottom and fill available space
 }
 
 .latest-card__actions {
@@ -73,17 +74,58 @@
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    font-weight: 500;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: var(--border-radius-md);
+    transition: all var(--animation-duration-standard) var(--animation-easing);
+    
+    // Primary filled button styling
+    &.mat-flat-button,
+    &.mat-raised-button {
+      background-color: var(--color-primary);
+      color: var(--text-on-primary);
+      border: none;
+      
+      &:hover {
+        background-color: var(--interactive-primary-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+      
+      &:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-md);
+      }
+    }
+    
+    // Ensure proper colors for mat-stroked-button (fallback)
+    &.mat-stroked-button {
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      background-color: transparent;
+      
+      &:hover {
+        background-color: var(--color-primary);
+        color: var(--text-on-primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      
+      &:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-sm);
+      }
+    }
 
     mat-icon {
       font-size: 1.125rem;
       width: 1.125rem;
       height: 1.125rem;
-      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transition: transform var(--animation-duration-standard) var(--animation-easing);
     }
 
     &:hover mat-icon {
-      transform: translateX(2px);
+      transform: translateX(4px);
     }
   }
 }
@@ -95,11 +137,11 @@
 // Tablet and up
 @include theme.respond-to('tablet') {
   .latest-card {
-    padding: var(--spacing-xl) var(--spacing-2xl);
+    padding: var(--spacing-xl) var(--spacing-xl);
   }
 
   .latest-card__title {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
   }
 
   .latest-card__description {
@@ -111,8 +153,8 @@
 @include theme.respond-to('desktop') {
   .latest-card {
     &:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
     }
   }
 }

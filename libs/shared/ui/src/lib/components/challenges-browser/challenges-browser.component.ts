@@ -4,13 +4,12 @@ import {
   signal,
   computed,
   Signal,
-  effect,
   DestroyRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, NavigationEnd } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,12 +17,28 @@ import {
   ChallengeCategoryService,
   ChallengesService,
 } from '@ng-coding-challenges/shared/services';
-import { Challenge } from '@ng-coding-challenges/shared/models';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
-import { ChallengeCardComponent } from '../challenge-card/challenge-card.component';
-import { FooterComponent, FooterLink } from '../footer/footer.component';
+import { filter, map } from 'rxjs';
 
+/**
+ * Challenges Browser Component - Pure Shell/Layout Component
+ * 
+ * Responsibilities:
+ * - Provides sidebar navigation for categories
+ * - Manages responsive layout (mobile/tablet/desktop)
+ * - Adapts UI based on route depth (shows/hides sidebar)
+ * - Delegates content rendering to child routes via <router-outlet>
+ * 
+ * Does NOT:
+ * - Render challenge lists (delegated to ChallengeListComponent)
+ * - Render challenge details (delegated to ChallengeDetailsComponent)
+ * - Handle challenge data fetching (done by resolvers)
+ * 
+ * Routing Architecture:
+ * - Level 1: /challenges/{category} - Shows ChallengeListComponent
+ * - Level 2: /challenges/{category}/{challengeId} - Shows ChallengeDetailsComponent
+ * - Level 3: /challenges/{category}/{challengeId}/workspace - Shows workspace component
+ */
 @Component({
   selector: 'app-challenges-browser',
   standalone: true,
@@ -34,7 +49,6 @@ import { FooterComponent, FooterLink } from '../footer/footer.component';
     MatButtonModule,
     MatToolbarModule,
     CategorySidebarComponent,
-    ChallengeCardComponent,
   ],
   templateUrl: './challenges-browser.component.html',
   styleUrl: './challenges-browser.component.scss',
@@ -51,63 +65,65 @@ export class ChallengesBrowserComponent {
   readonly isMobileView = signal<boolean>(false);
   readonly isSidebarOpen = signal<boolean>(false);
 
-  // Search state
-  readonly challengeSearchTerm = signal<string>('');
-
-  // Category selection from service
+  // Category selection from service (for sidebar)
   readonly selectedCategoryId: Signal<string> =
     this.categoryService.selectedCategoryId;
 
-  // Challenges for selected category
-  readonly categoryChallenges = computed(() => {
-    const categoryId = this.selectedCategoryId();
-    if (!categoryId) return [];
-    return this.challengesService.getChallengesByCategory(categoryId);
-  });
-
-  // Filtered challenges based on search term
-  readonly filteredChallenges = computed(() => {
-    const challenges = this.categoryChallenges();
-    const searchTerm = this.challengeSearchTerm().toLowerCase().trim();
-
-    if (!searchTerm) {
-      return challenges;
-    }
-
-    return challenges.filter(
-      (challenge) =>
-        challenge.title.toLowerCase().includes(searchTerm) ||
-        challenge.description.toLowerCase().includes(searchTerm)
-    );
-  });
-
-  // Top 2 challenges get "New" badges
-  readonly newBadgeChallengeIds = computed(() => {
-    const challenges = this.categoryChallenges();
-    return challenges.slice(-2).map((c) => c.id);
-  });
-
-  // Computed category name for display
+  // Computed category name for header display
   readonly selectedCategoryName = computed(() => {
     const categoryId = this.selectedCategoryId();
     return this.categoryService.getCategoryNameById(categoryId) || 'Challenges';
   });
 
-  // Result count display
+  // Get challenge count for result display
   readonly resultCountText = computed(() => {
-    const total = this.categoryChallenges().length;
-    const filtered = this.filteredChallenges().length;
+    const categoryId = this.selectedCategoryId();
+    if (!categoryId) return '0 challenges';
+    
+    const challenges = this.challengesService.getChallengesByCategory(categoryId);
+    const count = challenges.length;
     const categoryName = this.selectedCategoryName();
-    const searchTerm = this.challengeSearchTerm();
-
-    if (searchTerm && filtered !== total) {
-      return `${filtered} of ${total} challenges in ${categoryName}`;
-    }
-    return `${total} challenges in ${categoryName}`;
+    
+    return `${count} challenges in ${categoryName}`;
   });
 
-  // Check if child route is active (challenge detail view)
+  // Check if child route is active (challenge detail or workspace view)
   readonly isChildRouteActive = signal<boolean>(false);
+
+  /**
+   * Calculate route depth from URL
+   * Helper function for consistent depth calculation
+   */
+  private calculateRouteDepth(): number {
+    const url = this.router.url.split('?')[0]; // Remove query params
+    const segments = url.split('/').filter(s => s);
+    
+    // /challenges = 1 segment (depth 0)
+    // /challenges/rxjs-api = 2 segments (depth 1)
+    // /challenges/rxjs-api/fetch-products = 3 segments (depth 2)
+    // /challenges/rxjs-api/fetch-products/workspace = 4 segments (depth 3)
+    return segments.length - 1; // Subtract 'challenges' base
+  }
+
+  // Track current route depth for adaptive UI
+  // Depth 0: /challenges or /challenges/all
+  // Depth 1: /challenges/rxjs-api (category list)
+  // Depth 2: /challenges/rxjs-api/fetch-products (details)
+  // Depth 3: /challenges/rxjs-api/fetch-products/workspace (workspace)
+  readonly routeDepth = toSignal(
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => this.calculateRouteDepth()),
+      takeUntilDestroyed(this.destroyRef)
+    ),
+    { initialValue: this.calculateRouteDepth() } // Use current URL for initial value
+  );
+
+  // Show sidebar only in list view (depth 0 or 1)
+  readonly shouldShowSidebar = computed(() => {
+    const depth = this.routeDepth();
+    return depth <= 1;
+  });
 
   constructor() {
     // Initialize challenge counts for all categories
@@ -128,21 +144,12 @@ export class ChallengesBrowserComponent {
         }
       });
 
-    // Monitor route changes to detect child routes
-    effect(() => {
-      const hasChild = this.route.children.length > 0;
-      this.isChildRouteActive.set(hasChild);
-    });
-
-    // Sync category from query params on init
+    // Sync category from route/query params on init
     this.route.queryParams
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((params) => {
         if (params['category']) {
           this.categoryService.setSelectedCategory(params['category']);
-        }
-        if (params['search']) {
-          this.challengeSearchTerm.set(params['search']);
         }
       });
   }
@@ -155,23 +162,11 @@ export class ChallengesBrowserComponent {
     this.isSidebarOpen.set(false);
   }
 
+  /**
+   * Handle category selection from sidebar
+   * Navigates to the selected category route
+   */
   onCategorySelect(categoryId: string): void {
-    // Update query params
     this.router.navigate([categoryId], { relativeTo: this.route });
-
   }
-
-
-  onChallengeSearchClear(): void {
-    this.challengeSearchTerm.set('');
-
-    // Remove search param
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { search: null },
-      queryParamsHandling: 'merge',
-    });
-  }
-
-
 }

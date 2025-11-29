@@ -13,6 +13,10 @@ export * from './lib/theme/theme.service';
 export * from './lib/challenges/challenges.service';
 export * from './lib/challenges/challenge-category.service';
 
+// Route Resolvers
+export * from './lib/resolvers/challenge-details.resolver';
+export * from './lib/resolvers/challenge-list.resolver';
+
 // Utility Services
 export * from './lib/navigation/navigation.service';
 export * from './lib/notification/notification.service';

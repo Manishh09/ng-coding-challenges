@@ -7,19 +7,21 @@
 .metric-card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
   background: var(--surface-elevated);
   border-radius: var(--border-radius-lg);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--border-primary);
+  box-shadow: var(--shadow-md);
+  min-height: 200px; // Reduced from 240px for more compact cards
+  height: 100%; // Fill parent container
   transition: 
-    transform var(--animation-duration-normal) var(--animation-easing),
-    box-shadow var(--animation-duration-normal) var(--animation-easing),
-    border-color var(--animation-duration-normal) var(--animation-easing);
+    transform var(--animation-duration-standard) var(--animation-easing),
+    box-shadow var(--animation-duration-standard) var(--animation-easing),
+    border-color var(--animation-duration-standard) var(--animation-easing);
   
   // Animation on mount
-  animation: fadeInScale 0.5s var(--animation-easing) backwards;
+  animation: fadeInScale 0.6s var(--animation-easing) backwards;
 
   // Interactive variant with enhanced hover states
   &--interactive {
@@ -28,7 +30,7 @@
     &:hover,
     &:focus-within {
       transform: translateY(-4px);
-      
+      box-shadow: var(--shadow-xl);
       border-color: var(--color-primary-alpha-40);
 
       .metric-icon {
@@ -47,15 +49,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--border-radius-lg);
-  transition: transform var(--animation-duration-normal) var(--animation-easing);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  flex-shrink: 0; // Prevent icon from shrinking
+  transition: transform var(--animation-duration-standard) var(--animation-easing);
   
   mat-icon {
-    font-size: 2rem;
-    width: 2rem;
-    height: 2rem;
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
     transition: color var(--animation-duration-fast);
   }
 
@@ -110,11 +113,12 @@
 .metric-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-2xs);
+  flex: 1; // Allow content to fill remaining space
 }
 
 .metric-value {
-  font-size: clamp(1.75rem, 2vw + 0.5rem, 2.25rem);
+  font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-primary);
@@ -125,7 +129,7 @@
 }
 
 .metric-label {
-  font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+  font-size: clamp(0.9375rem, 1.5vw + 0.25rem, 1.0625rem);
   font-weight: 600;
   line-height: 1.4;
   color: var(--text-primary);
@@ -133,8 +137,8 @@
 }
 
 .metric-helper {
-  font-size: 0.9375rem;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
 }
@@ -146,18 +150,19 @@
 // Mobile: Stack cards vertically
 @media (max-width: 767px) {
   .metric-card {
-    padding: var(--spacing-lg);
-    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    gap: var(--spacing-sm);
+    min-height: 180px;
   }
 
   .metric-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
 
     mat-icon {
-      font-size: 1.75rem;
-      width: 1.75rem;
-      height: 1.75rem;
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 }
@@ -165,7 +170,7 @@
 // Tablet and up: Enhanced spacing
 @media (min-width: 768px) {
   .metric-card {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-xl) var(--spacing-xl);
   }
 }
 

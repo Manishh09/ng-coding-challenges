@@ -44,11 +44,28 @@ export class ChallengesService {
   /**
    * Finds detailed challenge information by ID (for detail pages).
    * Includes extended properties like longDescription, learningOutcomes, etc.
-   * @param id - Challenge ID
+   * @param id - Challenge ID (numeric) or slug (string)
    * @returns The detailed challenge data, or undefined if not found
+   * @deprecated Use getChallengeDetailsBySlug for slug-based routing
    */
   getChallengeDetailsById(id: string | number): ChallengeDetails | undefined {
+    // If numeric ID provided, find the challenge first to get its slug
+    if (typeof id === 'number') {
+      const challenge = this.getChallengeById(id);
+      return challenge ? this.challengeDetails[challenge.link] : undefined;
+    }
+    // If string provided, assume it's a slug
     return this.challengeDetails[id];
+  }
+
+  /**
+   * Finds detailed challenge information by slug/link (preferred for slug-based routing).
+   * Includes extended properties like longDescription, learningOutcomes, etc.
+   * @param slug - Challenge slug (e.g., 'fetch-products')
+   * @returns The detailed challenge data, or undefined if not found
+   */
+  getChallengeDetailsBySlug(slug: string): ChallengeDetails | undefined {
+    return this.challengeDetails[slug];
   }
 
   /**

@@ -22,6 +22,12 @@
     gap: var(--spacing-3xl);
   }
 
+  // Full width for detail/workspace views (no sidebar)
+  &.full-width {
+    margin-left: 0;
+    width: 100%;
+  }
+
   // Custom scrollbar
   &::-webkit-scrollbar {
     width: 8px;
@@ -125,9 +131,9 @@
 // Content container
 .content-container {
   flex: 1;
-  max-width: var(--max-width-wide); // 1440px - optimal for grid layouts
+  //max-width: var(--max-width-wide); // 1440px - optimal for grid layouts
   margin: 0 auto;
-  width: calc(100vw - 360px);
+  width: calc(100vw - 360px) !important;
   padding: var(--spacing-2xl) var(--spacing-2xl) calc(var(--spacing-2xl) + 16px); // Extra bottom padding for scroll clearance
   overflow: visible; // Allow hover effects to show without clipping
 
@@ -155,6 +161,7 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
     padding: 10px 2px;
+    width: 100% !important; // Account for 16px padding on each side
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -169,11 +176,7 @@
     padding: 12px 4px;
   }
 
-  @media (min-width: 1440px) {
-    grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
-    gap: var(--spacing-2xl);
-    padding: 12px 4px;
-  }
+  
 }
 
 .challenge-card-item {

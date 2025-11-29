@@ -6,11 +6,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ChallengesService, ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { ChallengeDetails } from '@ng-coding-challenges/shared/models';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs.component';
 
+/**
+ * Challenge Details Component
+ * 
+ * Level 2 in routing hierarchy: /challenges/{category}/{challengeId}
+ * 
+ * Features:
+ * - Displays challenge overview, requirements, learning outcomes
+ * - Provides navigation to workspace view
+ * - Shows related resources and documentation
+ * - Supports next/previous challenge navigation
+ */
 @Component({
   selector: 'ng-coding-challenges-challenge-details',
   standalone: true,
@@ -22,6 +34,7 @@ import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs
     MatChipsModule,
     MatCardModule,
     MatDividerModule,
+    MatTabsModule,
     BreadcrumbsComponent
   ],
   templateUrl: './challenge-details.component.html',
@@ -33,23 +46,34 @@ export class ChallengeDetailsComponent {
   private readonly challengesService = inject(ChallengesService);
   private readonly categoryService = inject(ChallengeCategoryService);
 
-  // Get route params
-  private readonly params = toSignal(this.route.params);
+  // Get route data (contains resolved challenge data from resolver)
+  private readonly routeData = toSignal(this.route.data);
+  private readonly routeParams = toSignal(this.route.params);
 
-  // Computed challenge ID from params
-  readonly challengeId = computed(() => {
-    const p = this.params();
-    const idParam = p?.['id'];
-    return idParam ? Number(idParam) : null;
-  });
-
-  // Fetch DETAILED challenge data (not just basic Challenge)
+  // Challenge details from resolver (preferred) or fallback to service lookup
   readonly challengeDetails = computed(() => {
-    const id = this.challengeId();
-    if (!id) return null;
+    const data = this.routeData() as { challenge?: ChallengeDetails };
+    
+    // If resolver provided the data, use it
+    if (data?.challenge) {
+      return data.challenge;
+    }
 
-    // This now returns ChallengeDetails with all the extended properties
-    return this.challengesService.getChallengeDetailsById(id);
+    // Fallback: manual lookup (for backwards compatibility)
+    const params = this.routeParams();
+    const categoryId = (data as { categoryId?: string })?.categoryId || '';
+    const challengeSlug = params?.['challengeId'] || '';
+    
+    if (!challengeSlug || !categoryId) return null;
+
+    const challenges = this.challengesService.getChallengesByCategory(categoryId);
+    const challenge = Array.from(challenges).find(c => 
+      this.createChallengeSlug(c.title) === challengeSlug
+    );
+
+    if (!challenge) return null;
+    
+    return this.challengesService.getChallengeDetailsById(challenge.id);
   });
 
   // Get category name for breadcrumbs
@@ -68,8 +92,7 @@ export class ChallengeDetailsComponent {
       { label: 'Challenges', route: '/challenges' },
       {
         label: this.categoryName(),
-        route: '/challenges',
-        queryParams: { category: c.category }
+        route: `/challenges/${c.category}`
       },
       { label: c.title }
     ];
@@ -77,44 +100,57 @@ export class ChallengeDetailsComponent {
 
   // Navigation helpers
   readonly nextChallenge = computed(() => {
-    const id = this.challengeId();
-    return id ? this.challengesService.getNextChallenge(id) : null;
+    const current = this.challengeDetails();
+    return current ? this.challengesService.getNextChallenge(current.id) : null;
   });
 
   readonly previousChallenge = computed(() => {
-    const id = this.challengeId();
-    return id ? this.challengesService.getPreviousChallenge(id) : null;
+    const current = this.challengeDetails();
+    return current ? this.challengesService.getPreviousChallenge(current.id) : null;
   });
 
   // Check if challenge exists
   readonly challengeNotFound = computed(() => {
-    const id = this.challengeId();
+    const params = this.routeParams();
+    const challengeSlug = params?.['challengeId'] || '';
     const challenge = this.challengeDetails();
-    return id !== null && !challenge;
+    return challengeSlug !== '' && !challenge;
   });
 
-  // Unused - Remove Later
+  /**
+   * Creates a URL-friendly slug from challenge title
+   */
+  private createChallengeSlug(title: string): string {
+    const withoutPrefix = title.replace(/^Challenge\s+\d+:\s*/i, '');
+    return withoutPrefix
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  /**
+   * Navigate back to category challenge list
+   */
   goBack(): void {
     const c = this.challengeDetails();
     if (c) {
-      this.router.navigate(['/challenges'], {
-        queryParams: { category: c.category }
-      });
+      this.router.navigate(['/challenges', c.category]);
     } else {
       this.router.navigate(['/challenges']);
     }
   }
 
+  /**
+   * Navigate to challenge workspace
+   * Level 3: /challenges/{category}/{challengeId}/workspace
+   */
   launchChallenge(): void {
     const c = this.challengeDetails();
-    if (c?.link) {
-      // If link is a full URL, open in new tab
-      if (c.link.startsWith('http')) {
-        window.open(c.link, '_blank');
-      } else {
-        // If it's a route, navigate internally
-        this.router.navigate([c.link]);
-      }
+    if (c) {
+      const slug = this.createChallengeSlug(c.title);
+      this.router.navigate(['/challenges', c.category, slug, 'workspace']);
     }
   }
 
@@ -142,14 +178,16 @@ export class ChallengeDetailsComponent {
   navigateToNext(): void {
     const next = this.nextChallenge();
     if (next) {
-      this.router.navigate(['/challenges', next.category, next.id]);
+      const slug = this.createChallengeSlug(next.title);
+      this.router.navigate(['/challenges', next.category, slug]);
     }
   }
 
   navigateToPrevious(): void {
     const prev = this.previousChallenge();
     if (prev) {
-      this.router.navigate(['/challenges', prev.category, prev.id]);
+      const slug = this.createChallengeSlug(prev.title);
+      this.router.navigate(['/challenges', prev.category, slug]);
     }
   }
 }

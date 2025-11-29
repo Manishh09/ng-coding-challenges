@@ -141,6 +141,45 @@ export class ChallengeCardComponent implements OnInit {
     }
   }
 
+  /**
+   * Navigates to challenge details page
+   * Route: /challenges/{category}/{challengeId}
+   */
+  viewDetails(): void {
+    const challenge = this.challenge();
+    const categoryId = challenge.category;
+    const challengeSlug = this.createChallengeSlug(challenge);
+    this.router.navigate(['/challenges', categoryId, challengeSlug]);
+  }
+
+  /**
+   * Navigates directly to challenge workspace
+   * Route: /challenges/{category}/{challengeId}/workspace
+   */
+  startChallenge(): void {
+    const challenge = this.challenge();
+    const categoryId = challenge.category;
+    const challengeSlug = this.createChallengeSlug(challenge);
+    this.router.navigate(['/challenges', categoryId, challengeSlug, 'workspace']);
+  }
+
+  /**
+   * Creates a URL-friendly slug from challenge title
+   * Example: "Challenge 01: Fetch Products" → "fetch-products"
+   */
+  private createChallengeSlug(challenge: Challenge): string {
+    const title = challenge.title;
+    // Remove "Challenge XX:" prefix if present
+    const withoutPrefix = title.replace(/^Challenge\s+\d+:\s*/i, '');
+    // Convert to kebab-case
+    return withoutPrefix
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+  }
+
   viewOutput(link: string): void {
     this.router.navigate([link], { relativeTo: this.route });
   }
