@@ -7,47 +7,47 @@ import { challengeListResolver, challengeDetailsResolver } from '@ng-coding-chal
  * Maps challengeId to workspace component
  */
 const CHALLENGE_COMPONENTS = {
-  'fetch-products': () => 
+  'fetch-products': () =>
     import('./challenges/challenge-01-product-list/components/product-list/product-list.component')
       .then(m => m.ProductListComponent),
-  
-  'handle-parallel-apis': () => 
+
+  'handle-parallel-apis': () =>
     import('./challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component')
       .then(m => m.DashboardComponent),
-  
-  'client-side-search': () => 
+
+  'client-side-search': () =>
     import('./challenges/challenge-03-client-side-search/components/client-side-search/client-side-search.component')
       .then(m => m.ClientSideSearchComponent),
-  
-  'server-side-search': () => 
+
+  'server-side-search': () =>
     import('./challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component')
       .then(m => m.ServerSideSearchComponent),
-  
-  'product-category-management': () => 
+
+  'product-category-management': () =>
     import('./challenges/challenge-05-product-category-management-system/components/product-category-dashboard/product-category-dashboard.component')
       .then(m => m.ProductCategoryDashboardComponent),
-  
-  'user-todos-filter': () => 
+
+  'user-todos-filter': () =>
     import('./challenges/challenge-06-user-todos-filter/components/user-todos/user-todos.component')
       .then(m => m.UserTodosComponent),
-  
-  'user-posts-dashboard': () => 
+
+  'user-posts-dashboard': () =>
     import('./challenges/challenge-07-dependent-apis/components/user-posts-dashboard/user-posts-dashboard.component')
       .then(m => m.UserPostsDashboardComponent),
-  
-  'ecommerce-checkout': () => 
+
+  'ecommerce-checkout': () =>
     import('./challenges/challenge-08-ecommerce-checkout/components/checkout/checkout.component')
       .then(m => m.CheckoutComponent),
 };
 
 /**
  * RxJS & API Challenges Routes
- * 
+ *
  * Three-level architecture:
  * Level 1: /challenges/rxjs-api - Challenge list for this category
  * Level 2: /challenges/rxjs-api/:challengeId - Challenge details with description, requirements, solution tabs
  * Level 3: /challenges/rxjs-api/:challengeId/workspace - Interactive challenge workspace
- * 
+ *
  * Uses Route Resolvers:
  * - challengeListResolver: Pre-fetches challenge list data
  * - challengeDetailsResolver: Pre-fetches challenge details data
@@ -60,7 +60,8 @@ export const NGC_RXJS_API_ROUTES: Routes = [
     resolve: {
       challenges: challengeListResolver
     },
-    data: { 
+    data: {
+      layoutType: 'landing-page',
       categoryId: 'rxjs-api',
       categoryName: 'RxJS & API Challenges'
     }
@@ -77,20 +78,22 @@ export const NGC_RXJS_API_ROUTES: Routes = [
         resolve: {
           challenge: challengeDetailsResolver
         },
-        data: { 
+        data: {
+          layoutType: 'challenge-details',
           categoryId: 'rxjs-api',
           categoryName: 'RxJS & API Challenges',
-          challengeId 
+          challengeId
         }
       },
       // Level 3: Challenge workspace
       {
         path: 'workspace',
         loadComponent: componentLoader,
-        data: { 
+        data: {
+          layoutType: 'challenge-workspace',
           categoryId: 'rxjs-api',
           categoryName: 'RxJS & API Challenges',
-          challengeId 
+          challengeId
         }
       }
     ]

@@ -1,5 +1,5 @@
 @if (challengeDetails(); as c) {
-<div class="challenge-details-container fade-in">
+<div class="details-container fade-in">
     <!-- Back Button -->
     <!-- <button mat-button class="back-button" (click)="goBack()" aria-label="Go back to challenges list">
         <mat-icon>arrow_back</mat-icon>
@@ -52,13 +52,69 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <!-- Launch Card -->
-            <div class="launch-card">
-                <button mat-flat-button color="primary" class="launch-btn" (click)="launchChallenge()">
-                    <mat-icon>play_arrow</mat-icon>
-                    Start Challenge
+            <!-- PRIMARY: StackBlitz Launch Card -->
+            <div class="launch-card launch-card--primary">
+                <div class="launch-card__header">
+                    <div class="launch-card__icon">
+                        <mat-icon>electric_bolt</mat-icon>
+                    </div>
+                    <h3 class="launch-card__title">Start Coding</h3>
+                </div>
+
+                <p class="launch-card__description">
+                    Launch the challenge in an interactive StackBlitz IDE and start building your solution
+                </p>
+
+                <button
+                    mat-flat-button
+                    class="launch-btn launch-btn--stackblitz"
+                    [disabled]="launching()"
+                    (click)="launchStackBlitz()"
+                    [attr.aria-label]="'Open ' + c.title + ' in StackBlitz coding environment'">
+                    @if (launching()) {
+                        <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
+                        <span>Opening StackBlitz...</span>
+                    } @else {
+                        <ng-container>
+                            <mat-icon>code</mat-icon>
+                            <span>Code in StackBlitz</span>
+                        </ng-container>
+                    }
                 </button>
-                <p class="launch-hint">Opens the interactive coding workspace.</p>
+
+                <div class="launch-card__badge">
+                    <mat-icon>speed</mat-icon>
+                    <span>Ready to code</span>
+                </div>
+            </div>
+
+            <!-- SECONDARY: Workspace Preview Card -->
+            <div class="launch-card launch-card--secondary">
+                <div class="launch-card__header">
+                    <div class="launch-card__icon">
+                        <mat-icon>visibility</mat-icon>
+                    </div>
+                    <h3 class="launch-card__title">Preview Solution</h3>
+                </div>
+
+                <p class="launch-card__description">
+                    See the expected output and user flow before you start building
+                </p>
+
+                <button
+                    mat-stroked-button
+                    color="primary"
+                    class="launch-btn launch-btn--workspace"
+                    (click)="launchWorkspace()"
+                    [attr.aria-label]="'Preview expected output for ' + c.title">
+                    <mat-icon>play_circle_outline</mat-icon>
+                    <span>View Demo</span>
+                </button>
+
+                <div class="launch-card__hint">
+                    <mat-icon>info_outline</mat-icon>
+                    <span>Great for understanding requirements</span>
+                </div>
             </div>
 
             <!-- Learning Outcomes -->

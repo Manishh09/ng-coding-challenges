@@ -39,6 +39,7 @@ export const NGC_ROUTING_ROUTES: Routes = [
       challenges: challengeListResolver
     },
     data: {
+      layoutType: 'landing-page',
       categoryId: 'angular-routing',
       categoryName: 'Routing Challenges'
     }
@@ -63,6 +64,7 @@ export const NGC_ROUTING_ROUTES: Routes = [
           challenge: challengeDetailsResolver
         },
         data: {
+          layoutType: 'challenge-details',
           categoryId: 'angular-routing',
           categoryName: 'Routing Challenges',
           challengeId
@@ -75,6 +77,7 @@ export const NGC_ROUTING_ROUTES: Routes = [
         canActivate: challengeId === 'authorized-resource-access' ? [authGuard] :
                      challengeId === 'admin-dashboard-access' ? [adminGuard] : [],
         data: {
+          layoutType: 'challenge-workspace',
           categoryId: 'angular-routing',
           categoryName: 'Routing Challenges',
           challengeId
@@ -90,6 +93,9 @@ export const NGC_ROUTING_ROUTES: Routes = [
       import('./challenges/challenge-11-admin-dashboard-access/components/user-list/user-list.component')
         .then(m => m.UserListComponent),
     canActivate: [adminGuard],
+    data: {
+      layoutType: 'challenge-workspace'
+    }
   },
   {
     path: 'admin-dashboard-access/workspace/posts',
@@ -97,6 +103,9 @@ export const NGC_ROUTING_ROUTES: Routes = [
       import('./challenges/challenge-11-admin-dashboard-access/components/posts/posts.component')
         .then(m => m.PostsComponent),
     canActivate: [adminGuard],
+    data: {
+      layoutType: 'challenge-workspace'
+    }
   },
 
   { path: '**', redirectTo: '' }

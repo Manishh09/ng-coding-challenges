@@ -14,11 +14,13 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+  width: 100%;
   transition: margin-left var(--animation-duration-standard) var(--animation-easing);
 
-  // Shifted for sidebar on desktop
+  // Shifted for sidebar on desktop (list view)
   &.shifted {
     margin-left: 280px;
+    width: calc(100% - 280px);
     gap: var(--spacing-3xl);
   }
 
@@ -76,7 +78,7 @@
 .content-header {
   max-width: var(--max-width-wide); // 1440px - match content container
   margin: 0 auto;
-  width: calc(100vw - 280px);
+  width: 100%;
   padding: var(--spacing-xl) var(--spacing-2xl) var(--spacing-md); // Match content container padding
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
@@ -128,25 +130,6 @@
   }
 }
 
-// Content container
-.content-container {
-  flex: 1;
-  //max-width: var(--max-width-wide); // 1440px - optimal for grid layouts
-  margin: 0 auto;
-  width: calc(100vw - 360px) !important;
-  padding: var(--spacing-2xl) var(--spacing-2xl) calc(var(--spacing-2xl) + 16px); // Extra bottom padding for scroll clearance
-  overflow: visible; // Allow hover effects to show without clipping
-
-  @media (max-width: 768px) {
-    padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 16px); // Match header's mobile padding (16px)
-    margin-top: 64px; // Mobile top bar height
-  }
-
-  @media (min-width: 769px) and (max-width: 1023px) {
-    padding: var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 16px); // Match header's tablet padding (32px)
-  }
-}
-
 // Challenges grid
 .challenges-grid {
   display: grid;
@@ -176,7 +159,7 @@
     padding: 12px 4px;
   }
 
-  
+
 }
 
 .challenge-card-item {

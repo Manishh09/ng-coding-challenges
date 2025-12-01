@@ -131,6 +131,44 @@ export class ChallengesBrowserComponent {
     return depth <= 1;
   });
 
+  /**
+   * Dynamic container class based on route data
+   * Reads layoutType from route data for explicit layout declaration
+   * Provides single source of truth for container styling
+   *
+   * @returns Container class name (e.g., 'landing-page-container', 'challenge-details-container', 'challenge-workspace-container')
+   */
+  readonly containerClass = toSignal(
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        // Traverse to the deepest activated route to get its data
+        let route = this.route.firstChild;
+        while (route?.firstChild) {
+          route = route.firstChild;
+        }
+
+        // Get layoutType from route data (explicit declaration)
+        const layoutType = route?.snapshot.data['layoutType'];
+
+        // Return container class with proper suffix
+        return layoutType ? `${layoutType}-container` : 'landing-page-container';
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    ),
+    {
+      // Calculate initial value from current route
+      initialValue: (() => {
+        let route = this.route.firstChild;
+        while (route?.firstChild) {
+          route = route.firstChild;
+        }
+        const layoutType = route?.snapshot.data['layoutType'];
+        return layoutType ? `${layoutType}-container` : 'landing-page-container';
+      })()
+    }
+  );
+
   constructor() {
     // Monitor breakpoint changes for responsive behavior
     this.breakpointObserver

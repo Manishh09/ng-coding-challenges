@@ -69,8 +69,8 @@ app-root,
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, 
-      rgba(0, 0, 0, 0.15), 
+    background: linear-gradient(135deg,
+      rgba(0, 0, 0, 0.15),
       rgba(0, 0, 0, 0.05)
     );
     pointer-events: none;
@@ -167,7 +167,7 @@ textarea,
 [role="button"],
 [role="link"] {
   min-height: 44px; // WCAG 2.5.5 Target Size
-  
+
   @media (pointer: coarse) {
     min-height: 48px; // Larger for touch devices
   }
@@ -238,8 +238,8 @@ body.dark-mode {
   // Override any potential contrast issues
   .hero-section {
     &::before {
-      background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.25), 
+      background: linear-gradient(135deg,
+        rgba(0, 0, 0, 0.25),
         rgba(0, 0, 0, 0.15)
       );
     }
@@ -307,6 +307,74 @@ body.dark-mode {
 ::-moz-selection {
   background: var(--color-primary-alpha-30);
   color: var(--text-primary);
+}
+
+/* ==========================================
+   Layout Container Classes
+   Route-based layout system for consistent widths
+   ========================================== */
+
+// Base content container foundation
+.content-container {
+  flex: 1;
+  margin: 0 auto;
+  width: 100%;
+  overflow: visible;
+
+  // Smooth transitions between layout types
+  transition:
+    padding var(--animation-duration-standard) var(--animation-easing),
+    max-width var(--animation-duration-standard) var(--animation-easing);
+}
+
+// 1. Landing Page Container (Challenge List View)
+// Purpose: Grid layout with challenge cards
+// Layout: Maximum breathing room for card display
+.landing-page-container {
+  max-width: var(--max-width-wide); // 1440px - consistent width
+  padding: var(--spacing-2xl) var(--spacing-2xl) calc(var(--spacing-2xl) + 16px);
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 16px);
+    margin-top: 64px; // Mobile top bar offset
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 16px);
+  }
+}
+
+// 2. Challenge Details Container
+// Purpose: Details page with sidebar + main content
+// Layout: Balanced padding for optimal reading experience
+.challenge-details-container {
+  max-width: var(--max-width-wide); // 1440px - consistent width
+  // padding: var(--spacing-xl) var(--spacing-2xl);
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+}
+
+// 3. Challenge Workspace Container
+// Purpose: Interactive workspace view
+// Layout: Tighter padding to maximize interaction area
+.challenge-workspace-container {
+  max-width: var(--max-width-wide); // 1440px - consistent width
+  padding: var(--spacing-lg) var(--spacing-xl);
+  padding-bottom: var(--spacing-md); // Maximize vertical space for workspace
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
 }
 
 /* ==========================================

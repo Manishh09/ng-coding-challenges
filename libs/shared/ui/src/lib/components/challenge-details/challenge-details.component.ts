@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +7,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ChallengesService, ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ChallengesService, ChallengeCategoryService, StackblitzService } from '@ng-coding-challenges/shared/services';
 import { ChallengeDetails } from '@ng-coding-challenges/shared/models';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs.component';
@@ -35,6 +36,7 @@ import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs
     MatCardModule,
     MatDividerModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
     BreadcrumbsComponent
   ],
   templateUrl: './challenge-details.component.html',
@@ -45,6 +47,10 @@ export class ChallengeDetailsComponent {
   private readonly router = inject(Router);
   private readonly challengesService = inject(ChallengesService);
   private readonly categoryService = inject(ChallengeCategoryService);
+  private readonly stackblitzService = inject(StackblitzService);
+
+  // Loading state for StackBlitz launch
+  readonly launching = signal<boolean>(false);
 
   // Get route data (contains resolved challenge data from resolver)
   private readonly routeData = toSignal(this.route.data);
@@ -81,7 +87,7 @@ export class ChallengeDetailsComponent {
   readonly nextChallenge = computed(() => {
     const current = this.challengeDetails();
     if (!current) return null;
-    
+
     // Convert Observable to Signal by subscribing in effect
     const nextSignal = toSignal(this.challengesService.getNextChallenge(current.id));
     return nextSignal() || null;
@@ -90,7 +96,7 @@ export class ChallengeDetailsComponent {
   readonly previousChallenge = computed(() => {
     const current = this.challengeDetails();
     if (!current) return null;
-    
+
     // Convert Observable to Signal by subscribing in effect
     const prevSignal = toSignal(this.challengesService.getPreviousChallenge(current.id));
     return prevSignal() || null;
@@ -128,14 +134,41 @@ export class ChallengeDetailsComponent {
   }
 
   /**
-   * Navigate to challenge workspace
+   * Navigate to challenge workspace demo
    * Level 3: /challenges/{category}/{challengeId}/workspace
    */
-  launchChallenge(): void {
+  launchWorkspace(): void {
     const c = this.challengeDetails();
     if (c) {
       const slug = this.createChallengeSlug(c.title);
       this.router.navigate(['/challenges', c.category, slug, 'workspace']);
+    }
+  }
+
+  /**
+   * Launch challenge in StackBlitz IDE
+   */
+  async launchStackBlitz(): Promise<void> {
+    const c = this.challengeDetails();
+    if (!c) return;
+
+    this.launching.set(true);
+    try {
+      await this.stackblitzService.openChallengeInStackblitz({
+        id: c.id,
+        title: c.title,
+        category: c.category,
+        gitHub: c.gitHub,
+        description: c.description || '',
+        difficulty: c.difficulty || '',
+        tags: c.tags || [],
+        link: c.link || ''
+      });
+    } catch (error) {
+      console.error('Failed to launch StackBlitz:', error);
+    } finally {
+      // Keep launching state for a moment to show feedback
+      setTimeout(() => this.launching.set(false), 1000);
     }
   }
 

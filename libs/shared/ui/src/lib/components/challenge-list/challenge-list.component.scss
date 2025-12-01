@@ -22,7 +22,7 @@
   .challenge-list-header-content {
     display: flex;
      gap: 1.5rem;
-    max-width: 1400px;
+    width: 100%; // Full width of parent
     margin: 0 auto;
     position: relative;
   }
@@ -123,8 +123,7 @@
   gap: var(--spacing-lg);
   // padding: var(--spacing-md) clamp(1.5rem, 6vw, 4rem);
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  margin: 0 auto; // Parent container controls max-width
   box-sizing: border-box;
 
   & > * {

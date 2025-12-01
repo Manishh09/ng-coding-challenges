@@ -27,7 +27,7 @@
     }
 
     <!-- Content Container -->
-    <div class="content-container">
+    <div class="content-container" [ngClass]="containerClass()">
       <!-- Router Outlet: Delegates to ChallengeListComponent or ChallengeDetailsComponent -->
       <router-outlet />
     </div>

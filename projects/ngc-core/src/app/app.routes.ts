@@ -33,6 +33,7 @@ export const NGC_CORE_ROUTES: Routes = [
       challenges: challengeListResolver
     },
     data: {
+      layoutType: 'landing-page',
       categoryId: 'angular-core',
       categoryName: 'Angular Core Challenges'
     }
@@ -50,6 +51,7 @@ export const NGC_CORE_ROUTES: Routes = [
           challenge: challengeDetailsResolver
         },
         data: {
+          layoutType: 'challenge-details',
           categoryId: 'angular-core',
           categoryName: 'Angular Core Challenges',
           challengeId
@@ -60,6 +62,7 @@ export const NGC_CORE_ROUTES: Routes = [
         path: 'workspace',
         loadComponent: componentLoader,
         data: {
+          layoutType: 'challenge-workspace',
           categoryId: 'angular-core',
           categoryName: 'Angular Core Challenges',
           challengeId
