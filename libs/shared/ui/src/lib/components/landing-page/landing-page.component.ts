@@ -3,7 +3,9 @@ import {
   ChangeDetectionStrategy,
   inject,
   input,
+  computed,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -87,13 +89,18 @@ export class LandingPageComponent {
   readonly heroAltText = input<string>('Developer coding illustration');
 
   // ========== Derived Data ==========
-  private readonly challengeList = this.challengesService.getChallenges();
-  private readonly groupedChallenges =
-    this.challengesService.getChallengesGroupedByCategory();
+  private readonly challengeList = toSignal(
+    this.challengesService.getChallenges(),
+    { initialValue: [] }
+  );
+  private readonly groupedChallenges = toSignal(
+    this.challengesService.getChallengesGroupedByCategory(),
+    { initialValue: new Map() }
+  );
   private readonly categoryCatalog = this.categoryService.categories();
 
-  readonly totalChallenges = this.challengeList.length;
-  readonly totalCategories = this.groupedChallenges.size;
+  readonly totalChallenges = computed(() => this.challengeList().length);
+  readonly totalCategories = computed(() => this.groupedChallenges().size);
 
   readonly heroHighlights: readonly string[] = [
     'Real Angular scenarios you will ship in production',
@@ -129,9 +136,17 @@ export class LandingPageComponent {
       return;
     }
 
-    // Construct dynamic route safely
-    const { category, id } = latestChallenge;
-    this.router.navigate([`${ROUTES.challenges}/${category}/${id}`]);
+    // Convert Observable to value via subscription
+    latestChallenge.subscribe(latest => {
+      if (latest) {
+        // Construct dynamic route safely
+        const { category, id } = latest;
+        this.router.navigate([`${ROUTES.challenges}/${category}/${id}`]);
+      } else {
+        this.notificationService.info('No challenges available yet. Check back soon!');
+        this.router.navigate([ROUTES.challenges]);
+      }
+    });
   }
 
   navigateToCategory(categoryId: string): void {
@@ -173,7 +188,7 @@ export class LandingPageComponent {
   }
 
   private computeFeaturedTracks(): FeaturedTrack[] {
-    const entries = Array.from(this.groupedChallenges.entries());
+    const entries = Array.from(this.groupedChallenges().entries());
     return entries
       .sort((a, b) => b[1].length - a[1].length)
       .slice(0, 3)
@@ -191,7 +206,7 @@ export class LandingPageComponent {
   }
 
   private computeLatestChallenges(): SpotlightChallenge[] {
-    return [...this.challengeList]
+    return [...this.challengeList()]
       .slice(-3)
       .reverse()
       .map((challenge) => ({

@@ -5,6 +5,7 @@ import {
   computed,
   Signal,
   DestroyRef,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule, NavigationEnd } from '@angular/router';
@@ -22,18 +23,18 @@ import { filter, map } from 'rxjs';
 
 /**
  * Challenges Browser Component - Pure Shell/Layout Component
- * 
+ *
  * Responsibilities:
  * - Provides sidebar navigation for categories
  * - Manages responsive layout (mobile/tablet/desktop)
  * - Adapts UI based on route depth (shows/hides sidebar)
  * - Delegates content rendering to child routes via <router-outlet>
- * 
+ *
  * Does NOT:
  * - Render challenge lists (delegated to ChallengeListComponent)
  * - Render challenge details (delegated to ChallengeDetailsComponent)
  * - Handle challenge data fetching (done by resolvers)
- * 
+ *
  * Routing Architecture:
  * - Level 1: /challenges/{category} - Shows ChallengeListComponent
  * - Level 2: /challenges/{category}/{challengeId} - Shows ChallengeDetailsComponent
@@ -75,15 +76,20 @@ export class ChallengesBrowserComponent {
     return this.categoryService.getCategoryNameById(categoryId) || 'Challenges';
   });
 
+  // Cache for challenge counts by category (initialized once, updated reactively)
+  private readonly challengeCountByCategory = toSignal(
+    this.challengesService.getChallengeCountByCategory(),
+    { initialValue: new Map<string, number>() }
+  );
+
   // Get challenge count for result display
   readonly resultCountText = computed(() => {
     const categoryId = this.selectedCategoryId();
     if (!categoryId) return '0 challenges';
-    
-    const challenges = this.challengesService.getChallengesByCategory(categoryId);
-    const count = challenges.length;
+
+    const count = this.challengeCountByCategory().get(categoryId) || 0;
     const categoryName = this.selectedCategoryName();
-    
+
     return `${count} challenges in ${categoryName}`;
   });
 
@@ -97,7 +103,7 @@ export class ChallengesBrowserComponent {
   private calculateRouteDepth(): number {
     const url = this.router.url.split('?')[0]; // Remove query params
     const segments = url.split('/').filter(s => s);
-    
+
     // /challenges = 1 segment (depth 0)
     // /challenges/rxjs-api = 2 segments (depth 1)
     // /challenges/rxjs-api/fetch-products = 3 segments (depth 2)
@@ -126,10 +132,6 @@ export class ChallengesBrowserComponent {
   });
 
   constructor() {
-    // Initialize challenge counts for all categories
-    const challengeCountMap = this.challengesService.getChallengeCountByCategory();
-    this.categoryService.updateAllChallengeCounts(challengeCountMap);
-
     // Monitor breakpoint changes for responsive behavior
     this.breakpointObserver
       .observe([Breakpoints.HandsetPortrait, '(max-width: 767px)'])
@@ -165,8 +167,17 @@ export class ChallengesBrowserComponent {
   /**
    * Handle category selection from sidebar
    * Navigates to the selected category route
+   * Validates that the category exists before navigation
    */
   onCategorySelect(categoryId: string): void {
+    // Validate category exists in route configuration
+    const validCategories = ['rxjs-api', 'angular-core', 'angular-routing'];
+
+    if (!validCategories.includes(categoryId)) {
+      console.warn(`[ChallengesBrowser] Category '${categoryId}' does not have a route configured`);
+      return;
+    }
+
     this.router.navigate([categoryId], { relativeTo: this.route });
   }
 }

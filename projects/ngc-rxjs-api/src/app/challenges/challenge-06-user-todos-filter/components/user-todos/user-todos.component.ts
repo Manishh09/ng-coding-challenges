@@ -6,11 +6,10 @@ import { UserTodoFacadeService } from '../../services/user-todo-facade.service';
  import { CommonModule, NgClass } from "@angular/common";
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 @Component({
   selector: 'app-user-todos',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, MatRadioModule, MatChipsModule, MatTableModule, MatSelectModule, NgClass, ChallengeHeaderComponent],
+  imports: [AsyncPipe, CommonModule, MatRadioModule, MatChipsModule, MatTableModule, MatSelectModule, NgClass],
   templateUrl: './user-todos.component.html',
   styleUrls: ['./user-todos.component.scss']
 })

@@ -1,21 +1,74 @@
-import { Injectable, Signal, signal, computed } from '@angular/core';
-import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
-import { CHALLENGE_CATEGORIES } from './challenge-category.data';
+import { Injectable, Signal, signal, computed, inject, effect } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ChallengeCategory, CategorySlug } from '@ng-coding-challenges/shared/models';
+import { ConfigLoaderService } from '../config/config-loader.service';
+import { map, switchMap, forkJoin } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChallengeCategoryService {
+  private readonly configLoader = inject(ConfigLoaderService);
+
+  /**
+   * Load categories from JSON configuration with challenge counts.
+   * Falls back to empty array if JSON load fails.
+   */
+  private readonly categoriesFromJson = toSignal(
+    this.configLoader.getCategories().pipe(
+      switchMap(categories => {
+        // Load challenge counts for all categories in parallel
+        const categoriesWithCounts$ = categories.map(cat =>
+          this.configLoader.getChallengesByCategory(cat.slug as CategorySlug).pipe(
+            map(challenges => ({
+              id: cat.slug,
+              name: cat.title,
+              description: cat.description,
+              icon: cat.icon,
+              newBadgeCount: 0,
+              challengeCount: challenges.length
+            } as ChallengeCategory))
+          )
+        );
+
+        // Wait for all categories to load with their counts
+        return categoriesWithCounts$.length > 0
+          ? combineLatest(categoriesWithCounts$)
+          : [[]];
+      })
+    ),
+    { initialValue: [] } // Empty array fallback
+  );
 
   /**
    * Internal reactive state for all categories.
+   * Now populated from JSON configuration.
    */
-  private readonly _categories = signal<ChallengeCategory[]>(CHALLENGE_CATEGORIES);
+  private readonly _categories = signal<ChallengeCategory[]>([]);
 
   /**
    * Internal reactive state for the selected category ID.
    */
-  private readonly _selectedCategoryId = signal<string>(this._categories().length ? this._categories()[0].id : '');
+  private readonly _selectedCategoryId = signal<string>('');
+
+  /**
+   * Watch for changes in JSON-loaded categories and update the signal
+   */
+  constructor() {
+    // Use effect to reactively sync JSON categories when they load
+    effect(() => {
+      const jsonCategories = this.categoriesFromJson();
+      if (jsonCategories && jsonCategories.length > 0) {
+        this._categories.set(jsonCategories);
+
+        // Set first category as selected if none selected yet
+        if (!this._selectedCategoryId() && jsonCategories.length > 0) {
+          this._selectedCategoryId.set(jsonCategories[0].id);
+        }
+      }
+    });
+  }
 
   /**
    * Internal reactive state for category search/filter term.

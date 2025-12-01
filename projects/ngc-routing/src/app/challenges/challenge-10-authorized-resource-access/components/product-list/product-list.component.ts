@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 
 @Component({
   selector: 'app-product-list',
-  imports: [ChallengeHeaderComponent],
+  imports: [],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })

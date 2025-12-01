@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChallengeCardComponent } from '../challenge-card/challenge-card.component';
-import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,7 +38,6 @@ export class ChallengeListComponent {
 
   //  Dependencies
   private readonly challengeCategoryService = inject(ChallengeCategoryService);
-  private readonly challengesService = inject(ChallengesService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -57,19 +55,10 @@ export class ChallengeListComponent {
     return data.categoryId || '';
   });
 
-  //  Derived signal: list of challenges (from resolver or fallback to service)
+  //  Derived signal: list of challenges (from resolver)
   readonly challenges = computed<Challenge[]>(() => {
     const data = this.routeData() as { challenges?: readonly Challenge[] };
-    
-    // If resolver provided the data, use it
-    if (data.challenges) {
-      return Array.from(data.challenges);
-    }
-
-    // Fallback: manual lookup (for backwards compatibility)
-    const id = this.categoryId();
-    if (!id) return [];
-    return Array.from(this.challengesService.getChallengesByCategory(id));
+    return data.challenges ? Array.from(data.challenges) : [];
   });
 
   // Derived signal: new badge challenge IDs (top 2)
@@ -97,7 +86,7 @@ export class ChallengeListComponent {
         this.loading.set(true);
         this.challengeCategoryService.setSelectedCategory(id);
         // Simulate async loading (remove if you have real async data fetching)
-        setTimeout(() => this.loading.set(false), 300);
+        setTimeout(() => this.loading.set(false), 500);
       }
     });
   }

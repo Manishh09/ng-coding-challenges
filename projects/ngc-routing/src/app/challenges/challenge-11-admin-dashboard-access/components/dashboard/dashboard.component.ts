@@ -3,11 +3,10 @@ import { AuthService } from '../../services/auth.service';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, MatCardModule, RouterModule, ChallengeHeaderComponent],
+  imports: [CommonModule, MatCardModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

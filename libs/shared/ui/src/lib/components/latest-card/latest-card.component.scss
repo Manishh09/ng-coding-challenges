@@ -2,7 +2,7 @@
 
 /**
  * LatestCard Component Styles
- * 
+ *
  * A card component for showcasing latest content with category pill and CTA.
  * Uses Material Design 3 principles with responsive design.
  */
@@ -22,7 +22,7 @@
 
   // Hover state for visual feedback
   &:hover {
-    border-color: var(--border-emphasis);
+    border-color: var(--electric-violet);
     box-shadow: var(--shadow-xl);
     transform: translateY(-4px);
   }
@@ -69,6 +69,7 @@
   align-items: center;
   gap: var(--spacing-sm);
   margin-top: auto;
+  justify-content: center;
 
   button {
     display: inline-flex;
@@ -78,45 +79,26 @@
     padding: 10px 24px;
     border-radius: var(--border-radius-md);
     transition: all var(--animation-duration-standard) var(--animation-easing);
-    
+
     // Primary filled button styling
-    &.mat-flat-button,
-    &.mat-raised-button {
-      background-color: var(--color-primary);
+    &.mat-flat-button {
+      background-color: var(--electric-violet) !important;
       color: var(--text-on-primary);
       border: none;
-      
-      &:hover {
-        background-color: var(--interactive-primary-hover);
+
+      &:hover:not(:disabled) {
+        background-color: var(--electric-violet) !important;
         transform: translateY(-2px);
         box-shadow: var(--shadow-lg);
       }
-      
+
       &:active {
         transform: translateY(0);
         box-shadow: var(--shadow-md);
-      }
-    }
-    
-    // Ensure proper colors for mat-stroked-button (fallback)
-    &.mat-stroked-button {
-      border: 2px solid var(--color-primary);
-      color: var(--color-primary);
-      background-color: transparent;
-      
-      &:hover {
-        background-color: var(--color-primary);
-        color: var(--text-on-primary);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-      }
-      
-      &:active {
-        transform: translateY(0);
-        box-shadow: var(--shadow-sm);
       }
     }
 
+    // Icon styling within button
     mat-icon {
       font-size: 1.125rem;
       width: 1.125rem;

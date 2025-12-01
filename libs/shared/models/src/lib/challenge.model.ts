@@ -50,5 +50,5 @@ export interface ChallengeDetails extends Challenge {
   author: Author;
   estimatedTime?: string;
   prerequisites?: string[];
-  requirementsList?: string[];
+  requirementList?: string[];
 }

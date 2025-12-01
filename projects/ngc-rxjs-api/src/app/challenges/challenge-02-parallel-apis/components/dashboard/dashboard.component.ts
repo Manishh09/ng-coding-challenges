@@ -5,11 +5,10 @@ import { Post } from '../../models/post';
 import { User } from '../../models/user';
 import { DashboardResponse } from '../../models/dasboard';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ChallengeHeaderComponent],
+  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

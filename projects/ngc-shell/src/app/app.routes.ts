@@ -4,14 +4,14 @@ import { challengeListResolver } from '@ng-coding-challenges/shared/services';
 
 /**
  * Main application routes
- * 
+ *
  * Architecture:
  * - Landing page at root
  * - Three-level challenge routing:
  *   Level 1: Category list (/challenges/rxjs-api)
  *   Level 2: Challenge details (/challenges/rxjs-api/fetch-products)
  *   Level 3: Challenge workspace (/challenges/rxjs-api/fetch-products/workspace)
- * 
+ *
  * Uses Route Resolvers for pre-fetching data
  */
 export const routes: Routes = [
@@ -46,7 +46,7 @@ export const routes: Routes = [
         resolve: {
           challenges: challengeListResolver
         },
-        data: { categoryId: 'all', categoryName: 'All Challenges' }
+        data: { categoryId: 'rxjs-api', categoryName: 'RxJS & API Challenges' }
       },
 
       // RxJS API Category (lazy loaded sub-app)

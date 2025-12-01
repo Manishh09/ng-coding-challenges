@@ -3,12 +3,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CurrencyPipe, ChallengeHeaderComponent],
+  imports: [CurrencyPipe],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })

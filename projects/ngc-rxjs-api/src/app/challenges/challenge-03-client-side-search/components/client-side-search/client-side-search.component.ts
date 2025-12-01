@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 
 @Component({
   selector: 'app-client-side-search',
@@ -18,8 +17,7 @@ import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/comp
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule,
-    ChallengeHeaderComponent
+    MatCardModule
 ],
   templateUrl: './client-side-search.component.html',
   styleUrl: './client-side-search.component.scss'

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, input, computed, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -68,7 +69,7 @@ export class ChallengeCardComponent implements OnInit {
 
   // Reactive signal to check if current challenge is the latest challenge
   readonly isLatestChallenge = computed(() => {
-    const latest = this.challengesService.getLatestChallenge();
+    const latest = this.latestChallenge();
     const current = this.challenge();
     return !!latest && current.id === latest.id;
   });
@@ -93,6 +94,12 @@ export class ChallengeCardComponent implements OnInit {
   private readonly navigationService = inject(NavigationService);
   private readonly notificationService = inject(NotificationService);
   private readonly stackblitzService = inject(StackblitzService);
+
+  // Cache latest challenge outside reactive context
+  private readonly latestChallenge = toSignal(
+    this.challengesService.getLatestChallenge(),
+    { initialValue: undefined }
+  );
 
   ngOnInit(): void {
     // Initialization logic can go here if needed
@@ -149,7 +156,7 @@ export class ChallengeCardComponent implements OnInit {
     const challenge = this.challenge();
     const categoryId = challenge.category;
     const challengeSlug = this.createChallengeSlug(challenge);
-    this.router.navigate(['/challenges', categoryId, challengeSlug]);
+    this.router.navigate(['/challenges', categoryId, challenge.link]);
   }
 
   /**

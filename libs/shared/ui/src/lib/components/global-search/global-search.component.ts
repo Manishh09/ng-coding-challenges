@@ -8,6 +8,7 @@ import {
   viewChild,
   OnInit,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -63,13 +64,16 @@ export class GlobalSearchComponent implements OnInit {
   readonly showAllResults = signal<boolean>(false);
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
+  // Store search results in a signal (updated via effect)
+  private readonly searchResults = signal<SearchResult[]>([]);
+
   // Computed values
   readonly allResults = computed(() => {
     const term = this.searchTerm();
     if (!term || term.trim().length < this.MIN_SEARCH_LENGTH) {
       return [];
     }
-    return this.challengesService.searchAllChallenges(term, 20);
+    return this.searchResults();
   });
 
   readonly displayedResults = computed(() => {
@@ -104,6 +108,21 @@ export class GlobalSearchComponent implements OnInit {
     effect(() => {
       this.searchTerm(); // Track dependency
       this.showAllResults.set(false);
+    });
+
+    // Perform search when search term changes
+    effect(() => {
+      const term = this.searchTerm();
+      if (!term || term.trim().length < this.MIN_SEARCH_LENGTH) {
+        this.searchResults.set([]);
+        return;
+      }
+
+      // Subscribe to search results and update signal
+      this.challengesService.searchAllChallenges(term, 20).subscribe({
+        next: (results) => this.searchResults.set(results),
+        error: () => this.searchResults.set([])
+      });
     });
   }
 

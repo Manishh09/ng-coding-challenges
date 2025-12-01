@@ -4,13 +4,11 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs';
 import { User } from '../../models/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
  @Component({
   selector: 'app-server-side-search',
   imports: [
     ReactiveFormsModule,
-    FormsModule,
-    ChallengeHeaderComponent
+    FormsModule
   ],
   templateUrl: './server-side-search.component.html',
   styleUrl: './server-side-search.component.scss'

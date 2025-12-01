@@ -2,7 +2,7 @@
 
 /**
  * FeatureCard Component Styles
- * 
+ *
  * Interactive button-based card for features, tracks, and categories.
  * Uses Material Design 3 principles with responsive design and accessibility.
  */
@@ -24,15 +24,15 @@
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  
+
   // Remove default button styles
   appearance: none;
   font-family: inherit;
   color: inherit;
 
   // Hover state
-  &:hover:not(:disabled) {
-    border-color: var(--color-primary);
+  &:hover {
+    border-color: var(--electric-violet);
     box-shadow: var(--shadow-xl);
     transform: translateY(-4px);
 

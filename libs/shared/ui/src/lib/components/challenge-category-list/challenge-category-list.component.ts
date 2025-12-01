@@ -4,6 +4,7 @@ import {
   computed,
   inject,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
@@ -42,13 +43,21 @@ export class ChallengeCategoryListComponent {
   //  Signals exposed from services
   readonly categories = this.categoryService.categories;
 
+  // Cache challenge count map outside reactive context
+  private readonly challengeCountMap = toSignal(
+    this.challengeService.getChallengeCountByCategory(),
+    { initialValue: new Map<string, number>() }
+  );
+
   // Computed signal for categories with challenge counts
   readonly categoriesWithCount = computed(() =>
-    this.categories().map((category) => ({
-      ...category,
-      challengeCount: this.challengeService.getChallengesByCategory(category.id)
-        .length,
-    }))
+    this.categories().map((category) => {
+      const challengeCount = this.challengeCountMap().get(category.id) || 0;
+      return {
+        ...category,
+        challengeCount,
+      };
+    })
   );
 
   /**

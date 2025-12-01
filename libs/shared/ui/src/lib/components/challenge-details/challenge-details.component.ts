@@ -14,9 +14,9 @@ import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs
 
 /**
  * Challenge Details Component
- * 
+ *
  * Level 2 in routing hierarchy: /challenges/{category}/{challengeId}
- * 
+ *
  * Features:
  * - Displays challenge overview, requirements, learning outcomes
  * - Provides navigation to workspace view
@@ -48,32 +48,11 @@ export class ChallengeDetailsComponent {
 
   // Get route data (contains resolved challenge data from resolver)
   private readonly routeData = toSignal(this.route.data);
-  private readonly routeParams = toSignal(this.route.params);
 
-  // Challenge details from resolver (preferred) or fallback to service lookup
+  // Challenge details from resolver
   readonly challengeDetails = computed(() => {
     const data = this.routeData() as { challenge?: ChallengeDetails };
-    
-    // If resolver provided the data, use it
-    if (data?.challenge) {
-      return data.challenge;
-    }
-
-    // Fallback: manual lookup (for backwards compatibility)
-    const params = this.routeParams();
-    const categoryId = (data as { categoryId?: string })?.categoryId || '';
-    const challengeSlug = params?.['challengeId'] || '';
-    
-    if (!challengeSlug || !categoryId) return null;
-
-    const challenges = this.challengesService.getChallengesByCategory(categoryId);
-    const challenge = Array.from(challenges).find(c => 
-      this.createChallengeSlug(c.title) === challengeSlug
-    );
-
-    if (!challenge) return null;
-    
-    return this.challengesService.getChallengeDetailsById(challenge.id);
+    return data?.challenge || null;
   });
 
   // Get category name for breadcrumbs
@@ -98,23 +77,29 @@ export class ChallengeDetailsComponent {
     ];
   });
 
-  // Navigation helpers
+  // Navigation helpers - converted to signals from observables
   readonly nextChallenge = computed(() => {
     const current = this.challengeDetails();
-    return current ? this.challengesService.getNextChallenge(current.id) : null;
+    if (!current) return null;
+    
+    // Convert Observable to Signal by subscribing in effect
+    const nextSignal = toSignal(this.challengesService.getNextChallenge(current.id));
+    return nextSignal() || null;
   });
 
   readonly previousChallenge = computed(() => {
     const current = this.challengeDetails();
-    return current ? this.challengesService.getPreviousChallenge(current.id) : null;
+    if (!current) return null;
+    
+    // Convert Observable to Signal by subscribing in effect
+    const prevSignal = toSignal(this.challengesService.getPreviousChallenge(current.id));
+    return prevSignal() || null;
   });
 
   // Check if challenge exists
   readonly challengeNotFound = computed(() => {
-    const params = this.routeParams();
-    const challengeSlug = params?.['challengeId'] || '';
     const challenge = this.challengeDetails();
-    return challengeSlug !== '' && !challenge;
+    return !challenge;
   });
 
   /**

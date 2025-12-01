@@ -37,12 +37,12 @@
             <section class="section requirements">
                 <h2>Requirements</h2>
                 <mat-divider></mat-divider>
-                @for(req of c.requirementsList; track req) {
+                @for(req of c.requirementList; track req) {
                  <ul class="requirements-list">
                     <li>{{ req }}</li>
                 </ul>
                 }
-                 
+
                 <a [href]="c.requirementDoc" target="_blank" class="requirements-link">
                     <span>See full requirements doc</span>
                     <mat-icon>arrow_forward</mat-icon>

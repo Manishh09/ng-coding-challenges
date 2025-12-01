@@ -5,10 +5,9 @@ import { ProductService } from '../../services/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CheckoutFacadeService } from '../../services/checkuot-facade.service';
 import { MatButtonModule } from '@angular/material/button';
-import { ChallengeHeaderComponent } from 'projects/ngc-shell/src/app/shared/components/challenge-header/challenge-header.component';
 @Component({
   selector: 'app-checkout',
-  imports: [MatButtonModule, ChallengeHeaderComponent],
+  imports: [MatButtonModule],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })

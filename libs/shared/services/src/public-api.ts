@@ -13,6 +13,12 @@ export * from './lib/theme/theme.service';
 export * from './lib/challenges/challenges.service';
 export * from './lib/challenges/challenge-category.service';
 
+// Configuration Services
+export * from './lib/config/config-loader.service';
+
+// Type Mappers
+export * from './lib/mappers/challenge-type-mapper';
+
 // Route Resolvers
 export * from './lib/resolvers/challenge-details.resolver';
 export * from './lib/resolvers/challenge-list.resolver';
