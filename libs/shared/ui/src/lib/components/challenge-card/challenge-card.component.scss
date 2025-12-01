@@ -1,78 +1,104 @@
-/* ==========================================
-   Challenge Card Component Styles
-   ========================================== */
+/* =============================================================================
+ * Challenge Card Component
+ * =============================================================================
+ * Displays individual challenge information with hover interactions.
+ * Uses BEM naming convention for clarity and maintainability.
+ * ============================================================================= */
 
+/* -----------------------------------------------------------------------------
+ * Host Element
+ * ----------------------------------------------------------------------------- */
 :host {
   display: block;
   height: 100%;
   animation: fadeIn 0.45s var(--animation-easing);
 }
 
+/* -----------------------------------------------------------------------------
+ * Card Container
+ * ----------------------------------------------------------------------------- */
 .challenge-card {
+  /* Layout */
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-radius: var(--border-radius-lg);
-  border: 1px solid var(--border-primary);
-  background: linear-gradient(to bottom, 
-    var(--surface-secondary), 
+  overflow: hidden;
+
+  /* Visual styling */
+  background: linear-gradient(
+    to bottom,
+    var(--surface-secondary),
     color-mix(in srgb, var(--surface-secondary) 97%, var(--interactive-primary) 3%)
   );
-  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: transform var(--animation-duration-standard) var(--animation-easing),
+  color: var(--text-primary);
+
+  /* Animation & transitions */
+  transition:
+    transform var(--animation-duration-standard) var(--animation-easing),
     box-shadow var(--animation-duration-standard) var(--animation-easing),
     border-color var(--animation-duration-fast) var(--animation-easing);
   will-change: transform, box-shadow;
 
+  /* Hover state */
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--interactive-primary);
-    background: linear-gradient(to bottom, 
-      var(--surface-secondary), 
+    background: linear-gradient(
+      to bottom,
+      var(--surface-secondary),
       color-mix(in srgb, var(--surface-secondary) 94%, var(--interactive-primary) 6%)
     );
   }
 
+  /* Focus state for accessibility */
   &:focus-within {
     outline: 2px solid var(--color-primary-alpha-60);
     outline-offset: 2px;
     border-color: var(--color-primary-alpha-40);
   }
 
-  // Latest challenge highlight
+  /* Latest challenge variant */
   &--latest {
     border-color: var(--interactive-primary);
-    box-shadow: 0 0 0 1px var(--color-primary-alpha-20), var(--shadow-md);
-    background: linear-gradient(to bottom, 
-      var(--surface-secondary), 
+    box-shadow:
+      0 0 0 1px var(--color-primary-alpha-20),
+      var(--shadow-md);
+    background: linear-gradient(
+      to bottom,
+      var(--surface-secondary),
       color-mix(in srgb, var(--surface-secondary) 92%, var(--interactive-primary) 8%)
     );
   }
 }
 
-/* Decorative gradient halo */
+/* -----------------------------------------------------------------------------
+ * Decorative Halo Effect
+ * ----------------------------------------------------------------------------- */
 .challenge-card__halo {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 0%, var(--color-primary-alpha-10), transparent 60%),
+  background:
+    radial-gradient(circle at 30% 0%, var(--color-primary-alpha-10), transparent 60%),
     radial-gradient(circle at 70% 0%, var(--color-secondary-alpha-10), transparent 60%);
-  pointer-events: none;
   opacity: 0.5;
+  pointer-events: none;
   transition: opacity var(--animation-duration-standard) var(--animation-easing);
+
+  .challenge-card:hover & {
+    opacity: 0.8;
+  }
 }
 
-.challenge-card:hover .challenge-card__halo {
-  opacity: 0.8;
-}
-
-/* ==========================================
-   Header & Badge
-   ========================================== */
+/* -----------------------------------------------------------------------------
+ * Header Section
+ * ----------------------------------------------------------------------------- */
 .challenge-card__header {
+  /* Layout */
   position: relative;
   z-index: 1;
   display: flex;
@@ -80,16 +106,18 @@
   justify-content: space-between;
   gap: var(--spacing-md);
   min-height: 52px;
-  padding: var(--spacing-md) var(--spacing-md);
+  padding: var(--spacing-md);
+
+  /* Visual styling */
   background: linear-gradient(to bottom, var(--surface-primary), transparent);
-  border-bottom: 1px solid var(--border-primary); /* Fallback for older browsers */
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .challenge-card__header-left {
   display: flex;
   align-items: center;
   flex: 1;
-  min-width: 0; // Allow text truncation
+  min-width: 0; /* Enable text truncation */
 }
 
 .challenge-card__header-right {
@@ -98,35 +126,43 @@
   flex-shrink: 0;
 }
 
-// Challenge ID styling (e.g., "Challenge-01")
+/* Challenge ID (e.g., "Challenge-01") */
 .challenge-card__id {
+  font-family: var(--font-family-mono, 'Courier New', monospace);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   color: var(--text-secondary);
   text-transform: uppercase;
-  font-family: var(--font-family-mono, 'Courier New', monospace);
 
   @media (min-width: 768px) {
     font-size: 0.9375rem;
   }
 }
 
+/* "New" Badge */
 .challenge-card__badge {
+  /* Layout */
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-sm);
+  white-space: nowrap;
+
+  /* Typography */
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-on-primary);
+
+  /* Visual styling */
   background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover));
   border-radius: var(--border-radius-pill);
   box-shadow: 0 2px 8px var(--color-primary-alpha-30);
+
+  /* Animation */
   animation: pulse 2s ease-in-out infinite;
-  white-space: nowrap;
 
   mat-icon {
     font-size: 14px;
@@ -135,11 +171,14 @@
   }
 }
 
+/* Badge pulse animation */
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.02);
     opacity: 0.95;

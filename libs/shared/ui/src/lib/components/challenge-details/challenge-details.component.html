@@ -1,15 +1,13 @@
 @if (challengeDetails(); as c) {
+<!-- =============================================================================
+     Challenge Details Component
+     Displays comprehensive information about a specific challenge
+     ============================================================================= -->
 <div class="details-container fade-in">
-    <!-- Back Button -->
-    <!-- <button mat-button class="back-button" (click)="goBack()" aria-label="Go back to challenges list">
-        <mat-icon>arrow_back</mat-icon>
-        <span>Back to {{ categoryName() }} Challenges</span>
-    </button> -->
-
-    <!-- Breadcrumbs Component -->
+    <!-- Breadcrumb Navigation -->
     <ng-coding-challenges-breadcrumbs [items]="breadcrumbItems()" />
 
-    <!-- Header -->
+    <!-- Challenge Header Section -->
     <header class="details-header">
         <h1 class="title">{{ c.title }}</h1>
         <div class="tags-row">
@@ -26,14 +24,16 @@
     </header>
 
     <div class="details-grid">
-        <!-- Main Content -->
+        <!-- Main Content Area -->
         <main class="main-content">
+            <!-- About This Challenge Section -->
             <section class="section about">
                 <h2>About this Challenge</h2>
                 <mat-divider></mat-divider>
                 <p class="description-text">{{ c.longDescription }}</p>
             </section>
 
+            <!-- Requirements Section -->
             <section class="section requirements">
                 <h2>Requirements</h2>
                 <mat-divider></mat-divider>

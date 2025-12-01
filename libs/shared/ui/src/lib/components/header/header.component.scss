@@ -1,48 +1,77 @@
-// Header styles
+/* =============================================================================
+ * Header Component
+ * =============================================================================
+ * Main navigation header with fixed positioning, search, and actions.
+ * Uses Material Design principles with glassmorphism effects.
+ * ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+ * Toolbar Container
+ * ----------------------------------------------------------------------------- */
 .header-toolbar {
+  /* Positioning */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1100;
+
+  /* Layout */
+  width: 100%;
+  height: var(--header-height);
+  padding: 0;
+
+  /* Visual styling */
   background: var(--surface-secondary);
+  box-shadow: 0 1px 0 var(--border-primary);
+
+  /* Glassmorphism effect */
   backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
   -webkit-backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
-  box-shadow: 0 1px 0 var(--border-primary);
-  padding: 0;
-  height: var(--header-height);
-  width: 100%;
-  transition: background var(--animation-duration-standard) var(--animation-easing),
+
+  /* Animation */
+  transition:
+    background var(--animation-duration-standard) var(--animation-easing),
     box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
 
-// Container for header content
+/* -----------------------------------------------------------------------------
+ * Container for Header Content
+ * ----------------------------------------------------------------------------- */
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 var(--spacing-2xl);
   height: 100%;
+  padding: 0 var(--spacing-2xl);
 }
 
-// Logo container
+/* -----------------------------------------------------------------------------
+ * Logo Section
+ * ----------------------------------------------------------------------------- */
 .logo-section {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-// Logo link styling
 .logo-link {
+  /* Layout */
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
+  /* Visual */
   color: inherit;
   text-decoration: none;
-  transition: transform var(--animation-duration-fast) var(--animation-easing),
+
+  /* Animation */
+  transition:
+    transform var(--animation-duration-fast) var(--animation-easing),
     opacity var(--animation-duration-fast) var(--animation-easing);
 
+  /* Focus state */
   &:focus-visible {
     outline: 3px solid var(--state-focus-ring);
     outline-offset: 2px;
@@ -53,6 +82,7 @@
     outline: none;
   }
 
+  /* Hover state */
   &:hover {
     opacity: 0.9;
   }

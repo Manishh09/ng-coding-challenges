@@ -136,7 +136,8 @@
   gap: var(--spacing-sm);
 }
 
-.btn {
+/* Hero Button Base Styles */
+.hero-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +179,8 @@
   }
 }
 
-.btn-primary {
+/* Primary Button Variant */
+.hero-button--primary {
   background: var(--gradient-primary);
   color: var(--color-white-alpha-90);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -193,7 +195,8 @@
   }
 }
 
-.btn-outline {
+/* Outline Button Variant */
+.hero-button--outline {
   background: var(--color-white-alpha-10);
   border: 1px solid var(--color-white-alpha-30);
   color: var(--color-white-alpha-90);
@@ -209,6 +212,20 @@
 }
 
 .btn-ghost {
+  background: transparent;
+  color: var(--color-white-alpha-90);
+  border: 1px solid transparent;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-white-alpha-30);
+    background: var(--color-white-alpha-10);
+    transform: translateY(-2px);
+  }
+}
+
+/* Ghost Button Variant */
+.hero-button--ghost {
   background: transparent;
   color: var(--color-white-alpha-90);
   border: 1px solid transparent;
@@ -609,7 +626,7 @@
     flex-direction: column;
     align-items: stretch;
 
-    .btn {
+    .hero-button {
       width: 100%;
     }
   }

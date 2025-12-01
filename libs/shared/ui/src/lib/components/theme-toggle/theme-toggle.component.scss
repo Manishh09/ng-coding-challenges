@@ -1,4 +1,4 @@
-.theme-toggle-btn {
+.theme-toggle-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -39,24 +39,24 @@
 }
 
 /* Dark mode retains same minimal style */
-body.dark-mode .theme-toggle-btn {
+body.dark-mode .theme-toggle-button {
   background: transparent;
   border: none;
 }
 
 /* Remove animation */
-.theme-toggle-btn mat-icon.light_mode,
-.theme-toggle-btn mat-icon.dark_mode {
+.theme-toggle-button mat-icon.light_mode,
+.theme-toggle-button mat-icon.dark_mode {
   animation: none;
 }
 
 @media (max-width: 768px) {
-  .theme-toggle-btn {
+  .theme-toggle-button {
     width: 32px;
     height: 32px;
   }
 
-  .theme-toggle-btn mat-icon {
+  .theme-toggle-button mat-icon {
     font-size: 24px;
     width: 24px;
     height: 24px;
@@ -65,8 +65,8 @@ body.dark-mode .theme-toggle-btn {
 
 @media (prefers-reduced-motion: reduce) {
 
-  .theme-toggle-btn,
-  .theme-toggle-btn mat-icon {
+  .theme-toggle-button,
+  .theme-toggle-button mat-icon {
     transition: none;
   }
 }
