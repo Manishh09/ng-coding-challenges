@@ -373,7 +373,7 @@
 // Add extra bottom padding to latest section for breathing room
 .latest-section {
   padding-bottom: var(--spacing-4xl); // 64px bottom spacing
-  
+
   @media (max-width: 767px) {
     padding-bottom: var(--spacing-3xl); // 48px on mobile
   }
