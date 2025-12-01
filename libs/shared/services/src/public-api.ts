@@ -16,7 +16,10 @@ export * from './lib/challenges/challenge-category.service';
 // Configuration Services
 export * from './lib/config/config-loader.service';
 
-// Type Mappers
+// Adapters (Adapter Pattern for data transformation)
+export * from './lib/adapters';
+
+// Type Mappers (Deprecated - Use Adapters instead)
 export * from './lib/mappers/challenge-type-mapper';
 
 // Route Resolvers
@@ -28,5 +31,8 @@ export * from './lib/navigation/navigation.service';
 export * from './lib/notification/notification.service';
 export * from './lib/stackblitz/stackblitz.service';
 export * from './lib/loading/loading.service';
+
+// Interceptors
+export * from './lib/interceptors/router-loading.interceptor';
 
 // Add future services here...

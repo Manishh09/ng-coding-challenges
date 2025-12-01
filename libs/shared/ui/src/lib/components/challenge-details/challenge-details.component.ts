@@ -9,9 +9,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChallengesService, ChallengeCategoryService, StackblitzService } from '@ng-coding-challenges/shared/services';
-import { ChallengeDetails } from '@ng-coding-challenges/shared/models';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChallengeDetails, Challenge } from '@ng-coding-challenges/shared/models';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs.component';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { LOADING_CONFIG } from '../../constants/loading.constants';
+import { ChallengeDetailsRouteData } from '../../models/route-data.interface';
 
 /**
  * Challenge Details Component
@@ -57,9 +61,12 @@ export class ChallengeDetailsComponent {
 
   // Challenge details from resolver
   readonly challengeDetails = computed(() => {
-    const data = this.routeData() as { challenge?: ChallengeDetails };
+    const data = this.routeData() as ChallengeDetailsRouteData | undefined;
     return data?.challenge || null;
   });
+
+  // Get current challenge ID for reactive navigation queries
+  private readonly currentChallengeId = computed(() => this.challengeDetails()?.id ?? 0);
 
   // Get category name for breadcrumbs
   readonly categoryName = computed(() => {
@@ -83,24 +90,21 @@ export class ChallengeDetailsComponent {
     ];
   });
 
-  // Navigation helpers - converted to signals from observables
-  readonly nextChallenge = computed(() => {
-    const current = this.challengeDetails();
-    if (!current) return null;
+  // Navigation helpers - properly converted to signals without memory leaks
+  // Creates a single subscription that automatically switches based on challenge ID
+  readonly nextChallenge = toSignal(
+    toObservable(this.currentChallengeId).pipe(
+      switchMap(id => id ? this.challengesService.getNextChallenge(id) : of(null))
+    ),
+    { initialValue: null }
+  );
 
-    // Convert Observable to Signal by subscribing in effect
-    const nextSignal = toSignal(this.challengesService.getNextChallenge(current.id));
-    return nextSignal() || null;
-  });
-
-  readonly previousChallenge = computed(() => {
-    const current = this.challengeDetails();
-    if (!current) return null;
-
-    // Convert Observable to Signal by subscribing in effect
-    const prevSignal = toSignal(this.challengesService.getPreviousChallenge(current.id));
-    return prevSignal() || null;
-  });
+  readonly previousChallenge = toSignal(
+    toObservable(this.currentChallengeId).pipe(
+      switchMap(id => id ? this.challengesService.getPreviousChallenge(id) : of(null))
+    ),
+    { initialValue: null }
+  );
 
   // Check if challenge exists
   readonly challengeNotFound = computed(() => {
@@ -168,7 +172,7 @@ export class ChallengeDetailsComponent {
       console.error('Failed to launch StackBlitz:', error);
     } finally {
       // Keep launching state for a moment to show feedback
-      setTimeout(() => this.launching.set(false), 1000);
+      setTimeout(() => this.launching.set(false), LOADING_CONFIG.LONG_DELAY_MS);
     }
   }
 

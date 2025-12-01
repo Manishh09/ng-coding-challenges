@@ -8,7 +8,7 @@ import {
   viewChild,
   OnInit,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +22,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { SearchResult } from '@ng-coding-challenges/shared/models';
 import { HighlightTextPipe } from '../../pipes/highlight-text.pipe';
-
+import { debounceTime, filter, switchMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { SEARCH_CONFIG } from '../../constants/search.constants';
+import { LOADING_CONFIG } from '../../constants/loading.constants';
 @Component({
   selector: 'app-global-search',
   standalone: true,
@@ -47,10 +50,10 @@ export class GlobalSearchComponent implements OnInit {
   private readonly dialogRef = inject(MatDialogRef<GlobalSearchComponent>);
   readonly data = inject(MAT_DIALOG_DATA, { optional: true });
 
-  // Configuration
-  private readonly INITIAL_RESULTS_COUNT = 3;
-  private readonly MIN_SEARCH_LENGTH = 2;
-  private readonly DEBOUNCE_TIME = 150;
+  // Configuration from constants
+  private readonly INITIAL_RESULTS_COUNT = SEARCH_CONFIG.INITIAL_RESULTS_COUNT;
+  private readonly MIN_SEARCH_LENGTH = SEARCH_CONFIG.MIN_SEARCH_LENGTH;
+  private readonly DEBOUNCE_TIME = SEARCH_CONFIG.DEBOUNCE_TIME;
 
   // Mobile detection from dialog data
   readonly isMobile = signal<boolean>(this.data?.isMobile ?? false);
@@ -62,10 +65,20 @@ export class GlobalSearchComponent implements OnInit {
   readonly searchTerm = signal<string>('');
   readonly isOpen = signal<boolean>(false);
   readonly showAllResults = signal<boolean>(false);
-  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  // Store search results in a signal (updated via effect)
-  private readonly searchResults = signal<SearchResult[]>([]);
+  // Search results using proper reactive pattern (no memory leaks)
+  readonly searchResults = toSignal(
+    toObservable(this.searchTerm).pipe(
+      debounceTime(this.DEBOUNCE_TIME),
+      filter(term => term.trim().length >= this.MIN_SEARCH_LENGTH),
+      switchMap(term =>
+        this.challengesService.searchAllChallenges(term, SEARCH_CONFIG.MAX_RESULTS).pipe(
+          catchError(() => of([]))
+        )
+      )
+    ),
+    { initialValue: [] }
+  );
 
   // Computed values
   readonly allResults = computed(() => {
@@ -109,37 +122,17 @@ export class GlobalSearchComponent implements OnInit {
       this.searchTerm(); // Track dependency
       this.showAllResults.set(false);
     });
-
-    // Perform search when search term changes
-    effect(() => {
-      const term = this.searchTerm();
-      if (!term || term.trim().length < this.MIN_SEARCH_LENGTH) {
-        this.searchResults.set([]);
-        return;
-      }
-
-      // Subscribe to search results and update signal
-      this.challengesService.searchAllChallenges(term, 20).subscribe({
-        next: (results) => this.searchResults.set(results),
-        error: () => this.searchResults.set([])
-      });
-    });
   }
 
   ngOnInit(): void {
     // Focus input after dialog animation
-    setTimeout(() => this.focusSearch(), 150);
+    setTimeout(() => this.focusSearch(), LOADING_CONFIG.FOCUS_DELAY_MS);
   }
 
   onSearchInput(value: string): void {
-    if (this.debounceTimer) {
-      clearTimeout(this.debounceTimer);
-    }
-
-    this.debounceTimer = setTimeout(() => {
-      this.searchTerm.set(value);
-      this.isOpen.set(value.trim().length >= this.MIN_SEARCH_LENGTH);
-    }, this.DEBOUNCE_TIME);
+    // Update signal directly - debouncing handled by toSignal pipe
+    this.searchTerm.set(value);
+    this.isOpen.set(value.trim().length >= this.MIN_SEARCH_LENGTH);
   }
 
   loadMore(): void {

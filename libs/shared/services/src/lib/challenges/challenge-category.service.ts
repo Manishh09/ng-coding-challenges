@@ -142,13 +142,13 @@ export class ChallengeCategoryService {
     return category?.name;
   }
 
+  /**
+   * Updates the challenge count for a specific category.
+   * @param categoryId - Category ID to update
+   * @param count - New challenge count
+   */
   mapCategoryIdToCount(categoryId: string, count: number): void {
-    const categories = [...this._categories()];
-    const index = categories.findIndex(c => c.id === categoryId);
-    if (index !== -1) {
-      categories[index] = { ...categories[index], challengeCount: count };
-      this._categories.set(categories);
-    }
+    this.updateCategoryById(categoryId, { challengeCount: count });
   }
 
   getSelectedCategoryId(): string {

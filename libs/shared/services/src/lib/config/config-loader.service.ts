@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, shareReplay } from 'rxjs/operators';
+import { catchError, map, shareReplay, retry } from 'rxjs/operators';
 import {
   ChallengeConfig,
   CategoryConfig,
@@ -49,13 +49,15 @@ export class ConfigLoaderService {
   /**
    * Cached categories configuration observable
    * shareReplay(1) ensures single HTTP call, cached result for all subscribers
+   * Includes retry logic for transient network failures
    */
   private readonly categoriesConfig$: Observable<CategoryConfig> = this.http
     .get<CategoryConfig>(`${this.configBasePath}/categories.json`)
     .pipe(
+      retry({ count: 2, delay: 1000 }), // Retry up to 2 times with 1s delay
       catchError((error) => {
-        console.error('Failed to load categories.json:', error);
-        return throwError(() => new Error('Failed to load categories configuration'));
+        console.error('[ConfigLoaderService] Failed to load categories.json:', error);
+        return throwError(() => new Error('Failed to load categories configuration. Please check your network connection.'));
       }),
       shareReplay(1) // Cache the result for all subscribers
     );
@@ -63,13 +65,15 @@ export class ConfigLoaderService {
   /**
    * Cached challenges configuration observable
    * shareReplay(1) ensures single HTTP call, cached result for all subscribers
+   * Includes retry logic for transient network failures
    */
   private readonly challengesConfig$: Observable<ChallengeConfig> = this.http
     .get<ChallengeConfig>(`${this.configBasePath}/challenges.json`)
     .pipe(
+      retry({ count: 2, delay: 1000 }), // Retry up to 2 times with 1s delay
       catchError((error) => {
-        console.error('Failed to load challenges.json:', error);
-        return throwError(() => new Error('Failed to load challenges configuration'));
+        console.error('[ConfigLoaderService] Failed to load challenges.json:', error);
+        return throwError(() => new Error('Failed to load challenges configuration. Please check your network connection.'));
       }),
       shareReplay(1) // Cache the result for all subscribers
     );

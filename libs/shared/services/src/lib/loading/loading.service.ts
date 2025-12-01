@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Observable, finalize, MonoTypeOperatorFunction } from 'rxjs';
 
 /**
  * Global loading state management service
@@ -16,6 +17,11 @@ import { Injectable, signal } from '@angular/core';
  * const loadingId = loadingService.startOperation('fetchChallenges');
  * // ... async operation
  * loadingService.stopOperation(loadingId);
+ *
+ * // Use RxJS operator for automatic tracking
+ * this.http.get('/api/data').pipe(
+ *   loadingService.withLoadingOperator('fetchData')
+ * ).subscribe();
  * ```
  */
 @Injectable({
@@ -123,5 +129,28 @@ export class LoadingService {
     } finally {
       this.stopOperation(operationId);
     }
+  }
+
+  /**
+   * RxJS operator for automatic loading state management
+   * Automatically starts loading when observable is subscribed and stops when completed/errored
+   *
+   * @param operationName - Descriptive name for the operation
+   * @returns MonoTypeOperatorFunction that manages loading state
+   *
+   * @example
+   * ```typescript
+   * this.http.get('/api/data').pipe(
+   *   loadingService.withLoadingOperator('fetchData')
+   * ).subscribe();
+   * ```
+   */
+  withLoadingOperator<T>(operationName: string): MonoTypeOperatorFunction<T> {
+    return (source: Observable<T>) => {
+      const operationId = this.startOperation(operationName);
+      return source.pipe(
+        finalize(() => this.stopOperation(operationId))
+      );
+    };
   }
 }

@@ -10,7 +10,8 @@ import {
 } from '@ng-coding-challenges/shared/models';
 import { ChallengeCategoryService } from './challenge-category.service';
 import { ConfigLoaderService } from '../config/config-loader.service';
-import { ChallengeTypeMapper } from '../mappers/challenge-type-mapper';
+import { ChallengeAdapter } from '../adapters/challenge.adapter';
+import { SEARCH_SCORING, SEARCH_LIMITS } from '../constants/search-scoring.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ import { ChallengeTypeMapper } from '../mappers/challenge-type-mapper';
 export class ChallengesService {
   private readonly configLoader = inject(ConfigLoaderService);
   private readonly categoryService = inject(ChallengeCategoryService);
+  private readonly challengeAdapter = inject(ChallengeAdapter);
 
   /**
    * Cached challenges loaded from JSON, mapped to legacy Challenge interface.
@@ -26,7 +28,7 @@ export class ChallengesService {
   private readonly challenges$: Observable<Challenge[]> = this.configLoader
     .getAllChallenges()
     .pipe(
-      map(challengeDataArray => ChallengeTypeMapper.toChallengeListArray(challengeDataArray)),
+      map(challengeDataArray => this.challengeAdapter.adaptToChallengeList(challengeDataArray)),
       shareReplay(1) // Cache the result
     );
 
@@ -82,9 +84,9 @@ export class ChallengesService {
   getChallengeDetailsBySlug(slug: string, categoryId?: ChallengeCategoryId): Observable<ChallengeDetails | undefined> {
     // If categoryId provided, use O(1) lookup
     if (categoryId) {
-      const categorySlug = ChallengeTypeMapper.toCategorySlug(categoryId);
+      const categorySlug = this.challengeAdapter.adaptCategoryIdToSlug(categoryId);
       return this.configLoader.getChallengeBySlug(categorySlug, slug).pipe(
-        map(challengeData => challengeData ? ChallengeTypeMapper.toChallengeDetails(challengeData) : undefined)
+        map(challengeData => challengeData ? this.challengeAdapter.adaptToChallengeDetails(challengeData) : undefined)
       );
     }
 
@@ -92,7 +94,7 @@ export class ChallengesService {
     return this.configLoader.getAllChallenges().pipe(
       map(challenges => {
         const challenge = challenges.find(c => c.slug === slug);
-        return challenge ? ChallengeTypeMapper.toChallengeDetails(challenge) : undefined;
+        return challenge ? this.challengeAdapter.adaptToChallengeDetails(challenge) : undefined;
       })
     );
   }
@@ -106,9 +108,9 @@ export class ChallengesService {
   getChallengesByCategory(category: string): Observable<readonly Challenge[]> {
     if (!category) return of([]);
 
-    const categorySlug = ChallengeTypeMapper.toCategorySlug(category as ChallengeCategoryId);
+    const categorySlug = this.challengeAdapter.adaptCategoryIdToSlug(category as ChallengeCategoryId);
     return this.configLoader.getChallengesByCategory(categorySlug).pipe(
-      map(challengeDataArray => ChallengeTypeMapper.toChallengeListArray(challengeDataArray))
+      map(challengeDataArray => this.challengeAdapter.adaptToChallengeList(challengeDataArray))
     );
   }
 
@@ -131,7 +133,7 @@ export class ChallengesService {
   getChallengesByTag(tag: string): Observable<readonly Challenge[]> {
     if (!tag) return of([]);
     return this.configLoader.getChallengesByTag(tag).pipe(
-      map(challengeDataArray => ChallengeTypeMapper.toChallengeListArray(challengeDataArray))
+      map(challengeDataArray => this.challengeAdapter.adaptToChallengeList(challengeDataArray))
     );
   }
 
@@ -281,15 +283,22 @@ export class ChallengesService {
    * Returns results sorted by relevance (title matches first, then description).
    *
    * @param searchTerm - The search query string
-   * @param maxResults - Maximum number of results to return (default: 20)
+   * @param maxResults - Maximum number of results to return (default: 20, max: 100)
    * @returns Observable of search results array with highlighted matches
    */
-  searchAllChallenges(searchTerm: string, maxResults: number = 20): Observable<SearchResult[]> {
-    if (!searchTerm || searchTerm.trim().length < 2) {
+  searchAllChallenges(searchTerm: string, maxResults: number = SEARCH_LIMITS.DEFAULT_RESULTS): Observable<SearchResult[]> {
+    // Validate search term
+    if (!searchTerm || searchTerm.trim().length < SEARCH_LIMITS.MIN_SEARCH_LENGTH) {
       return of([]);
     }
 
-    const normalizedTerm = searchTerm.toLowerCase().trim();
+    // Sanitize search term (remove potentially dangerous characters)
+    const sanitizedTerm = searchTerm.replace(/[<>"']/g, '');
+
+    // Validate and bound maxResults
+    const validMaxResults = Math.max(1, Math.min(maxResults, SEARCH_LIMITS.MAX_RESULTS));
+
+    const normalizedTerm = sanitizedTerm.toLowerCase().trim();
     const searchTerms = normalizedTerm.split(/\s+/);
 
     return this.challenges$.pipe(
@@ -314,19 +323,14 @@ export class ChallengesService {
           })
           .filter((result): result is SearchResult => result !== null)
           .sort((a, b) => b.score - a.score)
-          .slice(0, maxResults);
+          .slice(0, validMaxResults);
       })
     );
   }
 
   /**
    * Calculates relevance score based on where and how many times the search terms appear.
-   * Scoring:
-   * - Exact title match: 200 points
-   * - Title contains term: 100 points per term
-   * - Description contains term: 50 points per term
-   * - Category contains term: 25 points per term
-   * - Tags contain term: 30 points per term
+   * Uses constants from SEARCH_SCORING for consistent scoring weights.
    */
   private calculateRelevanceScore(challenge: Challenge, searchTerms: string[]): number {
     let score = 0;
@@ -338,32 +342,32 @@ export class ChallengesService {
     searchTerms.forEach((term) => {
       // Exact title match bonus
       if (lowerTitle === term) {
-        score += 200;
+        score += SEARCH_SCORING.EXACT_TITLE_MATCH;
       }
 
       // Title contains term
       if (lowerTitle.includes(term)) {
-        score += 100;
+        score += SEARCH_SCORING.TITLE_CONTAINS;
 
         // Bonus for term at start of title
         if (lowerTitle.startsWith(term)) {
-          score += 50;
+          score += SEARCH_SCORING.TITLE_STARTS_WITH_BONUS;
         }
       }
 
       // Description contains term
       if (lowerDescription.includes(term)) {
-        score += 50;
+        score += SEARCH_SCORING.DESCRIPTION_CONTAINS;
       }
 
       // Category contains term
       if (lowerCategory.includes(term)) {
-        score += 25;
+        score += SEARCH_SCORING.CATEGORY_CONTAINS;
       }
 
       // Tags contain term
       if (lowerTags?.some(tag => tag.includes(term))) {
-        score += 30;
+        score += SEARCH_SCORING.TAG_CONTAINS;
       }
     });
 

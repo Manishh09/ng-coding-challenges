@@ -11,6 +11,7 @@ import { NgOptimizedImage } from "@angular/common";
 import { GlobalSearchComponent } from '../global-search/global-search.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SEARCH_DIALOG_CONFIG } from '../../constants/search.constants';
 
 /**
  * Header component with responsive design
@@ -97,15 +98,8 @@ export class HeaderComponent implements OnInit {
     }
 
     this.dialog.open(GlobalSearchComponent, {
-      width: '90vw',
-      maxWidth: '700px',
-      maxHeight: '85vh',
-      panelClass: 'global-search-dialog',
-      data: { isMobile: this.isMobile() },
-      autoFocus: 'input',
-      restoreFocus: true,
-      hasBackdrop: true,
-      disableClose: false
+      ...SEARCH_DIALOG_CONFIG,
+      data: { isMobile: this.isMobile() }
     });
   }
 

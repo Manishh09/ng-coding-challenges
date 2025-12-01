@@ -28,6 +28,7 @@ export * from './lib/components/global-search/global-search.component';
 export * from './lib/components/challenge-not-found/challenge-not-found.component';
 
 export * from './lib/components/loading-spinner/loading-spinner.component';
+export * from './lib/components/global-loading-overlay/global-loading-overlay.component';
 export * from './lib/components/theme-toggle/theme-toggle.component';
 export * from './lib/components/skeleton-loader/skeleton-loader.component';
 export * from './lib/components/error-boundary/error-boundary.component';
@@ -48,6 +49,19 @@ export * from './lib/components/hero-stats/hero-stats.component';
  * Reusable transformation pipes
  */
 export * from './lib/pipes/highlight-text.pipe';
+
+/**
+ * Constants
+ * Application-wide constants for consistency
+ */
+export * from './lib/constants/search.constants';
+export * from './lib/constants/loading.constants';
+
+/**
+ * Type Definitions
+ * Type-safe interfaces and types
+ */
+export * from './lib/models/route-data.interface';
 
 /**
  * Design System Tokens

@@ -8,6 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
+import { ChallengeListRouteData } from '../../models/route-data.interface';
 
 /**
  * Component for displaying a list of challenges for a specific category
@@ -51,14 +52,14 @@ export class ChallengeListComponent {
 
   //  Derived signal: selected category ID
   readonly categoryId = computed(() => {
-    const data = this.routeData() as { categoryId?: string };
-    return data.categoryId || '';
+    const data = this.routeData() as ChallengeListRouteData | undefined;
+    return data?.categoryId || '';
   });
 
   //  Derived signal: list of challenges (from resolver)
   readonly challenges = computed<Challenge[]>(() => {
-    const data = this.routeData() as { challenges?: readonly Challenge[] };
-    return data.challenges ? Array.from(data.challenges) : [];
+    const data = this.routeData() as ChallengeListRouteData | undefined;
+    return data?.challenges ? Array.from(data.challenges) : [];
   });
 
   // Derived signal: new badge challenge IDs (top 2)
@@ -75,18 +76,33 @@ export class ChallengeListComponent {
     return categoryName ? `${categoryName} - Challenges` : 'Available Challenges';
   });
 
-  // Loading state
-  readonly loading = signal(false);
+  /**
+   * Loading state signal - improves UX with skeleton loaders
+   *
+   * Shows loading when:
+   * - Route data hasn't been populated yet (initial load)
+   * - Challenges array is empty AND categoryId is present (resolver still running)
+   *
+   * This provides visual feedback during the resolver execution phase,
+   * creating a smoother, more responsive user experience.
+   */
+  readonly loading = computed(() => {
+    const data = this.routeData() as ChallengeListRouteData | undefined;
+    const hasCategory = !!this.categoryId();
+    const hasChallenges = this.challenges().length > 0;
+
+    // Show loading if:
+    // 1. No data yet (initial state)
+    // 2. Has category but no challenges (resolver still loading)
+    return !data || (hasCategory && !hasChallenges);
+  });
 
   constructor() {
     // Reactive side effect to update selected category
     effect(() => {
       const id = this.categoryId();
       if (id) {
-        this.loading.set(true);
         this.challengeCategoryService.setSelectedCategory(id);
-        // Simulate async loading (remove if you have real async data fetching)
-        setTimeout(() => this.loading.set(false), 500);
       }
     });
   }
