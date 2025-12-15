@@ -103,17 +103,17 @@ export class LandingPageComponent {
   readonly totalCategories = computed(() => this.groupedChallenges().size);
 
   readonly heroHighlights: readonly string[] = [
-    'Real Angular scenarios you will ship in production',
-    'Step-by-step requirement & solution guides',
-    'Launch-ready StackBlitz workspaces',
+    'Real-world Angular scenarios',
+    'Guided solutions with clear requirements',
+    'Instant StackBlitz workspaces',
   ];
 
-  readonly metrics: LandingMetric[] = this.createMetrics();
-  readonly heroStatItems = this.metrics.slice(0, 2);
-  readonly featuredTracks: FeaturedTrack[] = this.computeFeaturedTracks();
-  readonly latestChallenges: SpotlightChallenge[] =
-    this.computeLatestChallenges();
-  readonly heroSpotlight = this.latestChallenges.at(0) ?? null;
+  // Convert to computed signals to react to async data changes
+  readonly metrics = computed(() => this.createMetrics());
+  readonly heroStatItems = computed(() => this.metrics().slice(0, 2));
+  readonly featuredTracks = computed(() => this.computeFeaturedTracks());
+  readonly latestChallenges = computed(() => this.computeLatestChallenges());
+  readonly heroSpotlight = computed(() => this.latestChallenges().at(0) ?? null);
 
   // ========== Event Handlers ==========
   onGetStarted(): void {

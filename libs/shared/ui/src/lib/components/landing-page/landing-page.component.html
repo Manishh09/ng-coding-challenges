@@ -5,14 +5,14 @@
 
     <div class="hero-shell">
       <div class="hero-copy">
-        <p class="hero-eyebrow">Angular learning playground</p>
+        <p class="hero-eyebrow">ANGULAR LEARN & CODE PLAYGROUND</p>
         <h1 id="hero-title" class="hero-title">
-          Master production-ready Angular with  <span>ng<span class="highlight-q">Q</span>uest</span>
+          Real-world Angular challenges for hands-on developers
         </h1>
 
         <p class="intro-text">
-          Level up faster with curated, hands-on challenges, guided walkthroughs,
-          and launch-ready starter kits for your favourite Angular features.
+          Solve practical Angular problems with guided walkthroughs and
+launch-ready starter kits — built for real projects.
         </p>
 
         <ul class="hero-highlights" aria-label="Key platform benefits">
@@ -35,7 +35,7 @@
             (click)="onGetStarted()"
             aria-label="Start the guided path - Begin the onboarding guide to learn the platform"
           >
-            <span>Start the guided path</span>
+            <span>Getting Started</span>
           </button>
 
           <button
@@ -60,7 +60,7 @@
         </div>
 
         <ng-coding-challenges-hero-stats
-          [stats]="heroStatItems"
+          [stats]="heroStatItems()"
           ariaLabel="Platform stats"
         />
       </div>
@@ -81,15 +81,15 @@
             <mat-icon aria-hidden="true">emoji_objects</mat-icon>
             <span>Practice, ship, repeat</span>
           </div>
-          @if (heroSpotlight) {
+          @if (heroSpotlight()) {
           <div class="hero-card__footer">
             <div class="hero-card__footer-label">Latest challenge</div>
             <div class="hero-card__footer-title">
-              {{ heroSpotlight.title }}
+              {{ heroSpotlight()!.title }}
             </div>
             <div class="hero-card__footer-meta">
               <mat-icon aria-hidden="true">category</mat-icon>
-              <span>{{ heroSpotlight.categoryLabel }}</span>
+              <span>{{ heroSpotlight()!.categoryLabel }}</span>
             </div>
           </div>
           }
@@ -112,7 +112,7 @@
     />
 
     <div class="metrics-grid">
-      @for (metric of metrics; track metric.label) {
+      @for (metric of metrics(); track metric.label) {
         <ng-coding-challenges-metric-card
           [icon]="metric.icon"
           [value]="metric.value"
@@ -137,7 +137,7 @@
     />
 
     <div class="featured-grid">
-      @for (track of featuredTracks; track track.id) {
+      @for (track of featuredTracks(); track track.id) {
         <ng-coding-challenges-feature-card
           [icon]="track.icon"
           [count]="track.count"
@@ -167,7 +167,7 @@
     />
 
     <div class="latest-grid">
-      @for (challenge of latestChallenges; track challenge.id) {
+      @for (challenge of latestChallenges(); track challenge.id) {
         <ng-coding-challenges-latest-card
           [categoryLabel]="challenge.categoryLabel"
           [title]="challenge.title"
