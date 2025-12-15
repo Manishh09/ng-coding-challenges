@@ -6,9 +6,9 @@
 .footer {
   position: relative;
   width: 100%;
-  color: rgba(243, 244, 246, 0.92);
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(76, 29, 149, 0.92));
-  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  color: var(--text-primary);
+  background: var(--brand-gradient-footer);
+  border-top: 1px solid var(--border-primary);
   overflow: hidden;
   isolation: isolate;
 
@@ -16,8 +16,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 20%, rgba(129, 140, 248, 0.2), transparent 60%),
-      radial-gradient(circle at 80% 10%, rgba(236, 72, 153, 0.2), transparent 55%);
+    background: radial-gradient(circle at 20% 20%, var(--color-primary-alpha-20), transparent 60%),
+      radial-gradient(circle at 80% 10%, var(--color-accent-alpha-20), transparent 55%);
     z-index: 0;
   }
 
@@ -25,7 +25,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.35) 100%);
+    background: var(--surface-secondary);
+    opacity: 0.5;
     z-index: 0;
   }
 }
@@ -59,7 +60,7 @@
   font-weight: 600;
   position: relative;
   padding-bottom: 8px;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--text-primary);
 
   &::after {
     content: '';
@@ -68,7 +69,7 @@
     left: 0;
     width: 42px;
     height: 2px;
-    background: rgba(165, 180, 252, 0.65);
+    background: var(--color-primary-alpha-60);
     border-radius: 3px;
     transition: width 0.3s var(--animation-easing);
   }
@@ -109,7 +110,7 @@
 }
 
 .footer-tagline {
-  color: rgba(226, 232, 240, 0.78);
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: var(--spacing-md);
@@ -135,7 +136,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: rgba(226, 232, 240, 0.78);
+  color: var(--text-secondary);
   text-decoration: none;
   transition: all 0.3s var(--animation-easing);
   padding: 0.5rem 0;
@@ -144,9 +145,8 @@
 
   .mat-icon {
     font-size: 1.25rem;
-    color: rgba(165, 180, 252, 0.85);
-    opacity: 0.85;
-    transition: opacity 0.3s var(--animation-easing);
+    color: var(--interactive-primary);
+    transition: color 0.3s var(--animation-easing);
   }
 
   span {
@@ -167,11 +167,11 @@
   }
 
   &:hover {
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--text-primary);
     transform: translateX(4px);
 
     .mat-icon {
-      opacity: 1;
+      color: var(--interactive-primary-hover);
     }
 
     span::after {
@@ -195,8 +195,8 @@
 .footer-bottom {
   position: relative;
   width: 100%;
-  border-top: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(15, 23, 42, 0.35);
+  border-top: 1px solid var(--border-primary);
+  background: var(--surface-secondary);
   backdrop-filter: blur(16px);
 }
 
@@ -212,12 +212,12 @@
 
 .copyright {
   margin: 0;
-  color: rgba(226, 232, 240, 0.7);
+  color: var(--text-tertiary);
   font-size: 0.9rem;
 }
 
 .created-by {
-  color: rgba(165, 180, 252, 0.9);
+  color: var(--interactive-primary);
 }
 
 .heart-icon {

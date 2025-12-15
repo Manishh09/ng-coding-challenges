@@ -58,8 +58,10 @@ app-root,
    ========================================== */
 
 .hero-section {
-  background: var(--gradient-primary);
-  color: #ffffff;
+  background: var(--background-primary);
+  // Elegant subtle gradient for hero background instead of harsh solid
+  background-image: var(--brand-gradient-hero);
+  color: var(--text-primary);
   padding: var(--spacing-3xl) var(--spacing-lg);
   text-align: center;
   position: relative;
@@ -69,14 +71,15 @@ app-root,
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.05)
-    );
+    // Enhanced glass effect texture
+    background-image: radial-gradient(circle at 1px 1px, var(--border-primary) 1px, transparent 0);
+    background-size: 40px 40px;
+    opacity: 0.15;
     pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
   }
 
-  > * {
+  >* {
     position: relative;
     z-index: 1;
   }
@@ -85,15 +88,16 @@ app-root,
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: var(--spacing-lg);
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+    // Subtle modern text glow instead of hard shadow
+    text-shadow: 0 0 30px var(--color-primary-alpha-30);
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
 
   p {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--text-secondary);
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
@@ -179,7 +183,7 @@ textarea,
   top: -100px;
   left: 0;
   background: var(--interactive-primary);
-  color: #ffffff;
+  color: var(--text-on-primary);
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
   font-weight: 600;
@@ -188,13 +192,14 @@ textarea,
 
   &:focus {
     top: 0;
-    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline: 3px solid var(--color-white-alpha-50);
     outline-offset: -3px;
   }
 }
 
 /* Reduced motion support - WCAG 2.3.3 */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -235,13 +240,13 @@ textarea,
 
 /* Dark mode - ensure proper contrast ratios */
 body.dark-mode {
+
   // Override any potential contrast issues
   .hero-section {
     &::before {
       background: linear-gradient(135deg,
-        rgba(0, 0, 0, 0.25),
-        rgba(0, 0, 0, 0.15)
-      );
+          rgba(0, 0, 0, 0.25),
+          rgba(0, 0, 0, 0.15));
     }
   }
 }
@@ -378,7 +383,7 @@ body.dark-mode {
 }
 
 /* ==========================================
-   Print Styles
+   Print Styles (hardcoded for print media)
    ========================================== */
 @media print {
   body {

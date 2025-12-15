@@ -6,17 +6,18 @@
 .angular-dev-card {
     background: var(--surface-secondary);
     border: 1px solid var(--border-primary);
-    border-radius: var(--border-radius-lg);
+    border-radius: 24px; // Consistent 24px radius
     box-shadow: var(--shadow-sm);
-    transition: all var(--animation-duration-standard) var(--animation-easing);
+    transition: all 0.3s var(--animation-easing);
 
     &:hover {
-        box-shadow: var(--shadow-md);
-        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
+        border-color: var(--interactive-primary-alpha-30, rgba(139, 92, 246, 0.3));
     }
 
     &.elevated {
-        box-shadow: var(--shadow-lg);
+        box-shadow: var(--shadow-xl);
     }
 }
 
@@ -25,7 +26,7 @@
     background: var(--gradient-primary);
     border: none;
     border-radius: var(--border-radius-md);
-    color: white;
+    color: var(--text-on-primary);
     font-weight: 500;
     padding: var(--spacing-sm) var(--spacing-lg);
     transition: all var(--animation-duration-standard) var(--animation-easing);

@@ -20,9 +20,9 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 10001;
-  padding: 12px 24px;
+  padding: 12px 20px;
   background: var(--color-primary, rgba(99, 102, 241, 1));
-  color: #ffffff;
+  color: var(--text-on-primary);
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;

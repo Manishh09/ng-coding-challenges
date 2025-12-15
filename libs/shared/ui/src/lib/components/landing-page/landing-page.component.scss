@@ -12,9 +12,8 @@
   // Responsive padding: smaller on mobile for better above-fold content
   padding: clamp(2.5rem, 6vw, 6rem) var(--spacing-md);
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
-  // background: var(--brand-gradient-hero);
-  background: linear-gradient(135deg, #241830f5, #4c1d95eb);
-  color: var(--color-white-alpha-90);
+  background: var(--brand-gradient-hero);
+  color: var(--hero-text-primary);
   isolation: isolate;
 
   // Adjust padding for larger screens
@@ -92,7 +91,7 @@
   max-width: 46ch;
   font-size: 1.15rem;
   line-height: 1.65;
-  color: var(--color-white-alpha-90);
+  color: var(--hero-text-secondary);
 }
 
 
@@ -124,7 +123,7 @@
 
     mat-icon {
       font-size: 1.25rem;
-      color: var(--color-white-alpha-90);
+      color: var(--hero-text-primary);
       flex-shrink: 0;
     }
   }
@@ -164,7 +163,7 @@
 
   // Focus ring for keyboard navigation
   &:focus-visible {
-    outline: 2px solid var(--color-white);
+    outline: 2px solid var(--interactive-primary);
     outline-offset: 2px;
   }
 
@@ -182,7 +181,7 @@
 /* Primary Button Variant */
 .hero-button--primary {
   background: var(--gradient-primary);
-  color: var(--color-white-alpha-90);
+  color: var(--text-on-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
   &:hover:not(:active) {
@@ -197,29 +196,29 @@
 
 /* Outline Button Variant */
 .hero-button--outline {
-  background: var(--color-white-alpha-10);
-  border: 1px solid var(--color-white-alpha-30);
-  color: var(--color-white-alpha-90);
+  background: var(--interactive-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--hero-text-primary);
 
   &:hover:not(:active) {
-    background: var(--color-white-alpha-20);
-    border-color: var(--color-white-alpha-40);
+    background: var(--interactive-secondary-hover);
+    border-color: var(--interactive-primary);
   }
 
   &:focus-visible {
-    background: var(--color-white-alpha-20);
+    background: var(--interactive-secondary-hover);
   }
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--color-white-alpha-90);
+  color: var(--hero-text-primary);
   border: 1px solid transparent;
 
   &:hover,
   &:focus-visible {
-    border-color: var(--color-white-alpha-30);
-    background: var(--color-white-alpha-10);
+    border-color: var(--border-secondary);
+    background: var(--interactive-secondary);
     transform: translateY(-2px);
   }
 }
@@ -227,13 +226,13 @@
 /* Ghost Button Variant */
 .hero-button--ghost {
   background: transparent;
-  color: var(--color-white-alpha-90);
+  color: var(--hero-text-primary);
   border: 1px solid transparent;
 
   &:hover,
   &:focus-visible {
-    border-color: var(--color-white-alpha-30);
-    background: var(--color-white-alpha-10);
+    border-color: var(--border-secondary);
+    background: var(--interactive-secondary);
     transform: translateY(-2px);
   }
 }
@@ -242,12 +241,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
-  background: var(--color-white-alpha-10);
+  background: var(--surface-secondary);
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-pill);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
-  border: 1px solid var(--color-white-alpha-20);
+  border: 1px solid var(--border-primary);
 }
 
 .hero-stat {
@@ -255,7 +254,7 @@
   align-items: baseline;
   gap: var(--spacing-xs);
   padding: 0.5rem 1rem;
-  background: var(--color-white-alpha-10);
+  background: var(--surface-tertiary);
   border-radius: var(--border-radius-pill);
   min-width: 150px;
 }
@@ -292,7 +291,7 @@
 .hero-card__media {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
-  border: 1px solid var(--color-white-alpha-10);
+  border: 1px solid var(--border-primary);
 }
 
 .hero-card__image {
@@ -306,7 +305,7 @@
   align-items: center;
   gap: var(--spacing-xs);
   background: var(--status-success-alpha-20);
-  color: var(--color-white-alpha-90);
+  color: var(--hero-text-primary);
   padding: 0.45rem 1rem;
   border-radius: var(--border-radius-pill);
   font-size: 0.95rem;
@@ -316,10 +315,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
-  background: var(--color-white-alpha-10);
+  background: var(--surface-secondary);
   padding: var(--spacing-md);
   border-radius: var(--border-radius-lg);
-  border: 1px solid var(--color-white-alpha-20);
+  border: 1px solid var(--border-primary);
 }
 
 .hero-card__footer-label {

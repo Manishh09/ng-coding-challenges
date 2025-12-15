@@ -19,18 +19,24 @@ $super-green: oklch(58.11% 0.238 142.55);
 $ruby-red: #E0115F;
 $dark-pink: #C11C84;
 
-// Gray Scale (OKLCH for consistent lightness)
-$gray-50: oklch(98.5% 0.003 240);
-$gray-100: oklch(96.5% 0.003 240);
-$gray-200: oklch(92.5% 0.003 240);
-$gray-300: oklch(87.5% 0.003 240);
-$gray-400: oklch(80.5% 0.003 240);
-$gray-500: oklch(70.5% 0.003 240);
-$gray-600: oklch(60.5% 0.003 240);
-$gray-700: oklch(45.5% 0.003 240);
-$gray-800: oklch(30.5% 0.003 240);
-$gray-900: oklch(15.5% 0.003 240);
-$gray-950: oklch(8.5% 0.003 240);
+// Semantic Accessible Text Colors (Decoupled from Brand)
+// Ruby Red darkened for Light Mode text (>4.5:1)
+$accent-text-light: #be0f51;
+// Rose-400 for Dark Mode text (>4.5:1 vs Slate-950)
+$accent-text-dark: #fb7185;
+
+// Gray Scale (Slate Palette - Cool & Professional)
+$gray-50: #f8fafc;
+$gray-100: #f1f5f9;
+$gray-200: #e2e8f0;
+$gray-300: #cbd5e1;
+$gray-400: #94a3b8;
+$gray-500: #64748b;
+$gray-600: #475569;
+$gray-700: #334155;
+$gray-800: #1e293b;
+$gray-900: #0f172a;
+$gray-950: #020617;
 
 // Alpha Channel Tokens - Primary Color (Electric Violet #8b5cf6)
 $color-primary-alpha-5: rgba(139, 92, 246, 0.05);

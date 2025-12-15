@@ -25,72 +25,68 @@
   height: 100%;
   overflow: hidden;
 
-  /* Visual styling */
-  background: linear-gradient(
-    to bottom,
-    var(--surface-secondary),
-    color-mix(in srgb, var(--surface-secondary) 97%, var(--interactive-primary) 3%)
-  );
+  /* Visual styling - Elevated Surface */
+  background: var(--surface-secondary);
+
   border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-lg);
+  border-radius: 24px; // Ample radius for "Friendly" UI
   box-shadow: var(--shadow-sm);
   color: var(--text-primary);
 
   /* Animation & transitions */
   transition:
-    transform var(--animation-duration-standard) var(--animation-easing),
-    box-shadow var(--animation-duration-standard) var(--animation-easing),
-    border-color var(--animation-duration-fast) var(--animation-easing);
+    transform 0.3s var(--animation-easing),
+    box-shadow 0.3s var(--animation-easing),
+    border-color 0.2s linear;
   will-change: transform, box-shadow;
 
-  /* Hover state */
+  /* Hover state - Soft Lift & Glow */
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px); // Subtle lift
+    box-shadow: var(--shadow-xl);
     border-color: var(--interactive-primary);
-    background: linear-gradient(
-      to bottom,
-      var(--surface-secondary),
-      color-mix(in srgb, var(--surface-secondary) 94%, var(--interactive-primary) 6%)
-    );
+    background: linear-gradient(to bottom,
+        var(--surface-secondary),
+        var(--surface-tertiary));
   }
 
   /* Focus state for accessibility */
   &:focus-within {
-    outline: 2px solid var(--color-primary-alpha-60);
-    outline-offset: 2px;
-    border-color: var(--color-primary-alpha-40);
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 4px;
+    border-color: var(--interactive-primary);
   }
 
   /* Latest challenge variant */
   &--latest {
     border-color: var(--interactive-primary);
-    box-shadow:
-      0 0 0 1px var(--color-primary-alpha-20),
-      var(--shadow-md);
-    background: linear-gradient(
-      to bottom,
-      var(--surface-secondary),
-      color-mix(in srgb, var(--surface-secondary) 92%, var(--interactive-primary) 8%)
-    );
+    background: linear-gradient(165deg,
+        var(--surface-secondary) 0%,
+        var(--color-primary-alpha-5) 100%);
+    box-shadow: var(--shadow-md);
   }
 }
 
 /* -----------------------------------------------------------------------------
  * Decorative Halo Effect
  * ----------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Decorative Noise Texture
+ * ----------------------------------------------------------------------------- */
 .challenge-card__halo {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 30% 0%, var(--color-primary-alpha-10), transparent 60%),
-    radial-gradient(circle at 70% 0%, var(--color-secondary-alpha-10), transparent 60%);
-  opacity: 0.5;
+  // Subtle Noise Texture via SVG or URL (simulated here with repeating gradient for now)
+  background-image:
+    radial-gradient(at 0% 0%, var(--color-primary-alpha-10) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, var(--color-secondary-alpha-10) 0px, transparent 50%);
+  opacity: 0.6;
   pointer-events: none;
-  transition: opacity var(--animation-duration-standard) var(--animation-easing);
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
 
   .challenge-card:hover & {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 }
 
@@ -109,15 +105,17 @@
   padding: var(--spacing-md);
 
   /* Visual styling */
-  background: linear-gradient(to bottom, var(--surface-primary), transparent);
+  background: transparent; // Clean header
   border-bottom: 1px solid var(--border-primary);
+  padding-bottom: var(--spacing-md); // Visual separation
 }
 
 .challenge-card__header-left {
   display: flex;
   align-items: center;
   flex: 1;
-  min-width: 0; /* Enable text truncation */
+  min-width: 0;
+  /* Enable text truncation */
 }
 
 .challenge-card__header-right {
@@ -156,10 +154,10 @@
   text-transform: uppercase;
   color: var(--text-on-primary);
 
-  /* Visual styling */
-  background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover));
+  /* Visual styling - Ruby red accent for high emphasis */
+  background: var(--gradient-accent);
   border-radius: var(--border-radius-pill);
-  box-shadow: 0 2px 8px var(--color-primary-alpha-30);
+  box-shadow: 0 2px 8px rgba(224, 17, 95, 0.3);
 
   /* Animation */
   animation: pulse 2s ease-in-out infinite;
@@ -173,6 +171,7 @@
 
 /* Badge pulse animation */
 @keyframes pulse {
+
   0%,
   100% {
     transform: scale(1);
@@ -265,11 +264,10 @@
   letter-spacing: 0.02em;
   padding: 14px 28px;
   border-radius: var(--border-radius-md);
-  background: var(--electric-violet) !important;
-  //background: linear-gradient(135deg, var(--interactive-primary), var(--interactive-primary-hover)) !important;
+  background: var(--gradient-primary) !important;
   color: var(--text-on-primary) !important;
   box-shadow: 0 2px 8px var(--color-primary-alpha-30),
-              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transition: transform var(--animation-duration-fast) var(--animation-easing),
     box-shadow var(--animation-duration-fast) var(--animation-easing),
     background var(--animation-duration-fast) var(--animation-easing);
@@ -285,10 +283,9 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent);
     transition: left 0.5s ease;
   }
 
@@ -297,7 +294,7 @@
   &:active:not(:disabled) {
     transform: translateY(0);
     box-shadow: 0 2px 6px var(--color-primary-alpha-30),
-                inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      inset 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   &:focus-visible {

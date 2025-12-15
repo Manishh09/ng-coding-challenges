@@ -163,7 +163,7 @@
 
   &:hover {
     background: var(--state-hover-bg);
-    border-color: var(--border-primary);
+    border-color: var(--interactive-primary);
   }
 
   &:focus-visible {
@@ -259,7 +259,7 @@
   align-items: center;
   padding: 2px var(--spacing-xs);
   background: var(--gradient-primary);
-  color: white;
+  color: var(--text-on-primary);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   border-radius: var(--border-radius-full);

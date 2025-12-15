@@ -8,117 +8,96 @@
 // We need to ensure these styles have high specificity or are loaded after Material core
 // Since this file is imported in theme.scss which is imported in styles.scss, it should be fine.
 
-/* Custom tooltip styles with angular.dev theme support */
+/* Custom tooltip styles */
 .mat-mdc-tooltip {
     background-color: var(--surface-secondary) !important;
     color: var(--text-primary) !important;
-    font-size: 14px;
-    border: 1px solid var(--vivid-pink) !important;
-    border-radius: 5px;
-    box-shadow: var(--shadow-lg);
-    font-family: var(--font-family-primary);
+    font-size: 0.8rem;
+    padding: 8px 12px !important;
+    border: 1px solid var(--border-primary) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--shadow-lg) !important;
 }
 
-/* Material button overrides for angular.dev styling */
-.mat-mdc-raised-button.mat-primary {
-    background: var(--gradient-primary) !important;
-    border: none !important;
-    border-radius: var(--border-radius-md) !important;
+/* Material button overrides - Sleek & Soft */
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+    border-radius: 12px !important; // Softer corners
+    letter-spacing: 0.01em !important;
     font-weight: 500 !important;
-    transition: all var(--animation-duration-standard) var(--animation-easing) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
-    &:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: var(--shadow-md) !important;
+    &.mat-primary {
+        background: var(--gradient-primary) !important;
+        color: var(--text-on-primary) !important;
+        box-shadow: 0 4px 12px var(--color-primary-alpha-30) !important; // Colored shadow
+
+        &:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 16px var(--color-primary-alpha-40) !important;
+        }
     }
 }
 
-.mat-mdc-raised-button.mat-accent {
-    background: var(--gradient-secondary) !important;
-    border: none !important;
-    border-radius: var(--border-radius-md) !important;
-    font-weight: 500 !important;
-    transition: all var(--animation-duration-standard) var(--animation-easing) !important;
-
-    &:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: var(--shadow-md) !important;
-    }
-}
-
-/* Material card overrides */
+/* Material card overrides - Glassy & Clean */
 .mat-mdc-card {
     background: var(--surface-secondary) !important;
     border: 1px solid var(--border-primary) !important;
-    border-radius: var(--border-radius-lg) !important;
+    border-radius: 20px !important; // Modern ample radius
     box-shadow: var(--shadow-sm) !important;
-    transition: all var(--animation-duration-standard) var(--animation-easing) !important;
 
     &:hover {
-        box-shadow: var(--shadow-md) !important;
-        transform: translateY(-2px) !important;
+        border-color: var(--interactive-primary-alpha-20, rgba(139, 92, 246, 0.2));
     }
 }
 
-/* Material form field overrides */
+/* Material form field overrides - Filled & Rounded */
 .mat-mdc-form-field {
     .mat-mdc-text-field-wrapper {
-        background: var(--surface-secondary) !important;
-        border: 1px solid var(--border-primary) !important;
-        border-radius: var(--border-radius-md) !important;
-        transition: border-color var(--animation-duration-standard) var(--animation-easing) !important;
+        background-color: var(--surface-tertiary) !important; // Subtle fill
+        border-radius: 12px 12px 0 0 !important; // Rounded top
 
-        &:hover {
-            border-color: var(--interactive-primary) !important;
+        &.mdc-text-field--outlined {
+            border-radius: 12px !important; // Fully rounded for outlined
+            background-color: transparent !important;
         }
     }
 
     .mat-mdc-form-field-focus-overlay {
-        background: transparent !important;
-    }
-
-    .mat-mdc-form-field-label {
-        color: var(--text-secondary) !important;
-    }
-
-    .mat-mdc-input-element {
-        color: var(--text-primary) !important;
+        opacity: 0 !important; // Remove default gray overlay
     }
 }
 
-/* Material dialog overrides */
+/* Material dialog overrides - Frosted Glass Backdrop */
 .mat-mdc-dialog-container {
     .mat-mdc-dialog-surface {
-        background: var(--surface-secondary) !important;
-        border-radius: var(--border-radius-lg) !important;
-        box-shadow: var(--shadow-xl) !important;
+        background: var(--surface-secondary) !important; // Make sure this is opaque enough or handled by token
+        border-radius: 24px !important;
+        box-shadow: var(--shadow-2xl) !important;
+        border: 1px solid var(--border-primary);
     }
 }
 
-/* Material snackbar overrides */
-.mat-mdc-snack-bar-container {
-    .mdc-snackbar__surface {
-        background: var(--surface-secondary) !important;
-        color: var(--text-primary) !important;
-        border: 1px solid var(--border-primary) !important;
-        border-radius: var(--border-radius-md) !important;
-        box-shadow: var(--shadow-lg) !important;
-    }
+.cdk-overlay-backdrop {
+    backdrop-filter: blur(4px); // Blurry backdrop for focus
+    background-color: rgba(0, 0, 0, 0.3); // Semi-transparent black
 }
 
-/* Material Menu overrides */
+/* Material Menu overrides - Floating & Sleek */
 .mat-mdc-menu-panel {
     background: var(--surface-secondary) !important;
     border: 1px solid var(--border-primary);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-lg);
+    border-radius: 16px !important;
+    box-shadow: var(--shadow-xl) !important;
 
     .mat-mdc-menu-item {
         color: var(--text-primary) !important;
+        margin: 4px;
+        border-radius: 8px;
+        transition: background 0.1s ease;
 
         &:hover {
             background: var(--interactive-secondary) !important;
-            color: var(--text-primary) !important;
         }
     }
 }

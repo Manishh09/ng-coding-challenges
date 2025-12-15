@@ -2,7 +2,7 @@
 
 /**
  * HeroStats Component Styles
- * 
+ *
  * Compact stats display with glassmorphism effect for hero sections.
  * Responsive design with pill-styled containers.
  */
@@ -63,13 +63,13 @@
   align-items: baseline;
   gap: var(--spacing-xs);
   padding: 0.5rem 1rem;
-  background: var(--color-white-alpha-10);
+  background: var(--surface-tertiary);
   border-radius: var(--border-radius-pill);
   min-width: 150px;
   transition: all var(--animation-duration-fast) var(--animation-easing);
 
   &:hover {
-    background: var(--color-white-alpha-15);
+    background: var(--interactive-secondary-hover);
     transform: scale(1.02);
   }
 }
@@ -77,7 +77,7 @@
 .hero-stat__value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-white-alpha-95);
+  color: var(--hero-text-primary);
   line-height: 1;
   letter-spacing: -0.01em;
 }
@@ -85,7 +85,7 @@
 .hero-stat__label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-white-alpha-80);
+  color: var(--hero-text-secondary);
   line-height: 1.2;
 }
 

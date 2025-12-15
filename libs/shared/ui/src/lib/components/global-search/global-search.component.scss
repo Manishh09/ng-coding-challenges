@@ -280,12 +280,12 @@
 }
 .load-more-button {
   width: 100%;
-  color: var(--electric-violet);
+  color: var(--interactive-primary);
   border-color: var(--border-primary);
 
   &:hover {
     background: var(--color-primary-alpha-5);
-    border-color: var(--electric-violet);
+    border-color: var(--interactive-primary);
   }
 
   mat-icon {

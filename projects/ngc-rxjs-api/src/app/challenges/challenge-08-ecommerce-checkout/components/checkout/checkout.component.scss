@@ -44,7 +44,7 @@
 
 /* Loading & Error States */
 .error {
-  color: #d32f2f;
+  color: var(--status-error);
   font-size: 0.9rem;
   margin: 0.5rem 0 1rem;
 }
@@ -74,7 +74,7 @@
 }
 
 .product-item:hover {
-  border-color: #bbb;
+  border-color: var(--border-secondary);
 }
 
 .product-item label {
@@ -87,7 +87,7 @@
 
 .product-item input[type="checkbox"] {
   transform: scale(1.15);
-  accent-color: #3f51b5;
+  accent-color: var(--interactive-primary);
 }
 
 /* Place Order Button */
@@ -134,7 +134,7 @@
 
 .order-summary li {
   padding: 0.5rem 0;
-  border-bottom: 1px dashed #ddd;
+  border-bottom: 1px dashed var(--border-primary);
   font-size: 0.95rem;
 }
 

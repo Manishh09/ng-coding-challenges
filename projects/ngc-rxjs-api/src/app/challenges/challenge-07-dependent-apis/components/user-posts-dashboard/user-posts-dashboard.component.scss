@@ -15,18 +15,18 @@
   font-size: 0.95rem;
 
   &.loading {
-    background: #e3f2fd;
-    color: #1565c0;
+    background: var(--status-info-alpha-10);
+    color: var(--status-info-dark);
   }
 
   &.error {
-    background: #ffebee;
-    color: #c62828;
+    background: var(--status-error-alpha-10);
+    color: var(--status-error-dark);
   }
 
   &.empty {
-    background: #f5f5f5;
-    color: #666;
+    background: var(--surface-tertiary);
+    color: var(--text-tertiary);
   }
 }
 
@@ -78,7 +78,7 @@
   }
 
   .no-posts {
-    color: #999;
+    color: var(--text-tertiary);
     font-style: italic;
   }
 }
