@@ -18,6 +18,11 @@ import { LOADING_CONFIG } from '../../constants/loading.constants';
 import { ChallengeDetailsRouteData } from '../../models/route-data.interface';
 
 /**
+ * Base GitHub repository URL for constructing full documentation links
+ */
+const BASE_REPOSITORY = 'https://github.com/Manishh09/ng-coding-challenges/blob/develop';
+
+/**
  * Challenge Details Component
  *
  * Level 2 in routing hierarchy: /challenges/{category}/{challengeId}
@@ -113,19 +118,6 @@ export class ChallengeDetailsComponent {
   });
 
   /**
-   * Creates a URL-friendly slug from challenge title
-   */
-  private createChallengeSlug(title: string): string {
-    const withoutPrefix = title.replace(/^Challenge\s+\d+:\s*/i, '');
-    return withoutPrefix
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-');
-  }
-
-  /**
    * Navigate back to category challenge list
    */
   goBack(): void {
@@ -144,8 +136,8 @@ export class ChallengeDetailsComponent {
   launchWorkspace(): void {
     const c = this.challengeDetails();
     if (c) {
-      const slug = this.createChallengeSlug(c.title);
-      this.router.navigate(['/challenges', c.category, slug, 'workspace']);
+      // Use c.link which contains the correct slug from configuration
+      this.router.navigate(['/challenges', c.category, c.link, 'workspace']);
     }
   }
 
@@ -179,37 +171,40 @@ export class ChallengeDetailsComponent {
   openGitHub(): void {
     const c = this.challengeDetails();
     if (c?.gitHub) {
-      window.open(c.gitHub, '_blank');
+      const fullUrl = `${BASE_REPOSITORY}/${c.gitHub}`;
+      window.open(fullUrl, '_blank');
     }
   }
 
   openRequirement(): void {
     const c = this.challengeDetails();
-    if (c?.requirement) {
-      window.open(c.requirement, '_blank');
+    if (c?.requirementDoc) {
+      const fullUrl = `${BASE_REPOSITORY}/${c.requirementDoc}`;
+      window.open(fullUrl, '_blank');
     }
   }
 
   openSolutionGuide(): void {
     const c = this.challengeDetails();
     if (c?.solutionGuide) {
-      window.open(c.solutionGuide, '_blank');
+      const fullUrl = `${BASE_REPOSITORY}/${c.solutionGuide}`;
+      window.open(fullUrl, '_blank');
     }
   }
 
   navigateToNext(): void {
     const next = this.nextChallenge();
     if (next) {
-      const slug = this.createChallengeSlug(next.title);
-      this.router.navigate(['/challenges', next.category, slug]);
+      // Use next.link which contains the correct slug from configuration
+      this.router.navigate(['/challenges', next.category, next.link]);
     }
   }
 
   navigateToPrevious(): void {
     const prev = this.previousChallenge();
     if (prev) {
-      const slug = this.createChallengeSlug(prev.title);
-      this.router.navigate(['/challenges', prev.category, slug]);
+      // Use prev.link which contains the correct slug from configuration
+      this.router.navigate(['/challenges', prev.category, prev.link]);
     }
   }
 }

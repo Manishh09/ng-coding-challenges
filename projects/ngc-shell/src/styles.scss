@@ -370,8 +370,8 @@ body.dark-mode {
 // Layout: Tighter padding to maximize interaction area
 .challenge-workspace-container {
   max-width: var(--max-width-wide); // 1440px - consistent width
-  padding: var(--spacing-lg) var(--spacing-xl);
-  padding-bottom: var(--spacing-md); // Maximize vertical space for workspace
+  //padding: var(--spacing-lg) var(--spacing-xl);
+  //padding-bottom: var(--spacing-md); // Maximize vertical space for workspace
 
   @media (max-width: 768px) {
     padding: var(--spacing-sm) var(--spacing-md);

@@ -313,6 +313,8 @@
     transition: all var(--animation-duration-fast) var(--animation-easing);
     border: 1px solid var(--border-primary);
     background: var(--surface-secondary);
+    cursor: pointer;
+    font-family: inherit;
 
     mat-icon {
         font-size: 18px;
@@ -321,7 +323,7 @@
         transition: transform var(--animation-duration-fast) var(--animation-easing);
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         background: var(--color-primary-alpha-10);
         border-color: var(--interactive-primary);
         transform: translateY(-2px);
@@ -335,6 +337,11 @@
     &:focus-visible {
         outline: 2px solid var(--interactive-primary);
         outline-offset: 2px;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 
     @media (max-width: 768px) {

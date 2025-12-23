@@ -22,7 +22,7 @@
   </header>
 
   <div class="challenge-list-cards" [attr.role]="'challenge-list'">
-    @if (loading()) {
+    @if (loading() && challenges().length !== 0) {
       <!-- Skeleton loaders for loading state -->
       @for (i of [1,2,3]; track i) {
         <app-skeleton-loader variant="card"></app-skeleton-loader>

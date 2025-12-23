@@ -44,7 +44,8 @@ export const NGC_ROUTING_ROUTES: Routes = [
       categoryName: 'Routing Challenges'
     }
   },
-
+  // TEMPORARILY DISABLED - Routing conflicts with main app
+  // Will be moved to standalone apps in future update
   // Shared login component for routing challenges
   {
     path: 'login',
@@ -75,7 +76,7 @@ export const NGC_ROUTING_ROUTES: Routes = [
         path: 'workspace',
         loadComponent: componentLoader,
         canActivate: challengeId === 'authorized-resource-access' ? [authGuard] :
-                     challengeId === 'admin-dashboard-access' ? [adminGuard] : [],
+          challengeId === 'admin-dashboard-access' ? [adminGuard] : [],
         data: {
           layoutType: 'challenge-workspace',
           categoryId: 'angular-routing',

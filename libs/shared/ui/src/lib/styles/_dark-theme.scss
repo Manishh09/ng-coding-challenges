@@ -43,6 +43,7 @@
 
   // Hero: Subtle violet glow for brand consistency
   --brand-gradient-hero: radial-gradient(ellipse at top, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+  --brand-gradient-header: linear-gradient(to bottom, var(--gray-950), var(--gray-900));
   --brand-gradient-footer: linear-gradient(to bottom, var(--gray-950), var(--gray-900));
   --brand-gradient-section: linear-gradient(120deg, rgba(109, 40, 217, 0.05), rgba(168, 85, 247, 0.05));
 

@@ -155,7 +155,6 @@ export class ChallengeCardComponent implements OnInit {
   viewDetails(): void {
     const challenge = this.challenge();
     const categoryId = challenge.category;
-    const challengeSlug = this.createChallengeSlug(challenge);
     this.router.navigate(['/challenges', categoryId, challenge.link]);
   }
 
@@ -166,25 +165,8 @@ export class ChallengeCardComponent implements OnInit {
   startChallenge(): void {
     const challenge = this.challenge();
     const categoryId = challenge.category;
-    const challengeSlug = this.createChallengeSlug(challenge);
-    this.router.navigate(['/challenges', categoryId, challengeSlug, 'workspace']);
-  }
-
-  /**
-   * Creates a URL-friendly slug from challenge title
-   * Example: "Challenge 01: Fetch Products" → "fetch-products"
-   */
-  private createChallengeSlug(challenge: Challenge): string {
-    const title = challenge.title;
-    // Remove "Challenge XX:" prefix if present
-    const withoutPrefix = title.replace(/^Challenge\s+\d+:\s*/i, '');
-    // Convert to kebab-case
-    return withoutPrefix
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+    // Use challenge.link which contains the correct slug from configuration
+    this.router.navigate(['/challenges', categoryId, challenge.link, 'workspace']);
   }
 
   viewOutput(link: string): void {

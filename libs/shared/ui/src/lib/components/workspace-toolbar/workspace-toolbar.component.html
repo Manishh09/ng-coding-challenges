@@ -1,0 +1,56 @@
+<mat-toolbar class="workspace-toolbar">
+  <div class="toolbar-content">
+    <!-- Left Section: Back Button + Challenge Info -->
+    <div class="toolbar-left">
+      <button
+        mat-icon-button
+        (click)="navigateBack()"
+        [matTooltip]="'Back to challenge details'"
+        aria-label="Back to challenge details"
+        class="back-button"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div class="challenge-info">
+        <span class="challenge-title">{{ challengeTitle() }}</span>
+        @if (categoryName()) {
+          <span class="category-badge">{{ categoryName() }}</span>
+        }
+      </div>
+    </div>
+
+    <!-- Right Section: Action Buttons -->
+    <div class="toolbar-right">
+      <!-- Solution Button (Primary) -->
+      @if (solutionGuide()) {
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="openSolution()"
+          [matTooltip]="'View solution guide'"
+          aria-label="View solution guide"
+          class="action-button solution-button"
+        >
+          <mat-icon class="button-icon">lightbulb</mat-icon>
+          <span class="button-text">Solution</span>
+        </button>
+      }
+
+      <!-- StackBlitz Button (Secondary) -->
+      @if (gitHub()) {
+        <button
+          mat-stroked-button
+          (click)="launchStackBlitz()"
+          [matTooltip]="'Open in StackBlitz IDE'"
+          aria-label="Open in StackBlitz IDE"
+          class="action-button stackblitz-button"
+          [disabled]="launching()"
+        >
+          <mat-icon class="button-icon">bolt</mat-icon>
+          <span class="button-text">StackBlitz</span>
+        </button>
+      }
+    </div>
+  </div>
+</mat-toolbar>

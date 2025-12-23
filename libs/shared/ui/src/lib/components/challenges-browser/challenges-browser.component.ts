@@ -19,6 +19,7 @@ import {
   ChallengesService,
 } from '@ng-coding-challenges/shared/services';
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
+import { WorkspaceToolbarComponent } from '../workspace-toolbar/workspace-toolbar.component';
 import { filter, map } from 'rxjs';
 
 /**
@@ -28,17 +29,19 @@ import { filter, map } from 'rxjs';
  * - Provides sidebar navigation for categories
  * - Manages responsive layout (mobile/tablet/desktop)
  * - Adapts UI based on route depth (shows/hides sidebar)
+ * - Conditionally displays workspace toolbar for workspace routes
  * - Delegates content rendering to child routes via <router-outlet>
  *
  * Does NOT:
  * - Render challenge lists (delegated to ChallengeListComponent)
  * - Render challenge details (delegated to ChallengeDetailsComponent)
- * - Handle challenge data fetching (done by resolvers)
+ * - Handle challenge data fetching (done by resolvers and child components)
+ * - Manage workspace-specific logic (handled by WorkspaceToolbarComponent)
  *
  * Routing Architecture:
  * - Level 1: /challenges/{category} - Shows ChallengeListComponent
  * - Level 2: /challenges/{category}/{challengeId} - Shows ChallengeDetailsComponent
- * - Level 3: /challenges/{category}/{challengeId}/workspace - Shows workspace component
+ * - Level 3: /challenges/{category}/{challengeId}/workspace - Shows workspace component + toolbar
  */
 @Component({
   selector: 'app-challenges-browser',
@@ -50,6 +53,7 @@ import { filter, map } from 'rxjs';
     MatButtonModule,
     MatToolbarModule,
     CategorySidebarComponent,
+    WorkspaceToolbarComponent,
   ],
   templateUrl: './challenges-browser.component.html',
   styleUrl: './challenges-browser.component.scss',
@@ -129,6 +133,41 @@ export class ChallengesBrowserComponent {
   readonly shouldShowSidebar = computed(() => {
     const depth = this.routeDepth();
     return depth <= 1;
+  });
+
+  /**
+   * Workspace route data - extracted from deepest route for conditional toolbar display
+   */
+  readonly workspaceData = toSignal(
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        let route = this.route.firstChild;
+        while (route?.firstChild) {
+          route = route.firstChild;
+        }
+        return route?.snapshot.data || {};
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    ),
+    {
+      initialValue: (() => {
+        let route = this.route.firstChild;
+        while (route?.firstChild) {
+          route = route.firstChild;
+        }
+        return route?.snapshot.data || {};
+      })()
+    }
+  );
+
+  /**
+   * Check if current route is a workspace route
+   * Used to conditionally show workspace toolbar
+   */
+  readonly isWorkspaceRoute = computed(() => {
+    const data = this.workspaceData();
+    return data['layoutType'] === 'challenge-workspace';
   });
 
   /**

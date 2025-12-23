@@ -43,10 +43,14 @@
                 </ul>
                 }
 
-                <a [href]="c.requirementDoc" target="_blank" class="requirements-link">
+                <button
+                    (click)="openRequirement()"
+                    class="requirements-link"
+                    [disabled]="!c.requirementDoc"
+                >
                     <span>See full requirements doc</span>
                     <mat-icon>arrow_forward</mat-icon>
-                </a>
+                </button>
             </section>
         </main>
 

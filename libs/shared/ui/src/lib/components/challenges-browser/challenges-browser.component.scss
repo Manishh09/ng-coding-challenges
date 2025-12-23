@@ -17,6 +17,14 @@
   width: 100%;
   transition: margin-left var(--animation-duration-standard) var(--animation-easing);
 
+  // Ensure workspace toolbar is visible
+  ng-coding-challenges-workspace-toolbar {
+    display: block;
+    flex-shrink: 0;
+    width: 100%;
+    margin-top: 64px;
+  }
+
   // Shifted for sidebar on desktop (list view)
   &.shifted {
     margin-left: 280px;

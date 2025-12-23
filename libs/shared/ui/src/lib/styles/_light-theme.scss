@@ -42,6 +42,7 @@
 
   // Extremely subtle hero background - clean and professional
   --brand-gradient-hero: radial-gradient(ellipse at top, #f8fafc 0%, #e0e7ff 60%, #ddd6fe 100%);
+  --brand-gradient-header: linear-gradient(to bottom, var(--gray-50), var(--gray-100));
   --brand-gradient-footer: linear-gradient(to bottom, var(--gray-50), var(--gray-100));
   --brand-gradient-section: linear-gradient(120deg, rgba(79, 70, 229, 0.03), rgba(124, 58, 237, 0.03));
 

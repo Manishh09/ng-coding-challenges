@@ -7,6 +7,11 @@
 
   <!-- Main Content Area -->
   <main class="content-area" [class.shifted]="!isMobileView() && shouldShowSidebar()" [class.full-width]="!shouldShowSidebar()">
+    <!-- Workspace Toolbar (only in workspace view) - Self-contained -->
+    @if (isWorkspaceRoute()) {
+      <ng-coding-challenges-workspace-toolbar />
+    }
+
     <!-- Mobile Top Bar (only in list view) -->
     @if (isMobileView() && shouldShowSidebar()) {
     <div class="mobile-top-bar">

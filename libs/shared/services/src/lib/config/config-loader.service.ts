@@ -100,7 +100,7 @@ export class ConfigLoaderService {
    */
   getCategories(): Observable<Category[]> {
     return this.categoriesConfig$.pipe(
-      map(config => config.categories)
+      map(config => config.categories.filter((cat: Category) => cat.enabled))
     );
   }
 
