@@ -110,7 +110,7 @@ export class LandingPageComponent {
 
   // Convert to computed signals to react to async data changes
   readonly metrics = computed(() => this.createMetrics());
-  readonly heroStatItems = computed(() => this.metrics().slice(0, 2));
+  readonly heroStatItems = computed(() => this.metrics().slice(0, 1));
   readonly featuredTracks = computed(() => this.computeFeaturedTracks());
   readonly latestChallenges = computed(() => this.computeLatestChallenges());
   readonly heroSpotlight = computed(() => this.latestChallenges().at(0) ?? null);
