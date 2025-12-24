@@ -3,75 +3,93 @@
 
 // Light theme CSS variables aligned with angular.dev
 @mixin light-theme-vars() {
-  --surface-primary: var(--gray-50);
-  --surface-secondary: #ffffff;
+  // Surface colors - High brightness for clean feel
+  --surface-primary: #ffffff;
+  --surface-secondary: var(--gray-50);
   --surface-tertiary: var(--gray-100);
 
+  // Text colors - High contrast for readability
   --text-primary: var(--gray-900);
   --text-secondary: var(--gray-700);
-  --text-tertiary: var(--gray-500);
+  --text-tertiary: var(--gray-600); // Darker for better contrast (>4.5:1)
+  --text-on-primary: #ffffff;
+  --text-on-secondary: var(--gray-900);
 
+  // Borders - Subtle but defining
   --border-primary: var(--gray-200);
   --border-secondary: var(--gray-300);
 
-  --background-primary: #ffffff;
-  --background-secondary: var(--gray-50);
+  // Backgrounds (unified with surface tokens)
+  --background-primary: var(--surface-primary);
+  --background-secondary: var(--surface-secondary);
 
-  --interactive-primary: var(--electric-violet);
-  --interactive-primary-hover: #7c3aed; // violet-600
+  // Interactive Colors - Electric Violet with better hover states
+  --interactive-primary: #7c3aed; // violet-600
+  --interactive-primary-hover: #6d28d9; // violet-700
   --interactive-secondary: var(--gray-100);
   --interactive-secondary-hover: var(--gray-200);
 
-  // Gradients and brands
-  --gradient-primary: linear-gradient(135deg, var(--ruby-red), var(--dark-pink), var(--electric-violet));
-  --gradient-secondary: linear-gradient(135deg, var(--bright-blue), var(--electric-violet));
+  // Enhanced Gradients - Corporate & Elegant (Indigo to Violet)
+  --gradient-primary: linear-gradient(135deg, #6d28d9 0%, #a855f7 100%);
+  --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
   --brand-gradient-primary: var(--gradient-primary);
-  --brand-gradient-hero: var(--gradient-primary);
-  --brand-gradient-footer: var(--gradient-primary);
-  --brand-gradient-section: linear-gradient(120deg, rgba(139, 92, 246, 0.06), rgba(236, 72, 153, 0.06));
+
+  // Ruby-red accent gradient for high-emphasis CTAs
+  --gradient-accent: linear-gradient(to right, #E0115F 0%, #C11C84 100%);
+  --gradient-logo: linear-gradient(to right, #E0115F 0%, #C11C84 100%);
+  --cta-accent: #E0115F; // Ruby red for special emphasis
+  --cta-accent-hover: #C11C84; // Dark pink hover state
+
+  // Extremely subtle hero background - clean and professional
+  --brand-gradient-hero: radial-gradient(ellipse at top, #f8fafc 0%, #e0e7ff 60%, #ddd6fe 100%);
+  --brand-gradient-header: linear-gradient(to bottom, var(--gray-50), var(--gray-100));
+  --brand-gradient-footer: linear-gradient(to bottom, var(--gray-50), var(--gray-100));
+  --brand-gradient-section: linear-gradient(120deg, rgba(79, 70, 229, 0.03), rgba(124, 58, 237, 0.03));
+
+  // Hero section text colors (adapt to light background)
+  --hero-text-primary: var(--gray-900);
+  --hero-text-secondary: var(--gray-700);
+  --hero-text-muted: var(--gray-600);
 
   // Aliases for component usage
-  --color-primary: var(--electric-violet);
-  --color-accent: var(--vivid-pink);
-  --color-bg: var(--background-primary);
+  --color-primary: var(--interactive-primary);
+  --color-accent: #6366f1; // indigo-500
+  --color-bg: var(--surface-primary);
   --color-fg: var(--text-primary);
-  --color-surface: var(--surface-secondary);
+  --color-surface: var(--surface-primary);
 
   // Legacy compatibility aliases
-  --surface-color: var(--surface-secondary);
+  --surface-color: var(--surface-primary);
   --surface-variant-color: var(--surface-tertiary);
-  --surface-variant-color-rgb: 245,245,245;
+  --surface-variant-color-rgb: 241, 245, 249;
   --on-surface-color: var(--text-primary);
   --on-surface-variant-color: var(--text-secondary);
   --outline-color: var(--border-primary);
-  --outline-color-rgb: 224,224,224;
-  --primary-color: var(--electric-violet);
-  --primary-color-rgb: 139, 92, 246;
-  --shadow-color: rgba(0,0,0,0.12);
+  --outline-color-rgb: 226, 232, 240;
+  --primary-color: var(--interactive-primary);
+  --primary-color-rgb: 124, 58, 237;
+  --shadow-color: rgba(15, 23, 42, 0.08); // slate-900 with low opacity
 
-  // Logo theming (preserve original gradient in light mode)
+  // Logo theming
   --logo-filter: none;
   --logo-blend-mode: normal;
-  --logo-shadow-color: rgba(139, 92, 246, 0.18);
+  --logo-shadow-color: rgba(124, 58, 237, 0.2);
 }
 
 // Material 3 light theme
 @mixin light-material-theme() {
   // Pull M3 palettes
   $primary-palette: palettes.$violet-palette; // M3 violet aligns with angular.dev primary
-  $tertiary-palette: palettes.$rose-palette;  // M3 rose aligns with vivid-pink accents
+  $tertiary-palette: palettes.$rose-palette; // M3 rose aligns with vivid-pink accents
 
-  $theme: mat.define-theme((
-    color: (
-      theme-type: light,
-      primary: $primary-palette,
-      tertiary: $tertiary-palette,
-      use-system-variables: true,
-    ),
-    density: (
-      scale: 0,
-    ),
-  ));
+  $theme: mat.define-theme((color: (theme-type: light,
+          primary: $primary-palette,
+          tertiary: $tertiary-palette,
+          use-system-variables: true,
+        ),
+        density: (scale: 0,
+        ),
+      ));
 
   // Emit system tokens and component styles (must be inside a selector at call site)
   @include mat.theme($theme);

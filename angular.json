@@ -70,7 +70,7 @@
         }
       }
     },
-     "shared-ui": {
+    "shared-ui": {
       "projectType": "library",
       "root": "libs/shared/ui",
       "sourceRoot": "libs/shared/ui/src",
@@ -103,37 +103,37 @@
         }
       }
     },
-    "coding-challenges": {
+    "ngc-shell": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/coding-challenges",
-      "sourceRoot": "projects/coding-challenges/src",
+      "root": "projects/ngc-shell",
+      "sourceRoot": "projects/ngc-shell/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/coding-challenges",
-            "index": "projects/coding-challenges/src/index.html",
-            "browser": "projects/coding-challenges/src/main.ts",
+            "outputPath": "dist/ngc-shell",
+            "index": "projects/ngc-shell/src/index.html",
+            "browser": "projects/ngc-shell/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/coding-challenges/tsconfig.app.json",
+            "tsConfig": "projects/ngc-shell/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/coding-challenges/public"
+                "input": "projects/ngc-shell/public"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "projects/coding-challenges/src/styles.scss"
+              "projects/ngc-shell/src/styles.scss"
             ],
             "scripts": []
           },
@@ -142,8 +142,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "3MB",
+                  "maximumError": "3MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -165,10 +165,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "coding-challenges:build:production"
+              "buildTarget": "ngc-shell:build:production"
             },
             "development": {
-              "buildTarget": "coding-challenges:build:development"
+              "buildTarget": "ngc-shell:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -183,53 +183,53 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/coding-challenges/tsconfig.spec.json",
+            "tsConfig": "projects/ngc-shell/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/coding-challenges/public"
+                "input": "projects/ngc-shell/public"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "projects/coding-challenges/src/styles.scss"
+              "projects/ngc-shell/src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     },
-    "ngc-rxjs": {
+    "ngc-rxjs-api": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/ngc-rxjs",
-      "sourceRoot": "projects/ngc-rxjs/src",
+      "root": "projects/ngc-rxjs-api",
+      "sourceRoot": "projects/ngc-rxjs-api/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngc-rxjs",
-            "index": "projects/ngc-rxjs/src/index.html",
-            "browser": "projects/ngc-rxjs/src/main.ts",
+            "outputPath": "dist/ngc-rxjs-api",
+            "index": "projects/ngc-rxjs-api/src/index.html",
+            "browser": "projects/ngc-rxjs-api/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/ngc-rxjs/tsconfig.app.json",
+            "tsConfig": "projects/ngc-rxjs-api/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/ngc-rxjs/public"
+                "input": "projects/ngc-rxjs-api/public"
               }
             ],
             "styles": [
-              "projects/ngc-rxjs/src/styles.scss"
+              "projects/ngc-rxjs-api/src/styles.scss"
             ],
             "scripts": []
           },
@@ -238,7 +238,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "800kB",
                   "maximumError": "1MB"
                 },
                 {
@@ -261,10 +261,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ngc-rxjs:build:production"
+              "buildTarget": "ngc-rxjs-api:build:production"
             },
             "development": {
-              "buildTarget": "ngc-rxjs:build:development"
+              "buildTarget": "ngc-rxjs-api:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -279,16 +279,206 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/ngc-rxjs/tsconfig.spec.json",
+            "tsConfig": "projects/ngc-rxjs-api/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/ngc-rxjs/public"
+                "input": "projects/ngc-rxjs-api/public"
               }
             ],
             "styles": [
-              "projects/ngc-rxjs/src/styles.scss"
+              "projects/ngc-rxjs-api/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "ngc-core": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngc-core",
+      "sourceRoot": "projects/ngc-core/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/ngc-core",
+            "index": "projects/ngc-core/src/index.html",
+            "browser": "projects/ngc-core/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/ngc-core/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngc-core/public"
+              }
+            ],
+            "styles": [
+              "projects/ngc-core/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "800kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ngc-core:build:production"
+            },
+            "development": {
+              "buildTarget": "ngc-core:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/ngc-core/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngc-core/public"
+              }
+            ],
+            "styles": [
+              "projects/ngc-core/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "ngc-routing": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngc-routing",
+      "sourceRoot": "projects/ngc-routing/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/ngc-routing",
+            "index": "projects/ngc-routing/src/index.html",
+            "browser": "projects/ngc-routing/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/ngc-routing/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngc-routing/public"
+              }
+            ],
+            "styles": [
+              "projects/ngc-routing/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "800kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ngc-routing:build:production"
+            },
+            "development": {
+              "buildTarget": "ngc-routing:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/ngc-routing/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngc-routing/public"
+              }
+            ],
+            "styles": [
+              "projects/ngc-routing/src/styles.scss"
             ],
             "scripts": []
           }

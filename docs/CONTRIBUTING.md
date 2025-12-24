@@ -15,13 +15,12 @@ There are many ways to contribute:
 - Improving tests or adding new ones
 
 ---
- 
 
 ## Getting Started
 
 ### Development Environment Setup
 
-**Prerequisites**
+### Prerequisites
 
 - Node.js (v18 or higher)
 - npm (v9 or higher)
@@ -67,7 +66,7 @@ There are many ways to contribute:
     # commit your changes
     git commit -m "your-commit-message" 
 ```
-    
+
 5. **Push your branch** to your fork:
 
 ```bash

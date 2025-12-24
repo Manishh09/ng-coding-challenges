@@ -1,4 +1,4 @@
-import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
+import { Injectable, signal, effect, PLATFORM_ID, inject, DestroyRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ThemeType } from '@ng-coding-challenges/shared/models';
 
@@ -8,6 +8,7 @@ import { ThemeType } from '@ng-coding-challenges/shared/models';
 export class ThemeService {
   private readonly THEME_STORAGE_KEY = 'ng-coding-challenges-theme';
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
 
   // Signal-based reactive state
   private readonly _currentTheme = signal<ThemeType>(this.getInitialTheme());
@@ -74,7 +75,13 @@ export class ThemeService {
     const handleChange = (e: MediaQueryListEvent) => {
       this._systemPreference.set(e.matches ? 'dark' : 'light');
     };
+
     mediaQuery.addEventListener('change', handleChange);
+
+    // Cleanup event listener on service destruction
+    this.destroyRef.onDestroy(() => {
+      mediaQuery.removeEventListener('change', handleChange);
+    });
   }
 
   private applyTheme(theme: ThemeType): void {

@@ -25,47 +25,75 @@ We have adopted a monorepo structure, leveraging Angular's workspace capabilitie
 
 ## Directory Structure
 
-```
 ng-coding-challenges/
 ├── projects/
-│   ├── coding-challenges/    # Main application (challenge browser)
-│   ├── challenge-1/          # Individual challenge app
-│   ├── challenge-2/          # Individual challenge app
-│   └── ...                   # More challenges
+│   ├── ngc-shell/           # 🧩 Main Application Shell
+│   │                        # - Hosts the main layout, routing, and navigation
+│   │                        # - Entry point for all challenge category apps
+│   │                        # - Responsible for global UI (header, sidebar, etc.)
+│   │
+│   ├── ngc-core/            # ⚙️ Core Challenges Category
+│   │                        # - Contains core Angular challenges
+│   │                        # - Each challenge lives inside this category folder
+│   │
+│   ├── ngc-routing/         # 🧭 Routing Challenges Category
+│   │                        # - Focused on Angular Router-related challenges
+│   │
+│   ├── ngc-rxjs-api/        # 🔄 RxJS & API Challenges Category
+│   │                        # - Deals with RxJS patterns, API handling, observables
+│   │
+│   └── ...                  # Additional challenge categories can be added here
+│
 ├── libs/
 │   └── shared/
-│       ├── ui/               # Shared UI components
-│       ├── models/           # Shared data models
-│       └── services/         # Shared services
-```
+│       ├── models/          # 🧱 Shared TypeScript models & interfaces
+│       ├── services/        # 🔧 Common Angular services (e.g., API, storage, logging)
+│       └── ui/              # 🎨 Shared UI components (buttons, cards, layouts, etc.)
+│
+└── node_modules/
 
-### Shared Libraries
+## Shared Libraries
 
-- **shared/ui:** Common UI elements (headers, footers, challenge cards, etc.)
-- **shared/models:** Shared interfaces and data models
-- **shared/services:** Reusable services (API clients, utilities, etc.)
+| Library | Purpose |
+|----------|----------|
+| **shared/ui** | Common UI elements like headers, footers, and challenge cards |
+| **shared/models** | Shared interfaces and type definitions |
+| **shared/services** | Cross-app services such as API clients, logging, and utility helpers |
 
-### Challenge Applications
+## Challenge Applications
 
-Each challenge resides in its own Angular application, featuring:
+Each **category app** (e.g., `ngc-core`, `ngc-routing`, `ngc-rxjs-api`) contains one or more **challenges**, each structured as below:
 
-- Dedicated routing
-- Challenge-specific components, services, and models
-- A `REQUIREMENT.md` file outlining the challenge details
+ngc-category-app/
+└── src/
+    └── app/
+        ├── challenges/
+        │   ├── challenge-01/
+        │   ├── challenge-02/
+        │   └── ...
+        ├── app.component.*
+        ├── app.routes.ts
+        ├── app.config.ts
+        ├── main.ts
+        ├── index.html
+        └── styles.scss
 
-### Main Application
+## Main Application
 
-The `coding-challenges` app serves as the central hub, providing:
+The **`ngc-shell`** app serves as the **central hub** for all challenge categories.  
+It provides:
 
-- A dashboard listing all challenges
-- Navigation to individual challenge apps
-- Shared UI (header, footer, theme toggle)
+- A **dashboard** listing all categories and challenges  
+- **Routing and navigation** between challenge apps  
+- **Global UI elements** such as header, sidebar, and theme toggle  
+- Integration with **shared libraries** for a consistent experience.
 
 ## Tooling & Workflow
 
-- CLI scripts for scaffolding new challenges
-- Build/test scripts for individual apps and the entire monorepo
-- Contributor documentation for onboarding and challenge creation
+- **Scaffold Scripts:** Automate creation of new challenges and categories  
+- **Individual Build/Test Pipelines:** Build, test, and serve each challenge app separately  
+- **Monorepo Management:** Simplifies dependency management and CI/CD integration  
+- **Contributor Docs:** Onboarding guide for new developers to create and contribute challenges
 
 ## Alternatives Considered
 
@@ -73,4 +101,8 @@ The `coding-challenges` app serves as the central hub, providing:
 - **Separate repositories:** Maximum isolation, but harder to maintain consistency and share code
 - **Nx workspace:** Advanced tooling, but adds complexity and a steeper learning curve
 
-Our chosen monorepo approach provides a balanced solution for scalability, maintainability, and developer productivity.
+## Conclusion
+
+This monorepo architecture provides the **right balance** between modularity, scalability, and simplicity.
+
+It enables **independent challenge development**, **efficient reuse of shared resources**, and a **cohesive user experience** — ensuring the `ng-coding-challenges` platform remains maintainable and extensible as it grows.

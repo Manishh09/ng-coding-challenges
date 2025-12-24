@@ -1,0 +1,226 @@
+// ============================
+// Metric Card Component Styles
+// ============================
+// Reusable metric/stat card with icon, value, label, and helper text
+// Follows Material Design principles and design system tokens
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: var(--surface-elevated);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--border-primary);
+  box-shadow: var(--shadow-md);
+  min-height: 200px; // Reduced from 240px for more compact cards
+  height: 100%; // Fill parent container
+  transition: 
+    transform var(--animation-duration-standard) var(--animation-easing),
+    box-shadow var(--animation-duration-standard) var(--animation-easing),
+    border-color var(--animation-duration-standard) var(--animation-easing);
+  
+  // Animation on mount
+  animation: fadeInScale 0.6s var(--animation-easing) backwards;
+
+  // Interactive variant with enhanced hover states
+  &--interactive {
+    cursor: pointer;
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--color-primary-alpha-40);
+
+      .metric-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+}
+
+.metric-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  flex-shrink: 0; // Prevent icon from shrinking
+  transition: transform var(--animation-duration-standard) var(--animation-easing);
+  
+  mat-icon {
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    transition: color var(--animation-duration-fast);
+  }
+
+  // Icon background variant
+  &--with-background {
+    background: var(--gradient-subtle);
+    box-shadow: var(--shadow-sm);
+  }
+
+  // Icon color variants
+  &[data-color='primary'] {
+    mat-icon {
+      color: var(--color-primary);
+    }
+    
+    &.metric-icon--with-background {
+      background: var(--color-primary-alpha-10);
+    }
+  }
+
+  &[data-color='secondary'] {
+    mat-icon {
+      color: var(--color-secondary);
+    }
+    
+    &.metric-icon--with-background {
+      background: var(--color-secondary-alpha-10);
+    }
+  }
+
+  &[data-color='accent'] {
+    mat-icon {
+      color: var(--color-accent);
+    }
+    
+    &.metric-icon--with-background {
+      background: var(--color-accent-alpha-10);
+    }
+  }
+
+  &[data-color='success'] {
+    mat-icon {
+      color: var(--color-success);
+    }
+    
+    &.metric-icon--with-background {
+      background: var(--color-success-alpha-10);
+    }
+  }
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xs);
+  flex: 1; // Allow content to fill remaining space
+}
+
+.metric-value {
+  font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metric-label {
+  font-size: clamp(0.9375rem, 1.5vw + 0.25rem, 1.0625rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.metric-helper {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+// ============================
+// Responsive Design
+// ============================
+
+// Mobile: Stack cards vertically
+@media (max-width: 767px) {
+  .metric-card {
+    padding: var(--spacing-md) var(--spacing-lg);
+    gap: var(--spacing-sm);
+    min-height: 180px;
+  }
+
+  .metric-icon {
+    width: 44px;
+    height: 44px;
+
+    mat-icon {
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+// Tablet and up: Enhanced spacing
+@media (min-width: 768px) {
+  .metric-card {
+    padding: var(--spacing-xl) var(--spacing-xl);
+  }
+}
+
+// Desktop: Max comfortable width
+@media (min-width: 1024px) {
+  .metric-card {
+    max-width: 360px;
+  }
+}
+
+// ============================
+// Animations
+// ============================
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Reduce motion for accessibility
+@media (prefers-reduced-motion: reduce) {
+  .metric-card {
+    animation: none;
+    
+    &--interactive {
+      &:hover,
+      &:focus-within {
+        transform: none;
+      }
+    }
+  }
+
+  .metric-icon {
+    transition: none;
+  }
+}
+
+// ============================
+// Dark Mode Support
+// ============================
+
+@media (prefers-color-scheme: dark) {
+  .metric-card {
+    background: var(--surface-elevated-dark);
+    border-color: var(--border-subtle-dark);
+  }
+}

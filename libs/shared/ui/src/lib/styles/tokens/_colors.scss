@@ -1,0 +1,164 @@
+/**
+ * Color Design Tokens
+ *
+ * Defines the complete color system including:
+ * - Brand colors
+ * - Gray scale
+ * - Alpha channel variants for layering
+ * - Status/semantic colors
+ */
+
+// Brand Colors (OKLCH color space for better perceptual uniformity)
+$bright-blue: oklch(51.01% 0.274 263.83);
+$electric-violet: oklch(53.18% 0.28 296.97);
+$vivid-pink: oklch(65.71% 0.277 342.55);
+$hot-pink: oklch(58.11% 0.238 342.55);
+$hot-red: oklch(58.11% 0.238 15.55);
+$orange-red: oklch(58.11% 0.238 25.55);
+$super-green: oklch(58.11% 0.238 142.55);
+$ruby-red: #E0115F;
+$dark-pink: #C11C84;
+
+// Semantic Accessible Text Colors (Decoupled from Brand)
+// Ruby Red darkened for Light Mode text (>4.5:1)
+$accent-text-light: #be0f51;
+// Rose-400 for Dark Mode text (>4.5:1 vs Slate-950)
+$accent-text-dark: #fb7185;
+
+// Gray Scale (Slate Palette - Cool & Professional)
+$gray-50: #f8fafc;
+$gray-100: #f1f5f9;
+$gray-200: #e2e8f0;
+$gray-300: #cbd5e1;
+$gray-400: #94a3b8;
+$gray-500: #64748b;
+$gray-600: #475569;
+$gray-700: #334155;
+$gray-800: #1e293b;
+$gray-900: #0f172a;
+$gray-950: #020617;
+
+// Alpha Channel Tokens - Primary Color (Electric Violet #8b5cf6)
+$color-primary-alpha-5: rgba(139, 92, 246, 0.05);
+$color-primary-alpha-10: rgba(139, 92, 246, 0.1);
+$color-primary-alpha-20: rgba(139, 92, 246, 0.2);
+$color-primary-alpha-30: rgba(139, 92, 246, 0.3);
+$color-primary-alpha-40: rgba(139, 92, 246, 0.4);
+$color-primary-alpha-50: rgba(139, 92, 246, 0.5);
+$color-primary-alpha-60: rgba(139, 92, 246, 0.6);
+$color-primary-alpha-70: rgba(139, 92, 246, 0.7);
+$color-primary-alpha-80: rgba(139, 92, 246, 0.8);
+$color-primary-alpha-90: rgba(139, 92, 246, 0.9);
+
+// Alpha Channel Tokens - Accent Color (Rose #ec4899)
+$color-accent-alpha-5: rgba(236, 72, 153, 0.05);
+$color-accent-alpha-10: rgba(236, 72, 153, 0.1);
+$color-accent-alpha-20: rgba(236, 72, 153, 0.2);
+$color-accent-alpha-30: rgba(236, 72, 153, 0.3);
+$color-accent-alpha-40: rgba(236, 72, 153, 0.4);
+$color-accent-alpha-50: rgba(236, 72, 153, 0.5);
+$color-accent-alpha-60: rgba(236, 72, 153, 0.6);
+$color-accent-alpha-70: rgba(236, 72, 153, 0.7);
+$color-accent-alpha-80: rgba(236, 72, 153, 0.8);
+$color-accent-alpha-90: rgba(236, 72, 153, 0.9);
+
+// Alpha Channel Tokens - Black
+$color-black-alpha-5: rgba(0, 0, 0, 0.05);
+$color-black-alpha-10: rgba(0, 0, 0, 0.1);
+$color-black-alpha-20: rgba(0, 0, 0, 0.2);
+$color-black-alpha-30: rgba(0, 0, 0, 0.3);
+$color-black-alpha-40: rgba(0, 0, 0, 0.4);
+$color-black-alpha-50: rgba(0, 0, 0, 0.5);
+$color-black-alpha-60: rgba(0, 0, 0, 0.6);
+$color-black-alpha-70: rgba(0, 0, 0, 0.7);
+$color-black-alpha-80: rgba(0, 0, 0, 0.8);
+$color-black-alpha-90: rgba(0, 0, 0, 0.9);
+
+// Alpha Channel Tokens - White
+$color-white-alpha-5: rgba(255, 255, 255, 0.05);
+$color-white-alpha-10: rgba(255, 255, 255, 0.1);
+$color-white-alpha-20: rgba(255, 255, 255, 0.2);
+$color-white-alpha-30: rgba(255, 255, 255, 0.3);
+$color-white-alpha-40: rgba(255, 255, 255, 0.4);
+$color-white-alpha-50: rgba(255, 255, 255, 0.5);
+$color-white-alpha-60: rgba(255, 255, 255, 0.6);
+$color-white-alpha-70: rgba(255, 255, 255, 0.7);
+$color-white-alpha-80: rgba(255, 255, 255, 0.8);
+$color-white-alpha-90: rgba(255, 255, 255, 0.9);
+
+/**
+ * Mixin: Apply color CSS custom properties
+ */
+@mixin color-css-vars() {
+  // Brand colors
+  --bright-blue: #{$bright-blue};
+  --electric-violet: #{$electric-violet};
+  --vivid-pink: #{$vivid-pink};
+  --hot-pink: #{$hot-pink};
+  --hot-red: #{$hot-red};
+  --orange-red: #{$orange-red};
+  --super-green: #{$super-green};
+  --ruby-red: #{$ruby-red};
+  --dark-pink: #{$dark-pink};
+
+  // Gray scale
+  --gray-50: #{$gray-50};
+  --gray-100: #{$gray-100};
+  --gray-200: #{$gray-200};
+  --gray-300: #{$gray-300};
+  --gray-400: #{$gray-400};
+  --gray-500: #{$gray-500};
+  --gray-600: #{$gray-600};
+  --gray-700: #{$gray-700};
+  --gray-800: #{$gray-800};
+  --gray-900: #{$gray-900};
+  --gray-950: #{$gray-950};
+
+  // Primary alpha variants
+  --color-primary-alpha-5: #{$color-primary-alpha-5};
+  --color-primary-alpha-10: #{$color-primary-alpha-10};
+  --color-primary-alpha-20: #{$color-primary-alpha-20};
+  --color-primary-alpha-30: #{$color-primary-alpha-30};
+  --color-primary-alpha-40: #{$color-primary-alpha-40};
+  --color-primary-alpha-50: #{$color-primary-alpha-50};
+  --color-primary-alpha-60: #{$color-primary-alpha-60};
+  --color-primary-alpha-70: #{$color-primary-alpha-70};
+  --color-primary-alpha-80: #{$color-primary-alpha-80};
+  --color-primary-alpha-90: #{$color-primary-alpha-90};
+
+  // Accent alpha variants
+  --color-accent-alpha-5: #{$color-accent-alpha-5};
+  --color-accent-alpha-10: #{$color-accent-alpha-10};
+  --color-accent-alpha-20: #{$color-accent-alpha-20};
+  --color-accent-alpha-30: #{$color-accent-alpha-30};
+  --color-accent-alpha-40: #{$color-accent-alpha-40};
+  --color-accent-alpha-50: #{$color-accent-alpha-50};
+  --color-accent-alpha-60: #{$color-accent-alpha-60};
+  --color-accent-alpha-70: #{$color-accent-alpha-70};
+  --color-accent-alpha-80: #{$color-accent-alpha-80};
+  --color-accent-alpha-90: #{$color-accent-alpha-90};
+
+  // Black alpha variants
+  --color-black-alpha-5: #{$color-black-alpha-5};
+  --color-black-alpha-10: #{$color-black-alpha-10};
+  --color-black-alpha-20: #{$color-black-alpha-20};
+  --color-black-alpha-30: #{$color-black-alpha-30};
+  --color-black-alpha-40: #{$color-black-alpha-40};
+  --color-black-alpha-50: #{$color-black-alpha-50};
+  --color-black-alpha-60: #{$color-black-alpha-60};
+  --color-black-alpha-70: #{$color-black-alpha-70};
+  --color-black-alpha-80: #{$color-black-alpha-80};
+  --color-black-alpha-90: #{$color-black-alpha-90};
+
+  // White alpha variants
+  --color-white-alpha-5: #{$color-white-alpha-5};
+  --color-white-alpha-10: #{$color-white-alpha-10};
+  --color-white-alpha-20: #{$color-white-alpha-20};
+  --color-white-alpha-30: #{$color-white-alpha-30};
+  --color-white-alpha-40: #{$color-white-alpha-40};
+  --color-white-alpha-50: #{$color-white-alpha-50};
+  --color-white-alpha-60: #{$color-white-alpha-60};
+  --color-white-alpha-70: #{$color-white-alpha-70};
+  --color-white-alpha-80: #{$color-white-alpha-80};
+  --color-white-alpha-90: #{$color-white-alpha-90};
+}

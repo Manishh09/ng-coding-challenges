@@ -1,0 +1,29 @@
+.admin-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.admin-card {
+  width: 100%;
+  max-width: 960px;
+  padding: 1rem;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.admin-nav a {
+  text-decoration: none;
+}
+
+@media (max-width:600px) {
+  .admin-nav {
+    flex-direction: column;
+  }
+}
