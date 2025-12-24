@@ -15,6 +15,13 @@
   background: var(--brand-gradient-hero);
   color: var(--hero-text-primary);
   isolation: isolate;
+  min-height: fit-content;
+
+  // Prevent content cutoff on mobile
+  @media (max-width: 767px) {
+    padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-3xl);
+    overflow: visible;
+  }
 
   // Adjust padding for larger screens
   @media (min-width: 768px) {
@@ -59,12 +66,19 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
   align-items: center;
   gap: clamp(var(--spacing-xl), 4vw, var(--spacing-3xl));
+  width: 100%;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero-copy {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  width: 100%;
+  overflow: visible;
 }
 
 .hero-eyebrow {
@@ -82,7 +96,13 @@
   font-weight: 700;
   margin: 0;
   max-width: 18ch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 
+  @media (max-width: 767px) {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+    max-width: 100%;
+  }
 
   .highlight-q {
     color: var(--ruby-red);
@@ -94,6 +114,11 @@
   font-size: 1.15rem;
   line-height: 1.65;
   color: var(--hero-text-secondary);
+
+  @media (max-width: 767px) {
+    font-size: 1rem;
+    max-width: 100%;
+  }
 }
 
 
@@ -383,8 +408,17 @@
 .featured-section,
 .latest-section {
   max-width: var(--max-width-section); // 1280px - standard for landing page sections
-  // margin: 0 auto;
+  margin: 0 auto;
   padding: 0 var(--spacing-3xl); // 48px horizontal desktop for content sections
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 0 var(--spacing-xl);
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 var(--spacing-md);
+  }
 }
 
 // Add extra bottom padding to latest section for breathing room
@@ -519,9 +553,28 @@
 
 .latest-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg);
   align-items: stretch; // Ensure equal height cards
+  width: 100%;
+
+  // Desktop: auto-fit with proper minimum
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+
+  // Mobile and small tablet: force single column to prevent any overlapping
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  // Large tablet and up: ensure at least 2 columns if space allows
+  @media (min-width: 901px) and (max-width: 1200px) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+
+  // Extra small mobile: tighter spacing
+  @media (max-width: 600px) {
+    gap: var(--spacing-sm);
+  }
 }
 
 .latest-card {
@@ -603,6 +656,7 @@
 @media (max-width: 992px) {
   .hero-shell {
     grid-template-columns: 1fr;
+    margin-top: 16px;
   }
 
   .hero-visual {
@@ -619,26 +673,12 @@
     gap: var(--spacing-3xl);
   }
 
-  .hero-section {
-    padding: var(--spacing-3xl) var(--spacing-xl);
-  }
-
   .hero-buttons {
     justify-content: flex-start;
-  }
-
-  .metrics-section,
-  .featured-section,
-  .latest-section {
-    padding: 0 var(--spacing-xl);
   }
 }
 
 @media (max-width: 600px) {
-  .hero-section {
-    padding: var(--spacing-2xl) var(--spacing-md);
-  }
-
   .hero-buttons {
     flex-direction: column;
     align-items: stretch;
@@ -652,10 +692,13 @@
     flex-direction: column;
   }
 
-  .metrics-section,
-  .featured-section,
-  .latest-section {
-    padding: 0 var(--spacing-md);
+  .latest-grid {
+    gap: var(--spacing-sm);
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
 }
 

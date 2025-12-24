@@ -65,20 +65,19 @@
   right: 0;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
   z-index: 100;
-  height: 64px;
+  height: auto; // Changed from fixed 64px to auto to accommodate header + pills
+  min-height: 64px;
+  overflow: hidden;
 
-  .menu-button {
-    flex-shrink: 0;
-    color: var(--text-primary);
-  }
-
-  .mobile-search {
-    flex: 1;
+  // Make embedded category sidebar take full width
+  app-category-sidebar {
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 }
 

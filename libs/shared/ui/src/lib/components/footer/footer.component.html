@@ -16,7 +16,7 @@
         About {{ appName() }}
       </h3>
 
-      <div class="footer-logo" [attr.aria-label]="description">
+      <div [style.display]="'none'" class="footer-logo" [attr.aria-label]="description">
         <mat-icon aria-hidden="true" class="footer-logo-icon">code</mat-icon>
         <h4 class="footer-logo-text">{{ description }}</h4>
       </div>

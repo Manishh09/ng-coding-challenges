@@ -7,12 +7,13 @@
       <div class="hero-copy">
         <p class="hero-eyebrow">ANGULAR LEARN & CODE PLAYGROUND</p>
         <h1 id="hero-title" class="hero-title">
-          Real-world Angular challenges for hands-on developers
+          Master Angular with real-world coding challenges!
         </h1>
 
         <p class="intro-text">
+          Bridge the gap between theory and practice.
           Solve practical Angular problems with guided walkthroughs and
-launch-ready starter kits — built for real projects.
+launch-ready starter kits.
         </p>
 
         <ul class="hero-highlights" aria-label="Key platform benefits">
@@ -42,9 +43,9 @@ launch-ready starter kits — built for real projects.
             class="hero-button hero-button--outline"
             type="button"
             (click)="onExploreChallenges()"
-            aria-label="Browse challenges - View all Angular challenge categories"
+            aria-label="Explore challenges - View all Angular challenge categories"
           >
-            <span>Browse challenges</span>
+            <span>Explore challenges</span>
             <mat-icon aria-hidden="true">arrow_outward</mat-icon>
           </button>
 
@@ -157,6 +158,7 @@ launch-ready starter kits — built for real projects.
   </section>
 
    <section
+   [style.display]="'none'"
     class="featured-section"
     aria-labelledby="featured-title"
     role="region"

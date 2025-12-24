@@ -19,6 +19,8 @@
   transition: all var(--animation-duration-standard) var(--animation-easing);
   height: 100%;
   min-height: 240px; // Consistent with other cards
+  width: 100%; // Ensure it respects grid container width
+  box-sizing: border-box; // Include padding and border in width calculation
 
   // Hover state for visual feedback
   &:hover {
@@ -115,6 +117,27 @@
 // ========================================
 // Responsive Design
 // ========================================
+
+// Mobile specific
+@media (max-width: 767px) {
+  .latest-card {
+    padding: var(--spacing-md) var(--spacing-lg);
+    min-height: auto;
+  }
+
+  .latest-card__title {
+    font-size: 1.125rem;
+  }
+
+  .latest-card__description {
+    font-size: 0.875rem;
+  }
+
+  .latest-card__actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 // Tablet and up
 @include theme.respond-to('tablet') {

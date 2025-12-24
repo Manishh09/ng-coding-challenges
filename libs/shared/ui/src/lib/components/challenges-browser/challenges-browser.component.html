@@ -1,8 +1,13 @@
 <div class="challenges-browser">
-  <!-- Category Sidebar (only shown in list view) -->
-  @if (shouldShowSidebar()) {
-  <app-category-sidebar [isOpen]="isSidebarOpen()" [isMobile]="isMobileView()"
-    (categorySelect)="onCategorySelect($event)" (closeDrawer)="closeSidebar()" />
+  <!-- Category Sidebar (only shown in list view on desktop) -->
+  @if (shouldShowSidebar() && !isMobileView()) {
+  <app-category-sidebar
+    [isOpen]="isSidebarOpen()"
+    [isMobile]="false"
+    [displayMode]="'drawer'"
+    (categorySelect)="onCategorySelect($event)"
+    (closeDrawer)="closeSidebar()"
+  />
   }
 
   <!-- Main Content Area -->
@@ -15,9 +20,13 @@
     <!-- Mobile Top Bar (only in list view) -->
     @if (isMobileView() && shouldShowSidebar()) {
     <div class="mobile-top-bar">
-      <button mat-icon-button (click)="toggleSidebar()" aria-label="Toggle categories menu" class="menu-button">
-        <mat-icon>menu</mat-icon>
-      </button>
+      <!-- Embedded Category Pills -->
+      <app-category-sidebar
+        [isOpen]="true"
+        [isMobile]="true"
+        [displayMode]="'inline'"
+        (categorySelect)="onCategorySelect($event)"
+      />
     </div>
     }
 

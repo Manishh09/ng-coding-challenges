@@ -36,11 +36,19 @@
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  padding: var(--spacing-3xl);
+  padding: var(--spacing-2xl) var(--spacing-3xl); // Reduced top/bottom padding from var(--spacing-3xl)
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--spacing-xl);
   backdrop-filter: blur(18px);
+  max-width: 1440px;
+
+  // Fix mobile stacking
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl) var(--spacing-md); // Reduced mobile padding
+  }
 }
 
 .footer-section {
@@ -122,7 +130,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: 0.25rem; // Reduced from var(--spacing-sm) for tighter spacing
   list-style: none;
   padding: 0;
   margin: 0;
@@ -139,7 +147,7 @@
   color: var(--text-secondary);
   text-decoration: none;
   transition: all 0.3s var(--animation-easing);
-  padding: 0.5rem 0;
+  padding: 0.25rem 0; // Reduced from 0.5rem for tighter spacing
   cursor: pointer;
   position: relative;
 
@@ -198,6 +206,7 @@
   border-top: 1px solid var(--border-primary);
   background: var(--surface-secondary);
   backdrop-filter: blur(16px);
+  opacity: 1; // Increased from default for better visibility
 }
 
 .footer-bottom-content {
@@ -205,7 +214,7 @@
   justify-content: center;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md); // Reduced vertical padding from var(--spacing-md)
   flex-wrap: wrap;
   text-align: center;
 }
@@ -214,10 +223,13 @@
   margin: 0;
   color: var(--text-tertiary);
   font-size: 0.9rem;
+  opacity: 0.9; // Increased opacity for better visibility
 }
 
 .created-by {
   color: var(--interactive-primary);
+  font-weight: 500;
+  opacity: 0.95; // Increased visibility
 }
 
 .heart-icon {
@@ -276,7 +288,7 @@
    ========================================================= */
 @media (max-width: 1024px) {
   .footer-container {
-    padding: var(--spacing-2xl) var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-xl); // Reduced from var(--spacing-2xl)
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
@@ -291,16 +303,28 @@
 
   .footer-bottom-content {
     flex-direction: column;
+    gap: var(--spacing-xs); // Reduced gap in stacked layout
   }
 }
 
 @media (max-width: 768px) {
   .footer-container {
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-md); // Reduced from var(--spacing-xl)
+    grid-template-columns: 1fr;
+  }
+
+  .footer-section {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links {
+    align-items: center;
   }
 
   .footer-tagline {
     font-size: 0.9rem;
+    text-align: center;
   }
 
   .section-title {
@@ -321,7 +345,7 @@
 
 @media (max-width: 480px) {
   .footer-container {
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-sm); // Reduced padding
   }
 
   .footer-logo-text {
@@ -330,6 +354,11 @@
 
   .footer-link {
     font-size: 0.9rem;
+    padding: 0.2rem 0; // Even tighter on mobile
+  }
+
+  .footer-links {
+    gap: 0.15rem; // Minimal gap on small screens
   }
 }
 
