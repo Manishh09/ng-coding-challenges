@@ -22,10 +22,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between; // Ensures proper spacing between left and right sections
-  width: 100%;
+
   max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 48px;
   height: 64px;
   gap: var(--spacing-lg); // Gap between left and right sections
 
