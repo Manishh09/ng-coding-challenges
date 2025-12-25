@@ -72,6 +72,14 @@ export const routes: Routes = [
           import('@ngc-routing').then(m => m.NGC_ROUTING_ROUTES),
         data: { categoryId: 'angular-routing', categoryName: 'Routing Challenges' }
       },
+
+      // Angular Forms Category (lazy loaded sub-app)
+      {
+        path: 'angular-forms',
+        loadChildren: () =>
+          import('@ngc-forms').then(m => m.NGC_FORMS_ROUTES),
+        data: { categoryId: 'angular-forms', categoryName: 'Angular Forms Challenges' }
+      },
     ],
   },
 
