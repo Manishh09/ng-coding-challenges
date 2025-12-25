@@ -6,7 +6,7 @@ export type DifficultyLevel = 'Beginner' | 'Intermediate' | 'Advanced';
 /**
  * Represents the category ID of a challenge
  */
-export type ChallengeCategoryId = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'http';
+export type ChallengeCategoryId = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms' | 'http';
 
 /**
  * Represents the author information for a challenge

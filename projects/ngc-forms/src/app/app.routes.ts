@@ -7,9 +7,9 @@ import { challengeListResolver, challengeDetailsResolver } from '@ng-coding-chal
  * Maps challengeId to workspace component
  */
 const CHALLENGE_COMPONENTS = {
-  // Add your challenges here as you create them
-  // 'challenge-id': () => import('./challenges/challenge-xx/components/component-name/component-name.component')
-  //   .then(m => m.ComponentName),
+  'reactive-login-form': () =>
+    import('./challenges/challenge-12-reactive-login-form/components/login-form/login-form.component')
+      .then(m => m.LoginFormComponent),
 };
 
 /**
