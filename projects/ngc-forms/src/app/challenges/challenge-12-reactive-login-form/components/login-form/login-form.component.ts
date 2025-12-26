@@ -40,15 +40,10 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  /* ================= CONTROL GETTERS ================= */
-  //  No string access in template
+  /* ================= CONTROLS GETTER ================= */
 
-  get email(): AbstractControl {
-    return this.loginForm.get('email')!;
-  }
-
-  get password(): AbstractControl {
-    return this.loginForm.get('password')!;
+  get f(): { [key: string]: AbstractControl } {
+    return this.loginForm.controls;
   }
 
   /* ================= ERROR VISIBILITY ================= */

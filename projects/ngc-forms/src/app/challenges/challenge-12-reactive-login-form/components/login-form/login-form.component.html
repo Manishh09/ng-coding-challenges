@@ -24,22 +24,22 @@
           class="form-control"
           placeholder="Enter your email"
           autocomplete="email"
-          [class.is-valid]="email.valid && email.touched"
-          [class.is-invalid]="showError(email)"
+          [class.is-valid]="f['email'].valid && f['email'].touched"
+          [class.is-invalid]="showError(f['email'])"
         />
 
-        @if (showError(email)) {
+        @if (showError(f['email'])) {
           <div class="error-message" role="alert">
-            @if (email.errors?.['required']) {
+            @if (f['email'].errors?.['required']) {
               Email is required
             }
-            @if (email.errors?.['email']) {
+            @if (f['email'].errors?.['email']) {
               Please enter a valid email address
             }
           </div>
         }
 
-        @if (email.valid && email.touched) {
+        @if (f['email'].valid && f['email'].touched) {
           <div class="success-message">✓ Valid email</div>
         }
       </div>
@@ -57,24 +57,24 @@
           class="form-control"
           placeholder="Minimum 6 characters"
           autocomplete="current-password"
-          [class.is-valid]="password.valid && password.touched"
-          [class.is-invalid]="showError(password)"
+          [class.is-valid]="f['password'].valid && f['password'].touched"
+          [class.is-invalid]="showError(f['password'])"
         />
 
-        @if (showError(password)) {
+        @if (showError(f['password'])) {
           <div class="error-message" role="alert">
-            @if (password.errors?.['required']) {
+            @if (f['password'].errors?.['required']) {
               Password is required
             }
-            @if (password.errors?.['minlength']) {
+            @if (f['password'].errors?.['minlength']) {
               Minimum
-              {{ password.errors?.['minlength'].requiredLength }}
+              {{ f['password'].errors?.['minlength'].requiredLength }}
               characters required
             }
           </div>
         }
 
-        @if (password.valid && password.touched) {
+        @if (f['password'].valid && f['password'].touched) {
           <div class="success-message">✓ Valid password</div>
         }
       </div>
