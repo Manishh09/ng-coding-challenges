@@ -1,23 +1,22 @@
 {
-  "name": "ng-ngc-shell",
+  "name": "ng-coding-challenges",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:main": "ng serve ngc-shell",
-    "build:main": "ng build ngc-shell",
+    "start:main": "ng serve coding-challenges",
+    "build:main": "ng build coding-challenges",
     "build:libs": "ng build shared-models && ng build shared-services && ng build shared-ui",
-    "build:all": "npm run build:libs && ng build ngc-rxjs-api && ng build ngc-core && ng build ngc-shell",
+    "build:all": "npm run build:libs && ng build coding-challenges",
     "build:models": "ng build shared-models",
     "build:services": "ng build shared-services",
     "build:ui": "ng build shared-ui",
     "build": "npm run build:all",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:all": "ng test --projects=shared-ui,shared-models,shared-services,ngc-shell",
+    "test:all": "ng test --projects=shared-ui,shared-models,shared-services,coding-challenges",
     "start:all": "concurrently \"npm run build:libs\" \"npm run start:challenges\"",
-    "create:category-app": "node scripts/create-category-app.js",
     "create:challenge": "node scripts/create-challenge.js"
   },
   "dependencies": {

@@ -1,0 +1,68 @@
+<app-challenge-header [title]="'User Posts Dashboard - Dependent API Calls'" />
+
+<div class="challenge-container">
+
+  <!-- User Posts Dashboard Section -->
+  <div class="user-posts-dashboard-container">
+
+  <!-- Loading -->
+  @if(isLoading){
+
+  <div class="status loading">
+    Loading users and posts...
+  </div>
+  }
+
+  <!-- Error -->
+  @if(error){
+
+  <div class="status error">
+    {{ error }}
+  </div>
+  }
+
+  <!-- Table -->
+  @if(!isLoading && !error && usersWithPosts.length){
+
+  <table class="users-table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Posts Count</th>
+        <th>Posts</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      @for(user of usersWithPosts; track user.id){
+      <tr>
+        <td>{{ user.firstName }} {{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <ul>
+            @for(post of user.posts; track post.id){
+            <li>{{ post.title }}</li>
+            }
+            @if (user.posts.length === 0) {
+            <li class="no-posts">No posts</li>
+            }
+          </ul>
+        </td>
+        <td>{{ user.posts.length }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+
+  <!-- Empty state -->
+  @if(!isLoading && !error && usersWithPosts.length === 0){
+  <div class="status empty">
+    No users available
+  </div>
+  }
+</div>
+</div>

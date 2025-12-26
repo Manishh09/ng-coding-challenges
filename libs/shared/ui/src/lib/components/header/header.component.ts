@@ -1,27 +1,16 @@
-import { ChangeDetectionStrategy, Component, input, signal, inject, DestroyRef, OnInit, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgOptimizedImage } from "@angular/common";
-import { GlobalSearchComponent } from '../global-search/global-search.component';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SEARCH_DIALOG_CONFIG } from '../../constants/search.constants';
 
 /**
  * Header component with responsive design
  * Includes logo, navigation, theme toggle and mobile menu
- *
- * Features:
- * - Dynamic mobile menu state management
- * - Accessible ARIA attributes
- * - Optimized images with priority loading
- * - Theme toggle integration
  */
 @Component({
   selector: 'ng-coding-challenges-header',
@@ -34,14 +23,13 @@ import { SEARCH_DIALOG_CONFIG } from '../../constants/search.constants';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatDialogModule,
     ThemeToggleComponent,
     MatTooltipModule,
     NgOptimizedImage
 ],
   standalone: true
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   /** Application name for accessibility and branding */
   appName = input<string>('');
 
@@ -53,77 +41,4 @@ export class HeaderComponent implements OnInit {
 
   /** Github  logo */
   githubLogoUrl = input<string>('');
-
-  /** Mobile menu open state */
-  readonly mobileMenuOpen = signal(false);
-
-  /** Check if viewport is mobile */
-  readonly isMobile = signal(false);
-
-  private readonly dialog = inject(MatDialog);
-  private readonly breakpointObserver = inject(BreakpointObserver);
-  private readonly destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    // Detect mobile viewport
-    this.breakpointObserver
-      .observe([Breakpoints.HandsetPortrait, '(max-width: 767px)'])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        this.isMobile.set(result.matches);
-      });
-  }
-
-  /**
-   * Toggle mobile menu state
-   */
-  toggleMobileMenu(): void {
-    this.mobileMenuOpen.update(value => !value);
-  }
-
-  /**
-   * Close mobile menu
-   */
-  closeMobileMenu(): void {
-    this.mobileMenuOpen.set(false);
-  }
-
-  /**
-   * Open global search modal
-   */
-  openGlobalSearch(): void {
-    // Prevent opening multiple dialogs
-    if (this.dialog.openDialogs.length > 0) {
-      return;
-    }
-
-    this.dialog.open(GlobalSearchComponent, {
-      ...SEARCH_DIALOG_CONFIG,
-      data: { isMobile: this.isMobile() }
-    });
-  }
-
-  /**
-   * Handle keyboard shortcut for opening search
-   */
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardShortcut(event: KeyboardEvent): void {
-    // Press "/" to open search modal (like GitHub, GitLab)
-    if (event.key === '/' && !this.isInputFocused()) {
-      event.preventDefault();
-      this.openGlobalSearch();
-    }
-  }
-
-  /**
-   * Check if an input field is currently focused
-   */
-  private isInputFocused(): boolean {
-    const activeElement = document.activeElement;
-    return (
-      activeElement instanceof HTMLInputElement ||
-      activeElement instanceof HTMLTextAreaElement ||
-      activeElement?.getAttribute('contenteditable') === 'true'
-    );
-  }
 }

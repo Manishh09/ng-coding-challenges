@@ -1,109 +1,52 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChallengeCardComponent } from '../challenge-card/challenge-card.component';
+import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { Challenge } from '@ng-coding-challenges/shared/models';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
-import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
-import { ChallengeListRouteData } from '../../models/route-data.interface';
 
-/**
- * Component for displaying a list of challenges for a specific category
- *
- * Features:
- * - Reactive route parameter handling
- * - Loading states with skeleton loaders
- * - New badge highlighting
- * - Clean separation: only shows list, no nested routing
- */
 @Component({
   selector: 'ng-coding-challenges-challenge-list',
   templateUrl: './challenge-list.component.html',
   styleUrl: './challenge-list.component.scss',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    ChallengeCardComponent,
-    SkeletonLoaderComponent
-  ],
+  imports: [CommonModule, ChallengeCardComponent],
 })
-export class ChallengeListComponent {
+export class ChallengeListComponent implements OnInit {
+  challenges: Challenge[] = [];
+  protected title = 'Available Challenges';
+  protected newBadgeChallengeIds: number[] = [];
 
-  //  Dependencies
-  private readonly challengeCategoryService = inject(ChallengeCategoryService);
-  private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly challengesService = inject(ChallengesService);
 
-  // Reactive source for route data (contains resolved challenges from resolver)
-  private readonly routeData = toSignal(
-    this.activatedRoute.data.pipe(
-      takeUntilDestroyed()
-    ),
-    { initialValue: {} }
-  );
+  ngOnInit(): void {
+    this.challenges = this.challengesService.getChallenges();
 
-  //  Derived signal: selected category ID
-  readonly categoryId = computed(() => {
-    const data = this.routeData() as ChallengeListRouteData | undefined;
-    return data?.categoryId || '';
-  });
-
-  //  Derived signal: list of challenges (from resolver)
-  readonly challenges = computed<Challenge[]>(() => {
-    const data = this.routeData() as ChallengeListRouteData | undefined;
-    return data?.challenges ? Array.from(data.challenges) : [];
-  });
-
-  // Derived signal: new badge challenge IDs (top 2)
-  readonly newBadgeChallengeIds = computed<number[]>(() => {
-    const sorted = [...this.challenges()].sort((a, b) => b.id - a.id);
-    if (sorted.length >= 2) return [sorted[0].id, sorted[1].id];
-    if (sorted.length === 1) return [sorted[0].id];
-    return [];
-  });
-
-  // Derived signal: title
-  readonly title = computed(() => {
-    const categoryName = this.challengeCategoryService.getCategoryNameById(this.categoryId());
-    return categoryName ? `${categoryName} - Challenges` : 'Available Challenges';
-  });
+    // Determine which challenges should have the "New" badge
+    this.setNewBadgeChallenges();
+  }
 
   /**
-   * Loading state signal - improves UX with skeleton loaders
-   *
-   * Shows loading when:
-   * - Route data hasn't been populated yet (initial load)
-   * - Challenges array is empty AND categoryId is present (resolver still running)
-   *
-   * This provides visual feedback during the resolver execution phase,
-   * creating a smoother, more responsive user experience.
+   * Sets the challenges that should display the "New" badge
+   * This can use different strategies like:
+   * 1. Most recent challenges (e.g., latest 2 challenges)
+   * 2. Challenges added within the last month
+   * 3. Explicitly specified challenges by ID
    */
-  readonly loading = computed(() => {
-    const data = this.routeData() as ChallengeListRouteData | undefined;
-    const hasCategory = !!this.categoryId();
-    const hasChallenges = this.challenges().length > 0;
+  private setNewBadgeChallenges(): void {
+    // Get all challenges and sort by ID (assuming higher ID means newer challenge)
+    const sortedChallenges = [...this.challenges].sort((a, b) => b.id - a.id);
 
-    // Show loading if:
-    // 1. No data yet (initial state)
-    // 2. Has category but no challenges (resolver still loading)
-    return !data || (hasCategory && !hasChallenges);
-  });
+    // Strategy 1: Mark the two most recent challenges as "new"
+    if (sortedChallenges.length >= 2) {
+      this.newBadgeChallengeIds = [
+        sortedChallenges[0].id,  // Latest challenge
+        sortedChallenges[1].id   // Second latest challenge
+      ];
+    } else if (sortedChallenges.length === 1) {
+      this.newBadgeChallengeIds = [sortedChallenges[0].id];
+    }
 
-  constructor() {
-    // Reactive side effect to update selected category
-    effect(() => {
-      const id = this.categoryId();
-      if (id) {
-        this.challengeCategoryService.setSelectedCategory(id);
-      }
-    });
+    // Alternative strategy (commented out): Explicitly specify which challenges get the badge
+    // this.newBadgeChallengeIds = [3, 4]; // Specific challenge IDs that should show the "New" badge
   }
 }

@@ -1,138 +1,55 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 @use 'sass:color';
-@use './tokens/tokens' as tokens;
+@use './_typography.scss' as typo;
 @use './_light-theme.scss' as light;
 @use './_dark-theme.scss' as dark;
-@use './components';
-@use './material-overrides';
+
 // Core Material
 @include mat.core();
 
 // Base tokens (CSS variables shared by both themes)
 :root {
-  // Apply all design tokens from token registry
-  @include tokens.all-css-vars();
+  // Brand tokens (OKLCH is fine in CSS vars)
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --vivid-pink: oklch(65.71% 0.277 342.55);
+  --hot-pink: oklch(58.11% 0.238 342.55);
+  --hot-red: oklch(58.11% 0.238 15.55);
+  --orange-red: oklch(58.11% 0.238 25.55);
+  --super-green: oklch(58.11% 0.238 142.55);
+  --ruby-red: #E0115F;
+  --dark-pink: #C11C84;
 
-  // Additional alpha variants for semantic colors
-  --color-secondary-alpha-5: rgba(236, 72, 153, 0.05);
-  --color-secondary-alpha-10: rgba(236, 72, 153, 0.1);
-  --color-secondary-alpha-20: rgba(236, 72, 153, 0.2);
-  --color-secondary-alpha-30: rgba(236, 72, 153, 0.3);
-  --color-secondary-alpha-40: rgba(236, 72, 153, 0.4);
-  --color-secondary-alpha-50: rgba(236, 72, 153, 0.5);
-  --color-secondary-alpha-60: rgba(236, 72, 153, 0.6);
-  --color-secondary-alpha-70: rgba(236, 72, 153, 0.7);
-  --color-secondary-alpha-80: rgba(236, 72, 153, 0.8);
-  --color-secondary-alpha-90: rgba(236, 72, 153, 0.9);
+  // Gray scale
+  --gray-50: oklch(98.5% 0.003 240);
+  --gray-100: oklch(96.5% 0.003 240);
+  --gray-200: oklch(92.5% 0.003 240);
+  --gray-300: oklch(87.5% 0.003 240);
+  --gray-400: oklch(80.5% 0.003 240);
+  --gray-500: oklch(70.5% 0.003 240);
+  --gray-600: oklch(60.5% 0.003 240);
+  --gray-700: oklch(45.5% 0.003 240);
+  --gray-800: oklch(30.5% 0.003 240);
+  --gray-900: oklch(15.5% 0.003 240);
+  --gray-950: oklch(8.5% 0.003 240);
 
-  --color-gray-alpha-5: rgba(148, 163, 184, 0.05);
-  --color-gray-alpha-10: rgba(148, 163, 184, 0.1);
-  --color-gray-alpha-20: rgba(148, 163, 184, 0.2);
-  --color-gray-alpha-30: rgba(148, 163, 184, 0.3);
-  --color-gray-alpha-40: rgba(148, 163, 184, 0.4);
-  --color-gray-alpha-50: rgba(148, 163, 184, 0.5);
-  --color-gray-alpha-60: rgba(148, 163, 184, 0.6);
-  --color-gray-alpha-70: rgba(148, 163, 184, 0.7);
-  --color-gray-alpha-80: rgba(148, 163, 184, 0.8);
-  --color-gray-alpha-90: rgba(148, 163, 184, 0.9);
+  // Spacing & radii
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
-  // Glass surface effects - Modern and subtle
-  --glass-surface: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.4));
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-backdrop-blur: blur(12px);
-  --glass-backdrop-saturate: saturate(180%);
 
-  // Gradient definitions
-  --gradient-hero-radial: radial-gradient(circle at top center,
-      var(--interactive-primary-hover),
-      transparent 70%);
-
-  --gradient-hero-radial-light: radial-gradient(circle at top center,
-      var(--interactive-primary),
-      transparent 70%);
-
-  // Subtle card gradients
-  --gradient-card-hover: linear-gradient(135deg,
-      var(--color-secondary-alpha-5),
-      var(--color-primary-alpha-5));
-
-  // Button gradient overlays
-  --gradient-button-overlay: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.15),
-      rgba(255, 255, 255, 0));
-
-  // Layout system
-  --header-height: 64px;
-  --header-height-mobile: 56px;
-
-  // ============================================================================
-  // CONTENT MAX-WIDTHS (Container Standards)
-  // ============================================================================
-
-  // Pixel-based max-widths
-  --max-width-reading: 800px; // Text-heavy pages (optimal reading, 60-75 chars)
-  --max-width-content: 1200px; // Standard app content (forms, mixed content)
-  --max-width-wide: 1440px; // Wide layouts (grids, dashboards, browser)
-  --max-width-section: 1280px; // Landing page sections (Material Design standard)
-
-  // Character-based constraints (for optimal reading)
-  --max-width-text-narrow: 65ch; // ~60-70 characters per line
-  --max-width-text-normal: 75ch; // ~70-80 characters per line
-  --max-width-text-wide: 85ch; // ~80-90 characters per line
-
-  // ============================================================================
-  // STATUS & SEMANTIC COLORS
-  // ============================================================================
-
-  // Success (Green)
-  --status-success: #22c55e;
-  --status-success-light: #86efac;
-  --status-success-dark: #16a34a;
-  --status-success-alpha-10: rgba(34, 197, 94, 0.1);
-  --status-success-alpha-20: rgba(34, 197, 94, 0.2);
-
-  // Warning (Yellow/Amber)
-  --status-warning: #eab308;
-  --status-warning-light: #fde047;
-  --status-warning-dark: #ca8a04;
-  --status-warning-alpha-10: rgba(234, 179, 8, 0.1);
-  --status-warning-alpha-20: rgba(234, 179, 8, 0.2);
-
-  // Error (Red)
-  --status-error: #ef4444;
-  --status-error-light: #fca5a5;
-  --status-error-dark: #dc2626;
-  --status-error-alpha-10: rgba(239, 68, 68, 0.1);
-  --status-error-alpha-20: rgba(239, 68, 68, 0.2);
-
-  // Info (Blue)
-  --status-info: #3b82f6;
-  --status-info-light: #93c5fd;
-  --status-info-dark: #2563eb;
-  --status-info-alpha-10: rgba(59, 130, 246, 0.1);
-  --status-info-alpha-20: rgba(59, 130, 246, 0.2);
-
-  // Disabled state
-  --state-disabled-bg: var(--gray-100);
-  --state-disabled-text: var(--gray-400);
-  --state-disabled-border: var(--gray-200);
-  --state-disabled-alpha: rgba(148, 163, 184, 0.4);
-
-  // Selected/Active state
-  --state-selected-bg: var(--color-primary-alpha-10);
-  --state-selected-border: var(--electric-violet);
-  --state-selected-text: var(--electric-violet);
-
-  // Hover state
-  --state-hover-bg: var(--color-gray-alpha-5);
-  --state-hover-border: var(--gray-300);
-
-  // Focus state
-  --state-focus-ring: var(--electric-violet);
-  --state-focus-ring-alpha: var(--color-primary-alpha-30);
+  // Typography vars
+  @include typo.typography-css-vars();
 }
 
 // Apply light theme tokens and Material styles under :root
@@ -153,124 +70,113 @@ body.dark-mode {
     @include dark.dark-theme-vars();
   }
 }
-
 @media (prefers-color-scheme: light) {
   body:not(.dark-mode) {
     @include light.light-theme-vars();
   }
 }
 
-// Apply global typography to body
-body {
-  @include tokens.apply-typography();
-  // Sleek tight typography
-  letter-spacing: -0.015em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+// Apply global typography
+@include typo.apply-typography();
+
+// ============================================================================
+// CUSTOM COMPONENT STYLES
+// ============================================================================
+
+// angular.dev inspired card styles
+.angular-dev-card {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--animation-duration-standard) var(--animation-easing);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &.elevated {
+    box-shadow: var(--shadow-lg);
+  }
 }
 
-// ============================================================================
-// GLOBAL APP STYLES (Scrollbars, Selection, etc.)
-// ============================================================================
-@mixin apply-global-styles() {
+// angular.dev inspired button styles
+.angular-dev-button {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: white;
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  transition: all var(--animation-duration-standard) var(--animation-easing);
 
-  // Custom Sleek Scrollbar
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--border-secondary);
-    border-radius: 5px;
-    border: 2px solid transparent;
-    background-clip: content-box;
+  &.secondary {
+    background: var(--interactive-secondary);
+    color: var(--text-primary);
 
     &:hover {
-      background-color: var(--text-tertiary);
+      background: var(--interactive-secondary-hover);
     }
   }
-
-  // Text Selection
-  ::selection {
-    background: var(--color-primary-alpha-20);
-    color: var(--text-primary);
-  }
 }
 
-// Apply global styles immediately
-:root {
-  @include apply-global-styles();
-}
-
-
-.text-primary {
+// angular.dev inspired surface styles
+.angular-dev-surface {
+  background: var(--surface-primary);
   color: var(--text-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
 }
 
-.text-secondary {
-  color: var(--text-secondary);
+// Code block styling
+.angular-dev-code {
+  background: var(--code-background);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family-mono);
+  padding: var(--spacing-md);
+
+  .keyword { color: var(--code-keyword); }
+  .string { color: var(--code-string); }
+  .comment { color: var(--code-comment); }
+  .function { color: var(--code-function); }
+  .number { color: var(--code-number); }
 }
 
-.text-tertiary {
-  color: var(--text-tertiary);
-}
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
 
-.text-accent {
-  color: var(--accent-color);
-}
+// Text utilities
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-accent { color: var(--accent-color); }
 
 // Background utilities
-.bg-primary {
-  background: var(--background-primary);
-}
-
-.bg-secondary {
-  background: var(--background-secondary);
-}
-
-.bg-surface {
-  background: var(--surface-secondary);
-}
+.bg-primary { background: var(--background-primary); }
+.bg-secondary { background: var(--background-secondary); }
+.bg-surface { background: var(--surface-secondary); }
 
 // Border utilities
-.border-primary {
-  border-color: var(--border-primary);
-}
-
-.border-secondary {
-  border-color: var(--border-secondary);
-}
+.border-primary { border-color: var(--border-primary); }
+.border-secondary { border-color: var(--border-secondary); }
 
 // Shadow utilities
-.shadow-sm {
-  box-shadow: var(--shadow-sm);
-}
-
-.shadow-md {
-  box-shadow: var(--shadow-md);
-}
-
-.shadow-lg {
-  box-shadow: var(--shadow-lg);
-}
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
 
 // Animation utilities
-.transition-fast {
-  transition-duration: var(--animation-duration-fast);
-}
-
-.transition-standard {
-  transition-duration: var(--animation-duration-standard);
-}
-
-.transition-slow {
-  transition-duration: var(--animation-duration-slow);
-}
+.transition-fast { transition-duration: var(--animation-duration-fast); }
+.transition-standard { transition-duration: var(--animation-duration-standard); }
+.transition-slow { transition-duration: var(--animation-duration-slow); }
 
 // ============================================================================
 // RESPONSIVE BREAKPOINTS
@@ -299,7 +205,6 @@ $breakpoints: (
     opacity: 0;
     transform: translateY(16px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -311,7 +216,6 @@ $breakpoints: (
     opacity: 0;
     transform: translateY(24px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -319,12 +223,9 @@ $breakpoints: (
 }
 
 @keyframes pulse {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.5;
   }
@@ -340,20 +241,4 @@ $breakpoints: (
 
 .pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-// Global Search Dialog Styles
-.global-search-dialog {
-  .mat-mdc-dialog-container {
-    padding: 0;
-    border-radius: var(--border-radius-lg);
-    background: var(--surface-primary);
-    box-shadow: var(--shadow-xl);
-
-    .mat-mdc-dialog-surface {
-      padding: 0;
-      border-radius: var(--border-radius-lg);
-      overflow: hidden;
-    }
-  }
 }

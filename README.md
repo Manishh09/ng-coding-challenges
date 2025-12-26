@@ -16,20 +16,6 @@ The platform includes a clean, modern UI with light/dark theme support, responsi
 
 ---
 
-## 🎨 Visual Design System
-
-To keep upcoming UI refresh work consistent, the shell now follows a documented design language:
-
-- **Palette:** Primary gradient blends ruby-red → dark-pink → electric-violet (`--gradient-primary`), backed by a neutral gray ramp (`--gray-50` – `--gray-950`). Status tokens surface success/warning/error accents for chips and badges.
-- **Typography:** Primary font family is Inter (700/600/500/400 weights) with JetBrains Mono for code, exposed via CSS variables (`--font-family-primary`, `--font-family-mono`). Headings lean on 1.2 line height for strong hierarchy.
-- **Spacing & Radii:** Modular scale from `--spacing-xs` (4px) up to `--spacing-4xl` (96px) and radii tokens (`--border-radius-sm`, `--border-radius-pill`) keep layout rhythm predictable.
-- **Elevation & Glass:** Shadow tokens (`--shadow-xs` → `--shadow-xl`) and glassmorphism helpers (`--glass-surface`, `--glass-border`) enable layered hero sections and cards without ad-hoc values.
-- **Motion:** Timing tokens (`--animation-duration-fast`, `--animation-duration-expressive`) plus easing curves (`--animation-easing`, `--animation-easing-emphasized`) guide hover, focus, and entrance animations.
-
-See `libs/shared/ui/src/lib/styles/theme.scss` for the authoritative token list used across landing, cards, and layout components.
-
----
-
 ## 📦 Monorepo Architecture
 
 This project is structured as a monorepo with:
@@ -38,33 +24,24 @@ This project is structured as a monorepo with:
 - **Shared libraries**: Common components, services, and models used across multiple challenges
 
 ```
-
 ng-coding-challenges/
-├── projects/
-│   ├── ngc-shell/           # 🧩 Main Application Shell
-│   │                        # - Hosts the main layout, routing, and navigation
-│   │                        # - Entry point for all challenge category apps
-│   │                        # - Responsible for global UI (header, sidebar, etc.)
-│   │
-│   ├── ngc-core/            # ⚙️ Core Challenges Category
-│   │                        # - Contains core Angular challenges
-│   │                        # - Each challenge lives inside this category folder
-│   │
-│   ├── ngc-routing/         # 🧭 Routing Challenges Category
-│   │                        # - Focused on Angular Router-related challenges
-│   │
-│   ├── ngc-rxjs-api/        # 🔄 RxJS & API Challenges Category
-│   │                        # - Deals with RxJS patterns, API handling, observables
-│   │
-│   └── ...                  # Additional challenge categories can be added here
-│
-├── libs/
+├── projects/                 # Individual challenge applications
+│   └── coding-challenges/    # Main application (challenge browser)
+│       └── src/
+│           └── app/
+│               └── challenges/
+│                   ├── challenge-01/   # Individual challenge folder
+│                   ├── challenge-02/   # Individual challenge folder
+│                   └── ...
+├── libs/                     # Shared libraries
 │   └── shared/
-│       ├── models/          # 🧱 Shared TypeScript models & interfaces
-│       ├── services/        # 🔧 Common Angular services (e.g., API, storage, logging)
-│       └── ui/              # 🎨 Shared UI components (buttons, cards, layouts, etc.)
-│
-└── node_modules/
+│       ├── ui/               # Shared UI components
+│       ├── models/           # Shared data models
+│       └── services/         # Shared services
+└── docs/                     # Documentation
+    ├── CREATE_CHALLENGE.md   # Template for creating new challenges
+    └── CONTRIBUTION.md       # Guide for contribution
+
 ```
 
 See the Architecture Guide [ARCHITECTURE.md](docs/ARCHITECTURE.md) for more details.

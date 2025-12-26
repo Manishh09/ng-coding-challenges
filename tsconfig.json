@@ -20,10 +20,7 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
       "@ng-coding-challenges/shared/ui": [
         "dist/shared/ui",
@@ -36,11 +33,7 @@
       "@ng-coding-challenges/shared/services": [
         "dist/shared/services",
         "libs/shared/services/src/public-api.ts"
-      ],
-      "@ngc-rxjs-api": ["projects/ngc-rxjs-api/src/public-api.ts"],
-      "@ngc-core": ["projects/ngc-core/src/public-api.ts"],
-      "@ngc-routing": ["projects/ngc-routing/src/public-api.ts"],
-      "@ngc-forms": ["projects/ngc-forms/src/public-api.ts"]
+      ]
     }
   },
   "angularCompilerOptions": {
@@ -51,8 +44,5 @@
     "strictStandalone": true,
     "controlFlow": true
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
