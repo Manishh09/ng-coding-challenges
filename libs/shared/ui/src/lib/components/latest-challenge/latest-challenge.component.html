@@ -1,0 +1,39 @@
+@if(latestChallenge){
+<div class="latest-challenge-card">
+  <div class="challenge-header">
+    <div class="challenge-badge">
+      <!-- <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 0L10.154 5.846L16 8L10.154 10.154L8 16L5.846 10.154L0 8L5.846 5.846L8 0Z" fill="#F97316" />
+      </svg> -->
+      ⭐ Latest Challenge
+    </div>
+    <div class="source-code" >
+      <button class="source-code-button"
+      matTooltip="Open Source Code"
+      matTooltipPosition="above"
+      mat-icon-button (click)="openURL(latestChallenge.gitHub)" >
+        <mat-icon>code</mat-icon>
+      </button>
+    </div>
+     <button
+        matTooltip="View Output"
+        matTooltipPosition="above"
+        mat-icon-button
+        color="primary"
+        (click)="viewOutput(latestChallenge.link)"
+        class="view-button"
+        aria-label="View Output">
+        <mat-icon>preview</mat-icon>
+      </button>
+  </div>
+  <div class="challenge-content">
+    <div class="challenge-info">
+      <h3 class="challenge-title">{{ latestChallenge.title }}</h3>
+      <p class="challenge-description">{{ latestChallenge.description }}</p>
+    </div>
+    <button mat-stroked-button class="try-now-btn" (click)="onTryLatestChallenge(latestChallenge)">
+      Try Now
+    </button>
+  </div>
+</div>
+}

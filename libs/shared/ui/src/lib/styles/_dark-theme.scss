@@ -3,79 +3,56 @@
 
 // Dark theme CSS variables aligned with angular.dev
 @mixin dark-theme-vars() {
-  // Surface colors - Deep and rich for reduced eye strain
   --surface-primary: var(--gray-950);
   --surface-secondary: var(--gray-900);
   --surface-tertiary: var(--gray-800);
 
-  // Text colors - Optimized for dark mode readability
   --text-primary: var(--gray-50);
   --text-secondary: var(--gray-300);
   --text-tertiary: var(--gray-400);
-  --text-on-primary: #ffffff;
-  --text-on-secondary: var(--gray-50);
 
-  // Borders - Subtle integration
-  --border-primary: var(--gray-800);
-  --border-secondary: var(--gray-700);
+  --border-primary: var(--gray-700);
+  --border-secondary: var(--gray-600);
 
-  // Backgrounds (unified with surface tokens)
-  --background-primary: var(--surface-primary);
-  --background-secondary: var(--surface-secondary);
+  --background-primary: var(--gray-950);
+  --background-secondary: var(--gray-900);
 
-  // Interactive Colors - Brighter accents for dark mode
-  --interactive-primary: #8b5cf6; // violet-500
+  --interactive-primary: var(--electric-violet);
   --interactive-primary-hover: #a78bfa; // violet-400
   --interactive-secondary: var(--gray-800);
   --interactive-secondary-hover: var(--gray-700);
 
-  // Enhanced Gradients - Rich and elegant for dark mode
-  // Maintain violet theme with deeper tones for consistency
-  --gradient-primary: linear-gradient(135deg, #6d28d9 0%, #a855f7 100%);
-  --gradient-secondary: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+  // Gradients and brands
+  --gradient-primary: linear-gradient(135deg, var(--hot-red), var(--hot-pink), var(--electric-violet));
+  --gradient-secondary: linear-gradient(135deg, var(--bright-blue), #8b5cf6);
   --brand-gradient-primary: var(--gradient-primary);
-
-  // Ruby-red accent gradient for high-emphasis CTAs
-  --gradient-accent: linear-gradient(to right, #E0115F 0%, #C11C84 100%);
-  --gradient-logo: linear-gradient(to right, #E0115F 0%, #C11C84 100%);
-  --cta-accent: #E0115F; // Ruby red for special emphasis
-  --cta-accent-hover: #ff1a75; // Brighter pink for dark mode hover
-
-  // Hero: Subtle violet glow for brand consistency
-  --brand-gradient-hero: radial-gradient(ellipse at top, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
-  --brand-gradient-header: linear-gradient(to bottom, var(--gray-950), var(--gray-900));
-  --brand-gradient-footer: linear-gradient(to bottom, var(--gray-950), var(--gray-900));
-  --brand-gradient-section: linear-gradient(120deg, rgba(109, 40, 217, 0.05), rgba(168, 85, 247, 0.05));
-
-  // Hero section text colors (adapt to dark background)
-  --hero-text-primary: var(--color-white-alpha-90);
-  --hero-text-secondary: var(--color-white-alpha-80);
-  --hero-text-muted: var(--color-white-alpha-70);
+  --brand-gradient-hero: var(--gradient-primary);
+  --brand-gradient-footer: var(--gradient-primary);
+  --brand-gradient-section: linear-gradient(120deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.08));
 
   // Aliases for component usage
-  --color-primary: var(--interactive-primary);
-  // Strictly accessible accent text (Rose-400)
-  --color-accent: #fb7185;
-  --color-bg: var(--surface-primary);
+  --color-primary: var(--electric-violet);
+  --color-accent: var(--vivid-pink);
+  --color-bg: var(--background-primary);
   --color-fg: var(--text-primary);
   --color-surface: var(--surface-secondary);
 
   // Legacy compatibility aliases
   --surface-color: var(--surface-secondary);
   --surface-variant-color: var(--surface-tertiary);
-  --surface-variant-color-rgb: 30, 41, 59;
+  --surface-variant-color-rgb: 30,30,30;
   --on-surface-color: var(--text-primary);
   --on-surface-variant-color: var(--text-secondary);
   --outline-color: var(--border-primary);
-  --outline-color-rgb: 51, 65, 85;
-  --primary-color: var(--interactive-primary);
+  --outline-color-rgb: 64,64,64;
+  --primary-color: var(--electric-violet);
   --primary-color-rgb: 139, 92, 246;
-  --shadow-color: rgba(0, 0, 0, 0.5); // Stronger shadow for dark mode depth
+  --shadow-color: rgba(0,0,0,0.3);
 
-  // Logo theming
-  --logo-filter: brightness(1.2) contrast(1.1);
+  // Logo theming (brighten slightly for dark bg, keep violet tint)
+  --logo-filter: brightness(1.05) contrast(1.05);
   --logo-blend-mode: screen;
-  --logo-shadow-color: rgba(139, 92, 246, 0.4);
+  --logo-shadow-color: rgba(139, 92, 246, 0.25);
 }
 
 // Material 3 dark theme
@@ -83,14 +60,17 @@
   $primary-palette: palettes.$violet-palette;
   $tertiary-palette: palettes.$rose-palette;
 
-  $theme: mat.define-theme((color: (theme-type: dark,
-          primary: $primary-palette,
-          tertiary: $tertiary-palette,
-          use-system-variables: true,
-        ),
-        density: (scale: 0,
-        ),
-      ));
+  $theme: mat.define-theme((
+    color: (
+      theme-type: dark,
+      primary: $primary-palette,
+      tertiary: $tertiary-palette,
+      use-system-variables: true,
+    ),
+    density: (
+      scale: 0,
+    ),
+  ));
 
   // Emit system tokens and component styles (must be inside a selector at call site)
   @include mat.theme($theme);

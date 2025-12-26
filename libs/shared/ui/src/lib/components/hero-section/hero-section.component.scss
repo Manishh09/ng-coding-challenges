@@ -1,0 +1,437 @@
+/* Keyframe animations for hero section effects */
+@keyframes pulse {
+  0% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.hero-section {
+  background: var(--brand-gradient-hero);
+  color: white;
+  padding: calc(var(--spacing-xxl, 4rem) + 20px) var(--spacing-md, 1.5rem) var(--spacing-xl, 3rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  /* angular.dev style background effect */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.2;
+    background-size: cover;
+    animation: pulse 10s ease-in-out infinite alternate;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 61, 95, 0.5) 0%, transparent 50%);
+    filter: blur(40px);
+  }
+
+  /* Add a ribbon badge */
+  .ribbon-badge {
+    position: absolute;
+    top: 7rem; /* lowered to avoid fixed header overlap */
+    //right: -45px;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 8px 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    z-index: 3;
+    letter-spacing: 1px;
+    width: 180px;
+    text-align: center;
+    pointer-events: none;
+    transition: all 0.3s var(--animation-easing);
+    border-radius: 2px;
+    text-transform: uppercase;
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    &::before {
+      left: 8px;
+    }
+
+    &::after {
+      right: 8px;
+    }
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  width: 100%;
+  animation: fadeInUp 0.8s var(--animation-easing) both;
+}
+
+.hero-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  max-width: 900px;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  font-weight: 400;
+}
+
+.description-container {
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.skills-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 1.5rem 0;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.skill-badge {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s var(--animation-easing);
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  letter-spacing: 0.3px;
+
+  /* Glassmorphism effect with better contrast */
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* angular.dev-inspired shine effect */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    z-index: -1;
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s var(--animation-easing);
+  }
+
+  &:hover::before {
+    transform: rotate(45deg) translateX(100%);
+  }
+
+  /* Additional inner highlight for depth */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: opacity 0.3s var(--animation-easing);
+  }
+
+  &:hover::after {
+    opacity: 0.7;
+  }
+}
+
+.explore-btn {
+  margin: 32px auto 0;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  min-width: 200px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s var(--animation-easing);
+    z-index: 1;
+  }
+
+  &:hover::before {
+    transform: translateX(100%);
+  }
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-icon {
+    transition: transform 0.3s var(--animation-easing);
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  &:hover .btn-icon {
+    animation: bounce 1s infinite;
+  }
+}
+
+/* Code pattern background overlay for subtle texture */
+.pattern-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 50 L50 0 L100 50 L50 100 z' /%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-section h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+
+  .explore-btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+  }
+
+  .ribbon-badge {
+    font-size: 0.7rem;
+    //right: -50px;
+    top: 6rem;
+    padding: 6px 50px;
+    width: 160px;
+
+    &::before, &::after {
+      width: 3px;
+    }
+
+    &::before {
+      left: 6px;
+    }
+
+    &::after {
+      right: 6px;
+    }
+  }
+
+  .skills-badges {
+    gap: 8px;
+  }
+
+  .skill-badge {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .hero-section {
+    //padding: var(--spacing-xl, 2.5rem) var(--spacing-md, 1rem) var(--spacing-lg, 2rem);
+  }
+
+  .skills-badges {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .skill-badge {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+
+  .ribbon-badge {
+    font-size: 0.65rem;
+    right: -55px;
+    top: 6rem;
+    padding: 5px 50px;
+    width: 150px;
+
+    &::before, &::after {
+      width: 2px;
+    }
+
+    &::before {
+      left: 5px;
+    }
+
+    &::after {
+      right: 5px;
+    }
+  }
+}
+
+.hero-section .ribbon-badge { right: -38px; top: 7rem; background: var(--gradient-primary); color: white; }
+@media (max-width: 768px) { .hero-section .ribbon-badge {  top: 6rem; } }
+@media (max-width: 480px) { .hero-section .ribbon-badge {  top: 6rem; } }
+
+/* Accessibility - Respect reduced motion preferences */
+@media (prefers-reduced-motion) {
+  .hero-section h2,
+  .description-container,
+  .skills-badges,
+  .explore-btn,
+  .btn-icon {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .explore-btn:hover {
+    transform: none !important;
+  }
+
+  .skill-badge:hover {
+    transform: none !important;
+  }
+}

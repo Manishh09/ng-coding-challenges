@@ -1,0 +1,319 @@
+// Material and theme
+@use '@angular/material' as mat;
+@use '../../../libs/shared/ui/src/lib/styles/theme.scss' as theme;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  // padding-top: 64px;
+}
+
+/* Ensure app-root takes full height */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Fix for extra space at bottom */
+body,
+html,
+app-root,
+.app-layout,
+.footer,
+.footer-bottom {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure no extra white space at the bottom of the page */
+.mat-typography {
+  margin: 0;
+  padding: 0;
+}
+
+// ============================================================================
+// MATERIAL DESIGN OVERRIDES
+// ============================================================================
+
+/* Custom tooltip styles with angular.dev theme support */
+.mat-mdc-tooltip {
+  background-color: var(--surface-secondary) !important;
+  color: var(--text-primary) !important;
+  font-size: 14px;
+  border: 1px solid var(--vivid-pink) !important;
+  border-radius: 5px;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-family-primary);
+}
+
+/* Material button overrides for angular.dev styling */
+.mat-mdc-raised-button.mat-primary {
+  background: var(--gradient-primary) !important;
+  border: none !important;
+  border-radius: var(--border-radius-md) !important;
+  font-weight: 500 !important;
+  transition: all var(--animation-duration-standard) var(--animation-easing) !important;
+
+  &:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background: var(--gradient-secondary) !important;
+  border: none !important;
+  border-radius: var(--border-radius-md) !important;
+  font-weight: 500 !important;
+  transition: all var(--animation-duration-standard) var(--animation-easing) !important;
+
+  &:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+}
+
+/* Material card overrides */
+.mat-mdc-card {
+  background: var(--surface-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+  border-radius: var(--border-radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all var(--animation-duration-standard) var(--animation-easing) !important;
+
+  &:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+/* Material form field overrides */
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    background: var(--surface-secondary) !important;
+    border: 1px solid var(--border-primary) !important;
+    border-radius: var(--border-radius-md) !important;
+    transition: border-color var(--animation-duration-standard) var(--animation-easing) !important;
+
+    &:hover {
+      border-color: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: transparent !important;
+  }
+
+  .mat-mdc-form-field-label {
+    color: var(--text-secondary) !important;
+  }
+
+  .mat-mdc-input-element {
+    color: var(--text-primary) !important;
+  }
+}
+
+/* Material dialog overrides */
+.mat-mdc-dialog-container {
+  .mat-mdc-dialog-surface {
+    background: var(--surface-secondary) !important;
+    border-radius: var(--border-radius-lg) !important;
+    box-shadow: var(--shadow-xl) !important;
+  }
+}
+
+/* Material snackbar overrides */
+.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    background: var(--surface-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary) !important;
+    border-radius: var(--border-radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+  }
+}
+
+// ============================================================================
+// ANGULAR.DEV SPECIFIC COMPONENT STYLES
+// ============================================================================
+
+/* Hero section styling */
+.hero-section {
+  background: var(--gradient-primary);
+  color: white;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, white, rgba(255, 255, 255, 0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    // max-width: 600px;
+    // margin: 0 auto var(--spacing-xl);
+  }
+}
+
+/* Challenge card styling */
+.challenge-card {
+  @extend .angular-dev-card;
+  //padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+
+  h3 {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .challenge-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+
+    .difficulty {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--border-radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+
+      &.beginner {
+        background: var(--status-success);
+        color: white;
+      }
+
+      &.intermediate {
+        background: var(--status-warning);
+        color: white;
+      }
+
+      &.advanced {
+        background: var(--status-error);
+        color: white;
+      }
+    }
+  }
+}
+
+
+.mat-mdc-menu-panel {
+  background: var(--surface-secondary) !important;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+
+  .mat-mdc-menu-item {
+    color: var(--text-primary) !important;
+
+    &:hover {
+      background: var(--interactive-secondary) !important;
+      color: var(--text-primary) !important;
+    }
+  }
+}
+
+
+// ============================================================================
+// RESPONSIVE DESIGN
+// ============================================================================
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .nav-container {
+    .nav-content {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .nav-links {
+      gap: var(--spacing-md);
+    }
+  }
+
+  .challenge-card {
+    padding: var(--spacing-md);
+
+    .challenge-meta {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY IMPROVEMENTS
+// ============================================================================
+
+/* Focus styles for better accessibility */
+*:focus {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-primary: var(--text-primary);
+    --shadow-sm: 0 1px 2px 0 var(--text-primary);
+    --shadow-md: 0 4px 6px -1px var(--text-primary);
+    --shadow-lg: 0 10px 15px -3px var(--text-primary);
+  }
+}
+
+
+// ======================SHARED COMPONENT STYLES=========================//
+.challenge-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}

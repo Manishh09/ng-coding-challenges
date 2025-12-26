@@ -1,386 +1,131 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
-import {
-  Challenge,
-  ChallengeDetails,
-  SearchResult,
-  DifficultyLevel,
-  ChallengeCategoryId
-} from '@ng-coding-challenges/shared/models';
-import { ChallengeCategoryService } from './challenge-category.service';
-import { ConfigLoaderService } from '../config/config-loader.service';
-import { ChallengeAdapter } from '../adapters/challenge.adapter';
-import { SEARCH_SCORING, SEARCH_LIMITS } from '../constants/search-scoring.constants';
-
+import { Injectable } from '@angular/core';
+import { Challenge } from '@ng-coding-challenges/shared/models';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ChallengesService {
-  private readonly configLoader = inject(ConfigLoaderService);
-  private readonly categoryService = inject(ChallengeCategoryService);
-  private readonly challengeAdapter = inject(ChallengeAdapter);
-
-  /**
-   * Cached challenges loaded from JSON, mapped to legacy Challenge interface.
-   * ShareReplay ensures single load and cache for all subscribers.
-   */
-  private readonly challenges$: Observable<Challenge[]> = this.configLoader
-    .getAllChallenges()
-    .pipe(
-      map(challengeDataArray => this.challengeAdapter.adaptToChallengeList(challengeDataArray)),
-      shareReplay(1) // Cache the result
-    );
-
-  /**
-   * Returns all challenges (lightweight data).
-   * Now returns Observable instead of synchronous array.
-   */
-  getChallenges(): Observable<readonly Challenge[]> {
-    return this.challenges$;
-  }
-
-  /**
-   * Finds a challenge by its unique ID (lightweight data).
-   * @param id - Challenge ID
-   * @returns Observable of the matching challenge, or undefined if not found
-   */
-  getChallengeById(id: number): Observable<Challenge | undefined> {
-    return this.challenges$.pipe(
-      map(challenges => challenges.find(challenge => challenge.id === id))
-    );
-  }
-
-  /**
-   * Finds detailed challenge information by ID (for detail pages).
-   * Includes extended properties like longDescription, learningOutcomes, etc.
-   * @param id - Challenge ID (numeric) or slug (string)
-   * @returns Observable of the detailed challenge data, or undefined if not found
-   * @deprecated Use getChallengeDetailsBySlug for slug-based routing
-   */
-  getChallengeDetailsById(id: string | number): Observable<ChallengeDetails | undefined> {
-    if (typeof id === 'number') {
-      // Find by numeric ID, then get details by slug
-      return this.getChallengeById(id).pipe(
-        switchMap(challenge => {
-          if (!challenge) return of(undefined);
-          // Use getChallengeDetailsBySlug to load from JSON
-          return this.getChallengeDetailsBySlug(challenge.link, challenge.category);
-        })
-      );
+  private readonly repoUrl = 'https://github.com/Manishh09/ng-coding-challenges';
+  private challenges: Challenge[] = [
+    {
+      id: 1,
+      title: "Challenge-01: Fetch Products",
+      description: "Fetch Products data from a fake API and display data in a Table using RxJS and Angular's HttpClient.",
+      link: "/challenges/fetch-products",
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-01-product-list%2Fdocs%2FCH-01-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-01-product-list`
+    },
+    {
+      id: 2,
+      title: "Challenge-02: Dashboard Data - Parallel API Calls",
+      description: "Learn how to perform parallel API calls in Angular using RxJS's forkJoin. In this challenge, you'll fetch data from multiple independent endpoints and render the results in the UI only after all responses are received.",
+      link: "/challenges/handle-parallel-apis",
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-02-parallel-apis%2Fdocs%2FCH-02-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-02-parallel-apis`
+    },
+    {
+      id: 3,
+      title: "Challenge 03: Client-Side User Search",
+      description: "Implement a client-side search for users using Angular's Reactive Forms and RxJS with dummy API data",
+      link: "/challenges/client-side-search",
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-03-client-side-search%2Fdocs%2FCH-03-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-03-client-side-search`
+    },
+    {
+      id: 4,
+      title: "Challenge 04: Server-Side User Search (AutoComplete)",
+      description: "Implement a server-side search for users using Angular's Reactive Forms and RxJS with dummy API data",
+      link: "/challenges/server-side-search",
+      requirement: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-REQUIREMENT.md`,
+      solutionGuide: `${this.repoUrl}/blob/develop/projects%2Fcoding-challenges%2Fsrc%2Fapp%2Fchallenges%2Fchallenge-04-server-side-search%2Fdocs%2FCH-04-SOLUTION_GUIDE.md`,
+      gitHub: `${this.repoUrl}/tree/develop/projects/coding-challenges/src/app/challenges/challenge-04-server-side-search`
+    },
+    {
+      id: 5,
+      title: "Challenge 05: Product Category Management System - shareReplay",
+      description: "Build a product category management system where multiple Angular components share a list of product categories efficiently using Signals and RxJS shareReplay.",
+      link: "/challenges/product-category-management",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-05-product-category-management-system"
+    },
+    {
+      id: 6,
+      title: "Challenge 06: User Todos with Status Filter - combineLatest",
+      description: "Build an Angular component that fetches todos and users from a Fake API, merges them using RxJS combineLatest, and displays a table enriched with user names. Implement a status filter (All / Completed / Pending) and display the filtered results.",
+      link: "/challenges/user-todos-filter",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-06-user-todos-filter"
+    },
+    {
+      id: 7,
+      title: "Challenge 07: User Posts Dashboard - Dependent API Calls",
+      description: "Build an Angular component that fetches users and their posts from the DummyJSON API using RxJS mergeMap for dependent API calls. Display the the combined results in a simple HTML table (User → Post Titles) with loading and error states.",
+      link: "/challenges/user-posts-dashboard",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-07-dependent-apis"
+    },
+    {
+      id: 8,
+      title: "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
+      description: "Implement a simplified e-commerce checkout process in Angular using RxJS. The challenge involves fetching products from a fake API, allowing users to select products, placing an order, updating product inventory, and processing payment.",
+      link: "/challenges/ecommerce-checkout",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-08-ecommerce-checkout"
+    },
+    {
+      id: 9,
+      title: "Challenge 09: Component Communication using Signals",
+      description: "Build a Product Dashboard in Angular demonstrating Communication between components using Signals and standalone components. Fetch product categories from an API, allow category selection or custom input, manage state in parent via signals, and display the selected product in a receiver component.",
+      link: "/challenges/component-communication",
+      requirement: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md",
+      solutionGuide: "https://github.com/Manishh09/ng-coding-challenges/blob/develop/projects/coding-challenges/src/app/challenges/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md",
+      gitHub: "https://github.com/Manishh09/ng-coding-challenges/src/app/challenges/challenge-09-component-communication"
     }
-    // If string provided, assume it's a slug
-    return this.getChallengeDetailsBySlug(id);
+    // Add future challenges here..
+  ];
+
+  getChallenges(): Challenge[] {
+    return this.challenges;
   }
 
-  /**
-   * Finds detailed challenge information by slug/link (preferred for slug-based routing).
-   * Includes extended properties like longDescription, learningOutcomes, etc.
-   * Now loads from JSON with O(1) lookup.
-   * @param slug - Challenge slug (e.g., 'fetch-products')
-   * @param categoryId - Optional category ID for O(1) lookup optimization
-   * @returns Observable of the detailed challenge data, or undefined if not found
-   */
-  getChallengeDetailsBySlug(slug: string, categoryId?: ChallengeCategoryId): Observable<ChallengeDetails | undefined> {
-    // If categoryId provided, use O(1) lookup
-    if (categoryId) {
-      const categorySlug = this.challengeAdapter.adaptCategoryIdToSlug(categoryId);
-      return this.configLoader.getChallengeBySlug(categorySlug, slug).pipe(
-        map(challengeData => challengeData ? this.challengeAdapter.adaptToChallengeDetails(challengeData) : undefined)
-      );
-    }
-
-    // Otherwise, search all challenges (O(n) but still efficient)
-    return this.configLoader.getAllChallenges().pipe(
-      map(challenges => {
-        const challenge = challenges.find(c => c.slug === slug);
-        return challenge ? this.challengeAdapter.adaptToChallengeDetails(challenge) : undefined;
-      })
-    );
-  }
-
-  /**
-   * Retrieves all challenges belonging to a specific category.
-   * Now uses JSON configuration with O(1) category lookup.
-   * @param category - Category name
-   * @returns Observable of challenges array under the given category
-   */
-  getChallengesByCategory(category: string): Observable<readonly Challenge[]> {
-    if (!category) return of([]);
-
-    const categorySlug = this.challengeAdapter.adaptCategoryIdToSlug(category as ChallengeCategoryId);
-    return this.configLoader.getChallengesByCategory(categorySlug).pipe(
-      map(challengeDataArray => this.challengeAdapter.adaptToChallengeList(challengeDataArray))
-    );
-  }
-
-  /**
-   * Retrieves challenges by difficulty level.
-   * @param difficulty - Difficulty level
-   * @returns Observable of challenges array with the given difficulty
-   */
-  getChallengesByDifficulty(difficulty: DifficultyLevel): Observable<readonly Challenge[]> {
-    return this.challenges$.pipe(
-      map(challenges => challenges.filter(challenge => challenge.difficulty === difficulty))
-    );
-  }
-
-  /**
-   * Retrieves challenges that have a specific tag.
-   * @param tag - Tag to filter by
-   * @returns Observable of challenges array with the given tag
-   */
-  getChallengesByTag(tag: string): Observable<readonly Challenge[]> {
-    if (!tag) return of([]);
-    return this.configLoader.getChallengesByTag(tag).pipe(
-      map(challengeDataArray => this.challengeAdapter.adaptToChallengeList(challengeDataArray))
-    );
+  getChallengeById(id: number): Challenge | undefined {
+    return this.challenges.find(challenge => challenge.id === id);
   }
 
   /**
    * Retrieves the most recent challenge from the collection.
-   * @returns Observable of the latest challenge, or undefined if the collection is empty
-   */
-  getLatestChallenge(): Observable<Challenge | undefined> {
-    return this.challenges$.pipe(
-      map(challenges => challenges.at(-1))
-    );
-  }
-
-  /**
-   * Finds a challenge based on a provided URL.
-   * Extracts the last segment and matches it with the challenge link.
    *
-   * @param url - The full URL string
-   * @returns Observable of the matching challenge, or undefined if not found
+   * @returns The latest challenge in the collection, or `undefined` if the collection is empty
    */
-  getChallengeFromURL(url: string): Observable<Challenge | undefined> {
-    if (!url) return of(undefined);
-    const lastSegment = url.split('/').at(-1);
-    if (!lastSegment) return of(undefined);
-
-    return this.challenges$.pipe(
-      map(challenges => challenges.find(c => c.link.includes(lastSegment)))
-    );
+  getLatestChallenge(): Challenge | undefined {
+    if (this.challenges.length === 0) {
+      return undefined;
+    }
+    return this.challenges.at(-1); // Assuming challenges are ordered by ID
   }
 
   /**
-   * Returns grouped challenge data by category.
-   * @returns Observable of Map with category name to challenge array
-   */
-  getChallengesGroupedByCategory(): Observable<Map<string, Challenge[]>> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        return challenges.reduce((map, challenge) => {
-          if (!map.has(challenge.category)) {
-            map.set(challenge.category, []);
-          }
-          map.get(challenge.category)!.push(challenge);
-          return map;
-        }, new Map<string, Challenge[]>());
-      })
-    );
-  }
-
-  /**
-   * Get the next challenge in the sequence.
-   * @param currentId - Current challenge ID
-   * @returns Observable of the next challenge, or undefined if at the end
-   */
-  getNextChallenge(currentId: number): Observable<Challenge | undefined> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        const currentIndex = challenges.findIndex(c => c.id === currentId);
-        if (currentIndex === -1 || currentIndex === challenges.length - 1) {
-          return undefined;
-        }
-        return challenges[currentIndex + 1];
-      })
-    );
-  }
-
-  /**
-   * Get the previous challenge in the sequence.
-   * @param currentId - Current challenge ID
-   * @returns Observable of the previous challenge, or undefined if at the beginning
-   */
-  getPreviousChallenge(currentId: number): Observable<Challenge | undefined> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        const currentIndex = challenges.findIndex(c => c.id === currentId);
-        if (currentIndex <= 0) {
-          return undefined;
-        }
-        return challenges[currentIndex - 1];
-      })
-    );
-  }
-
-  /**
-   * Get all unique tags across all challenges.
-   * @returns Observable of unique tags array, sorted alphabetically
-   */
-  getAllTags(): Observable<string[]> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        const tags = new Set<string>();
-        challenges.forEach(c => c.tags?.forEach(tag => tags.add(tag)));
-        return Array.from(tags).sort();
-      })
-    );
-  }
-
-  /**
-   * Get all unique difficulty levels used in challenges.
-   * @returns Observable of difficulty levels array
-   */
-  getAllDifficulties(): Observable<DifficultyLevel[]> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        const difficulties = new Set<DifficultyLevel>();
-        challenges.forEach(c => difficulties.add(c.difficulty));
-        return Array.from(difficulties);
-      })
-    );
-  }
-
-  /**
-   * Get challenge count by category.
-   * @returns Observable of Map with category to count
-   */
-  getChallengeCountByCategory(): Observable<Map<string, number>> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        const countMap = new Map<string, number>();
-        challenges.forEach(challenge => {
-          const count = countMap.get(challenge.category) || 0;
-          countMap.set(challenge.category, count + 1);
-        });
-        return countMap;
-      })
-    );
-  }
-
-  /**
-   * Get challenge count by difficulty.
-   * @returns Observable of Map with difficulty to count
-   */
-  getChallengeCountByDifficulty(): Observable<Map<DifficultyLevel, number>> {
-    return this.challenges$.pipe(
-      map(challenges => {
-        const countMap = new Map<DifficultyLevel, number>();
-        challenges.forEach(challenge => {
-          const count = countMap.get(challenge.difficulty) || 0;
-          countMap.set(challenge.difficulty, count + 1);
-        });
-        return countMap;
-      })
-    );
-  }
-
-  /**
-   * Searches all challenges across categories with relevance scoring.
-   * Returns results sorted by relevance (title matches first, then description).
+   * Extracts the current challenge from a given URL by parsing the last URL segment
+   * and matching it against available challenges.
    *
-   * @param searchTerm - The search query string
-   * @param maxResults - Maximum number of results to return (default: 20, max: 100)
-   * @returns Observable of search results array with highlighted matches
+   * @param url - The URL string to extract the challenge ID from
+   * @returns The matching Challenge object if found, otherwise null
    */
-  searchAllChallenges(searchTerm: string, maxResults: number = SEARCH_LIMITS.DEFAULT_RESULTS): Observable<SearchResult[]> {
-    // Validate search term
-    if (!searchTerm || searchTerm.trim().length < SEARCH_LIMITS.MIN_SEARCH_LENGTH) {
-      return of([]);
+  getCurrentChallengeIdFromURL(url: string): Challenge | null {
+    const segments = url.split('/');
+    const lastSegment = segments.at(-1);
+    if (lastSegment) {
+      const challenge = this.challenges.find(c => c.link.includes(lastSegment));
+      return challenge ? challenge : null;
+    } else {
+      return null;
     }
-
-    // Sanitize search term (remove potentially dangerous characters)
-    const sanitizedTerm = searchTerm.replace(/[<>"']/g, '');
-
-    // Validate and bound maxResults
-    const validMaxResults = Math.max(1, Math.min(maxResults, SEARCH_LIMITS.MAX_RESULTS));
-
-    const normalizedTerm = sanitizedTerm.toLowerCase().trim();
-    const searchTerms = normalizedTerm.split(/\s+/);
-
-    return this.challenges$.pipe(
-      map(challenges => {
-        return challenges
-          .map((challenge) => {
-            const score = this.calculateRelevanceScore(challenge, searchTerms);
-
-            if (score === 0) {
-              return null; // No match
-            }
-
-            return {
-              id: challenge.id,
-              title: challenge.title,
-              description: this.truncateDescription(challenge.description, 100),
-              category: challenge.category,
-              categoryName: this.categoryService.getCategoryNameById(challenge.category) || challenge.category,
-              link: challenge.link,
-              score
-            } as SearchResult;
-          })
-          .filter((result): result is SearchResult => result !== null)
-          .sort((a, b) => b.score - a.score)
-          .slice(0, validMaxResults);
-      })
-    );
   }
 
-  /**
-   * Calculates relevance score based on where and how many times the search terms appear.
-   * Uses constants from SEARCH_SCORING for consistent scoring weights.
-   */
-  private calculateRelevanceScore(challenge: Challenge, searchTerms: string[]): number {
-    let score = 0;
-    const lowerTitle = challenge.title.toLowerCase();
-    const lowerDescription = challenge.description.toLowerCase();
-    const lowerCategory = challenge.category.toLowerCase();
-    const lowerTags = challenge.tags?.map(tag => tag.toLowerCase());
-
-    searchTerms.forEach((term) => {
-      // Exact title match bonus
-      if (lowerTitle === term) {
-        score += SEARCH_SCORING.EXACT_TITLE_MATCH;
-      }
-
-      // Title contains term
-      if (lowerTitle.includes(term)) {
-        score += SEARCH_SCORING.TITLE_CONTAINS;
-
-        // Bonus for term at start of title
-        if (lowerTitle.startsWith(term)) {
-          score += SEARCH_SCORING.TITLE_STARTS_WITH_BONUS;
-        }
-      }
-
-      // Description contains term
-      if (lowerDescription.includes(term)) {
-        score += SEARCH_SCORING.DESCRIPTION_CONTAINS;
-      }
-
-      // Category contains term
-      if (lowerCategory.includes(term)) {
-        score += SEARCH_SCORING.CATEGORY_CONTAINS;
-      }
-
-      // Tags contain term
-      if (lowerTags?.some(tag => tag.includes(term))) {
-        score += SEARCH_SCORING.TAG_CONTAINS;
-      }
-    });
-
-    return score;
-  }
-
-  /**
-   * Truncates description to specified length with ellipsis.
-   */
-  private truncateDescription(description: string, maxLength: number): string {
-    if (description.length <= maxLength) {
-      return description;
-    }
-    return description.substring(0, maxLength).trim() + '...';
-  }
 }

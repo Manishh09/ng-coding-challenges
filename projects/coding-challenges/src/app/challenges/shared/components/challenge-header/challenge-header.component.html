@@ -1,0 +1,13 @@
+<div class="challenge-header-wrapper">
+  <!-- nav section -->
+  <app-challenge-nav></app-challenge-nav>
+
+  <!-- title section -->
+  <div class="challenge-title">
+    <h2>{{ title() }}</h2>
+
+    @if (subtitle()) {
+      <p class="subtitle">{{ subtitle() }}</p>
+    }
+  </div>
+</div>
