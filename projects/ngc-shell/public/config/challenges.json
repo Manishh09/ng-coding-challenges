@@ -586,6 +586,62 @@
         "componentPath": "./challenges/challenge-13-duplicate-project-name-validator/components/project-form/project-form.component",
         "componentName": "ProjectFormComponent"
       }
+    },
+    "email-availability-check": {
+      "id": 14,
+      "slug": "email-availability-check",
+      "title": "Challenge 14: Email Availability Check (Custom Async Validator)",
+      "categoryId": "angular-forms",
+      "difficulty": "Advanced",
+      "enabled": true,
+      "order": 3,
+      "description": "Implement a custom asynchronous validator that checks email availability via simulated API with debouncing, loading states, and proper error handling.",
+      "longDescription": "Master asynchronous form validation in Angular by creating a custom async validator that simulates real-world API calls. Learn how to implement debouncing to optimize performance, handle loading states elegantly, cancel in-flight requests, and provide a seamless user experience during async validation. This challenge demonstrates production-ready patterns for server-side validation.",
+      "tags": [
+        "Async Validators",
+        "AsyncValidatorFn",
+        "RxJS",
+        "debounceTime",
+        "switchMap",
+        "Loading States",
+        "API Simulation"
+      ],
+      "estimatedTime": "60-90 minutes",
+      "prerequisites": [
+        "Completed Challenge 13 or equivalent custom validator experience",
+        "Understanding of RxJS observables",
+        "Knowledge of async/await patterns",
+        "Familiarity with timer and delay operators"
+      ],
+      "learningOutcomes": [
+        "Create custom AsyncValidatorFn functions returning Observables",
+        "Use RxJS operators for debouncing and request cancellation",
+        "Handle PENDING validation states in Angular forms",
+        "Simulate API calls with realistic delays",
+        "Display loading indicators during async validation",
+        "Implement proper error handling in async validators",
+        "Provide suggested alternatives in validation errors",
+        "Optimize form performance with debouncing strategies"
+      ],
+      "requirementList": [
+        "Create an asyncEmailAvailabilityValidator factory function returning AsyncValidatorFn.",
+        "Implement EmailValidationService with simulated API using 1.5 second delay.",
+        "Use debounceTime(500ms) to reduce validation calls during typing.",
+        "Show loading spinner while validation status is PENDING.",
+        "Display clear error messages for taken emails with suggested alternatives.",
+        "Handle API errors gracefully with catchError (fail-open strategy).",
+        "Register async validator in third parameter of FormControl array.",
+        "Monitor statusChanges observable to track PENDING state."
+      ],
+      "links": {
+        "requirement": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-REQUIREMENT.md",
+        "solution": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-SOLUTION_GUIDE.md",
+        "github": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check"
+      },
+      "workspace": {
+        "componentPath": "./challenges/challenge-14-email-availability-check/components/email-form/email-form.component",
+        "componentName": "EmailFormComponent"
+      }
     }
   }
 }
