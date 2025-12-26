@@ -1,0 +1,14 @@
+<div 
+  class="hero-stats" 
+  [class.hero-stats--compact]="variant() === 'compact'"
+  [class.hero-stats--prominent]="variant() === 'prominent'"
+  role="list" 
+  [attr.aria-label]="ariaLabel()"
+>
+  @for (stat of stats(); track stat.label) {
+    <div class="hero-stat" role="listitem">
+      <span class="hero-stat__value">{{ stat.value }}</span>
+      <span class="hero-stat__label">{{ stat.label }}</span>
+    </div>
+  }
+</div>

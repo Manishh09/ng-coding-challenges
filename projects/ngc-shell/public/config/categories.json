@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-30T00:00:00Z",
+  "metadata": {
+    "author": {
+      "name": "Manish Kumar",
+      "avatar": "/assets/avatars/manish.jpg",
+      "profileUrl": "https://github.com/Manishh09"
+    },
+    "repository": "https://github.com/Manishh09/ng-coding-challenges"
+  },
+  "categories": [
+    {
+      "id": 1,
+      "slug": "rxjs-api",
+      "title": "RxJS & APIs",
+      "description": "API handling with RxJS operators",
+      "icon": "api",
+      "order": 1,
+      "enabled": true,
+      "route": {
+        "path": "rxjs-api",
+        "moduleName": "@ngc-rxjs-api",
+        "exportName": "NGC_RXJS_API_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "RxJS",
+        "TypeScript",
+        "HttpClient"
+      ],
+      "metadata": {
+        "color": "#DD0031",
+        "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "angular-core",
+      "title": "Angular Core",
+      "description": "Component communication, directives, pipes",
+      "icon": "settings",
+      "order": 2,
+      "enabled": true,
+      "route": {
+        "path": "angular-core",
+        "moduleName": "@ngc-core",
+        "exportName": "NGC_CORE_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Signals",
+        "TypeScript",
+        "Standalone Components"
+      ],
+      "metadata": {
+        "color": "#0066CC",
+        "gradient": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "angular-routing",
+      "title": "Angular Routing",
+      "description": "Routing, guards, lazy loading",
+      "icon": "route",
+      "order": 3,
+      "enabled": true,
+      "route": {
+        "path": "angular-routing",
+        "moduleName": "@ngc-routing",
+        "exportName": "NGC_ROUTING_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Router",
+        "Signals",
+        "Route Guards"
+      ],
+      "metadata": {
+        "color": "#00BCD4",
+        "gradient": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+      }
+    },
+    {
+      "id": 4,
+      "slug": "angular-forms",
+      "title": "Angular Forms",
+      "description": "Template-driven, reactive forms, validation",
+      "icon": "assignment",
+      "order": 4,
+      "enabled": true,
+      "route": {
+        "path": "angular-forms",
+        "moduleName": "@ngc-forms",
+        "exportName": "NGC_FORMS_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Reactive Forms",
+        "Template-driven Forms",
+        "Validators"
+      ],
+      "metadata": {
+        "color": "#4CAF50",
+        "gradient": "linear-gradient(135deg, #a8e063 0%, #56ab2f 100%)"
+      }
+    }
+  ]
+}

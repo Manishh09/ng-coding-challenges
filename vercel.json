@@ -1,7 +1,7 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/coding-challenges/browser",
+  "outputDirectory": "dist/ngc-shell/browser",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

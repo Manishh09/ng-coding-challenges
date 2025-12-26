@@ -1,0 +1,11 @@
+<nav class="skip-links" aria-label="Skip navigation links">
+  @for (link of links(); track link.target) {
+    <a
+      [href]="link.target"
+      class="skip-link"
+      [attr.aria-label]="link.text"
+    >
+      {{ link.text }}
+    </a>
+  }
+</nav>

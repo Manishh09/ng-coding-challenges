@@ -1,4 +1,4 @@
-.theme-toggle-btn {
+.theme-toggle-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19,23 +19,54 @@
     color: var(--text-primary);
   }
 
-  &:hover { background: transparent; border: none; transform: none; box-shadow: none; }
-  &:focus, &:focus-visible { outline: none; box-shadow: none; }
-  &:active { transform: none; box-shadow: none; }
+  &:hover {
+    background: transparent;
+    border: none;
+    transform: none;
+    box-shadow: none;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:active {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 /* Dark mode retains same minimal style */
-body.dark-mode .theme-toggle-btn { background: transparent; border: none; }
+body.dark-mode .theme-toggle-button {
+  background: transparent;
+  border: none;
+}
 
 /* Remove animation */
-.theme-toggle-btn mat-icon.light_mode,
-.theme-toggle-btn mat-icon.dark_mode { animation: none; }
+.theme-toggle-button mat-icon.light_mode,
+.theme-toggle-button mat-icon.dark_mode {
+  animation: none;
+}
 
 @media (max-width: 768px) {
-  .theme-toggle-btn { width: 32px; height: 32px; }
-  .theme-toggle-btn mat-icon { font-size: 24px; width: 24px; height: 24px; }
+  .theme-toggle-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .theme-toggle-button mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-toggle-btn, .theme-toggle-btn mat-icon { transition: none; }
+
+  .theme-toggle-button,
+  .theme-toggle-button mat-icon {
+    transition: none;
+  }
 }

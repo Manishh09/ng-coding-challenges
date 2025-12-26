@@ -1,0 +1,56 @@
+/**
+
+ * Design Token Registry
+ *
+ * Central import point for all design tokens.
+ * This file consolidates all token categories and provides
+ * a single source of truth for the design system.
+ *
+ * Usage:
+ * @use 'tokens' as tokens;
+ *
+ * Then apply tokens in your :root or component:
+ * :root {
+ *   @include tokens.all-css-vars();
+ * }
+ */
+
+// Forward all token modules for direct access if needed (must come first)
+@forward './colors';
+@forward './typography';
+@forward './spacing';
+@forward './icons';
+@forward './elevation';
+@forward './motion';
+@forward './breakpoints';
+
+// Import modules for use in mixins
+@use './colors' as colors;
+@use './typography' as typography;
+@use './spacing' as spacing;
+@use './icons' as icons;
+@use './elevation' as elevation;
+@use './motion' as motion;
+@use './breakpoints' as breakpoints;
+
+/**
+ * Mixin: Apply all design token CSS custom properties
+ *
+ * This master mixin includes all token categories.
+ * Use this in :root to make all design tokens available
+ * as CSS custom properties throughout your application.
+ */
+@mixin all-css-vars() {
+  @include colors.color-css-vars();
+  @include typography.typography-css-vars();
+  @include spacing.spacing-css-vars();
+  @include icons.icon-css-vars();
+  @include elevation.elevation-css-vars();
+  @include motion.motion-css-vars();
+  @include breakpoints.breakpoint-css-vars();
+}
+
+// Re-export typography mixin for body styles
+@mixin apply-typography() {
+  @include typography.apply-typography();
+}

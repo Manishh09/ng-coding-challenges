@@ -1,0 +1,104 @@
+/* ==========================================
+   Skip Links Component Styles
+   Accessible navigation for keyboard users
+   ========================================== */
+
+.skip-links {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: var(--surface-primary, #ffffff);
+  border-bottom: 2px solid var(--color-primary, rgba(99, 102, 241, 1));
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  padding: 12px 20px;
+  background: var(--color-primary, rgba(99, 102, 241, 1));
+  color: var(--text-on-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: top 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap;
+
+  &:focus {
+    top: 0;
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover {
+    background: var(--color-primary-dark, rgba(79, 70, 229, 1));
+  }
+
+  &:active {
+    transform: translateX(-50%) scale(0.98);
+  }
+
+  // Support for multiple skip links
+  &:nth-child(2) {
+    left: calc(50% + 150px);
+  }
+
+  &:nth-child(3) {
+    left: calc(50% - 150px);
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .skip-link {
+    border: 2px solid #ffffff;
+
+    &:focus {
+      outline-width: 4px;
+    }
+  }
+}
+
+// Dark mode adjustments
+:host-context(body.dark-mode) {
+  .skip-links {
+    background: var(--surface-primary, #1a1a1a);
+  }
+
+  .skip-link {
+    background: var(--color-primary, rgba(99, 102, 241, 1));
+  }
+}
+
+// Responsive adjustments for mobile
+@media (max-width: 768px) {
+  .skip-link {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      left: 50%;
+      top: -200%;
+
+      &:focus {
+        top: calc(0px + (var(--skip-link-index, 0) * 50px));
+      }
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .skip-links {
+    display: none;
+  }
+}

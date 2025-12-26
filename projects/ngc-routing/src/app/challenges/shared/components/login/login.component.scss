@@ -1,0 +1,43 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: calc(100vh - 2rem);
+}
+
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 1.25rem;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+
+@media (max-width: 420px) {
+  .login-card {
+    margin: 0 1rem;
+  }
+}

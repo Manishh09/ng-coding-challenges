@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NavigationService {
-  
+
   /**
    * List of allowed domains for external navigation
    * This helps prevent potential security issues with malicious URLs
@@ -64,53 +64,6 @@ export class NavigationService {
     });
   }
 
-  openExternalLinkV2(url: string, windowName: string = '_blank'): boolean {
-  const newWindow = window.open('', windowName, 'noopener,noreferrer');
-
-  if (!newWindow) {
-    console.warn('Popup blocked');
-    return false;
-  }
-
-  try {
-    if (!this.isValidUrl(url)) {
-      newWindow.close();
-      return false;
-    }
-
-    if (!this.isDomainAllowed(url)) {
-      const confirmLeave = confirm('This is an external link. Do you want to continue?');
-      if (!confirmLeave) {
-        newWindow.close();
-        return false;
-      }
-    }
-
-    newWindow.opener = null;
-    newWindow.location.href = url;
-    return true;
-  } catch (err) {
-    newWindow.close();
-    console.error('Failed to open link:', err);
-    return false;
-  }
-}
-
-
-  /**
-   * Opens a challenge requirement document
-   * @param requirementUrl - URL to the requirement document
-   * @returns Promise<boolean>
-   */
-  async openChallengeRequirement(requirementUrl: string): Promise<boolean> {
-    if (!requirementUrl) {
-      console.warn('NavigationService: No requirement URL provided');
-      return false;
-    }
-
-    return this.openExternalLink(requirementUrl, 'challenge_requirement');
-  }
-
   /**
    * Validates if a URL is properly formatted
    * @param url - URL to validate
@@ -134,8 +87,8 @@ export class NavigationService {
     try {
       const urlObj = new URL(url);
       const hostname = urlObj.hostname.toLowerCase();
-      
-      return this.allowedDomains.some(domain => 
+
+      return this.allowedDomains.some(domain =>
         hostname === domain || hostname.endsWith('.' + domain)
       );
     } catch {

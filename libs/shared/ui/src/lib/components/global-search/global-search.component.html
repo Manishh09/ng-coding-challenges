@@ -1,0 +1,141 @@
+<!-- Global Search Dialog Content -->
+<div class="global-search-dialog-container" [class.mobile]="isMobile()">
+  <!-- Mobile Header -->
+  @if (isMobile()) {
+    <div class="mobile-header">
+      <button
+        mat-icon-button
+        (click)="closeSearch()"
+        aria-label="Close search"
+        type="button"
+        class="close-button"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="search-title">Search Challenges</span>
+    </div>
+  }
+
+  <!-- Search Input -->
+  <div class="search-input-wrapper">
+    <mat-icon class="search-icon">search</mat-icon>
+
+    <input
+      #searchInput
+      type="text"
+      class="search-input"
+      placeholder="Search challenges..."
+      [value]="searchTerm()"
+      (input)="onSearchInput($any($event.target).value)"
+      (focus)="isOpen.set(searchTerm().trim().length >= 2)"
+      aria-label="Search all challenges"
+      aria-autocomplete="list"
+      aria-controls="search-results"
+      [attr.aria-expanded]="isOpen()"
+    />
+
+    @if (searchTerm()) {
+      <button
+        mat-icon-button
+        class="clear-button"
+        (click)="searchTerm.set(''); isOpen.set(false)"
+        aria-label="Clear search"
+        type="button"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </div>
+
+  <!-- Dropdown Results -->
+  @if (isOpen()) {
+    <div
+      class="search-dropdown"
+      id="search-results"
+      role="listbox"
+    >
+            <!-- Results List -->
+            @if (hasResults()) {
+              <div class="results-list">
+                @for (result of displayedResults(); track result.id) {
+                  <button
+                    class="result-item"
+                    matRipple
+                    (click)="selectResult(result)"
+                    role="option"
+                    [attr.aria-label]="'Navigate to ' + result.title"
+                    type="button"
+                  >
+                    <div class="result-content">
+                      <div class="result-header">
+                        <h4
+                          class="result-title"
+                          [innerHTML]="result.title | highlightText:searchTerm()"
+                        ></h4>
+                        <span
+                          class="category-badge"
+                          [class]="getCategoryBadgeClass(result.category)"
+                        >
+                          {{ result.categoryName }}
+                        </span>
+                      </div>
+                      <p
+                        class="result-description"
+                        [innerHTML]="result.description | highlightText:searchTerm()"
+                      ></p>
+                    </div>
+                    <mat-icon class="result-arrow">arrow_forward</mat-icon>
+                  </button>
+                }
+              </div>
+
+              <!-- Load More Button -->
+              @if (hasMoreResults()) {
+                <div class="load-more-section">
+                  <button
+                    mat-stroked-button
+                    class="load-more-button"
+                    (click)="loadMore()"
+                    type="button"
+                  >
+                    <mat-icon>expand_more</mat-icon>
+                    Load {{ remainingCount() }} more result{{ remainingCount() > 1 ? 's' : '' }}
+                  </button>
+                </div>
+              }
+
+              <!-- Results Footer -->
+              @if (showAllResults() && allResults().length > 0) {
+                <div class="results-footer">
+                  <span class="results-count">
+                    Showing all {{ allResults().length }} result{{ allResults().length > 1 ? 's' : '' }}
+                  </span>
+                </div>
+              }
+            }
+
+            <!-- Empty State -->
+            @if (showEmptyState()) {
+              <div class="empty-state">
+                <mat-icon class="empty-icon">search_off</mat-icon>
+                <h3>No challenges found</h3>
+                <p>Try searching for:</p>
+                <ul class="suggestions">
+                  <li>"RxJS"</li>
+                  <li>"HTTP"</li>
+                  <li>"Routing"</li>
+                  <li>"API"</li>
+                </ul>
+              </div>
+            }
+
+            <!-- Keyboard Shortcut Hint -->
+            @if (!isSearching()) {
+              <div class="keyboard-hint">
+                <mat-icon>keyboard</mat-icon>
+                <span>Press <kbd>Esc</kbd> to close</span>
+              </div>
+            }
+          </div>
+        }
+</div>

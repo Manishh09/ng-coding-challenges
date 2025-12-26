@@ -1,64 +1,91 @@
-// Header styles
+/* =============================================================================
+ * Header Component
+ * =============================================================================
+ * Main navigation header with fixed positioning, search, and actions.
+ * Uses Material Design principles with glassmorphism effects.
+ * ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+ * Toolbar Container
+ * ----------------------------------------------------------------------------- */
 .header-toolbar {
+  /* Positioning */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1100;
-  background: var(--surface-secondary);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 var(--border-primary);
-  padding: 0;
-  height: 64px;
+
+  /* Layout */
   width: 100%;
-  overflow-x: hidden;
-  transition: background var(--animation-duration-standard) var(--animation-easing),
+  height: var(--header-height);
+  padding: 0;
+
+  /* Visual styling */
+  background: var(--surface-secondary);
+  box-shadow: 0 1px 0 var(--border-primary);
+
+  /* Glassmorphism effect */
+  backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
+
+  /* Animation */
+  transition:
+    background var(--animation-duration-standard) var(--animation-easing),
     box-shadow var(--animation-duration-standard) var(--animation-easing);
 }
 
-// Container for header content
+/* -----------------------------------------------------------------------------
+ * Container for Header Content
+ * ----------------------------------------------------------------------------- */
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-
-  padding: 0 32px;
   height: 100%;
-  overflow: hidden;
+  padding: 0 var(--spacing-2xl);
+      background: var(--brand-gradient-footer);
 }
 
-// Logo container
+/* -----------------------------------------------------------------------------
+ * Logo Section
+ * ----------------------------------------------------------------------------- */
 .logo-section {
   display: flex;
   align-items: center;
   flex-shrink: 0;
 }
 
-// Logo link styling
 .logo-link {
+  /* Layout */
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
+  /* Visual */
   color: inherit;
   text-decoration: none;
-  transition: transform var(--animation-duration-fast) var(--animation-easing),
-  opacity var(--animation-duration-fast) var(--animation-easing);
 
-  // &:hover {
-  //   opacity: 0.95;
-  //   transform: scale(1.02);
-  // }
+  /* Animation */
+  transition:
+    transform var(--animation-duration-fast) var(--animation-easing),
+    opacity var(--animation-duration-fast) var(--animation-easing);
 
+  /* Focus state */
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 3px solid var(--state-focus-ring);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   &:focus:not(:focus-visible) {
     outline: none;
+  }
+
+  /* Hover state */
+  &:hover {
+    opacity: 0.9;
   }
 }
 
@@ -88,7 +115,7 @@
   width: 100%;
   height: 100%;
   display: inline-block;
-  background: var(--brand-gradient-primary);
+  background: var(--gradient-logo);
   -webkit-mask: var(--logo-src) center/contain no-repeat;
   mask: var(--logo-src) center/contain no-repeat;
 }
@@ -113,19 +140,138 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  flex-grow: 1;
+  flex-shrink: 0;
   justify-content: center;
 }
 
-// Actions section (theme toggle, buttons)
+// Search section (center position)
+.search-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 var(--spacing-lg);
+}
+
+// Search Trigger Button (looks like input)
+.search-trigger {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  background: var(--surface-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all var(--animation-duration-fast) var(--animation-easing);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+
+  &:hover {
+    background: var(--surface-secondary);
+    border-color: var(--border-secondary);
+    color: var(--text-secondary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--state-focus-ring);
+    outline-offset: 2px;
+    border-color: var(--state-focus-ring);
+  }
+
+  .search-trigger-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .search-trigger-text {
+    flex: 1;
+    text-align: left;
+    font-family: var(--font-family-base);
+    user-select: none;
+  }
+
+  .search-trigger-hint {
+    padding: 2px 6px;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    font-family: var(--font-family-mono);
+    flex-shrink: 0;
+  }
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--border-radius-pill);
+  transition: color var(--animation-duration-fast) var(--animation-easing),
+    background var(--animation-duration-fast) var(--animation-easing),
+    transform var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-primary);
+    background: var(--color-primary-alpha-10);
+    transform: translateY(-1px);
+    outline: none;
+  }
+}
+
+.nav-link--active {
+  color: var(--text-primary);
+  background: var(--color-primary-alpha-20);
+  box-shadow: inset 0 0 0 1px var(--color-primary-alpha-30);
+}
+
+// Actions section (icons, theme toggle, buttons)
 .actions-section {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-sm);
   flex-shrink: 0;
   height: 100%;
-  padding-right: 8px;
-  margin-left: auto;
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--border-radius-pill);
+  background: var(--color-primary-alpha-20);
+  color: var(--electric-violet);
+  font-weight: 600;
+  border: 1px solid var(--color-primary-alpha-30);
+  cursor: pointer;
+  transition: transform var(--animation-duration-fast) var(--animation-easing),
+    box-shadow var(--animation-duration-fast) var(--animation-easing),
+    background var(--animation-duration-fast) var(--animation-easing);
+
+  mat-icon {
+    font-size: 1.1rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px var(--color-primary-alpha-20);
+    background: var(--color-primary-alpha-30);
+    outline: none;
+  }
 }
 
 // Theme toggle component
@@ -140,8 +286,7 @@ ng-coding-challenges-theme-toggle {
 .logo-text {
   font-size: 2rem;
   font-weight: 800;
-
-  background: var(--gradient-primary);
+  background: var(--gradient-logo);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -173,7 +318,6 @@ ng-coding-challenges-theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 0;
   background: transparent;
   border: none;
@@ -182,7 +326,8 @@ ng-coding-challenges-theme-toggle {
   text-decoration: none;
 }
 
-.github-svg, .linkedin-svg {
+.github-svg,
+.linkedin-svg {
   width: 24px;
   height: 24px;
   fill: var(--text-primary);
@@ -191,7 +336,7 @@ ng-coding-challenges-theme-toggle {
 
 .linkedin-svg {
   width: 20px;
-  height:24px;
+  height: 24px;
   fill: var(--text-primary);
   display: block;
 }
@@ -204,31 +349,6 @@ body.dark-mode .linkedin-svg {
   fill: var(--text-primary);
 }
 
-
-@media (max-width: 768px) {
-
-  .github-svg, .linkedin-svg {
-    width: 20px;
-    height: 24px;
-  }
-}
-
-// Animation for gradient text
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-// Responsive design for mobile devices
 @media (max-width: 768px) {
   .desktop-only {
     display: none !important;
@@ -248,11 +368,11 @@ body.dark-mode .linkedin-svg {
   }
 
   .header-container {
-    padding: 0 12px;
+    padding: 0 var(--spacing-md);
   }
 
   .header-toolbar {
-    height: 56px;
+    height: var(--header-height-mobile);
   }
 
   ng-coding-challenges-theme-toggle {
@@ -263,11 +383,36 @@ body.dark-mode .linkedin-svg {
     width: 48px;
     height: 48px;
   }
+
+  .github-svg,
+  .linkedin-svg {
+    width: 20px;
+    height: 24px;
+  }
+
+  .search-section {
+    display: none;
+  }
 }
 
 // Hide mobile elements on larger screens
 @media (min-width: 769px) {
   .mobile-only {
     display: none !important;
+  }
+}
+
+// Animation for gradient text
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }

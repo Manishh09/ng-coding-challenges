@@ -33,6 +33,7 @@ npm install
 
 # if any issues, remove package-lock.json file and run `npm install`
 ```
+
 **Note:** if any issues, remove package-lock.json file and run `npm install`
 
 ### Running the Application
@@ -46,5 +47,3 @@ npm run start:main
 ```
 
 **Note:** Have any changes in libs ? Always build libs first and then run the main app
-
-

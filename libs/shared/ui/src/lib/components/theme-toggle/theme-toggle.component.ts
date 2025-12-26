@@ -1,4 +1,9 @@
-import { Component, inject, ChangeDetectionStrategy, computed } from '@angular/core';
+import {
+  Component,
+  inject,
+  ChangeDetectionStrategy,
+  computed,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -14,7 +19,7 @@ import { ThemeService } from '@ng-coding-challenges/shared/services';
   styleUrl: './theme-toggle.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-  standalone: true
+  standalone: true,
 })
 export class ThemeToggleComponent {
   /** Theme service for managing theme state */
@@ -26,14 +31,7 @@ export class ThemeToggleComponent {
   );
 
   /** Computed tooltip text based on current theme */
-  readonly tooltipText = computed(() =>
-    `Switch to ${this.themeService.isDarkMode() ? 'light' : 'dark'} theme`
+  readonly tooltipText = computed(
+    () => `Switch to ${this.themeService.isDarkMode() ? 'light' : 'dark'} theme`
   );
-
-  /**
-   * Handle theme toggle with smooth transition
-   */
-  onToggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
 }

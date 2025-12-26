@@ -1,0 +1,215 @@
+.workspace-toolbar {
+  position: relative; // Changed from sticky to relative
+  top: 0;
+  z-index: 50; // Lower than header (1100) but high enough within content
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  min-height: 64px;
+  padding: 0;
+  flex-shrink: 0; // Prevent toolbar from shrinking
+  width: 100%; // Ensure full width
+  display: block; // Ensure it's displayed
+  visibility: visible; // Ensure it's visible
+  opacity: 1; // Ensure it's opaque
+
+  @media (max-width: 768px) {
+    min-height: 56px;
+  }
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // Ensures proper spacing between left and right sections
+
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 48px;
+  height: 64px;
+  gap: var(--spacing-lg); // Gap between left and right sections
+
+  @media (max-width: 768px) {
+    height: 56px;
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+}
+
+// Left Section: Back button + Challenge Info
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+  min-width: 0; // Allow text truncation
+  overflow: hidden;
+}
+
+// Right Section: Action Buttons
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0; // Prevent action buttons from shrinking
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-xs);
+  }
+}
+
+.back-button {
+  flex-shrink: 0;
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--state-hover-bg);
+  }
+}
+
+.challenge-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+  min-width: 0; // Allow text truncation
+  overflow: hidden;
+}
+
+.challenge-title {
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-body);
+  }
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-md); // More generous padding
+  border-radius: var(--border-radius-lg); // Less rounded for modern look
+  background: linear-gradient(135deg, var(--interactive-primary) 0%, var(--interactive-primary-dark, #0066cc) 100%);
+  color: white;
+  font-size: var(--font-size-sm); // Slightly larger
+  font-weight: var(--font-weight-semibold); // Bolder text
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 102, 204, 0.2); // Subtle shadow for depth
+  transition: transform var(--animation-duration-fast) var(--animation-easing),
+              box-shadow var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+  }
+}
+
+.action-button {
+  flex-shrink: 0;
+  font-weight: var(--font-weight-medium);
+  transition: transform var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.button-icon {
+  margin-right: var(--spacing-xs);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.solution-button {
+  // Accent color styling from Material
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.stackblitz-button {
+  // Stroked button with custom hover effect
+  &:hover:not(:disabled) {
+    background: var(--state-hover-bg);
+  }
+}
+
+/* Mobile: Icon-only buttons */
+@media (max-width: 767px) {
+  .button-text {
+    display: none; // Hide text labels on mobile
+  }
+
+  .button-icon {
+    margin-right: 0; // Remove margin when text is hidden
+  }
+
+  .action-button {
+    min-width: 40px;
+    padding: 0 8px;
+  }
+
+  .toolbar-actions {
+    gap: var(--spacing-xs); // Tighter gap on mobile
+  }
+}
+
+/* Tablet: Text + Icon */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .button-text {
+    display: inline; // Show text on tablet
+  }
+
+  .action-button {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+/* Desktop: Full text + icon */
+@media (min-width: 1024px) {
+  .button-text {
+    display: inline; // Full text on desktop
+  }
+
+  .action-button {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .challenge-title {
+    font-size: var(--font-size-body);
+  }
+
+  .category-badge {
+    display: none; // Hide on mobile to save space
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .challenge-title {
+    font-size: var(--font-size-body-large);
+  }
+}

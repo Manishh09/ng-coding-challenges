@@ -1,0 +1,416 @@
+// Material and theme
+@use '@angular/material' as mat;
+@use '../../../libs/shared/ui/src/lib/styles/theme.scss' as theme;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+/* ==========================================
+   Global Base Styles - WCAG 2.1 AA Compliant
+   ========================================== */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background-primary);
+  color: var(--text-primary);
+  // Ensure smooth font rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure app-root takes full height */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--background-primary);
+}
+
+/* Fix for extra space at bottom */
+body,
+html,
+app-root,
+.app-layout,
+.footer,
+.footer-bottom {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure no extra white space at the bottom of the page */
+.mat-typography {
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   Hero Section Styling - WCAG Compliant
+   ========================================== */
+
+.hero-section {
+  background: var(--background-primary);
+  // Elegant subtle gradient for hero background instead of harsh solid
+  background-image: var(--brand-gradient-hero);
+  color: var(--text-primary);
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  text-align: center;
+  position: relative;
+
+  // Ensure sufficient contrast overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    // Enhanced glass effect texture
+    background-image: radial-gradient(circle at 1px 1px, var(--border-primary) 1px, transparent 0);
+    background-size: 40px 40px;
+    opacity: 0.15;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  }
+
+  >* {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+    // Subtle modern text glow instead of hard shadow
+    text-shadow: 0 0 30px var(--color-primary-alpha-30);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .nav-container {
+    .nav-content {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .nav-links {
+      gap: var(--spacing-md);
+    }
+  }
+
+  .challenge-card {
+    padding: var(--spacing-md);
+
+    .challenge-meta {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-section {
+    padding: var(--spacing-3xl) var(--spacing-xl);
+  }
+}
+
+/* ==========================================
+   WCAG 2.1 AA Accessibility Standards
+   ========================================== */
+
+/* Enhanced focus styles for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--interactive-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+  transition: outline-offset 0.15s ease;
+}
+
+/* Ensure all interactive elements meet minimum touch target (48x48px) */
+button,
+a,
+input,
+select,
+textarea,
+[role="button"],
+[role="link"] {
+  min-height: 44px; // WCAG 2.5.5 Target Size
+
+  @media (pointer: coarse) {
+    min-height: 48px; // Larger for touch devices
+  }
+}
+
+/* Skip to main content link for screen readers */
+.skip-to-main {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--interactive-primary);
+  color: var(--text-on-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 9999;
+  border-radius: 0 0 var(--border-radius-md) 0;
+
+  &:focus {
+    top: 0;
+    outline: 3px solid var(--color-white-alpha-50);
+    outline-offset: -3px;
+  }
+}
+
+/* Reduced motion support - WCAG 2.3.3 */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in,
+  .slide-in-up,
+  .pulse {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support - WCAG 1.4.3 */
+@media (prefers-contrast: high) {
+  :root {
+    --border-primary: var(--text-primary);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 20px -3px rgba(0, 0, 0, 0.5);
+  }
+
+  button,
+  a,
+  input,
+  select {
+    border-width: 2px !important;
+  }
+
+  *:focus-visible {
+    outline-width: 4px;
+    outline-offset: 3px;
+  }
+}
+
+/* Dark mode - ensure proper contrast ratios */
+body.dark-mode {
+
+  // Override any potential contrast issues
+  .hero-section {
+    &::before {
+      background: linear-gradient(135deg,
+          rgba(0, 0, 0, 0.25),
+          rgba(0, 0, 0, 0.15));
+    }
+  }
+}
+
+/* Forced colors mode support (Windows High Contrast) */
+@media (forced-colors: active) {
+  * {
+    forced-color-adjust: auto;
+  }
+
+  button,
+  a {
+    border: 1px solid currentColor;
+  }
+}
+
+/* ==========================================
+   Screen Reader Only Content
+   ========================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ==========================================
+   Shared Component Styles
+   ========================================== */
+
+.challenge-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  background: var(--background-primary);
+}
+
+/* ==========================================
+   Text Selection
+   ========================================== */
+::selection {
+  background: var(--color-primary-alpha-30);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--color-primary-alpha-30);
+  color: var(--text-primary);
+}
+
+/* ==========================================
+   Layout Container Classes
+   Route-based layout system for consistent widths
+   ========================================== */
+
+// Base content container foundation
+.content-container {
+  flex: 1;
+  margin: 0 auto;
+  width: 100%;
+  overflow: visible;
+
+  // Smooth transitions between layout types
+  transition:
+    padding var(--animation-duration-standard) var(--animation-easing),
+    max-width var(--animation-duration-standard) var(--animation-easing);
+}
+
+// 1. Landing Page Container (Challenge List View)
+// Purpose: Grid layout with challenge cards
+// Layout: Maximum breathing room for card display
+.landing-page-container {
+  max-width: var(--max-width-wide); // 1440px - consistent width
+  padding: var(--spacing-2xl) var(--spacing-2xl) calc(var(--spacing-2xl) + 16px);
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 16px);
+    margin-top: 64px; // Mobile top bar offset
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 16px);
+  }
+}
+
+// 2. Challenge Details Container
+// Purpose: Details page with sidebar + main content
+// Layout: Balanced padding for optimal reading experience
+.challenge-details-container {
+  max-width: var(--max-width-wide); // 1440px - consistent width
+  // padding: var(--spacing-xl) var(--spacing-2xl);
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+}
+
+// 3. Challenge Workspace Container
+// Purpose: Interactive workspace view
+// Layout: Tighter padding to maximize interaction area
+.challenge-workspace-container {
+  max-width: var(--max-width-wide); // 1440px - consistent width
+  //padding: var(--spacing-lg) var(--spacing-xl);
+  //padding-bottom: var(--spacing-md); // Maximize vertical space for workspace
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+}
+
+/* ==========================================
+   Print Styles (hardcoded for print media)
+   ========================================== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .hero-section {
+    background: none;
+    color: black;
+  }
+
+  button,
+  nav,
+  aside,
+  [role="navigation"],
+  [role="banner"] {
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+    color: black;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.875rem;
+  }
+}
