@@ -248,7 +248,7 @@ export class ChallengesBrowserComponent {
    */
   onCategorySelect(categoryId: string): void {
     // Validate category exists in route configuration
-    const validCategories = ['rxjs-api', 'angular-core', 'angular-routing'];
+    const validCategories = ['rxjs-api', 'angular-core', 'angular-routing', 'angular-forms'];
 
     if (!validCategories.includes(categoryId)) {
       console.warn(`[ChallengesBrowser] Category '${categoryId}' does not have a route configured`);

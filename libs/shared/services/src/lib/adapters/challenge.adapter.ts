@@ -104,7 +104,8 @@ export class ChallengeAdapter implements IChallengeAdapter {
     const categoryMap: Record<CategorySlug, ChallengeCategoryId> = {
       'rxjs-api': 'rxjs-api',
       'angular-core': 'angular-core',
-      'angular-routing': 'angular-routing'
+      'angular-routing': 'angular-routing',
+      'angular-forms': 'angular-forms'
     };
 
     const mappedCategory = categoryMap[categorySlug];

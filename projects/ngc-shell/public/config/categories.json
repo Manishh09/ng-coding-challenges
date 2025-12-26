@@ -81,6 +81,30 @@
         "color": "#00BCD4",
         "gradient": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
       }
+    },
+    {
+      "id": 4,
+      "slug": "angular-forms",
+      "title": "Angular Forms",
+      "description": "Template-driven, reactive forms, validation",
+      "icon": "assignment",
+      "order": 4,
+      "enabled": true,
+      "route": {
+        "path": "angular-forms",
+        "moduleName": "@ngc-forms",
+        "exportName": "NGC_FORMS_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Reactive Forms",
+        "Template-driven Forms",
+        "Validators"
+      ],
+      "metadata": {
+        "color": "#4CAF50",
+        "gradient": "linear-gradient(135deg, #a8e063 0%, #56ab2f 100%)"
+      }
     }
   ]
 }

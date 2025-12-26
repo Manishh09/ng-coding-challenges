@@ -11,7 +11,7 @@ export type ChallengeDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 /**
  * Category identifier for challenges (JSON config version)
  */
-export type CategorySlug = 'rxjs-api' | 'angular-core' | 'angular-routing';
+export type CategorySlug = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms';
 
 /**
  * Author information for challenges

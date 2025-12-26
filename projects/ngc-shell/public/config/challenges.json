@@ -486,6 +486,55 @@
         "componentName": "DashboardComponent"
       }
     }
+  },
+  "angular-forms": {
+    "reactive-login-form": {
+      "id": 12,
+      "slug": "reactive-login-form",
+      "title": "Challenge 12: Reactive Login Form",
+      "categoryId": "angular-forms",
+      "difficulty": "Beginner",
+      "enabled": true,
+      "order": 1,
+      "description": "Build a reactive login form with email and password validation using Angular's FormGroup, FormControl, and built-in validators.",
+      "longDescription": "Master the fundamentals of Angular Reactive Forms by building a production-ready login form. Learn how to use FormBuilder, implement built-in validators, display dynamic error messages, and manage form state effectively. This challenge covers essential skills every Angular developer needs for form handling.",
+      "tags": [
+        "Reactive Forms",
+        "FormGroup",
+        "FormControl",
+        "Validators",
+        "Form Validation"
+      ],
+      "estimatedTime": "30-45 minutes",
+      "prerequisites": [
+        "Basic Angular knowledge",
+        "Understanding of TypeScript",
+        "Familiarity with Angular components"
+      ],
+      "learningOutcomes": [
+        "Create reactive forms using FormBuilder and FormGroup",
+        "Implement built-in validators (required, email, minLength)",
+        "Display dynamic error messages based on validation state",
+        "Manage form state (valid, invalid, touched, dirty)",
+        "Use Angular Signals for reactive state management",
+        "Implement proper form submission handling"
+      ],
+      "requirementList": [
+        "Create a LoginFormComponent with email and password fields using Angular Reactive Forms.",
+        "Implement validation: email (required + valid format), password (required + minimum 6 characters).",
+        "Display inline error messages that appear only after fields are touched or form is submitted.",
+        "Disable the submit button when the form is invalid and show success message on valid submission."
+      ],
+      "links": {
+        "requirement": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-REQUIREMENT.md",
+        "solution": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-SOLUTION_GUIDE.md",
+        "github": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form"
+      },
+      "workspace": {
+        "componentPath": "./challenges/challenge-12-reactive-login-form/components/login-form/login-form.component",
+        "componentName": "LoginFormComponent"
+      }
+    }
   }
 }
 }

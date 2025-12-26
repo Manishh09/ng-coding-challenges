@@ -96,6 +96,7 @@ export class CategorySidebarComponent {
       'http': 'http',
       'angular-core': 'settings',
       'angular-routing': 'route',
+      'angular-forms': 'assignment',
     };
     return iconMap[categoryId] || 'folder';
   }

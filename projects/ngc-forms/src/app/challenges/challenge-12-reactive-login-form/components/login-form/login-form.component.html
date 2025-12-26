@@ -1,0 +1,123 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Login Form</h2>
+    </div>
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+      class="login-form"
+    >
+
+      <!-- ================= EMAIL ================= -->
+      <div class="form-group">
+        <label for="email">
+          Email <span class="required">*</span>
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Enter your email"
+          autocomplete="email"
+          [class.is-valid]="f['email'].valid && f['email'].touched"
+          [class.is-invalid]="showError(f['email'])"
+        />
+
+        @if (showError(f['email'])) {
+          <div class="error-message" role="alert">
+            @if (f['email'].errors?.['required']) {
+              Email is required
+            }
+            @if (f['email'].errors?.['email']) {
+              Please enter a valid email address
+            }
+          </div>
+        }
+
+        @if (f['email'].valid && f['email'].touched) {
+          <div class="success-message">✓ Valid email</div>
+        }
+      </div>
+
+      <!-- ================= PASSWORD ================= -->
+      <div class="form-group">
+        <label for="password">
+          Password <span class="required">*</span>
+        </label>
+
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Minimum 6 characters"
+          autocomplete="current-password"
+          [class.is-valid]="f['password'].valid && f['password'].touched"
+          [class.is-invalid]="showError(f['password'])"
+        />
+
+        @if (showError(f['password'])) {
+          <div class="error-message" role="alert">
+            @if (f['password'].errors?.['required']) {
+              Password is required
+            }
+            @if (f['password'].errors?.['minlength']) {
+              Minimum
+              {{ f['password'].errors?.['minlength'].requiredLength }}
+              characters required
+            }
+          </div>
+        }
+
+        @if (f['password'].valid && f['password'].touched) {
+          <div class="success-message">✓ Valid password</div>
+        }
+      </div>
+
+      <!-- ================= ACTIONS ================= -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="resetForm()"
+        >
+          Reset
+        </button>
+      </div>
+
+      <!-- ================= FORM STATE (DEBUG / LEARNING) ================= -->
+      <div class="form-status">
+        <p><strong>Status:</strong> {{ loginForm.valid ? 'Valid ✓' : 'Invalid ✗' }}</p>
+        <p><strong>Touched:</strong> {{ loginForm.touched }}</p>
+        <p><strong>Dirty:</strong> {{ loginForm.dirty }}</p>
+      </div>
+    </form>
+
+    <!-- ================= SUCCESS MESSAGE ================= -->
+    @if (loginSuccess()) {
+      <div class="alert alert-success" role="alert">
+        <h3>{{ loginResponse()?.message }}</h3>
+        <p>Email: <strong>{{ loginResponse()?.user?.email }}</strong></p>
+      </div>
+    }
+
+    <!-- ================= FORM VALUE PREVIEW ================= -->
+    <div class="form-preview">
+      <h3>Form Values (Debug)</h3>
+      <pre>{{ loginForm.value | json }}</pre>
+    </div>
+  </div>
+</div>
