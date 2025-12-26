@@ -13,6 +13,9 @@ const CHALLENGE_COMPONENTS = {
   'duplicate-project-name-validator': () =>
     import('./challenges/challenge-13-duplicate-project-name-validator/components/project-form/project-form.component')
       .then(m => m.ProjectFormComponent),
+  'email-availability-check': () =>
+    import('./challenges/challenge-14-email-availability-check/components/email-form/email-form.component')
+      .then(m => m.EmailFormComponent),
 };
 
 /**
