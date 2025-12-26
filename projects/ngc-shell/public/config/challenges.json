@@ -534,6 +534,58 @@
         "componentPath": "./challenges/challenge-12-reactive-login-form/components/login-form/login-form.component",
         "componentName": "LoginFormComponent"
       }
+    },
+    "duplicate-project-name-validator": {
+      "id": 13,
+      "slug": "duplicate-project-name-validator",
+      "title": "Challenge 13: Duplicate Project Name Validator",
+      "categoryId": "angular-forms",
+      "difficulty": "Intermediate",
+      "enabled": true,
+      "order": 2,
+      "description": "Implement a custom synchronous validator that prevents duplicate project names with case-insensitive comparison and whitespace normalization.",
+      "longDescription": "Take your Angular form validation skills to the next level by creating a custom validator with business logic. Learn how to build reusable validator functions, implement normalization strategies, handle edit mode scenarios, and provide rich error messages. This challenge demonstrates real-world patterns used in production applications.",
+      "tags": [
+        "Custom Validators",
+        "ValidatorFn",
+        "Synchronous Validation",
+        "Business Logic",
+        "Normalization",
+        "Dynamic Validators"
+      ],
+      "estimatedTime": "60-90 minutes",
+      "prerequisites": [
+        "Completed Challenge 12 or equivalent reactive forms experience",
+        "Understanding of Angular validators",
+        "TypeScript functions and closures",
+        "Angular Signals basics"
+      ],
+      "learningOutcomes": [
+        "Create custom ValidatorFn functions with factory pattern",
+        "Implement string normalization for consistent comparison",
+        "Handle create vs edit mode validation scenarios",
+        "Update validators dynamically at runtime",
+        "Structure detailed ValidationErrors objects",
+        "Use Angular Signals for reactive state in services",
+        "Apply separation of concerns in validator design"
+      ],
+      "requirementList": [
+        "Create a reusable duplicateNameValidator factory function that returns a ValidatorFn.",
+        "Implement normalization: case-insensitive, trim whitespace, treat spaces/hyphens as equivalent.",
+        "Support edit mode by excluding the current project name from duplicate checking.",
+        "Display real-time validation with normalized preview and clear error messages.",
+        "Build a ProjectService with Angular Signals managing CRUD operations and computed project names.",
+        "Create mode toggle allowing users to switch between create and edit modes with dynamic validator updates."
+      ],
+      "links": {
+        "requirement": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-REQUIREMENT.md",
+        "solution": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-SOLUTION_GUIDE.md",
+        "github": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator"
+      },
+      "workspace": {
+        "componentPath": "./challenges/challenge-13-duplicate-project-name-validator/components/project-form/project-form.component",
+        "componentName": "ProjectFormComponent"
+      }
     }
   }
 }

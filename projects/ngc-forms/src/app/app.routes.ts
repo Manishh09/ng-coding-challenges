@@ -10,6 +10,9 @@ const CHALLENGE_COMPONENTS = {
   'reactive-login-form': () =>
     import('./challenges/challenge-12-reactive-login-form/components/login-form/login-form.component')
       .then(m => m.LoginFormComponent),
+  'duplicate-project-name-validator': () =>
+    import('./challenges/challenge-13-duplicate-project-name-validator/components/project-form/project-form.component')
+      .then(m => m.ProjectFormComponent),
 };
 
 /**

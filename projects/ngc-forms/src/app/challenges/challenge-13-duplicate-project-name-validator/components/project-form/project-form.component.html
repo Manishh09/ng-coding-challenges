@@ -1,0 +1,170 @@
+<div class="project-form-container">
+  <!-- Success Message -->
+  @if (showSuccessMessage()) {
+    <div class="alert alert-success">
+      {{ successMessage() }}
+    </div>
+  }
+
+  <div class="main-content">
+    <!-- Left Side: Form Section -->
+    <div class="form-section">
+      <!-- Form Header -->
+      <div class="form-header">
+        <h2>Create New Project</h2>
+        <p class="form-subtitle">Test the duplicate name validator by creating projects</p>
+      </div>
+
+      <!-- Project Form -->
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
+
+        <!-- Project Name Field -->
+        <div class="form-group">
+          <label for="name" class="form-label">
+            Project Name <span class="required">*</span>
+          </label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="getFieldClass('name')"
+          placeholder="Enter project name (e.g., Mobile App)"
+        />
+
+        <!-- Error Messages -->
+        @if (shouldShowValidation('name') && getErrorMessage('name')) {
+          <div class="error-message">
+            <span class="error-icon">⚠</span>
+            {{ getErrorMessage('name') }}
+          </div>
+        }
+
+        <!-- Success Indicator -->
+        @if (shouldShowValidation('name') && !getErrorMessage('name')) {
+          <div class="success-message">
+            <span class="success-icon">✓</span>
+            Project name is available
+          </div>
+        }
+
+        <!-- Field Hints -->
+        <small class="form-hint">
+          3-50 characters. Must be unique (case-sensitive).
+        </small>
+      </div>
+
+      <!-- Description Field -->
+      <div class="form-group">
+        <label for="description" class="form-label">
+          Description <span class="required">*</span>
+        </label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="getFieldClass('description')"
+          placeholder="Enter project description"
+          rows="4"
+        ></textarea>
+
+        <!-- Error Messages -->
+        @if (shouldShowValidation('description') && getErrorMessage('description')) {
+          <div class="error-message">
+            <span class="error-icon">⚠</span>
+            {{ getErrorMessage('description') }}
+          </div>
+        }
+
+        <!-- Success Indicator -->
+        @if (shouldShowValidation('description') && !getErrorMessage('description')) {
+          <div class="success-message">
+            <span class="success-icon">✓</span>
+            Description is valid
+          </div>
+        }
+
+        <!-- Field Hints -->
+        <small class="form-hint">
+          10-200 characters. Provide a clear description of your project.
+        </small>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="projectForm.invalid && submitted()">
+          Create Project
+        </button>
+      </div>
+
+      <!-- Form Status -->
+      @if (submitted() && projectForm.invalid) {
+        <div class="form-status error">
+          <strong>Form has errors.</strong> Please fix the issues above before submitting.
+        </div>
+      }
+      </form>
+    </div>
+
+    <!-- Right Side: Existing Projects List -->
+    <div class="projects-list-section">
+      <div class="list-header">
+        <h3>Existing Projects</h3>
+        <p class="list-description">
+          These names are already taken. The validator will prevent duplicates.
+        </p>
+      </div>
+
+      @if (projectService.projects().length === 0) {
+        <div class="empty-state">
+          <p>No projects yet. Create your first project!</p>
+        </div>
+      } @else {
+        <div class="projects-list">
+          @for (project of projectService.projects(); track project.id) {
+            <div class="project-item">
+              <div class="project-name-display">
+                <span class="project-name">{{ project.name }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Validation Examples -->
+  <div class="examples-section">
+    <h3>Validation Examples</h3>
+    <div class="examples-grid">
+      <div class="example-card">
+        <h4>✅ Valid Names</h4>
+        <ul>
+          <li><code>New Project</code> (unique)</li>
+          <li><code>E-Commerce Site</code> (unique)</li>
+          <li><code>Dashboard 2024</code> (unique)</li>
+        </ul>
+      </div>
+      <div class="example-card">
+        <h4>❌ Invalid Names (Duplicates)</h4>
+        <ul>
+          <li><code>Project-Alpha</code> (exact match)</li>
+          <li><code>Project-Beta</code> (exact match)</li>
+          <li><code>Project-K</code> (exact match)</li>
+        </ul>
+      </div>
+      <div class="example-card">
+        <h4>📝 Validation Rules</h4>
+        <ul>
+          <li>Case-insensitive comparison (can be lower or upper case)</li>
+          <li>Must be unique</li>
+          <li>Whitespace trimmed</li>
+          <li>3-50 characters required</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
