@@ -824,6 +824,64 @@
           "componentPath": "./challenges/challenge-16-custom-input-cva/components/demo-form/demo-form.component",
           "componentName": "DemoFormComponent"
         }
+      },
+      "server-driven-dynamic-form": {
+        "id": 18,
+        "slug": "server-driven-dynamic-form",
+        "title": "Challenge 18: Server-Driven Dynamic Form",
+        "categoryId": "angular-forms",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 7,
+        "description": "Build a form dynamically from JSON schema with runtime validators, supporting multiple field types (text, email, select, checkbox).",
+        "longDescription": "Master the art of building dynamic forms in Angular by rendering forms from JSON configuration. Learn to construct FormGroups at runtime, implement a validator factory pattern that maps string-based configs to Angular validators, and conditionally render different field types. This pattern is essential for CMS platforms, multi-tenant applications, admin panels, and any scenario where form structure comes from a server. Understand the trade-offs between flexibility and type safety while building truly scalable form systems.",
+        "tags": [
+          "Dynamic Forms",
+          "JSON Schema",
+          "FormBuilder",
+          "Runtime Form Construction",
+          "Validator Factory",
+          "Schema-Driven UI",
+          "Scalability Patterns"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
+          "Understanding of FormBuilder and FormGroup",
+          "Knowledge of Validators and ValidatorFn",
+          "Familiarity with @switch control flow"
+        ],
+        "learningOutcomes": [
+          "Build forms dynamically from JSON configuration",
+          "Implement validator factory pattern for runtime validator mapping",
+          "Map string-based configs to Angular ValidatorFn",
+          "Render different field types conditionally with @switch",
+          "Handle form submission with dynamic structure",
+          "Apply scalability patterns for schema-driven UI",
+          "Understand trade-offs: flexibility vs type safety",
+          "Sort and order fields from schema configuration"
+        ],
+        "requirementList": [
+          "Create FormSchema interface with title, description, fields array.",
+          "Create FieldConfig interface with name, type, label, validators, options.",
+          "Create ValidatorConfig interface with type, value, message.",
+          "Build FormGroup dynamically from JSON schema using FormBuilder.",
+          "Implement validator factory: map string types to ValidatorFn (required, email, minLength, min, max).",
+          "Support field types: text, email, number, select (with options), checkbox.",
+          "Sort fields by order property from schema.",
+          "Render fields conditionally using @switch based on type.",
+          "Display custom error messages from schema configuration.",
+          "Handle form submission and show submitted data."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-18-server-driven-dynamic-form/docs/CH-18-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-18-server-driven-dynamic-form/docs/CH-18-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-18-server-driven-dynamic-form"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-18-server-driven-dynamic-form/components/dynamic-form/dynamic-form.component",
+          "componentName": "DynamicFormComponent"
+        }
       }
     }
   }
