@@ -1,103 +1,587 @@
 # Challenge 15: Date Range Validation - Solution Guide
 
-## 📖 Table of Contents
+## � Quick Overview
 
-1. [Solution Overview](#solution-overview)
-2. [File Structure](#file-structure)
-3. [Step-by-Step Implementation](#step-by-step-implementation)
-4. [Key Patterns & Best Practices](#key-patterns--best-practices)
-5. [Testing Strategy](#testing-strategy)
-6. [Common Pitfalls](#common-pitfalls)
-7. [Extensions & Improvements](#extensions--improvements)
-8. [Key Takeaways](#key-takeaways)
+This challenge focuses on **cross-field validation** - validating the relationship between multiple form fields (start and end dates) at the FormGroup level, not at individual control level.
+
+**Core Concept:** End date must be after start date.
 
 ---
 
-## 📋 Solution Overview
+## 🎯 Step-by-Step Solution
 
-This challenge demonstrates **cross-field validation** in Angular Reactive Forms. Unlike previous challenges where validators checked individual fields in isolation, this challenge validates the **relationship between multiple fields** at the FormGroup level.
+### Step 1: Create the Date Range Validator
 
-### Core Architecture
-
-```
-┌─────────────────────────────────────────┐
-│         LeaveFormComponent              │
-│  ┌───────────────────────────────────┐  │
-│  │        FormGroup                   │  │
-│  │  ┌──────────┐  ┌──────────┐      │  │
-│  │  │startDate │  │ endDate  │      │  │
-│  │  │FormControl│ │FormControl│      │  │
-│  │  └──────────┘  └──────────┘      │  │
-│  │                                    │  │
-│  │  validators: [dateRangeValidator()]│  │
-│  │              ↑                     │  │
-│  │      Validates both controls       │  │
-│  └───────────────────────────────────┘  │
-└─────────────────────────────────────────┘
-```
-
-### Key Difference from Control-Level Validation
-
-| Aspect | Control-Level | **Group-Level (This Challenge)** |
-|--------|---------------|----------------------------------|
-| Applied to | FormControl | **FormGroup** |
-| Receives | FormControl | **AbstractControl (FormGroup)** |
-| Accesses | Own value | **Multiple child controls** |
-| Error on | `control.errors` | **`formGroup.errors`** |
-| Display | `control.hasError()` | **`formGroup.hasError()`** |
-
----
-
-## 📁 File Structure
-
-```
-challenge-15-date-range-validation/
-├── models/
-│   └── leave-request.model.ts           # Interfaces and types
-├── validators/
-│   └── date-range.validator.ts          # Cross-field validator
-├── components/
-│   └── leave-form/
-│       ├── leave-form.component.ts      # Component logic
-│       ├── leave-form.component.html    # Template
-│       ├── leave-form.component.scss    # Styles
-│       └── leave-form.component.spec.ts # Tests
-└── docs/
-    ├── CH-15-REQUIREMENT.md
-    └── CH-15-SOLUTION_GUIDE.md
-```
-
----
-
-## 🔨 Step-by-Step Implementation
-
-### Step 1: Create Models (`leave-request.model.ts`)
-
-Define TypeScript interfaces for type safety:
+**File:** `validators/date-range.validator.ts`
 
 ```typescript
-export type LeaveType = 'vacation' | 'sick' | 'personal' | 'unpaid';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export interface LeaveRequestFormData {
-  leaveType: LeaveType;
-  startDate: string;  // ISO format: YYYY-MM-DD
-  endDate: string;
-  reason: string;
+export function dateRangeValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    // 1. Get the child controls
+    const startDateControl = control.get('startDate');
+    const endDateControl = control.get('endDate');
+
+    const startValue = startDateControl?.value;
+    const endValue = endDateControl?.value;
+
+    // 2. Skip if either field is empty (let required handle it)
+    if (!startValue || !endValue) {
+      return null;
+    }
+
+    // 3. Convert to Date objects
+    const startDate = new Date(startValue);
+    const endDate = new Date(endValue);
+
+    // 4. Validate dates are valid
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      return {
+        invalidDate: {
+          message: 'Invalid date format detected'
+        }
+      };
+    }
+
+    // 5. Check if end date is after start date
+    if (endDate <= startDate) {
+      return {
+        dateRangeInvalid: {
+          message: 'End date must be after start date',
+          startDate: startValue,
+          endDate: endValue
+        }
+      };
+    }
+
+    // 6. Valid - return null
+    return null;
+  };
 }
 
-export interface LeaveRequest extends LeaveRequestFormData {
-  id: number;
-  employeeName: string;
-  status: 'pending' | 'approved' | 'rejected';
-  totalDays: number;
-  submittedAt: Date;
+// Utility function to calculate days between dates
+export function calculateDaysBetween(startDate: string | Date, endDate: string | Date): number {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
+
+  const diffTime = end.getTime() - start.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays + 1; // +1 to include both start and end dates
+}
+```
+
+**Key Points:**
+- ✅ Validator receives `AbstractControl` (the FormGroup)
+- ✅ Use `control.get('fieldName')` to access child controls
+- ✅ Return `null` for empty fields
+- ✅ Use `<=` to catch both reversed and same dates
+
+---
+
+### Step 2: Apply Validator to FormGroup
+
+**File:** `components/leave-form/leave-form.component.ts`
+
+```typescript
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { dateRangeValidator, calculateDaysBetween } from '../../validators/date-range.validator';
+
+@Component({
+  selector: 'app-leave-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './leave-form.component.html'
+})
+export class LeaveFormComponent implements OnInit {
+  leaveForm!: FormGroup;
+  
+  submitted = signal<boolean>(false);
+  private formUpdateTrigger = signal<number>(0);
+  private fb = inject(FormBuilder);
+
+  ngOnInit(): void {
+    this.initializeForm();
+    
+    // Make computed signals reactive to form changes
+    this.leaveForm.valueChanges.subscribe(() => {
+      this.formUpdateTrigger.update(v => v + 1);
+    });
+    
+    this.leaveForm.statusChanges.subscribe(() => {
+      this.formUpdateTrigger.update(v => v + 1);
+    });
+  }
+
+  private initializeForm(): void {
+    this.leaveForm = this.fb.group({
+      leaveType: ['vacation', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      reason: ['', [Validators.required, Validators.minLength(10)]]
+    }, {
+      // ⭐ KEY: Apply cross-field validator at FormGroup level
+      validators: [dateRangeValidator()]
+    });
+  }
+
+  // Computed signals for errors
+  readonly startDateError = computed(() => {
+    this.formUpdateTrigger();
+    const control = this.leaveForm?.get('startDate');
+    if (!control?.errors || !(control.touched || this.submitted())) return null;
+    if (control.errors['required']) return 'Start date is required';
+    return null;
+  });
+
+  readonly endDateError = computed(() => {
+    this.formUpdateTrigger();
+    const control = this.leaveForm?.get('endDate');
+    if (!control?.errors || !(control.touched || this.submitted())) return null;
+    if (control.errors['required']) return 'End date is required';
+    return null;
+  });
+
+  // ⭐ KEY: Check FormGroup for group-level errors
+  readonly groupError = computed(() => {
+    this.formUpdateTrigger();
+    if (!this.leaveForm) return null;
+    
+    const startControl = this.leaveForm.get('startDate');
+    const endControl = this.leaveForm.get('endDate');
+
+    const shouldShow = (startControl?.touched || this.submitted()) &&
+                       (endControl?.touched || this.submitted());
+
+    if (!shouldShow) return null;
+
+    // Check FormGroup errors (not control errors!)
+    if (this.leaveForm.hasError('dateRangeInvalid')) {
+      return this.leaveForm.errors?.['dateRangeInvalid']?.message;
+    }
+
+    return null;
+  });
+
+  readonly totalDays = computed(() => {
+    this.formUpdateTrigger();
+    if (!this.leaveForm) return 0;
+
+    const startDate = this.leaveForm.get('startDate')?.value;
+    const endDate = this.leaveForm.get('endDate')?.value;
+
+    if (startDate && endDate && !this.leaveForm.hasError('dateRangeInvalid')) {
+      return calculateDaysBetween(startDate, endDate);
+    }
+    return 0;
+  });
+
+  onSubmit(): void {
+    this.submitted.set(true);
+
+    if (this.leaveForm.invalid) {
+      Object.keys(this.leaveForm.controls).forEach(key => {
+        this.leaveForm.get(key)?.markAsTouched();
+      });
+      return;
+    }
+
+    console.log('Form submitted:', this.leaveForm.value);
+  }
+}
+```
+
+**Key Points:**
+- ✅ Apply validator in second parameter of `fb.group()`
+- ✅ Use `formUpdateTrigger` signal to make computed signals reactive
+- ✅ Check `this.leaveForm.hasError()` for group-level errors
+- ✅ Don't check control errors for group-level validation
+
+---
+
+### Step 3: Display Errors in Template
+
+**File:** `components/leave-form/leave-form.component.html`
+
+```html
+<form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+  
+  <!-- Start Date -->
+  <div class="form-group">
+    <label for="startDate">Start Date *</label>
+    <input 
+      type="date" 
+      id="startDate" 
+      formControlName="startDate"
+      [class.is-invalid]="startDateError() || groupError()" />
+    
+    @if (startDateError()) {
+      <div class="error-message">{{ startDateError() }}</div>
+    }
+  </div>
+
+  <!-- End Date -->
+  <div class="form-group">
+    <label for="endDate">End Date *</label>
+    <input 
+      type="date" 
+      id="endDate" 
+      formControlName="endDate"
+      [class.is-invalid]="endDateError() || groupError()" />
+    
+    @if (endDateError()) {
+      <div class="error-message">{{ endDateError() }}</div>
+    }
+  </div>
+
+  <!-- ⭐ Group-Level Error (Cross-Field Validation) -->
+  @if (groupError()) {
+    <div class="group-error-message" role="alert">
+      <strong>Date Range Error:</strong>
+      <p>{{ groupError() }}</p>
+    </div>
+  }
+
+  <!-- Total Days Display -->
+  @if (totalDays() > 0 && !groupError()) {
+    <div class="total-days">
+      Total Days: {{ totalDays() }}
+    </div>
+  }
+
+  <button type="submit" [disabled]="leaveForm.invalid">
+    Submit
+  </button>
+</form>
+```
+
+**Key Points:**
+- ✅ Show control errors below each field
+- ✅ Show group error in separate section
+- ✅ Apply invalid styling when either control or group error exists
+- ✅ Hide total days when there's a validation error
+
+---
+
+## 🎯 Key Concepts
+
+### Control-Level vs Group-Level Validation
+
+| Aspect | Control-Level | Group-Level |
+|--------|---------------|-------------|
+| **Applied to** | FormControl | FormGroup |
+| **Validator receives** | FormControl | AbstractControl (FormGroup) |
+| **Access fields** | Own value | Via `control.get('name')` |
+| **Error stored on** | `control.errors` | `formGroup.errors` |
+| **Check error** | `control.hasError('key')` | `formGroup.hasError('key')` |
+
+### When to Use Each
+
+**Use Control-Level Validators:**
+- ✅ Single field rules (required, email, pattern)
+- ✅ Field-specific constraints
+- ✅ Independent validation
+
+**Use Group-Level Validators:**
+- ✅ Relationships between fields (date ranges)
+- ✅ Password confirmation
+- ✅ Conditional validation based on other fields
+
+---
+
+## ⚠️ Common Pitfalls
+
+### ❌ Wrong: Applying to Control
+```typescript
+startDate: ['', [Validators.required, dateRangeValidator()]]  // Won't work!
+```
+
+### ✅ Correct: Applying to FormGroup
+```typescript
+this.fb.group({...}, { validators: [dateRangeValidator()] })
+```
+
+---
+
+### ❌ Wrong: Checking Control for Group Error
+```html
+@if (leaveForm.get('endDate')?.hasError('dateRangeInvalid')) {
+  <!-- Won't find it! -->
+}
+```
+
+### ✅ Correct: Checking FormGroup
+```html
+@if (leaveForm.hasError('dateRangeInvalid')) {
+  {{ leaveForm.errors?.['dateRangeInvalid']?.message }}
+}
+```
+
+---
+
+### ❌ Wrong: Showing Error Too Early
+```typescript
+// Shows error even when end date is empty
+readonly groupError = computed(() => {
+  if (this.leaveForm.hasError('dateRangeInvalid')) {
+    return 'Error';
+  }
+  return null;
+});
+```
+
+### ✅ Correct: Wait for Both Fields to be Touched
+```typescript
+readonly groupError = computed(() => {
+  const shouldShow = startTouched && endTouched;
+  if (!shouldShow) return null;
+  
+  if (this.leaveForm.hasError('dateRangeInvalid')) {
+    return 'Error';
+  }
+  return null;
+});
+```
+
+---
+
+## 🚀 Advanced Solutions
+
+### 1. Making Computed Signals Reactive
+
+**Problem:** Computed signals don't automatically react to form value changes.
+
+**Solution:** Use a trigger signal that updates on form changes.
+
+```typescript
+private formUpdateTrigger = signal<number>(0);
+
+ngOnInit(): void {
+  this.leaveForm.valueChanges.subscribe(() => {
+    this.formUpdateTrigger.update(v => v + 1);
+  });
+  
+  this.leaveForm.statusChanges.subscribe(() => {
+    this.formUpdateTrigger.update(v => v + 1);
+  });
 }
 
-export interface DateRangeValidationError {
-  dateRangeInvalid: {
-    message: string;
-    startDate: string;
-    endDate: string;
+readonly groupError = computed(() => {
+  this.formUpdateTrigger(); // Read trigger to make reactive
+  // ... rest of logic
+});
+```
+
+---
+
+### 2. Maximum Range Validator
+
+Limit the date range to a maximum number of days:
+
+```typescript
+export function maxRangeValidator(maxDays: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const startDate = control.get('startDate')?.value;
+    const endDate = control.get('endDate')?.value;
+    
+    if (!startDate || !endDate) return null;
+    
+    const days = calculateDaysBetween(startDate, endDate);
+    
+    if (days > maxDays) {
+      return {
+        maxRangeExceeded: {
+          message: `Date range cannot exceed ${maxDays} days`,
+          days,
+          maxDays
+        }
+      };
+    }
+    
+    return null;
+  };
+}
+
+// Usage
+this.fb.group({...}, { 
+  validators: [dateRangeValidator(), maxRangeValidator(30)] 
+})
+```
+
+---
+
+### 3. Business Days Calculator
+
+Exclude weekends and holidays from day count:
+
+```typescript
+export function calculateBusinessDays(
+  startDate: string | Date, 
+  endDate: string | Date,
+  holidays: Date[] = []
+): number {
+  let count = 0;
+  const current = new Date(startDate);
+  const end = new Date(endDate);
+  
+  while (current <= end) {
+    const day = current.getDay();
+    const isWeekend = day === 0 || day === 6;
+    const isHoliday = holidays.some(h => 
+      h.toDateString() === current.toDateString()
+    );
+    
+    if (!isWeekend && !isHoliday) {
+      count++;
+    }
+    
+    current.setDate(current.getDate() + 1);
+  }
+  
+  return count;
+}
+```
+
+---
+
+### 4. Dynamic Validation Based on Leave Type
+
+```typescript
+export function leaveTypeLimitValidator(leaveTypes: LeaveTypeConfig[]): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const leaveType = control.get('leaveType')?.value;
+    const startDate = control.get('startDate')?.value;
+    const endDate = control.get('endDate')?.value;
+    
+    if (!startDate || !endDate) return null;
+    
+    const days = calculateDaysBetween(startDate, endDate);
+    const config = leaveTypes.find(t => t.value === leaveType);
+    
+    if (config?.maxDays && days > config.maxDays) {
+      return {
+        leaveTypeLimitExceeded: {
+          message: `${config.label} allows maximum ${config.maxDays} days`,
+          days,
+          maxDays: config.maxDays
+        }
+      };
+    }
+    
+    return null;
+  };
+}
+```
+
+---
+
+### 5. Async Balance Check Validator
+
+```typescript
+export function leaveBalanceValidator(
+  checkBalance: (leaveType: string, days: number) => Observable<boolean>
+): AsyncValidatorFn {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    const leaveType = control.get('leaveType')?.value;
+    const startDate = control.get('startDate')?.value;
+    const endDate = control.get('endDate')?.value;
+    
+    if (!startDate || !endDate) {
+      return of(null);
+    }
+    
+    const days = calculateDaysBetween(startDate, endDate);
+    
+    return checkBalance(leaveType, days).pipe(
+      map(hasBalance => {
+        if (!hasBalance) {
+          return {
+            insufficientBalance: {
+              message: `Insufficient leave balance for ${days} days`
+            }
+          };
+        }
+        return null;
+      }),
+      debounceTime(300),
+      catchError(() => of(null))
+    );
+  };
+}
+```
+
+---
+
+### 6. Generic Error Handling Pattern
+
+For scaling to many controls:
+
+```typescript
+// Configuration
+private readonly FIELD_CONFIG = {
+  startDate: { label: 'Start date', messages: { required: 'Start date is required' } },
+  endDate: { label: 'End date', messages: { required: 'End date is required' } }
+} as const;
+
+// Generic helper
+private getErrorMessage(fieldName: keyof typeof this.FIELD_CONFIG): string | null {
+  const control = this.leaveForm.get(fieldName);
+  const config = this.FIELD_CONFIG[fieldName];
+  
+  if (!control?.errors || !(control.touched || this.submitted())) {
+    return null;
+  }
+  
+  const errorKey = Object.keys(control.errors)[0];
+  return config.messages[errorKey] || `${config.label} is invalid`;
+}
+
+// One-liner error signals
+readonly startDateError = computed(() => this.getErrorMessage('startDate'));
+readonly endDateError = computed(() => this.getErrorMessage('endDate'));
+```
+
+---
+
+## ✅ Testing Checklist
+
+- [ ] ✅ End date after start date → Valid
+- [ ] ✅ End date before start date → Invalid (dateRangeInvalid)
+- [ ] ✅ End date equals start date → Invalid (same day)
+- [ ] ✅ Empty start date → No cross-field error (required handles it)
+- [ ] ✅ Empty end date → No cross-field error
+- [ ] ✅ Invalid date format → Invalid (invalidDate)
+- [ ] ✅ Error shows only when both fields touched
+- [ ] ✅ Total days calculation is correct
+- [ ] ✅ Form submission blocked when invalid
+- [ ] ✅ Error messages are clear and actionable
+
+---
+
+## 🎓 Key Takeaways
+
+1. **Cross-field validators go on FormGroup**, not FormControl
+2. **Access controls via `control.get('name')`** inside validator
+3. **Return `null` for empty fields** - let required handle them
+4. **Check `formGroup.hasError()`** for group-level errors
+5. **Use `formUpdateTrigger` signal** to make computed signals reactive
+6. **Show group errors only when all related fields are touched**
+7. **Use `computed()` signals instead of methods** for better performance
+
+---
+
+## 📚 Resources
+
+- [Angular Reactive Forms Documentation](https://angular.io/guide/reactive-forms)
+- [Form Validation Guide](https://angular.io/guide/form-validation)
+- [Signals Documentation](https://angular.io/guide/signals)
+
+---
   };
 }
 
@@ -661,83 +1145,6 @@ if (endDate < startDate) {
 
 ---
 
-## 🧪 Testing Strategy
-
-### Unit Tests for Validator
-
-```typescript
-describe('dateRangeValidator', () => {
-  let form: FormGroup;
-
-  beforeEach(() => {
-    form = new FormGroup({
-      startDate: new FormControl(''),
-      endDate: new FormControl('')
-    }, { validators: [dateRangeValidator()] });
-  });
-
-  it('should be valid when end date is after start date', () => {
-    form.patchValue({
-      startDate: '2025-01-15',
-      endDate: '2025-01-20'
-    });
-    
-    expect(form.hasError('dateRangeInvalid')).toBeFalsy();
-    expect(form.valid).toBeTruthy();
-  });
-
-  it('should be invalid when end date equals start date', () => {
-    form.patchValue({
-      startDate: '2025-01-15',
-      endDate: '2025-01-15'
-    });
-    
-    expect(form.hasError('dateRangeInvalid')).toBeTruthy();
-  });
-
-  it('should not show error when fields are empty', () => {
-    form.patchValue({
-      startDate: '',
-      endDate: ''
-    });
-    
-    expect(form.hasError('dateRangeInvalid')).toBeFalsy();
-  });
-});
-```
-
-### Component Tests
-
-```typescript
-describe('LeaveFormComponent', () => {
-  it('should show group error only when both dates touched', () => {
-    component.leaveForm.patchValue({
-      startDate: '2025-01-20',
-      endDate: '2025-01-15'
-    });
-    
-    // Neither touched
-    expect(component.shouldShowGroupError()).toBeFalsy();
-    
-    // Both touched
-    component.leaveForm.get('startDate')?.markAsTouched();
-    component.leaveForm.get('endDate')?.markAsTouched();
-    expect(component.shouldShowGroupError()).toBeTruthy();
-  });
-
-  it('should calculate total days correctly', () => {
-    component.leaveForm.patchValue({
-      startDate: '2025-01-15',
-      endDate: '2025-01-20'
-    });
-    
-    expect(component.totalDays()).toBe(6);  // Inclusive
-  });
-});
-```
-
----
-
 ## ⚠️ Common Pitfalls
 
 ### 1. Applying Validator to Wrong Level
@@ -761,20 +1168,6 @@ this.fb.group({...}, { validators: [dateRangeValidator()] })
 <!-- ✅ CORRECT -->
 @if (leaveForm.hasError('dateRangeInvalid')) {
   <div>{{ leaveForm.errors?.['dateRangeInvalid']?.message }}</div>
-}
-```
-
-### 3. Showing Error Too Early
-
-```typescript
-// ❌ WRONG: Show immediately
-shouldShowGroupError(): boolean {
-  return !!this.getGroupErrorMessage();
-}
-
-// ✅ CORRECT: Show only after both fields touched
-shouldShowGroupError(): boolean {
-  return bothFieldsTouched && !!this.getGroupErrorMessage();
 }
 ```
 
@@ -1023,31 +1416,5 @@ Group Errors (Multi-Field)
    - Test all edge cases thoroughly
    - Verify error display timing
    - Check form submission behavior
-
 ---
 
-## 📚 Related Resources
-
-- [Angular Reactive Forms Documentation](https://angular.io/guide/reactive-forms)
-- [Custom Validators Guide](https://angular.io/guide/form-validation#custom-validators)
-- [Form Validation Best Practices](https://angular.io/guide/form-validation)
-
----
-
-**Challenge 15 Complete!** 🎉
-
-You've mastered cross-field validation in Angular Reactive Forms. This pattern is essential for building robust, user-friendly forms that enforce complex business rules and relationships between fields.
-
-**Next Steps:**
-
-- Explore async cross-field validation (e.g., checking leave balance with API)
-- Combine multiple group-level validators
-- Build forms with nested FormGroups and cross-validation
-- Implement dynamic validation based on user roles or business context
-
----
-
-**Difficulty**: Advanced  
-**Estimated Time**: 60-90 minutes  
-**Category**: Angular Forms  
-**Skills Learned**: Cross-Field Validation, FormGroup Validators, Date Handling, Business Rules

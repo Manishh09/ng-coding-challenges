@@ -9,6 +9,7 @@ Build a **leave request form** where the **end date must be after the start date
 ## 🎯 Requirements
 
 ### Form Fields (4 fields)
+
 1. **Leave Type** (dropdown): Required, pre-populated options
 2. **Start Date** (date input): Required  
 3. **End Date** (date input): Required, must be after start date
@@ -17,10 +18,12 @@ Build a **leave request form** where the **end date must be after the start date
 ### Validation Rules
 
 **Individual Field Validation:**
+
 - All fields required
 - Reason minimum 10 characters
 
 **Cross-Field Validation (Core Focus):**
+
 - End date must be **after** start date (not equal)
 - Implement at **FormGroup level**, not control level
 - Show error only when both date fields are touched
@@ -39,6 +42,7 @@ if (leaveForm.hasError('dateRangeInvalid')) { }
 ### UI Requirements
 
 **Simple single-column layout with:**
+
 - Form fields stacked vertically
 - Error messages below each field
 - Group error displayed between date fields (distinct styling)
@@ -47,7 +51,8 @@ if (leaveForm.hasError('dateRangeInvalid')) { }
 
 ## 🔍 Expected Output
 
-### Valid Form:
+### Valid Form
+
 ```
 Leave Type: Vacation
 Start Date: 2025-01-15
@@ -57,7 +62,8 @@ Total Days: 6 days ✓
 [Submit] Enabled
 ```
 
-### Invalid Range (Group Error):
+### Invalid Range (Group Error)
+
 ```
 Start Date: 2025-01-20
 End Date: 2025-01-15
@@ -77,14 +83,16 @@ Test these scenarios to validate your implementation:
 4. **Empty Fields:** One or both dates empty → No group error
 5. **Untouched Fields:** No errors shown initially
 
-4. **Reversed Range:**
+6. **Reversed Range:**
+
    ```typescript
    startDate: '2025-01-20'
    endDate: '2025-01-15'
    // Should show group error: "End date must be after start date"
    ```
 
-5. **Exceeds Type Limit:**
+7. **Exceeds Type Limit:**
+
    ```typescript
    leaveType: 'vacation' (max 30 days)
    days: 36
@@ -96,6 +104,7 @@ Test these scenarios to validate your implementation:
 ### 1. FormGroup-Level Validators vs Control-Level Validators
 
 **Control-Level (Challenge 13, 14):**
+
 ```typescript
 // Applied to individual FormControl
 email: ['', [Validators.required], [emailAvailabilityValidator()]]
@@ -106,12 +115,14 @@ email: ['', [Validators.required], [emailAvailabilityValidator()]]
 ## 📚 Key Concept: FormGroup vs Control Validators
 
 ### Control-Level Validation (Previous Challenges)
+
 ```typescript
 // Applied to individual FormControl
 email: ['', [Validators.required], [asyncValidator()]]
 ```
 
 ### Group-Level Validation (This Challenge)
+
 ```typescript
 // Applied to entire FormGroup
 this.fb.group({
@@ -131,58 +142,6 @@ this.fb.group({
 | Validates | Single field | Multiple fields |
 | Error location | `control.errors` | `formGroup.errors` |
 | Check with | `control.hasError()` | `formGroup.hasError()` |
-
-## 🔧 Implementation Guide
-
-### 1. Validator Function
-```typescript
-export function dateRangeValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    // Get child controls from FormGroup
-    const startDate = control.get('startDate')?.value;
-    const endDate = control.get('endDate')?.value;
-    
-    // Skip if empty (required validator handles this)
-    if (!startDate || !endDate) return null;
-    
-    // Compare dates
-    if (new Date(endDate) <= new Date(startDate)) {
-      return {
-        dateRangeInvalid: {
-          message: 'End date must be after start date'
-        }
-      };
-    }
-    
-    return null;
-  };
-}
-```
-
-### 2. Component Registration
-```typescript
-this.leaveForm = this.fb.group({
-  leaveType: ['vacation', [Validators.required]],
-  startDate: ['', [Validators.required]],
-  endDate: ['', [Validators.required]],
-  reason: ['', [Validators.required, Validators.minLength(10)]]
-}, {
-  validators: [dateRangeValidator()]  // ← FormGroup level
-});
-```
-
-### 3. Template Display
-```html
-<!-- Group error check -->
-@if (leaveForm.hasError('dateRangeInvalid') && bothDatesTouched) {
-  <div class="error">
-    {{ leaveForm.errors?.['dateRangeInvalid']?.message }}
-  </div>
-}
-
-<!-- Submit button -->
-<button [disabled]="leaveForm.invalid">Submit</button>
-```
 
 ## ✅ Success Criteria
 
