@@ -701,6 +701,69 @@
         "componentPath": "./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component",
         "componentName": "LeaveFormComponent"
       }
+    },
+    "dynamic-form-array": {
+      "id": 16,
+      "slug": "dynamic-form-array",
+      "title": "Challenge 16: Dynamic FormArray (Experience Section)",
+      "categoryId": "angular-forms",
+      "difficulty": "Intermediate",
+      "enabled": true,
+      "order": 5,
+      "description": "Create a dynamic work experience form using FormArray where users can add/remove multiple experience entries with nested FormGroups.",
+      "longDescription": "Master dynamic form structures in Angular by implementing FormArray for managing variable-length lists of form controls. This challenge teaches you how to dynamically add and remove form entries, handle nested FormGroups within FormArray, implement array constraints, and build reusable factory patterns for creating form structures. Essential patterns for building scalable forms like job applications, shopping carts, or any scenario requiring dynamic form entries.",
+      "tags": [
+        "FormArray",
+        "Dynamic Forms",
+        "Nested FormGroups",
+        "Factory Pattern",
+        "Array Constraints",
+        "Add/Remove Operations",
+        "Computed Signals"
+      ],
+      "estimatedTime": "40-50 minutes",
+      "prerequisites": [
+        "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
+        "Understanding of FormBuilder and FormGroup",
+        "Familiarity with Angular control flow (@for)",
+        "Basic TypeScript array operations"
+      ],
+      "learningOutcomes": [
+        "Create and manage FormArray for dynamic form controls",
+        "Implement nested FormGroups within FormArray",
+        "Build factory methods for consistent FormGroup creation",
+        "Handle dynamic add/remove operations on form arrays",
+        "Apply array length constraints (min/max entries)",
+        "Access nested controls with at() and get() methods",
+        "Iterate over FormArray controls in templates with @for",
+        "Use computed signals for reactive calculations across array entries",
+        "Implement proper type casting for FormArray",
+        "Handle form validation across all array entries"
+      ],
+      "requirementList": [
+        "Create FormArray named 'experiences' containing nested FormGroups.",
+        "Each FormGroup has fields: company (2-100 chars), role (2-50 chars), years (0.5-50).",
+        "Start with 1 empty experience entry (minimum requirement).",
+        "Implement Add Experience button (max 5 entries, disabled when at limit).",
+        "Implement Remove button per entry (min 1 entry, disabled at minimum).",
+        "Create factory method createExperienceGroup() for consistent structure.",
+        "Use getter with type casting: get experiences(): FormArray.",
+        "Display entry counter showing current count (e.g., '2 of 5 entries').",
+        "Calculate total years across all experiences using computed signal.",
+        "Show validation errors for each field in each entry.",
+        "Use formArrayName and [formGroupName]='i' in template.",
+        "Iterate with @for over experiences.controls with track $index.",
+        "Mark all nested controls as touched on invalid submission."
+      ],
+      "links": {
+        "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-REQUIREMENTS.md",
+        "solution": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-SOLUTION_GUIDE.md",
+        "github": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array"
+      },
+      "workspace": {
+        "componentPath": "./challenges/challenge-16-dynamic-form-array/components/experience-form/experience-form.component",
+        "componentName": "ExperienceFormComponent"
+      }
     }
   }
 }

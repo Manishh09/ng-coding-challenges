@@ -19,6 +19,9 @@ const CHALLENGE_COMPONENTS = {
   'date-range-validation': () =>
     import('./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component')
       .then(m => m.LeaveFormComponent),
+  'dynamic-form-array': () =>
+    import('./challenges/challenge-16-dynamic-form-array/components/experience-form/experience-form.component')
+      .then(m => m.ExperienceFormComponent),
 };
 
 /**

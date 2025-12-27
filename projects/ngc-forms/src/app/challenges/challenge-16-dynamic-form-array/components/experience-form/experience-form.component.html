@@ -1,0 +1,207 @@
+<div class="experience-form-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <h1>Work Experience</h1>
+    <p class="subtitle">Add your professional experience (minimum 1, maximum 5 entries)</p>
+  </div>
+
+  <!-- Success Message -->
+  @if (showSuccessMessage()) {
+    <div class="success-message" role="alert">
+      <div class="success-icon">✓</div>
+      <div class="success-content">
+        <h3>Success!</h3>
+        <p>{{ successMessage() }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Main Content -->
+  <div class="content-grid">
+
+    <!-- Left Column: Experience Form -->
+    <div class="form-section">
+      <div class="card">
+        <div class="card-header">
+          <h2>Professional Experience</h2>
+          <span class="entry-counter">
+            {{ experiences.length }} of 5 entries
+          </span>
+        </div>
+
+        <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- FormArray: Dynamic Experience Entries -->
+          <div formArrayName="experiences" class="experiences-list">
+
+            @for (exp of experiences.controls; track $index; let i = $index) {
+              <div [formGroupName]="i" class="experience-entry">
+
+                <!-- Entry Header -->
+                <div class="entry-header">
+                  <h3>Experience {{ i + 1 }}</h3>
+                  <button
+                    type="button"
+                    (click)="removeExperience(i)"
+                    [disabled]="!canRemove()"
+                    class="btn-remove"
+                    [attr.aria-label]="'Remove experience ' + (i + 1)">
+                    <span class="icon">x</span>
+                    Remove
+                  </button>
+                </div>
+
+                <div class="entry-fields">
+
+                  <!-- Company Field -->
+                  <div class="form-group">
+                    <label [for]="'company-' + i" class="form-label">
+                      Company <span class="required">*</span>
+                    </label>
+                    <input
+                      [id]="'company-' + i"
+                      type="text"
+                      formControlName="company"
+                      class="form-control"
+                      placeholder="e.g., Google, Microsoft"
+                      [class.is-invalid]="shouldShowError(i, 'company')" />
+
+                    @if (getErrorMessage(i, 'company'); as errorMsg) {
+                      <div class="error-message">
+                        {{ errorMsg }}
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Role Field -->
+                  <div class="form-group">
+                    <label [for]="'role-' + i" class="form-label">
+                      Role <span class="required">*</span>
+                    </label>
+                    <input
+                      [id]="'role-' + i"
+                      type="text"
+                      formControlName="role"
+                      class="form-control"
+                      placeholder="e.g., Senior Developer, Tech Lead"
+                      />
+
+                    @if (getErrorMessage(i, 'role'); as errorMsg) {
+                      <div class="error-message">
+                        {{ errorMsg }}
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Years Field -->
+                  <div class="form-group">
+                    <label [for]="'years-' + i" class="form-label">
+                      Years <span class="required">*</span>
+                    </label>
+                    <input
+                      [id]="'years-' + i"
+                      type="number"
+                      step="0.5"
+                      formControlName="years"
+                      class="form-control"
+                      placeholder="e.g., 2.5"
+                      />
+
+                    @if (getErrorMessage(i, 'years'); as errorMsg) {
+                      <div class="error-message">
+                        {{ errorMsg }}
+                      </div>
+                    }
+
+                    <small class="form-hint">Use decimals for months (e.g., 2.5 for 2 years 6 months)</small>
+                  </div>
+
+                </div>
+              </div>
+            }
+
+          </div>
+
+          <!-- Add Experience Button -->
+          <div class="add-button-container">
+            <button
+              type="button"
+              (click)="addExperience()"
+              [disabled]="!canAdd()"
+              class="btn-add">
+              <span class="icon">+</span>
+              Add Experience
+            </button>
+
+            @if (!canAdd()) {
+              <small class="form-hint">Maximum 5 entries reached</small>
+            }
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button
+              type="button"
+              (click)="onReset()"
+              class="btn-secondary">
+              Reset
+            </button>
+
+            <button
+              type="submit"
+              [disabled]="experienceForm.invalid"
+              class="btn-primary">
+              Submit Experience
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- Right Column: Information Panel -->
+    <div class="info-section">
+      <div class="card info-card">
+        <h3>📝 Challenge Requirements</h3>
+        <ul class="requirements-list">
+          <li>
+            <span class="check">✓</span>
+            Minimum 1 experience entry
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Maximum 5 experience entries
+          </li>
+          <li>
+            <span class="check">✓</span>
+            All fields are required
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Company: 2-100 characters
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Role: 2-50 characters
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Years: 0.5-50 years
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tips Card -->
+      <div class="card tips-card">
+        <h3>💡 Tips</h3>
+        <ul>
+          <li>Add your most recent experience first</li>
+          <li>Use decimal years for precise duration (e.g., 2.5 for 2 years 6 months)</li>
+          <li>Include internships and contract work</li>
+          <li>You can add up to 5 experiences</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
