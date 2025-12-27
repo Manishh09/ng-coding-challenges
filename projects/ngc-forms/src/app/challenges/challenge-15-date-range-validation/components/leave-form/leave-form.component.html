@@ -45,9 +45,9 @@
                 </option>
               }
             </select>
-            @if (leaveTypeError()) {
+            @if (getLeaveTypeError(); as errorMsg) {
               <div class="error-message">
-                {{ leaveTypeError() }}
+                {{ errorMsg }}
               </div>
             }
           </div>
@@ -63,9 +63,9 @@
               formControlName="startDate"
               class="form-control" />
 
-            @if (startDateError()) {
+            @if (getStartDateError(); as errorMsg) {
               <div class="error-message">
-                {{ startDateError() }}
+                {{ errorMsg }}
               </div>
             }
           </div>
@@ -81,31 +81,31 @@
               formControlName="endDate"
               class="form-control" />
 
-            @if (endDateError()) {
+            @if (getEndDateError(); as errorMsg) {
               <div class="error-message">
-                {{ endDateError() }}
+                {{ errorMsg }}
               </div>
             }
           </div>
 
           <!-- Cross-Field Validation Error (FormGroup Level) -->
-          @if (groupError()) {
+          @if (getGroupError(); as errorMsg) {
             <div class="group-error-message" role="alert">
               <div class="error-icon">⚠</div>
               <div class="error-content">
                 <strong>Date Range Error:</strong>
-                <p>{{ groupError() }}</p>
+                <p>{{ errorMsg }}</p>
               </div>
             </div>
           }
 
           <!-- Max Days Warning (Business Rule) -->
-          @if (maxDaysWarning()) {
+          @if (getMaxDaysWarning(); as warningMsg) {
             <div class="group-error-message" role="alert" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;">
               <div class="error-icon" style="color: #f59e0b;">⚠</div>
               <div class="error-content">
                 <strong style="color: #92400e;">Leave Type Limit Exceeded:</strong>
-                <p style="color: #92400e;">{{ maxDaysWarning() }}</p>
+                <p style="color: #92400e;">{{ warningMsg }}</p>
               </div>
             </div>
           }
@@ -123,12 +123,12 @@
               placeholder="Provide a detailed reason for your leave request (minimum 10 characters)"></textarea>
 
             <div class="character-count">
-              {{ characterCount() }} / 500 characters
+              {{ getCharacterCount() }} / 500 characters
             </div>
 
-            @if (reasonError()) {
+            @if (getReasonError(); as errorMsg) {
               <div class="error-message">
-                {{ reasonError() }}
+                {{ errorMsg }}
               </div>
             }
           </div>
