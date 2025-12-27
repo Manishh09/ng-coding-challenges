@@ -16,6 +16,9 @@ const CHALLENGE_COMPONENTS = {
   'email-availability-check': () =>
     import('./challenges/challenge-14-email-availability-check/components/email-form/email-form.component')
       .then(m => m.EmailFormComponent),
+  'date-range-validation': () =>
+    import('./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component')
+      .then(m => m.LeaveFormComponent),
 };
 
 /**
