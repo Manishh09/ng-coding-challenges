@@ -642,6 +642,65 @@
         "componentPath": "./challenges/challenge-14-email-availability-check/components/email-form/email-form.component",
         "componentName": "EmailFormComponent"
       }
+    },
+    "date-range-validation": {
+      "id": 15,
+      "slug": "date-range-validation",
+      "title": "Challenge 15: Date Range Validation (Cross-Field Validator)",
+      "categoryId": "angular-forms",
+      "difficulty": "Advanced",
+      "enabled": true,
+      "order": 4,
+      "description": "Build a leave request form with cross-field date range validation ensuring end date is after start date, demonstrating FormGroup-level validators.",
+      "longDescription": "Advance your Angular forms expertise by mastering cross-field validation patterns. Unlike individual field validators, this challenge teaches you to validate relationships between multiple fields at the FormGroup level. Learn to implement date range validation where the end date must be after the start date, handle edge cases, calculate derived values, and display group-level errors separately from control-level errors. Essential patterns for real-world forms.",
+      "tags": [
+        "Cross-Field Validation",
+        "FormGroup Validators",
+        "Date Validation",
+        "ValidatorFn",
+        "Leave Management",
+        "Group Errors",
+        "Computed Values"
+      ],
+      "estimatedTime": "60-90 minutes",
+      "prerequisites": [
+        "Completed Challenge 12, 13, or equivalent ReactiveFormsModule experience",
+        "Understanding of FormBuilder and FormGroup",
+        "Knowledge of ValidatorFn vs AsyncValidatorFn",
+        "Familiarity with HTML5 date inputs"
+      ],
+      "learningOutcomes": [
+        "Implement FormGroup-level validators vs control-level validators",
+        "Validate relationships between multiple form fields",
+        "Access multiple controls within a validator function",
+        "Display FormGroup errors separately from control errors",
+        "Handle date comparisons and calculations in validators",
+        "Implement conditional error display (show only when both fields touched)",
+        "Calculate derived values (total days) from form data",
+        "Apply business rules (maximum days per leave type)",
+        "Use native HTML5 date inputs with proper formatting"
+      ],
+      "requirementList": [
+        "Create a dateRangeValidator function returning ValidatorFn for FormGroup.",
+        "Implement leave request form with fields: leave type, start date, end date, reason.",
+        "Apply cross-field validator at FormGroup level (not control level).",
+        "Access controls via control.get('fieldName') within validator.",
+        "Return group error: { dateRangeInvalid: { message, startDate, endDate } }.",
+        "Display group error only when both date fields are touched.",
+        "Calculate and display total leave days from valid date range.",
+        "Implement leave type limits (vacation: 30 days, sick: 15 days, personal: 10 days, unpaid: unlimited).",
+        "Show warning if selected days exceed leave type maximum.",
+        "Use HTML5 <input type='date'> for native date pickers."
+      ],
+      "links": {
+        "requirement": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-REQUIREMENT.md",
+        "solution": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-SOLUTION_GUIDE.md",
+        "github": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation"
+      },
+      "workspace": {
+        "componentPath": "./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component",
+        "componentName": "LeaveFormComponent"
+      }
     }
   }
 }
