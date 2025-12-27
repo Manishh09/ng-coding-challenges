@@ -1,0 +1,14 @@
+<div class="custom-input-wrapper">
+  @if (label) {
+    <label class="input-label">{{ label }}</label>
+  }
+
+  <input
+    class="input-field"
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    (input)="onInputChange($event)"
+    (blur)="onInputBlur()" />
+</div>

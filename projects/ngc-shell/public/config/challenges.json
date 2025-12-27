@@ -12,759 +12,819 @@
       "fetch-products": {
         "id": 1,
         "slug": "fetch-products",
-      "title": "Challenge 01: Fetch Products",
-      "categoryId": "rxjs-api",
-      "difficulty": "Beginner",
-      "enabled": true,
-      "order": 1,
-      "description": "Fetch product data from a fake API and display it in a table using Angular's HttpClient and RxJS.",
-      "longDescription": "This challenge introduces you to Angular's HttpClient module and RxJS observables. You'll learn how to fetch data from a REST API and display it in a structured format. This is a fundamental skill for any Angular developer working with backend services.",
-      "tags": [
-        "HttpClient",
-        "API",
-        "RxJS",
-        "Observables"
-      ],
-      "estimatedTime": "30-45 minutes",
-      "prerequisites": [
-        "Basic Angular knowledge",
-        "TypeScript fundamentals"
-      ],
-      "learningOutcomes": [
-        "Set up HttpClient in Angular standalone applications",
-        "Make GET requests to REST APIs",
-        "Handle observables with async pipe",
-        "Display API data in tables",
-        "Implement loading and error states"
-      ],
-      "requirementList": [
-        "Create a service using HttpClient to fetch products from the Fake Store API endpoint: https://fakestoreapi.com/products.",
-        "Develop a component to display the list of products in a table format with columns for Product Name, Price, and Category.",
-        "Implement loading indicators while fetching data and error handling for failed requests."
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-01-product-list/docs/CH-01-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-01-product-list/docs/CH-01-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-01-product-list"
+        "title": "Challenge 01: Fetch Products",
+        "categoryId": "rxjs-api",
+        "difficulty": "Beginner",
+        "enabled": true,
+        "order": 1,
+        "description": "Fetch product data from a fake API and display it in a table using Angular's HttpClient and RxJS.",
+        "longDescription": "This challenge introduces you to Angular's HttpClient module and RxJS observables. You'll learn how to fetch data from a REST API and display it in a structured format. This is a fundamental skill for any Angular developer working with backend services.",
+        "tags": [
+          "HttpClient",
+          "API",
+          "RxJS",
+          "Observables"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Basic Angular knowledge",
+          "TypeScript fundamentals"
+        ],
+        "learningOutcomes": [
+          "Set up HttpClient in Angular standalone applications",
+          "Make GET requests to REST APIs",
+          "Handle observables with async pipe",
+          "Display API data in tables",
+          "Implement loading and error states"
+        ],
+        "requirementList": [
+          "Create a service using HttpClient to fetch products from the Fake Store API endpoint: https://fakestoreapi.com/products.",
+          "Develop a component to display the list of products in a table format with columns for Product Name, Price, and Category.",
+          "Implement loading indicators while fetching data and error handling for failed requests."
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-01-product-list/docs/CH-01-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-01-product-list/docs/CH-01-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-01-product-list"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-01-product-list/components/product-list/product-list.component",
+          "componentName": "ProductListComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-01-product-list/components/product-list/product-list.component",
-        "componentName": "ProductListComponent"
+      "handle-parallel-apis": {
+        "id": 2,
+        "slug": "handle-parallel-apis",
+        "title": "Challenge 02: Dashboard Data - Parallel API Calls",
+        "categoryId": "rxjs-api",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 2,
+        "description": "Perform parallel API calls in Angular using RxJS's forkJoin and display combined dashboard data.",
+        "longDescription": "Master parallel API calls using RxJS's forkJoin operator. This challenge simulates a real-world dashboard scenario where you need to fetch data from multiple endpoints simultaneously and combine the results efficiently.",
+        "tags": [
+          "forkJoin",
+          "Parallel APIs",
+          "RxJS"
+        ],
+        "estimatedTime": "45-60 minutes",
+        "prerequisites": [
+          "Challenge 01 completed",
+          "Understanding of Observables"
+        ],
+        "learningOutcomes": [
+          "Use forkJoin for parallel API calls",
+          "Combine multiple observable streams",
+          "Handle loading states for multiple requests",
+          "Manage errors in parallel operations",
+          "Optimize API call performance"
+        ],
+        "requirementList": [
+          "Fetch product statistics from /products/stats endpoint.",
+          "Fetch recent orders from /orders/recent endpoint.",
+          "Fetch user activity data from /users/activity endpoint.",
+          "Combine all fetched data and display in a unified dashboard view."
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-02-parallel-apis/docs/CH-02-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-02-parallel-apis/docs/CH-02-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-02-parallel-apis"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component",
+          "componentName": "DashboardComponent"
+        }
+      },
+      "client-side-search": {
+        "id": 3,
+        "slug": "client-side-search",
+        "title": "Challenge 03: Client-Side User Search",
+        "categoryId": "rxjs-api",
+        "difficulty": "Beginner",
+        "enabled": true,
+        "order": 3,
+        "description": "Implement a client-side search using Angular Reactive Forms and RxJS with dummy user data.",
+        "longDescription": "Build a client-side search feature using Angular Reactive Forms and RxJS operators. Learn how to filter data efficiently without making API calls for every keystroke.",
+        "tags": [
+          "Reactive Forms",
+          "Search",
+          "Filtering"
+        ],
+        "estimatedTime": "40-50 minutes",
+        "prerequisites": [
+          "Reactive Forms basics",
+          "Array manipulation in JavaScript"
+        ],
+        "learningOutcomes": [
+          "Create reactive forms in Angular",
+          "Implement client-side filtering",
+          "Use RxJS operators for search optimization",
+          "Handle form value changes reactively",
+          "Build responsive search interfaces"
+        ],
+        "requirementList": [
+          "Implement a search form using Angular Reactive Forms.",
+          "Fetch product data from the API based on user input.",
+          "Debounce user input to optimize API calls.",
+          "Display search results in real-time as the user types."
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-03-client-side-search/docs/CH-03-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-03-client-side-search/docs/CH-03-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-03-client-side-search"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-03-client-side-search/components/client-side-search/client-side-search.component",
+          "componentName": "ClientSideSearchComponent"
+        }
+      },
+      "server-side-search": {
+        "id": 4,
+        "slug": "server-side-search",
+        "title": "Challenge 04: Server-Side User Search (AutoComplete)",
+        "categoryId": "rxjs-api",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 4,
+        "description": "Implement a server-side search (auto-complete) using Angular Reactive Forms and RxJS with an API backend.",
+        "longDescription": "Implement a professional autocomplete search feature that queries a backend API. Learn critical RxJS operators like debounceTime, distinctUntilChanged, and switchMap to create a performant search experience.",
+        "tags": [
+          "AutoComplete",
+          "debounceTime",
+          "switchMap",
+          "API"
+        ],
+        "estimatedTime": "60-75 minutes",
+        "prerequisites": [
+          "Challenge 03 completed",
+          "Understanding of RxJS operators"
+        ],
+        "learningOutcomes": [
+          "Implement debounced search queries",
+          "Use switchMap for request cancellation",
+          "Handle rapid user input efficiently",
+          "Create autocomplete UI components",
+          "Optimize API call frequency"
+        ],
+        "requirementList": [
+          "Implement a search form using Angular Reactive Forms.",
+          "Fetch product data from the API based on user input.",
+          "Debounce user input to optimize API calls.",
+          "Display search results in real-time as the user types."
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-04-server-side-search/docs/CH-04-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-04-server-side-search/docs/CH-04-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-04-server-side-search"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component",
+          "componentName": "ServerSideSearchComponent"
+        }
+      },
+      "product-category-management": {
+        "id": 5,
+        "slug": "product-category-management",
+        "title": "Challenge 05: Product Category Management - shareReplay",
+        "categoryId": "rxjs-api",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 5,
+        "description": "Build a product category management system where multiple components share category data using Signals and RxJS shareReplay.",
+        "longDescription": "Build a product category management system that demonstrates efficient data sharing between components. Learn how to use shareReplay to cache API responses and Angular Signals for reactive state management.",
+        "tags": [
+          "shareReplay",
+          "Caching",
+          "Signals"
+        ],
+        "estimatedTime": "60-90 minutes",
+        "prerequisites": [
+          "Understanding of Signals",
+          "RxJS multicasting concepts"
+        ],
+        "learningOutcomes": [
+          "Implement data caching with shareReplay",
+          "Share data across multiple components",
+          "Integrate Angular Signals with RxJS",
+          "Optimize API call performance",
+          "Build reactive component architectures"
+        ],
+        "requirementList": [
+          "Implement data caching with shareReplay",
+          "Share data across multiple components",
+          "Integrate Angular Signals with RxJS",
+          "Optimize API call performance",
+          "Build reactive component architectures"
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-05-product-category-management-system/components/product-category-dashboard/product-category-dashboard.component",
+          "componentName": "ProductCategoryDashboardComponent"
+        }
+      },
+      "user-todos-filter": {
+        "id": 6,
+        "slug": "user-todos-filter",
+        "title": "Challenge 06: User Todos with Status Filter - combineLatest",
+        "categoryId": "rxjs-api",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 6,
+        "description": "Fetch todos and users from an API, merge them using RxJS combineLatest, and display an enriched table with status filters.",
+        "longDescription": "Create a todo management system that combines data from multiple sources and provides dynamic filtering. Master the combineLatest operator to synchronize multiple data streams.",
+        "tags": [
+          "combineLatest",
+          "Data Merging",
+          "Filtering"
+        ],
+        "estimatedTime": "75-90 minutes",
+        "prerequisites": [
+          "Understanding of combineLatest",
+          "Data transformation skills"
+        ],
+        "learningOutcomes": [
+          "Use combineLatest for data synchronization",
+          "Merge data from multiple API endpoints",
+          "Implement dynamic filtering logic",
+          "Create enriched data models",
+          "Build complex reactive data flows"
+        ],
+        "requirementList": [
+          "Fetch todos from /todos endpoint and users from /users endpoint.",
+          "Combine the data to create an enriched todo list with user names.",
+          "Implement a status filter to view All, Completed, and Pending todos.",
+          "Display the enriched and filtered todo list in a table format."
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-06-user-todos-filter/components/user-todos/user-todos.component",
+          "componentName": "UserTodosComponent"
+        }
+      },
+      "user-posts-dashboard": {
+        "id": 7,
+        "slug": "user-posts-dashboard",
+        "title": "Challenge 07: User Posts Dashboard - Dependent API Calls",
+        "categoryId": "rxjs-api",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 7,
+        "description": "Fetch users and their posts from DummyJSON API using RxJS mergeMap to handle dependent API calls.",
+        "longDescription": "Tackle dependent API calls where the result of one request determines the next. Learn to use mergeMap (flatMap) to handle nested observables and create complex data flows for a user posts dashboard.",
+        "tags": [
+          "mergeMap",
+          "Dependent APIs",
+          "Nested Observables"
+        ],
+        "estimatedTime": "90-120 minutes",
+        "prerequisites": [
+          "Understanding of higher-order observables",
+          "Advanced RxJS operators"
+        ],
+        "learningOutcomes": [
+          "Handle dependent API calls with mergeMap",
+          "Flatten nested observables",
+          "Manage complex asynchronous flows",
+          "Build hierarchical data structures",
+          "Optimize nested request patterns"
+        ],
+        "requirementList": [
+          "Fetch the list of users from /users endpoint.",
+          "For each user, fetch their posts from /posts?userId={userId} endpoint."
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-07-dependent-apis/components/user-posts-dashboard/user-posts-dashboard.component",
+          "componentName": "UserPostsDashboardComponent"
+        }
+      },
+      "ecommerce-checkout": {
+        "id": 8,
+        "slug": "ecommerce-checkout",
+        "title": "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
+        "categoryId": "rxjs-api",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 8,
+        "description": "Implement a simplified e-commerce checkout process in Angular using RxJS to manage sequential API calls.",
+        "longDescription": "Implement a multi-step checkout process with sequential API calls. Learn to use concatMap to ensure operations happen in order, handle errors gracefully, and manage complex state throughout the checkout flow.",
+        "tags": [
+          "concatMap",
+          "Sequential APIs",
+          "Error Handling"
+        ],
+        "estimatedTime": "120-150 minutes",
+        "prerequisites": [
+          "All previous RxJS challenges",
+          "Understanding of concatMap vs mergeMap"
+        ],
+        "learningOutcomes": [
+          "Implement sequential API operations with concatMap",
+          "Handle multi-step form processes",
+          "Manage transaction-like operations",
+          "Implement comprehensive error handling",
+          "Build state machines with RxJS"
+        ],
+        "requirementList": [
+          "Create a multi-step checkout form with steps for Cart Review, Shipping Info, Payment Info, and Order Confirmation.",
+          "On form submission, perform the following API calls in sequence using concatMap:",
+          "- Validate Cart: POST /checkout/validate",
+          "- Process Payment: POST /checkout/payment",
+          "- Confirm Order: POST /checkout/confirm"
+        ],
+        "links": {
+          "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
+          "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-08-ecommerce-checkout/components/checkout/checkout.component",
+          "componentName": "CheckoutComponent"
+        }
       }
     },
-    "handle-parallel-apis": {
-      "id": 2,
-      "slug": "handle-parallel-apis",
-      "title": "Challenge 02: Dashboard Data - Parallel API Calls",
-      "categoryId": "rxjs-api",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 2,
-      "description": "Perform parallel API calls in Angular using RxJS's forkJoin and display combined dashboard data.",
-      "longDescription": "Master parallel API calls using RxJS's forkJoin operator. This challenge simulates a real-world dashboard scenario where you need to fetch data from multiple endpoints simultaneously and combine the results efficiently.",
-      "tags": [
-        "forkJoin",
-        "Parallel APIs",
-        "RxJS"
-      ],
-      "estimatedTime": "45-60 minutes",
-      "prerequisites": [
-        "Challenge 01 completed",
-        "Understanding of Observables"
-      ],
-      "learningOutcomes": [
-        "Use forkJoin for parallel API calls",
-        "Combine multiple observable streams",
-        "Handle loading states for multiple requests",
-        "Manage errors in parallel operations",
-        "Optimize API call performance"
-      ],
-      "requirementList": [
-        "Fetch product statistics from /products/stats endpoint.",
-        "Fetch recent orders from /orders/recent endpoint.",
-        "Fetch user activity data from /users/activity endpoint.",
-        "Combine all fetched data and display in a unified dashboard view."
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-02-parallel-apis/docs/CH-02-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-02-parallel-apis/docs/CH-02-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-02-parallel-apis"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-02-parallel-apis/components/dashboard/dashboard.component",
-        "componentName": "DashboardComponent"
+    "angular-core": {
+      "component-communication": {
+        "id": 9,
+        "slug": "component-communication",
+        "title": "Challenge 09: Component Communication using Signals",
+        "categoryId": "angular-core",
+        "difficulty": "Beginner",
+        "enabled": true,
+        "order": 1,
+        "description": "Build a product dashboard demonstrating parent-child component communication using Angular Signals and standalone components.",
+        "longDescription": "Master modern Angular component communication using Signals. Build a product dashboard with parent-child communication patterns, exploring input/output decorators and the new Signal-based APIs.",
+        "tags": [
+          "Signals",
+          "Component Communication",
+          "Input/Output"
+        ],
+        "estimatedTime": "60-75 minutes",
+        "prerequisites": [
+          "Angular Signals basics",
+          "Standalone components"
+        ],
+        "learningOutcomes": [
+          "Implement parent-child communication with Signals",
+          "Use input() and output() functions",
+          "Build standalone components",
+          "Create reactive component architectures",
+          "Handle component lifecycle with Signals"
+        ],
+        "requirementList": [
+          "Create a parent component that holds a list of products as a Signal.",
+          "Develop a child component to display individual product details, receiving data via input().",
+          "Implement an output() function in the child component to notify the parent when a product is selected."
+        ],
+        "links": {
+          "requirement": "projects/ngc-core/src/app/challenges/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md",
+          "solution": "projects/ngc-core/src/app/challenges/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-core/src/app/challenges/challenge-09-component-communication"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-09-component-communication/components/product-dashboard/product-dashboard.component",
+          "componentName": "ProductDashboardComponent"
+        }
       }
     },
-    "client-side-search": {
-      "id": 3,
-      "slug": "client-side-search",
-      "title": "Challenge 03: Client-Side User Search",
-      "categoryId": "rxjs-api",
-      "difficulty": "Beginner",
-      "enabled": true,
-      "order": 3,
-      "description": "Implement a client-side search using Angular Reactive Forms and RxJS with dummy user data.",
-      "longDescription": "Build a client-side search feature using Angular Reactive Forms and RxJS operators. Learn how to filter data efficiently without making API calls for every keystroke.",
-      "tags": [
-        "Reactive Forms",
-        "Search",
-        "Filtering"
-      ],
-      "estimatedTime": "40-50 minutes",
-      "prerequisites": [
-        "Reactive Forms basics",
-        "Array manipulation in JavaScript"
-      ],
-      "learningOutcomes": [
-        "Create reactive forms in Angular",
-        "Implement client-side filtering",
-        "Use RxJS operators for search optimization",
-        "Handle form value changes reactively",
-        "Build responsive search interfaces"
-      ],
-      "requirementList": [
-        "Implement a search form using Angular Reactive Forms.",
-        "Fetch product data from the API based on user input.",
-        "Debounce user input to optimize API calls.",
-        "Display search results in real-time as the user types."
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-03-client-side-search/docs/CH-03-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-03-client-side-search/docs/CH-03-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-03-client-side-search"
+    "angular-routing": {
+      "authorized-resource-access": {
+        "id": 10,
+        "slug": "authorized-resource-access",
+        "title": "Challenge 10: Authorized Resource Access",
+        "categoryId": "angular-routing",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 1,
+        "description": "Implement a simple authentication system in Angular using Signals and route guards to protect authorized resources.",
+        "longDescription": "Build a complete authentication system with protected routes. Learn to implement canActivate guards using functional guards and Signals to control access to authorized resources.",
+        "tags": [
+          "Route Guards",
+          "Authentication",
+          "canActivate"
+        ],
+        "estimatedTime": "90-120 minutes",
+        "prerequisites": [
+          "Angular Router basics",
+          "Understanding of guards"
+        ],
+        "learningOutcomes": [
+          "Implement functional route guards",
+          "Create authentication services with Signals",
+          "Protect routes with canActivate",
+          "Handle login/logout flows",
+          "Manage authentication state"
+        ],
+        "requirementList": [
+          "Create a simple login form that updates an authentication Signal upon successful login.",
+          "Implement a canActivate guard that checks the authentication Signal to allow or deny access to protected routes.",
+          "Set up routes for Login, Dashboard (protected), and Public pages.",
+          "Ensure unauthorized users are redirected to the Login page when trying to access protected routes."
+        ],
+        "links": {
+          "requirement": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access/docs/CH-10-REQUIREMENT.md",
+          "solution": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access/docs/CH-10-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-10-authorized-resource-access/components/product-list/product-list.component",
+          "componentName": "ProductListComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-03-client-side-search/components/client-side-search/client-side-search.component",
-        "componentName": "ClientSideSearchComponent"
+      "admin-dashboard-access": {
+        "id": 11,
+        "slug": "admin-dashboard-access",
+        "title": "Challenge 11: Admin Dashboard Access",
+        "categoryId": "angular-routing",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 2,
+        "description": "Create an admin dashboard in Angular with role-based access control using Signals and route guards.",
+        "longDescription": "Implement role-based access control (RBAC) for an admin dashboard. Learn advanced routing techniques including role-based guards, protecting multiple routes, and handling unauthorized access gracefully.",
+        "tags": [
+          "RBAC",
+          "Route Guards",
+          "Authorization"
+        ],
+        "estimatedTime": "120-150 minutes",
+        "prerequisites": [
+          "Challenge 10 completed",
+          "Advanced routing concepts"
+        ],
+        "learningOutcomes": [
+          "Implement role-based access control",
+          "Create complex authorization logic",
+          "Handle multiple user roles",
+          "Build secure route hierarchies",
+          "Implement redirect strategies"
+        ],
+        "requirementList": [
+          "Create a user authentication system that assigns roles (e.g., admin, user) upon login.",
+          "Implement a canActivate guard that checks the user role Signal to allow or deny access to admin routes.",
+          "Set up routes for Admin Dashboard (protected), User Dashboard (protected), and Public pages.",
+          "Ensure users without the admin role are redirected to an Unauthorized page when trying to access admin routes."
+        ],
+        "links": {
+          "requirement": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access/docs/CH-11-REQUIREMENT.md",
+          "solution": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access/docs/CH-11-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-11-admin-dashboard-access/components/dashboard/dashboard.component",
+          "componentName": "DashboardComponent"
+        }
       }
     },
-    "server-side-search": {
-      "id": 4,
-      "slug": "server-side-search",
-      "title": "Challenge 04: Server-Side User Search (AutoComplete)",
-      "categoryId": "rxjs-api",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 4,
-      "description": "Implement a server-side search (auto-complete) using Angular Reactive Forms and RxJS with an API backend.",
-      "longDescription": "Implement a professional autocomplete search feature that queries a backend API. Learn critical RxJS operators like debounceTime, distinctUntilChanged, and switchMap to create a performant search experience.",
-      "tags": [
-        "AutoComplete",
-        "debounceTime",
-        "switchMap",
-        "API"
-      ],
-      "estimatedTime": "60-75 minutes",
-      "prerequisites": [
-        "Challenge 03 completed",
-        "Understanding of RxJS operators"
-      ],
-      "learningOutcomes": [
-        "Implement debounced search queries",
-        "Use switchMap for request cancellation",
-        "Handle rapid user input efficiently",
-        "Create autocomplete UI components",
-        "Optimize API call frequency"
-      ],
-      "requirementList": [
-        "Implement a search form using Angular Reactive Forms.",
-        "Fetch product data from the API based on user input.",
-        "Debounce user input to optimize API calls.",
-        "Display search results in real-time as the user types."
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-04-server-side-search/docs/CH-04-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-04-server-side-search/docs/CH-04-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-04-server-side-search"
+    "angular-forms": {
+      "reactive-login-form": {
+        "id": 12,
+        "slug": "reactive-login-form",
+        "title": "Challenge 12: Reactive Login Form",
+        "categoryId": "angular-forms",
+        "difficulty": "Beginner",
+        "enabled": true,
+        "order": 1,
+        "description": "Build a reactive login form with email and password validation using Angular's FormGroup, FormControl, and built-in validators.",
+        "longDescription": "Master the fundamentals of Angular Reactive Forms by building a production-ready login form. Learn how to use FormBuilder, implement built-in validators, display dynamic error messages, and manage form state effectively. This challenge covers essential skills every Angular developer needs for form handling.",
+        "tags": [
+          "Reactive Forms",
+          "FormGroup",
+          "FormControl",
+          "Validators",
+          "Form Validation"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Basic Angular knowledge",
+          "Understanding of TypeScript",
+          "Familiarity with Angular components"
+        ],
+        "learningOutcomes": [
+          "Create reactive forms using FormBuilder and FormGroup",
+          "Implement built-in validators (required, email, minLength)",
+          "Display dynamic error messages based on validation state",
+          "Manage form state (valid, invalid, touched, dirty)",
+          "Use Angular Signals for reactive state management",
+          "Implement proper form submission handling"
+        ],
+        "requirementList": [
+          "Create a LoginFormComponent with email and password fields using Angular Reactive Forms.",
+          "Implement validation: email (required + valid format), password (required + minimum 6 characters).",
+          "Display inline error messages that appear only after fields are touched or form is submitted.",
+          "Disable the submit button when the form is invalid and show success message on valid submission."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-12-reactive-login-form/components/login-form/login-form.component",
+          "componentName": "LoginFormComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-04-server-side-search/components/server-side-search/server-side-search.component",
-        "componentName": "ServerSideSearchComponent"
-      }
-    },
-    "product-category-management": {
-      "id": 5,
-      "slug": "product-category-management",
-      "title": "Challenge 05: Product Category Management - shareReplay",
-      "categoryId": "rxjs-api",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 5,
-      "description": "Build a product category management system where multiple components share category data using Signals and RxJS shareReplay.",
-      "longDescription": "Build a product category management system that demonstrates efficient data sharing between components. Learn how to use shareReplay to cache API responses and Angular Signals for reactive state management.",
-      "tags": [
-        "shareReplay",
-        "Caching",
-        "Signals"
-      ],
-      "estimatedTime": "60-90 minutes",
-      "prerequisites": [
-        "Understanding of Signals",
-        "RxJS multicasting concepts"
-      ],
-      "learningOutcomes": [
-        "Implement data caching with shareReplay",
-        "Share data across multiple components",
-        "Integrate Angular Signals with RxJS",
-        "Optimize API call performance",
-        "Build reactive component architectures"
-      ],
-      "requirementList": [
-        "Implement data caching with shareReplay",
-        "Share data across multiple components",
-        "Integrate Angular Signals with RxJS",
-        "Optimize API call performance",
-        "Build reactive component architectures"
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system"
+      "duplicate-project-name-validator": {
+        "id": 13,
+        "slug": "duplicate-project-name-validator",
+        "title": "Challenge 13: Duplicate Project Name Validator",
+        "categoryId": "angular-forms",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 2,
+        "description": "Implement a custom synchronous validator that prevents duplicate project names with case-insensitive comparison and whitespace normalization.",
+        "longDescription": "Take your Angular form validation skills to the next level by creating a custom validator with business logic. Learn how to build reusable validator functions, implement normalization strategies, handle edit mode scenarios, and provide rich error messages. This challenge demonstrates real-world patterns used in production applications.",
+        "tags": [
+          "Custom Validators",
+          "ValidatorFn",
+          "Synchronous Validation",
+          "Business Logic",
+          "Normalization",
+          "Dynamic Validators"
+        ],
+        "estimatedTime": "60-90 minutes",
+        "prerequisites": [
+          "Completed Challenge 12 or equivalent reactive forms experience",
+          "Understanding of Angular validators",
+          "TypeScript functions and closures",
+          "Angular Signals basics"
+        ],
+        "learningOutcomes": [
+          "Create custom ValidatorFn functions with factory pattern",
+          "Implement string normalization for consistent comparison",
+          "Handle create vs edit mode validation scenarios",
+          "Update validators dynamically at runtime",
+          "Structure detailed ValidationErrors objects",
+          "Use Angular Signals for reactive state in services",
+          "Apply separation of concerns in validator design"
+        ],
+        "requirementList": [
+          "Create a reusable duplicateNameValidator factory function that returns a ValidatorFn.",
+          "Implement normalization: case-insensitive, trim whitespace, treat spaces/hyphens as equivalent.",
+          "Support edit mode by excluding the current project name from duplicate checking.",
+          "Display real-time validation with normalized preview and clear error messages.",
+          "Build a ProjectService with Angular Signals managing CRUD operations and computed project names.",
+          "Create mode toggle allowing users to switch between create and edit modes with dynamic validator updates."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-13-duplicate-project-name-validator/components/project-form/project-form.component",
+          "componentName": "ProjectFormComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-05-product-category-management-system/components/product-category-dashboard/product-category-dashboard.component",
-        "componentName": "ProductCategoryDashboardComponent"
-      }
-    },
-    "user-todos-filter": {
-      "id": 6,
-      "slug": "user-todos-filter",
-      "title": "Challenge 06: User Todos with Status Filter - combineLatest",
-      "categoryId": "rxjs-api",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 6,
-      "description": "Fetch todos and users from an API, merge them using RxJS combineLatest, and display an enriched table with status filters.",
-      "longDescription": "Create a todo management system that combines data from multiple sources and provides dynamic filtering. Master the combineLatest operator to synchronize multiple data streams.",
-      "tags": [
-        "combineLatest",
-        "Data Merging",
-        "Filtering"
-      ],
-      "estimatedTime": "75-90 minutes",
-      "prerequisites": [
-        "Understanding of combineLatest",
-        "Data transformation skills"
-      ],
-      "learningOutcomes": [
-        "Use combineLatest for data synchronization",
-        "Merge data from multiple API endpoints",
-        "Implement dynamic filtering logic",
-        "Create enriched data models",
-        "Build complex reactive data flows"
-      ],
-      "requirementList": [
-        "Fetch todos from /todos endpoint and users from /users endpoint.",
-        "Combine the data to create an enriched todo list with user names.",
-        "Implement a status filter to view All, Completed, and Pending todos.",
-        "Display the enriched and filtered todo list in a table format."
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter"
+      "email-availability-check": {
+        "id": 14,
+        "slug": "email-availability-check",
+        "title": "Challenge 14: Email Availability Check (Custom Async Validator)",
+        "categoryId": "angular-forms",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 3,
+        "description": "Implement a custom asynchronous validator that checks email availability via simulated API with debouncing, loading states, and proper error handling.",
+        "longDescription": "Master asynchronous form validation in Angular by creating a custom async validator that simulates real-world API calls. Learn how to implement debouncing to optimize performance, handle loading states elegantly, cancel in-flight requests, and provide a seamless user experience during async validation. This challenge demonstrates production-ready patterns for server-side validation.",
+        "tags": [
+          "Async Validators",
+          "AsyncValidatorFn",
+          "RxJS",
+          "debounceTime",
+          "switchMap",
+          "Loading States",
+          "API Simulation"
+        ],
+        "estimatedTime": "60-90 minutes",
+        "prerequisites": [
+          "Completed Challenge 13 or equivalent custom validator experience",
+          "Understanding of RxJS observables",
+          "Knowledge of async/await patterns",
+          "Familiarity with timer and delay operators"
+        ],
+        "learningOutcomes": [
+          "Create custom AsyncValidatorFn functions returning Observables",
+          "Use RxJS operators for debouncing and request cancellation",
+          "Handle PENDING validation states in Angular forms",
+          "Simulate API calls with realistic delays",
+          "Display loading indicators during async validation",
+          "Implement proper error handling in async validators",
+          "Provide suggested alternatives in validation errors",
+          "Optimize form performance with debouncing strategies"
+        ],
+        "requirementList": [
+          "Create an asyncEmailAvailabilityValidator factory function returning AsyncValidatorFn.",
+          "Implement EmailValidationService with simulated API using 1.5 second delay.",
+          "Use debounceTime(500ms) to reduce validation calls during typing.",
+          "Show loading spinner while validation status is PENDING.",
+          "Display clear error messages for taken emails with suggested alternatives.",
+          "Handle API errors gracefully with catchError (fail-open strategy).",
+          "Register async validator in third parameter of FormControl array.",
+          "Monitor statusChanges observable to track PENDING state."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-14-email-availability-check/components/email-form/email-form.component",
+          "componentName": "EmailFormComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-06-user-todos-filter/components/user-todos/user-todos.component",
-        "componentName": "UserTodosComponent"
-      }
-    },
-    "user-posts-dashboard": {
-      "id": 7,
-      "slug": "user-posts-dashboard",
-      "title": "Challenge 07: User Posts Dashboard - Dependent API Calls",
-      "categoryId": "rxjs-api",
-      "difficulty": "Advanced",
-      "enabled": true,
-      "order": 7,
-      "description": "Fetch users and their posts from DummyJSON API using RxJS mergeMap to handle dependent API calls.",
-      "longDescription": "Tackle dependent API calls where the result of one request determines the next. Learn to use mergeMap (flatMap) to handle nested observables and create complex data flows for a user posts dashboard.",
-      "tags": [
-        "mergeMap",
-        "Dependent APIs",
-        "Nested Observables"
-      ],
-      "estimatedTime": "90-120 minutes",
-      "prerequisites": [
-        "Understanding of higher-order observables",
-        "Advanced RxJS operators"
-      ],
-      "learningOutcomes": [
-        "Handle dependent API calls with mergeMap",
-        "Flatten nested observables",
-        "Manage complex asynchronous flows",
-        "Build hierarchical data structures",
-        "Optimize nested request patterns"
-      ],
-      "requirementList": [
-        "Fetch the list of users from /users endpoint.",
-        "For each user, fetch their posts from /posts?userId={userId} endpoint."
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis"
+      "date-range-validation": {
+        "id": 15,
+        "slug": "date-range-validation",
+        "title": "Challenge 15: Date Range Validation (Cross-Field Validator)",
+        "categoryId": "angular-forms",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 4,
+        "description": "Build a leave request form with cross-field date range validation ensuring end date is after start date, demonstrating FormGroup-level validators.",
+        "longDescription": "Advance your Angular forms expertise by mastering cross-field validation patterns. Unlike individual field validators, this challenge teaches you to validate relationships between multiple fields at the FormGroup level. Learn to implement date range validation where the end date must be after the start date, handle edge cases, calculate derived values, and display group-level errors separately from control-level errors. Essential patterns for real-world forms.",
+        "tags": [
+          "Cross-Field Validation",
+          "FormGroup Validators",
+          "Date Validation",
+          "ValidatorFn",
+          "Leave Management",
+          "Group Errors",
+          "Computed Values"
+        ],
+        "estimatedTime": "60-90 minutes",
+        "prerequisites": [
+          "Completed Challenge 12, 13, or equivalent ReactiveFormsModule experience",
+          "Understanding of FormBuilder and FormGroup",
+          "Knowledge of ValidatorFn vs AsyncValidatorFn",
+          "Familiarity with HTML5 date inputs"
+        ],
+        "learningOutcomes": [
+          "Implement FormGroup-level validators vs control-level validators",
+          "Validate relationships between multiple form fields",
+          "Access multiple controls within a validator function",
+          "Display FormGroup errors separately from control errors",
+          "Handle date comparisons and calculations in validators",
+          "Implement conditional error display (show only when both fields touched)",
+          "Calculate derived values (total days) from form data",
+          "Apply business rules (maximum days per leave type)",
+          "Use native HTML5 date inputs with proper formatting"
+        ],
+        "requirementList": [
+          "Create a dateRangeValidator function returning ValidatorFn for FormGroup.",
+          "Implement leave request form with fields: leave type, start date, end date, reason.",
+          "Apply cross-field validator at FormGroup level (not control level).",
+          "Access controls via control.get('fieldName') within validator.",
+          "Return group error: { dateRangeInvalid: { message, startDate, endDate } }.",
+          "Display group error only when both date fields are touched.",
+          "Calculate and display total leave days from valid date range.",
+          "Implement leave type limits (vacation: 30 days, sick: 15 days, personal: 10 days, unpaid: unlimited).",
+          "Show warning if selected days exceed leave type maximum.",
+          "Use HTML5 <input type='date'> for native date pickers."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component",
+          "componentName": "LeaveFormComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-07-dependent-apis/components/user-posts-dashboard/user-posts-dashboard.component",
-        "componentName": "UserPostsDashboardComponent"
-      }
-    },
-    "ecommerce-checkout": {
-      "id": 8,
-      "slug": "ecommerce-checkout",
-      "title": "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
-      "categoryId": "rxjs-api",
-      "difficulty": "Advanced",
-      "enabled": true,
-      "order": 8,
-      "description": "Implement a simplified e-commerce checkout process in Angular using RxJS to manage sequential API calls.",
-      "longDescription": "Implement a multi-step checkout process with sequential API calls. Learn to use concatMap to ensure operations happen in order, handle errors gracefully, and manage complex state throughout the checkout flow.",
-      "tags": [
-        "concatMap",
-        "Sequential APIs",
-        "Error Handling"
-      ],
-      "estimatedTime": "120-150 minutes",
-      "prerequisites": [
-        "All previous RxJS challenges",
-        "Understanding of concatMap vs mergeMap"
-      ],
-      "learningOutcomes": [
-        "Implement sequential API operations with concatMap",
-        "Handle multi-step form processes",
-        "Manage transaction-like operations",
-        "Implement comprehensive error handling",
-        "Build state machines with RxJS"
-      ],
-      "requirementList": [
-        "Create a multi-step checkout form with steps for Cart Review, Shipping Info, Payment Info, and Order Confirmation.",
-        "On form submission, perform the following API calls in sequence using concatMap:",
-        "- Validate Cart: POST /checkout/validate",
-        "- Process Payment: POST /checkout/payment",
-        "- Confirm Order: POST /checkout/confirm"
-      ],
-      "links": {
-        "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
-        "solution": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout"
+      "dynamic-form-array": {
+        "id": 16,
+        "slug": "dynamic-form-array",
+        "title": "Challenge 16: Dynamic FormArray (Experience Section)",
+        "categoryId": "angular-forms",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 5,
+        "description": "Create a dynamic work experience form using FormArray where users can add/remove multiple experience entries with nested FormGroups.",
+        "longDescription": "Master dynamic form structures in Angular by implementing FormArray for managing variable-length lists of form controls. This challenge teaches you how to dynamically add and remove form entries, handle nested FormGroups within FormArray, implement array constraints, and build reusable factory patterns for creating form structures. Essential patterns for building scalable forms like job applications, shopping carts, or any scenario requiring dynamic form entries.",
+        "tags": [
+          "FormArray",
+          "Dynamic Forms",
+          "Nested FormGroups",
+          "Factory Pattern",
+          "Array Constraints",
+          "Add/Remove Operations",
+          "Computed Signals"
+        ],
+        "estimatedTime": "40-50 minutes",
+        "prerequisites": [
+          "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
+          "Understanding of FormBuilder and FormGroup",
+          "Familiarity with Angular control flow (@for)",
+          "Basic TypeScript array operations"
+        ],
+        "learningOutcomes": [
+          "Create and manage FormArray for dynamic form controls",
+          "Implement nested FormGroups within FormArray",
+          "Build factory methods for consistent FormGroup creation",
+          "Handle dynamic add/remove operations on form arrays",
+          "Apply array length constraints (min/max entries)",
+          "Access nested controls with at() and get() methods",
+          "Iterate over FormArray controls in templates with @for",
+          "Use computed signals for reactive calculations across array entries",
+          "Implement proper type casting for FormArray",
+          "Handle form validation across all array entries"
+        ],
+        "requirementList": [
+          "Create FormArray named 'experiences' containing nested FormGroups.",
+          "Each FormGroup has fields: company (2-100 chars), role (2-50 chars), years (0.5-50).",
+          "Start with 1 empty experience entry (minimum requirement).",
+          "Implement Add Experience button (max 5 entries, disabled when at limit).",
+          "Implement Remove button per entry (min 1 entry, disabled at minimum).",
+          "Create factory method createExperienceGroup() for consistent structure.",
+          "Use getter with type casting: get experiences(): FormArray.",
+          "Display entry counter showing current count (e.g., '2 of 5 entries').",
+          "Calculate total years across all experiences using computed signal.",
+          "Show validation errors for each field in each entry.",
+          "Use formArrayName and [formGroupName]='i' in template.",
+          "Iterate with @for over experiences.controls with track $index.",
+          "Mark all nested controls as touched on invalid submission."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-REQUIREMENTS.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-16-dynamic-form-array/components/experience-form/experience-form.component",
+          "componentName": "ExperienceFormComponent"
+        }
       },
-      "workspace": {
-        "componentPath": "./challenges/challenge-08-ecommerce-checkout/components/checkout/checkout.component",
-        "componentName": "CheckoutComponent"
-      }
-    }
-  },
-  "angular-core": {
-    "component-communication": {
-      "id": 9,
-      "slug": "component-communication",
-      "title": "Challenge 09: Component Communication using Signals",
-      "categoryId": "angular-core",
-      "difficulty": "Beginner",
-      "enabled": true,
-      "order": 1,
-      "description": "Build a product dashboard demonstrating parent-child component communication using Angular Signals and standalone components.",
-      "longDescription": "Master modern Angular component communication using Signals. Build a product dashboard with parent-child communication patterns, exploring input/output decorators and the new Signal-based APIs.",
-      "tags": [
-        "Signals",
-        "Component Communication",
-        "Input/Output"
-      ],
-      "estimatedTime": "60-75 minutes",
-      "prerequisites": [
-        "Angular Signals basics",
-        "Standalone components"
-      ],
-      "learningOutcomes": [
-        "Implement parent-child communication with Signals",
-        "Use input() and output() functions",
-        "Build standalone components",
-        "Create reactive component architectures",
-        "Handle component lifecycle with Signals"
-      ],
-      "requirementList": [
-        "Create a parent component that holds a list of products as a Signal.",
-        "Develop a child component to display individual product details, receiving data via input().",
-        "Implement an output() function in the child component to notify the parent when a product is selected."
-      ],
-      "links": {
-        "requirement": "projects/ngc-core/src/app/challenges/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md",
-        "solution": "projects/ngc-core/src/app/challenges/challenge-09-component-communication/docs/CH-09-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-core/src/app/challenges/challenge-09-component-communication"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-09-component-communication/components/product-dashboard/product-dashboard.component",
-        "componentName": "ProductDashboardComponent"
-      }
-    }
-  },
-  "angular-routing": {
-    "authorized-resource-access": {
-      "id": 10,
-      "slug": "authorized-resource-access",
-      "title": "Challenge 10: Authorized Resource Access",
-      "categoryId": "angular-routing",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 1,
-      "description": "Implement a simple authentication system in Angular using Signals and route guards to protect authorized resources.",
-      "longDescription": "Build a complete authentication system with protected routes. Learn to implement canActivate guards using functional guards and Signals to control access to authorized resources.",
-      "tags": [
-        "Route Guards",
-        "Authentication",
-        "canActivate"
-      ],
-      "estimatedTime": "90-120 minutes",
-      "prerequisites": [
-        "Angular Router basics",
-        "Understanding of guards"
-      ],
-      "learningOutcomes": [
-        "Implement functional route guards",
-        "Create authentication services with Signals",
-        "Protect routes with canActivate",
-        "Handle login/logout flows",
-        "Manage authentication state"
-      ],
-      "requirementList": [
-        "Create a simple login form that updates an authentication Signal upon successful login.",
-        "Implement a canActivate guard that checks the authentication Signal to allow or deny access to protected routes.",
-        "Set up routes for Login, Dashboard (protected), and Public pages.",
-        "Ensure unauthorized users are redirected to the Login page when trying to access protected routes."
-      ],
-      "links": {
-        "requirement": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access/docs/CH-10-REQUIREMENT.md",
-        "solution": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access/docs/CH-10-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-10-authorized-resource-access/components/product-list/product-list.component",
-        "componentName": "ProductListComponent"
-      }
-    },
-    "admin-dashboard-access": {
-      "id": 11,
-      "slug": "admin-dashboard-access",
-      "title": "Challenge 11: Admin Dashboard Access",
-      "categoryId": "angular-routing",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 2,
-      "description": "Create an admin dashboard in Angular with role-based access control using Signals and route guards.",
-      "longDescription": "Implement role-based access control (RBAC) for an admin dashboard. Learn advanced routing techniques including role-based guards, protecting multiple routes, and handling unauthorized access gracefully.",
-      "tags": [
-        "RBAC",
-        "Route Guards",
-        "Authorization"
-      ],
-      "estimatedTime": "120-150 minutes",
-      "prerequisites": [
-        "Challenge 10 completed",
-        "Advanced routing concepts"
-      ],
-      "learningOutcomes": [
-        "Implement role-based access control",
-        "Create complex authorization logic",
-        "Handle multiple user roles",
-        "Build secure route hierarchies",
-        "Implement redirect strategies"
-      ],
-      "requirementList": [
-        "Create a user authentication system that assigns roles (e.g., admin, user) upon login.",
-        "Implement a canActivate guard that checks the user role Signal to allow or deny access to admin routes.",
-        "Set up routes for Admin Dashboard (protected), User Dashboard (protected), and Public pages.",
-        "Ensure users without the admin role are redirected to an Unauthorized page when trying to access admin routes."
-      ],
-      "links": {
-        "requirement": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access/docs/CH-11-REQUIREMENT.md",
-        "solution": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access/docs/CH-11-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-11-admin-dashboard-access/components/dashboard/dashboard.component",
-        "componentName": "DashboardComponent"
-      }
-    }
-  },
-  "angular-forms": {
-    "reactive-login-form": {
-      "id": 12,
-      "slug": "reactive-login-form",
-      "title": "Challenge 12: Reactive Login Form",
-      "categoryId": "angular-forms",
-      "difficulty": "Beginner",
-      "enabled": true,
-      "order": 1,
-      "description": "Build a reactive login form with email and password validation using Angular's FormGroup, FormControl, and built-in validators.",
-      "longDescription": "Master the fundamentals of Angular Reactive Forms by building a production-ready login form. Learn how to use FormBuilder, implement built-in validators, display dynamic error messages, and manage form state effectively. This challenge covers essential skills every Angular developer needs for form handling.",
-      "tags": [
-        "Reactive Forms",
-        "FormGroup",
-        "FormControl",
-        "Validators",
-        "Form Validation"
-      ],
-      "estimatedTime": "30-45 minutes",
-      "prerequisites": [
-        "Basic Angular knowledge",
-        "Understanding of TypeScript",
-        "Familiarity with Angular components"
-      ],
-      "learningOutcomes": [
-        "Create reactive forms using FormBuilder and FormGroup",
-        "Implement built-in validators (required, email, minLength)",
-        "Display dynamic error messages based on validation state",
-        "Manage form state (valid, invalid, touched, dirty)",
-        "Use Angular Signals for reactive state management",
-        "Implement proper form submission handling"
-      ],
-      "requirementList": [
-        "Create a LoginFormComponent with email and password fields using Angular Reactive Forms.",
-        "Implement validation: email (required + valid format), password (required + minimum 6 characters).",
-        "Display inline error messages that appear only after fields are touched or form is submitted.",
-        "Disable the submit button when the form is invalid and show success message on valid submission."
-      ],
-      "links": {
-        "requirement": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-REQUIREMENT.md",
-        "solution": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-12-reactive-login-form/components/login-form/login-form.component",
-        "componentName": "LoginFormComponent"
-      }
-    },
-    "duplicate-project-name-validator": {
-      "id": 13,
-      "slug": "duplicate-project-name-validator",
-      "title": "Challenge 13: Duplicate Project Name Validator",
-      "categoryId": "angular-forms",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 2,
-      "description": "Implement a custom synchronous validator that prevents duplicate project names with case-insensitive comparison and whitespace normalization.",
-      "longDescription": "Take your Angular form validation skills to the next level by creating a custom validator with business logic. Learn how to build reusable validator functions, implement normalization strategies, handle edit mode scenarios, and provide rich error messages. This challenge demonstrates real-world patterns used in production applications.",
-      "tags": [
-        "Custom Validators",
-        "ValidatorFn",
-        "Synchronous Validation",
-        "Business Logic",
-        "Normalization",
-        "Dynamic Validators"
-      ],
-      "estimatedTime": "60-90 minutes",
-      "prerequisites": [
-        "Completed Challenge 12 or equivalent reactive forms experience",
-        "Understanding of Angular validators",
-        "TypeScript functions and closures",
-        "Angular Signals basics"
-      ],
-      "learningOutcomes": [
-        "Create custom ValidatorFn functions with factory pattern",
-        "Implement string normalization for consistent comparison",
-        "Handle create vs edit mode validation scenarios",
-        "Update validators dynamically at runtime",
-        "Structure detailed ValidationErrors objects",
-        "Use Angular Signals for reactive state in services",
-        "Apply separation of concerns in validator design"
-      ],
-      "requirementList": [
-        "Create a reusable duplicateNameValidator factory function that returns a ValidatorFn.",
-        "Implement normalization: case-insensitive, trim whitespace, treat spaces/hyphens as equivalent.",
-        "Support edit mode by excluding the current project name from duplicate checking.",
-        "Display real-time validation with normalized preview and clear error messages.",
-        "Build a ProjectService with Angular Signals managing CRUD operations and computed project names.",
-        "Create mode toggle allowing users to switch between create and edit modes with dynamic validator updates."
-      ],
-      "links": {
-        "requirement": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-REQUIREMENT.md",
-        "solution": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-13-duplicate-project-name-validator/components/project-form/project-form.component",
-        "componentName": "ProjectFormComponent"
-      }
-    },
-    "email-availability-check": {
-      "id": 14,
-      "slug": "email-availability-check",
-      "title": "Challenge 14: Email Availability Check (Custom Async Validator)",
-      "categoryId": "angular-forms",
-      "difficulty": "Advanced",
-      "enabled": true,
-      "order": 3,
-      "description": "Implement a custom asynchronous validator that checks email availability via simulated API with debouncing, loading states, and proper error handling.",
-      "longDescription": "Master asynchronous form validation in Angular by creating a custom async validator that simulates real-world API calls. Learn how to implement debouncing to optimize performance, handle loading states elegantly, cancel in-flight requests, and provide a seamless user experience during async validation. This challenge demonstrates production-ready patterns for server-side validation.",
-      "tags": [
-        "Async Validators",
-        "AsyncValidatorFn",
-        "RxJS",
-        "debounceTime",
-        "switchMap",
-        "Loading States",
-        "API Simulation"
-      ],
-      "estimatedTime": "60-90 minutes",
-      "prerequisites": [
-        "Completed Challenge 13 or equivalent custom validator experience",
-        "Understanding of RxJS observables",
-        "Knowledge of async/await patterns",
-        "Familiarity with timer and delay operators"
-      ],
-      "learningOutcomes": [
-        "Create custom AsyncValidatorFn functions returning Observables",
-        "Use RxJS operators for debouncing and request cancellation",
-        "Handle PENDING validation states in Angular forms",
-        "Simulate API calls with realistic delays",
-        "Display loading indicators during async validation",
-        "Implement proper error handling in async validators",
-        "Provide suggested alternatives in validation errors",
-        "Optimize form performance with debouncing strategies"
-      ],
-      "requirementList": [
-        "Create an asyncEmailAvailabilityValidator factory function returning AsyncValidatorFn.",
-        "Implement EmailValidationService with simulated API using 1.5 second delay.",
-        "Use debounceTime(500ms) to reduce validation calls during typing.",
-        "Show loading spinner while validation status is PENDING.",
-        "Display clear error messages for taken emails with suggested alternatives.",
-        "Handle API errors gracefully with catchError (fail-open strategy).",
-        "Register async validator in third parameter of FormControl array.",
-        "Monitor statusChanges observable to track PENDING state."
-      ],
-      "links": {
-        "requirement": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-REQUIREMENT.md",
-        "solution": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-14-email-availability-check/components/email-form/email-form.component",
-        "componentName": "EmailFormComponent"
-      }
-    },
-    "date-range-validation": {
-      "id": 15,
-      "slug": "date-range-validation",
-      "title": "Challenge 15: Date Range Validation (Cross-Field Validator)",
-      "categoryId": "angular-forms",
-      "difficulty": "Advanced",
-      "enabled": true,
-      "order": 4,
-      "description": "Build a leave request form with cross-field date range validation ensuring end date is after start date, demonstrating FormGroup-level validators.",
-      "longDescription": "Advance your Angular forms expertise by mastering cross-field validation patterns. Unlike individual field validators, this challenge teaches you to validate relationships between multiple fields at the FormGroup level. Learn to implement date range validation where the end date must be after the start date, handle edge cases, calculate derived values, and display group-level errors separately from control-level errors. Essential patterns for real-world forms.",
-      "tags": [
-        "Cross-Field Validation",
-        "FormGroup Validators",
-        "Date Validation",
-        "ValidatorFn",
-        "Leave Management",
-        "Group Errors",
-        "Computed Values"
-      ],
-      "estimatedTime": "60-90 minutes",
-      "prerequisites": [
-        "Completed Challenge 12, 13, or equivalent ReactiveFormsModule experience",
-        "Understanding of FormBuilder and FormGroup",
-        "Knowledge of ValidatorFn vs AsyncValidatorFn",
-        "Familiarity with HTML5 date inputs"
-      ],
-      "learningOutcomes": [
-        "Implement FormGroup-level validators vs control-level validators",
-        "Validate relationships between multiple form fields",
-        "Access multiple controls within a validator function",
-        "Display FormGroup errors separately from control errors",
-        "Handle date comparisons and calculations in validators",
-        "Implement conditional error display (show only when both fields touched)",
-        "Calculate derived values (total days) from form data",
-        "Apply business rules (maximum days per leave type)",
-        "Use native HTML5 date inputs with proper formatting"
-      ],
-      "requirementList": [
-        "Create a dateRangeValidator function returning ValidatorFn for FormGroup.",
-        "Implement leave request form with fields: leave type, start date, end date, reason.",
-        "Apply cross-field validator at FormGroup level (not control level).",
-        "Access controls via control.get('fieldName') within validator.",
-        "Return group error: { dateRangeInvalid: { message, startDate, endDate } }.",
-        "Display group error only when both date fields are touched.",
-        "Calculate and display total leave days from valid date range.",
-        "Implement leave type limits (vacation: 30 days, sick: 15 days, personal: 10 days, unpaid: unlimited).",
-        "Show warning if selected days exceed leave type maximum.",
-        "Use HTML5 <input type='date'> for native date pickers."
-      ],
-      "links": {
-        "requirement": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-REQUIREMENT.md",
-        "solution": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component",
-        "componentName": "LeaveFormComponent"
-      }
-    },
-    "dynamic-form-array": {
-      "id": 16,
-      "slug": "dynamic-form-array",
-      "title": "Challenge 16: Dynamic FormArray (Experience Section)",
-      "categoryId": "angular-forms",
-      "difficulty": "Intermediate",
-      "enabled": true,
-      "order": 5,
-      "description": "Create a dynamic work experience form using FormArray where users can add/remove multiple experience entries with nested FormGroups.",
-      "longDescription": "Master dynamic form structures in Angular by implementing FormArray for managing variable-length lists of form controls. This challenge teaches you how to dynamically add and remove form entries, handle nested FormGroups within FormArray, implement array constraints, and build reusable factory patterns for creating form structures. Essential patterns for building scalable forms like job applications, shopping carts, or any scenario requiring dynamic form entries.",
-      "tags": [
-        "FormArray",
-        "Dynamic Forms",
-        "Nested FormGroups",
-        "Factory Pattern",
-        "Array Constraints",
-        "Add/Remove Operations",
-        "Computed Signals"
-      ],
-      "estimatedTime": "40-50 minutes",
-      "prerequisites": [
-        "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
-        "Understanding of FormBuilder and FormGroup",
-        "Familiarity with Angular control flow (@for)",
-        "Basic TypeScript array operations"
-      ],
-      "learningOutcomes": [
-        "Create and manage FormArray for dynamic form controls",
-        "Implement nested FormGroups within FormArray",
-        "Build factory methods for consistent FormGroup creation",
-        "Handle dynamic add/remove operations on form arrays",
-        "Apply array length constraints (min/max entries)",
-        "Access nested controls with at() and get() methods",
-        "Iterate over FormArray controls in templates with @for",
-        "Use computed signals for reactive calculations across array entries",
-        "Implement proper type casting for FormArray",
-        "Handle form validation across all array entries"
-      ],
-      "requirementList": [
-        "Create FormArray named 'experiences' containing nested FormGroups.",
-        "Each FormGroup has fields: company (2-100 chars), role (2-50 chars), years (0.5-50).",
-        "Start with 1 empty experience entry (minimum requirement).",
-        "Implement Add Experience button (max 5 entries, disabled when at limit).",
-        "Implement Remove button per entry (min 1 entry, disabled at minimum).",
-        "Create factory method createExperienceGroup() for consistent structure.",
-        "Use getter with type casting: get experiences(): FormArray.",
-        "Display entry counter showing current count (e.g., '2 of 5 entries').",
-        "Calculate total years across all experiences using computed signal.",
-        "Show validation errors for each field in each entry.",
-        "Use formArrayName and [formGroupName]='i' in template.",
-        "Iterate with @for over experiences.controls with track $index.",
-        "Mark all nested controls as touched on invalid submission."
-      ],
-      "links": {
-        "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-REQUIREMENTS.md",
-        "solution": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-SOLUTION_GUIDE.md",
-        "github": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array"
-      },
-      "workspace": {
-        "componentPath": "./challenges/challenge-16-dynamic-form-array/components/experience-form/experience-form.component",
-        "componentName": "ExperienceFormComponent"
+      "custom-input-cva": {
+        "id": 17,
+        "slug": "custom-input-cva",
+        "title": "Challenge 17: Custom Input Field using ControlValueAccessor",
+        "categoryId": "angular-forms",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 6,
+        "description": "Build a reusable custom input component implementing ControlValueAccessor interface to work seamlessly with Angular's reactive forms.",
+        "longDescription": "Master the art of creating truly reusable form controls in Angular by implementing the ControlValueAccessor interface. This challenge teaches you how to bridge the gap between Angular's reactive forms and custom components, enabling bidirectional data flow and seamless integration with formControlName. Learn the 4 essential CVA methods, understand when and why each is called, and grasp the data flow patterns that make your components work like native inputs. Essential knowledge for building component libraries and reusable form controls.",
+        "tags": [
+          "ControlValueAccessor",
+          "Custom Form Controls",
+          "NG_VALUE_ACCESSOR",
+          "Reusable Components",
+          "forwardRef",
+          "Reactive Forms Integration",
+          "Bidirectional Data Flow"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
+          "Understanding of FormBuilder and FormGroup",
+          "Knowledge of @Input/@Output decorators",
+          "Familiarity with Angular dependency injection"
+        ],
+        "learningOutcomes": [
+          "Implement ControlValueAccessor interface with all 4 methods",
+          "Configure NG_VALUE_ACCESSOR provider with forwardRef",
+          "Understand bidirectional data flow: Form ↔ Component",
+          "Handle writeValue() to receive values from parent form",
+          "Implement registerOnChange() for Component → Form communication",
+          "Implement registerOnTouched() for touch tracking",
+          "Handle setDisabledState() for disabled state propagation",
+          "Use custom controls with formControlName directive",
+          "Validate at parent level (not inside CVA component)",
+          "Display errors from parent form state"
+        ],
+        "requirementList": [
+          "Create CustomInputComponent implementing ControlValueAccessor interface.",
+          "Implement all 4 CVA methods: writeValue(), registerOnChange(), registerOnTouched(), setDisabledState().",
+          "Configure NG_VALUE_ACCESSOR provider: { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CustomInputComponent), multi: true }.",
+          "Add @Input() properties: label, placeholder, type (text/email/tel/password/number).",
+          "Handle user input events to call onChange callback.",
+          "Handle blur events to call onTouched callback.",
+          "Create demo form with 2 fields (name: required + minLength 3, email: required + email validator).",
+          "Use <ngc-input formControlName='name'> syntax in parent form.",
+          "Display validation errors from parent form state (not inside CVA).",
+          "Demonstrate disabled state propagation from parent form."
+        ],
+        "links": {
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva/docs/CH-16-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva/docs/CH-16-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-16-custom-input-cva/components/demo-form/demo-form.component",
+          "componentName": "DemoFormComponent"
+        }
       }
     }
   }
-}
 }
