@@ -1,0 +1,128 @@
+<div class="dynamic-form-container">
+  <!-- Left side: Dynamic Form -->
+  <section class="form-section">
+    <div class="form-header">
+      <h2>{{ formSchema.title }}</h2>
+      @if (formSchema.description) {
+        <p class="form-description">{{ formSchema.description }}</p>
+      }
+    </div>
+
+    <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" class="dynamic-form">
+      @for (field of fields; track field.name) {
+        <div class="form-field">
+          <label [for]="field.name" class="field-label">
+            {{ field.label }}
+            @if (field.required) {
+              <span class="required-indicator">*</span>
+            }
+          </label>
+
+          @switch (field.type) {
+            @case ('text') {
+              <input
+                [id]="field.name"
+                type="text"
+                class="form-control"
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder || ''" />
+            }
+            @case ('email') {
+              <input
+                [id]="field.name"
+                type="email"
+                class="form-control"
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder || ''" />
+            }
+            @case ('number') {
+              <input
+                [id]="field.name"
+                type="number"
+                class="form-control"
+                [formControlName]="field.name"
+                [placeholder]="field.placeholder || ''" />
+            }
+            @case ('select') {
+              <select
+                [id]="field.name"
+                class="form-control"
+                [formControlName]="field.name">
+                @for (option of field.options; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            }
+            @case ('checkbox') {
+              <div class="checkbox-wrapper">
+                <input
+                  [id]="field.name"
+                  type="checkbox"
+                  class="form-checkbox"
+                  [formControlName]="field.name" />
+                <label [for]="field.name" class="checkbox-label">{{ field.label }}</label>
+              </div>
+            }
+          }
+
+          @if (shouldShowError(field.name)) {
+            <div class="error-message">
+              {{ getErrorMessage(field.name) }}
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          Submit
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onReset()">
+          Reset
+        </button>
+      </div>
+
+      <!-- Success Message -->
+      @if (showSuccessMessage()) {
+        <div class="success-message">
+          <strong>✓ Success!</strong> Form submitted successfully.
+          @if (submittedData()) {
+            <div class="submitted-data">
+              <h4>Submitted Data:</h4>
+              <pre>{{ submittedData() | json }}</pre>
+            </div>
+          }
+        </div>
+      }
+    </form>
+  </section>
+
+  <!-- Right side: Explanation -->
+  <section class="explanation-section">
+
+
+    <div class="info-card">
+      <h3>🔑 Key Concepts</h3>
+      <ul>
+        <li><strong>Dynamic Form Construction:</strong> Build FormGroup at runtime from JSON</li>
+        <li><strong>Validator Factory:</strong> Map string configs to ValidatorFn</li>
+        <li><strong>Field Type Rendering:</strong> Conditional rendering with &#64;switch</li>
+        <li><strong>Schema-Driven UI:</strong> Server controls form structure</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>📋 Supported Features</h3>
+      <ul>
+        <li><strong>Field Types:</strong> text, email, number, select, checkbox</li>
+        <li><strong>Validators:</strong> required, email, minLength, maxLength, min, max</li>
+        <li><strong>Custom Messages:</strong> Error messages from schema</li>
+        <li><strong>Field Ordering:</strong> Sort fields by order property</li>
+      </ul>
+    </div>
+
+
+
+  </section>
+</div>

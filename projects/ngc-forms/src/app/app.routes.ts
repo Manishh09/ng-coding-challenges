@@ -22,6 +22,12 @@ const CHALLENGE_COMPONENTS = {
   'dynamic-form-array': () =>
     import('./challenges/challenge-16-dynamic-form-array/components/experience-form/experience-form.component')
       .then(m => m.ExperienceFormComponent),
+  'custom-input-cva': () =>
+    import('./challenges/challenge-17-custom-input-cva/components/demo-form/demo-form.component')
+      .then(m => m.DemoFormComponent),
+  'server-driven-dynamic-form': () =>
+    import('./challenges/challenge-18-server-driven-dynamic-form/components/dynamic-form/dynamic-form.component')
+      .then(m => m.DynamicFormComponent),
 };
 
 /**

@@ -1,0 +1,101 @@
+<div class="demo-container">
+  <!-- Left side: Form -->
+  <section class="form-section">
+    <div class="form-header">
+      <h2>User Registration Form</h2>
+      <p class="form-subtitle">Demonstrating Custom Input with ControlValueAccessor</p>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+      <!-- Name Field -->
+      <div class="form-field">
+        <ngc-input
+          formControlName="name"
+          label="Full Name"
+          placeholder="Enter your full name"
+          type="text">
+        </ngc-input>
+
+        @if (shouldShowError('name')) {
+          <div class="error-message">
+            {{ getErrorMessage('name') }}
+          </div>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-field">
+        <ngc-input
+          formControlName="email"
+          label="Email Address"
+          placeholder="Enter your email"
+          type="email">
+        </ngc-input>
+
+        @if (shouldShowError('email')) {
+          <div class="error-message">
+            {{ getErrorMessage('email') }}
+          </div>
+        }
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="userForm.invalid && submitted()">
+          Submit
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onReset()">
+          Reset
+        </button>
+      </div>
+
+      <!-- Success Message -->
+      @if (showSuccessMessage()) {
+        <div class="success-message">
+          <strong>✓ Success!</strong> Form submitted successfully.
+          @if (formData()) {
+            <div class="submitted-data">
+              <p><strong>Name:</strong> {{ formData()!.name }}</p>
+              <p><strong>Email:</strong> {{ formData()!.email }}</p>
+            </div>
+          }
+        </div>
+      }
+    </form>
+  </section>
+
+  <!-- Right side: Explanation -->
+  <section class="explanation-section">
+    <div class="info-card">
+      <h3>🔑 Key Concepts</h3>
+      <ul>
+        <li><strong>writeValue():</strong> Form → Component</li>
+        <li><strong>registerOnChange():</strong> Component → Form</li>
+        <li><strong>registerOnTouched():</strong> Touch tracking</li>
+        <li><strong>setDisabledState():</strong> Handle disabled state</li>
+      </ul>
+    </div>
+
+    <div class="info-card highlight">
+      <h3>💡 Data Flow</h3>
+      <p><strong>Parent Form</strong> validates and manages state</p>
+      <p>↕️</p>
+      <p><strong>Custom Input</strong> handles user interaction</p>
+    </div>
+
+    <div class="info-card">
+      <h3>✅ Form Status</h3>
+      <div class="status-info">
+        <p><strong>Valid:</strong> {{ userForm.valid }}</p>
+        <p><strong>Touched:</strong> {{ userForm.touched }}</p>
+        <p><strong>Dirty:</strong> {{ userForm.dirty }}</p>
+      </div>
+    </div>
+  </section>
+</div>
