@@ -1,5 +1,9 @@
 # Challenge 15: Date Range Validation - Solution Guide
 
+**Time to Complete:** 45 minutes  
+**Difficulty:** Advanced  
+---
+
 ## 📖 Quick Overview
 
 This challenge focuses on **cross-field validation** - validating relationships between multiple form fields at the FormGroup level, not at individual control level.
@@ -81,6 +85,7 @@ export function calculateDaysBetween(startDate: string | Date, endDate: string |
 ```
 
 **⭐ Key Interview Points:**
+
 - Validator receives `AbstractControl` (the FormGroup, not individual controls)
 - Use `control.get('fieldName')` to access child controls
 - Return `null` for valid state or when validation should be skipped
@@ -175,6 +180,7 @@ export class LeaveFormComponent implements OnInit {
 ```
 
 **⭐ Key Interview Points:**
+
 - Cross-field validator applied in **second parameter** of `fb.group()`
 - Uses object syntax: `{ validators: [dateRangeValidator()] }`
 - Individual control validators stay in first parameter
@@ -270,6 +276,7 @@ getGroupError(): string | null {
 ```
 
 **⭐ Key Interview Points:**
+
 - Control errors check `control.errors`
 - Group errors check `this.leaveForm.errors` or `this.leaveForm.hasError()`
 - Group error displayed only when both related fields touched
@@ -561,12 +568,14 @@ onReset(): void {
 ### 2. When to Use Cross-Field Validation
 
 **Use cross-field validation when:**
+
 - ✅ Field B depends on value of Field A (end date after start date)
 - ✅ Sum of multiple fields has constraints (total must equal 100%)
 - ✅ Conditional validation (if A is selected, B is required)
 - ✅ Complex business rules spanning multiple fields
 
 **Don't use it for:**
+
 - ❌ Independent field validation (use control-level validators)
 - ❌ Async validation (use AsyncValidatorFn)
 - ❌ Simple presence/format checks
@@ -838,6 +847,7 @@ ngOnInit(): void {
 
 **"Could you make this validator reusable for other date pairs?"**
 > "Yes! I could parameterize the field names:
+>
 > ```typescript
 > export function dateRangeValidator(startField = 'startDate', endField = 'endDate'): ValidatorFn {
 >   return (control: AbstractControl): ValidationErrors | null => {
@@ -847,6 +857,7 @@ ngOnInit(): void {
 >   };
 > }
 > ```
+>
 > Then use it like: `validators: [dateRangeValidator('checkIn', 'checkOut')]`"
 
 ---
@@ -854,6 +865,7 @@ ngOnInit(): void {
 ## 📚 Quick Reference
 
 ### Validator Pattern
+
 ```typescript
 export function crossFieldValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -872,6 +884,7 @@ export function crossFieldValidator(): ValidatorFn {
 ```
 
 ### Application
+
 ```typescript
 this.fb.group({
   field1: ['', [Validators.required]],
@@ -882,6 +895,7 @@ this.fb.group({
 ```
 
 ### Error Check
+
 ```typescript
 // In component
 if (this.form.hasError('errorKey')) { }
@@ -908,8 +922,3 @@ if (this.form.hasError('errorKey')) { }
 - [ ] Form submission and reset working
 
 ---
-
-**Time to Complete:** 60-90 minutes  
-**Difficulty:** Advanced  
-**Key Focus:** Cross-field validation, FormGroup-level validators, error hierarchy
-

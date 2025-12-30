@@ -1,5 +1,10 @@
 # Challenge 12: Reactive Login Form
 
+**Estimated Time:** 30-45 minutes  
+**Difficulty:** Beginner
+
+---
+
 ## Description
 
 Build a fully functional login form using Angular's **Reactive Forms** approach. This challenge focuses on mastering `FormGroup`, `FormControl`, built-in validators, and dynamic error handling in templates.

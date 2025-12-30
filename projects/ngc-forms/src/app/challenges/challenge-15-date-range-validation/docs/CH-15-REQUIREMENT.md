@@ -1,5 +1,10 @@
 # Challenge 15: Date Range Validation (Cross-Field Validator)
 
+**Estimated Time:** 45 minutes  
+**Difficulty:** Advanced
+
+---
+
 ## 📋 Problem Statement
 
 Build a **leave request form** where the **end date must be after the start date**. This validation requires examining multiple fields together at the **FormGroup level**, not individual controls.

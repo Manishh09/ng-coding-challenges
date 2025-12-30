@@ -1,5 +1,10 @@
 # Challenge 18: Server-Driven Dynamic Form
 
+**Estimated Time:** 30-45 minutes  
+**Difficulty:** Advanced
+
+---
+
 ## 1️⃣ Problem Statement
 
 Build a dynamic form system that renders forms from **JSON schema** with runtime validators. Instead of hardcoding forms, the structure comes from configuration at runtime.

@@ -1,5 +1,7 @@
 # Challenge 16: Dynamic FormArray (Experience Section)
 
+**Difficulty:** 🟡 Intermediate  
+**Estimated Time:** 40-50 minutes
 ---
 
 ## 🎯 Problem Statement
@@ -9,6 +11,7 @@ Build a **dynamic work experience form** using FormArray where users can add/rem
 ### The Challenge
 
 Create a form that:
+
 - Manages variable-length list of work experiences
 - Allows adding entries (max 5)
 - Allows removing entries (min 1)
@@ -22,6 +25,7 @@ Create a form that:
 ### 1. FormArray Structure
 
 **Data Model:**
+
 ```typescript
 interface Experience {
   company: string;
@@ -35,6 +39,7 @@ interface ExperienceFormData {
 ```
 
 **Form Structure:**
+
 ```
 FormGroup {
   experiences: FormArray [
@@ -56,6 +61,7 @@ FormGroup {
 | **Entry Counter** | Display current/max | "2 of 5 entries" |
 
 **Key Methods:**
+
 - `createExperienceGroup()` - Factory method for consistent FormGroup structure
 - `addExperience()` - Check constraint then `push()`
 - `removeExperience(index)` - Check constraint then `removeAt(index)`
@@ -70,6 +76,7 @@ FormGroup {
 | **Years** | Required, min(0.5), max(50), numeric with decimals |
 
 **Error Handling:**
+
 - Access nested control: `experiences.at(index)?.get(fieldName)`
 - Show errors when touched or submitted
 - Mark all nested controls as touched on submit if invalid
@@ -77,6 +84,7 @@ FormGroup {
 ### 4. Computed Features
 
 **Total Years Signal:**
+
 ```typescript
 totalYears = computed(() => {
   return experiences.controls.reduce((sum, control) => {
@@ -86,6 +94,7 @@ totalYears = computed(() => {
 ```
 
 **Display Features:**
+
 - Entry counter: "X of 5 entries"
 - Total years: Sum across all experiences
 - Success message after submission
@@ -94,6 +103,7 @@ totalYears = computed(() => {
 ### 5. Template Requirements
 
 **Directives:**
+
 - `formArrayName="experiences"` on wrapper
 - `[formGroupName]="i"` dynamic binding per entry
 - `@for` iteration: `@for (exp of experiences.controls; track $index; let i = $index)`
@@ -113,6 +123,7 @@ totalYears = computed(() => {
 | **Type Casting** | `as FormArray` for accessing array-specific methods |
 
 **Key FormArray Methods:**
+
 - `push(control)` - Add to array
 - `removeAt(index)` - Remove from array
 - `at(index)` - Access control at index
@@ -147,11 +158,13 @@ totalYears = computed(() => {
 ### Validation Display
 
 **Valid Entry:**
+
 - ✅ Green border on inputs
 - No error messages
 - Contributes to total years
 
 **Invalid Entry:**
+
 - ❌ Red border on invalid inputs
 - Error message below field: "Company is required" or "Minimum 2 characters required"
 - Submit button remains disabled

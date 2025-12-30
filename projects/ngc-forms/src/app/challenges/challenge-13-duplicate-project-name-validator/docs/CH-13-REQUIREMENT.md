@@ -1,5 +1,10 @@
 # Challenge 13: Duplicate Project Name Validator
 
+**Estimated Time:** 45 minutes  
+**Difficulty:** Intermediate
+
+---
+
 ## 1️⃣ Problem Statement
 
 Build a **custom synchronous validator** that prevents duplicate project names. The validator must handle case-insensitive comparison and support both create and edit modes.

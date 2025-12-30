@@ -1,5 +1,8 @@
 # Challenge 14: Email Availability Check (Custom Async Validator)
 
+**Estimated Time:** 45 minutes  
+**Difficulty:** Advanced
+
 ---
 
 ## 🎯 Problem Statement
