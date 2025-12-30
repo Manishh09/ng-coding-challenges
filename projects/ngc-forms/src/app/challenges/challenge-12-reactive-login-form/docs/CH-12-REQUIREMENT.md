@@ -1,5 +1,10 @@
 # Challenge 12: Reactive Login Form
 
+**Estimated Time:** 30-45 minutes  
+**Difficulty:** Beginner
+
+---
+
 ## Description
 
 Build a fully functional login form using Angular's **Reactive Forms** approach. This challenge focuses on mastering `FormGroup`, `FormControl`, built-in validators, and dynamic error handling in templates.
@@ -151,28 +156,28 @@ loginForm = this.fb.group({
 ## Best Practices
 
 ### Code Organization
-✅ Separate concerns: Component logic, template, styles  
-✅ Use TypeScript interfaces for type safety  
-✅ Create helper methods for common operations  
-✅ Use getter methods for clean template access  
+Separate concerns: Component logic, template, styles  
+Use TypeScript interfaces for type safety  
+Create helper methods for common operations  
+Use getter methods for clean template access  
 
 ### Form Design
-✅ Initialize form in `ngOnInit()`  
-✅ Use `FormBuilder` for cleaner syntax  
-✅ Mark all fields as touched on submit  
-✅ Provide clear, user-friendly error messages  
+Initialize form in `ngOnInit()`  
+Use `FormBuilder` for cleaner syntax  
+Mark all fields as touched on submit  
+Provide clear, user-friendly error messages  
 
 ### Template Design
-✅ Use semantic HTML (`<form>`, `<label>`, proper input types)  
-✅ Add `novalidate` to prevent browser validation  
-✅ Include `autocomplete` attributes  
-✅ Use Angular's new control flow (`@if`)  
+Use semantic HTML (`<form>`, `<label>`, proper input types)  
+Add `novalidate` to prevent browser validation  
+Include `autocomplete` attributes  
+Use Angular's new control flow (`@if`)  
 
 ### Accessibility
-✅ Proper label-input associations  
-✅ ARIA roles for error messages (`role="alert"`)  
-✅ Keyboard navigation support  
-✅ Focus management  
+Proper label-input associations  
+ARIA roles for error messages (`role="alert"`)  
+Keyboard navigation support  
+Focus management  
 
 ---
 
@@ -259,4 +264,4 @@ After completing this challenge:
 
 ---
 
-**Good luck! 🚀**
+**Good luck!**

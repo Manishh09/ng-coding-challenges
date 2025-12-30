@@ -1,201 +1,174 @@
 # Challenge 13: Duplicate Project Name Validator
 
-## 📋 Overview
+**Estimated Time:** 45 minutes  
+**Difficulty:** Intermediate
 
-**Difficulty**: Intermediate  
-**Category**: Angular Forms - Custom Validators  
-**Learning Focus**: Custom Synchronous Validators, Form Validation Patterns, Business Logic Validation
+---
 
-## 🎯 Objective
+## Problem Statement
 
-Implement a custom synchronous validator that prevents users from creating or updating a project with a name that already exists in the system. The validator should handle various edge cases including case-insensitive comparison, whitespace normalization, and special character handling.
+Build a **custom synchronous validator** that prevents duplicate project names. The validator must handle case-insensitive comparison and support both create and edit modes.
 
-## 📝 Requirements
+### The Challenge
 
-### Core Functionality
+Create a reusable validator that:
 
-1. **Custom Validator Implementation**
-   - Create a reusable `duplicateNameValidator` function
-   - Implement as a `ValidatorFn` that can be attached to form controls
-   - Return appropriate `ValidationErrors` when duplicate is detected
+- Prevents duplicate project names (case-insensitive)
+- Supports edit mode (allows saving with same name)
+- Shows real-time validation feedback
+- Provides clear error messages
 
-2. **Name Normalization**
-   - **Case-insensitive comparison**: "Project Alpha" = "project alpha" = "PROJECT ALPHA"
-   - **Whitespace handling**: Trim leading/trailing spaces
-   - **Multiple spaces**: "Project   Alpha" = "Project Alpha"
-   - **Hyphen/Space equivalence**: "Project-Alpha" = "Project Alpha" = "project alpha"
+### Why This Matters
 
-3. **Edit Mode Support**
-   - Allow editing a project without triggering duplicate error for its own name
-   - Dynamically update validator when switching between create/edit modes
-   - Pass current project name as an exclusion parameter
+**Real-world applications:**
 
-4. **Real-time Validation**
-   - Validate as user types (after field is touched)
-   - Show clear error messages immediately
-   - Display normalized version of entered name for transparency
+- Project management systems preventing duplicate entries
+- User registration forms checking username availability
+- Tag/category systems enforcing unique names
+- Any CRUD application requiring unique identifiers
 
-5. **Form Integration**
-   - Use `ReactiveFormsModule` with `FormBuilder`
-   - Combine custom validator with built-in validators (`required`, `minLength`, etc.)
-   - Handle form submission with validation state checks
+**Core Pattern:** Custom validator factory with dynamic configuration for context-aware validation.
 
-### User Interface Requirements
+---
 
-1. **Form Fields**
-   - Project Name (required, 3-50 chars, custom duplicate validator)
-   - Description (required, 10-200 chars)
+## Requirements
 
-2. **Validation Feedback**
-   - Show error message when duplicate detected
-   - Display normalized version of entered name
-   - Visual indicators (red border for invalid, green for valid)
-   - Success message when name is available
+### Models
 
-3. **Mode Toggle**
-   - Button to switch between Create and Edit modes
-   - In Edit mode, allow selecting a project from the list
-   - Update form values when project selected
-   - Clear form when switching back to Create mode
+Create TypeScript interfaces for type safety:
 
-4. **Projects List**
-   - Display all existing projects in cards
-   - Show normalized version of each project name
-   - Edit and Delete actions for each project
-   - Visual indicator for currently selected project in edit mode
+```typescript
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: Date;
+}
 
-5. **Validation Examples Section**
-   - Show valid name examples
-   - Show invalid name examples (duplicates)
-   - Explain normalization rules
+interface ProjectFormData {
+  name: string;
+  description: string;
+}
+```
 
-### Technical Requirements
+### Services
 
-1. **TypeScript Interfaces**
-   - `Project`: id, name, description, createdAt
-   - `ProjectFormData`: name, description
-   - `ValidationContext`: existingNames, currentProjectId, mode
+**ProjectService**: Manage project state using Angular Signals
 
-2. **Service Layer**
-   - `ProjectService` with Angular Signals for state management
-   - In-memory data storage with CRUD operations
-   - Computed signal for project names array
-   - Methods: getProjectById, createProject, updateProject, deleteProject
+```typescript
+class ProjectService {
+  private projectsSignal = signal<Project[]>([]);
+  projects = this.projectsSignal.asReadonly();
+  projectNames = computed(() => this.projects().map(p => p.name));
+  
+  // Methods: create, update, delete, getById
+}
+```
 
-3. **Validator Factory Pattern**
-   - Create validator function that accepts parameters
-   - Return configured ValidatorFn
-   - Support dynamic validator updates
+**Key features:**
 
-4. **Error Message Format**
-   - Include original entered value
-   - Show matching existing name
-   - Display normalized version
-   - Provide clear user-friendly message
+- In-memory storage with CRUD operations
+- Computed signal for project names (for validator)
+- Signal-based reactive state
 
-## 🧪 Test Cases
+### Component
+
+**Core functionality to implement:**
+
+1. **Custom Validator Factory** - Create `duplicateNameValidator(existingNames, currentName?)`
+2. **Name Normalization** - Lowercase, trim, handle hyphens/spaces
+3. **Form with Validators** - Combine custom + built-in validators
+4. **Mode Management** - Toggle between Create/Edit modes
+5. **Real-time Feedback** - Show validation status and normalized value
+
+### Form Requirements
+
+**Fields:**
+
+- Project Name: required, minLength(3), maxLength(50), duplicateNameValidator
+- Description: required, minLength(10), maxLength(200)
+
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **Angular 17+** | Framework with standalone components |
+| **ReactiveFormsModule** | Form management and validation |
+| **FormBuilder** | Programmatic form construction |
+| **Signals** | Reactive state management |
+| **Custom ValidatorFn** | Business logic validation |
+| **TypeScript** | Type-safe interfaces |
+
+---
+
+## Expected Output (Functional Flow)
+
+### User Flow
+
+1. **Create Mode** → User enters project name → Validator checks for duplicates → Shows feedback
+2. **Switch to Edit** → Select project from list → Form pre-fills → Same name allowed
+3. **Save Project** → Validate form → Create/Update project → Show in list
+4. **Delete Project** → Remove from list → Update validator context
 
 ### Validation Test Cases
 
-1. **Exact Match**
-   - Input: "Project Alpha" (exists)
-   - Expected: Validation error
+| Scenario | Input | Existing Names | Expected Result |
+|----------|-------|----------------|-----------------|
+| Exact match | "Project Alpha" | ["Project Alpha"] | Duplicate error |
+| Case variation | "project alpha" | ["Project Alpha"] | Duplicate error |
 
-2. **Case Variation**
-   - Input: "project alpha" (exists as "Project Alpha")
-   - Expected: Validation error
+---
 
-3. **Whitespace Variation**
-   - Input: "Project   Alpha" (exists as "Project Alpha")
-   - Expected: Validation error
+## Success Criteria (Evaluation)
 
-4. **Hyphen/Space Equivalence**
-   - Input: "Project-Alpha" (exists as "Project Alpha")
-   - Expected: Validation error
+### Implementation Checklist
 
-5. **Unique Name**
-   - Input: "New Project XYZ"
-   - Expected: Valid (no error)
+**Must Have:**
 
-6. **Edit Mode - Same Name**
-   - Editing: "Project Alpha"
-   - Input: "Project Alpha"
-   - Expected: Valid (excluded from validation)
+- [ ] Custom `duplicateNameValidator` function implemented
+- [ ] Case-insensitive comparison (lowercase, trim)
+- [ ] ValidatorFn returns proper ValidationErrors object
+- [ ] Support for Create mode (check all names)
+- [ ] Support for Edit mode (exclude current name)
+- [ ] ProjectService with Signals for state management
+- [ ] Real-time validation feedback in UI
+- [ ] Display normalized value to user
+- [ ] Form integrates custom + built-in validators
+- [ ] CRUD operations: Create, Update, Delete projects
 
-7. **Edit Mode - Different Existing Name**
-   - Editing: "Project Alpha"
-   - Input: "Project Beta" (exists)
-   - Expected: Validation error
+**Code Quality:**
 
-8. **Empty Input**
-   - Input: ""
-   - Expected: Required validator handles this, duplicate validator returns null
+- [ ] Reusable validator factory pattern
+- [ ] Type-safe interfaces (Project, ProjectFormData)
+- [ ] Proper error object structure with helpful messages
+- [ ] Clean separation: service, validator, component
 
-## 🎨 Design Specifications
+### Interview Discussion
 
-### Visual Indicators
+**Be ready to explain:**
 
-1. **Valid State**
-   - Green border on input field
-   - Green checkmark with "Project name is available" message
-   - Light green background on input
+| Topic | Key Points |
+|-------|-----------|
+| **Custom validators** | ValidatorFn signature, return ValidationErrors or null, factory pattern for configuration |
+| **Edit mode pattern** | Exclude current name from validation, dynamic validator updates, passing context |
+| **Error structure** | Include original value, matching name, normalized form, user-friendly message |
+| **When to use** | Business logic validation, uniqueness checks, contextual rules, domain-specific requirements |
 
-2. **Invalid State**
-   - Red border on input field
-   - Red warning icon with specific error message
-   - Light red background on input
+### Time Expectation
 
-3. **Normalized Preview**
-   - Blue background box
-   - Shows "Normalized: project-alpha" format
-   - Displayed below name input when value exists
+**30-45 minutes** for complete implementation
 
-4. **Form Status**
-   - Success alert (green) after successful create/update
-   - Auto-dismiss after 3 seconds
-   - Error summary at bottom of form if validation fails
+### Bonus (Optional)
 
-## 🔧 Implementation Notes
+- Async validator simulating API check
+- Debounced validation (wait before checking)
+- "Similar name" suggestions
+- Custom error display component
+- Cross-field validation patterns
 
-### Normalization Function
-
-```typescript
-function normalizeProjectName(name: string): string {
-  return name
-    .toLowerCase()
-    .trim()
-    .replace(/[\s-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-```
-
-### Validator Structure
-
-```typescript
-export function duplicateNameValidator(
-  existingNames: string[],
-  currentProjectName?: string
-): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    // Implementation
-  };
-}
-```
-
-### Error Object Format
-
-```typescript
-{
-  duplicateName: {
-    value: 'entered value',
-    existingName: 'matching existing name',
-    normalizedValue: 'normalized-value',
-    message: 'User-friendly error message'
-  }
-}
-```
-
-## 📚 Learning Outcomes
+## Learning Outcomes
 
 After completing this challenge, you will understand:
 
@@ -208,7 +181,7 @@ After completing this challenge, you will understand:
 7. **Edit Mode Patterns**: Handling validation differently in create vs edit scenarios
 8. **Validator Composition**: Combining multiple validators on a single control
 
-## 🚀 Extension Ideas (Optional)
+## Extension Ideas (Optional)
 
 1. **Async Validator**: Simulate API call to check name uniqueness
 2. **Debouncing**: Add delay before validation triggers
@@ -217,7 +190,7 @@ After completing this challenge, you will understand:
 5. **Cross-field Validation**: Validate name + category combination
 6. **Validator Composition**: Create compound validators combining multiple rules
 
-## 📖 References
+## References
 
 - [Angular Reactive Forms Documentation](https://angular.io/guide/reactive-forms)
 - [Angular Form Validation Guide](https://angular.io/guide/form-validation)

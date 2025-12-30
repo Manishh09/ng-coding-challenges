@@ -53,13 +53,6 @@ export class ProjectService {
   );
 
   /**
-   * Get project by ID
-   */
-  getProjectById(id: string): Project | undefined {
-    return this.projectsSignal().find(p => p.id === id);
-  }
-
-  /**
    * Create a new project
    */
   createProject(formData: ProjectFormData): Project {
@@ -75,40 +68,6 @@ export class ProjectService {
   }
 
   /**
-   * Update an existing project
-   */
-  updateProject(id: string, formData: ProjectFormData): Project | null {
-    const projectIndex = this.projectsSignal().findIndex(p => p.id === id);
-
-    if (projectIndex === -1) {
-      return null;
-    }
-
-    const updatedProject: Project = {
-      ...this.projectsSignal()[projectIndex],
-      name: formData.name,
-      description: formData.description
-    };
-
-    this.projectsSignal.update(projects => {
-      const updated = [...projects];
-      updated[projectIndex] = updatedProject;
-      return updated;
-    });
-
-    return updatedProject;
-  }
-
-  /**
-   * Delete a project by ID
-   */
-  deleteProject(id: string): boolean {
-    const initialLength = this.projectsSignal().length;
-    this.projectsSignal.update(projects => projects.filter(p => p.id !== id));
-    return this.projectsSignal().length < initialLength;
-  }
-
-  /**
    * Generate a unique ID for new projects
    */
   private generateId(): string {
@@ -117,16 +76,5 @@ export class ProjectService {
       return isNaN(id) ? max : Math.max(max, id);
     }, 0);
     return (maxId + 1).toString();
-  }
-
-  /**
-   * Check if project name exists (excluding specific project ID)
-   */
-  isNameDuplicate(name: string, excludeId?: string): boolean {
-    const projects = excludeId
-      ? this.projectsSignal().filter(p => p.id !== excludeId)
-      : this.projectsSignal();
-
-    return projects.some(p => p.name.toLowerCase().trim() === name.toLowerCase().trim());
   }
 }
