@@ -1,0 +1,114 @@
+<div class="playground">
+  @if (isChallengeLoaded()) {
+    <!-- Header -->
+    <header class="playground-header">
+      <div class="challenge-info">
+        <h1>{{ challenge()?.title }}</h1>
+        <div class="challenge-meta">
+          <span class="difficulty">{{ challenge()?.difficulty }}</span>
+          @for (tag of challenge()?.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          class="btn btn-secondary"
+          (click)="onReset()"
+          title="Reset to original code"
+        >
+          Reset
+        </button>
+        <button
+          class="btn btn-primary"
+          title="Run tests (coming soon)"
+          disabled
+        >
+          Validate
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="playground-content">
+      <!-- Left Panel: File Tree + Editor -->
+      <div class="editor-panel" [class.active]="selectedPanel() === 'editor'">
+        <!-- File Tree -->
+        <div class="file-tree">
+          <div class="file-tree-header">Files</div>
+          <div class="file-list">
+            @for (file of editableFiles(); track file) {
+              <button
+                class="file-item"
+                [class.active]="file === activeFilePath()"
+                [class.read-only]="isCurrentFileReadOnly()"
+                (click)="onFileSelect(file)"
+              >
+                <span class="file-icon">📄</span>
+                <span class="file-name">{{ file }}</span>
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Monaco Editor -->
+        <div class="editor-area">
+          <div class="editor-header">
+            <span class="active-file">{{ activeFilePath() }}</span>
+            @if (isCurrentFileReadOnly()) {
+              <span class="badge read-only">Read Only</span>
+            }
+          </div>
+
+          <div class="editor-wrapper">
+            <ngc-monaco-editor
+              [code]="currentFileContent()"
+              [language]="currentFileLanguage()"
+              [readOnly]="isCurrentFileReadOnly()"
+              (codeChange)="onEditorChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Preview -->
+      <div class="preview-panel" [class.active]="selectedPanel() === 'preview'">
+        <div class="preview-header">
+          <span>Live Preview</span>
+        </div>
+
+        <div class="preview-wrapper">
+          <ngc-stackblitz-host
+            [challengeId]="challengeId()"
+            [files]="stackblitzFiles()"
+            [options]="stackblitzOptions()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Panel Toggle -->
+    <div class="mobile-toggle">
+      <button
+        [class.active]="selectedPanel() === 'editor'"
+        (click)="togglePanel('editor')"
+      >
+        Editor
+      </button>
+      <button
+        [class.active]="selectedPanel() === 'preview'"
+        (click)="togglePanel('preview')"
+      >
+        Preview
+      </button>
+    </div>
+  } @else {
+    <!-- Empty State -->
+    <div class="empty-state">
+      <div class="empty-icon">🎯</div>
+      <h2>No Challenge Selected</h2>
+      <p>Select a challenge from the list to start coding</p>
+    </div>
+  }
+</div>

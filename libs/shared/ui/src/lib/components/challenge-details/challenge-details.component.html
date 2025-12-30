@@ -56,21 +56,50 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <!-- PRIMARY: StackBlitz Launch Card -->
+            <!-- PRIMARY: Playground Launch Card (NEW) -->
             <div class="launch-card launch-card--primary">
                 <div class="launch-card__header">
                     <div class="launch-card__icon">
-                        <mat-icon>electric_bolt</mat-icon>
+                        <mat-icon>code</mat-icon>
                     </div>
-                    <h3 class="launch-card__title">Start Coding</h3>
+                    <h3 class="launch-card__title">Code in Playground</h3>
                 </div>
 
                 <p class="launch-card__description">
-                    Launch the challenge in an interactive StackBlitz IDE and start building your solution
+                    Open the challenge in our integrated Monaco Editor with live preview
                 </p>
 
                 <button
                     mat-flat-button
+                    class="launch-btn launch-btn--playground"
+                    (click)="openInPlayground()"
+                    [attr.aria-label]="'Open ' + c.title + ' in Playground editor'">
+                    <mat-icon>rocket_launch</mat-icon>
+                    <span>Open in Playground</span>
+                </button>
+
+                <div class="launch-card__badge">
+                    <mat-icon>local_fire_department</mat-icon>
+                    <span>Recommended</span>
+                </div>
+            </div>
+
+            <!-- SECONDARY: StackBlitz Launch Card -->
+            <div class="launch-card launch-card--secondary">
+                <div class="launch-card__header">
+                    <div class="launch-card__icon">
+                        <mat-icon>electric_bolt</mat-icon>
+                    </div>
+                    <h3 class="launch-card__title">Code in StackBlitz</h3>
+                </div>
+
+                <p class="launch-card__description">
+                    Launch in an external StackBlitz IDE (opens in new tab)
+                </p>
+
+                <button
+                    mat-stroked-button
+                    color="primary"
                     class="launch-btn launch-btn--stackblitz"
                     [disabled]="launching()"
                     (click)="launchStackBlitz()"
@@ -80,20 +109,20 @@
                         <span>Opening StackBlitz...</span>
                     } @else {
                         <ng-container>
-                            <mat-icon>code</mat-icon>
-                            <span>Code in StackBlitz</span>
+                            <mat-icon>open_in_new</mat-icon>
+                            <span>Open StackBlitz</span>
                         </ng-container>
                     }
                 </button>
 
-                <div class="launch-card__badge">
-                    <mat-icon>speed</mat-icon>
-                    <span>Ready to code</span>
+                <div class="launch-card__hint">
+                    <mat-icon>info_outline</mat-icon>
+                    <span>Opens in new tab</span>
                 </div>
             </div>
 
-            <!-- SECONDARY: Workspace Preview Card -->
-            <div class="launch-card launch-card--secondary">
+            <!-- TERTIARY: Workspace Preview Card -->
+            <div class="launch-card launch-card--tertiary">
                 <div class="launch-card__header">
                     <div class="launch-card__icon">
                         <mat-icon>visibility</mat-icon>

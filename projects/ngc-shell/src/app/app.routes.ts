@@ -31,6 +31,15 @@ export const routes: Routes = [
       ),
   },
 
+  // Playground (Code Editor + StackBlitz)
+  {
+    path: 'playground',
+    loadComponent: () =>
+      import('./features/playground/components/playground-container/playground-container.component').then(
+        m => m.PlaygroundContainerComponent
+      ),
+  },
+
   // Challenges section with shell layout
   {
     path: 'challenges',

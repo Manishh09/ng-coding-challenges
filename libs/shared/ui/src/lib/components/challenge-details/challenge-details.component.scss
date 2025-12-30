@@ -379,7 +379,7 @@
         transform: translateY(-2px);
     }
 
-    // PRIMARY CARD - StackBlitz (Most Prominent)
+    // PRIMARY CARD - Playground (Most Prominent - Recommended)
     &--primary {
         background: linear-gradient(135deg,
             var(--electric-violet) 0%,
@@ -438,7 +438,7 @@
         }
     }
 
-    // SECONDARY CARD - Workspace Preview (Subtle)
+    // SECONDARY CARD - StackBlitz (Alternative Option)
     &--secondary {
         background: var(--surface-secondary);
         border: 2px solid var(--border-primary);
@@ -452,6 +452,28 @@
         .launch-card__icon {
             background: var(--color-primary-alpha-10);
             color: var(--interactive-primary);
+        }
+
+        .launch-card__badge {
+            background: var(--color-primary-alpha-10);
+            color: var(--interactive-primary);
+        }
+    }
+
+    // TERTIARY CARD - Workspace Preview (Subtle Preview Option)
+    &--tertiary {
+        background: var(--surface-secondary);
+        border: 2px solid var(--border-primary);
+        box-shadow: var(--shadow-sm);
+
+        &:hover {
+            border-color: var(--border-secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .launch-card__icon {
+            background: var(--color-info-alpha-10);
+            color: var(--color-info);
         }
 
         .launch-card__hint {
@@ -531,8 +553,8 @@
             height: 20px;
         }
 
-        // StackBlitz Button (White on gradient)
-        &--stackblitz {
+        // Playground Button (White on gradient - Primary)
+        &--playground {
             background: rgba(255, 255, 255, 0.95) !important;
             color: var(--electric-violet) !important;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
@@ -556,15 +578,37 @@
             }
         }
 
-        // Workspace Button (Outlined)
-        &--workspace {
+        // StackBlitz Button (Outlined - Secondary)
+        &--stackblitz {
             border: 2px solid var(--interactive-primary);
             color: var(--interactive-primary);
             background: transparent !important;
 
-            &:hover {
+            &:hover:not(:disabled) {
                 background: var(--color-primary-alpha-10) !important;
                 border-color: var(--interactive-primary-hover);
+                transform: translateY(-2px);
+            }
+
+            &:active:not(:disabled) {
+                transform: translateY(0);
+            }
+
+            &:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
+        }
+
+        // Workspace Button (Outlined - Tertiary)
+        &--workspace {
+            border: 2px solid var(--border-primary);
+            color: var(--text-secondary);
+            background: transparent !important;
+
+            &:hover {
+                background: var(--surface-tertiary) !important;
+                border-color: var(--border-secondary);
                 transform: translateY(-1px);
             }
 

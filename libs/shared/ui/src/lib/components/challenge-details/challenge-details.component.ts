@@ -168,6 +168,22 @@ export class ChallengeDetailsComponent {
     }
   }
 
+  /**
+   * Open challenge in playground editor
+   * Navigates to /playground with category and challenge query params
+   */
+  openInPlayground(): void {
+    const c = this.challengeDetails();
+    if (!c) return;
+
+    this.router.navigate(['/playground'], {
+      queryParams: {
+        category: c.category,
+        challenge: c.link
+      }
+    });
+  }
+
   openGitHub(): void {
     const c = this.challengeDetails();
     if (c?.gitHub) {
