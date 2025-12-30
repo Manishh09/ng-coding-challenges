@@ -5,7 +5,7 @@
 
 ---
 
-## 1️⃣ Problem Statement
+## Problem Statement
 
 Build a dynamic form system that renders forms from **JSON schema** with runtime validators. Instead of hardcoding forms, the structure comes from configuration at runtime.
 
@@ -33,7 +33,7 @@ Create a component that:
 
 ---
 
-## 2️⃣ Requirements
+## Requirements
 
 ### Models
 
@@ -135,7 +135,7 @@ getValidators(configs: ValidatorConfig[]): ValidatorFn[] {
 
 ---
 
-## 3️⃣ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
@@ -148,7 +148,7 @@ getValidators(configs: ValidatorConfig[]): ValidatorFn[] {
 
 ---
 
-## 4️⃣ Expected Output (Functional Flow)
+## Expected Output (Functional Flow)
 
 ### User Flow
 
@@ -189,7 +189,7 @@ getValidators(configs: ValidatorConfig[]): ValidatorFn[] {
 
 ---
 
-## 5️⃣ Success Criteria (Evaluation)
+## Success Criteria (Evaluation)
 
 ### Implementation Checklist
 
@@ -225,7 +225,7 @@ getValidators(configs: ValidatorConfig[]): ValidatorFn[] {
 
 ### Time Expectation
 
-⏱️ **30-45 minutes** for complete implementation
+**30-45 minutes** for complete implementation
 
 ### Bonus (Optional)
 

@@ -5,7 +5,7 @@
 
 ---
 
-## 1️⃣ Problem Statement
+## Problem Statement
 
 Build a **custom synchronous validator** that prevents duplicate project names. The validator must handle case-insensitive comparison and support both create and edit modes.
 
@@ -31,7 +31,7 @@ Create a reusable validator that:
 
 ---
 
-## 2️⃣ Requirements
+## Requirements
 
 ### Models
 
@@ -90,7 +90,7 @@ class ProjectService {
 
 ---
 
-## 3️⃣ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
@@ -103,7 +103,7 @@ class ProjectService {
 
 ---
 
-## 4️⃣ Expected Output (Functional Flow)
+## Expected Output (Functional Flow)
 
 ### User Flow
 
@@ -116,12 +116,12 @@ class ProjectService {
 
 | Scenario | Input | Existing Names | Expected Result |
 |----------|-------|----------------|-----------------|
-| Exact match | "Project Alpha" | ["Project Alpha"] | ❌ Duplicate error |
-| Case variation | "project alpha" | ["Project Alpha"] | ❌ Duplicate error |
+| Exact match | "Project Alpha" | ["Project Alpha"] | Duplicate error |
+| Case variation | "project alpha" | ["Project Alpha"] | Duplicate error |
 
 ---
 
-## 5️⃣ Success Criteria (Evaluation)
+## Success Criteria (Evaluation)
 
 ### Implementation Checklist
 
@@ -158,7 +158,7 @@ class ProjectService {
 
 ### Time Expectation
 
-⏱️ **30-45 minutes** for complete implementation
+**30-45 minutes** for complete implementation
 
 ### Bonus (Optional)
 
@@ -168,7 +168,7 @@ class ProjectService {
 - Custom error display component
 - Cross-field validation patterns
 
-## 📚 Learning Outcomes
+## Learning Outcomes
 
 After completing this challenge, you will understand:
 
@@ -181,7 +181,7 @@ After completing this challenge, you will understand:
 7. **Edit Mode Patterns**: Handling validation differently in create vs edit scenarios
 8. **Validator Composition**: Combining multiple validators on a single control
 
-## 🚀 Extension Ideas (Optional)
+## Extension Ideas (Optional)
 
 1. **Async Validator**: Simulate API call to check name uniqueness
 2. **Debouncing**: Add delay before validation triggers
@@ -190,7 +190,7 @@ After completing this challenge, you will understand:
 5. **Cross-field Validation**: Validate name + category combination
 6. **Validator Composition**: Create compound validators combining multiple rules
 
-## 📖 References
+## References
 
 - [Angular Reactive Forms Documentation](https://angular.io/guide/reactive-forms)
 - [Angular Form Validation Guide](https://angular.io/guide/form-validation)

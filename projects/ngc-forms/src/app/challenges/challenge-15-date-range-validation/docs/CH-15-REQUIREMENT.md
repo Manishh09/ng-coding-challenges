@@ -5,13 +5,13 @@
 
 ---
 
-## 📋 Problem Statement
+## Problem Statement
 
 Build a **leave request form** where the **end date must be after the start date**. This validation requires examining multiple fields together at the **FormGroup level**, not individual controls.
 
 **Key Concept:** Unlike previous challenges where validators checked fields in isolation, this uses **cross-field validation** to validate relationships between fields.
 
-## 🎯 Requirements
+## Requirements
 
 ### Form Fields (4 fields)
 
@@ -37,10 +37,10 @@ Build a **leave request form** where the **end date must be after the start date
 ### Error Display Pattern
 
 ```typescript
-// ❌ WRONG: Checking control for group error
+// WRONG: Checking control for group error
 if (leaveForm.get('endDate')?.hasError('dateRangeInvalid')) { }
 
-// ✅ CORRECT: Checking FormGroup for group error  
+// CORRECT: Checking FormGroup for group error  
 if (leaveForm.hasError('dateRangeInvalid')) { }
 ```
 
@@ -54,7 +54,7 @@ if (leaveForm.hasError('dateRangeInvalid')) { }
 - Submit button disabled when form invalid
 - Basic success message on submit
 
-## 🔍 Expected Output
+## Expected Output
 
 ### Valid Form
 
@@ -63,7 +63,7 @@ Leave Type: Vacation
 Start Date: 2025-01-15
 End Date: 2025-01-20
 Reason: Planning a family vacation
-Total Days: 6 days ✓
+Total Days: 6 days
 [Submit] Enabled
 ```
 
@@ -73,18 +73,18 @@ Total Days: 6 days ✓
 Start Date: 2025-01-20
 End Date: 2025-01-15
 
-⚠ Date Range Error: End date must be after start date
+Date Range Error: End date must be after start date
 
 [Submit] Disabled
 ```
 
-## 🧪 Test Cases
+## Test Cases
 
 Test these scenarios to validate your implementation:
 
-1. **Valid Range:** Start: Jan 15, End: Jan 20 → ✅ Valid
-2. **Same Date:** Start: Jan 15, End: Jan 15 → ❌ Error
-3. **Reversed Range:** Start: Jan 20, End: Jan 15 → ❌ Error  
+1. **Valid Range:** Start: Jan 15, End: Jan 20 → Valid
+2. **Same Date:** Start: Jan 15, End: Jan 15 → Error
+3. **Reversed Range:** Start: Jan 20, End: Jan 15 → Error  
 4. **Empty Fields:** One or both dates empty → No group error
 5. **Untouched Fields:** No errors shown initially
 
@@ -104,7 +104,7 @@ Test these scenarios to validate your implementation:
    // Should show warning and disable submit
    ```
 
-## 📚 Key Concepts
+## Key Concepts
 
 ### 1. FormGroup-Level Validators vs Control-Level Validators
 
@@ -117,7 +117,7 @@ email: ['', [Validators.required], [emailAvailabilityValidator()]]
     FormControl                    AsyncValidator
 ```
 
-## 📚 Key Concept: FormGroup vs Control Validators
+## Key Concept: FormGroup vs Control Validators
 
 ### Control-Level Validation (Previous Challenges)
 
@@ -148,18 +148,18 @@ this.fb.group({
 | Error location | `control.errors` | `formGroup.errors` |
 | Check with | `control.hasError()` | `formGroup.hasError()` |
 
-## ✅ Success Criteria
+## Success Criteria
 
 Your implementation must:
 
-1. ✅ Use FormGroup-level validator (not control-level)
-2. ✅ Display group errors separately from control errors
-3. ✅ Show error only when both date fields touched
-4. ✅ Handle empty fields correctly (return null)
-5. ✅ Disable submit when form invalid
-6. ✅ Use `form.hasError()` not `control.hasError()` for group errors
+1. Use FormGroup-level validator (not control-level)
+2. Display group errors separately from control errors
+3. Show error only when both date fields touched
+4. Handle empty fields correctly (return null)
+5. Disable submit when form invalid
+6. Use `form.hasError()` not `control.hasError()` for group errors
 
-## 🎓 Learning Objectives
+## Learning Objectives
 
 - Understand difference between control and group validators
 - Implement cross-field validation patterns

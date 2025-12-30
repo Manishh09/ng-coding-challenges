@@ -265,7 +265,7 @@ onSubmit(): void {
   
   @if (hasError('email')) {
     <div class="error-message" role="alert">
-      <span class="error-icon">⚠</span>
+      <span class="error-icon">!</span>
       {{ getErrorMessage('email') }}
     </div>
   }
@@ -462,17 +462,17 @@ const data: LoginCredentials = this.loginForm.value; // typed!
 
 ## Best Practices Checklist
 
-✅ **Form Initialization**
+**Form Initialization**
 - [ ] Create form in `ngOnInit()`
 - [ ] Use `FormBuilder` for cleaner code
 - [ ] Define all validators upfront
 
-✅ **Validation**
+**Validation**
 - [ ] Combine multiple validator conditions
 - [ ] Provide specific error messages
 - [ ] Show errors only when appropriate
 
-✅ **Type Safety**
+**Type Safety**
 - [ ] Create interfaces for form data
 - [ ] Type form values on submission
 - [ ] Use strict TypeScript settings

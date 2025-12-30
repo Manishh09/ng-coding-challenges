@@ -5,7 +5,7 @@
 
 ---
 
-## 📚 Solution Overview
+## Solution Overview
 
 Async validators return `Observable<ValidationErrors | null>` and are registered as the 3rd parameter in FormControl. Unlike sync validators, they make the control status `'PENDING'` during validation.
 
@@ -25,9 +25,7 @@ User types → timer(500ms) → switchMap(API call) → delay(1500ms) → map(re
 
 ---
 
-## 📝 Implementation Steps
-
-## 📝 Implementation Steps
+## Implementation Steps
 
 ### Step 1: Define Interfaces
 
@@ -250,7 +248,7 @@ export class EmailFormComponent implements OnInit {
 
 ---
 
-## 💡 Interview Discussion Points
+## Interview Discussion Points
 
 ### AsyncValidatorFn Pattern
 "Factory function that returns AsyncValidatorFn. Takes service as parameter for dependency injection. Returns Observable instead of direct value - enables async operations like API calls."
@@ -269,7 +267,7 @@ export class EmailFormComponent implements OnInit {
 
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 | Issue | Solution |
 |-------|----------|
@@ -282,7 +280,7 @@ export class EmailFormComponent implements OnInit {
 
 ---
 
-## 🧪 Key Tests
+## Key Tests
 
 ```typescript
 // Async validator - available email
@@ -324,7 +322,7 @@ it('should set isValidating during validation', fakeAsync(() => {
 
 ---
 
-## ✅ Implementation Checklist
+## Implementation Checklist
 
 - [ ] `emailAvailabilityValidator` returns `Observable<ValidationErrors | null>`
 - [ ] Debouncing with `timer(500)` implemented
@@ -341,13 +339,13 @@ it('should set isValidating during validation', fakeAsync(() => {
 
 ---
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
-✅ **AsyncValidatorFn** returns `Observable<ValidationErrors | null>`, registered as 3rd parameter  
-✅ **Debouncing** with `timer(500)` reduces API calls, improves performance  
-✅ **switchMap()** cancels previous requests, prevents race conditions  
-✅ **statusChanges** Observable tracks `'PENDING'` state for loading indicators  
-✅ **Fail-open** strategy (`catchError(() => of(null))`) provides better UX on errors  
-✅ Return `of(null)` immediately for empty values (no API call)  
-✅ Block submission when `form.pending` in addition to `form.invalid`  
-✅ Use `delay()` operator to simulate realistic API latency in services
+**AsyncValidatorFn** returns `Observable<ValidationErrors | null>`, registered as 3rd parameter  
+**Debouncing** with `timer(500)` reduces API calls, improves performance  
+**switchMap()** cancels previous requests, prevents race conditions  
+**statusChanges** Observable tracks `'PENDING'` state for loading indicators  
+**Fail-open** strategy (`catchError(() => of(null))`) provides better UX on errors  
+Return `of(null)` immediately for empty values (no API call)  
+Block submission when `form.pending` in addition to `form.invalid`  
+Use `delay()` operator to simulate realistic API latency in services

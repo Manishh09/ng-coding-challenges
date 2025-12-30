@@ -188,13 +188,13 @@ private updateNameValidator(): void {
 
 ---
 
-## 🔄 Flow Summary
+## Flow Summary
 
 **User Action** → Enter project name → Validator checks against existing names (case-insensitive) → Show real-time feedback (valid/duplicate)
 
 ---
 
-## 💡 Interview Discussion Points
+## Interview Discussion Points
 
 ### Custom Validator Pattern
 "Factory function returns ValidatorFn configured with parameters (existingNames, optionally currentName for edit scenarios). Enables context-aware validation - same validator, different configuration."
@@ -207,7 +207,7 @@ private updateNameValidator(): void {
 
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 | Issue | Solution |
 |-------|----------|
@@ -218,7 +218,7 @@ private updateNameValidator(): void {
 
 ---
 
-## 🧪 Key Tests
+## Key Tests
 
 ```typescript
 // Validator - Duplicate (case-insensitive)
@@ -233,7 +233,7 @@ expect(validator(new FormControl('Project-Gamma'))).toBeNull();
 
 ---
 
-## ✅ Implementation Checklist
+## Implementation Checklist
 
 - [ ] Custom validator factory with existingNames parameter
 - [ ] Case-insensitive comparison (toLowerCase + trim)
@@ -246,14 +246,14 @@ expect(validator(new FormControl('Project-Gamma'))).toBeNull();
 
 ---
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
-✅ Custom validators are **factory functions** returning ValidatorFn  
-✅ **Case-insensitive comparison** (`toLowerCase().trim()`) ensures consistent validation  
-✅ **ValidationErrors object** should include helpful context (value, existingName, message)  
-✅ **Computed signals** automatically derive data from source signals  
-✅ **Signals** simplify reactive state management without subscriptions  
-✅ Return `null` for valid, return error object for invalid
+Custom validators are **factory functions** returning ValidatorFn  
+**Case-insensitive comparison** (`toLowerCase().trim()`) ensures consistent validation  
+**ValidationErrors object** should include helpful context (value, existingName, message)  
+**Computed signals** automatically derive data from source signals  
+**Signals** simplify reactive state management without subscriptions  
+Return `null` for valid, return error object for invalid
 - **Component**: UI logic and user interaction
 
 ### 3. Signal-based Reactivity
@@ -315,7 +315,7 @@ return {
 
 ---
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 ### Unit Test: Normalization Function
 
@@ -397,7 +397,7 @@ describe('ProjectFormComponent', () => {
 
 ---
 
-## 💡 Common Pitfalls & Solutions
+## Common Pitfalls & Solutions
 
 ### Pitfall 1: Validator Not Updating
 
@@ -454,7 +454,7 @@ shouldShowValidation(fieldName: string): boolean {
 
 ---
 
-## 📚 Key Takeaways
+## Key Takeaways
 
 1. **Custom validators are factory functions** that return `ValidatorFn`
 2. **Normalization is critical** for consistent comparison
@@ -465,12 +465,12 @@ shouldShowValidation(fieldName: string): boolean {
 7. **Error objects should be descriptive** for better UX
 8. **Always trigger validation updates** after changing validator configuration
 
-## 🎯 Success Criteria Checklist
+## Success Criteria Checklist
 
-- ✅ Custom validator function implemented
-- ✅ Normalization handles case, whitespace, hyphens
-- ✅ Edit mode excludes current project from validation
-- ✅ Real-time validation with immediate feedback
+- Custom validator function implemented
+- Normalization handles case, whitespace, hyphens
+- Edit mode excludes current project from validation
+- Real-time validation with immediate feedback
 - ✅ Clear error messages with matched name displayed
 - ✅ Normalized preview shows transformation
 - ✅ Mode toggle switches between create/edit

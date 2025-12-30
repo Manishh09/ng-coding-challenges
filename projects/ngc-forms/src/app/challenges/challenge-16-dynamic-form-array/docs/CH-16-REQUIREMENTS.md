@@ -1,10 +1,10 @@
 # Challenge 16: Dynamic FormArray (Experience Section)
 
-**Difficulty:** 🟡 Intermediate  
+**Difficulty:** Intermediate  
 **Estimated Time:** 40-50 minutes
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Build a **dynamic work experience form** using FormArray where users can add/remove multiple experience entries at runtime. Each entry captures company name, role, and years of experience.
 
@@ -20,7 +20,7 @@ Create a form that:
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 ### 1. FormArray Structure
 
@@ -111,7 +111,7 @@ totalYears = computed(() => {
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|----------|
@@ -132,7 +132,7 @@ totalYears = computed(() => {
 
 ---
 
-## ✅ Expected Output
+## Expected Output
 
 ### User Flow
 
@@ -159,19 +159,19 @@ totalYears = computed(() => {
 
 **Valid Entry:**
 
-- ✅ Green border on inputs
+- Green border on inputs
 - No error messages
 - Contributes to total years
 
 **Invalid Entry:**
 
-- ❌ Red border on invalid inputs
+- Red border on invalid inputs
 - Error message below field: "Company is required" or "Minimum 2 characters required"
 - Submit button remains disabled
 
 ---
 
-## 🎯 Success Criteria
+## Success Criteria
 
 ### Interview Discussion Topics
 

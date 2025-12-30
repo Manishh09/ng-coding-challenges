@@ -1,11 +1,11 @@
 # Challenge 17: Custom Input using ControlValueAccessor - Solution Guide
 
-**Difficulty:** 🟡 Intermediate  
+**Difficulty:** Intermediate  
 **Estimated Time:** 30-40 minutes
 
 ---
 
-## 📚 Solution Overview
+## Solution Overview
 
 **ControlValueAccessor (CVA)** bridges custom components with Angular's reactive forms. It defines 4 methods enabling bidirectional data flow:
 
@@ -28,7 +28,7 @@ export class CustomInputComponent implements ControlValueAccessor { }
 
 ---
 
-## 📝 Implementation Steps
+## Implementation Steps
 
 ### Step 1: Define Models
 
@@ -78,22 +78,22 @@ export class CustomInputComponent implements ControlValueAccessor {
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
-  // 1️⃣ Form → Component
-  writeValue(value: any): void {
+  // 1. Form → Component
+  writeValue(value: string): void {
     this.value = value || '';
   }
 
-  // 2️⃣ Store Component → Form callback
-  registerOnChange(fn: any): void {
+  // 2. Store Component → Form callback
+  registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  // 3️⃣ Store touch tracking callback
-  registerOnTouched(fn: any): void {
+  // 3. Store touch tracking callback
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  // 4️⃣ Handle disabled state
+  // 4. Handle disabled state
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
@@ -221,7 +221,7 @@ Works exactly like native `<input formControlName="name">`!
 
 ---
 
-## 🔄 Data Flow Diagram
+## Data Flow Diagram
 
 ```
 ┌─────────────────────────────────────┐
@@ -240,7 +240,7 @@ Works exactly like native `<input formControlName="name">`!
 
 ---
 
-## 💡 Interview Discussion Points
+## Interview Discussion Points
 
 ### What is ControlValueAccessor?
 "CVA is the bridge between custom components and reactive forms. It's an interface with 4 methods enabling bidirectional data flow, making custom components work like native inputs with formControlName."
@@ -275,7 +275,7 @@ Works exactly like native `<input formControlName="name">`!
 
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 | Issue | Symptom | Solution |
 |-------|---------|----------|
@@ -288,7 +288,7 @@ Works exactly like native `<input formControlName="name">`!
 
 ---
 
-## 🧪 Key Tests
+## Key Tests
 
 ```typescript
 describe('CustomInputComponent - CVA', () => {
@@ -323,7 +323,7 @@ describe('CustomInputComponent - CVA', () => {
 
 ---
 
-## ✅ Completion Checklist
+## Completion Checklist
 
 - [ ] CustomInputComponent implements all 4 CVA methods
 - [ ] NG_VALUE_ACCESSOR provider with forwardRef configured

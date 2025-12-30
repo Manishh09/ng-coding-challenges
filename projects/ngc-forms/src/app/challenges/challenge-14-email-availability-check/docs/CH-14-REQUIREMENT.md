@@ -5,7 +5,7 @@
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Build a **custom asynchronous validator** that checks email availability in real-time without blocking the UI. The validator must simulate an API call with realistic delay and provide instant feedback.
 
@@ -21,7 +21,7 @@ Create a registration form that:
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 ### 1. Custom Async Validator
 
@@ -109,16 +109,16 @@ interface EmailFormData {
 
 | State | Display | Behavior |
 |-------|---------|----------|
-| **PENDING** | 🔄 "Checking email availability..." | Show spinner, disable submit |
-| **INVALID** | ❌ "Email already registered" + suggestions | Show error, red border |
-| **VALID** | ✅ "Email is available!" | Green border, enable submit |
+| **PENDING** | "Checking email availability..." | Show spinner, disable submit |
+| **INVALID** | "Email already registered" + suggestions | Show error, red border |
+| **VALID** | "Email is available!" | Green border, enable submit |
 | **Empty** | - | No async call (required validator handles) |
 
 **Implementation:** Monitor `statusChanges` Observable to track state transitions
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|----------|
@@ -130,12 +130,12 @@ interface EmailFormData {
 
 ---
 
-## ✅ Expected Output
+## Expected Output
 
 ### User Flow
 
-1. **User Types Email** → Wait 500ms pause → Show loading (🔄 "Checking...")
-2. **API Responds** (after 1.5s) → Show result (✅ Available / ❌ Taken)
+1. **User Types Email** → Wait 500ms pause → Show loading ("Checking...")
+2. **API Responds** (after 1.5s) → Show result (Available / Taken)
 3. **If Taken** → Display suggestions: `username123@domain.com`
 4. **Submit** → Blocked if invalid or pending
 
@@ -143,12 +143,12 @@ interface EmailFormData {
 
 | Input | Result | Time | Notes |
 |-------|--------|------|-------|
-| `admin@company.com` | ❌ Already registered | ~2s | Case-insensitive match |
-| `Admin@Company.com` | ❌ Already registered | ~2s | Normalized to lowercase |
-| `newuser@example.com` | ✅ Email is available! | ~2s | Unique email |
-| *(empty field)* | ❌ Required | 0s | No async call |
+| `admin@company.com` | Already registered | ~2s | Case-insensitive match |
+| `Admin@Company.com` | Already registered | ~2s | Normalized to lowercase |
+| `newuser@example.com` | Email is available! | ~2s | Unique email |
+| *(empty field)* | Required | 0s | No async call |
 | *(rapid typing)* | ⏳ Waiting... | - | Debounce delays check |
-| `test@test.com` | ❌ Already registered | ~2s | Trimmed before check |
+| `test@test.com` | Already registered | ~2s | Trimmed before check |
 
 **Total Time:** Debounce (500ms) + API delay (1500ms) = **~2 seconds**
 
@@ -164,7 +164,7 @@ interface EmailFormData {
 
 ---
 
-## 🎯 Success Criteria
+## Success Criteria
 
 ### Interview Discussion Topics
 

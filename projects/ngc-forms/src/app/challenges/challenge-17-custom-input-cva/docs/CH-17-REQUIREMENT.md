@@ -5,7 +5,7 @@
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Build a **reusable custom input component** that integrates seamlessly with Angular's reactive forms using the `ControlValueAccessor` interface.
 
@@ -134,7 +134,7 @@ this.userForm = this.fb.group({
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |-----------|----------|
@@ -150,7 +150,7 @@ this.userForm = this.fb.group({
 
 ---
 
-## 📤 Expected Output
+## Expected Output
 
 ### User Flow
 
@@ -194,7 +194,7 @@ this.userForm = this.fb.group({
 
 ---
 
-## ✅ Success Criteria
+## Success Criteria
 
 ### Implementation Checklist
 
@@ -233,7 +233,7 @@ this.userForm = this.fb.group({
 
 ---
 
-## ✅ Completion Checklist
+## Completion Checklist
 
 - [ ] All 4 CVA methods implemented correctly
 - [ ] Component works with formControlName directive

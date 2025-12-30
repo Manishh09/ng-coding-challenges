@@ -4,7 +4,7 @@
 **Difficulty:** Advanced  
 ---
 
-## 📖 Quick Overview
+## Quick Overview
 
 This challenge focuses on **cross-field validation** - validating relationships between multiple form fields at the FormGroup level, not at individual control level.
 
@@ -12,7 +12,7 @@ This challenge focuses on **cross-field validation** - validating relationships 
 
 ---
 
-## 🎯 Step-by-Step Solution
+## Step-by-Step Solution
 
 ### Step 1: Create the Cross-Field Validator
 
@@ -411,7 +411,7 @@ onReset(): void {
 
 ---
 
-## 🎨 Template Implementation
+## Template Implementation
 
 ### Step 7: Create Form Template
 
@@ -484,7 +484,7 @@ onReset(): void {
   <!-- Cross-Field Validation Error (FormGroup Level) -->
   @if (getGroupError(); as errorMsg) {
     <div class="group-error-message" role="alert">
-      <div class="error-icon">⚠</div>
+      <div class="error-icon">!</div>
       <div class="error-content">
         <strong>Date Range Error:</strong>
         <p>{{ errorMsg }}</p>
@@ -495,7 +495,7 @@ onReset(): void {
   <!-- Max Days Warning (Business Rule) -->
   @if (getMaxDaysWarning(); as warningMsg) {
     <div class="group-error-message warning" role="alert">
-      <div class="error-icon">⚠</div>
+      <div class="error-icon">!</div>
       <div class="error-content">
         <strong>Leave Type Limit Exceeded:</strong>
         <p>{{ warningMsg }}</p>
@@ -554,7 +554,7 @@ onReset(): void {
 
 ---
 
-## 📝 Key Concepts Explained
+## Key Concepts Explained
 
 ### 1. Control-Level vs FormGroup-Level Validation
 
@@ -569,16 +569,16 @@ onReset(): void {
 
 **Use cross-field validation when:**
 
-- ✅ Field B depends on value of Field A (end date after start date)
-- ✅ Sum of multiple fields has constraints (total must equal 100%)
-- ✅ Conditional validation (if A is selected, B is required)
-- ✅ Complex business rules spanning multiple fields
+- Field B depends on value of Field A (end date after start date)
+- Sum of multiple fields has constraints (total must equal 100%)
+- Conditional validation (if A is selected, B is required)
+- Complex business rules spanning multiple fields
 
 **Don't use it for:**
 
-- ❌ Independent field validation (use control-level validators)
-- ❌ Async validation (use AsyncValidatorFn)
-- ❌ Simple presence/format checks
+- Independent field validation (use control-level validators)
+- Async validation (use AsyncValidatorFn)
+- Simple presence/format checks
 
 ### 3. Validator Return Values
 
@@ -618,18 +618,18 @@ if (shouldShow && this.form.hasError('error')) { }
 
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 ### 1. Applying Validator at Wrong Level
 
 ```typescript
-// ❌ WRONG: Applying to control
+// WRONG: Applying to control
 this.fb.group({
   startDate: ['', [Validators.required, dateRangeValidator()]],  // Wrong!
   endDate: ['', [Validators.required]]
 })
 
-// ✅ CORRECT: Applying to FormGroup
+// CORRECT: Applying to FormGroup
 this.fb.group({
   startDate: ['', [Validators.required]],
   endDate: ['', [Validators.required]]
@@ -641,22 +641,22 @@ this.fb.group({
 ### 2. Checking Control for Group Error
 
 ```typescript
-// ❌ WRONG: Checking control for group error
+// WRONG: Checking control for group error
 if (this.leaveForm.get('endDate')?.hasError('dateRangeInvalid')) { }
 
-// ✅ CORRECT: Checking FormGroup for group error
+// CORRECT: Checking FormGroup for group error
 if (this.leaveForm.hasError('dateRangeInvalid')) { }
 ```
 
 ### 3. Showing Error Too Early
 
 ```typescript
-// ❌ WRONG: Shows error when only one field touched
+// WRONG: Shows error when only one field touched
 if (this.leaveForm.hasError('dateRangeInvalid')) {
   return errorMessage;
 }
 
-// ✅ CORRECT: Shows error only when both fields touched
+// CORRECT: Shows error only when both fields touched
 const startTouched = this.leaveForm.get('startDate')?.touched;
 const endTouched = this.leaveForm.get('endDate')?.touched;
 
@@ -670,7 +670,7 @@ if ((startTouched || submitted) && (endTouched || submitted)) {
 ### 4. Not Returning Null for Empty Fields
 
 ```typescript
-// ❌ WRONG: Validates even when fields are empty
+// WRONG: Validates even when fields are empty
 export function dateRangeValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const startDate = control.get('startDate')?.value;
@@ -685,7 +685,7 @@ export function dateRangeValidator(): ValidatorFn {
   };
 }
 
-// ✅ CORRECT: Skip validation for empty fields
+// CORRECT: Skip validation for empty fields
 export function dateRangeValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const startDate = control.get('startDate')?.value;
@@ -708,12 +708,12 @@ export function dateRangeValidator(): ValidatorFn {
 ### 5. Using < Instead of <=
 
 ```typescript
-// ❌ PARTIAL: Allows same date
+// PARTIAL: Allows same date
 if (endDate < startDate) {  // Only catches reversed dates
   return { dateRangeInvalid: true };
 }
 
-// ✅ CORRECT: Catches same date too
+// CORRECT: Catches same date too
 if (endDate <= startDate) {  // Catches both same and reversed dates
   return { dateRangeInvalid: true };
 }
@@ -721,7 +721,7 @@ if (endDate <= startDate) {  // Catches both same and reversed dates
 
 ---
 
-## 🚀 Advanced Patterns
+## Advanced Patterns
 
 ### 1. Multiple Cross-Field Validators
 
@@ -808,7 +808,7 @@ ngOnInit(): void {
 
 ---
 
-## 🎯 Interview Tips
+## Interview Tips
 
 ### What Interviewers Look For
 
@@ -862,7 +862,7 @@ ngOnInit(): void {
 
 ---
 
-## 📚 Quick Reference
+## Quick Reference
 
 ### Validator Pattern
 
@@ -908,7 +908,7 @@ if (this.form.hasError('errorKey')) { }
 
 ---
 
-## ✅ Checklist
+## Checklist
 
 - [ ] Validator created in separate file
 - [ ] Validator applied at FormGroup level (second parameter)

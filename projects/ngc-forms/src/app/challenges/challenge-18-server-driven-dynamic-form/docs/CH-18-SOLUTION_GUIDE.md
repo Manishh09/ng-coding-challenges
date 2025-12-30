@@ -1,6 +1,6 @@
 # Challenge 18: Solution Guide - Server-Driven Dynamic Form
 
-## � Overview
+## Overview
 
 This guide shows how to build dynamic forms from JSON schema using the **validator factory pattern**. Forms are generated at runtime from configuration instead of hardcoded templates.
 
@@ -199,13 +199,13 @@ onSubmit(): void {
 
 ---
 
-## 🔄 Flow Summary
+## Flow Summary
 
 **JSON Schema** → Load & Sort → **Validator Factory** → Build FormGroup → **Render (@switch)** → User Input → **Validation** → Show Errors → **Submit**
 
 ---
 
-## 💡 Interview Discussion Points
+## Interview Discussion Points
 
 ### Why Dynamic Forms?
 "Dynamic forms enable runtime form generation from JSON configuration. Use cases: CMS platforms (admins create forms), multi-tenant apps (custom forms per tenant), A/B testing (test structures without deployment), and workflow engines (process-driven forms)."
@@ -214,9 +214,9 @@ onSubmit(): void {
 "Maps string configs to Angular's ValidatorFn. Example: `{ type: 'minLength', value: 3 }` → `Validators.minLength(3)`. Benefits: scalable (add validators easily), decouples schema from Angular, reusable across frameworks."
 
 ### Trade-offs
-- ✅ **Flexibility**: Runtime changes without redeployment
-- ❌ **Type Safety**: Form structure unknown at compile time
-- ⚠️ **Performance**: Small runtime cost
+- **Flexibility**: Runtime changes without redeployment
+- **Type Safety**: Form structure unknown at compile time
+- **Performance**: Small runtime cost
 - 🔒 **Security**: Must validate schema server-side
 
 ### When NOT to Use
@@ -231,7 +231,7 @@ onSubmit(): void {
 
 ---
 
-## 🧪 Key Tests
+## Key Tests
 
 ```typescript
 // Form construction
@@ -263,7 +263,7 @@ it('should display custom error messages', () => {
 
 ---
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 | Issue | Solution |
 |-------|----------|
@@ -274,7 +274,7 @@ it('should display custom error messages', () => {
 
 ---
 
-## ✅ Implementation Checklist
+## Implementation Checklist
 
 - [ ] FormSchema interfaces defined
 - [ ] Validator factory maps strings to ValidatorFn
@@ -287,7 +287,7 @@ it('should display custom error messages', () => {
 
 ---
 
-## 🚀 Next Steps (Optional)
+## Next Steps (Optional)
 
 **Advanced features:**
 - Conditional field visibility
@@ -298,10 +298,10 @@ it('should display custom error messages', () => {
 
 ---
 
-## 🎯 Key Takeaways
+## Key Takeaways
 
-✅ Validator factory decouples schema from Angular  
-✅ Runtime construction enables schema-driven UI  
-✅ @switch/@ for enable conditional rendering  
-✅ Trade-off: flexibility vs type safety  
-✅ Server-side validation is mandatory for security
+Validator factory decouples schema from Angular  
+Runtime construction enables schema-driven UI  
+@switch/@ for enable conditional rendering  
+Trade-off: flexibility vs type safety  
+Server-side validation is mandatory for security
