@@ -1,131 +1,34 @@
-# Challenge 08: E-Commerce Checkout
+# Challenge 08: Auto-Checkout (Sequential)
 
-## Description
+**Estimated Time:** 45-60 minutes
+**Difficulty:** Expert
 
-Build an e-commerce checkout flow feature involving multiple dependent API calls executed sequentially. The flow should simulate a real checkout where:
+## 1. Challenge 🎯
+**Scenario:**
+You are implementing an e-commerce checkout. It has a strict order logic:
+1.  **Create Order**: Send cart to server. (Must pass)
+2.  **Reserve Inventory**: Tell warehouse to hold items. (Must pass)
+3.  **Process Payment**: Charge credit card. (Must pass)
 
-1. An order is created with user and cart details.
-2. Inventory is reserved by deducting stock quantities for purchased products.
-3. Payment is processed only after successful inventory reservation.
+**Task:**
+Implement a button "Place Order" that triggers this chain of 3 API calls sequentially. If any step fails, the subsequent steps must NOT run.
 
----
+## 2. Requirements 📋
+*   [ ] **RxJS**: Use `concatMap` to chain the calls.
+*   [ ] **Safety**: Ensure Step 3 never happens if Step 1 or 2 fails.
+*   [ ] **State**: Show progress (e.g., "Processing Order..." -> "Reserving Inventory..." -> "Charging Card...").
+*   **APIs**: FakeStore APIs (see below).
 
-## APIs – FakeStore API
+## 3. Expected Output 🖼️
+*   **Button**: "Place Order".
+*   **Status Text**: Updates as the stream progresses.
+*   **Result**: Success message with Order ID or Error message.
 
-- Get products:  
-  `GET https://fakestoreapi.com/products`
+## 4. Edge Cases / Constraints ⚠️
+*   **SwitchMap?**: NO. If the user double-clicks, we don't want to cancel the first correct payment and start a new one incorrectly. `concatMap` queues or `exhaustMap` ignores. For this challenge, `concatMap` is safer (guarantees execution).
+*   **MergeMap?**: NO. We cannot pay before we have an order ID.
 
-- Create order (cart):  
-  `POST https://fakestoreapi.com/carts`
-
-- Update inventory (simulate stock deduction):  
-  `PUT https://fakestoreapi.com/products/{id}`
-
-- Simulate payment:  
-  Mock with a dummy observable like `of({ status: 'success' })`
-
-### Models
-
-```ts
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  stock: number;
-  quantity?: number; // quantity to order
-}
-
-export interface Order {
-  id?: number;
-
-  products: Product[];
-  total?: number;
-  paymentStatus?: PaymentStatus;
-}
-
-export type PaymentStatus = "pending" | "completed" | "failed";
-
-export interface Payment {
-  id: number;
-  orderId: number;
-  amount: number;
-  status: PaymentStatus;
-}
-```
-
----
-
-## Functional Requirements
-
-- Implement services for `OrderService`, `ProductService`, and a `CheckoutFacade`.
-- Use RxJS **`concatMap`** to handle dependent API calls sequentially:
-  - Create order → Reserve inventory → Process payment.
-- Display results in a simple HTML table showing:
-  - Order ID
-  - Ordered products
-  - Payment status
-- Use Angular Material for UI components including a "Place Order" button.
-- Implement loading indicators and error handling using Angular’s new template control flow syntax (`@if`).
-
----
-
-## Technical Considerations
-
-- Sequential execution is critical; **`concatMap`** ensures that each API call completes before the next begins.
-- Avoid `mergeMap` which fires all calls concurrently risking payment before inventory update.
-- Avoid `switchMap` which cancels previous calls if new inputs occur, unsuitable for checkout flow.
-
----
-
-## Architecture: Component & Service Layers
-
-- **OrderService:** manages order creation API calls.
-- **ProductService:** manages product inventory updates.
-- **CheckoutFacade:** coordinates the checkout workflow, orchestrating sequential API calls.
-- **CheckoutComponent:** standalone Angular 19 component invoking facade methods, managing UI state with Signals and reactive patterns.
-
----
-
-## UI / Template Requirements
-
-- Use Angular Material for styling and UI components.
-- Provide a "Place Order" button to trigger the checkout process.
-- Render order information in a simple HTML table: order id, products, payment status.
-- Use Angular control flow directives (`@if`) for loading and error states.
-
----
-
-## Constraints & Expectations
-
-- Use Angular’s `HttpClient` for all backend API requests.
-- Create separate services and a facade to manage those services.
-- Ensure API calls execute sequentially using RxJS `concatMap` to respect dependent flow order.
-- Manage reactive state using Angular Signals or reactive streams.
-- Implement error handling and loading states clearly in the UI using Angular’s template control flow (`@if`).
-- Use Angular Material components for user interface consistency and accessibility.
-- Apply standalone component architecture with `inject()` for dependency injection.
-- Keep components and services modular with clear separation of concerns.
-- Avoid redundant or concurrent API calls that can lead to inconsistent checkout states.
-
----
-
-## Best Practices
-
-- Encapsulate all HTTP operations in dedicated Angular services to promote maintainability and reuse.
-- Use `concatMap` to maintain ordered dependent API calls for workflows like checkout.
-- Leverage Angular Signals and reactive template syntax for declarative and memory-safe UI state management.
-- Adopt standalone components and Angular 19 features (`inject()`, new template syntax) for streamlined, modern codebases.
-- Write modular, readable code with clear responsibilities per component and service.
-- Include proper error handling and user-friendly feedback throughout the checkout process.
-- Optimize performance by preventing unnecessary API calls and handling concurrency carefully.
-
----
-
-## Interview Tips
-
-- Emphasize the importance of sequential API call execution in checkout workflows.
-- Explain why `concatMap` is preferred over `mergeMap` and `switchMap` for dependent sequences.
-- Discuss how this pattern guarantees data consistency and user experience integrity.
-- Highlight Angular 19 features leveraged like standalone components, Signals, and new template syntax.
-
----
+## 5. Success Criteria ✅
+*   [ ] Sequence is strictly observed in Network Timeline and Logs.
+*   [ ] `concatMap` is used.
+*   [ ] UI reflects the current step.

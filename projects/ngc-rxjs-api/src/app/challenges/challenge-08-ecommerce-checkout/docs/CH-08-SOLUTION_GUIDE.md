@@ -1,45 +1,66 @@
-# Challenge 08: Solution Guide – E-Commerce Checkout Flow with concatMap
+# Solution: Sequential Checkout
 
-## Steps
+## 🧠 Approach
+We need strict ordering: A -> B -> C.
+1.  **Service**: 3 separate methods.
+2.  **Component**:
+    *   Trigger `checkout()`.
+    *   Use `concatMap`.
+    *   `Order API` -> `concatMap` -> `Inventory API` -> `concatMap` -> `Payment API`.
 
-1. create models for Product, Order, PaymentResponse.
-2. create ProductService to fetch products and update inventory.
-3. create OrderService to create orders.
-4. create CheckoutFacade to orchestrate the checkout flow using `concatMap`.
-5. create CheckoutComponent to handle UI and user interactions.
+## 🚀 Step-by-Step Implementation
 
----
+### Step 1: Define the Interface
+```typescript
+interface Order { id: number; total: number; }
+```
 
-## APIs
-- **Get products**: `GET https://fakestoreapi.com/products`
-- **Create order (cart)**: `POST https://fakestoreapi.com/carts`
-- **Update inventory**: `PUT https://fakestoreapi.com/products/{id}` (simulate stock deduction)
-- **Simulate payment**: Mock this step with a dummy `of({ status: 'success' })` observable.
+### Step 2: Create the Service
+```typescript
+@Injectable({ providedIn: 'root' })
+export class CheckoutService {
+  private http = inject(HttpClient);
+  createOrder(cart: any) { return this.http.post<Order>('api/order', cart); }
+  reserveInventory(orderId: number) { return this.http.post('api/inventory', { orderId }); }
+  processPayment(orderId: number) { return this.http.post('api/pay', { orderId }); }
+}
+```
 
----
+### Step 3: Implement the Component (The Chain)
+```typescript
+@Component({ ... })
+export class CheckoutComponent {
+  private service = inject(CheckoutService);
+  status = signal('Idle');
 
-## Explanation
+  checkout() {
+    this.status.set('Creating Order...');
 
-- **Models**: Define interfaces for Product, Order, and PaymentResponse to structure data.
-- **Services**:
-  - `ProductService`: Fetches products and updates inventory.
-  - `OrderService`: Creates orders.
-- **CheckoutFacade**: Manages the checkout process using `concatMap` to ensure sequential execution of API calls.
-- **CheckoutComponent**: Handles user interactions, displays products, and shows order/payment results.
-- **RxJS `concatMap`**: Used to chain dependent API calls (create order → update inventory → process payment) ensuring each step completes before the next begins.
-- **Error Handling**: Catches errors at each step and updates the UI accordingly.
-- **Loading State**: Manages loading state to provide user feedback during the checkout process.
+    this.service.createOrder({ items: [] }).pipe(
+      // Step 2: Order Created -> Reserve
+      tap(() => this.status.set('Reserving Inventory...')),
+      concatMap(order => this.service.reserveInventory(order.id).pipe(map(() => order))),
 
----
+      // Step 3: Reserved -> Pay
+      tap(() => this.status.set('Processing Payment...')),
+      concatMap(order => this.service.processPayment(order.id))
+    ).subscribe({
+      next: () => this.status.set('Order Placed Successfully! ✅'),
+      error: (err) => this.status.set('Checkout Failed ❌: ' + err.message)
+    });
+  }
+}
+```
 
-## Summary
+### Step 4: The Template
+```html
+<button (click)="checkout()" mat-raised-button color="primary">Place Order</button>
+<div class="status-box">
+  <h3>Status: {{ status() }}</h3>
+</div>
+```
 
-- First creates an order, then updates inventory for each product in the order, and finally simulates a payment process.
-- Uses `concatMap` to ensure that each step is completed before moving to the next, maintaining the correct sequence of operations.
-
-## Key Learning
-
-- `concatMap` ensures **sequential execution**: order → inventory → payment.
-- Handles **dependent API calls** in Angular.
-- Avoids race conditions that can occur with `mergeMap`.
-- Demonstrates a **real-world e-commerce scenario** with multiple sequential steps.
+## 🌟 Best Practices Used
+*   **concatMap**: The strict enforcer. It waits for the inner Observable to complete before subscribing to the next one.
+*   **tap**: Used for side-effects (like updating the UI text) without affecting the data stream.
+*   **Error Handling**: If `createOrder` fails, the `concatMap` simply never runs, and the `error` block in `subscribe` catches it immediately.
