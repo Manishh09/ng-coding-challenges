@@ -20,11 +20,6 @@
   }
 }
 
-mat-select, mat-label {
-  color: var(--text-primary);
-  outline: none;
-  background-color: var(--surface-color);
-}
 
 @media (max-width: 484px) {
   .product-selector {

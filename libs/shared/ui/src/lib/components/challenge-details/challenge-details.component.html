@@ -153,7 +153,12 @@
                 <h3>Author</h3>
                 <div class="author-info">
                     <div class="avatar-placeholder">
-                        {{ c.author.name.charAt(0) }}
+                        @if (c.author.avatar) {
+                        <img [src]="c.author.avatar"
+                         alt="{{ c.author.name }}'s avatar"
+                         loading="lazy"
+                         />
+                        }
                     </div>
                     <div class="author-details">
                         <span class="author-name">{{ c.author.name }}</span>

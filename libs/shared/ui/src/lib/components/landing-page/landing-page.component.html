@@ -16,7 +16,7 @@
 launch-ready starter kits.
         </p>
 
-        <ul class="hero-highlights" aria-label="Key platform benefits">
+        <ul [style.display]="'none'" class="hero-highlights" aria-label="Key platform benefits">
           @for (highlight of heroHighlights; track highlight) {
           <li>
             <mat-icon aria-hidden="true">check_circle</mat-icon>

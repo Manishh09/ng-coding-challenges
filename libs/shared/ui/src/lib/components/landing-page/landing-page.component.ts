@@ -140,8 +140,8 @@ export class LandingPageComponent {
     latestChallenge.subscribe(latest => {
       if (latest) {
         // Construct dynamic route safely
-        const { category, id } = latest;
-        this.router.navigate([`${ROUTES.challenges}/${category}/${id}`]);
+        const { category, link } = latest;
+        this.router.navigate([`${ROUTES.challenges}/${category}/${link}`]);
       } else {
         this.notificationService.info('No challenges available yet. Check back soon!');
         this.router.navigate([ROUTES.challenges]);
