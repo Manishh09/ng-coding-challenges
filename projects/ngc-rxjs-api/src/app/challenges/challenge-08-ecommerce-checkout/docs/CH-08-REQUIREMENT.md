@@ -1,6 +1,6 @@
 # Challenge 08: Auto-Checkout (Sequential)
 
-**Estimated Time:** 45-60 minutes
+**Estimated Time:** 60-75 minutes
 **Difficulty:** Expert
 
 ## 1. Challenge 🎯
@@ -32,3 +32,4 @@ Implement a button "Place Order" that triggers this chain of 3 API calls sequent
 *   [ ] Sequence is strictly observed in Network Timeline and Logs.
 *   [ ] `concatMap` is used.
 *   [ ] UI reflects the current step.
+*   [ ] `takeUntilDestroyed` is used to unsubscribe from the subscription when the component is destroyed.

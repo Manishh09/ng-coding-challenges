@@ -99,3 +99,4 @@ We use the `async` pipe to subscribe. Since `data$` is `null` initially (before 
 *   **Parallel Execution**: `forkJoin` is much faster than chaining requests one by one.
 *   **Single Source of Truth**: The template listens to one `data$` stream.
 *   **Error Safety**: `catchError` ensures the app doesn't crash if an API is down.
+*   **Memory Management**: `takeUntilDestroyed` is used to prevent memory leaks.

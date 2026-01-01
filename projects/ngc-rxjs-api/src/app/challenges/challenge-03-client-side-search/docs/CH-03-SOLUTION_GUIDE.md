@@ -5,8 +5,12 @@ Since the dataset is small, we can fetch *all* users once and filter them in mem
 1.  **Service**: Fetch the list of users (`getUsers()`).
 2.  **Component**:
     *   Create a `FormControl` for the input.
-    *   Use `combineLatest` (or `toSignal`) to combine the "List of Users" and "Search Term" into a single "Filtered List" stream.
-    *   Alternatively, for beginners: Subscribe to users once, store them, and filter based on `valueChanges`. (We will show the Stream approach as it's more "RxJS-native").
+    *   Use `startWith` to emit the initial value.
+    *   Use `debounceTime` to wait for 300ms of delay.
+    *   Use `distinctUntilChanged` to only emit if value changes.
+    *   Use `map` to filter the users based on the search term.
+    *   Use `takeUntilDestroyed` to unsubscribe on destroy.
+    *  Subscribe to users once, store them, and filter based on `valueChanges`. (We will show the Stream approach as it's more "RxJS-native").
 
 ## 🚀 Step-by-Step Implementation
 
@@ -42,22 +46,23 @@ export class SearchComponent {
   searchControl = new FormControl('');
 
   // Stream 1: Users (fetched once)
-  users$ = this.userService.getUsers();
-
-  // Stream 2: Search Term (debounced)
-  searchTerm$ = this.searchControl.valueChanges.pipe(
-    startWith(''),
-    debounceTime(300),
-    distinctUntilChanged()
+  this.filteredUsers$ = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(searchTerm => this.getSearchedUsers(searchTerm as string)),
+      takeUntilDestroyed(this.destroyRef) // Unsubscribe on destroy
   );
 
-  // Combined Stream: Filtered Users
-  filteredUsers$ = combineLatest([this.users$, this.searchTerm$]).pipe(
-    map(([users, term]) => {
-      const query = (term || '').toLowerCase();
-      return users.filter(u => u.name.toLowerCase().includes(query) || u.email.toLowerCase().includes(query));
-    })
-  );
+  getSearchedUsers(searchTerm: string): User[] {
+    if (!searchTerm.trim()) {
+      return this.users;
+    }
+    const query = searchTerm.toLowerCase().trim();
+    return this.users.filter(user =>
+      user.name.toLowerCase().includes(query)
+    );
+  }
 }
 ```
 

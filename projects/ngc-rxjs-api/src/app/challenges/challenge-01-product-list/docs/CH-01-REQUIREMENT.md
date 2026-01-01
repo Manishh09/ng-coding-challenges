@@ -1,6 +1,6 @@
 # Challenge 01: Product List
 
-**Estimated Time:** 25-30 minutes
+**Estimated Time:** 20-30 minutes
 **Difficulty:** Beginner
 
 ## 1. Challenge 🎯

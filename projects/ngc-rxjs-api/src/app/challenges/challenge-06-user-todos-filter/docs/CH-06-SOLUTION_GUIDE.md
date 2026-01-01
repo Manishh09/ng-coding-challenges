@@ -83,5 +83,7 @@ Just display the `vm$` (View Model) stream.
 
 ## 🌟 Best Practices Used
 *   **combineLatest**: The perfect tool for "Re-calculate everything when any input changes".
+*   **Two services are used to fetch the data for Todos and Users to maintain the separation of concerns**.
+*   **Facade pattern is used to handle the data fetching from the services**.
 *   **Derived State**: We don't store "Filtered Todos" in a variable. It is calculated on-the-fly.
 *   **Single Async Pipe**: One subscription manages the entire view.

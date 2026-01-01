@@ -1,11 +1,11 @@
 # Challenge 15: Cross-Field Validation (Date Range)
 
-**Estimated Time:** 30-45 minutes
+**Estimated Time:** 45-60 minutes
 **Difficulty:** Advanced
 
 ## 1. Challenge 🎯
 **Scenario:**
-You have a "Time Off Request" form.
+You have a "Time Off Request" / "Leave Request" form.
 Rule: **End Date** cannot be before **Start Date**.
 
 **Task:**
@@ -26,6 +26,7 @@ Create a **FormGroup Validator** that compares two sibling controls.
 *   **Same Day**: Decided by business rule. Usually Start == End is allowed (1 day off).
 
 ## 5. Success Criteria ✅
+*   [ ] Cross-field validator implementation.
 *   [ ] Validator is applied to the `FormGroup`, not `FormControl`.
 *   [ ] Validator returns `{ dateRangeInvalid: true }` when invalid.
 *   [ ] Template checks `form.hasError('dateRangeInvalid')`.

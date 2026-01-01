@@ -1,6 +1,6 @@
 # Challenge 12: Reactive Login Form
 
-**Estimated Time:** 30-45 minutes
+**Estimated Time:** 20-30 minutes
 **Difficulty:** Beginner
 
 ## 1. Challenge 🎯

@@ -36,3 +36,9 @@ Create a component that fetches data from three different API endpoints in paral
 *   [ ] Application compiles and runs without errors.
 *   [ ] All three sections populate at the same time.
 *   [ ] `forkJoin` is correctly implemented in the service or component.
+*   [ ] Memory management is handled correctly (e.g., `takeUntilDestroyed`).
+*   [ ] Error handling is implemented correctly (e.g., `catchError`).
+*   [ ] AsyncPipe is used to subscribe to the observable (Unsubscribe automatically).
+*   [ ] Loading state is handled correctly.
+*   [ ] Error state is handled correctly.
+

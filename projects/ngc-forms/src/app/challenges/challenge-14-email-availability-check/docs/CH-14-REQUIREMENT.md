@@ -1,6 +1,6 @@
 # Challenge 14: Async Email Validator
 
-**Estimated Time:** 30-45 minutes
+**Estimated Time:** 45-60 minutes
 **Difficulty:** Advanced
 
 ## 1. Challenge 🎯
@@ -26,6 +26,7 @@ Create an **Async Validator** that debounces input and calls a service.
 *   **Fail-Open**: If the API fails, assume the email is valid (don't block the user).
 
 ## 5. Success Criteria ✅
+*   [ ] Custom Async Validator implementation.
 *   [ ] Validator returns an Observable.
 *   [ ] `switchMap` is used to cancel old requests.
 *   [ ] Input status changes to `PENDING` during the check.

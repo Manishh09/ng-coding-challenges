@@ -31,3 +31,6 @@ Implement a search bar that queries a remote API. Crucially, it must **cancel pr
 *   [ ] Network tab shows cancelled requests when typing fast.
 *   [ ] Spinner shows/hides correctly.
 *   [ ] `switchMap` is used.
+*   [ ] No additional API calls are made on every keystroke.
+*   [ ] No memory leaks on component destroy.
+

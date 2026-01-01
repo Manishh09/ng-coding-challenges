@@ -1,6 +1,6 @@
 # Challenge 18: Server Driven Dynamic Forms
 
-**Estimated Time:** 45-60 minutes
+**Estimated Time:** 60-75 minutes
 **Difficulty:** Expert
 
 ## 1. Challenge 🎯

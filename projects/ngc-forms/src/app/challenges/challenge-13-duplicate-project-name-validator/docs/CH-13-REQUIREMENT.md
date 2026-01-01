@@ -25,6 +25,8 @@ Create a Reusable Custom Validator `uniqueNameValidator(names)` that checks the 
 *   **Whitespace**: " Test " should equal "Test". Trim inputs.
 
 ## 5. Success Criteria ✅
+*   [ ] Validator is a function that returns a `ValidatorFn`.
+*   [ ] Custom Synchronous Validator implementation.
 *   [ ] Validator correctly identifies duplicates.
 *   [ ] Validator correctly ignores case.
 *   [ ] Validator allows the current name in Edit Mode.

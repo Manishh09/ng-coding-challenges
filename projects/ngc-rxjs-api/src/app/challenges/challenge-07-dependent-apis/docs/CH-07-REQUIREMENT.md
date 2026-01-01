@@ -1,6 +1,6 @@
 # Challenge 07: Dependent API Calls
 
-**Estimated Time:** 30-45 minutes
+**Estimated Time:** 45-60 minutes
 **Difficulty:** Advanced
 
 ## 1. Challenge 🎯

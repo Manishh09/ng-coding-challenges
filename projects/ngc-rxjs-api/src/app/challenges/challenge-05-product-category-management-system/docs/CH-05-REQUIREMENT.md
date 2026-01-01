@@ -1,6 +1,6 @@
 # Challenge 05: Caching with RxJS
 
-**Estimated Time:** 30-45 minutes
+**Estimated Time:** 45-60 minutes
 **Difficulty:** Advanced
 
 ## 1. Challenge 🎯
@@ -12,7 +12,7 @@ Refactor the application so the Category List is fetched **once** and cached for
 
 ## 2. Requirements 📋
 *   [ ] **Service**: Implement `CategoryService` with caching.
-*   [ ] **RxJS**: Use `shareReplay(1)` to cache the stream.
+*   [ ] **RxJS**: Use `shareReplay` to cache the stream .
 *   [ ] **Components**: Create 3 simple components consuming the same service.
 *   [ ] **Signal**: Use Angular Signals for state in the components.
 *   **API Endpoint**: `https://fakestoreapi.com/products/categories`
@@ -30,4 +30,4 @@ Refactor the application so the Category List is fetched **once** and cached for
 ## 5. Success Criteria ✅
 *   [ ] All 3 components display data.
 *   [ ] Network tab shows exactly 1 HTTP request.
-*   [ ] `shareReplay(1)` is used.
+*   [ ] `shareReplay({ bufferSize: 1, refCount: true })` is used( subscription will be unsubscribed when there are no subscribers).

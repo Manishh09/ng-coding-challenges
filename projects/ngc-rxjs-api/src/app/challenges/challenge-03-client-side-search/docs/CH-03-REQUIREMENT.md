@@ -5,7 +5,7 @@
 
 ## 1. Challenge 🎯
 **Scenario:**
-Users of your contact management app are complaining that finding a specific person takes too long. They want a search bar that filters the list instantly as they type.
+Users of your **Contact Management App** are complaining that finding a specific person takes too long. They want a search bar that filters the list instantly as they type.
 
 **Task:**
 Implement a real-time, client-side search feature that filters a list of users by name or email without making new API calls for every keystroke.
@@ -32,3 +32,7 @@ Implement a real-time, client-side search feature that filters a list of users b
 *   [ ] `debounceTime` is set (e.g., 300ms).
 *   [ ] Search is case-insensitive.
 *   [ ] Data is fetched only once.
+*   [ ] Loading state is displayed while fetching.
+*   [ ] Error state is displayed on failure.
+*   [ ] No additional API calls are made on every keystroke.
+*   [ ] No memory leaks on component destroy (Used `takeUntilDestroyed`).

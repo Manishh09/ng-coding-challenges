@@ -1,6 +1,6 @@
 # Challenge 17: Custom Input (ControlValueAccessor)
 
-**Estimated Time:** 45-60 minutes
+**Estimated Time:** 60-75 minutes
 **Difficulty:** Expert
 
 ## 1. Challenge 🎯
@@ -35,6 +35,7 @@ Implement the `ControlValueAccessor` (CVA) interface to make your component comp
 *   **Touched**: Ensure `onTouched` is called on `blur`. If you forget this, validation messages won't show up at the right time.
 
 ## 5. Success Criteria ✅
+*   [ ] Component implements `ControlValueAccessor`.
 *   [ ] Component provides `NG_VALUE_ACCESSOR`.
 *   [ ] Two-way binding works.
 *   [ ] Validation status propagates (Valid/Invalid).

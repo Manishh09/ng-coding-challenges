@@ -64,3 +64,5 @@ export class CheckoutComponent {
 *   **concatMap**: The strict enforcer. It waits for the inner Observable to complete before subscribing to the next one.
 *   **tap**: Used for side-effects (like updating the UI text) without affecting the data stream.
 *   **Error Handling**: If `createOrder` fails, the `concatMap` simply never runs, and the `error` block in `subscribe` catches it immediately.
+*   **Facade pattern is used to handle the data fetching from the services**.
+* `takeUntilDestroyed` is used to unsubscribe from the subscription when the component is destroyed.

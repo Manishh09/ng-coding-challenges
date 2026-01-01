@@ -61,7 +61,7 @@ export class ProductListComponent {
     })
   );
 
-  errorMessage = '';
+  errorMessage = ''; // If Asked in interview
 }
 ```
 
@@ -73,6 +73,7 @@ We use logic blocks (`@if`, `@for`) and the `async` pipe.
   <h2>Product List</h2>
 
   <!-- Error State -->
+  <!-- If asked in interview -->
   @if (errorMessage) {
     <div class="error">{{ errorMessage }}</div>
   }
@@ -110,3 +111,4 @@ We use logic blocks (`@if`, `@for`) and the `async` pipe.
 *   **Separation of Concerns**: The Component doesn't know *how* to fetch data, only *where* to get it.
 *   **Async Pipe**: We avoided `.subscribe()` in the TS file, so we don't need `ngOnDestroy`.
 *   **Declarative Pattern**: The data flow is defined as a stream (`products$`) rather than a sequence of imperative steps.
+*   **New Control Flow**: `@if`, `@for`, `@empty` are new in Angular 17.

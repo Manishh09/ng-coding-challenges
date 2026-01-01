@@ -34,3 +34,5 @@ Fetch both datasets in parallel, join them locally (like a SQL JOIN), and filter
 *   [ ] Correct User Name appears next to each Todo.
 *   [ ] Changing filter updates the list instantly.
 *   [ ] `combineLatest` is used.
+*   [ ] Two services are used to fetch the data for Todos and Users to maintain the separation of concerns.
+*   [ ] facade pattern is used to handle the data fetching from the services
