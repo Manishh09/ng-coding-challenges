@@ -141,6 +141,7 @@
 .solution-button {
   // Accent color styling from Material
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--interactive-primary) !important;
 
   &:hover:not(:disabled) {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
@@ -148,6 +149,7 @@
 }
 
 .stackblitz-button {
+  color: var(--text-primary) !important;
   // Stroked button with custom hover effect
   &:hover:not(:disabled) {
     background: var(--state-hover-bg);
