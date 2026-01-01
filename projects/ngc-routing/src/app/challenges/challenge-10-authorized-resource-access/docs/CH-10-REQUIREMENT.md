@@ -1,63 +1,38 @@
-# Challenge 10 - Secure Dashboard Page Access (CanActivate Guards)
+# Challenge 10: Authorized Route Guard
 
-##  Description
-Build a real-world authentication flow in Angular 19 where authenticated users can access `/products` while unauthenticated users are redirected to `/login`. Logged-in users cannot access `/login` or `/register` again. Use standalone components, signals, Angular Material, and the new Angular control flow syntax.
+**Estimated Time:** 30-45 minutes
+**Difficulty:** Intermediate
 
-## Requirements
+## 1. Challenge 🎯
+**Scenario:**
+You have a "Products" page that should only be accessible to logged-in users. If an unauthenticated user tries to visit it, they must be redirected to the "Login" page. Conversely, a logged-in user should not be able to visit the "Login" page again.
 
-### Technical Requirements
-- Angular 19 standalone components.
-- Route guards (`CanActivate`) for:
-  - `AuthGuard`: Protect private routes.
-  - `LoginGuard`: Prevent logged-in users from accessing login/register routes.
-- Signals (`signal`, `computed`) for reactive authentication state.
-- Lazy loading routes via `loadComponent`.
-- Angular Material components for UI.
-- Control flow syntax (`@if`, `@else`) in templates.
-- Redirection logic:
-  - If not logged in → `/login`
-  - If already logged in → `/products`
+**Task:**
+Implement Access Control using functional **CanActivate** guards.
 
-### UI Requirements
-- **Login Page:** `mat-card` with username/password fields and a login button.
-- **Products Page:** Welcome message and logout button.
-- Optional: Responsive design and clean spacing.
+## 2. Requirements 📋
+*   [ ] **Guards**: `authGuard` (protects /products) and `guestGuard` (protects /login).
+*   [ ] **Service**: `AuthService` with a Signal `isLoggedIn`.
+*   [ ] **Routing**: Configure routes with these guards.
+*   **Routes**:
+    *   `/login` (Public, but protected from logged-in users)
+    *   `/products` (Private)
 
-## Architecture
+## 3. Expected Output 🖼️
+*   **Login Page**: Button "Login".
+*   **Products Page**: Button "Logout".
+*   **Behavior**:
+    1.  Start at `/login`.
+    2.  Click "Login" -> Redirects to `/products`.
+    3.  Try manually typing `/login` in URL -> Redirects back to `/products`.
+    4.  Click "Logout" -> Redirects to `/login`.
+    5.  Try manually typing `/products` -> Redirects back to `/login`.
 
-### Service Layer
-- `AuthService`: Maintains auth state, provides login/logout methods, handles navigation.
+## 4. Edge Cases / Constraints ⚠️
+*   **Functional Guards**: Do not use Class-based guards (deprecated).
+*   **Redirects**: Guards must return `UrlTree` for redirects, not just `false`.
 
-### Guard Layer
-- `AuthGuard`: Checks authentication state, protects private routes.
-- `LoginGuard`: Redirects logged-in users from public routes.
-
-### Component Layer
-- `LoginComponent`: Handles login UI and logic.
-- `ProductListComponent`: Displays secure content and logout.
-- Routing configuration: Private and public routes with guards.
-
-##  Constraints and Expectations
-| Category | Constraint / Expectation |
-|-----------|--------------------------|
-| Authentication Logic | Mock authentication only (e.g., username: admin, password: admin). |
-| Persistence | Signals only (no NgRx). |
-| Routing | Use Angular 19 standalone routing (`loadComponent`). |
-| Guards | Return boolean or UrlTree. |
-| UI Library | Angular Material only. |
-| Error Handling | Alert or Material Snackbar for invalid login. |
-| Redirection | Guards redirect correctly for both auth states. |
-| Performance | Guards and signals should be lightweight. |
-| File Structure | Clean separation: `auth`, `dashboard`, `guards`. |
-
-##  Best Practices
-- Single Responsibility Principle for guards.
-- Signal-based reactive state.
-- Declarative routing with `UrlTree`.
-- Lazy loading for standalone components.
-- Clear separation of concerns.
-- Consistent Material UI usage.
-- New control flow syntax in templates.
-- Descriptive naming conventions.
-- Secure and predictable navigation.
-- Extensible for future enhancements.
+## 5. Success Criteria ✅
+*   [ ] Guards correctly block access.
+*   [ ] Guards correctly redirect.
+*   [ ] `AuthService` uses Signals.
