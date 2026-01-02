@@ -21,7 +21,7 @@
      Hero Title
      ========================================== */
   h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 2.5rem);
     font-weight: var(--font-weight-bold);
     // margin: 0 0 var(--spacing-xl) 0;
     color: var(--text-primary);
@@ -224,6 +224,10 @@
       border-radius: 2px;
     }
   }
+}
+
+.btn {
+  color: var(--interactive-primary) !important;
 }
 
 /* ==========================================

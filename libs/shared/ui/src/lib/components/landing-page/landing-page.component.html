@@ -7,14 +7,18 @@
       <div class="hero-copy">
         <p class="hero-eyebrow">ANGULAR LEARN & CODE PLAYGROUND</p>
         <h1 id="hero-title" class="hero-title">
-          Master Angular with real-world coding challenges!
+          Welcome to ngQuest
         </h1>
 
         <p class="intro-text">
           Bridge the gap between theory and practice.
-          Solve practical Angular problems with guided walkthroughs and
-launch-ready starter kits.
+          Your playground for learning and practicing Angular with real-world challenges.
         </p>
+
+        <ng-coding-challenges-hero-stats
+          [stats]="heroStatItems()"
+          ariaLabel="Platform stats"
+        />
 
         <ul [style.display]="'none'" class="hero-highlights" aria-label="Key platform benefits">
           @for (highlight of heroHighlights; track highlight) {
@@ -60,10 +64,7 @@ launch-ready starter kits.
           </button>
         </div>
 
-        <ng-coding-challenges-hero-stats
-          [stats]="heroStatItems()"
-          ariaLabel="Platform stats"
-        />
+
       </div>
 
       <div class="hero-visual" aria-hidden="true">
@@ -80,7 +81,7 @@ launch-ready starter kits.
           </div>
           <div class="hero-card__badge">
             <mat-icon aria-hidden="true">emoji_objects</mat-icon>
-            <span>Learn. Code. Repeat.</span>
+            <span>Learn. Code. Apply.</span>
           </div>
           @if (heroSpotlight()) {
           <div class="hero-card__footer">
