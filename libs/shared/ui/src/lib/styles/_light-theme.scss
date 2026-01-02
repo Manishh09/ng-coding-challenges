@@ -40,8 +40,11 @@
   --cta-accent: #E0115F; // Ruby red for special emphasis
   --cta-accent-hover: #C11C84; // Dark pink hover state
 
-  // Extremely subtle hero background - clean and professional
-  --brand-gradient-hero: radial-gradient(ellipse at top, #f8fafc 0%, #e0e7ff 60%, #ddd6fe 100%);
+  // Premium multi-layer hero gradient with radial accents (Vercel/Linear style)
+  --brand-gradient-hero:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.15), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(99, 102, 241, 0.08), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #fafafa 25%, #f4f4f5 50%, #f0f0f1 75%, #e8e8ea 100%);
   --brand-gradient-header: linear-gradient(to bottom, var(--gray-50), var(--gray-100));
   --brand-gradient-footer: linear-gradient(to bottom, var(--gray-50), var(--gray-100));
   --brand-gradient-section: linear-gradient(120deg, rgba(79, 70, 229, 0.03), rgba(124, 58, 237, 0.03));

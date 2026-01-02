@@ -241,9 +241,10 @@
 .actions-section {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   flex-shrink: 0;
   height: 100%;
+  padding-right: var(--spacing-xs);
 }
 
 .header-cta {
@@ -278,8 +279,8 @@
 ng-coding-challenges-theme-toggle {
   display: flex;
   align-items: center;
-  height: 100%;
-  margin-right: 4px;
+  justify-content: center;
+  height: 40px;
 }
 
 // Logo text styling
@@ -313,39 +314,53 @@ ng-coding-challenges-theme-toggle {
   font-weight: 700;
 }
 
-// Github logo styling
-.github-logo-link {
+// Github and LinkedIn logo styling
+.github-logo-link,
+.linkedin-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
   padding: 0;
   background: transparent;
   border: none;
   border-radius: var(--border-radius-md);
-  box-shadow: none;
   text-decoration: none;
+  cursor: pointer;
+  transition: all var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover {
+    background: var(--interactive-secondary);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--state-focus-ring);
+    outline-offset: 2px;
+  }
 }
 
-.github-svg,
-.linkedin-svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--text-primary);
+.github-svg {
+  fill: var(--text-secondary);
   display: block;
+  transition: fill var(--animation-duration-fast) var(--animation-easing);
 }
 
 .linkedin-svg {
   width: 20px;
-  height: 24px;
-  fill: var(--text-primary);
+  height: 20px;
+  fill: var(--text-secondary);
   display: block;
+  transition: fill var(--animation-duration-fast) var(--animation-easing);
 }
 
-body.dark-mode .github-svg {
-  fill: var(--text-primary);
-}
-
-body.dark-mode .linkedin-svg {
+.github-logo-link:hover .github-svg,
+.linkedin-btn:hover .linkedin-svg {
   fill: var(--text-primary);
 }
 
@@ -375,19 +390,33 @@ body.dark-mode .linkedin-svg {
     height: var(--header-height-mobile);
   }
 
+  .actions-section {
+    gap: var(--spacing-2xs);
+  }
+
+  .github-logo-link,
+  .linkedin-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .github-svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .linkedin-svg {
+    width: 16px;
+    height: 16px;
+  }
+
   ng-coding-challenges-theme-toggle {
-    margin-right: 0;
+    height: 36px;
   }
 
   .logo-image-wrap {
     width: 48px;
     height: 48px;
-  }
-
-  .github-svg,
-  .linkedin-svg {
-    width: 20px;
-    height: 24px;
   }
 
   .search-section {

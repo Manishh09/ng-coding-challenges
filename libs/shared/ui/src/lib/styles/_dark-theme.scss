@@ -41,8 +41,12 @@
   --cta-accent: #E0115F; // Ruby red for special emphasis
   --cta-accent-hover: #ff1a75; // Brighter pink for dark mode hover
 
-  // Hero: Subtle violet glow for brand consistency
-  --brand-gradient-hero: radial-gradient(ellipse at top, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+  // Premium multi-layer hero gradient with glowing accents (GitHub/Vercel style)
+  --brand-gradient-hero:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(236, 72, 153, 0.08), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(59, 130, 246, 0.08), transparent 70%),
+    linear-gradient(180deg, #000000 0%, #0a0a0a 20%, #0f0f10 40%, #18181b 70%, #1f1f23 100%);
   --brand-gradient-header: linear-gradient(to bottom, var(--gray-950), var(--gray-900));
   --brand-gradient-footer: linear-gradient(to bottom, var(--gray-950), var(--gray-900));
   --brand-gradient-section: linear-gradient(120deg, rgba(109, 40, 217, 0.05), rgba(168, 85, 247, 0.05));
