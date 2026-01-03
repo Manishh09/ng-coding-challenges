@@ -9,7 +9,7 @@
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(3rem, 8vw, 7rem) var(--spacing-md);
+  padding: clamp(4rem, 8vw, 7rem) var(--spacing-xl); // Desktop: 48px horizontal
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
 
   // Premium multi-layer gradient with radial accents
@@ -17,7 +17,7 @@
 
   color: var(--hero-text-primary);
   isolation: isolate;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - var(--header-height));
   display: flex;
   align-items: center;
 
@@ -47,20 +47,16 @@
     mix-blend-mode: normal;
   }
 
-  // Prevent content cutoff on mobile
+  // Tablet responsive padding
+  @media (max-width: 1024px) {
+    padding: clamp(3.5rem, 6vw, 5rem) var(--spacing-xl); // Tablet: 32px horizontal
+  }
+
+  // Mobile responsive padding
   @media (max-width: 767px) {
-    padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-4xl);
+    padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-4xl); // Mobile: 16px horizontal
     overflow: visible;
     min-height: auto;
-  }
-
-  // Adjust padding for larger screens
-  @media (min-width: 768px) {
-    padding: clamp(4.5rem, 8vw, 7rem) var(--spacing-xl);
-  }
-
-  @media (min-width: 1024px) {
-    padding: var(--spacing-3xl) var(--spacing-2xl);
   }
 }
 
@@ -116,7 +112,7 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--gradient-logo);
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -651,15 +647,15 @@
 .latest-section {
   max-width: var(--max-width-section); // 1280px - standard for landing page sections
   margin: 0 auto;
-  padding: 0 var(--spacing-3xl); // 48px horizontal desktop for content sections
+  padding: 0 var(--spacing-2xl); // Desktop: 48px - matches header and footer
   width: 100%;
 
-  @media (max-width: 768px) {
-    padding: 0 var(--spacing-xl);
+  @media (max-width: 1024px) {
+    padding: 0 var(--spacing-xl); // Tablet: 32px - matches header
   }
 
-  @media (max-width: 600px) {
-    padding: 0 var(--spacing-md);
+  @media (max-width: 767px) {
+    padding: 0 var(--spacing-md); // Mobile: 16px - matches header
   }
 }
 

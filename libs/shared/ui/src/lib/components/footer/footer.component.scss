@@ -36,18 +36,31 @@
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-3xl); // Reduced top/bottom padding from var(--spacing-3xl)
+  padding: var(--spacing-2xl) var(--spacing-xl);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--spacing-xl);
+  grid-template-columns: 1.5fr 1fr 1fr; // Fixed ratio: brand section wider, other sections equal
+  gap: clamp(var(--spacing-xl), 5vw, var(--spacing-3xl));
   backdrop-filter: blur(18px);
-  max-width: 1440px;
+  max-width: var(--max-width-section); // 1280px - consistent with landing page sections
+  width: 100%;
+  align-items: start; // Top-align all sections for clean baseline
 
-  // Fix mobile stacking
+  // Tablet: 2-column layout
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    
+    .brand-section {
+      grid-column: 1 / -1; // Full width on top
+    }
+  }
+
+  // Mobile: Single column stack
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-xl) var(--spacing-md); // Reduced mobile padding
+    gap: var(--spacing-xl);
+    padding: var(--spacing-2xl) var(--spacing-md);
   }
 }
 
@@ -58,7 +71,8 @@
 }
 
 .brand-section {
-  max-width: 350px;
+  // Removed max-width constraint for better grid alignment
+  // Width is controlled by grid-template-columns: 1.5fr 1fr 1fr
 }
 
 /* Section Headings */
@@ -206,6 +220,7 @@
   z-index: 1;
   border-top: 1px solid var(--border-primary);
   background: var(--surface-primary); // Enhanced background
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
 
@@ -214,9 +229,16 @@
   justify-content: center;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-md) var(--spacing-lg); // Increased padding for better spacing
+  padding: var(--spacing-lg) var(--spacing-xl);
   flex-wrap: wrap;
   text-align: center;
+  max-width: var(--max-width-section); // Match footer-container width
+  margin: 0 auto;
+  width: 100%;
+  
+  @media (max-width: 767px) {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
 }
 
 .copyright {
