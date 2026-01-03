@@ -9,7 +9,7 @@
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(4rem, 8vw, 7rem) var(--spacing-xl); // Desktop: 48px horizontal
+  padding: clamp(4rem, 8vw, 4rem) var(--spacing-xl); // Desktop: 48px horizontal
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
 
   // Premium multi-layer gradient with radial accents
@@ -112,7 +112,7 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--gradient-logo);
+  color: #E0115F;
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
