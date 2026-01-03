@@ -83,7 +83,7 @@ export class LandingPageComponent {
 
   // ========== Inputs ==========
   /** Hero illustration image path (configurable) */
-  readonly heroIllustration = input<string>('/angular-mascot.webp');
+  readonly heroIllustration = input<string>('/angular_mascot_coder.webp');
 
   /** Hero illustration alt text for accessibility */
   readonly heroAltText = input<string>('Developer coding illustration');

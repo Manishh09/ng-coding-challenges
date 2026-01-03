@@ -99,6 +99,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -112,12 +113,14 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #E0115F;
+  background: linear-gradient(to right, #E0115F 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
   padding: 0.5rem 1rem;
-  background: var(--color-primary-alpha-15);
   border: 1px solid var(--color-primary-alpha-30);
   border-radius: var(--border-radius-pill);
   width: fit-content;
@@ -140,11 +143,9 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   text-align: center;
-  background: linear-gradient(
-    135deg,
-    var(--hero-text-primary) 0%,
-    var(--color-primary) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--hero-text-primary) 0%,
+      var(--color-primary) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -294,11 +295,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 50%
-    );
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 50%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -460,6 +459,7 @@
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -467,10 +467,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: translate(-50%, -50%) scale(1.1);
@@ -495,7 +498,7 @@
 .hero-card__media {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
-   
+
 }
 
 .hero-card__image {
@@ -508,15 +511,17 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  background: var(--status-success-alpha-20);
-  color: var(--hero-text-primary);
+  background: #8b5cf626; // violet-500 with 15% opacity
+  color: var(--color-primary);
   padding: 0.45rem 1rem;
   border-radius: var(--border-radius-pill);
   font-size: 0.95rem;
 
-  mat-icon {
-    color: var(--ruby-red);
+  .badge_title {
+    color: var(--color-primary);
   }
+
+
 }
 
 .hero-card__footer {
@@ -570,34 +575,30 @@
   color: var(--color-primary);
   margin-top: var(--spacing-sm);
   width: fit-content;
-  
+
   // Modern Pill/Badge Design
   padding: 0.5rem 1rem;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-alpha-15) 0%,
-    var(--color-primary-alpha-10) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--color-primary-alpha-15) 0%,
+      var(--color-primary-alpha-10) 100%);
   border: 1px solid var(--color-primary-alpha-30);
   border-radius: var(--border-radius-pill); // Full rounded corners
 
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   // Subtle glow effect
-  box-shadow: 
+  box-shadow:
     0 1px 2px var(--color-black-alpha-10),
     inset 0 1px 0 var(--color-white-alpha-10);
-  
+
   // Hover state for interactivity (if clickable)
   &:hover {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-alpha-25) 0%,
-      var(--color-primary-alpha-20) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--color-primary-alpha-25) 0%,
+        var(--color-primary-alpha-20) 100%);
     border-color: var(--color-primary-alpha-50);
     transform: translateY(-1px);
-    box-shadow: 
+    box-shadow:
       0 2px 4px var(--color-black-alpha-15),
       inset 0 1px 0 var(--color-white-alpha-15);
   }
@@ -614,7 +615,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
-  
+
   // Responsive adjustment
   @media (max-width: 768px) {
     font-size: 0.75rem;

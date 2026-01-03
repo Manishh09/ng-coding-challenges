@@ -381,9 +381,8 @@
 
   // PRIMARY CARD - StackBlitz (Most Prominent)
   &--primary {
-    background: linear-gradient(135deg,
-        var(--electric-violet) 0%,
-        color-mix(in srgb, var(--electric-violet) 85%, black 15%) 100%);
+    background: linear-gradient(135deg, #8b5cf6 0%,
+        color-mix(in srgb, #a855f7 85%, black 15%) 100%);
     color: var(--text-on-primary);
     box-shadow: 0 8px 24px var(--color-primary-alpha-40),
       0 4px 12px var(--color-primary-alpha-30),
@@ -576,6 +575,13 @@
         transform: translateY(0);
       }
     }
+  }
+
+  .launch-btn__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
   }
 
   .button-spinner {

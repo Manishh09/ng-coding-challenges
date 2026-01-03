@@ -81,7 +81,7 @@
           </div>
           <div class="hero-card__badge">
             <mat-icon aria-hidden="true">emoji_objects</mat-icon>
-            <span>Learn. Code. Apply.</span>
+            <span class="badge_title">Learn. Code. Apply.</span>
           </div>
           @if (heroSpotlight()) {
           <div class="hero-card__footer">
@@ -146,7 +146,7 @@
           [title]="challenge.title"
           [description]="challenge.description"
           buttonText="View Details"
-          buttonIcon="rocket_launch"
+          buttonIcon="visibility"
           (actionClick)="launchChallenge(challenge.route)"
         />
       } @empty {
