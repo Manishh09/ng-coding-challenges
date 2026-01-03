@@ -1,12 +1,11 @@
 .experience-form-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 2rem 1rem;
 }
 
 .header-section {
   text-align: center;
-  color: white;
+   
   margin-bottom: 2rem;
 
   h1 {
@@ -406,6 +405,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

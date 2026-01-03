@@ -76,7 +76,6 @@ app-root,
     background-size: 40px 40px;
     opacity: 0.15;
     pointer-events: none;
-    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
   }
 
   >* {
@@ -322,8 +321,7 @@ body.dark-mode {
 // Base content container foundation
 .content-container {
   flex: 1;
-  margin: 0 auto;
-  width: 100%;
+  
   overflow: visible;
 
   // Smooth transitions between layout types
@@ -337,7 +335,7 @@ body.dark-mode {
 // Layout: Maximum breathing room for card display
 .landing-page-container {
   max-width: var(--max-width-wide); // 1440px - consistent width
-  padding: var(--spacing-2xl) var(--spacing-2xl) calc(var(--spacing-2xl) + 16px);
+  padding: var(--spacing-2xl);
 
   @media (max-width: 768px) {
     padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 16px);
@@ -358,10 +356,11 @@ body.dark-mode {
 
   @media (max-width: 768px) {
     padding: var(--spacing-md) var(--spacing-md);
+    margin-top: 64px; // Mobile top bar offset
   }
 
   @media (min-width: 769px) and (max-width: 1023px) {
-    padding: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-lg);
   }
 }
 
@@ -369,7 +368,7 @@ body.dark-mode {
 // Purpose: Interactive workspace view
 // Layout: Tighter padding to maximize interaction area
 .challenge-workspace-container {
-  max-width: var(--max-width-wide); // 1440px - consistent width
+  // max-width: var(--max-width-wide); // 1440px - consistent width
   //padding: var(--spacing-lg) var(--spacing-xl);
   //padding-bottom: var(--spacing-md); // Maximize vertical space for workspace
 
