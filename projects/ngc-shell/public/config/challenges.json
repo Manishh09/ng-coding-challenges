@@ -446,7 +446,7 @@
       "admin-dashboard-access": {
         "id": 11,
         "slug": "admin-dashboard-access",
-        "title": "Challenge 11: Admin Dashboard Access",
+        "title": "Challenge 11: Admin Dashboard Access (RBAC)",
         "categoryId": "angular-routing",
         "difficulty": "Intermediate",
         "enabled": true,

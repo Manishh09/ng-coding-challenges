@@ -256,10 +256,10 @@
 
   .challenge-list-cards {
     grid-template-columns: 1fr;
-    padding: var(--spacing-md);
+    // padding: var(--spacing-md);
     gap: var(--spacing-md);
-    width: calc(100% - 20px);
-    margin: 0 auto;
+    // width: calc(100% - 20px);
+    // margin: 0 auto;
   }
 
   .card-wrapper {

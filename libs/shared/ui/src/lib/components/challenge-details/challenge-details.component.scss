@@ -381,9 +381,7 @@
 
   // PRIMARY CARD - StackBlitz (Most Prominent)
   &--primary {
-    background: linear-gradient(135deg, #8b5cf6 0%,
-        color-mix(in srgb, #a855f7 85%, black 15%) 100%);
-    color: var(--text-on-primary);
+    background: var(--gradient-logo);
     box-shadow: 0 8px 24px var(--color-primary-alpha-40),
       0 4px 12px var(--color-primary-alpha-30),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
