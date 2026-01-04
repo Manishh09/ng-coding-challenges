@@ -24,7 +24,7 @@
       #searchInput
       type="text"
       class="search-input"
-      placeholder="Search challenges..."
+      placeholder="Search challenges...e.g 'rxjs', 'forms', 'components'"
       [value]="searchTerm()"
       (input)="onSearchInput($any($event.target).value)"
       (focus)="isOpen.set(searchTerm().trim().length >= 2)"
