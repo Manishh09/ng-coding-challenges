@@ -10,13 +10,13 @@
   margin-bottom: 2rem;
 
   h1 {
-    color: #1a202c;
+    color: var(--text-primary);
     font-size: 2rem;
     margin-bottom: 0.5rem;
   }
 
   .subtitle {
-    color: #718096;
+    color: var(--text-secondary);
     font-size: 0.95rem;
   }
 }

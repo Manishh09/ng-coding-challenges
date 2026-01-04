@@ -162,7 +162,7 @@ export class LandingPageComponent {
     return [
       {
         icon: 'bolt',
-        value: `${this.totalChallenges()}+`,
+        value: `${this.totalChallenges()}`,
         label: 'Hands-on challenges',
         helper: 'Build UI & data flows that mirror real Angular projects.',
       },
