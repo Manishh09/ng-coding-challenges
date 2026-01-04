@@ -136,7 +136,7 @@ describe('ChallengeAdapter', () => {
       expect(result.prerequisites).toEqual(['Basic RxJS knowledge']);
 
       // Author
-      expect(result.author.name).toBe('Manish Kumar');
+      expect(result.author.name).toBe('Manish Boge');
       expect(result.author.profileUrl).toBe('https://github.com/Manishh09');
     });
   });

@@ -83,7 +83,7 @@ export class LandingPageComponent {
 
   // ========== Inputs ==========
   /** Hero illustration image path (configurable) */
-  readonly heroIllustration = input<string>('/angular-mascot.webp');
+  readonly heroIllustration = input<string>('/angular_mascot_coder.webp');
 
   /** Hero illustration alt text for accessibility */
   readonly heroAltText = input<string>('Developer coding illustration');
@@ -140,8 +140,8 @@ export class LandingPageComponent {
     latestChallenge.subscribe(latest => {
       if (latest) {
         // Construct dynamic route safely
-        const { category, id } = latest;
-        this.router.navigate([`${ROUTES.challenges}/${category}/${id}`]);
+        const { category, link } = latest;
+        this.router.navigate([`${ROUTES.challenges}/${category}/${link}`]);
       } else {
         this.notificationService.info('No challenges available yet. Check back soon!');
         this.router.navigate([ROUTES.challenges]);

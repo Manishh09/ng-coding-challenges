@@ -126,8 +126,8 @@ export class ChallengeAdapter implements IChallengeAdapter {
    */
   private getDefaultAuthor(): Author {
     return {
-      name: 'Manish Kumar',
-      avatar: '/assets/avatars/manish.jpg',
+      name: 'Manish Boge',
+      avatar: 'https://avatars.githubusercontent.com/u/46419064?v=4',
       profileUrl: 'https://github.com/Manishh09'
     };
   }

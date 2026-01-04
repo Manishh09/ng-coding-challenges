@@ -139,7 +139,7 @@
   <!-- Sidebar Header -->
   <div class="sidebar-header">
     <div class="header-title">
-      <mat-icon class="header-icon">category</mat-icon>
+       
       <h2>Categories</h2>
     </div>
   </div>
@@ -163,9 +163,6 @@
           [attr.aria-current]="isSelected(category.id) ? 'page' : null"
         >
           <div class="category-content">
-            <mat-icon class="category-icon">
-              {{ getCategoryIcon(category.id) }}
-            </mat-icon>
 
             <div class="category-info">
               <span class="category-name">{{ category.name }}</span>

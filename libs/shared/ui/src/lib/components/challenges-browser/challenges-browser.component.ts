@@ -146,7 +146,7 @@ export class ChallengesBrowserComponent {
         while (route?.firstChild) {
           route = route.firstChild;
         }
-        return route?.snapshot.data || {};
+        return route?.snapshot?.data || {};
       }),
       takeUntilDestroyed(this.destroyRef)
     ),
@@ -156,7 +156,7 @@ export class ChallengesBrowserComponent {
         while (route?.firstChild) {
           route = route.firstChild;
         }
-        return route?.snapshot.data || {};
+        return route?.snapshot?.data || {};
       })()
     }
   );
@@ -188,7 +188,7 @@ export class ChallengesBrowserComponent {
         }
 
         // Get layoutType from route data (explicit declaration)
-        const layoutType = route?.snapshot.data['layoutType'];
+        const layoutType = route?.snapshot?.data?.['layoutType'];
 
         // Return container class with proper suffix
         return layoutType ? `${layoutType}-container` : 'landing-page-container';
@@ -202,7 +202,7 @@ export class ChallengesBrowserComponent {
         while (route?.firstChild) {
           route = route.firstChild;
         }
-        const layoutType = route?.snapshot.data['layoutType'];
+        const layoutType = route?.snapshot?.data?.['layoutType'];
         return layoutType ? `${layoutType}-container` : 'landing-page-container';
       })()
     }

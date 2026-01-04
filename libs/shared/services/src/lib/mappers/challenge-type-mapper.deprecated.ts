@@ -97,8 +97,8 @@ export class ChallengeTypeMapper {
 
       // Author info - will be populated from config or default
       author: {
-        name: 'Manish Kumar', // Default, can be overridden
-        avatar: '/assets/avatars/manish.jpg',
+        name: 'Manish Boge', // Default, can be overridden
+        avatar: 'https://avatars.githubusercontent.com/u/46419064?v=4',
         profileUrl: 'https://github.com/Manishh09'
       }
     };

@@ -80,8 +80,10 @@
                         <span>Opening StackBlitz...</span>
                     } @else {
                         <ng-container>
-                            <mat-icon>code</mat-icon>
-                            <span>Code in StackBlitz</span>
+                          <div class="launch-btn__content">
+                            <span>Launch in StackBlitz</span>
+                            <mat-icon>rocket_launch</mat-icon>
+                          </div>
                         </ng-container>
                     }
                 </button>
@@ -96,7 +98,7 @@
             <div class="launch-card launch-card--secondary">
                 <div class="launch-card__header">
                     <div class="launch-card__icon">
-                        <mat-icon>visibility</mat-icon>
+                        <mat-icon>preview</mat-icon>
                     </div>
                     <h3 class="launch-card__title">Preview Solution</h3>
                 </div>
@@ -153,7 +155,12 @@
                 <h3>Author</h3>
                 <div class="author-info">
                     <div class="avatar-placeholder">
-                        {{ c.author.name.charAt(0) }}
+                        @if (c.author.avatar) {
+                        <img [src]="c.author.avatar"
+                         alt="{{ c.author.name }}'s avatar"
+                         loading="lazy"
+                         />
+                        }
                     </div>
                     <div class="author-details">
                         <span class="author-name">{{ c.author.name }}</span>

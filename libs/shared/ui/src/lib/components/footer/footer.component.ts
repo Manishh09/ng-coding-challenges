@@ -81,7 +81,7 @@ export class FooterComponent {
 
   // Static content
   readonly description = 'Practice. Learn. Succeed.';
-  readonly angularVersion = `Angular ${VERSION.full}`;
+  readonly angularVersion = `Angular ${VERSION.major}`;
 
   // Computed signal for current year
   readonly currentYear = computed(() => new Date().getFullYear());

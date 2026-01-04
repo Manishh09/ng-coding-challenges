@@ -4,9 +4,8 @@
    ========================================== */
 
 .get-started-container {
-  max-width: var(--max-width-content); // 1200px - standard for instructional content
-  margin: 0 auto;
-  padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-2xl) var(--spacing-2xl); // 48px horizontal desktop
+  max-width: var(--max-width-content); // 1200px - standard for instructional content;
+  padding: var(--spacing-3xl) var(--spacing-3xl); // 48px horizontal desktop
   animation: fadeIn 0.4s var(--animation-easing);
 
   @media (max-width: 768px) {
@@ -14,16 +13,16 @@
   }
 
   @media (min-width: 769px) and (max-width: 1023px) {
-    padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-3xl); // 32px horizontal tablet
+    padding: var(--spacing-3xl) var(--spacing-3xl); // 32px horizontal tablet
   }
 
   /* ==========================================
      Hero Title
      ========================================== */
   h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 2.5rem);
     font-weight: var(--font-weight-bold);
-    margin: 0 0 var(--spacing-xl) 0;
+    // margin: 0 0 var(--spacing-xl) 0;
     color: var(--text-primary);
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -224,6 +223,10 @@
       border-radius: 2px;
     }
   }
+}
+
+.btn {
+  color: var(--interactive-primary) !important;
 }
 
 /* ==========================================

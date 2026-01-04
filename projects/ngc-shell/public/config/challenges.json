@@ -3,8 +3,8 @@
   "lastUpdated": "2025-11-30T00:00:00Z",
   "baseRepository": "https://github.com/Manishh09/ng-coding-challenges/blob/develop",
   "defaultAuthor": {
-    "name": "Manish Kumar",
-    "avatar": "/assets/avatars/manish.jpg",
+    "name": "Manish Boge",
+    "avatar": "https://avatars.githubusercontent.com/u/46419064?v=4",
     "profileUrl": "https://github.com/Manishh09"
   },
   "challenges": {
@@ -446,7 +446,7 @@
       "admin-dashboard-access": {
         "id": 11,
         "slug": "admin-dashboard-access",
-        "title": "Challenge 11: Admin Dashboard Access",
+        "title": "Challenge 11: Admin Dashboard Access (RBAC)",
         "categoryId": "angular-routing",
         "difficulty": "Intermediate",
         "enabled": true,

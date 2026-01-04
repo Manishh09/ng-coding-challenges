@@ -28,7 +28,7 @@
   /* Visual styling - Elevated Surface */
   background: var(--surface-secondary);
 
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--interactive-primary);
   border-radius: 24px; // Ample radius for "Friendly" UI
   box-shadow: var(--shadow-sm);
   color: var(--text-primary);
@@ -44,7 +44,7 @@
   &:hover {
     transform: translateY(-2px); // Subtle lift
     box-shadow: var(--shadow-xl);
-    border-color: var(--interactive-primary);
+    border-color: var(--interactive-primary) !important;
     background: linear-gradient(to bottom,
         var(--surface-secondary),
         var(--surface-tertiary));
@@ -52,9 +52,9 @@
 
   /* Focus state for accessibility */
   &:focus-within {
-    outline: 2px solid var(--interactive-primary);
+    outline: 2px solid var(--interactive-primary) !important;
     outline-offset: 4px;
-    border-color: var(--interactive-primary);
+    border-color: var(--interactive-primary) !important;
   }
 
   /* Latest challenge variant */
