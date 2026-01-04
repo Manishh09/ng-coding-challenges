@@ -485,6 +485,56 @@
           "componentPath": "./challenges/challenge-11-admin-dashboard-access/components/dashboard/dashboard.component",
           "componentName": "DashboardComponent"
         }
+      },
+      "unsaved-form-changes": {
+        "id": 19,
+        "slug": "unsaved-form-changes",
+        "title": "Challenge 19: Unsaved Changes Guard",
+        "categoryId": "angular-routing",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 3,
+        "description": "Implement a canDeactivate route guard to prevent navigation when a form has unsaved changes, prompting users with a confirmation dialog.",
+        "longDescription": "Protect users from losing their work by implementing a canDeactivate guard. Learn advanced routing concepts including component-guard communication, form state tracking, and handling multiple navigation scenarios. This challenge demonstrates enterprise-level patterns for preventing accidental data loss.",
+        "tags": [
+          "canDeactivate",
+          "CanDeactivateFn",
+          "Route Guards",
+          "Form State",
+          "Navigation Prevention",
+          "UX Protection"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Challenge 10 completed",
+          "Understanding of reactive forms",
+          "Knowledge of route guards"
+        ],
+        "learningOutcomes": [
+          "Implement canDeactivate functional guards",
+          "Create reusable guard interfaces",
+          "Track form dirty/pristine states",
+          "Handle browser refresh warnings",
+          "Manage component-guard communication",
+          "Implement confirmation dialogs"
+        ],
+        "requirementList": [
+          "Create a CanDeactivateComponent interface for reusable guard logic across multiple components.",
+          "Implement a functional canDeactivate guard that checks form state before allowing navigation.",
+          "Build a user form component that tracks dirty state and implements the guard interface.",
+          "Show confirmation dialog when user attempts to navigate with unsaved changes.",
+          "Handle browser refresh/close events with beforeunload listener.",
+          "Allow navigation after successful form save by marking form as pristine."
+        ],
+        "links": {
+          "requirement": "projects/ngc-routing/src/app/challenges/challenge-19-unsaved-form-changes/docs/CH-19-REQUIREMENT.md",
+          "solution": "projects/ngc-routing/src/app/challenges/challenge-19-unsaved-form-changes/docs/CH-19-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-routing/src/app/challenges/challenge-19-unsaved-form-changes"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-19-unsaved-form-changes/components/user-form/user-form.component",
+          "componentName": "UserFormComponent"
+        }
       }
     },
     "angular-forms": {
