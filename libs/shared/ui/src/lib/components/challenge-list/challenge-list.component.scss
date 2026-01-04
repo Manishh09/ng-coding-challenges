@@ -12,6 +12,7 @@
               transform 0.4s var(--animation-easing);
   box-sizing: border-box;
   overflow-x: hidden;
+  overflow-y: visible; // Allow content to overflow vertically for hover effects
 }
 
 /* ---------- Header Section ---------- */
@@ -121,7 +122,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing-lg);
-  // padding: var(--spacing-md) clamp(1.5rem, 6vw, 4rem);
+  padding: 4px;
   width: 100%;
   margin: 0 auto; // Parent container controls max-width
   box-sizing: border-box;
@@ -231,6 +232,7 @@
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: var(--spacing-md);
     padding: var(--spacing-md);
+    margin-top: 96px;
   }
 
   .card-wrapper {
