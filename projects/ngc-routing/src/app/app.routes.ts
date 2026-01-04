@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './challenges/challenge-10-authorized-resource-access/guards/auth.guard';
 import { adminGuard } from './challenges/challenge-11-admin-dashboard-access/guards/adming.guard';
+import { canDeactivateGuard } from './challenges/challenge-19-unsaved-form-changes/guards/can-deactivate.guard';
 import { ChallengeListComponent, ChallengeDetailsComponent } from '@ng-coding-challenges/shared/ui';
 import { challengeListResolver, challengeDetailsResolver } from '@ng-coding-challenges/shared/services';
 
@@ -16,6 +17,10 @@ const CHALLENGE_COMPONENTS = {
   'admin-dashboard-access': () =>
     import('./challenges/challenge-11-admin-dashboard-access/components/dashboard/dashboard.component')
       .then(m => m.DashboardComponent),
+
+  'unsaved-form-changes': () =>
+    import('./challenges/challenge-19-unsaved-form-changes/components/user-form/user-form.component')
+      .then(m => m.UserFormComponent),
 };
 
 /**
@@ -77,6 +82,7 @@ export const NGC_ROUTING_ROUTES: Routes = [
         loadComponent: componentLoader,
         canActivate: challengeId === 'authorized-resource-access' ? [authGuard] :
           challengeId === 'admin-dashboard-access' ? [adminGuard] : [],
+        canDeactivate: challengeId === 'unsaved-form-changes' ? [canDeactivateGuard] : [],
         data: {
           layoutType: 'challenge-workspace',
           categoryId: 'angular-routing',
