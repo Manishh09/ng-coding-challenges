@@ -21,6 +21,10 @@ const CHALLENGE_COMPONENTS = {
   'unsaved-form-changes': () =>
     import('./challenges/challenge-19-unsaved-form-changes/components/user-form/user-form.component')
       .then(m => m.UserFormComponent),
+
+  'premium-feature-access': () =>
+    import('./challenges/challenge-20-premium-feature-access/components/subscription-manager/subscription-manager.component')
+      .then(m => m.SubscriptionManagerComponent),
 };
 
 /**
@@ -112,6 +116,20 @@ export const NGC_ROUTING_ROUTES: Routes = [
     canActivate: [adminGuard],
     data: {
       layoutType: 'challenge-workspace'
+    }
+  },
+
+  // Challenge 20: Premium Feature Access (canMatch guard with dual-route pattern)
+  {
+    path: 'premium-feature-access',
+    loadChildren: () =>
+      import('./challenges/challenge-20-premium-feature-access/challenge-20.routes')
+        .then(m => m.challenge20Routes),
+    data: {
+      layoutType: 'challenge-workspace',
+      categoryId: 'angular-routing',
+      categoryName: 'Routing Challenges',
+      challengeId: 'premium-feature-access'
     }
   },
 

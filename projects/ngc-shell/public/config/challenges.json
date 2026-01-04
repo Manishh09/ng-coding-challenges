@@ -535,6 +535,62 @@
           "componentPath": "./challenges/challenge-19-unsaved-form-changes/components/user-form/user-form.component",
           "componentName": "UserFormComponent"
         }
+      },
+      "premium-feature-access": {
+        "id": 20,
+        "slug": "premium-feature-access",
+        "title": "Challenge 20: Premium Feature Access Control",
+        "categoryId": "angular-routing",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 4,
+        "description": "Implement canMatch route guards to control feature access based on subscription tiers, using the dual-route pattern for seamless UX and performance optimization.",
+        "longDescription": "Build a LinkedIn-style subscription system with tier-based feature access. Learn how canMatch guards prevent route matching before lazy loading, optimize bundle size, and create fallback routes for better UX. This challenge demonstrates SaaS access control patterns and performance optimization techniques.",
+        "tags": [
+          "canMatch",
+          "CanMatchFn",
+          "Route Guards",
+          "Lazy Loading",
+          "Dual-Route Pattern",
+          "Subscription Tiers",
+          "Performance",
+          "Access Control"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Challenge 10 completed",
+          "Understanding of route guards",
+          "Knowledge of lazy loading"
+        ],
+        "learningOutcomes": [
+          "Implement canMatch functional guards with tier validation",
+          "Configure dual-route pattern for same-path fallbacks",
+          "Optimize lazy loading with route-level guards",
+          "Build tier-based subscription systems",
+          "Handle guard redirects with UrlTree",
+          "Compare canMatch vs canActivate performance trade-offs",
+          "Apply SaaS feature access patterns",
+          "Use effect() for localStorage auto-sync"
+        ],
+        "requirementList": [
+          "Create subscription tier model (free, premium) with feature lists.",
+          "Build SubscriptionService with signals for tier management and localStorage persistence using effect().",
+          "Implement canMatch guard that reads tier requirement from route.data.",
+          "Configure dual-route pattern: guarded route for premium users, fallback route for upgrade prompt.",
+          "Build premium dashboard component with 3 simplified features (profile views, InMail credits, learning courses).",
+          "Build upgrade prompt component with single pricing card and upgrade button.",
+          "Build subscription manager test panel with toggle button to switch tiers.",
+          "Handle guard return values: true (allow), UrlTree (redirect to upgrade page)."
+        ],
+        "links": {
+          "requirement": "projects/ngc-routing/src/app/challenges/challenge-20-premium-feature-access/docs/CH-20-REQUIREMENT.md",
+          "solution": "projects/ngc-routing/src/app/challenges/challenge-20-premium-feature-access/docs/CH-20-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-routing/src/app/challenges/challenge-20-premium-feature-access"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-20-premium-feature-access/components/subscription-manager/subscription-manager.component",
+          "componentName": "SubscriptionManagerComponent"
+        }
       }
     },
     "angular-forms": {

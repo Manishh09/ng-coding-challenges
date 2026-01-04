@@ -1,0 +1,115 @@
+<div class="premium-dashboard">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="header-content">
+      <h1>✨ Premium Dashboard</h1>
+      <div class="tier-badge">
+        {{ currentTier() | titlecase }} Tier
+      </div>
+    </div>
+    <p class="subtitle">You have access to all premium features</p>
+  </div>
+
+  <!-- Success Message -->
+  <div class="success-banner">
+    <span class="icon">🎉</span>
+    <div>
+      <strong>Welcome to Premium!</strong>
+      <p>This component is protected by canMatch guard - free users never see this page.</p>
+    </div>
+  </div>
+
+  <!-- Premium Features (Simplified for Interview) -->
+  <div class="features-section">
+    <h2>🏆 Your Premium Features</h2>
+
+    <div class="feature-grid">
+      <!-- Profile Views -->
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <div class="feature-content">
+          <h3>Profile Views</h3>
+          <div class="feature-value">{{ profileViews }}</div>
+          <p>People who viewed your profile in the last 90 days</p>
+        </div>
+      </div>
+
+      <!-- InMail Credits -->
+      <div class="feature-card">
+        <div class="feature-icon">💌</div>
+        <div class="feature-content">
+          <h3>InMail Credits</h3>
+          <div class="feature-value">{{ inMailCredits }}</div>
+          <p>Send messages to anyone, even if you're not connected</p>
+        </div>
+      </div>
+
+      <!-- Learning Access -->
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <div class="feature-content">
+          <h3>Learning Courses</h3>
+          <div class="feature-value">{{ learningCoursesCount }}+</div>
+          <p>Unlimited access to professional development courses</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guard Explanation -->
+  <div class="guard-info">
+    <h3>🔒 How canMatch Guard Protects This Page</h3>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>1. Guard Checks Tier</strong>
+        <p>Before route matching, canMatch guard verifies subscription tier</p>
+      </div>
+      <div class="info-item">
+        <strong>2. Premium Users Pass</strong>
+        <p>Guard returns <code>true</code> → Route matches → Component loads</p>
+      </div>
+      <div class="info-item">
+        <strong>3. Free Users Blocked</strong>
+        <p>Guard returns <code>UrlTree</code> → Redirect to upgrade page</p>
+      </div>
+      <div class="info-item">
+        <strong>4. Performance Win</strong>
+        <p>Free users never download this component bundle!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation-section">
+    <a routerLink="/challenges/angular-routing/premium-feature-access" class="btn-secondary">
+      ← Back to Subscription Manager
+    </a>
+  </div>
+
+  <!-- Debug Info -->
+  <div class="debug-info">
+    <h4>🔍 Debug Information</h4>
+    <div class="debug-grid">
+      <div class="debug-item">
+        <span class="debug-label">Current Tier:</span>
+        <span class="debug-value">{{ currentTier() }}</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Guard Result:</span>
+        <span class="debug-value success">ALLOWED</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Component Status:</span>
+        <span class="debug-value success">LOADED</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Bundle Downloaded:</span>
+        <span class="debug-value success">YES (Premium User)</span>
+      </div>
+    </div>
+    <div class="debug-note">
+      💡 <strong>Tip:</strong> Open Network tab in DevTools, switch to Free tier,
+      and try accessing this page again. You'll see this component bundle is never downloaded!
+    </div>
+  </div>
+</div>

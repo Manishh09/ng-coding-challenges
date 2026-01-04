@@ -1,0 +1,191 @@
+<div class="subscription-manager">
+  <!-- Header -->
+  <div class="manager-header">
+    <h1>🔑 Subscription Manager</h1>
+    <p class="subtitle">Test canMatch guard behavior by switching subscription tiers</p>
+  </div>
+
+  <!-- Notification Banner -->
+  @if (showNotification()) {
+    <div class="notification-banner"
+         [class.notification-success]="currentTier() === 'premium'"
+         [class.notification-info]="currentTier() === 'free'">
+      <div class="notification-content">
+        <span class="notification-icon">
+          {{ currentTier() === 'premium' ? '🎉' : '📉' }}
+        </span>
+        <span class="notification-text">{{ notificationMessage() }}</span>
+      </div>
+    </div>
+  }
+
+  <!-- Side by Side Layout -->
+  <div class="two-column-layout">
+
+    <!-- LEFT SIDE: Main Functionality -->
+    <div class="left-section">
+
+      <!-- Current Tier -->
+      <div class="current-tier-section">
+        <h2>Current Subscription</h2>
+        <div class="tier-display">
+          <div class="tier-badge" [class.badge-free]="currentTier() === 'free'" [class.badge-premium]="currentTier() === 'premium'">
+            {{ currentTier() === 'free' ? 'Free' : 'Premium' }}
+          </div>
+          <div class="tier-info">
+            <p>You currently have a <strong>{{ currentTier() === 'free' ? 'Free' : 'Premium' }}</strong> subscription</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Start Guide -->
+      <div class="quick-start">
+        <div class="quick-start-header">
+          <span class="icon">⚡</span>
+          <h3>Quick Start</h3>
+        </div>
+        <ol class="quick-steps">
+          <li>Toggle your subscription tier below</li>
+          <li>Click "Try Access" button</li>
+          <li>See the guard in action!</li>
+        </ol>
+      </div>
+
+      <!-- Tier Switcher -->
+      <div class="tier-switcher-section">
+        <h2>Step 1: Switch Tier</h2>
+        <div class="tier-buttons">
+          <button class="tier-btn toggle-btn" (click)="toggleTier()">
+            <div class="tier-icon">
+              @if (currentTier() === 'free') {
+                🏆 Upgrade to Premium
+              } @else {
+                🆓 Downgrade to Free
+              }
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Test Routes -->
+      <div class="test-routes-section">
+        <h2>Step 2: Test Protected Route</h2>
+        <div class="route-card">
+          <div class="route-header">
+            <h3>🎯 Workspace</h3>
+            <span class="requirement-badge badge-premium">Premium Required</span>
+          </div>
+          <p class="route-code">Tests <code>canMatch: [premiumGuard]</code></p>
+
+          <div class="route-actions">
+            <a routerLink="../workspace" class="btn-primary btn-large">Try Access Workspace →</a>
+          </div>
+
+          <div class="access-status-box">
+            <div class="status-label">Current Status:</div>
+            @if (currentTier() === 'premium') {
+              <div class="status-indicator status-granted">
+                <span class="status-icon">✓</span>
+                <span class="status-text">Access Granted</span>
+              </div>
+            } @else {
+              <div class="status-indicator status-denied">
+                <span class="status-icon">✗</span>
+                <span class="status-text">Access Denied</span>
+              </div>
+            }
+          </div>
+
+          <div class="expected-behavior">
+            <strong>What will happen?</strong>
+            <div class="behavior-options">
+              <div class="behavior-option" [class.active]="currentTier() === 'premium'">
+                <span class="behavior-icon">✨</span>
+                <span class="behavior-text"><strong>Premium:</strong> Loads premium dashboard</span>
+              </div>
+              <div class="behavior-option" [class.active]="currentTier() === 'free'">
+                <span class="behavior-icon">🔒</span>
+                <span class="behavior-text"><strong>Free:</strong> Shows upgrade prompt</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE: Information & Explanations -->
+    <div class="right-section">
+
+      <!-- How It Works -->
+      <div class="how-it-works">
+        <h2>💡 How canMatch Works</h2>
+        <div class="explanation-cards">
+          <div class="explanation-card">
+            <div class="card-number">1</div>
+            <div class="card-content">
+              <h4>Route Matching Phase</h4>
+              <p>Router evaluates <code>canMatch</code> guards <strong>before</strong> route matching. If guard returns false, the route is skipped.</p>
+            </div>
+          </div>
+          <div class="explanation-card">
+            <div class="card-number">2</div>
+            <div class="card-content">
+              <h4>Lazy Loading Optimization</h4>
+              <p>Premium component bundle is <strong>never downloaded</strong> for free-tier users. Saves bandwidth!</p>
+            </div>
+          </div>
+          <div class="explanation-card">
+            <div class="card-number">3</div>
+            <div class="card-content">
+              <h4>Fallback Route Pattern</h4>
+              <p>Dual routes with same path: first has canMatch guard, second has no guard. Router tries first, falls back to second if blocked.</p>
+            </div>
+          </div>
+          <div class="explanation-card">
+            <div class="card-number">4</div>
+            <div class="card-content">
+              <h4>User Experience</h4>
+              <p>Users see upgrade prompt instead of "Access Denied" error. Guard returns UrlTree for redirects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Access Matrix -->
+      <div class="features-section">
+        <h2>📊 Feature Access Matrix</h2>
+        <div class="feature-table">
+          <div class="table-header">
+            <div class="feature-col">Feature</div>
+            <div class="tier-col">Free</div>
+            <div class="tier-col">Premium</div>
+          </div>
+
+          @for (feature of tierFeatures.free; track feature) {
+            <div class="table-row">
+              <div class="feature-col">{{ feature }}</div>
+              <div class="tier-col access">✓</div>
+              <div class="tier-col access">✓</div>
+            </div>
+          }
+
+          @for (feature of tierFeatures.premium; track feature) {
+            <div class="table-row">
+              <div class="feature-col">{{ feature }}</div>
+              <div class="tier-col no-access">✗</div>
+              <div class="tier-col access">✓</div>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation">
+    <a routerLink="/challenges/angular-routing" class="btn-back">← Back to Challenges</a>
+  </div>
+</div>

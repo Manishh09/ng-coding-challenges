@@ -1,0 +1,152 @@
+<div class="upgrade-prompt">
+  <!-- Header -->
+  <div class="prompt-header">
+    <div class="lock-icon">🔒</div>
+    <h1>Unlock Premium Features</h1>
+    <p class="subtitle">Upgrade to premium to access this workspace</p>
+  </div>
+
+  <!-- Current Status -->
+  <div class="status-banner">
+    <div class="status-content">
+      <div class="status-label">Current Plan</div>
+      <div class="status-value">{{ currentTier() | titlecase }}</div>
+    </div>
+    <div class="status-arrow">→</div>
+    <div class="status-content">
+      <div class="status-label">Upgrade To</div>
+      <div class="status-value">Premium</div>
+    </div>
+  </div>
+
+  <!-- Premium Features -->
+  <div class="features-section">
+    <h2>🏆 What's Included in Premium</h2>
+    <div class="features-list">
+      <div class="feature-item">
+        <span class="feature-icon">👁️</span>
+        <div class="feature-text">
+          <strong>See Who Viewed Your Profile</strong>
+          <p>Know exactly who's been checking out your profile</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💌</span>
+        <div class="feature-text">
+          <strong>Unlimited InMail Messages</strong>
+          <p>Contact anyone directly, even without connections</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📚</span>
+        <div class="feature-text">
+          <strong>150+ Learning Courses</strong>
+          <p>Access professional development resources</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📊</span>
+        <div class="feature-text">
+          <strong>Advanced Analytics Dashboard</strong>
+          <p>Track your profile performance with detailed insights</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Card -->
+  <div class="pricing-section">
+    <div class="pricing-card">
+      <div class="popular-badge">⭐ Most Popular</div>
+      <h3>Premium</h3>
+      <div class="price">
+        <span class="currency">$</span>
+        <span class="amount">29.99</span>
+        <span class="period">/month</span>
+      </div>
+      <p class="description">Full access to all premium features</p>
+
+      <button
+        class="upgrade-btn"
+        [class.loading]="isUpgrading()"
+        [disabled]="isUpgrading()"
+        (click)="upgradeToPremium()">
+        @if (isUpgrading()) {
+          <span>⏳ Processing...</span>
+        } @else {
+          <span>Upgrade to Premium</span>
+        }
+      </button>
+    </div>
+  </div>
+
+  <!-- Guard Explanation -->
+  <div class="guard-info">
+    <h3>🔍 How This Works (canMatch Guard)</h3>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <strong>You Try to Access Premium Workspace</strong>
+          <p>Router receives navigation to /workspace</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <strong>canMatch Guard Checks Tier</strong>
+          <p>Guard checks: Does user have premium? → No</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <strong>First Route Skipped</strong>
+          <p>Guard returns false → Router skips premium route</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <strong>Fallback Route Matches</strong>
+          <p>Router tries next route → This component loads!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation-section">
+    <a routerLink="/challenges/angular-routing/premium-feature-access" class="btn-secondary">
+      ← Back to Subscription Manager
+    </a>
+  </div>
+
+  <!-- Debug Info -->
+  <div class="debug-info">
+    <h4>🔍 Debug Information</h4>
+    <div class="debug-grid">
+      <div class="debug-item">
+        <span class="debug-label">Current Tier:</span>
+        <span class="debug-value">{{ currentTier() }}</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Guard Result:</span>
+        <span class="debug-value blocked">BLOCKED</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Route Matched:</span>
+        <span class="debug-value">Fallback Route</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Premium Bundle:</span>
+        <span class="debug-value blocked">NOT DOWNLOADED</span>
+      </div>
+    </div>
+    <div class="debug-note">
+      💡 <strong>Performance Win:</strong> The premium dashboard component bundle was never downloaded!
+      Check the Network tab - you'll see this saves bandwidth for free users.
+    </div>
+  </div>
+</div>
+
