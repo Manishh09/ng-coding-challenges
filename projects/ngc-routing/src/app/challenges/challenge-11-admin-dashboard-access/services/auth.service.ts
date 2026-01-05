@@ -35,7 +35,7 @@ export class AuthService {
   }
 
 
-  logout(redirect = '/login') {
+  logout(redirect = '/challenges/angular-routing/login') {
     this._user.set(null);
     this.router.navigate([redirect]);
   }

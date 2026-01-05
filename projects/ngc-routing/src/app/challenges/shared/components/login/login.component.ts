@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../challenge-10-authorized-resource-access/services/auth.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class LoginComponent {
   private auth = inject(AuthService);
   private snack = inject(MatSnackBar);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
 
   onSubmit() {
@@ -32,7 +33,8 @@ export class LoginComponent {
       this.snack.open('Invalid username or password', 'Close', { duration: 3000, panelClass: ['snack-error'] });
       return;
     }
-    // navigate to default secured page
-    this.router.navigate(['/user-details']);
+    // Navigate to returnUrl from query params, or default to challenge workspace
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/challenges/angular-routing/authorized-resource-access/workspace';
+    this.router.navigateByUrl(returnUrl);
   }
 }
