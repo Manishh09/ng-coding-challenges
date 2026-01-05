@@ -1,6 +1,35 @@
 <section class="page">
+  <h2>Manage Users</h2>
+
   <mat-card>
-    <h2>Manage Users</h2>
-    <p>List and manage users (mock data for now).</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.id) {
+          <tr>
+            <td class="name">{{ user.name }}</td>
+            <td class="email">{{ user.email }}</td>
+            <td>
+              <span class="role-badge" [class.admin]="user.role === 'Admin'">{{ user.role }}</span>
+            </td>
+            <td class="actions">
+              <button mat-icon-button aria-label="Edit user">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Delete user">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </mat-card>
 </section>

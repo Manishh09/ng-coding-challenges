@@ -1,0 +1,31 @@
+<main class="product-page" role="main" aria-labelledby="productHeading">
+  <p class="welcome">Welcome <strong>{{ auth.user() }}</strong>!</p>
+
+  <div class="header">
+    <h1 id="productHeading">Product List</h1>
+    <button mat-raised-button color="warn" (click)="onLogout()" id="btn-logout">
+      Logout
+    </button>
+  </div>
+
+  <mat-card>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products; track product.id) {
+          <tr>
+            <td class="product-name">{{ product.name }}</td>
+            <td class="description">{{ product.description }}</td>
+            <td class="price">${{ product.price }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </mat-card>
+</main>

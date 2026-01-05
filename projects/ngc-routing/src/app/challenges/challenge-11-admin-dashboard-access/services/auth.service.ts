@@ -18,6 +18,8 @@ export class AuthService {
 
   login(username: string, password: string): boolean {
     // Mock users: admin/admin and user/user
+    // NOTE: Credentials will be validated in backend in PRODUCTION code
+
     if (username === 'admin' && password === 'admin') {
       this._user.set({ username, role: 'admin' });
       return true;
@@ -26,6 +28,7 @@ export class AuthService {
       this._user.set({ username, role: 'user' });
       return true;
     }
+
     return false;
   }
 
@@ -35,7 +38,7 @@ export class AuthService {
   }
 
 
-  logout(redirect = '/challenges/angular-routing/login') {
+  logout(redirect = '/challenges/angular-routing/admin-dashboard-access/login') {
     this._user.set(null);
     this.router.navigate([redirect]);
   }

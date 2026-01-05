@@ -1,6 +1,33 @@
 <section class="page">
+  <h2>Manage Posts</h2>
+
   <mat-card>
-    <h2>Manage Posts</h2>
-    <p>List and manage posts (mock data for now).</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (post of posts; track post.id) {
+          <tr>
+            <td class="title">{{ post.title }}</td>
+            <td class="author">{{ post.author }}</td>
+            <td class="date">{{ post.date }}</td>
+            <td class="actions">
+              <button mat-icon-button aria-label="Edit post">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Delete post">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </mat-card>
 </section>

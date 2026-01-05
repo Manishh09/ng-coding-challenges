@@ -1,14 +1,36 @@
 <main class="admin-page" role="main" aria-labelledby="adminHeading">
   <mat-card class="admin-card">
-    <h1 id="adminHeading">Admin Dashboard</h1>
-    <p>Welcome <strong>{{ auth.user()?.username }}</strong>. Manage application resources below.</p>
+    <div class="header">
+      <h1 id="adminHeading">Admin Dashboard</h1>
+      <button mat-raised-button color="warn" (click)="onLogout()" id="btn-logout">
+        Logout
+      </button>
+    </div>
+    <p>Welcome <strong>{{ auth.user()?.username }}</strong> ({{ auth.user()?.role }}). Manage application resources below.</p>
 
-
-    <nav aria-label="Admin navigation">
-      <ul class="admin-nav">
-        <li><a routerLink="/dashboard/users" id="link-users">Manage Users</a></li>
-        <li><a routerLink="/dashboard/posts" id="link-posts">Manage Posts</a></li>
-      </ul>
+    <nav aria-label="Admin navigation" class="tab-navigation">
+      <button
+        mat-raised-button
+        [color]="activeTab === 'users' ? 'primary' : 'basic'"
+        (click)="activeTab = 'users'"
+        id="tab-users">
+        Manage Users
+      </button>
+      <button
+        mat-raised-button
+        [color]="activeTab === 'posts' ? 'primary' : 'basic'"
+        (click)="activeTab = 'posts'"
+        id="tab-posts">
+        Manage Posts
+      </button>
     </nav>
+
+    <div class="tab-content">
+      @if (activeTab === 'users') {
+        <app-user-list />
+      } @else if (activeTab === 'posts') {
+        <app-posts />
+      }
+    </div>
   </mat-card>
 </main>

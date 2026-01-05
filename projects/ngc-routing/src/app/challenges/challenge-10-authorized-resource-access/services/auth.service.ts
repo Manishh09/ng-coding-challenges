@@ -14,15 +14,15 @@ export class AuthService {
 
   login(username: string, password: string): boolean {
     // Mock auth: user/user is valid
-    if (username === 'user' && password === 'user') {
+    if (username === password) {
       this._user.set(username);
       return true;
     }
     return false;
   }
 
-
-  logout(redirect = '/challenges/angular-routing/login') {
+  // NOTE: Navigate to proper route in PRODUCTION code
+  logout(redirect = '/challenges/angular-routing/authorized-resource-access/login') {
     this._user.set(null);
     this.router.navigate([redirect]);
   }
