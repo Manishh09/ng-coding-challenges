@@ -139,7 +139,7 @@
   <!-- Sidebar Header -->
   <div class="sidebar-header">
     <div class="header-title">
-       
+
       <h2>Categories</h2>
     </div>
   </div>
@@ -168,8 +168,9 @@
               <span class="category-name">{{ category.name }}</span>
 
               @if (category.description) {
-                <span class="category-description">{{ category.description }}</span>
+                <span class="category-description">{{ category.challengeCount ? category.description : 'Coming Soon' }}</span>
               }
+
             </div>
           </div>
 

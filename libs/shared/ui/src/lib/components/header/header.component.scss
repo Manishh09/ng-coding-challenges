@@ -46,7 +46,7 @@
   height: 100%;
   // max-width: var(--max-width-section); // 1280px - match page sections
   // margin: 0 auto;
-  padding: 0 var(--spacing-2xl); // Desktop: 48px - match content sections
+  padding: 0 var(--spacing-md); // Desktop: 48px - match content sections
   background: var(--brand-gradient-footer);
 
   @media (max-width: 1024px) {

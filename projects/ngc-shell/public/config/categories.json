@@ -105,6 +105,30 @@
         "color": "#4CAF50",
         "gradient": "linear-gradient(135deg, #a8e063 0%, #56ab2f 100%)"
       }
+    },
+    {
+      "id": 5,
+      "slug": "angular-signals",
+      "title": "Angular Signals",
+      "description": "Reactive state management with Angular Signals",
+      "icon": "bolt",
+      "order": 5,
+      "enabled": true,
+      "route": {
+        "path": "angular-signals",
+        "moduleName": "@ngc-signals",
+        "exportName": "NGC_SIGNALS_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Signals",
+        "Computed",
+        "Effects"
+      ],
+      "metadata": {
+        "color": "#FF9800",
+        "gradient": "linear-gradient(135deg, #ffd89b 0%, #ff9800 100%)"
+      }
     }
   ]
 }
