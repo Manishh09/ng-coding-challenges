@@ -21,6 +21,7 @@ import {
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
 import { WorkspaceToolbarComponent } from '../workspace-toolbar/workspace-toolbar.component';
 import { filter, map } from 'rxjs';
+import { CHALLENGE_CATEGORY_IDS } from '../../constants/constants';
 
 /**
  * Challenges Browser Component - Pure Shell/Layout Component
@@ -248,9 +249,9 @@ export class ChallengesBrowserComponent {
    */
   onCategorySelect(categoryId: string): void {
     // Validate category exists in route configuration
-    const validCategories = ['rxjs-api', 'angular-core', 'angular-routing', 'angular-forms'];
+    const validCategories = CHALLENGE_CATEGORY_IDS;
 
-    if (!validCategories.includes(categoryId)) {
+    if (!validCategories.includes(categoryId as typeof CHALLENGE_CATEGORY_IDS[number])) {
       console.warn(`[ChallengesBrowser] Category '${categoryId}' does not have a route configured`);
       return;
     }

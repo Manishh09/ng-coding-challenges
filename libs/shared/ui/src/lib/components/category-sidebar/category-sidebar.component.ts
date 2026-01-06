@@ -16,7 +16,8 @@ import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
     MatButtonModule,
     MatBadgeModule,
     MatRippleModule,
-  ],
+
+],
   templateUrl: './category-sidebar.component.html',
   styleUrl: './category-sidebar.component.scss',
 })
@@ -97,6 +98,7 @@ export class CategorySidebarComponent {
       'angular-core': 'settings',
       'angular-routing': 'route',
       'angular-forms': 'assignment',
+      'angular-signals': 'signal_cellular_alt',
     };
     return iconMap[categoryId] || 'folder';
   }

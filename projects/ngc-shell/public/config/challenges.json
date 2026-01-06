@@ -933,6 +933,8 @@
           "componentName": "DynamicFormComponent"
         }
       }
+    },
+    "angular-signals": {
     }
   }
 }

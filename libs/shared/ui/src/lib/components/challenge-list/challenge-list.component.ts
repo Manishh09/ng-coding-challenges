@@ -9,7 +9,7 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
 import { ChallengeListRouteData } from '../../models/route-data.interface';
-
+import { ChallengeNotFoundComponent } from '../challenge-not-found/challenge-not-found.component';
 /**
  * Component for displaying a list of challenges for a specific category
  *
@@ -32,7 +32,8 @@ import { ChallengeListRouteData } from '../../models/route-data.interface';
     RouterLink,
     MatIconModule,
     ChallengeCardComponent,
-    SkeletonLoaderComponent
+    SkeletonLoaderComponent,
+    ChallengeNotFoundComponent
   ],
 })
 export class ChallengeListComponent {
