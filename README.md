@@ -77,7 +77,7 @@ See the Architecture Guide [ARCHITECTURE.md](docs/ARCHITECTURE.md) for more deta
 
 - Node.js (v18 or higher recommended)
 - npm (v9 or higher recommended)
-- Angular CLI (v19.2.12 or compatible)
+- Angular CLI (v19.2.17 or compatible)
 
 ### Installation
 
