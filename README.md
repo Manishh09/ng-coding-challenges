@@ -143,13 +143,15 @@ See [CREATE CHALLENGE TEMPLATE](docs/CREATE_CHALLENGE.md) for more details on ch
 ## 📚 Documentation
 
 - Setup and run the application: [SETUP_AND_RUN_APP_GUIDE.md](docs/SETUP_AND_RUN_APP_GUIDE.md)
-- Contributing guidelines: [CONTRIBUTING.md](docs/CONTRIBUTING.md)
+- Contributing guidelines: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - Branch naming conventions: [BRANCH_NAMING_GUIDE.md](docs/BRANCH_NAMING_GUIDE.md)
 - Angular best practices: [ANGULAR_BEST_PRACTICES.md](docs/ANGULAR_BEST_PRACTICES.md)
 - Git commit message guidelines: [GIT_COMMIT_MESSAGES.md](docs/GIT_COMMIT_MESSAGES.md)
 - Create Challenge Guide: [CREATE_CHALLENGE.md](docs/CREATE_CHALLENGE.md)
-- Pull Request Process: [PULL_REQUEST_TEMPLATE.md](docs/PULL_REQUEST_TEMPLATE.md)
+- Pull Request Process: [PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file for guidelines.
+Contributions are welcome! Please see the [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines on how to contribute to this project.
+
+---

@@ -47,17 +47,17 @@ There are many ways to contribute:
 
    Always create a branch from the latest `develop` branch.
   
-   Read the [Branch Naming Guide](./BRANCH_NAMING_GUIDE.md) for details.
+   Read the [Branch Naming Guide](docs/BRANCH_NAMING_GUIDE.md) for details.
 
    **Note:** Run `npm install` to install all dependencies and verify if app is running.
 
 1. **Make your changes** following the project's coding standards.
 
-   Read Create Challenge Guide for adding new challenges: [CREATE_CHALLENGE.md](./CREATE_CHALLENGE.md).
+   Read Create Challenge Guide for adding new challenges: [CREATE_CHALLENGE.md](docs/CREATE_CHALLENGE.md).
 
 2. **Commit your changes** with clear, descriptive commit messages:
 
-   Read the [Git Commit Messages](./GIT_COMMIT_MESSAGES.md) guide for best practices.
+   Read the [Git Commit Messages](docs/GIT_COMMIT_MESSAGES.md) guide for best practices.
 
 ```bash
     # stage your changes
@@ -82,7 +82,7 @@ There are many ways to contribute:
 ## Code Style and Guidelines
 
 - Follow the existing coding style and conventions.
-- Follow Angular Best Practices Guide [Angular Best Practices](./ANGULAR_BEST_PRACTICES.md)
+- Follow Angular Best Practices Guide [Angular Best Practices](docs/ANGULAR_BEST_PRACTICES.md)
 - Write clear, concise commit messages.
 - Include tests for new features or bug fixes.
 - Ensure all tests pass before submitting your PR.
@@ -98,7 +98,7 @@ Please name your branches using the following patterns:
 - `docs/` for documentation changes
 - `chore/` for maintenance tasks
 
-Read the [Branch Naming Guide](./BRANCH_NAMING_GUIDE.md) for more details.
+Read the [Branch Naming Guide](docs/BRANCH_NAMING_GUIDE.md) for more details.
 
 ---
 
@@ -108,7 +108,7 @@ Read the [Branch Naming Guide](./BRANCH_NAMING_GUIDE.md) for more details.
 - Describe your changes clearly in the PR description.
 - Link related issues (if any) using GitHub keywords (e.g., fixes #123).
 - Be responsive to code review feedback and update your PR accordingly.
-- Read the [Pull Request Template](./PULL_REQUEST_TEMPLATE.md) for more details.
+- Read the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE.md) for more details.
 
 ---
 
