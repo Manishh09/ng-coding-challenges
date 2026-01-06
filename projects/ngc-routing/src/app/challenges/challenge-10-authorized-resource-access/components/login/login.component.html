@@ -1,0 +1,82 @@
+<main class="login-page" role="main" aria-labelledby="loginHeading">
+  <div class="login-container">
+    <!-- Left Section: Login Form -->
+    <div class="left-section">
+      <mat-card class="login-card" id="loginCard">
+        <h1 id="loginHeading">Sign in to Products</h1>
+
+        <form (ngSubmit)="onSubmit()" aria-describedby="loginDesc">
+          <p id="loginDesc" class="visually-hidden">Enter credentials to access products.</p>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput id="username" name="username" [(ngModel)]="username" required aria-required="true" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput id="password" [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="password" required
+              aria-required="true" />
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" [attr.aria-label]="'Toggle password visibility'">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <div class="actions">
+            <button mat-flat-button color="primary" type="submit" id="loginButton">Login</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+
+    <!-- Right Section: Credentials & Info -->
+    <div class="right-section">
+      <!-- Credentials Card -->
+      <mat-card class="credentials-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">key</mat-icon>
+        <h2>Test Credentials</h2>
+      </div>
+      <div class="credentials-content">
+        <div class="credential-item">
+          <span class="label">Username:</span>
+          <code class="value">user</code>
+        </div>
+        <div class="credential-item">
+          <span class="label">Password:</span>
+          <code class="value">user</code>
+        </div>
+      </div>
+    </mat-card>
+
+      <!-- Info Expansion Panel -->
+    <mat-expansion-panel class="info-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>info</mat-icon>
+          <span>What happens next?</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="challenge-info">
+        <h3>Authentication Flow</h3>
+        <ol>
+          <li><strong>Enter credentials</strong> above and click Login</li>
+          <li><strong>Auth Guard checks</strong> your authentication status</li>
+          <li><strong>Redirect to Products</strong> page on successful login</li>
+          <li><strong>View protected content</strong> - browse the product list</li>
+          <li><strong>Logout</strong> using the button to end your session</li>
+        </ol>
+
+        <h3>Key Concepts</h3>
+        <ul>
+          <li><mat-icon class="concept-icon">check_circle</mat-icon> Route Guards (CanActivate)</li>
+          <li><mat-icon class="concept-icon">check_circle</mat-icon> Authentication Service with Signals</li>
+          <li><mat-icon class="concept-icon">check_circle</mat-icon> Protected Route Navigation</li>
+          <li><mat-icon class="concept-icon">check_circle</mat-icon> Return URL Preservation</li>
+        </ul>
+      </div>
+    </mat-expansion-panel>
+    </div>
+  </div>
+</main>

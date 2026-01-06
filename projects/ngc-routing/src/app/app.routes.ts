@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './challenges/challenge-10-authorized-resource-access/guards/auth.guard';
-import { adminGuard } from './challenges/challenge-11-admin-dashboard-access/guards/adming.guard';
+import { adminGuard } from './challenges/challenge-11-admin-dashboard-access/guards/admin.guard';
 import { canDeactivateGuard } from './challenges/challenge-19-unsaved-form-changes/guards/can-deactivate.guard';
 import { ChallengeListComponent, ChallengeDetailsComponent } from '@ng-coding-challenges/shared/ui';
 import { challengeListResolver, challengeDetailsResolver } from '@ng-coding-challenges/shared/services';
@@ -49,14 +49,6 @@ export const NGC_ROUTING_ROUTES: Routes = [
       categoryName: 'Routing Challenges'
     }
   },
-  // TEMPORARILY DISABLED - Routing conflicts with main app
-  // Will be moved to standalone apps in future update
-  // Shared login component for routing challenges
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./challenges/shared/components/login/login.component').then(m => m.LoginComponent),
-  },
 
   // Level 2 & 3: Individual challenge routes
   ...Object.entries(CHALLENGE_COMPONENTS).map(([challengeId, componentLoader]) => ({
@@ -76,6 +68,22 @@ export const NGC_ROUTING_ROUTES: Routes = [
           challengeId
         }
       },
+      // Challenge-specific login routes
+      ...(challengeId === 'authorized-resource-access' ? [{
+        path: 'login',
+        loadComponent: () =>
+          import('./challenges/challenge-10-authorized-resource-access/components/login/login.component')
+            .then(m => m.LoginComponent),
+        data: { layoutType: 'challenge-workspace' }
+      }] : []),
+      ...(challengeId === 'admin-dashboard-access' ? [{
+        path: 'login',
+        loadComponent: () =>
+          import('./challenges/challenge-11-admin-dashboard-access/components/login/login.component')
+            .then(m => m.LoginComponent),
+        data: { layoutType: 'challenge-workspace' }
+      }] : []),
+
       // Level 3: Challenge workspace (with guards for routing challenges)
       {
         path: 'workspace',
@@ -92,28 +100,6 @@ export const NGC_ROUTING_ROUTES: Routes = [
       }
     ]
   })),
-
-  // Additional routes for admin dashboard sub-pages (CH-11)
-  {
-    path: 'admin-dashboard-access/workspace/users',
-    loadComponent: () =>
-      import('./challenges/challenge-11-admin-dashboard-access/components/user-list/user-list.component')
-        .then(m => m.UserListComponent),
-    canActivate: [adminGuard],
-    data: {
-      layoutType: 'challenge-workspace'
-    }
-  },
-  {
-    path: 'admin-dashboard-access/workspace/posts',
-    loadComponent: () =>
-      import('./challenges/challenge-11-admin-dashboard-access/components/posts/posts.component')
-        .then(m => m.PostsComponent),
-    canActivate: [adminGuard],
-    data: {
-      layoutType: 'challenge-workspace'
-    }
-  },
 
   { path: '**', redirectTo: '' }
 ];
