@@ -37,7 +37,7 @@ const QUICK_LINKS: FooterLink[] = [
   {
     text: 'Contribute',
     icon: 'volunteer_activism',
-    url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md',
+    url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/CONTRIBUTING.md',
     external: true,
     section: 'contribute',
   },

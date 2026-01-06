@@ -87,7 +87,31 @@ async function main() {
 
     fs.writeFileSync(
       path.join("projects", category, "README.md"),
-      `# ${category}\n\nChallenge category application '${category}'. Place challenges inside 'src/app/challenges'.\n`
+      `# ${category}
+
+[Brief description of what this category covers]
+
+## Project Structure
+
+\`\`\`
+src/app/
+├── challenges/                    # All challenge implementations
+│   ├── challenge-XX-[name]/       # Individual challenge folder
+│   │   ├── components/            # Challenge workspace components
+│   │   ├── services/              # Optional services
+│   │   ├── models/                # Optional TypeScript interfaces
+│   │   └── docs/                  # Challenge documentation
+│   │       ├── CH-XX-REQUIREMENT.md
+│   │       └── CH-XX-SOLUTION_GUIDE.md
+├── app.component.ts               # Root component
+├── app.config.ts                  # Application configuration
+└── app.routes.ts                  # Routing configuration
+\`\`\`
+
+## Challenge List
+
+_No challenges have been created yet. Use \`npm run create:challenge\` to add your first challenge._
+`
     );
     console.log(
       `\n📄 README.md created for Angular Challenge App '${category}'.`
