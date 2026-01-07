@@ -665,6 +665,7 @@
   padding-bottom: var(--spacing-4xl); // 64px bottom spacing
 
   @media (max-width: 767px) {
+    width: fit-content;
     padding-bottom: var(--spacing-3xl); // 48px on mobile
   }
 }

@@ -74,6 +74,11 @@ export class ChallengeCardComponent implements OnInit {
     return !!latest && current.id === latest.id;
   });
 
+  // Reactive signal for difficulty class binding (lowercase for CSS)
+  readonly difficultyClass = computed(() =>
+    this.challenge().difficulty.toLowerCase()
+  );
+
   // Reactive signal for new badge visibility
   readonly hasNewBadge = computed(() => {
     const newBadgeIds = this.newBadgeChallengeIds();

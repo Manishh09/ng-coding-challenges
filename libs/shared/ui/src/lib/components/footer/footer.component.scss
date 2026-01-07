@@ -50,7 +50,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-2xl);
     padding: var(--spacing-2xl) var(--spacing-lg);
-    
+
     .brand-section {
       grid-column: 1 / -1; // Full width on top
     }
@@ -234,8 +234,8 @@
   text-align: center;
   max-width: var(--max-width-section); // Match footer-container width
   margin: 0 auto;
-  width: 100%;
-  
+  // width: 100%;
+
   @media (max-width: 767px) {
     padding: var(--spacing-md) var(--spacing-md);
   }

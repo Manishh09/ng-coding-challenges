@@ -16,6 +16,12 @@
                 {{ c.difficulty }}
             </span>
             }
+            @if (c.estimatedTime) {
+            <span class="badge time-estimate" aria-label="Estimated completion time">
+                <mat-icon>schedule</mat-icon>
+                {{ c.estimatedTime }}
+            </span>
+            }
             <span class="badge category">{{ c.category }}</span>
             @for (tag of c.tags; track tag) {
             <span class="badge tag">{{ tag }}</span>

@@ -25,7 +25,7 @@
           "RxJS",
           "Observables"
         ],
-        "estimatedTime": "30-45 minutes",
+        "estimatedTime": "20-30 minutes",
         "prerequisites": [
           "Basic Angular knowledge",
           "TypeScript fundamentals"
@@ -67,7 +67,7 @@
           "Parallel APIs",
           "RxJS"
         ],
-        "estimatedTime": "45-60 minutes",
+        "estimatedTime": "30-45 minutes",
         "prerequisites": [
           "Challenge 01 completed",
           "Understanding of Observables"
@@ -100,7 +100,7 @@
         "slug": "client-side-search",
         "title": "Challenge 03: Client-Side User Search",
         "categoryId": "rxjs-api",
-        "difficulty": "Beginner",
+        "difficulty": "Intermediate",
         "enabled": true,
         "order": 3,
         "description": "Implement a client-side search using Angular Reactive Forms and RxJS with dummy user data.",
@@ -110,7 +110,7 @@
           "Search",
           "Filtering"
         ],
-        "estimatedTime": "40-50 minutes",
+        "estimatedTime": "30-45 minutes",
         "prerequisites": [
           "Reactive Forms basics",
           "Array manipulation in JavaScript"
@@ -143,7 +143,7 @@
         "slug": "server-side-search",
         "title": "Challenge 04: Server-Side User Search (AutoComplete)",
         "categoryId": "rxjs-api",
-        "difficulty": "Intermediate",
+        "difficulty": "Advanced",
         "enabled": true,
         "order": 4,
         "description": "Implement a server-side search (auto-complete) using Angular Reactive Forms and RxJS with an API backend.",
@@ -154,7 +154,7 @@
           "switchMap",
           "API"
         ],
-        "estimatedTime": "60-75 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Challenge 03 completed",
           "Understanding of RxJS operators"
@@ -187,7 +187,7 @@
         "slug": "product-category-management",
         "title": "Challenge 05: Product Category Management - shareReplay",
         "categoryId": "rxjs-api",
-        "difficulty": "Intermediate",
+        "difficulty": "Advanced",
         "enabled": true,
         "order": 5,
         "description": "Build a product category management system where multiple components share category data using Signals and RxJS shareReplay.",
@@ -197,7 +197,7 @@
           "Caching",
           "Signals"
         ],
-        "estimatedTime": "60-90 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Understanding of Signals",
           "RxJS multicasting concepts"
@@ -241,7 +241,7 @@
           "Data Merging",
           "Filtering"
         ],
-        "estimatedTime": "75-90 minutes",
+        "estimatedTime": "30-45 minutes",
         "prerequisites": [
           "Understanding of combineLatest",
           "Data transformation skills"
@@ -284,7 +284,7 @@
           "Dependent APIs",
           "Nested Observables"
         ],
-        "estimatedTime": "90-120 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Understanding of higher-order observables",
           "Advanced RxJS operators"
@@ -325,7 +325,7 @@
           "Sequential APIs",
           "Error Handling"
         ],
-        "estimatedTime": "120-150 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "All previous RxJS challenges",
           "Understanding of concatMap vs mergeMap"
@@ -371,7 +371,7 @@
           "Component Communication",
           "Input/Output"
         ],
-        "estimatedTime": "60-75 minutes",
+        "estimatedTime": "20-30 minutes",
         "prerequisites": [
           "Angular Signals basics",
           "Standalone components"
@@ -415,7 +415,7 @@
           "Authentication",
           "canActivate"
         ],
-        "estimatedTime": "90-120 minutes",
+        "estimatedTime": "30-45 minutes",
         "prerequisites": [
           "Angular Router basics",
           "Understanding of guards"
@@ -448,7 +448,7 @@
         "slug": "admin-dashboard-access",
         "title": "Challenge 11: Admin Dashboard Access (RBAC)",
         "categoryId": "angular-routing",
-        "difficulty": "Intermediate",
+        "difficulty": "Advanced",
         "enabled": true,
         "order": 2,
         "description": "Create an admin dashboard in Angular with role-based access control using Signals and route guards.",
@@ -458,7 +458,7 @@
           "Route Guards",
           "Authorization"
         ],
-        "estimatedTime": "120-150 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Challenge 10 completed",
           "Advanced routing concepts"
@@ -504,7 +504,7 @@
           "Navigation Prevention",
           "UX Protection"
         ],
-        "estimatedTime": "30-45 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Challenge 10 completed",
           "Understanding of reactive forms",
@@ -656,7 +656,7 @@
           "Loading States",
           "API Simulation"
         ],
-        "estimatedTime": "60-90 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Completed Challenge 13 or equivalent custom validator experience",
           "Understanding of RxJS observables",
@@ -712,7 +712,7 @@
           "Group Errors",
           "Computed Values"
         ],
-        "estimatedTime": "60-90 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Completed Challenge 12, 13, or equivalent ReactiveFormsModule experience",
           "Understanding of FormBuilder and FormGroup",
@@ -757,7 +757,7 @@
         "slug": "dynamic-form-array",
         "title": "Challenge 16: Dynamic FormArray (Experience Section)",
         "categoryId": "angular-forms",
-        "difficulty": "Intermediate",
+        "difficulty": "Advanced",
         "enabled": true,
         "order": 5,
         "description": "Create a dynamic work experience form using FormArray where users can add/remove multiple experience entries with nested FormGroups.",
@@ -771,7 +771,7 @@
           "Add/Remove Operations",
           "Computed Signals"
         ],
-        "estimatedTime": "40-50 minutes",
+        "estimatedTime": "45-60 minutes",
         "prerequisites": [
           "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
           "Understanding of FormBuilder and FormGroup",
@@ -820,7 +820,7 @@
         "slug": "custom-input-cva",
         "title": "Challenge 17: Custom Input Field using ControlValueAccessor",
         "categoryId": "angular-forms",
-        "difficulty": "Advanced",
+        "difficulty": "Expert",
         "enabled": true,
         "order": 6,
         "description": "Build a reusable custom input component implementing ControlValueAccessor interface to work seamlessly with Angular's reactive forms.",
@@ -834,7 +834,7 @@
           "Reactive Forms Integration",
           "Bidirectional Data Flow"
         ],
-        "estimatedTime": "30-45 minutes",
+        "estimatedTime": "60 minutes",
         "prerequisites": [
           "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
           "Understanding of FormBuilder and FormGroup",
@@ -880,7 +880,7 @@
         "slug": "server-driven-dynamic-form",
         "title": "Challenge 18: Server-Driven Dynamic Form",
         "categoryId": "angular-forms",
-        "difficulty": "Advanced",
+        "difficulty": "Expert",
         "enabled": true,
         "order": 7,
         "description": "Build a form dynamically from JSON schema with runtime validators, supporting multiple field types (text, email, select, checkbox).",
@@ -894,7 +894,7 @@
           "Schema-Driven UI",
           "Scalability Patterns"
         ],
-        "estimatedTime": "30-45 minutes",
+        "estimatedTime": "60 minutes",
         "prerequisites": [
           "Completed Challenge 12 or equivalent ReactiveFormsModule experience",
           "Understanding of FormBuilder and FormGroup",

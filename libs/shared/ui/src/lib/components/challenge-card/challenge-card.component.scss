@@ -52,9 +52,9 @@
 
   /* Focus state for accessibility */
   &:focus-within {
-    outline: 2px solid var(--interactive-primary) !important;
-    outline-offset: 4px;
-    border-color: var(--interactive-primary) !important;
+    //outline: 2px solid var(--interactive-primary) !important;
+    // outline-offset: 4px;
+    //border-color: var(--interactive-primary) !important;
   }
 
   /* Latest challenge variant */
@@ -121,6 +121,7 @@
 .challenge-card__header-right {
   display: flex;
   align-items: center;
+  gap: var(--spacing-sm);
   flex-shrink: 0;
 }
 
@@ -135,6 +136,58 @@
 
   @media (min-width: 768px) {
     font-size: 0.9375rem;
+  }
+}
+
+/* ==========================================
+   Difficulty Badge
+   ========================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &.difficulty {
+    &.beginner {
+      background: var(--status-success-alpha-20);
+      color: var(--status-success-dark);
+      border: 1px solid var(--status-success-alpha-20);
+    }
+
+    &.intermediate {
+      background: var(--status-warning-alpha-20);
+      color: var(--status-warning-dark);
+      border: 1px solid var(--status-warning-alpha-20);
+    }
+
+    &.advanced {
+      background: var(--status-error-alpha-20);
+      color: var(--status-error-dark);
+      border: 1px solid var(--status-error-alpha-20);
+    }
+
+    &.expert {
+      background: var(--status-expert-alpha-20);
+      color: var(--status-expert-dark);
+      border: 1px solid var(--status-expert-alpha-20);
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 5px 12px;
+    font-size: 0.725rem;
   }
 }
 
