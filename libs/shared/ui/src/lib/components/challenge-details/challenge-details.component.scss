@@ -147,6 +147,12 @@
       color: var(--status-error-dark);
       border: 1px solid var(--status-error-alpha-20);
     }
+
+    &.expert {
+      background: var(--status-expert-alpha-20);
+      color: var(--status-expert-dark);
+      border: 1px solid var(--status-expert-alpha-20);
+    }
   }
 
   &.category {
@@ -161,9 +167,30 @@
     border: 1px solid var(--border-primary);
   }
 
+  &.time-estimate {
+    background: var(--surface-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    gap: 4px;
+
+    mat-icon {
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+      line-height: 14px;
+      color: var(--interactive-primary);
+    }
+  }
+
   @media (max-width: 768px) {
     padding: 5px 12px;
     font-size: 0.7rem;
+
+    &.time-estimate mat-icon {
+      font-size: 12px;
+      width: 12px;
+      height: 12px;
+    }
   }
 }
 

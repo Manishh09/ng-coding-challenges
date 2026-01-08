@@ -1,12 +1,12 @@
 /**
  * Represents the difficulty level of a challenge
  */
-export type DifficultyLevel = 'Beginner' | 'Intermediate' | 'Advanced';
+export type DifficultyLevel = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 
 /**
  * Represents the category ID of a challenge
  */
-export type ChallengeCategoryId = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms' | 'http';
+export type ChallengeCategoryId = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms' | 'angular-signals' | 'http';
 
 /**
  * Represents the author information for a challenge

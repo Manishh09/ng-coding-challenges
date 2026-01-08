@@ -1,21 +1,39 @@
-<article class="latest-card">
-  <div class="latest-card__pill">{{ categoryLabel() }}</div>
-  
-  @switch (headingLevel()) {
-    @case ('h2') {
-      <h2 class="latest-card__title">{{ title() }}</h2>
+<mat-card class="latest-card">
+  <!-- Top Section: Challenge ID + Badges -->
+  <mat-card-header class="latest-card__header">
+    <div class="latest-card__header-left">
+      <span class="latest-card__id">Challenge {{ challengeId().toString().padStart(2, '0') }}</span>
+    </div>
+    <div class="latest-card__header-right">
+      <span class="badge category">{{ categoryLabel() }}</span>
+      @if (difficulty()) {
+        <span class="badge difficulty"
+              [class]="difficulty().toLowerCase()"
+              [attr.aria-label]="'Difficulty level: ' + difficulty()">
+          {{ difficulty() }}
+        </span>
+      }
+    </div>
+  </mat-card-header>
+
+  <!-- Body Section: Title + Description -->
+  <mat-card-content class="latest-card__body">
+    @switch (headingLevel()) {
+      @case ('h2') {
+        <h2 class="latest-card__title">{{ title() }}</h2>
+      }
+      @case ('h3') {
+        <h3 class="latest-card__title">{{ title() }}</h3>
+      }
+      @case ('h4') {
+        <h4 class="latest-card__title">{{ title() }}</h4>
+      }
     }
-    @case ('h3') {
-      <h3 class="latest-card__title">{{ title() }}</h3>
-    }
-    @case ('h4') {
-      <h4 class="latest-card__title">{{ title() }}</h4>
-    }
-  }
-  
-  <p class="latest-card__description">{{ description() }}</p>
-  
-  <div class="latest-card__actions">
+    <p class="latest-card__description">{{ description() }}</p>
+  </mat-card-content>
+
+  <!-- Actions Section -->
+  <mat-card-actions class="latest-card__actions" role="group" aria-label="Challenge actions">
     <button
       mat-flat-button
       color="primary"
@@ -23,8 +41,8 @@
       (click)="onActionClick($event)"
       [attr.aria-label]="title() + '. ' + buttonText()"
     >
-      {{ buttonText() }}
       <mat-icon aria-hidden="true">{{ buttonIcon() }}</mat-icon>
+      {{ buttonText() }}
     </button>
-  </div>
-</article>
+  </mat-card-actions>
+</mat-card>

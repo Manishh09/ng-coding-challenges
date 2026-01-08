@@ -6,7 +6,7 @@
 /**
  * Difficulty level of a challenge
  */
-export type ChallengeDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+export type ChallengeDifficulty = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 
 /**
  * Category identifier for challenges (JSON config version)
