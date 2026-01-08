@@ -5,13 +5,11 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-
   "git": {
     "deploymentEnabled": {
       "main": true,
       "develop": true
     }
   },
-
-  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"develop\" ]; then echo \"🚫 Deployment skipped for branch $VERCEL_GIT_COMMIT_REF\"; exit 0; fi"
+  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" = \"main\" ] || [ \"$VERCEL_GIT_COMMIT_REF\" = \"develop\" ]; then echo \"✅ Deployment allowed for $VERCEL_GIT_COMMIT_REF\"; exit 1; else echo \"🚫 Deployment skipped for branch $VERCEL_GIT_COMMIT_REF\"; exit 0; fi"
 }
