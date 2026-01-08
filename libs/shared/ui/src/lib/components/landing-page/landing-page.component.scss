@@ -4,6 +4,8 @@
   gap: var(--spacing-4xl);
   background: var(--background-primary);
   color: var(--text-primary);
+  overflow-x: hidden; // Prevent horizontal scroll
+  width: 100%;
 }
 
 .hero-section {
@@ -792,23 +794,26 @@
 }
 
 .latest-grid {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-lg);
-  align-items: stretch; // Ensure equal height cards
+  align-items: stretch;
   width: 100%;
 
-  // Desktop: auto-fit with proper minimum
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-
-  // Mobile and small tablet: force single column to prevent any overlapping
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+  // Tablet and up: Use grid layout for multi-column
+  @media (min-width: 901px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   }
 
-  // Large tablet and up: ensure at least 2 columns if space allows
+  // Large tablet: smaller minmax for better fit
   @media (min-width: 901px) and (max-width: 1200px) {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+
+  // Mobile and small tablet: flexbox ensures full-width cards
+  @media (max-width: 900px) {
+    gap: var(--spacing-md);
   }
 
   // Extra small mobile: tighter spacing

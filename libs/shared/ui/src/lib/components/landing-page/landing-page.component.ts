@@ -21,6 +21,7 @@ import { HeroStatsComponent } from '../hero-stats/hero-stats.component';
 import { MetricCardComponent } from '../metric-card/metric-card.component';
 import { FeatureCardComponent } from '../feature-card/feature-card.component';
 import { LatestCardComponent } from '../latest-card/latest-card.component';
+import { ChallengeDifficulty } from '@ng-coding-challenges/shared/models';
 
 type LandingMetric = {
   icon: string;
@@ -44,6 +45,7 @@ type SpotlightChallenge = {
   description: string;
   categoryId: string;
   categoryLabel: string;
+  difficulty: ChallengeDifficulty;
   route: readonly string[];
 };
 
@@ -214,6 +216,7 @@ export class LandingPageComponent {
         title: challenge.title,
         description: challenge.description,
         categoryId: challenge.category,
+        difficulty: challenge.difficulty,
         categoryLabel: this.getCategoryMeta(challenge.category).title,
         route: [
           ROUTES.challenges,
