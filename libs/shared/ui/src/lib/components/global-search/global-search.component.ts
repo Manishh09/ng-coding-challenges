@@ -17,7 +17,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatRippleModule } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { SearchResult } from '@ng-coding-challenges/shared/models';
@@ -39,7 +38,6 @@ import { getCategoryBadgeClass } from '../../utils';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatRippleModule,
     HighlightTextPipe,
   ],
   templateUrl: './global-search.component.html',

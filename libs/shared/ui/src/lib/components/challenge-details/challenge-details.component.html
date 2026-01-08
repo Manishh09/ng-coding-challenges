@@ -43,11 +43,11 @@
             <section class="section requirements">
                 <h2>Requirements</h2>
                 <mat-divider></mat-divider>
-                @for(req of c.requirementList; track req) {
-                 <ul class="requirements-list">
+                <ul class="requirements-list">
+                  @for(req of c.requirementList; track req) {
                     <li>{{ req }}</li>
+                  }
                 </ul>
-                }
 
                 <button
                     (click)="openRequirement()"

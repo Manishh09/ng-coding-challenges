@@ -51,8 +51,6 @@
             class="category-pill"
             [class.selected]="isSelected(category.id)"
             (click)="selectCategory(category.id)"
-            matRipple
-            [matRippleColor]="'var(--color-primary-alpha-10)'"
             role="tab"
             [attr.aria-label]="'Select ' + category.name + ' category'"
             [attr.aria-selected]="isSelected(category.id)"
@@ -111,8 +109,6 @@
             class="category-pill category-pill-compact"
             [class.selected]="isSelected(category.id)"
             (click)="selectCategory(category.id)"
-            matRipple
-            [matRippleColor]="'var(--color-primary-alpha-10)'"
             role="tab"
             [attr.aria-label]="'Select ' + category.name + ' category'"
             [attr.aria-selected]="isSelected(category.id)"
@@ -138,10 +134,7 @@
 >
   <!-- Sidebar Header -->
   <div class="sidebar-header">
-    <div class="header-title">
-
-      <h2>Categories</h2>
-    </div>
+    <h2>Categories</h2>
   </div>
 
   <!-- Category List -->
@@ -157,8 +150,6 @@
           class="category-item"
           [class.selected]="isSelected(category.id)"
           (click)="selectCategory(category.id)"
-          matRipple
-          [matRippleColor]="'var(--color-primary-alpha-10)'"
           [attr.aria-label]="'Select ' + category.name + ' category'"
           [attr.aria-current]="isSelected(category.id) ? 'page' : null"
         >

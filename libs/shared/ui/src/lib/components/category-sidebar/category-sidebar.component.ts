@@ -1,9 +1,8 @@
-import { Component, inject, output, input, Signal, computed, ViewChild, ElementRef, signal, effect, HostListener } from '@angular/core';
+import { Component, inject, output, input, Signal, computed, viewChild, ElementRef, signal, effect, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatRippleModule } from '@angular/material/core';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
 import { getCategoryIcon } from '../../utils';
@@ -16,8 +15,6 @@ import { getCategoryIcon } from '../../utils';
     MatIconModule,
     MatButtonModule,
     MatBadgeModule,
-    MatRippleModule,
-
 ],
   templateUrl: './category-sidebar.component.html',
   styleUrl: './category-sidebar.component.scss',
@@ -35,7 +32,7 @@ export class CategorySidebarComponent {
   closeDrawer = output<void>();
 
   // View references for carousel
-  @ViewChild('pillsContainer', { read: ElementRef }) pillsContainer?: ElementRef<HTMLDivElement>;
+  readonly pillsContainer = viewChild<ElementRef<HTMLDivElement>>('pillsContainer');
 
   // Carousel navigation state
   readonly showLeftArrow = signal<boolean>(false);
@@ -100,9 +97,10 @@ export class CategorySidebarComponent {
    * Scroll carousel left by calculated amount
    */
   scrollLeft(): void {
-    if (!this.pillsContainer) return;
+    const ref = this.pillsContainer();
+    if (!ref) return;
 
-    const container = this.pillsContainer.nativeElement;
+    const container = ref.nativeElement;
     const scrollAmount = this.calculateScrollAmount(container);
 
     container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -113,9 +111,10 @@ export class CategorySidebarComponent {
    * Scroll carousel right by calculated amount
    */
   scrollRight(): void {
-    if (!this.pillsContainer) return;
+    const ref = this.pillsContainer();
+    if (!ref) return;
 
-    const container = this.pillsContainer.nativeElement;
+    const container = ref.nativeElement;
     const scrollAmount = this.calculateScrollAmount(container);
 
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
@@ -126,9 +125,10 @@ export class CategorySidebarComponent {
    * Update arrow visibility based on scroll position
    */
   updateArrowVisibility(): void {
-    if (!this.pillsContainer) return;
+    const ref = this.pillsContainer();
+    if (!ref) return;
 
-    const container = this.pillsContainer.nativeElement;
+    const container = ref.nativeElement;
     const { scrollLeft, scrollWidth, clientWidth } = container;
 
     this.showLeftArrow.set(scrollLeft > 10);
@@ -154,9 +154,10 @@ export class CategorySidebarComponent {
    * Scroll selected pill into view (for inline mode)
    */
   private scrollSelectedPillIntoView(categoryId: string): void {
-    if (!this.pillsContainer) return;
+    const ref = this.pillsContainer();
+    if (!ref) return;
 
-    const container = this.pillsContainer.nativeElement;
+    const container = ref.nativeElement;
     const selectedButton = container.querySelector(`[aria-selected="true"]`) as HTMLElement;
 
     if (selectedButton) {

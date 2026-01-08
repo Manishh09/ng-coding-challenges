@@ -107,25 +107,6 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-
-  // Custom scrollbar
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--border-primary);
-    border-radius: var(--border-radius-full);
-
-    &:hover {
-      background: var(--border-secondary);
-    }
-  }
-
 }
 
 // Divider after search input

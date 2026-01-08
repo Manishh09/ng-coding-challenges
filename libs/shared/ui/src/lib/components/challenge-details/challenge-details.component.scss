@@ -28,59 +28,6 @@
 }
 
 /* ==========================================
-   Back Button - UnUsed Remove Later
-   ========================================== */
-.back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-sm) var(--spacing-md);
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  transition: all var(--animation-duration-fast) var(--animation-easing);
-  border-radius: var(--border-radius-md);
-  min-height: 40px;
-
-  mat-icon {
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
-    transition: transform var(--animation-duration-fast) var(--animation-easing);
-  }
-
-  &:hover {
-    background: var(--state-hover-bg);
-    color: var(--text-primary);
-
-    mat-icon {
-      transform: translateX(-4px);
-    }
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--interactive-primary);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: 768px) {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: var(--font-size-xs);
-    margin-bottom: var(--spacing-md);
-    min-height: 36px;
-
-    span {
-      display: none;
-    }
-
-    mat-icon {
-      margin: 0;
-    }
-  }
-}
-
-/* ==========================================
    Header Section
    ========================================== */
 .details-header {
