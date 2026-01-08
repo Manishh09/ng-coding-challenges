@@ -4,5 +4,12 @@
   "outputDirectory": "dist/ngc-shell/browser",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "develop": true
+    }
+  }
 }
