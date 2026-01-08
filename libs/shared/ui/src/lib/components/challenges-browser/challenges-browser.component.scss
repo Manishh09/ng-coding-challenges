@@ -37,24 +37,6 @@
     margin-left: 0;
     width: 100%;
   }
-
-  // Custom scrollbar
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--background-secondary);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--border-primary);
-    border-radius: var(--border-radius-full);
-
-    &:hover {
-      background: var(--border-secondary);
-    }
-  }
 }
 
 .btn {

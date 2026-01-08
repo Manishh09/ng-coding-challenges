@@ -19,8 +19,6 @@ import {
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
 import { HeroStatsComponent } from '../hero-stats/hero-stats.component';
-import { MetricCardComponent } from '../metric-card/metric-card.component';
-import { FeatureCardComponent } from '../feature-card/feature-card.component';
 import { LatestCardComponent } from '../latest-card/latest-card.component';
 import { ChallengeDifficulty } from '@ng-coding-challenges/shared/models';
 import { getCategoryIcon } from '../../utils/category-utils';
@@ -70,8 +68,6 @@ const ROUTES = {
     MatButtonModule,
     SectionHeaderComponent,
     HeroStatsComponent,
-    MetricCardComponent,
-    FeatureCardComponent,
     LatestCardComponent
   ],
   templateUrl: './landing-page.component.html',

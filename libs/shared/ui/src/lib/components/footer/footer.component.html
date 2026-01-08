@@ -1,11 +1,11 @@
-<footer class="footer" id="site-footer" role="contentinfo" aria-labelledby="footer-heading">
+<footer class="footer" id="site-footer" role="contentinfo">
   @if (showFooterLinks()) {
   <div class="footer-container">
     <!-- Brand Section -->
-    <section class="footer-section brand-section" id="footer-brand" aria-labelledby="footer-brand-heading">
-      <h3 id="footer-brand-heading" class="section-title">
+    <div class="footer-brand">
+      <h2 class="footer-heading">
         About {{ appName() }}
-      </h3>
+      </h2>
 
 
 
@@ -14,13 +14,13 @@
         master essential concepts and confidently tackle your next Angular
         interview.
       </p>
-    </section>
+    </div>
 
     <!-- Quick Links Section -->
-    <nav class="footer-section quick-links-section" id="footer-quick-links" aria-labelledby="quick-links-heading">
-      <h3 id="quick-links-heading" class="section-title">Quick Links</h3>
+    <nav class="footer-nav" aria-label="Quick links">
+      <h2 class="footer-heading">Quick Links</h2>
 
-      <ul class="footer-links" role="list">
+      <ul class="footer-links">
         @for (link of quickLinks(); track link.text) {
         <li class="footer-link-item">
           @if (link.external) {
@@ -45,10 +45,10 @@
     </nav>
 
     <!-- Community Links Section -->
-    <section class="footer-section community-section" id="footer-community" aria-labelledby="footer-community-heading">
-      <h3 id="footer-community-heading" class="section-title">Community</h3>
+    <div class="footer-community">
+      <h2 class="footer-heading">Community</h2>
 
-      <ul class="footer-links" role="list">
+      <ul class="footer-links">
         @for (link of socialLinks(); track link.text) {
         <li class="footer-link-item">
           <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link {{ link.cssClass }}"
@@ -61,7 +61,7 @@
         </li>
         }
       </ul>
-    </section>
+    </div>
   </div>
   }
 

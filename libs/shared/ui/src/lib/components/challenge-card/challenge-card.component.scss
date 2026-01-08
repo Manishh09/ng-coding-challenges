@@ -64,29 +64,6 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Decorative Halo Effect
- * ----------------------------------------------------------------------------- */
-/* -----------------------------------------------------------------------------
- * Decorative Noise Texture
- * ----------------------------------------------------------------------------- */
-.challenge-card__halo {
-  position: absolute;
-  inset: 0;
-  // Subtle Noise Texture via SVG or URL (simulated here with repeating gradient for now)
-  background-image:
-    radial-gradient(at 0% 0%, var(--color-primary-alpha-10) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, var(--color-secondary-alpha-10) 0px, transparent 50%);
-  opacity: 0.6;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  transition: opacity 0.3s ease;
-
-  .challenge-card:hover & {
-    opacity: 0.9;
-  }
-}
-
-/* -----------------------------------------------------------------------------
  * Header Section
  * ----------------------------------------------------------------------------- */
 .challenge-card__header {
@@ -135,9 +112,7 @@
   }
 }
 
-/* ==========================================
-   Difficulty Badge
-   ========================================== */
+/* Difficulty Badge */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -155,30 +130,29 @@
     transform: translateY(-1px);
   }
 
-  &.difficulty {
-    &.beginner {
-      --badge-color: var(--status-success-dark, #166534);
-      --badge-bg: var(--status-success-alpha-20, #dcfce7);
-    }
+  /* Difficulty variants */
+  &.difficulty.beginner {
+    background: var(--status-success-alpha-20, #dcfce7);
+    color: var(--status-success-dark, #166534);
+    border: 1px solid var(--status-success-alpha-20, #dcfce7);
+  }
 
-    &.intermediate {
-      --badge-color: var(--status-warning-dark, #854d0e);
-      --badge-bg: var(--status-warning-alpha-20, #fef9c3);
-    }
+  &.difficulty.intermediate {
+    background: var(--status-warning-alpha-20, #fef9c3);
+    color: var(--status-warning-dark, #854d0e);
+    border: 1px solid var(--status-warning-alpha-20, #fef9c3);
+  }
 
-    &.advanced {
-      --badge-color: var(--status-error-dark, #991b1b);
-      --badge-bg: var(--status-error-alpha-20, #fee2e2);
-    }
+  &.difficulty.advanced {
+    background: var(--status-error-alpha-20, #fee2e2);
+    color: var(--status-error-dark, #991b1b);
+    border: 1px solid var(--status-error-alpha-20, #fee2e2);
+  }
 
-    &.expert {
-      --badge-color: var(--status-expert-dark, #4a044e);
-      --badge-bg: var(--status-expert-alpha-20, #fae8ff);
-    }
-
-    background: var(--badge-bg);
-    color: var(--badge-color);
-    border: 1px solid var(--badge-bg);
+  &.difficulty.expert {
+    background: var(--status-expert-alpha-20, #fae8ff);
+    color: var(--status-expert-dark, #4a044e);
+    border: 1px solid var(--status-expert-alpha-20, #fae8ff);
   }
 
   @media (min-width: 768px) {
@@ -206,30 +180,12 @@
   /* Visual styling - Ruby red accent for high emphasis */
   background: var(--gradient-accent);
   border-radius: var(--border-radius-pill);
-  box-shadow: 0 2px 8px rgba(224, 17, 95, 0.3);
-
-  /* Animation */
-  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 1px 3px rgba(224, 17, 95, 0.2);
 
   mat-icon {
     font-size: 14px;
     width: 14px;
     height: 14px;
-  }
-}
-
-/* Badge pulse animation */
-@keyframes pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.02);
-    opacity: 0.95;
   }
 }
 

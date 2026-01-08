@@ -28,7 +28,6 @@ import { ChallengeListRouteData } from '../../models/route-data.interface';
   imports: [
     CommonModule,
     MatButtonModule,
-    RouterLink,
     MatIconModule,
     ChallengeCardComponent,
     SkeletonLoaderComponent,

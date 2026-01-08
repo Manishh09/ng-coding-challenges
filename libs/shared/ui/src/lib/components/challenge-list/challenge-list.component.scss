@@ -86,11 +86,7 @@
   margin: 0;
   font-size: var(--font-size-page-title);
   font-weight: var(--font-weight-bold);
-  color: var(--color-fg);
-  background: var(--brand-gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--text-primary);
   transition: all 0.3s var(--animation-easing);
   animation: fadeIn 0.8s var(--animation-easing) forwards;
   position: relative;

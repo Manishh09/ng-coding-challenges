@@ -12,22 +12,15 @@
   overflow: hidden;
   isolation: isolate;
 
+  /* Single subtle gradient overlay */
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 20%, var(--color-primary-alpha-20), transparent 60%),
-      radial-gradient(circle at 80% 10%, var(--color-accent-alpha-20), transparent 55%);
-    z-index: 0;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--surface-secondary);
+    background: radial-gradient(circle at 20% 20%, var(--color-primary-alpha-20), transparent 60%);
     opacity: 0.5;
     z-index: 0;
+    pointer-events: none;
   }
 }
 
@@ -38,25 +31,22 @@
   margin: 0 auto;
   padding: var(--spacing-2xl) var(--spacing-xl);
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr; // Fixed ratio: brand section wider, other sections equal
+  grid-template-columns: 2fr 1fr 1fr;
   gap: clamp(var(--spacing-xl), 5vw, var(--spacing-3xl));
-  backdrop-filter: blur(18px);
-  max-width: var(--max-width-section); // 1280px - consistent with landing page sections
+  max-width: var(--max-width-section);
   width: 100%;
-  align-items: start; // Top-align all sections for clean baseline
+  align-items: start;
 
-  // Tablet: 2-column layout
   @media (max-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-2xl);
     padding: var(--spacing-2xl) var(--spacing-lg);
 
-    .brand-section {
-      grid-column: 1 / -1; // Full width on top
+    .footer-brand {
+      grid-column: 1 / -1;
     }
   }
 
-  // Mobile: Single column stack
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
@@ -64,19 +54,22 @@
   }
 }
 
-.footer-section {
+.footer-brand,
+.footer-nav,
+.footer-community {
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.5s var(--animation-easing) forwards;
-}
 
-.brand-section {
-  // Removed max-width constraint for better grid alignment
-  // Width is controlled by grid-template-columns: 1.5fr 1fr 1fr
+  /* Center-align on mobile */
+  @media (max-width: 767px) {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 /* Section Headings */
-.section-title {
+.footer-heading {
   margin: 0 0 var(--spacing-md);
   font-size: 1.1rem;
   font-weight: 600;
@@ -98,6 +91,16 @@
 
   &:hover::after {
     width: 72px;
+  }
+
+  /* Center-align on mobile */
+  @media (max-width: 767px) {
+    text-align: center;
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }
 
