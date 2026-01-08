@@ -3,10 +3,13 @@ import {
   input,
   output,
   signal,
-  effect,
   Signal,
   computed,
+  DestroyRef,
+  inject,
 } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './search-bar.component.scss',
 })
 export class SearchBarComponent {
+  private destroyRef = inject(DestroyRef);
+
   // Inputs using signal inputs (Angular 19)
   placeholder = input<string>('Search...');
   label = input<string>('');
@@ -40,7 +45,6 @@ export class SearchBarComponent {
 
   // Internal state
   searchTerm = signal<string>('');
-  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   // Computed signal for showing clear button
   showClearButton: Signal<boolean> = computed(
@@ -48,18 +52,15 @@ export class SearchBarComponent {
   );
 
   constructor() {
-    // Effect to handle debounced search emission
-    effect(() => {
-      const term = this.searchTerm();
-
-      if (this.debounceTimer) {
-        clearTimeout(this.debounceTimer);
-      }
-
-      this.debounceTimer = setTimeout(() => {
+    // Convert searchTerm signal to observable and apply debounce
+    toObservable(this.searchTerm)
+      .pipe(
+        debounceTime(this.debounceTime()),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(term => {
         this.searchChange.emit(term);
-      }, this.debounceTime());
-    });
+      });
   }
 
   onSearchInput(value: string): void {

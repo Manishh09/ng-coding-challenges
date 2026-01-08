@@ -6,6 +6,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatRippleModule } from '@angular/material/core';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
+import { getCategoryIcon } from '../../utils';
 
 @Component({
   selector: 'app-category-sidebar',
@@ -92,15 +93,7 @@ export class CategorySidebarComponent {
   }
 
   getCategoryIcon(categoryId: string): string {
-    const iconMap: Record<string, string> = {
-      'rxjs-api': 'api',
-      'http': 'http',
-      'angular-core': 'settings',
-      'angular-routing': 'route',
-      'angular-forms': 'assignment',
-      'angular-signals': 'signal_cellular_alt',
-    };
-    return iconMap[categoryId] || 'folder';
+    return getCategoryIcon(categoryId);
   }
 
   /**

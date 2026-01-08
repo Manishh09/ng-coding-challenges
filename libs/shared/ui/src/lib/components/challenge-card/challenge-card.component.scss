@@ -51,11 +51,7 @@
   }
 
   /* Focus state for accessibility */
-  &:focus-within {
-    //outline: 2px solid var(--interactive-primary) !important;
-    // outline-offset: 4px;
-    //border-color: var(--interactive-primary) !important;
-  }
+
 
   /* Latest challenge variant */
   &--latest {
@@ -161,28 +157,28 @@
 
   &.difficulty {
     &.beginner {
-      background: var(--status-success-alpha-20);
-      color: var(--status-success-dark);
-      border: 1px solid var(--status-success-alpha-20);
+      --badge-color: var(--status-success-dark, #166534);
+      --badge-bg: var(--status-success-alpha-20, #dcfce7);
     }
 
     &.intermediate {
-      background: var(--status-warning-alpha-20);
-      color: var(--status-warning-dark);
-      border: 1px solid var(--status-warning-alpha-20);
+      --badge-color: var(--status-warning-dark, #854d0e);
+      --badge-bg: var(--status-warning-alpha-20, #fef9c3);
     }
 
     &.advanced {
-      background: var(--status-error-alpha-20);
-      color: var(--status-error-dark);
-      border: 1px solid var(--status-error-alpha-20);
+      --badge-color: var(--status-error-dark, #991b1b);
+      --badge-bg: var(--status-error-alpha-20, #fee2e2);
     }
 
     &.expert {
-      background: var(--status-expert-alpha-20);
-      color: var(--status-expert-dark);
-      border: 1px solid var(--status-expert-alpha-20);
+      --badge-color: var(--status-expert-dark, #4a044e);
+      --badge-bg: var(--status-expert-alpha-20, #fae8ff);
     }
+
+    background: var(--badge-bg);
+    color: var(--badge-color);
+    border: 1px solid var(--badge-bg);
   }
 
   @media (min-width: 768px) {

@@ -55,8 +55,15 @@ export * from './lib/pipes/highlight-text.pipe';
  * Constants
  * Application-wide constants for consistency
  */
+export * from './lib/constants/constants';
 export * from './lib/constants/search.constants';
 export * from './lib/constants/loading.constants';
+
+/**
+ * Utilities
+ * Helper functions for common operations
+ */
+export * from './lib/utils';
 
 /**
  * Type Definitions

@@ -10,6 +10,7 @@ import { LOADING_CONFIG } from '../../constants/loading.constants';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, switchMap, startWith } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { toChallengeCategoryId, toDifficultyLevel } from '../../utils/type-guards';
 
 /**
  * Base GitHub repository URL for constructing full documentation links
@@ -119,7 +120,9 @@ export class WorkspaceToolbarComponent {
           return of(null);
         }
 
-        return this.challengesService.getChallengeDetailsBySlug(challengeSlug, category as any);
+        // Use type-safe conversion with validation
+        const validCategory = toChallengeCategoryId(category);
+        return this.challengesService.getChallengeDetailsBySlug(challengeSlug, validCategory);
       }),
       takeUntilDestroyed(this.destroyRef)
     ),
@@ -208,10 +211,10 @@ export class WorkspaceToolbarComponent {
       await this.stackblitzService.openChallengeInStackblitz({
         id,
         title,
-        category: category as any, // Type cast to ChallengeCategoryId
+        category: toChallengeCategoryId(category), // Type-safe conversion
         gitHub: gitHubPath,
         description: this.description() || '',
-        difficulty: (difficulty || 'Beginner') as any, // Type cast to DifficultyLevel
+        difficulty: toDifficultyLevel(difficulty, 'Beginner'), // Type-safe conversion with fallback
         tags: this.tags() || [],
         link: this.challengeSlug()
       });

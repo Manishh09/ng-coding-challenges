@@ -22,6 +22,7 @@ import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.c
 import { WorkspaceToolbarComponent } from '../workspace-toolbar/workspace-toolbar.component';
 import { filter, map } from 'rxjs';
 import { CHALLENGE_CATEGORY_IDS } from '../../constants/constants';
+import { calculateRouteDepth } from '../../utils/route-utils';
 
 /**
  * Challenges Browser Component - Pure Shell/Layout Component
@@ -106,14 +107,8 @@ export class ChallengesBrowserComponent {
    * Helper function for consistent depth calculation
    */
   private calculateRouteDepth(): number {
-    const url = this.router.url.split('?')[0]; // Remove query params
-    const segments = url.split('/').filter(s => s);
-
-    // /challenges = 1 segment (depth 0)
-    // /challenges/rxjs-api = 2 segments (depth 1)
-    // /challenges/rxjs-api/fetch-products = 3 segments (depth 2)
-    // /challenges/rxjs-api/fetch-products/workspace = 4 segments (depth 3)
-    return segments.length - 1; // Subtract 'challenges' base
+    const url = this.router.url;
+    return calculateRouteDepth(url);
   }
 
   // Track current route depth for adaptive UI

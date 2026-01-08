@@ -26,6 +26,7 @@ import { debounceTime, filter, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SEARCH_CONFIG } from '../../constants/search.constants';
 import { LOADING_CONFIG } from '../../constants/loading.constants';
+import { getCategoryBadgeClass } from '../../utils';
 @Component({
   selector: 'app-global-search',
   standalone: true,
@@ -156,12 +157,6 @@ export class GlobalSearchComponent implements OnInit {
   }
 
   getCategoryBadgeClass(category: string): string {
-    const categoryMap: Record<string, string> = {
-      'rxjs-api': 'badge-rxjs',
-      'http': 'badge-http',
-      'angular-core': 'badge-core',
-      'angular-routing': 'badge-routing',
-    };
-    return categoryMap[category] || 'badge-default';
+    return getCategoryBadgeClass(category);
   }
 }
