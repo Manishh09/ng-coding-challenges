@@ -19,7 +19,7 @@ import { ChallengeListRouteData } from '../../models/route-data.interface';
  * - Clean separation: only shows list, no nested routing
  */
 @Component({
-  selector: 'ng-coding-challenges-challenge-list',
+  selector: 'ngc-ui-challenge-list',
   templateUrl: './challenge-list.component.html',
   styleUrl: './challenge-list.component.scss',
   standalone: true,

@@ -41,11 +41,11 @@ const BASE_REPOSITORY = 'https://github.com/Manishh09/ng-coding-challenges/blob/
  *
  * Usage:
  * ```html
- * <ng-coding-challenges-workspace-toolbar />
+ * <ngc-ui-workspace-toolbar />
  * ```
  */
 @Component({
-  selector: 'ng-coding-challenges-workspace-toolbar',
+  selector: 'ngc-ui-workspace-toolbar',
   standalone: true,
   imports: [
     CommonModule,

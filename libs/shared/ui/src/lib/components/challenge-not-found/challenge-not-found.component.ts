@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'ng-coding-challenges-challenge-not-found',
+  selector: 'ngc-ui-challenge-not-found',
   standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './challenge-not-found.component.html',

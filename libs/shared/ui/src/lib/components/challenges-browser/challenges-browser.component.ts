@@ -46,7 +46,7 @@ import { calculateRouteDepth } from '../../utils/route-utils';
  * - Level 3: /challenges/{category}/{challengeId}/workspace - Shows workspace component + toolbar
  */
 @Component({
-  selector: 'app-challenges-browser',
+  selector: 'ngc-ui-challenges-browser',
   standalone: true,
   imports: [
     CommonModule,

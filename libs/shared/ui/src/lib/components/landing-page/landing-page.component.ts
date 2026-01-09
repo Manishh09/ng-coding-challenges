@@ -58,7 +58,7 @@ const ROUTES = {
 };
 
 @Component({
-  selector: 'ng-coding-challenges-landing-page',
+  selector: 'ngc-ui-landing-page',
   standalone: true,
   imports: [
     CommonModule,

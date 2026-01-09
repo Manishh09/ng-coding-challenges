@@ -191,7 +191,6 @@
     flex: 1;
     text-align: left;
     font-family: var(--font-family-base);
-    user-select: none;
   }
 
   .search-trigger-hint {
@@ -273,7 +272,7 @@
 }
 
 // Theme toggle component
-ng-coding-challenges-theme-toggle {
+ngc-ui-theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -407,7 +406,7 @@ ng-coding-challenges-theme-toggle {
     height: 16px;
   }
 
-  ng-coding-challenges-theme-toggle {
+  ngc-ui-theme-toggle {
     height: 36px;
   }
 

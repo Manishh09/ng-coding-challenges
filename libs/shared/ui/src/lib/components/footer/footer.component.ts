@@ -64,7 +64,7 @@ const SOCIAL_LINKS: FooterLink[] = [
 // Footer Component
 // ============================
 @Component({
-  selector: 'ng-coding-challenges-footer',
+  selector: 'ngc-ui-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,

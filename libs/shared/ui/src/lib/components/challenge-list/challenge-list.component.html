@@ -3,12 +3,12 @@
     @if (loading() && challenges().length !== 0) {
     <!-- Skeleton loaders for loading state -->
     @for (i of [1,2,3]; track i) {
-    <app-skeleton-loader variant="card"></app-skeleton-loader>
+    <ngc-ui-skeleton-loader variant="card"></ngc-ui-skeleton-loader>
     }
     } @else {
     @for (challenge of challenges(); track challenge.id) {
-    <ng-coding-challenges-challenge-card [challenge]="challenge" [newBadgeChallengeIds]="newBadgeChallengeIds()">
-    </ng-coding-challenges-challenge-card>
+    <ngc-ui-challenge-card [challenge]="challenge" [newBadgeChallengeIds]="newBadgeChallengeIds()">
+    </ngc-ui-challenge-card>
 
     } @empty {
     <div class="challenge-list-empty" role="status" aria-live="polite">

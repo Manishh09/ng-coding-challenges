@@ -22,7 +22,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
  * - Docs and resources menu
  */
 @Component({
-  selector: 'ng-coding-challenges-challenge-card',
+  selector: 'ngc-ui-challenge-card',
   standalone: true,
   imports: [
     CommonModule,

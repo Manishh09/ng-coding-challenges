@@ -9,17 +9,17 @@ import { CommonModule } from '@angular/common';
  *
  * @example
  * ```html
- * <app-error-boundary
+ * <ngc-ui-error-boundary
  *   [hasError]="errorOccurred()"
  *   [errorMessage]="errorDetails()"
  *   (retry)="handleRetry()"
  * >
  *   <your-content-here />
- * </app-error-boundary>
+ * </ngc-ui-error-boundary>
  * ```
  */
 @Component({
-  selector: 'app-error-boundary',
+  selector: 'ngc-ui-error-boundary',
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './error-boundary.component.html',

@@ -15,7 +15,7 @@
           Your playground for learning and practicing Angular with real-world challenges.
         </p>
 
-        <ng-coding-challenges-hero-stats [stats]="heroStatItems()" ariaLabel="Platform stats" />
+        <ngc-ui-hero-stats [stats]="heroStatItems()" ariaLabel="Platform stats" />
 
 
 
@@ -72,12 +72,12 @@
 
 
   <section class="latest-section" aria-labelledby="latest-title">
-    <ng-coding-challenges-section-header eyebrow="Fresh drops" heading="Launch the latest Angular challenges" summary="Stay sharp with new problems sourced from real client work and Angular
+    <ngc-ui-section-header eyebrow="Fresh drops" heading="Launch the latest Angular challenges" summary="Stay sharp with new problems sourced from real client work and Angular
         community questions." headingId="latest-title" />
 
     <div class="latest-grid">
       @for (challenge of latestChallenges(); track challenge.id) {
-      <ng-coding-challenges-latest-card [challengeId]="challenge.id" [categoryLabel]="challenge.categoryLabel"
+      <ngc-ui-latest-card [challengeId]="challenge.id" [categoryLabel]="challenge.categoryLabel"
         [title]="challenge.title.split(':')[1].trim()" [difficulty]="challenge.difficulty"
         [description]="challenge.description" buttonText="View Details" buttonIcon="visibility"
         (actionClick)="launchChallenge(challenge.route)" />

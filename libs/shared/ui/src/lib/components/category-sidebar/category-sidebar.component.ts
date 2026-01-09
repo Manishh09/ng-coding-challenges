@@ -8,7 +8,7 @@ import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
 import { getCategoryIcon } from '../../utils';
 
 @Component({
-  selector: 'app-category-sidebar',
+  selector: 'ngc-ui-category-sidebar',
   standalone: true,
   imports: [
     CommonModule,

@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-search-bar',
+  selector: 'ngc-ui-search-bar',
   standalone: true,
   imports: [
     FormsModule,

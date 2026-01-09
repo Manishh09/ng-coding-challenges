@@ -27,7 +27,7 @@ import { SEARCH_CONFIG } from '../../constants/search.constants';
 import { LOADING_CONFIG } from '../../constants/loading.constants';
 import { getCategoryBadgeClass } from '../../utils';
 @Component({
-  selector: 'app-global-search',
+  selector: 'ngc-ui-global-search',
   standalone: true,
   imports: [
     CommonModule,

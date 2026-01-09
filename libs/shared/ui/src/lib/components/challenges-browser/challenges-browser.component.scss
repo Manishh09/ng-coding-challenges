@@ -18,7 +18,7 @@
   transition: margin-left var(--animation-duration-standard) var(--animation-easing);
 
   // Ensure workspace toolbar is visible
-  ng-coding-challenges-workspace-toolbar {
+  ngc-ui-workspace-toolbar {
     display: block;
     flex-shrink: 0;
     width: 100%;
@@ -60,7 +60,7 @@
   overflow: hidden;
 
   // Make embedded category sidebar take full width
-  app-category-sidebar {
+  ngc-ui-category-sidebar {
     width: 100%;
     display: flex;
     align-items: center;

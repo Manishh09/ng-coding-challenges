@@ -1,16 +1,16 @@
  <div class="app-layout">
   <!-- Header -->
 
-  <ng-coding-challenges-header id="header-section" [logoUrl]="logo" [appName]="title" [githubLogoUrl]="githubLogo"
+  <ngc-ui-header id="header-section" [logoUrl]="logo" [appName]="title" [githubLogoUrl]="githubLogo"
     [showMobileMenu]="false">
-  </ng-coding-challenges-header>
+  </ngc-ui-header>
 
 
   <!-- Landing Page Section - only shown on root path -->
   @if(showLandingPage()) {
-  <ng-coding-challenges-landing-page id="landing-section" (getStarted)="onGetStarted()"
+  <ngc-ui-landing-page id="landing-section" (getStarted)="onGetStarted()"
     (exploreChallenges)="onExploreChallenges()">
-  </ng-coding-challenges-landing-page>
+  </ngc-ui-landing-page>
   }
 
   <!-- Challenge Content Section (when showing individual challenges) -->
@@ -22,12 +22,12 @@
 
   <!-- Footer - always visible -->
   @if(showFooter()){
-    <ng-coding-challenges-footer id="footer-section"
+    <ngc-ui-footer id="footer-section"
       [appName]="title"
       (linkClicked)="onFooterLinkClick($event)"
       [showFooterLinks]="showFooterLinks()"
       >
-    </ng-coding-challenges-footer>
+    </ngc-ui-footer>
   }
 
 </div>
