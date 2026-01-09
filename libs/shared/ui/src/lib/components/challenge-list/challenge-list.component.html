@@ -7,7 +7,7 @@
     }
     } @else {
     @for (challenge of challenges(); track challenge.id) {
-    <ngc-ui-challenge-card [challenge]="challenge" [newBadgeChallengeIds]="newBadgeChallengeIds()">
+    <ngc-ui-challenge-card [challenge]="challenge">
     </ngc-ui-challenge-card>
 
     } @empty {

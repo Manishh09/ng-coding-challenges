@@ -33,6 +33,7 @@ export interface Challenge {
   gitHub?: string;
   requirement?: string;
   solutionGuide?: string;
+  isNew?: boolean;
 }
 
 /**

@@ -60,14 +60,6 @@ export class ChallengeListComponent {
     return data?.challenges ? Array.from(data.challenges) : [];
   });
 
-  // Derived signal: new badge challenge IDs (top 2)
-  readonly newBadgeChallengeIds = computed<number[]>(() => {
-    const sorted = [...this.challenges()].sort((a, b) => b.id - a.id);
-    if (sorted.length >= 2) return [sorted[0].id, sorted[1].id];
-    if (sorted.length === 1) return [sorted[0].id];
-    return [];
-  });
-
   // Derived signal: title
   readonly title = computed(() => {
     const categoryName = this.challengeCategoryService.getCategoryNameById(this.categoryId());

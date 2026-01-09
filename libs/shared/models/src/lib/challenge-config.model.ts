@@ -59,6 +59,7 @@ export interface ChallengeData {
   requirementList: string[];
   links: ChallengeLinks;
   workspace: ChallengeWorkspace;
+  isNew?: boolean;
 }
 
 /**

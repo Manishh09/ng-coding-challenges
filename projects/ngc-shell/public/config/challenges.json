@@ -11,6 +11,7 @@
     "rxjs-api": {
       "fetch-products": {
         "id": 1,
+        "isNew": false,
         "slug": "fetch-products",
         "title": "Challenge 01: Fetch Products",
         "categoryId": "rxjs-api",
@@ -54,6 +55,7 @@
       },
       "handle-parallel-apis": {
         "id": 2,
+        "isNew": false,
         "slug": "handle-parallel-apis",
         "title": "Challenge 02: Dashboard Data - Parallel API Calls",
         "categoryId": "rxjs-api",
@@ -96,6 +98,7 @@
       },
       "client-side-search": {
         "id": 3,
+        "isNew": false,
         "slug": "client-side-search",
         "title": "Challenge 03: Client-Side User Search",
         "categoryId": "rxjs-api",
@@ -139,6 +142,7 @@
       },
       "server-side-search": {
         "id": 4,
+        "isNew": false,
         "slug": "server-side-search",
         "title": "Challenge 04: Server-Side User Search (AutoComplete)",
         "categoryId": "rxjs-api",
@@ -183,6 +187,7 @@
       },
       "product-category-management": {
         "id": 5,
+        "isNew": false,
         "slug": "product-category-management",
         "title": "Challenge 05: Product Category Management - shareReplay",
         "categoryId": "rxjs-api",
@@ -225,6 +230,7 @@
       },
       "user-todos-filter": {
         "id": 6,
+        "isNew": false,
         "slug": "user-todos-filter",
         "title": "Challenge 06: User Todos with Status Filter - combineLatest",
         "categoryId": "rxjs-api",
@@ -267,6 +273,7 @@
       },
       "user-posts-dashboard": {
         "id": 7,
+        "isNew": false,
         "slug": "user-posts-dashboard",
         "title": "Challenge 07: User Posts Dashboard - Dependent API Calls",
         "categoryId": "rxjs-api",
@@ -309,6 +316,7 @@
       },
       "ecommerce-checkout": {
         "id": 8,
+        "isNew": false,
         "slug": "ecommerce-checkout",
         "title": "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
         "categoryId": "rxjs-api",
@@ -354,6 +362,7 @@
     "angular-core": {
       "component-communication": {
         "id": 9,
+        "isNew": false,
         "slug": "component-communication",
         "title": "Challenge 09: Component Communication using Signals",
         "categoryId": "angular-core",
@@ -398,6 +407,7 @@
     "angular-routing": {
       "authorized-resource-access": {
         "id": 10,
+        "isNew": false,
         "slug": "authorized-resource-access",
         "title": "Challenge 10: Authorized Resource Access",
         "categoryId": "angular-routing",
@@ -441,6 +451,7 @@
       },
       "admin-dashboard-access": {
         "id": 11,
+        "isNew": false,
         "slug": "admin-dashboard-access",
         "title": "Challenge 11: Admin Dashboard Access (RBAC)",
         "categoryId": "angular-routing",
@@ -484,6 +495,7 @@
       },
       "unsaved-form-changes": {
         "id": 19,
+        "isNew": false,
         "slug": "unsaved-form-changes",
         "title": "Challenge 19: Unsaved Changes Guard",
         "categoryId": "angular-routing",
@@ -534,6 +546,7 @@
     "angular-forms": {
       "reactive-login-form": {
         "id": 12,
+        "isNew": false,
         "slug": "reactive-login-form",
         "title": "Challenge 12: Reactive Login Form",
         "categoryId": "angular-forms",
@@ -581,6 +594,7 @@
       },
       "duplicate-project-name-validator": {
         "id": 13,
+        "isNew": false,
         "slug": "duplicate-project-name-validator",
         "title": "Challenge 13: Duplicate Project Name Validator",
         "categoryId": "angular-forms",
@@ -631,6 +645,7 @@
       },
       "email-availability-check": {
         "id": 14,
+        "isNew": false,
         "slug": "email-availability-check",
         "title": "Challenge 14: Email Availability Check (Custom Async Validator)",
         "categoryId": "angular-forms",
@@ -683,6 +698,7 @@
       },
       "date-range-validation": {
         "id": 15,
+        "isNew": false,
         "slug": "date-range-validation",
         "title": "Challenge 15: Date Range Validation (Cross-Field Validator)",
         "categoryId": "angular-forms",
@@ -736,6 +752,7 @@
       },
       "dynamic-form-array": {
         "id": 16,
+        "isNew": false,
         "slug": "dynamic-form-array",
         "title": "Challenge 16: Dynamic FormArray (Experience Section)",
         "categoryId": "angular-forms",
@@ -790,6 +807,7 @@
       },
       "custom-input-cva": {
         "id": 17,
+        "isNew": false,
         "slug": "custom-input-cva",
         "title": "Challenge 17: Custom Input Field using ControlValueAccessor",
         "categoryId": "angular-forms",
@@ -844,6 +862,7 @@
       },
       "server-driven-dynamic-form": {
         "id": 18,
+        "isNew": false,
         "slug": "server-driven-dynamic-form",
         "title": "Challenge 18: Server-Driven Dynamic Form",
         "categoryId": "angular-forms",
