@@ -2,8 +2,8 @@
 @use '@angular/material' as mat;
 @use '../../../libs/shared/ui/src/lib/styles/theme.scss' as theme;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+// Optimized font loading with display=swap
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 /* ==========================================
    Global Base Styles - WCAG 2.1 AA Compliant
@@ -321,7 +321,7 @@ body.dark-mode {
 // Base content container foundation
 .content-container {
   flex: 1;
-  
+
   overflow: visible;
 
   // Smooth transitions between layout types
@@ -351,7 +351,7 @@ body.dark-mode {
 // Purpose: Details page with sidebar + main content
 // Layout: Balanced padding for optimal reading experience
 .challenge-details-container {
-  max-width: var(--max-width-wide); // 1440px - consistent width
+  // max-width: var(--max-width-wide); // 1440px - consistent width
   // padding: var(--spacing-xl) var(--spacing-2xl);
 
   @media (max-width: 768px) {

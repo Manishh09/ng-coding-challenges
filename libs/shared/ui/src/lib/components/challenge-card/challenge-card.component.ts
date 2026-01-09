@@ -22,7 +22,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
  * - Docs and resources menu
  */
 @Component({
-  selector: 'ng-coding-challenges-challenge-card',
+  selector: 'ngc-ui-challenge-card',
   standalone: true,
   imports: [
     CommonModule,
@@ -41,7 +41,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class ChallengeCardComponent implements OnInit {
   // Input properties
   readonly challenge = input.required<Challenge>();
-  readonly newBadgeChallengeIds = input<number[]>([]);
 
   readonly categoryLabel = computed(() =>
     this.formatCategoryId(this.challenge().category)
@@ -80,14 +79,9 @@ export class ChallengeCardComponent implements OnInit {
   );
 
   // Reactive signal for new badge visibility
-  readonly hasNewBadge = computed(() => {
-    const newBadgeIds = this.newBadgeChallengeIds();
-    const currentId = this.challenge().id;
-    if (newBadgeIds?.length) {
-      return newBadgeIds.includes(currentId);
-    }
-    return this.isLatestChallenge();
-  });
+  readonly hasNewBadge = computed(() => 
+    this.challenge().isNew ?? false
+  );
 
   // Loading state for StackBlitz launch
   readonly launching = signal(false);

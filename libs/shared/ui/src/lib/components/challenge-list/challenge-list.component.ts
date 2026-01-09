@@ -9,7 +9,6 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
 import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
 import { ChallengeListRouteData } from '../../models/route-data.interface';
-import { ChallengeNotFoundComponent } from '../challenge-not-found/challenge-not-found.component';
 /**
  * Component for displaying a list of challenges for a specific category
  *
@@ -20,7 +19,7 @@ import { ChallengeNotFoundComponent } from '../challenge-not-found/challenge-not
  * - Clean separation: only shows list, no nested routing
  */
 @Component({
-  selector: 'ng-coding-challenges-challenge-list',
+  selector: 'ngc-ui-challenge-list',
   templateUrl: './challenge-list.component.html',
   styleUrl: './challenge-list.component.scss',
   standalone: true,
@@ -29,11 +28,9 @@ import { ChallengeNotFoundComponent } from '../challenge-not-found/challenge-not
   imports: [
     CommonModule,
     MatButtonModule,
-    RouterLink,
     MatIconModule,
     ChallengeCardComponent,
     SkeletonLoaderComponent,
-    ChallengeNotFoundComponent
   ],
 })
 export class ChallengeListComponent {
@@ -61,14 +58,6 @@ export class ChallengeListComponent {
   readonly challenges = computed<Challenge[]>(() => {
     const data = this.routeData() as ChallengeListRouteData | undefined;
     return data?.challenges ? Array.from(data.challenges) : [];
-  });
-
-  // Derived signal: new badge challenge IDs (top 2)
-  readonly newBadgeChallengeIds = computed<number[]>(() => {
-    const sorted = [...this.challenges()].sort((a, b) => b.id - a.id);
-    if (sorted.length >= 2) return [sorted[0].id, sorted[1].id];
-    if (sorted.length === 1) return [sorted[0].id];
-    return [];
   });
 
   // Derived signal: title

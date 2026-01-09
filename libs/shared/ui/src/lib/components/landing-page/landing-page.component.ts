@@ -10,6 +10,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { take } from 'rxjs/operators';
 import {
   ChallengeCategoryService,
   ChallengesService,
@@ -18,10 +19,9 @@ import {
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
 import { HeroStatsComponent } from '../hero-stats/hero-stats.component';
-import { MetricCardComponent } from '../metric-card/metric-card.component';
-import { FeatureCardComponent } from '../feature-card/feature-card.component';
 import { LatestCardComponent } from '../latest-card/latest-card.component';
 import { ChallengeDifficulty } from '@ng-coding-challenges/shared/models';
+import { getCategoryIcon } from '../../utils/category-utils';
 
 type LandingMetric = {
   icon: string;
@@ -58,7 +58,7 @@ const ROUTES = {
 };
 
 @Component({
-  selector: 'ng-coding-challenges-landing-page',
+  selector: 'ngc-ui-landing-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -68,8 +68,6 @@ const ROUTES = {
     MatButtonModule,
     SectionHeaderComponent,
     HeroStatsComponent,
-    MetricCardComponent,
-    FeatureCardComponent,
     LatestCardComponent
   ],
   templateUrl: './landing-page.component.html',
@@ -138,16 +136,23 @@ export class LandingPageComponent {
       return;
     }
 
-    // Convert Observable to value via subscription
-    latestChallenge.subscribe(latest => {
-      if (latest) {
-        // Construct dynamic route safely
-        const { category, link } = latest;
-        this.router.navigate([`${ROUTES.challenges}/${category}/${link}`]);
-      } else {
-        this.notificationService.info('No challenges available yet. Check back soon!');
+    // Use take(1) to automatically complete the subscription after first emission
+    latestChallenge.pipe(take(1)).subscribe({
+      next: latest => {
+        if (latest) {
+          // Construct dynamic route safely
+          const { category, link } = latest;
+          this.router.navigate([`${ROUTES.challenges}/${category}/${link}`]);
+        } else {
+          this.notificationService.info('No challenges available yet. Check back soon!');
+          this.router.navigate([ROUTES.challenges]);
+        }
+      },
+      error: error => {
+        console.error('Error fetching latest challenge:', error);
+        this.notificationService.error('Failed to load latest challenge');
         this.router.navigate([ROUTES.challenges]);
-      }
+      },
     });
   }
 
@@ -232,7 +237,7 @@ export class LandingPageComponent {
       title: entry?.name ?? this.formatCategoryId(categoryId),
       description:
         entry?.description ?? `Discover Angular ${this.formatCategoryId(categoryId)} challenges.`,
-      icon: entry?.icon ?? this.getCategoryIcon(categoryId),
+      icon: entry?.icon ?? getCategoryIcon(categoryId),
     };
   }
 
@@ -241,14 +246,5 @@ export class LandingPageComponent {
       .split('-')
       .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
       .join(' ');
-  }
-
-  private getCategoryIcon(categoryId: string): string {
-    const iconMap: Record<string, string> = {
-      'rxjs-api': 'sync_alt',
-      'angular-core': 'account_tree',
-      'angular-routing': 'alt_route',
-    };
-    return iconMap[categoryId] ?? 'auto_awesome';
   }
 }

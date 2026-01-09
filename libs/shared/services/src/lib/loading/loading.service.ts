@@ -28,6 +28,12 @@ import { Observable, finalize, MonoTypeOperatorFunction } from 'rxjs';
   providedIn: 'root'
 })
 export class LoadingService {
+  /** Default timeout for operations (30 seconds) */
+  private readonly DEFAULT_TIMEOUT_MS = 30000;
+
+  /** Map of operation IDs to their timeout handles */
+  private readonly operationTimeouts = new Map<string, number>();
+
   /** Global loading state - true when any operation is loading */
   private readonly loadingState = signal(false);
 
@@ -58,28 +64,44 @@ export class LoadingService {
 
   /**
    * Start a tracked operation and return its unique ID
-   * Automatically updates global loading state
+   * Automatically updates global loading state and sets a timeout for auto-cleanup
    *
    * @param operationName - Descriptive name for the operation
+   * @param timeoutMs - Optional timeout in milliseconds (default: 30000ms)
    * @returns Unique operation ID to use with stopOperation
    */
-  startOperation(operationName: string): string {
+  startOperation(operationName: string, timeoutMs: number = this.DEFAULT_TIMEOUT_MS): string {
     const operationId = `${operationName}_${Date.now()}_${Math.random()}`;
     const operations = new Set(this.activeOperations());
     operations.add(operationId);
     this.activeOperations.set(operations);
     this.activeOperationsCount.set(operations.size);
     this.updateLoadingState();
+
+    // Set timeout for auto-cleanup to prevent memory leaks
+    const timeoutId = window.setTimeout(() => {
+      console.warn(`[LoadingService] Operation '${operationName}' timed out after ${timeoutMs}ms. Auto-cleaning up.`);
+      this.stopOperation(operationId);
+    }, timeoutMs);
+
+    this.operationTimeouts.set(operationId, timeoutId);
     return operationId;
   }
 
   /**
    * Stop a tracked operation
-   * Automatically updates global loading state
+   * Automatically updates global loading state and clears timeout
    *
    * @param operationId - The ID returned from startOperation
    */
   stopOperation(operationId: string): void {
+    // Clear the timeout
+    const timeoutId = this.operationTimeouts.get(operationId);
+    if (timeoutId !== undefined) {
+      clearTimeout(timeoutId);
+      this.operationTimeouts.delete(operationId);
+    }
+
     const operations = new Set(this.activeOperations());
     operations.delete(operationId);
     this.activeOperations.set(operations);
@@ -88,10 +110,14 @@ export class LoadingService {
   }
 
   /**
-   * Clear all active operations
+   * Clear all active operations and their timeouts
    * Useful for cleanup or error recovery
    */
   clearAllOperations(): void {
+    // Clear all timeouts
+    this.operationTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+    this.operationTimeouts.clear();
+
     this.activeOperations.set(new Set());
     this.activeOperationsCount.set(0);
     this.updateLoadingState();
@@ -136,6 +162,7 @@ export class LoadingService {
    * Automatically starts loading when observable is subscribed and stops when completed/errored
    *
    * @param operationName - Descriptive name for the operation
+   * @param timeoutMs - Optional timeout in milliseconds (default: 30000ms)
    * @returns MonoTypeOperatorFunction that manages loading state
    *
    * @example
@@ -145,9 +172,9 @@ export class LoadingService {
    * ).subscribe();
    * ```
    */
-  withLoadingOperator<T>(operationName: string): MonoTypeOperatorFunction<T> {
+  withLoadingOperator<T>(operationName: string, timeoutMs?: number): MonoTypeOperatorFunction<T> {
     return (source: Observable<T>) => {
-      const operationId = this.startOperation(operationName);
+      const operationId = this.startOperation(operationName, timeoutMs);
       return source.pipe(
         finalize(() => this.stopOperation(operationId))
       );

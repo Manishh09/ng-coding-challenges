@@ -5,7 +5,7 @@
      ============================================================================= -->
 <div class="details-container fade-in">
     <!-- Breadcrumb Navigation -->
-    <ng-coding-challenges-breadcrumbs [items]="breadcrumbItems()" />
+    <ngc-ui-breadcrumbs [items]="breadcrumbItems()" />
 
     <!-- Challenge Header Section -->
     <header class="details-header">
@@ -43,11 +43,11 @@
             <section class="section requirements">
                 <h2>Requirements</h2>
                 <mat-divider></mat-divider>
-                @for(req of c.requirementList; track req) {
-                 <ul class="requirements-list">
+                <ul class="requirements-list">
+                  @for(req of c.requirementList; track req) {
                     <li>{{ req }}</li>
+                  }
                 </ul>
-                }
 
                 <button
                     (click)="openRequirement()"

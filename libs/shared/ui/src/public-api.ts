@@ -40,8 +40,6 @@ export * from './lib/components/skip-links/skip-links.component';
  * Composable UI components extracted from landing page patterns
  */
 export * from './lib/components/section-header/section-header.component';
-export * from './lib/components/metric-card/metric-card.component';
-export * from './lib/components/feature-card/feature-card.component';
 export * from './lib/components/latest-card/latest-card.component';
 export * from './lib/components/hero-stats/hero-stats.component';
 
@@ -55,8 +53,15 @@ export * from './lib/pipes/highlight-text.pipe';
  * Constants
  * Application-wide constants for consistency
  */
+export * from './lib/constants/constants';
 export * from './lib/constants/search.constants';
 export * from './lib/constants/loading.constants';
+
+/**
+ * Utilities
+ * Helper functions for common operations
+ */
+export * from './lib/utils';
 
 /**
  * Type Definitions

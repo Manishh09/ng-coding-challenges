@@ -91,12 +91,6 @@
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-padding: 0 var(--spacing-md);
-  scrollbar-width: none; // Firefox
-  -ms-overflow-style: none; // IE/Edge
-
-  &::-webkit-scrollbar {
-    display: none; // Chrome/Safari
-  }
 }
 
 .category-pill {

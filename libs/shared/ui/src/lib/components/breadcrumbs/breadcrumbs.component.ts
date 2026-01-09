@@ -9,7 +9,7 @@ export interface BreadcrumbItem {
 }
 
 @Component({
-  selector: 'ng-coding-challenges-breadcrumbs',
+  selector: 'ngc-ui-breadcrumbs',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './breadcrumbs.component.html',

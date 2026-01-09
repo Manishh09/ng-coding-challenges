@@ -11,6 +11,7 @@
     "rxjs-api": {
       "fetch-products": {
         "id": 1,
+        "isNew": false,
         "slug": "fetch-products",
         "title": "Challenge 01: Fetch Products",
         "categoryId": "rxjs-api",
@@ -54,6 +55,7 @@
       },
       "handle-parallel-apis": {
         "id": 2,
+        "isNew": false,
         "slug": "handle-parallel-apis",
         "title": "Challenge 02: Dashboard Data - Parallel API Calls",
         "categoryId": "rxjs-api",
@@ -80,9 +82,8 @@
           "Optimize API call performance"
         ],
         "requirementList": [
-          "Fetch product statistics from /products/stats endpoint.",
-          "Fetch recent orders from /orders/recent endpoint.",
-          "Fetch user activity data from /users/activity endpoint.",
+          "Fetch post details from /posts endpoint.",
+          "Fetch user details data from /users endpoint.",
           "Combine all fetched data and display in a unified dashboard view."
         ],
         "links": {
@@ -97,6 +98,7 @@
       },
       "client-side-search": {
         "id": 3,
+        "isNew": false,
         "slug": "client-side-search",
         "title": "Challenge 03: Client-Side User Search",
         "categoryId": "rxjs-api",
@@ -140,6 +142,7 @@
       },
       "server-side-search": {
         "id": 4,
+        "isNew": false,
         "slug": "server-side-search",
         "title": "Challenge 04: Server-Side User Search (AutoComplete)",
         "categoryId": "rxjs-api",
@@ -184,6 +187,7 @@
       },
       "product-category-management": {
         "id": 5,
+        "isNew": false,
         "slug": "product-category-management",
         "title": "Challenge 05: Product Category Management - shareReplay",
         "categoryId": "rxjs-api",
@@ -210,11 +214,9 @@
           "Build reactive component architectures"
         ],
         "requirementList": [
-          "Implement data caching with shareReplay",
-          "Share data across multiple components",
-          "Integrate Angular Signals with RxJS",
-          "Optimize API call performance",
-          "Build reactive component architectures"
+          "Implement data caching with shareReplay operator",
+          "Build product-category dashboard sharing data across components",
+          "Integrate Angular Signals with RxJS for reactive architecture"
         ],
         "links": {
           "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-05-product-category-management-system/docs/CH-05-REQUIREMENT.md",
@@ -228,6 +230,7 @@
       },
       "user-todos-filter": {
         "id": 6,
+        "isNew": false,
         "slug": "user-todos-filter",
         "title": "Challenge 06: User Todos with Status Filter - combineLatest",
         "categoryId": "rxjs-api",
@@ -254,10 +257,9 @@
           "Build complex reactive data flows"
         ],
         "requirementList": [
-          "Fetch todos from /todos endpoint and users from /users endpoint.",
-          "Combine the data to create an enriched todo list with user names.",
-          "Implement a status filter to view All, Completed, and Pending todos.",
-          "Display the enriched and filtered todo list in a table format."
+          "Fetch and combine todos with user data using RxJS operators",
+          "Implement status filter (All, Completed, Pending)",
+          "Display enriched todo list with user names in table format"
         ],
         "links": {
           "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-06-user-todos-filter/docs/CH-06-REQUIREMENT.md",
@@ -271,6 +273,7 @@
       },
       "user-posts-dashboard": {
         "id": 7,
+        "isNew": false,
         "slug": "user-posts-dashboard",
         "title": "Challenge 07: User Posts Dashboard - Dependent API Calls",
         "categoryId": "rxjs-api",
@@ -297,8 +300,9 @@
           "Optimize nested request patterns"
         ],
         "requirementList": [
-          "Fetch the list of users from /users endpoint.",
-          "For each user, fetch their posts from /posts?userId={userId} endpoint."
+          "Fetch users from /users endpoint",
+          "For each user, fetch their posts using mergeMap",
+          "Display combined user-posts dashboard with proper error handling"
         ],
         "links": {
           "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-07-dependent-apis/docs/CH-07-REQUIREMENT.md",
@@ -312,6 +316,7 @@
       },
       "ecommerce-checkout": {
         "id": 8,
+        "isNew": false,
         "slug": "ecommerce-checkout",
         "title": "Challenge 08: E-Commerce Checkout Process - Sequential API Calls",
         "categoryId": "rxjs-api",
@@ -338,11 +343,10 @@
           "Build state machines with RxJS"
         ],
         "requirementList": [
-          "Create a multi-step checkout form with steps for Cart Review, Shipping Info, Payment Info, and Order Confirmation.",
-          "On form submission, perform the following API calls in sequence using concatMap:",
-          "- Validate Cart: POST /checkout/validate",
-          "- Process Payment: POST /checkout/payment",
-          "- Confirm Order: POST /checkout/confirm"
+          "Build multi-step checkout form (Cart, Shipping, Payment, Confirmation)",
+          "Implement sequential API calls using concatMap",
+          "Handle cart validation, payment processing, and order confirmation",
+          "Display step progress and handle errors at each stage"
         ],
         "links": {
           "requirement": "projects/ngc-rxjs-api/src/app/challenges/challenge-08-ecommerce-checkout/docs/CH-08-REQUIREMENT.md",
@@ -358,6 +362,7 @@
     "angular-core": {
       "component-communication": {
         "id": 9,
+        "isNew": false,
         "slug": "component-communication",
         "title": "Challenge 09: Component Communication using Signals",
         "categoryId": "angular-core",
@@ -384,9 +389,9 @@
           "Handle component lifecycle with Signals"
         ],
         "requirementList": [
-          "Create a parent component that holds a list of products as a Signal.",
-          "Develop a child component to display individual product details, receiving data via input().",
-          "Implement an output() function in the child component to notify the parent when a product is selected."
+          "Create parent component managing product list with Signals",
+          "Build child component receiving data via input() function",
+          "Implement output() for parent-child communication on product selection"
         ],
         "links": {
           "requirement": "projects/ngc-core/src/app/challenges/challenge-09-component-communication/docs/CH-09-REQUIREMENT.md",
@@ -402,6 +407,7 @@
     "angular-routing": {
       "authorized-resource-access": {
         "id": 10,
+        "isNew": false,
         "slug": "authorized-resource-access",
         "title": "Challenge 10: Authorized Resource Access",
         "categoryId": "angular-routing",
@@ -428,10 +434,10 @@
           "Manage authentication state"
         ],
         "requirementList": [
-          "Create a simple login form that updates an authentication Signal upon successful login.",
-          "Implement a canActivate guard that checks the authentication Signal to allow or deny access to protected routes.",
-          "Set up routes for Login, Dashboard (protected), and Public pages.",
-          "Ensure unauthorized users are redirected to the Login page when trying to access protected routes."
+          "Build login form managing authentication state with Signals",
+          "Implement canActivate guard checking authentication status",
+          "Configure routes: Login, Dashboard (protected), Public",
+          "Redirect unauthorized users to Login page"
         ],
         "links": {
           "requirement": "projects/ngc-routing/src/app/challenges/challenge-10-authorized-resource-access/docs/CH-10-REQUIREMENT.md",
@@ -445,6 +451,7 @@
       },
       "admin-dashboard-access": {
         "id": 11,
+        "isNew": false,
         "slug": "admin-dashboard-access",
         "title": "Challenge 11: Admin Dashboard Access (RBAC)",
         "categoryId": "angular-routing",
@@ -471,10 +478,10 @@
           "Implement redirect strategies"
         ],
         "requirementList": [
-          "Create a user authentication system that assigns roles (e.g., admin, user) upon login.",
-          "Implement a canActivate guard that checks the user role Signal to allow or deny access to admin routes.",
-          "Set up routes for Admin Dashboard (protected), User Dashboard (protected), and Public pages.",
-          "Ensure users without the admin role are redirected to an Unauthorized page when trying to access admin routes."
+          "Build authentication system with role assignment (admin, user)",
+          "Implement role-based canActivate guard",
+          "Configure routes: Admin Dashboard, User Dashboard, Public, Unauthorized",
+          "Redirect non-admin users attempting admin access"
         ],
         "links": {
           "requirement": "projects/ngc-routing/src/app/challenges/challenge-11-admin-dashboard-access/docs/CH-11-REQUIREMENT.md",
@@ -488,6 +495,7 @@
       },
       "unsaved-form-changes": {
         "id": 19,
+        "isNew": false,
         "slug": "unsaved-form-changes",
         "title": "Challenge 19: Unsaved Changes Guard",
         "categoryId": "angular-routing",
@@ -519,12 +527,10 @@
           "Implement confirmation dialogs"
         ],
         "requirementList": [
-          "Create a CanDeactivateComponent interface for reusable guard logic across multiple components.",
-          "Implement a functional canDeactivate guard that checks form state before allowing navigation.",
-          "Build a user form component that tracks dirty state and implements the guard interface.",
-          "Show confirmation dialog when user attempts to navigate with unsaved changes.",
-          "Handle browser refresh/close events with beforeunload listener.",
-          "Allow navigation after successful form save by marking form as pristine."
+          "Implement canDeactivate guard with reusable component interface",
+          "Build user form tracking dirty state and unsaved changes",
+          "Show confirmation dialog before navigation with unsaved data",
+          "Handle browser events (refresh/close) with beforeunload"
         ],
         "links": {
           "requirement": "projects/ngc-routing/src/app/challenges/challenge-19-unsaved-form-changes/docs/CH-19-REQUIREMENT.md",
@@ -540,6 +546,7 @@
     "angular-forms": {
       "reactive-login-form": {
         "id": 12,
+        "isNew": false,
         "slug": "reactive-login-form",
         "title": "Challenge 12: Reactive Login Form",
         "categoryId": "angular-forms",
@@ -570,10 +577,10 @@
           "Implement proper form submission handling"
         ],
         "requirementList": [
-          "Create a LoginFormComponent with email and password fields using Angular Reactive Forms.",
-          "Implement validation: email (required + valid format), password (required + minimum 6 characters).",
-          "Display inline error messages that appear only after fields are touched or form is submitted.",
-          "Disable the submit button when the form is invalid and show success message on valid submission."
+          "Build reactive login form with email and password fields",
+          "Apply validators: required, email format, minLength(6)",
+          "Display dynamic error messages on touch/submit",
+          "Disable submit button when invalid and show success message"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-12-reactive-login-form/docs/CH-12-REQUIREMENT.md",
@@ -587,6 +594,7 @@
       },
       "duplicate-project-name-validator": {
         "id": 13,
+        "isNew": false,
         "slug": "duplicate-project-name-validator",
         "title": "Challenge 13: Duplicate Project Name Validator",
         "categoryId": "angular-forms",
@@ -620,12 +628,10 @@
           "Apply separation of concerns in validator design"
         ],
         "requirementList": [
-          "Create a reusable duplicateNameValidator factory function that returns a ValidatorFn.",
-          "Implement normalization: case-insensitive, trim whitespace, treat spaces/hyphens as equivalent.",
-          "Support edit mode by excluding the current project name from duplicate checking.",
-          "Display real-time validation with normalized preview and clear error messages.",
-          "Build a ProjectService with Angular Signals managing CRUD operations and computed project names.",
-          "Create mode toggle allowing users to switch between create and edit modes with dynamic validator updates."
+          "Create custom ValidatorFn factory checking duplicate names",
+          "Implement normalization (case-insensitive, whitespace, special chars)",
+          "Build ProjectService with Signals for state management",
+          "Display real-time validation with normalized preview"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-13-duplicate-project-name-validator/docs/CH-13-REQUIREMENT.md",
@@ -639,6 +645,7 @@
       },
       "email-availability-check": {
         "id": 14,
+        "isNew": false,
         "slug": "email-availability-check",
         "title": "Challenge 14: Email Availability Check (Custom Async Validator)",
         "categoryId": "angular-forms",
@@ -674,14 +681,10 @@
           "Optimize form performance with debouncing strategies"
         ],
         "requirementList": [
-          "Create an asyncEmailAvailabilityValidator factory function returning AsyncValidatorFn.",
-          "Implement EmailValidationService with simulated API using 1.5 second delay.",
-          "Use debounceTime(500ms) to reduce validation calls during typing.",
-          "Show loading spinner while validation status is PENDING.",
-          "Display clear error messages for taken emails with suggested alternatives.",
-          "Handle API errors gracefully with catchError (fail-open strategy).",
-          "Register async validator in third parameter of FormControl array.",
-          "Monitor statusChanges observable to track PENDING state."
+          "Create custom AsyncValidatorFn with simulated API delay",
+          "Implement debouncing (500ms) and loading states",
+          "Build EmailValidationService checking availability",
+          "Display error messages with suggested alternatives"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-14-email-availability-check/docs/CH-14-REQUIREMENT.md",
@@ -695,6 +698,7 @@
       },
       "date-range-validation": {
         "id": 15,
+        "isNew": false,
         "slug": "date-range-validation",
         "title": "Challenge 15: Date Range Validation (Cross-Field Validator)",
         "categoryId": "angular-forms",
@@ -731,16 +735,10 @@
           "Use native HTML5 date inputs with proper formatting"
         ],
         "requirementList": [
-          "Create a dateRangeValidator function returning ValidatorFn for FormGroup.",
-          "Implement leave request form with fields: leave type, start date, end date, reason.",
-          "Apply cross-field validator at FormGroup level (not control level).",
-          "Access controls via control.get('fieldName') within validator.",
-          "Return group error: { dateRangeInvalid: { message, startDate, endDate } }.",
-          "Display group error only when both date fields are touched.",
-          "Calculate and display total leave days from valid date range.",
-          "Implement leave type limits (vacation: 30 days, sick: 15 days, personal: 10 days, unpaid: unlimited).",
-          "Show warning if selected days exceed leave type maximum.",
-          "Use HTML5 <input type='date'> for native date pickers."
+          "Create cross-field dateRangeValidator at FormGroup level",
+          "Build leave request form (type, start date, end date, reason)",
+          "Calculate total days and enforce leave type limits",
+          "Display FormGroup errors and warnings conditionally"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-15-date-range-validation/docs/CH-15-REQUIREMENT.md",
@@ -754,6 +752,7 @@
       },
       "dynamic-form-array": {
         "id": 16,
+        "isNew": false,
         "slug": "dynamic-form-array",
         "title": "Challenge 16: Dynamic FormArray (Experience Section)",
         "categoryId": "angular-forms",
@@ -791,19 +790,10 @@
           "Handle form validation across all array entries"
         ],
         "requirementList": [
-          "Create FormArray named 'experiences' containing nested FormGroups.",
-          "Each FormGroup has fields: company (2-100 chars), role (2-50 chars), years (0.5-50).",
-          "Start with 1 empty experience entry (minimum requirement).",
-          "Implement Add Experience button (max 5 entries, disabled when at limit).",
-          "Implement Remove button per entry (min 1 entry, disabled at minimum).",
-          "Create factory method createExperienceGroup() for consistent structure.",
-          "Use getter with type casting: get experiences(): FormArray.",
-          "Display entry counter showing current count (e.g., '2 of 5 entries').",
-          "Calculate total years across all experiences using computed signal.",
-          "Show validation errors for each field in each entry.",
-          "Use formArrayName and [formGroupName]='i' in template.",
-          "Iterate with @for over experiences.controls with track $index.",
-          "Mark all nested controls as touched on invalid submission."
+          "Create FormArray with nested FormGroups for work experiences",
+          "Implement Add/Remove operations with constraints (min 1, max 5)",
+          "Build factory method for consistent FormGroup creation",
+          "Calculate total years with computed signal and display entry counter"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-dynamic-form-array/docs/CH-16-REQUIREMENTS.md",
@@ -817,6 +807,7 @@
       },
       "custom-input-cva": {
         "id": 17,
+        "isNew": false,
         "slug": "custom-input-cva",
         "title": "Challenge 17: Custom Input Field using ControlValueAccessor",
         "categoryId": "angular-forms",
@@ -854,16 +845,10 @@
           "Display errors from parent form state"
         ],
         "requirementList": [
-          "Create CustomInputComponent implementing ControlValueAccessor interface.",
-          "Implement all 4 CVA methods: writeValue(), registerOnChange(), registerOnTouched(), setDisabledState().",
-          "Configure NG_VALUE_ACCESSOR provider: { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CustomInputComponent), multi: true }.",
-          "Add @Input() properties: label, placeholder, type (text/email/tel/password/number).",
-          "Handle user input events to call onChange callback.",
-          "Handle blur events to call onTouched callback.",
-          "Create demo form with 2 fields (name: required + minLength 3, email: required + email validator).",
-          "Use <ngc-input formControlName='name'> syntax in parent form.",
-          "Display validation errors from parent form state (not inside CVA).",
-          "Demonstrate disabled state propagation from parent form."
+          "Implement ControlValueAccessor interface with all 4 methods",
+          "Configure NG_VALUE_ACCESSOR provider with forwardRef",
+          "Create reusable input component supporting multiple types",
+          "Build demo form demonstrating bidirectional data flow and validation"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva/docs/CH-16-REQUIREMENT.md",
@@ -877,6 +862,7 @@
       },
       "server-driven-dynamic-form": {
         "id": 18,
+        "isNew": false,
         "slug": "server-driven-dynamic-form",
         "title": "Challenge 18: Server-Driven Dynamic Form",
         "categoryId": "angular-forms",
@@ -912,16 +898,10 @@
           "Sort and order fields from schema configuration"
         ],
         "requirementList": [
-          "Create FormSchema interface with title, description, fields array.",
-          "Create FieldConfig interface with name, type, label, validators, options.",
-          "Create ValidatorConfig interface with type, value, message.",
-          "Build FormGroup dynamically from JSON schema using FormBuilder.",
-          "Implement validator factory: map string types to ValidatorFn (required, email, minLength, min, max).",
-          "Support field types: text, email, number, select (with options), checkbox.",
-          "Sort fields by order property from schema.",
-          "Render fields conditionally using @switch based on type.",
-          "Display custom error messages from schema configuration.",
-          "Handle form submission and show submitted data."
+          "Define interfaces: FormSchema, FieldConfig, ValidatorConfig",
+          "Build FormGroup dynamically from JSON schema at runtime",
+          "Implement validator factory mapping string configs to ValidatorFn",
+          "Render multiple field types (text, email, number, select, checkbox) conditionally"
         ],
         "links": {
           "requirement": "projects/ngc-forms/src/app/challenges/challenge-18-server-driven-dynamic-form/docs/CH-18-REQUIREMENT.md",

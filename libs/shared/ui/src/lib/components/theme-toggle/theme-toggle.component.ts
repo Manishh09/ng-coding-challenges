@@ -14,7 +14,7 @@ import { ThemeService } from '@ng-coding-challenges/shared/services';
  * Toggles between light and dark mode using angular.dev theme system
  */
 @Component({
-  selector: 'ng-coding-challenges-theme-toggle',
+  selector: 'ngc-ui-theme-toggle',
   templateUrl: './theme-toggle.component.html',
   styleUrl: './theme-toggle.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

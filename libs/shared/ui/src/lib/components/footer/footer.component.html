@@ -1,67 +1,36 @@
-<footer
-  class="footer"
-  id="site-footer"
-  role="contentinfo"
-  aria-labelledby="footer-heading"
->
+<footer class="footer" id="site-footer" role="contentinfo">
   @if (showFooterLinks()) {
   <div class="footer-container">
     <!-- Brand Section -->
-    <section
-      class="footer-section brand-section"
-      id="footer-brand"
-      aria-labelledby="footer-brand-heading"
-    >
-      <h3 id="footer-brand-heading" class="section-title">
+    <div class="footer-brand">
+      <h2 class="footer-heading">
         About {{ appName() }}
-      </h3>
-
-      <div [style.display]="'none'" class="footer-logo" [attr.aria-label]="description">
-        <mat-icon aria-hidden="true" class="footer-logo-icon">code</mat-icon>
-        <h4 class="footer-logo-text">{{ description }}</h4>
-      </div>
-
+      </h2>
       <p class="footer-tagline">
-        Practice real-world Angular coding challenges designed to help you
-        master essential concepts and confidently tackle your next Angular
-        interview.
+        Real-world Angular coding challenges to help you master core concepts and prepare for your next Angular interview.
       </p>
-    </section>
+    </div>
 
     <!-- Quick Links Section -->
-    <nav
-      class="footer-section quick-links-section"
-      id="footer-quick-links"
-      aria-labelledby="quick-links-heading"
-    >
-      <h3 id="quick-links-heading" class="section-title">Quick Links</h3>
+    <nav class="footer-nav" aria-label="Quick links">
+      <h2 class="footer-heading">Quick Links</h2>
 
-      <ul class="footer-links" role="list">
+      <ul class="footer-links">
         @for (link of quickLinks(); track link.text) {
         <li class="footer-link-item">
           @if (link.external) {
-          <a
-            [href]="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-link"
-            [attr.aria-label]="link.text"
-          >
+          <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link"
+            [attr.aria-label]="link.text">
             <mat-icon aria-hidden="true" class="footer-link-icon">{{
               link.icon
-            }}</mat-icon>
+              }}</mat-icon>
             <span>{{ link.text }}</span>
           </a>
           } @else {
-          <a
-            (click)="onLinkClick(link)"
-            class="footer-link"
-            role="link"
-            [attr.aria-label]="link.text"
-          >
+          <a (click)="onLinkClick(link)" class="footer-link" role="link" [attr.aria-label]="link.text">
             <mat-icon aria-hidden="true" class="footer-link-icon">{{
               link.icon
-            }}</mat-icon>
+              }}</mat-icon>
             <span>{{ link.text }}</span>
           </a>
           }
@@ -71,32 +40,23 @@
     </nav>
 
     <!-- Community Links Section -->
-    <section
-      class="footer-section community-section"
-      id="footer-community"
-      aria-labelledby="footer-community-heading"
-    >
-      <h3 id="footer-community-heading" class="section-title">Community</h3>
+    <div class="footer-community">
+      <h2 class="footer-heading">Community</h2>
 
-      <ul class="footer-links" role="list">
+      <ul class="footer-links">
         @for (link of socialLinks(); track link.text) {
         <li class="footer-link-item">
-          <a
-            [href]="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-link {{ link.cssClass }}"
-            [attr.aria-label]="link.text"
-          >
+          <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="footer-link {{ link.cssClass }}"
+            [attr.aria-label]="link.text">
             <mat-icon aria-hidden="true" class="footer-link-icon">{{
               link.icon
-            }}</mat-icon>
+              }}</mat-icon>
             <span>{{ link.text }}</span>
           </a>
         </li>
         }
       </ul>
-    </section>
+    </div>
   </div>
   }
 
@@ -105,13 +65,8 @@
     <div class="footer-bottom-content">
       <p class="copyright">
         © {{ currentYear() }} {{ appName() }}. Created by
-        <a
-          class="created-by"
-          href="https://www.linkedin.com/in/manishboge"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Manish Boge</a
-        >. Built with <span class="heart-icon" aria-hidden="true">❤</span> and
+        <a class="created-by" href="https://www.linkedin.com/in/manishboge" target="_blank"
+          rel="noopener noreferrer">Manish Boge</a>. Built with <span class="heart-icon" aria-hidden="true">❤</span> and
         {{ angularVersion }}
       </p>
     </div>

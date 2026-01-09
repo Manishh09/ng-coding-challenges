@@ -1,11 +1,11 @@
 <div class="landing-page">
-  <section class="hero-section" aria-labelledby="hero-title" role="region">
+  <section class="hero-section" aria-labelledby="hero-title">
     <div class="hero-floater hero-floater--one" aria-hidden="true"></div>
     <div class="hero-floater hero-floater--two" aria-hidden="true"></div>
 
-    <div class="hero-shell">
-      <div class="hero-copy">
-        <p class="hero-eyebrow">ANGULAR LEARN & CODE PLAYGROUND</p>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-eyebrow">ANGULAR LEARNING & CODING PLAYGROUND</p>
         <h1 id="hero-title" class="hero-title">
           Welcome to ngQuest
         </h1>
@@ -15,50 +15,24 @@
           Your playground for learning and practicing Angular with real-world challenges.
         </p>
 
-        <ng-coding-challenges-hero-stats
-          [stats]="heroStatItems()"
-          ariaLabel="Platform stats"
-        />
+        <ngc-ui-hero-stats [stats]="heroStatItems()" ariaLabel="Platform stats" />
 
-        <ul [style.display]="'none'" class="hero-highlights" aria-label="Key platform benefits">
-          @for (highlight of heroHighlights; track highlight) {
-          <li>
-            <mat-icon aria-hidden="true">check_circle</mat-icon>
-            <span>{{ highlight }}</span>
-          </li>
-          }
-        </ul>
 
-        <div
-          class="hero-buttons"
-          role="group"
-          aria-label="Primary call to action buttons"
-        >
-          <button
-            class="hero-button hero-button--primary"
-            type="button"
-            (click)="onGetStarted()"
-            aria-label="Start the guided path - Begin the onboarding guide to learn the platform"
-          >
+
+        <div class="hero-buttons" role="group" aria-label="Main actions">
+          <button class="hero-button hero-button--primary" type="button" (click)="onGetStarted()"
+            aria-label="Start onboarding guide">
             <span>Getting Started</span>
           </button>
 
-          <button
-            class="hero-button hero-button--outline"
-            type="button"
-            (click)="onExploreChallenges()"
-            aria-label="Explore challenges - View all Angular challenge categories"
-          >
+          <button class="hero-button hero-button--outline" type="button" (click)="onExploreChallenges()"
+            aria-label="Browse all challenges">
             <span>Explore challenges</span>
             <mat-icon aria-hidden="true">arrow_outward</mat-icon>
           </button>
 
-          <button
-            class="hero-button hero-button--outline"
-            type="button"
-            (click)="goToLatestChallenge()"
-            aria-label="Latest launch - Jump directly to the most recent Angular challenge"
-          >
+          <button class="hero-button hero-button--outline" type="button" (click)="goToLatestChallenge()"
+            aria-label="Jump to newest challenge">
             <span>Go to Latest Challenge</span>
             <mat-icon aria-hidden="true">rocket_launch</mat-icon>
           </button>
@@ -70,14 +44,8 @@
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-card">
           <div class="hero-card__media">
-            <img
-              [ngSrc]="heroIllustration()"
-              width="420"
-              height="280"
-              priority="high"
-              class="hero-card__image"
-              [alt]="heroAltText()"
-            />
+            <img [ngSrc]="heroIllustration()" width="420" height="280" priority="high" class="hero-card__image"
+              [alt]="heroAltText()" />
           </div>
           <div class="hero-card__badge">
             <mat-icon aria-hidden="true">emoji_objects</mat-icon>
@@ -99,94 +67,27 @@
     </div>
   </section>
 
-  <section [style.display]="'none'"
-    class="metrics-section"
-    aria-labelledby="metrics-title"
-    role="region"
-  >
-    <ng-coding-challenges-section-header
-      eyebrow="Why teams choose ngQuest"
-      heading="Ship Angular features faster with focused practice"
-      summary="Each challenge mirrors a production use-case and pairs it with solution
-        guides so you can understand the why, not just the how."
-      headingId="metrics-title"
-    />
-
-    <div class="metrics-grid">
-      @for (metric of metrics(); track metric.label) {
-        <ng-coding-challenges-metric-card
-          [icon]="metric.icon"
-          [value]="metric.value"
-          [label]="metric.label"
-          [helper]="metric.helper"
-        />
-      }
-    </div>
-  </section>
 
 
 
-  <section
-    class="latest-section"
-    aria-labelledby="latest-title"
-    role="region"
-  >
-    <ng-coding-challenges-section-header
-      eyebrow="Fresh drops"
-      heading="Launch the latest Angular challenges"
-      summary="Stay sharp with new problems sourced from real client work and Angular
-        community questions."
-      headingId="latest-title"
-    />
+
+  <section class="latest-section" aria-labelledby="latest-title">
+    <ngc-ui-section-header eyebrow="Fresh drops" heading="Launch the latest Angular challenges" summary="Stay sharp with new problems sourced from real client work and Angular
+        community questions." headingId="latest-title" />
 
     <div class="latest-grid">
       @for (challenge of latestChallenges(); track challenge.id) {
-        <ng-coding-challenges-latest-card
-          [challengeId]="challenge.id"
-          [categoryLabel]="challenge.categoryLabel"
-          [title]="challenge.title.split(':')[1].trim()"
-          [difficulty]="challenge.difficulty"
-          [description]="challenge.description"
-          buttonText="View Details"
-          buttonIcon="visibility"
-          (actionClick)="launchChallenge(challenge.route)"
-        />
+      <ngc-ui-latest-card [challengeId]="challenge.id" [categoryLabel]="challenge.categoryLabel"
+        [title]="challenge.title.split(':')[1].trim()" [difficulty]="challenge.difficulty"
+        [description]="challenge.description" buttonText="View Details" buttonIcon="visibility"
+        (actionClick)="launchChallenge(challenge.route)" />
       } @empty {
-        <div class="empty-state">
-          <p>No recent challenges right now. Check back soon!</p>
-        </div>
+      <div class="empty-state">
+        <p>No recent challenges right now. Check back soon!</p>
+      </div>
       }
     </div>
   </section>
 
-   <section
-   [style.display]="'none'"
-    class="featured-section"
-    aria-labelledby="featured-title"
-    role="region"
-  >
-    <ng-coding-challenges-section-header
-      eyebrow="Curated learning paths"
-      heading="Pick a track and go deep"
-      summary="Choose the Angular skill you want to master and follow a focused path of
-        challenges with increasing difficulty."
-      headingId="featured-title"
-    />
 
-    <div class="featured-grid">
-      @for (track of featuredTracks(); track track.id) {
-        <ng-coding-challenges-feature-card
-          [icon]="track.icon"
-          [count]="track.count"
-          [title]="track.title"
-          [description]="track.description"
-          ctaText="Explore track"
-          [ariaLabel]="'Open ' + track.title + ' challenges'"
-          (cardClick)="navigateToCategory(track.id)"
-        />
-      } @empty {
-        <p class="empty-state">New challenge tracks are on the way.</p>
-      }
-    </div>
-  </section>
 </div>

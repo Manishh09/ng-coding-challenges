@@ -5,13 +5,14 @@
     }
 
     <input
+      #searchInput
       matInput
       type="text"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
       [attr.aria-label]="ariaLabel()"
       [value]="searchTerm()"
-      (input)="onSearchInput($any($event.target).value)"
+      (input)="onSearchInput(searchInput.value)"
       class="search-input"
     />
 

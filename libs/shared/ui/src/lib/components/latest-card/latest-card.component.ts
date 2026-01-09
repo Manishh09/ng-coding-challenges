@@ -29,7 +29,7 @@ import { MatCardModule } from "@angular/material/card";
  *
  * @example
  * ```html
- * <ng-coding-challenges-latest-card
+ * <ngc-ui-latest-card
  *   categoryLabel="RxJS & API"
  *   title="Challenge 08: E-Commerce Checkout"
  *   description="Implement sequential API calls with concatMap"
@@ -43,7 +43,7 @@ import { MatCardModule } from "@angular/material/card";
  * @accessibility Semantic HTML with article element and proper heading structure
  */
 @Component({
-  selector: 'ng-coding-challenges-latest-card',
+  selector: 'ngc-ui-latest-card',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatCardModule],
   templateUrl: './latest-card.component.html',

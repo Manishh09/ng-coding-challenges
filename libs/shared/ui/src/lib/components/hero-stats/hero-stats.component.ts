@@ -34,7 +34,7 @@ export interface StatItem {
  * 
  * @example
  * ```html
- * <ng-coding-challenges-hero-stats
+ * <ngc-ui-hero-stats
  *   [stats]="[
  *     { value: '11+', label: 'Hands-on challenges' },
  *     { value: '3', label: 'Learning paths' }
@@ -47,7 +47,7 @@ export interface StatItem {
  * @accessibility Uses proper list semantics and configurable ARIA labels
  */
 @Component({
-  selector: 'ng-coding-challenges-hero-stats',
+  selector: 'ngc-ui-hero-stats',
   standalone: true,
   imports: [],
   templateUrl: './hero-stats.component.html',

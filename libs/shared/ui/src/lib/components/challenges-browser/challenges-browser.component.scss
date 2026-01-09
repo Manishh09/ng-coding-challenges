@@ -18,7 +18,7 @@
   transition: margin-left var(--animation-duration-standard) var(--animation-easing);
 
   // Ensure workspace toolbar is visible
-  ng-coding-challenges-workspace-toolbar {
+  ngc-ui-workspace-toolbar {
     display: block;
     flex-shrink: 0;
     width: 100%;
@@ -36,24 +36,6 @@
   &.full-width {
     margin-left: 0;
     width: 100%;
-  }
-
-  // Custom scrollbar
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--background-secondary);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--border-primary);
-    border-radius: var(--border-radius-full);
-
-    &:hover {
-      background: var(--border-secondary);
-    }
   }
 }
 
@@ -78,7 +60,7 @@
   overflow: hidden;
 
   // Make embedded category sidebar take full width
-  app-category-sidebar {
+  ngc-ui-category-sidebar {
     width: 100%;
     display: flex;
     align-items: center;
@@ -142,127 +124,3 @@
 }
 
 // Challenges grid
-.challenges-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
-  gap: var(--spacing-xl);
-  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
-  width: 100%;
-  align-items: start; // Align cards to top of grid cells
-  padding: 12px 4px; // Increased padding to prevent card hover clipping and scrollbar cut-off
-
-  @media (max-width: 767px) {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    padding: 10px 2px;
-    width: 100% !important; // Account for 16px padding on each side
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-    gap: var(--spacing-lg);
-    padding: 12px 4px;
-  }
-
-  @media (min-width: 1024px) and (max-width: 1439px) {
-    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
-    gap: var(--spacing-xl);
-    padding: 12px 4px;
-  }
-
-
-}
-
-.challenge-card-item {
-  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
-  animation-fill-mode: both;
-
-  @for $i from 1 through 20 {
-    &:nth-child(#{$i}) {
-      animation-delay: calc(#{$i} * 50ms);
-    }
-  }
-}
-
-// Empty state
-.empty-state {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-4xl) var(--spacing-lg);
-  text-align: center;
-  min-height: 400px;
-
-  .empty-icon {
-    font-size: 72px;
-    width: 72px;
-    height: 72px;
-    color: var(--text-tertiary);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  h3 {
-    margin: 0 0 var(--spacing-sm) 0;
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-primary);
-  }
-
-  p {
-    margin: 0 0 var(--spacing-lg) 0;
-    font-size: var(--font-size-base);
-    color: var(--text-secondary);
-  }
-
-  button {
-    margin-top: var(--spacing-md);
-  }
-}
-
-// Challenge detail view
-.challenge-detail-view {
-  animation: fadeIn var(--animation-duration-standard) var(--animation-easing);
-}
-
-// Animations
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Responsive adjustments
-@media (max-width: 767px) {
-  .challenges-browser {
-    min-height: calc(100vh - var(--header-height-mobile));
-  }
-
-  .content-area {
-    height: calc(100vh - var(--header-height-mobile));
-  }
-
-  .content-header {
-    top: calc(var(--header-height-mobile) + 64px); // Account for mobile top bar
-  }
-}
-
-// Print styles
-@media print {
-
-  .mobile-top-bar,
-  .content-header .header-search {
-    display: none;
-  }
-
-  .challenges-grid {
-    grid-template-columns: 1fr;
-  }
-}
