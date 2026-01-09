@@ -89,6 +89,40 @@ There are many ways to contribute:
 
 ---
 
+## Contributing Community Challenges
+
+We welcome community contributions of Angular challenges! The **Community** category (`ngc-community`) is dedicated to challenges created by developers like you.
+
+**📚 For detailed guidelines on creating and submitting community challenges, see the comprehensive [Community Challenges Guide](docs/COMMUNITY_CHALLENGES.md)**
+
+### Quick Start
+
+1. **Choose Your Topic**: Pick any Angular concept you want to teach
+2. **Run the Script**: `npm run create:challenge`
+3. **Select Category**: Choose `ngc-community` when prompted
+4. **Follow the Guide**: See [COMMUNITY_CHALLENGES.md](docs/COMMUNITY_CHALLENGES.md) for complete instructions
+5. **Submit PR**: Create a feature branch and open a pull request
+
+### What You'll Create
+
+- Clear problem statement (Requirements document)
+- Step-by-step solution guide
+- Working code following Angular best practices
+- Educational content that helps others learn
+
+### Benefits
+
+✅ Share your Angular expertise  
+✅ Help the community learn and grow  
+✅ Build your developer portfolio  
+✅ Get recognized for your contributions  
+
+**Your contribution helps the entire Angular community learn and grow!** 🚀
+
+For complete documentation including examples, quality standards, and submission guidelines, visit the [Community Challenges Guide](docs/COMMUNITY_CHALLENGES.md).
+
+---
+
 ## Branch Naming Convention
 
 Please name your branches using the following patterns:
