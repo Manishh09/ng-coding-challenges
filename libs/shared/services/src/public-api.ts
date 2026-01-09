@@ -12,15 +12,17 @@ export * from './lib/theme/theme.service';
 // Data Services
 export * from './lib/challenges/challenges.service';
 export * from './lib/challenges/challenge-category.service';
+export * from './lib/challenges/category-data-loader.service';
+export * from './lib/challenges/challenge-data.service';
+export * from './lib/challenges/challenge-search.service';
+export * from './lib/challenges/challenge-navigation.service';
+export * from './lib/challenges/challenge-aggregation.service';
 
 // Configuration Services
 export * from './lib/config/config-loader.service';
 
 // Adapters (Adapter Pattern for data transformation)
 export * from './lib/adapters';
-
-// Type Mappers (Deprecated - Use Adapters instead)
-export * from './lib/mappers/challenge-type-mapper';
 
 // Route Resolvers
 export * from './lib/resolvers/challenge-details.resolver';
