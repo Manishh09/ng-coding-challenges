@@ -1,12 +1,30 @@
 /**
+ * Available challenge category identifiers
+ * SINGLE SOURCE OF TRUTH for all category IDs
+ * Add new categories here - the ChallengeCategoryId type will update automatically
+ */
+export const CHALLENGE_CATEGORY_IDS = [
+  'rxjs-api',
+  'angular-core',
+  'angular-routing',
+  'angular-forms',
+  'angular-signals',
+  'community',
+] as const;
+
+/**
  * Represents the difficulty level of a challenge
  */
 export type DifficultyLevel = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 
 /**
- * Represents the category ID of a challenge
+ * Challenge category identifier type
+ * Automatically derived from CHALLENGE_CATEGORY_IDS constant above
+ * To add new categories, update the CHALLENGE_CATEGORY_IDS array
+ *
+ * @example 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms' | 'angular-signals' | 'community'
  */
-export type ChallengeCategoryId = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms' | 'angular-signals' | 'http';
+export type ChallengeCategoryId = (typeof CHALLENGE_CATEGORY_IDS)[number];
 
 /**
  * Represents the author information for a challenge

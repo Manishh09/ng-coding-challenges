@@ -1,20 +1,13 @@
-import { ChallengeCategoryId, DifficultyLevel } from '@ng-coding-challenges/shared/models';
+import { DifficultyLevel, ChallengeCategoryId, CHALLENGE_CATEGORY_IDS } from '@ng-coding-challenges/shared/models';
 
 /**
  * Type guard to check if a string is a valid ChallengeCategoryId
+ * Uses the centralized CHALLENGE_CATEGORY_IDS constant for validation
  * @param value - The value to check
  * @returns True if the value is a valid ChallengeCategoryId
  */
 export function isValidCategory(value: string): value is ChallengeCategoryId {
-  const validCategories: ChallengeCategoryId[] = [
-    'rxjs-api',
-    'angular-core',
-    'angular-routing',
-    'angular-forms',
-    'angular-signals',
-    'http',
-  ];
-  return validCategories.includes(value as ChallengeCategoryId);
+  return (CHALLENGE_CATEGORY_IDS as readonly string[]).includes(value);
 }
 
 /**

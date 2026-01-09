@@ -490,6 +490,34 @@ Once merged:
 
 ## ❓ FAQ
 
+### Q: Do I need to create a new category for my challenge?
+
+**A**: **No!** Community challenges should always go in the existing `ngc-community` category.
+
+When you run `npm run create:challenge`, simply:
+
+1. Select `ngc-community` from the category list
+2. Follow the prompts to create your challenge
+
+**Only maintainers** create new category apps (like `ngc-forms`, `ngc-signals`, etc.). If you believe a new category is needed, open an issue to discuss with maintainers first.
+
+### Q: What if I see category-related TypeScript errors?
+
+**A**: This shouldn't happen when creating challenges in `ngc-community`. If you encounter type errors related to categories:
+
+1. Ensure you're working with the latest `develop` branch:
+
+   ```bash
+   git checkout develop
+   git pull origin develop
+   ```
+
+2. Run `npm install` to ensure dependencies are updated
+3. Check that you selected `ngc-community` (not attempting to create a custom category)
+4. If errors persist, open an issue with details
+
+Category types are centrally managed in `libs/shared/models/src/lib/challenge.model.ts` and automatically updated. You don't need to modify any type definitions.
+
 ### Q: Can I submit multiple challenges?
 
 **A**: Absolutely! We welcome multiple contributions.

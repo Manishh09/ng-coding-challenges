@@ -21,9 +21,8 @@ import {
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
 import { WorkspaceToolbarComponent } from '../workspace-toolbar/workspace-toolbar.component';
 import { filter, map } from 'rxjs';
-import { CHALLENGE_CATEGORY_IDS } from '../../constants/constants';
 import { calculateRouteDepth } from '../../utils/route-utils';
-
+import { CHALLENGE_CATEGORY_IDS } from '@ng-coding-challenges/shared/models';
 /**
  * Challenges Browser Component - Pure Shell/Layout Component
  *
