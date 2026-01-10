@@ -851,9 +851,9 @@
           "Build demo form demonstrating bidirectional data flow and validation"
         ],
         "links": {
-          "requirement": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva/docs/CH-16-REQUIREMENT.md",
-          "solution": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva/docs/CH-16-SOLUTION_GUIDE.md",
-          "github": "projects/ngc-forms/src/app/challenges/challenge-16-custom-input-cva"
+          "requirement": "projects/ngc-forms/src/app/challenges/challenge-17-custom-input-cva/docs/CH-17-REQUIREMENT.md",
+          "solution": "projects/ngc-forms/src/app/challenges/challenge-17-custom-input-cva/docs/CH-17-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-forms/src/app/challenges/challenge-17-custom-input-cva"
         },
         "workspace": {
           "componentPath": "./challenges/challenge-16-custom-input-cva/components/demo-form/demo-form.component",
