@@ -47,6 +47,7 @@ export interface Challenge {
   category: ChallengeCategoryId;
   difficulty: DifficultyLevel;
   tags?: string[];
+  estimatedTime?: string;
   // Optional properties used by some services
   gitHub?: string;
   requirement?: string;

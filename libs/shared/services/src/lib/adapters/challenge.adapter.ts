@@ -58,6 +58,7 @@ export class ChallengeAdapter implements IChallengeAdapter {
       gitHub: data.links.github,
       requirement: data.links.requirement,
       solutionGuide: data.links.solution,
+      estimatedTime: data.estimatedTime,
       isNew: data.isNew ?? false
     };
   }
