@@ -12,9 +12,33 @@
 
     } @empty {
     <div class="challenge-list-empty" role="status" aria-live="polite">
-      <p class="challenge-list-empty-text">
-        No challenges match your criteria.
-      </p>
+      @if (categoryId() === 'community') {
+        <div class="empty-state-community">
+          <mat-icon class="empty-icon">emoji_people</mat-icon>
+          <h3 class="empty-title">Be the First to Contribute!</h3>
+          <p class="empty-description">
+            This category is powered by developers like you.
+            Share your expertise and create the first challenge.
+          </p>
+          <a
+            href="https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/COMMUNITY_CHALLENGES.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="empty-cta-button"
+            aria-label="Learn how to contribute to community challenges"
+          >
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>Learn How to Contribute</span>
+          </a>
+        </div>
+      } @else {
+        <div class="empty-state-default">
+          <mat-icon class="empty-icon">search_off</mat-icon>
+          <p class="challenge-list-empty-text">
+            No challenges available yet.
+          </p>
+        </div>
+      }
     </div>
     }
     }

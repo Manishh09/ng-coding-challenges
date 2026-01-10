@@ -152,6 +152,27 @@ See [CREATE CHALLENGE TEMPLATE](docs/CREATE_CHALLENGE.md) for more details on ch
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see the [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines on how to contribute to this project.
+Contributions are welcome! We have multiple ways to contribute:
+
+### General Contributions
+
+- Bug fixes, documentation, features, and improvements
+- See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
+
+### Community Challenges 🌟
+
+**Share your Angular expertise!** Contribute challenges to help others learn and ace interviews.
+
+- **Category**: `ngc-community` - dedicated to community-driven challenges
+- **Topics**: Any Angular concept (Components, Services, Forms, RxJS, Routing, Signals, Testing, etc.)
+- **Benefits**: Share knowledge, build portfolio, help the community grow
+
+**Get Started**:
+
+1. Read the [Community Challenges Guide](docs/COMMUNITY_CHALLENGES.md)
+2. Run `npm run create:challenge` and select `ngc-community`
+3. Create your challenge and submit a PR
+
+📚 [Full Community Challenges Documentation](docs/COMMUNITY_CHALLENGES.md)
 
 ---

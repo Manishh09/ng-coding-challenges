@@ -1,13 +1,10 @@
+import { CHALLENGE_CATEGORY_IDS } from '@ng-coding-challenges/shared/models';
+
 /**
- * Available challenge category identifiers
+ * Available challenge category identifiers are imported from @ng-coding-challenges/shared/models
+ * This avoids circular dependencies between libraries
+ * To add new categories, update the CHALLENGE_CATEGORY_IDS array in libs/shared/models/src/lib/challenge.model.ts
  */
-export const CHALLENGE_CATEGORY_IDS = [
-  'rxjs-api',
-  'angular-core',
-  'angular-routing',
-  'angular-forms',
-  'angular-signals',
-] as const;
 
 /**
  * Maps category IDs to Material Icon names
@@ -20,6 +17,7 @@ export const CATEGORY_ICON_MAP: Record<string, string> = {
   'angular-routing': 'route',
   'angular-forms': 'assignment',
   'angular-signals': 'signal_cellular_alt',
+  'community': 'people',
 };
 
 /**

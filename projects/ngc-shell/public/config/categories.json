@@ -129,6 +129,30 @@
         "color": "#FF9800",
         "gradient": "linear-gradient(135deg, #ffd89b 0%, #ff9800 100%)"
       }
+    },
+    {
+      "id": 6,
+      "slug": "community",
+      "title": "Community",
+      "description": "Community-contributed Angular challenges",
+      "icon": "people",
+      "order": 6,
+      "enabled": true,
+      "route": {
+        "path": "community",
+        "moduleName": "@ngc-community",
+        "exportName": "NGC_COMMUNITY_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Community Driven",
+        "TypeScript",
+        "Best Practices"
+      ],
+      "metadata": {
+        "color": "#9C27B0",
+        "gradient": "linear-gradient(135deg, #f093fb 0%, #9c27b0 100%)"
+      }
     }
   ]
 }
