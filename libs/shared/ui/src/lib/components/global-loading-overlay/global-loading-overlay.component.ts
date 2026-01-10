@@ -21,12 +21,12 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
  * @example
  * ```html
  * <!-- app.component.html -->
- * <ng-coding-challenges-global-loading-overlay />
+ * <ngc-ui-loading-overlay />
  * <router-outlet />
  * ```
  */
 @Component({
-  selector: 'ng-coding-challenges-global-loading-overlay',
+  selector: 'ngc-ui-loading-overlay',
   standalone: true,
   imports: [LoadingSpinnerComponent],
   template: `
@@ -38,7 +38,7 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
         aria-busy="true"
       >
         <div class="loading-content">
-          <ng-coding-challenges-loading-spinner
+          <ngc-ui-loading-spinner
             [diameter]="50"
             [strokeWidth]="5"
             color="primary"

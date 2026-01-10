@@ -27,7 +27,6 @@
 
   /* Glassmorphism effect */
   backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
-  -webkit-backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
 
   /* Animation */
   transition:
@@ -44,8 +43,18 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 0 var(--spacing-2xl);
-      background: var(--brand-gradient-footer);
+  // max-width: var(--max-width-section); // 1280px - match page sections
+  // margin: 0 auto;
+  padding: 0 var(--spacing-md); // Desktop: 48px - match content sections
+  background: var(--brand-gradient-footer);
+
+  @media (max-width: 1024px) {
+    padding: 0 var(--spacing-xl); // Tablet: 32px
+  }
+
+  @media (max-width: 767px) {
+    padding: 0 var(--spacing-md); // Mobile: 16px
+  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -89,53 +98,41 @@
   }
 }
 
-// Angular logo styling
-.angular-logo {
-  height: 40px;
-  width: auto;
-  vertical-align: middle;
-  transition: transform 0.3s var(--animation-easing),
-    filter 0.3s var(--animation-easing);
-  filter: var(--logo-filter);
-  mix-blend-mode: var(--logo-blend-mode);
-  image-rendering: -webkit-optimize-contrast;
-}
-
-// Gradient masked logo implementation
-.logo-image-wrap {
+/* Logo wrapper for gradient effect */
+.logo-wrapper {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-}
-
-.angular-logo-gradient {
-  width: 100%;
-  height: 100%;
   display: inline-block;
-  background: var(--gradient-logo);
-  -webkit-mask: var(--logo-src) center/contain no-repeat;
-  mask: var(--logo-src) center/contain no-repeat;
-}
+  width: 64px;
+  height: 42px;
 
-// Fallback raster image (hidden if mask is supported)
-.angular-logo-img {
-  position: absolute;
-  inset: 0;
-  object-fit: contain;
-  filter: var(--logo-filter);
-  mix-blend-mode: var(--logo-blend-mode);
-}
-
-@supports (mask: url(#mask)) or (-webkit-mask: url(#mask)) {
-  .angular-logo-img {
-    display: none;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-logo);
+    -webkit-mask: var(--logo-src, url('/angular_logo.webp')) center/contain no-repeat;
+    mask: var(--logo-src, url('/angular_logo.webp')) center/contain no-repeat;
+    z-index: 1;
   }
 }
 
-// Navigation section
+/* Logo image */
+.logo {
+  width: 64px;
+  height: 42px;
+  object-fit: contain;
+  vertical-align: middle;
+  opacity: 0;
+
+  /* Fallback for browsers without mask support */
+  @supports not ((-webkit-mask: url()) or (mask: url())) {
+    opacity: 1;
+    filter: var(--logo-filter);
+    mix-blend-mode: var(--logo-blend-mode);
+  }
+}
+
+/* Navigation section */
 .nav-section {
   display: flex;
   align-items: center;
@@ -163,7 +160,7 @@
   gap: var(--spacing-sm);
   padding: 0 var(--spacing-md);
   background: var(--surface-tertiary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--border-secondary);
   border-radius: var(--border-radius-lg);
   cursor: pointer;
   transition: all var(--animation-duration-fast) var(--animation-easing);
@@ -172,7 +169,7 @@
 
   &:hover {
     background: var(--surface-secondary);
-    border-color: var(--border-secondary);
+    border: 1px solid var(--interactive-primary);
     color: var(--text-secondary);
   }
 
@@ -194,7 +191,6 @@
     flex: 1;
     text-align: left;
     font-family: var(--font-family-base);
-    user-select: none;
   }
 
   .search-trigger-hint {
@@ -241,9 +237,10 @@
 .actions-section {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   flex-shrink: 0;
   height: 100%;
+  padding-right: var(--spacing-xs);
 }
 
 .header-cta {
@@ -275,11 +272,11 @@
 }
 
 // Theme toggle component
-ng-coding-challenges-theme-toggle {
+ngc-ui-theme-toggle {
   display: flex;
   align-items: center;
-  height: 100%;
-  margin-right: 4px;
+  justify-content: center;
+  height: 40px;
 }
 
 // Logo text styling
@@ -313,39 +310,53 @@ ng-coding-challenges-theme-toggle {
   font-weight: 700;
 }
 
-// Github logo styling
-.github-logo-link {
+// Github and LinkedIn logo styling
+.github-logo-link,
+.linkedin-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
   padding: 0;
   background: transparent;
   border: none;
   border-radius: var(--border-radius-md);
-  box-shadow: none;
   text-decoration: none;
+  cursor: pointer;
+  transition: all var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover {
+    background: var(--interactive-secondary);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--state-focus-ring);
+    outline-offset: 2px;
+  }
 }
 
-.github-svg,
-.linkedin-svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--text-primary);
+.github-svg {
+  fill: var(--text-secondary);
   display: block;
+  transition: fill var(--animation-duration-fast) var(--animation-easing);
 }
 
 .linkedin-svg {
   width: 20px;
-  height: 24px;
-  fill: var(--text-primary);
+  height: 20px;
+  fill: var(--text-secondary);
   display: block;
+  transition: fill var(--animation-duration-fast) var(--animation-easing);
 }
 
-body.dark-mode .github-svg {
-  fill: var(--text-primary);
-}
-
-body.dark-mode .linkedin-svg {
+.github-logo-link:hover .github-svg,
+.linkedin-btn:hover .linkedin-svg {
   fill: var(--text-primary);
 }
 
@@ -375,19 +386,33 @@ body.dark-mode .linkedin-svg {
     height: var(--header-height-mobile);
   }
 
-  ng-coding-challenges-theme-toggle {
-    margin-right: 0;
+  .actions-section {
+    gap: var(--spacing-2xs);
+  }
+
+  .github-logo-link,
+  .linkedin-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .github-svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .linkedin-svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  ngc-ui-theme-toggle {
+    height: 36px;
   }
 
   .logo-image-wrap {
     width: 48px;
     height: 48px;
-  }
-
-  .github-svg,
-  .linkedin-svg {
-    width: 20px;
-    height: 24px;
   }
 
   .search-section {

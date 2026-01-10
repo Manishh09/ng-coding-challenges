@@ -5,7 +5,7 @@
      ============================================================================= -->
 <div class="details-container fade-in">
     <!-- Breadcrumb Navigation -->
-    <ng-coding-challenges-breadcrumbs [items]="breadcrumbItems()" />
+    <ngc-ui-breadcrumbs [items]="breadcrumbItems()" />
 
     <!-- Challenge Header Section -->
     <header class="details-header">
@@ -14,6 +14,12 @@
             @if (c.difficulty) {
             <span class="badge difficulty" [class]="c.difficulty.toLowerCase()">
                 {{ c.difficulty }}
+            </span>
+            }
+            @if (c.estimatedTime) {
+            <span class="badge time-estimate" aria-label="Estimated completion time">
+                <mat-icon>schedule</mat-icon>
+                {{ c.estimatedTime }}
             </span>
             }
             <span class="badge category">{{ c.category }}</span>
@@ -37,11 +43,11 @@
             <section class="section requirements">
                 <h2>Requirements</h2>
                 <mat-divider></mat-divider>
-                @for(req of c.requirementList; track req) {
-                 <ul class="requirements-list">
+                <ul class="requirements-list">
+                  @for(req of c.requirementList; track req) {
                     <li>{{ req }}</li>
+                  }
                 </ul>
-                }
 
                 <button
                     (click)="openRequirement()"
@@ -109,8 +115,10 @@
                         <span>Opening StackBlitz...</span>
                     } @else {
                         <ng-container>
-                            <mat-icon>open_in_new</mat-icon>
-                            <span>Open StackBlitz</span>
+                          <div class="launch-btn__content">
+                            <span>Launch in StackBlitz</span>
+                            <mat-icon>rocket_launch</mat-icon>
+                          </div>
                         </ng-container>
                     }
                 </button>
@@ -125,7 +133,7 @@
             <div class="launch-card launch-card--tertiary">
                 <div class="launch-card__header">
                     <div class="launch-card__icon">
-                        <mat-icon>visibility</mat-icon>
+                        <mat-icon>preview</mat-icon>
                     </div>
                     <h3 class="launch-card__title">Preview Solution</h3>
                 </div>
@@ -163,9 +171,9 @@
                 </ul>
             </div>
 
-            <!-- Tech Stack -->
+            <!-- Topics Covered -->
             <div class="sidebar-card">
-                <h3>Tech Stack</h3>
+                <h3>Topics Covered</h3>
                 <div class="tech-stack-list">
                     @for (tech of c.techStack; track tech) {
                     <div class="tech-item">
@@ -182,7 +190,12 @@
                 <h3>Author</h3>
                 <div class="author-info">
                     <div class="avatar-placeholder">
-                        {{ c.author.name.charAt(0) }}
+                        @if (c.author.avatar) {
+                        <img [src]="c.author.avatar"
+                         alt="{{ c.author.name }}'s avatar"
+                         loading="lazy"
+                         />
+                        }
                     </div>
                     <div class="author-details">
                         <span class="author-name">{{ c.author.name }}</span>

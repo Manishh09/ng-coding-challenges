@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1400px !important;
   margin: 0 auto;
 }
 
@@ -89,6 +89,7 @@
   user-select: none;
   margin: 0;
   font-weight: normal;
+  color: #374151;
 }
 
 .error-message {

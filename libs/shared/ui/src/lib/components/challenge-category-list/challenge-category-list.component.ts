@@ -22,7 +22,7 @@ import { RouterLink } from '@angular/router';
  * - Responsive grid layout
  */
 @Component({
-  selector: 'app-challenge-category-list',
+  selector: 'ngc-ui-challenge-category-list',
   templateUrl: './challenge-category-list.component.html',
   styleUrls: ['./challenge-category-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

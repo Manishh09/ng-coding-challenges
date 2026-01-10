@@ -34,7 +34,7 @@ const BASE_REPOSITORY = 'https://github.com/Manishh09/ng-coding-challenges/blob/
  * - Supports next/previous challenge navigation
  */
 @Component({
-  selector: 'ng-coding-challenges-challenge-details',
+  selector: 'ngc-ui-challenge-details',
   standalone: true,
   imports: [
     CommonModule,

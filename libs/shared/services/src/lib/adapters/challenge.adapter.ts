@@ -3,7 +3,8 @@ import {
   Challenge,
   ChallengeDetails,
   ChallengeCategoryId,
-  Author
+  Author,
+  CHALLENGE_CATEGORY_IDS
 } from '@ng-coding-challenges/shared/models';
 import {
   ChallengeData,
@@ -57,6 +58,7 @@ export class ChallengeAdapter implements IChallengeAdapter {
       gitHub: data.links.github,
       requirement: data.links.requirement,
       solutionGuide: data.links.solution,
+      isNew: data.isNew ?? false
     };
   }
 
@@ -92,30 +94,23 @@ export class ChallengeAdapter implements IChallengeAdapter {
     return dataArray.map(data => this.adaptToChallenge(data));
   }
 
-  /**
-   * Maps CategorySlug (JSON format) to ChallengeCategoryId (legacy format)
-   * Provides fallback for deprecated categories
+  /**\n   * Adapts category slug from JSON config to ChallengeCategoryId
+   * Since CategorySlug and ChallengeCategoryId are now the same type,
+   * this method validates the category exists in CHALLENGE_CATEGORY_IDS
    *
    * @param categorySlug - Category identifier from JSON config
    * @returns Corresponding ChallengeCategoryId
    */
   private adaptCategorySlug(categorySlug: CategorySlug): ChallengeCategoryId {
-    // Direct mapping for compatible categories
-    const categoryMap: Record<CategorySlug, ChallengeCategoryId> = {
-      'rxjs-api': 'rxjs-api',
-      'angular-core': 'angular-core',
-      'angular-routing': 'angular-routing',
-      'angular-forms': 'angular-forms'
-    };
+    // Validate category exists in the constant array
+    const isValid = (CHALLENGE_CATEGORY_IDS as readonly string[]).includes(categorySlug);
 
-    const mappedCategory = categoryMap[categorySlug];
-
-    if (!mappedCategory) {
+    if (!isValid) {
       console.warn(`[ChallengeAdapter] Unknown category slug: ${categorySlug}, defaulting to 'rxjs-api'`);
       return 'rxjs-api';
     }
 
-    return mappedCategory;
+    return categorySlug as ChallengeCategoryId;
   }
 
   /**
@@ -126,27 +121,29 @@ export class ChallengeAdapter implements IChallengeAdapter {
    */
   private getDefaultAuthor(): Author {
     return {
-      name: 'Manish Kumar',
-      avatar: '/assets/avatars/manish.jpg',
+      name: 'Manish Boge',
+      avatar: 'https://avatars.githubusercontent.com/u/46419064?v=4',
       profileUrl: 'https://github.com/Manishh09'
     };
   }
 
   /**
-   * Utility method to adapt category ID in reverse direction
-   * Used when legacy code needs to query JSON config
+   * Utility method to adapt category ID to slug
+   * Since CategorySlug and ChallengeCategoryId are now the same type,
+   * this method simply validates and returns the value
    *
-   * @param categoryId - Legacy ChallengeCategoryId
+   * @param categoryId - ChallengeCategoryId to convert
    * @returns Corresponding CategorySlug
    */
   adaptCategoryIdToSlug(categoryId: ChallengeCategoryId): CategorySlug {
-    // Handle deprecated 'http' category
-    if (categoryId === 'http') {
-      console.warn('[ChallengeAdapter] Category "http" is deprecated, using "rxjs-api" instead');
+    // Since both types are identical now, just validate
+    const isValid = (CHALLENGE_CATEGORY_IDS as readonly string[]).includes(categoryId);
+
+    if (!isValid) {
+      console.warn(`[ChallengeAdapter] Invalid category ID: ${categoryId}, using "rxjs-api" instead`);
       return 'rxjs-api';
     }
 
-    // Direct mapping for compatible categories
     return categoryId as CategorySlug;
   }
 }

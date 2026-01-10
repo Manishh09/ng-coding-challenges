@@ -1,12 +1,13 @@
 <mat-card class="challenge-card" [class.challenge-card--latest]="isLatestChallenge()">
-  <div class="challenge-card__halo" aria-hidden="true"></div>
-
   <!-- Top Section: Challenge ID + Badge -->
   <div class="challenge-card__header">
     <div class="challenge-card__header-left">
       <span class="challenge-card__id">{{ challengeIdText() }}</span>
     </div>
     <div class="challenge-card__header-right">
+      <span class="badge difficulty" [class]="difficultyClass()" aria-label="Difficulty level">
+        {{ challenge().difficulty }}
+      </span>
       @if (hasNewBadge()) {
       <span class="challenge-card__badge">
         <mat-icon aria-hidden="true">sparkles</mat-icon>
@@ -27,12 +28,12 @@
   </div>
 
   <mat-card-actions class="challenge-card__actions" role="group" aria-label="Challenge actions">
-    <button 
-      mat-flat-button 
-      color="primary" 
-      type="button" 
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
       class="challenge-card__view-details-btn"
-      (click)="viewDetails()" 
+      (click)="viewDetails()"
       aria-label="View challenge details">
       <mat-icon aria-hidden="true">visibility</mat-icon>
       View Details

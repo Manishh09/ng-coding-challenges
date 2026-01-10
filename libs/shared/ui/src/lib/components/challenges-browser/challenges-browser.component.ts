@@ -21,7 +21,8 @@ import {
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
 import { WorkspaceToolbarComponent } from '../workspace-toolbar/workspace-toolbar.component';
 import { filter, map } from 'rxjs';
-
+import { calculateRouteDepth } from '../../utils/route-utils';
+import { CHALLENGE_CATEGORY_IDS } from '@ng-coding-challenges/shared/models';
 /**
  * Challenges Browser Component - Pure Shell/Layout Component
  *
@@ -44,7 +45,7 @@ import { filter, map } from 'rxjs';
  * - Level 3: /challenges/{category}/{challengeId}/workspace - Shows workspace component + toolbar
  */
 @Component({
-  selector: 'app-challenges-browser',
+  selector: 'ngc-ui-challenges-browser',
   standalone: true,
   imports: [
     CommonModule,
@@ -105,14 +106,8 @@ export class ChallengesBrowserComponent {
    * Helper function for consistent depth calculation
    */
   private calculateRouteDepth(): number {
-    const url = this.router.url.split('?')[0]; // Remove query params
-    const segments = url.split('/').filter(s => s);
-
-    // /challenges = 1 segment (depth 0)
-    // /challenges/rxjs-api = 2 segments (depth 1)
-    // /challenges/rxjs-api/fetch-products = 3 segments (depth 2)
-    // /challenges/rxjs-api/fetch-products/workspace = 4 segments (depth 3)
-    return segments.length - 1; // Subtract 'challenges' base
+    const url = this.router.url;
+    return calculateRouteDepth(url);
   }
 
   // Track current route depth for adaptive UI
@@ -146,7 +141,7 @@ export class ChallengesBrowserComponent {
         while (route?.firstChild) {
           route = route.firstChild;
         }
-        return route?.snapshot.data || {};
+        return route?.snapshot?.data || {};
       }),
       takeUntilDestroyed(this.destroyRef)
     ),
@@ -156,7 +151,7 @@ export class ChallengesBrowserComponent {
         while (route?.firstChild) {
           route = route.firstChild;
         }
-        return route?.snapshot.data || {};
+        return route?.snapshot?.data || {};
       })()
     }
   );
@@ -188,7 +183,7 @@ export class ChallengesBrowserComponent {
         }
 
         // Get layoutType from route data (explicit declaration)
-        const layoutType = route?.snapshot.data['layoutType'];
+        const layoutType = route?.snapshot?.data?.['layoutType'];
 
         // Return container class with proper suffix
         return layoutType ? `${layoutType}-container` : 'landing-page-container';
@@ -202,7 +197,7 @@ export class ChallengesBrowserComponent {
         while (route?.firstChild) {
           route = route.firstChild;
         }
-        const layoutType = route?.snapshot.data['layoutType'];
+        const layoutType = route?.snapshot?.data?.['layoutType'];
         return layoutType ? `${layoutType}-container` : 'landing-page-container';
       })()
     }
@@ -248,9 +243,9 @@ export class ChallengesBrowserComponent {
    */
   onCategorySelect(categoryId: string): void {
     // Validate category exists in route configuration
-    const validCategories = ['rxjs-api', 'angular-core', 'angular-routing', 'angular-forms'];
+    const validCategories = CHALLENGE_CATEGORY_IDS;
 
-    if (!validCategories.includes(categoryId)) {
+    if (!validCategories.includes(categoryId as typeof CHALLENGE_CATEGORY_IDS[number])) {
       console.warn(`[ChallengesBrowser] Category '${categoryId}' does not have a route configured`);
       return;
     }

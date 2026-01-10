@@ -1,123 +1,81 @@
-# Challenge 04 - Server-Side Search Solution Guide
+# Solution: Server-Side Search
 
-## Overview
+## 🧠 Approach
+We need to coordinate the User Input stream with the API Response stream.
+1.  **Service**: Exposes a method `search(query)`.
+2.  **Component**:
+    *   Listens to input changes.
+    *   Waits (`debounceTime`).
+    *   Switches to the new API call (`switchMap`), cancelling any previous ones.
+3.  **Template**: Displays the result of this pipeline.
 
-This solution guide provides an overview of the implementation for the server-side search feature in the Angular application. The goal is to create a responsive search interface that fetches user data from a server based on the user's input.
+## 🚀 Step-by-Step Implementation
 
-___
-
-## Implementation Steps
-
-`Step-1:` Create Models
-
-Create a user model to define the structure of user data.
-
+### Step 1: Define the Interface
 ```typescript
-// user.model.ts
 export interface User {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
 }
 ```
-___
 
-`Step-2:` Create Service
-
-Create a service to handle API requests for searching users.
-
+### Step 2: Create the Service
 ```typescript
-// user-search.service.ts
-@Injectable({ providedIn: "root" })
-export class UserSearchService {
-  searchUsers(query: string) {
-    // HTTP GET: https://dummyjson.com/users/search?q=<query>
-    // handle errors
-    // return observable of user list
+@Injectable({ providedIn: 'root' })
+export class SearchService {
+  private http = inject(HttpClient);
+  // Returns { users: [...] } so we map to get the array
+  search(q: string): Observable<User[]> {
+    return this.http.get<any>(`https://dummyjson.com/users/search?q=${q}`).pipe(
+      map(res => res.users)
+    );
   }
 }
 ```
-___
 
-`Step-3:` Create Component
-Create a component that uses Angular Reactive Forms to handle user input and display search results.
+### Step 3: Implement the Component
+This is the core logic. We define a stream `results$` that reacts to `searchControl`.
 
 ```typescript
-// server-side-search.component.ts
-@Component({
-  /*Metadata*/
-})
-export class ServerSideSearchComponent {
-  searchControl = new FormControl("");
-  users = signal<User[]>([]);
-  loading = signal(false);
-  error = signal("");
-  hasSearched = signal(false);
+@Component({ ... })
+export class ServerSearchComponent {
+  private service = inject(SearchService);
+  searchControl = new FormControl('');
 
-  // inject service
-  private userSearchService = inject(UserSearchService);
+  results$ = this.searchControl.valueChanges.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    switchMap(term => {
+      // If empty, return empty array immediately
+      if (!term.trim()) return of([]);
 
-  ngOnInit() {
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((query) => {
-          return this.userSearchService.searchUsers(query);
-        }),
-        takeUntilDestroyed(this.destroyRef) // Ensure to unsubscribe on component destroy
-      )
-      .subscribe({
-        next: (users) => {},
-        error: (error) => {},
-      });
-  }
+      // Start the search
+      return this.service.search(term).pipe(
+        catchError(() => of([])) // Handle error per request
+      );
+    })
+  );
 }
 ```
-___
 
-`Step-4:` Create Template
+### Step 4: The Template
+Simple async pipe usage. Note: Adding a loading indicator in the pure Observable pattern requires a bit more setup (e.g., using a separate `loading` signal or wrapping the data state), but for this challenge, getting the data flow right is priority #1.
 
 ```html
-<!-- server-side-search.component.html -->
-<div>
-  <input [formControl]="searchControl" placeholder="Search users..." />
-</div>
-@if (loading()) {
-<p class="loading">Loading...</p>
+<input [formControl]="searchControl" placeholder="Search..." />
 
-} @if (error()) {
-<p class="error">{{ error() }}</p>
+@if (results$ | async; as users) {
+  <ul>
+    @for (u of users; track u.id) {
+      <li>{{ u.firstName }} {{ u.lastName }}</li>
+    }
+  </ul>
 }
-
-<ul>
-  @for (user of users(); track user.id) {
-  <li>{{ user.firstName }} {{ user.lastName }}</li>
-  }
-</ul>
 ```
-___
 
-## Working Flow
-
-1. **User navigates** to the search component.
-2. **User types** in the search input.
-3. The input is processed with `debounceTime` to wait for the user to stop typing.
-4. The `distinctUntilChanged` operator ensures that only new queries trigger an API call.
-5. The `switchMap` operator cancels any previous API calls if a new query is received.
-6. The results are processed and displayed in the UI.
-7. The user can refine their search by modifying the input, which triggers the above flow again.
-
---- 
-
-### Why `switchMap` is used
-
-- `switchMap` is used to switch to a new observable whenever the search term changes.
-- This is useful for:
-  - Ensuring proper sequencing: load → then search.
-  - Canceling previous search requests if the user is typing quickly.
-  - Ensuring that only the latest search result is considered.
-- Example: If a user types "John", then quickly types "Doe", only the search for "Doe" will be processed.
-- Without `switchMap`, you might end up with multiple filter operations running simultaneously, leading to inconsistent results.
-
----
+## 🌟 Best Practices Used
+*   **switchMap**: The most critical operator here. It unsubscribes from the previous inner Observable (the old API call) when a new value arrives. This prevents race conditions.
+*   **Deboucing**: Reducing server load.
+*   **Defensive Coding**: Handling empty strings and errors inside the pipeline.

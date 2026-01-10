@@ -1,43 +1,21 @@
 import { Injectable, Signal, signal, computed, inject, effect } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ChallengeCategory, CategorySlug } from '@ng-coding-challenges/shared/models';
-import { ConfigLoaderService } from '../config/config-loader.service';
-import { map, switchMap, forkJoin } from 'rxjs';
-import { combineLatest } from 'rxjs';
+import { ChallengeCategory } from '@ng-coding-challenges/shared/models';
+import { CategoryDataLoaderService } from './category-data-loader.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChallengeCategoryService {
-  private readonly configLoader = inject(ConfigLoaderService);
+  private readonly categoryLoader = inject(CategoryDataLoaderService);
 
   /**
    * Load categories from JSON configuration with challenge counts.
    * Falls back to empty array if JSON load fails.
+   * Now delegated to CategoryDataLoaderService for separation of concerns.
    */
   private readonly categoriesFromJson = toSignal(
-    this.configLoader.getCategories().pipe(
-      switchMap(categories => {
-        // Load challenge counts for all categories in parallel
-        const categoriesWithCounts$ = categories.map(cat =>
-          this.configLoader.getChallengesByCategory(cat.slug as CategorySlug).pipe(
-            map(challenges => ({
-              id: cat.slug,
-              name: cat.title,
-              description: cat.description,
-              icon: cat.icon,
-              newBadgeCount: 0,
-              challengeCount: challenges.length
-            } as ChallengeCategory))
-          )
-        );
-
-        // Wait for all categories to load with their counts
-        return categoriesWithCounts$.length > 0
-          ? combineLatest(categoriesWithCounts$)
-          : [[]];
-      })
-    ),
+    this.categoryLoader.loadCategoriesWithCounts(),
     { initialValue: [] } // Empty array fallback
   );
 

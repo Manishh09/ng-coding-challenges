@@ -17,7 +17,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatRippleModule } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ChallengesService } from '@ng-coding-challenges/shared/services';
 import { SearchResult } from '@ng-coding-challenges/shared/models';
@@ -26,8 +25,9 @@ import { debounceTime, filter, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SEARCH_CONFIG } from '../../constants/search.constants';
 import { LOADING_CONFIG } from '../../constants/loading.constants';
+import { getCategoryBadgeClass } from '../../utils';
 @Component({
-  selector: 'app-global-search',
+  selector: 'ngc-ui-global-search',
   standalone: true,
   imports: [
     CommonModule,
@@ -38,7 +38,6 @@ import { LOADING_CONFIG } from '../../constants/loading.constants';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatRippleModule,
     HighlightTextPipe,
   ],
   templateUrl: './global-search.component.html',
@@ -156,12 +155,6 @@ export class GlobalSearchComponent implements OnInit {
   }
 
   getCategoryBadgeClass(category: string): string {
-    const categoryMap: Record<string, string> = {
-      'rxjs-api': 'badge-rxjs',
-      'http': 'badge-http',
-      'angular-core': 'badge-core',
-      'angular-routing': 'badge-routing',
-    };
-    return categoryMap[category] || 'badge-default';
+    return getCategoryBadgeClass(category);
   }
 }

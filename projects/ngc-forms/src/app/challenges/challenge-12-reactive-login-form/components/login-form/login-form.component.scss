@@ -1,12 +1,11 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 2rem;
 }
 
 .login-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   animation: fadeIn 0.5s ease-in;
 }
@@ -39,6 +38,7 @@
 
 .login-form {
   padding: 2rem;
+  width: 85%;
 }
 
 // Form Groups

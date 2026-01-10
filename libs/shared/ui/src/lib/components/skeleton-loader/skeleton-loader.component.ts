@@ -8,17 +8,17 @@ import { CommonModule } from '@angular/common';
  * @example
  * ```html
  * <!-- Text skeleton -->
- * <app-skeleton-loader variant="text" />
+ * <ngc-ui-skeleton-loader variant="text" />
  *
  * <!-- Card skeleton -->
- * <app-skeleton-loader variant="card" height="200px" />
+ * <ngc-ui-skeleton-loader variant="card" height="200px" />
  *
  * <!-- Custom dimensions -->
- * <app-skeleton-loader variant="rectangle" width="100%" height="60px" />
+ * <ngc-ui-skeleton-loader variant="rectangle" width="100%" height="60px" />
  * ```
  */
 @Component({
-  selector: 'app-skeleton-loader',
+  selector: 'ngc-ui-skeleton-loader',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './skeleton-loader.component.html',

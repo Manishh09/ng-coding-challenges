@@ -8,17 +8,17 @@ import { CommonModule } from '@angular/common';
  * @example
  * ```html
  * <!-- Place at the very top of your app -->
- * <app-skip-links />
+ * <ngc-ui-skip-links />
  *
  * <!-- Or with custom links -->
- * <app-skip-links [links]="customSkipLinks" />
+ * <ngc-ui-skip-links [links]="customSkipLinks" />
  *
  * <!-- Mark your main content -->
  * <main id="main-content">...</main>
  * ```
  */
 @Component({
-  selector: 'app-skip-links',
+  selector: 'ngc-ui-skip-links',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './skip-links.component.html',

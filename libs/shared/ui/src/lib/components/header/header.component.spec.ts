@@ -44,12 +44,12 @@ describe('HeaderComponent', () => {
 
   it('should render theme toggle', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const themeToggle = compiled.querySelector('ng-coding-challenges-theme-toggle');
+    const themeToggle = compiled.querySelector('ngc-ui-theme-toggle');
     expect(themeToggle).toBeTruthy();
   });
 
   it('should show mobile menu button when showMobileMenu is true', () => {
-    component.showMobileMenu = true;
+    fixture.componentRef.setInput('showMobileMenu', true);
     fixture.detectChanges();
     
     const compiled = fixture.nativeElement as HTMLElement;
@@ -58,7 +58,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should hide mobile menu button when showMobileMenu is false', () => {
-    component.showMobileMenu = false;
+    fixture.componentRef.setInput('showMobileMenu', false);
     fixture.detectChanges();
     
     const compiled = fixture.nativeElement as HTMLElement;
@@ -73,7 +73,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should accept custom app name', () => {
-    component.appName = 'Custom App';
+    fixture.componentRef.setInput('appName', 'Custom App');
     fixture.detectChanges();
     
     const compiled = fixture.nativeElement as HTMLElement;

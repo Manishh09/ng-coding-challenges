@@ -1,7 +1,7 @@
 .workspace-toolbar {
-  position: relative; // Changed from sticky to relative
+  position: relative;
   top: 0;
-  z-index: 50; // Lower than header (1100) but high enough within content
+  z-index: 50;
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -141,6 +141,7 @@
 .solution-button {
   // Accent color styling from Material
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--interactive-primary) !important;
 
   &:hover:not(:disabled) {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
@@ -148,6 +149,7 @@
 }
 
 .stackblitz-button {
+  color: var(--text-primary) !important;
   // Stroked button with custom hover effect
   &:hover:not(:disabled) {
     background: var(--state-hover-bg);

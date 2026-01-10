@@ -12,22 +12,15 @@
   overflow: hidden;
   isolation: isolate;
 
+  /* Single subtle gradient overlay */
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 20%, var(--color-primary-alpha-20), transparent 60%),
-      radial-gradient(circle at 80% 10%, var(--color-accent-alpha-20), transparent 55%);
-    z-index: 0;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--surface-secondary);
+    background: radial-gradient(circle at 20% 20%, var(--color-primary-alpha-20), transparent 60%);
     opacity: 0.5;
     z-index: 0;
+    pointer-events: none;
   }
 }
 
@@ -36,33 +29,47 @@
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  padding: var(--spacing-2xl) var(--spacing-3xl); // Reduced top/bottom padding from var(--spacing-3xl)
+  padding: var(--spacing-2xl) var(--spacing-xl);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--spacing-xl);
-  backdrop-filter: blur(18px);
-  max-width: 1440px;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: clamp(var(--spacing-xl), 5vw, var(--spacing-3xl));
+  max-width: var(--max-width-section);
+  width: 100%;
+  align-items: start;
 
-  // Fix mobile stacking
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-xl) var(--spacing-md); // Reduced mobile padding
+    gap: var(--spacing-xl);
+    padding: var(--spacing-2xl) var(--spacing-md);
   }
 }
 
-.footer-section {
+.footer-brand,
+.footer-nav,
+.footer-community {
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.5s var(--animation-easing) forwards;
-}
 
-.brand-section {
-  max-width: 350px;
+  /* Center-align on mobile */
+  @media (max-width: 767px) {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 /* Section Headings */
-.section-title {
+.footer-heading {
   margin: 0 0 var(--spacing-md);
   font-size: 1.1rem;
   font-weight: 600;
@@ -84,6 +91,16 @@
 
   &:hover::after {
     width: 72px;
+  }
+
+  /* Center-align on mobile */
+  @media (max-width: 767px) {
+    text-align: center;
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -203,10 +220,11 @@
 .footer-bottom {
   position: relative;
   width: 100%;
+  z-index: 1;
   border-top: 1px solid var(--border-primary);
-  background: var(--surface-secondary);
+  background: var(--surface-primary); // Enhanced background
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  opacity: 1; // Increased from default for better visibility
 }
 
 .footer-bottom-content {
@@ -214,26 +232,41 @@
   justify-content: center;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-md); // Reduced vertical padding from var(--spacing-md)
+  padding: var(--spacing-lg) var(--spacing-xl);
   flex-wrap: wrap;
   text-align: center;
+  max-width: var(--max-width-section); // Match footer-container width
+  margin: 0 auto;
+  // width: 100%;
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
 }
 
 .copyright {
   margin: 0;
-  color: var(--text-tertiary);
-  font-size: 0.9rem;
-  opacity: 0.9; // Increased opacity for better visibility
+  color: var(--text-primary); // Changed from text-tertiary for better visibility
+  font-size: 0.95rem; // Slightly increased font size
+  opacity: 1; // Full opacity for clarity
+  font-weight: 400;
 }
 
 .created-by {
   color: var(--interactive-primary);
-  font-weight: 500;
-  opacity: 0.95; // Increased visibility
+  font-weight: 600; // Increased weight for emphasis
+  opacity: 1; // Full opacity
+  text-decoration: none;
+  transition: color 0.3s var(--animation-easing);
+
+  &:hover {
+    color: var(--interactive-primary-hover);
+    text-decoration: underline;
+  }
 }
 
 .heart-icon {
-  color: rgba(248, 113, 113, 0.9);
+  color: var(--ruby-red) !important;
   display: inline-block;
   animation: heartbeat 1.5s infinite;
   margin: 0 3px;

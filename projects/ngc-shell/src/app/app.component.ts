@@ -1,11 +1,9 @@
-import { Component, inject, signal, OnInit, OnDestroy, VERSION } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy, VERSION, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Router,
   NavigationEnd,
   RouterOutlet,
-  RouterLink,
-  RouterLinkActive,
 } from '@angular/router';
 import {
 

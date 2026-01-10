@@ -11,23 +11,16 @@
         <a
           routerLink="/"
           class="logo-link"
-          [attr.aria-label]="'Go to ' + appName() + ' home page'"
+          [attr.aria-label]="appName() + ' home'"
         >
-          <span class="logo-image-wrap">
-            <span
-              class="angular-logo-gradient"
-              role="img"
-              [attr.aria-label]="appName() + ' logo'"
-              [style.--logo-src]="'url(' + logoUrl() + ')'"
-            ></span>
+          <span class="logo-wrapper" [style.--logo-src]="'url(' + logoUrl() + ')'">
             <img
               [ngSrc]="logoUrl()"
               [alt]="appName() + ' logo'"
               width="64"
               height="42"
               fetchpriority="high"
-              [title]="appName() + ' logo'"
-              class="angular-logo-img"
+              class="logo"
             />
           </span>
           <span class="logo-text">
@@ -51,7 +44,7 @@
           <button
             class="search-trigger"
             (click)="openGlobalSearch()"
-            aria-label="Open search"
+            aria-label="Search challenges (press / key)"
             type="button"
           >
             <mat-icon class="search-trigger-icon">search</mat-icon>
@@ -107,20 +100,20 @@
         </a>
 
         <!-- Theme Toggle: ensure aria-label available -->
-        <ng-coding-challenges-theme-toggle
+        <ngc-ui-theme-toggle
           aria-label="Toggle dark and light theme"
-        ></ng-coding-challenges-theme-toggle>
+        ></ngc-ui-theme-toggle>
 
         <!-- Mobile Search Button -->
         @if (isMobile()) {
           <button
             mat-icon-button
             (click)="openGlobalSearch()"
-            class="mobile-search-btn"
+            class="mobile-search-btn "
             aria-label="Open search"
             type="button"
           >
-            <mat-icon aria-hidden="true">search</mat-icon>
+            <mat-icon class="github-svg" aria-hidden="true">search</mat-icon>
           </button>
         }
 

@@ -1,0 +1,26 @@
+# Default owner
+* @Manishh09
+
+# -----------------------------
+# Main application (ngc-shell)
+# -----------------------------
+apps/ngc-shell/ @Manishh09
+
+# -----------------------------
+# Shared libraries
+# -----------------------------
+libs/ @Manishh09
+
+# -----------------------------
+# Challenge content
+# -----------------------------
+libs/challenges/ @Manishh09
+
+# -----------------------------
+# Repository governance & docs
+# -----------------------------
+CHANGELOG.md @Manishh09
+CONTRIBUTING.md @Manishh09
+LICENSE.md @Manishh09
+.github/ @Manishh09
+docs/ @Manishh09

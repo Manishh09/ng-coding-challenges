@@ -37,7 +37,7 @@ const QUICK_LINKS: FooterLink[] = [
   {
     text: 'Contribute',
     icon: 'volunteer_activism',
-    url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/CONTRIBUTING.md',
+    url: 'https://github.com/Manishh09/ng-coding-challenges/blob/develop/CONTRIBUTING.md',
     external: true,
     section: 'contribute',
   },
@@ -64,7 +64,7 @@ const SOCIAL_LINKS: FooterLink[] = [
 // Footer Component
 // ============================
 @Component({
-  selector: 'ng-coding-challenges-footer',
+  selector: 'ngc-ui-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,
@@ -81,7 +81,7 @@ export class FooterComponent {
 
   // Static content
   readonly description = 'Practice. Learn. Succeed.';
-  readonly angularVersion = `Angular ${VERSION.full}`;
+  readonly angularVersion = `Angular ${VERSION.major}.`;
 
   // Computed signal for current year
   readonly currentYear = computed(() => new Date().getFullYear());

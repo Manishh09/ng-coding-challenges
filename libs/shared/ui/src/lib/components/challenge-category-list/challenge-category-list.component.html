@@ -18,11 +18,11 @@
   <div class="category-cards">
     @for (category of categoriesWithCount(); track category.id) {
       <div class="card-wrapper">
-        <app-challenge-category-card
+        <ngc-ui-challenge-category-card
           [category]="category"
           [selected]="isSelected(category.id)()"
         >
-        </app-challenge-category-card>
+        </ngc-ui-challenge-category-card>
       </div>
     }
     @empty {

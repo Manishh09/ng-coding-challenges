@@ -7,7 +7,6 @@
         mat-icon-button
         (click)="closeSearch()"
         aria-label="Close search"
-        type="button"
         class="close-button"
       >
         <mat-icon>arrow_back</mat-icon>
@@ -24,9 +23,9 @@
       #searchInput
       type="text"
       class="search-input"
-      placeholder="Search challenges..."
+      placeholder="Search challenges (e.g., rxjs, forms, components)"
       [value]="searchTerm()"
-      (input)="onSearchInput($any($event.target).value)"
+      (input)="onSearchInput(searchInput.value)"
       (focus)="isOpen.set(searchTerm().trim().length >= 2)"
       aria-label="Search all challenges"
       aria-autocomplete="list"
@@ -40,7 +39,6 @@
         class="clear-button"
         (click)="searchTerm.set(''); isOpen.set(false)"
         aria-label="Clear search"
-        type="button"
       >
         <mat-icon>close</mat-icon>
       </button>
@@ -60,11 +58,9 @@
                 @for (result of displayedResults(); track result.id) {
                   <button
                     class="result-item"
-                    matRipple
                     (click)="selectResult(result)"
                     role="option"
                     [attr.aria-label]="'Navigate to ' + result.title"
-                    type="button"
                   >
                     <div class="result-content">
                       <div class="result-header">

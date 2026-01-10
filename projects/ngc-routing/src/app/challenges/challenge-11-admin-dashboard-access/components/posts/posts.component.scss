@@ -1,10 +1,102 @@
 .page {
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
+  padding: 1.5rem;
+}
+
+h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 mat-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.data-table {
   width: 100%;
-  max-width: 900px;
+  border-collapse: collapse;
+
+  thead {
+    background-color: var(--mat-sys-surface-container, rgba(0, 0, 0, 0.04));
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--mat-sys-outline, rgba(0, 0, 0, 0.12));
+    }
+  }
+
+  tbody {
+    tr {
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--mat-sys-surface-container, rgba(0, 0, 0, 0.02));
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.08));
+      }
+    }
+
+    td {
+      padding: 1rem;
+      font-size: 0.9rem;
+
+      &.title {
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--mat-sys-primary, #1976d2);
+      }
+
+      &.author {
+        color: var(--text-primary);
+        opacity: 0.8;
+      }
+
+      &.date {
+        color: var(--text-primary);
+        opacity: 0.6;
+        font-size: 0.85rem;
+      }
+
+      &.actions {
+        white-space: nowrap;
+
+        button {
+          margin: 0 0.25rem;
+
+          mat-icon {
+            font-size: 1.25rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--text-primary);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .data-table {
+    font-size: 0.85rem;
+
+    thead th,
+    tbody td {
+      padding: 0.75rem 0.5rem;
+    }
+
+    tbody td.title {
+      font-size: 0.9rem;
+    }
+  }
 }
