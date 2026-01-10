@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, of, catchError } from 'rxjs';
+import { Observable, map, of, catchError, switchMap } from 'rxjs';
 import { Challenge } from '../models/execution-challenge.model';
 
 /**
@@ -22,6 +22,7 @@ import { Challenge } from '../models/execution-challenge.model';
 export class ChallengeLoaderService {
   private http = inject(HttpClient);
   private challengesCache: any = null;
+  private rootPackageCache: any = null;
 
   /**
    * Loads challenge configuration and generates complete file system.
@@ -34,18 +35,23 @@ export class ChallengeLoaderService {
     categoryId: string,
     slug: string
   ): Observable<{ challenge: Challenge; files: Record<string, string> }> {
-    return this.getChallengesConfig().pipe(
-      map(config => {
-        const challenge = config.challenges[categoryId]?.[slug];
+    // Fetch both challenges config and root package.json
+    return this.getRootPackageJson().pipe(
+      switchMap(rootPkg => {
+        return this.getChallengesConfig().pipe(
+          map(config => {
+            const challenge = config.challenges[categoryId]?.[slug];
 
-        if (!challenge) {
-          throw new Error(`Challenge not found: ${categoryId}/${slug}`);
-        }
+            if (!challenge) {
+              throw new Error(`Challenge not found: ${categoryId}/${slug}`);
+            }
 
-        // Generate complete file system
-        const files = this.generateFileSystem(challenge);
+            // Generate complete file system with root package versions
+            const files = this.generateFileSystem(challenge, rootPkg);
 
-        return { challenge, files };
+            return { challenge, files };
+          })
+        );
       }),
       catchError(error => {
         console.error('[ChallengeLoader] Failed to load challenge:', error);
@@ -57,7 +63,7 @@ export class ChallengeLoaderService {
   /**
    * Generates complete Angular 19 file system for challenge.
    */
-  private generateFileSystem(challenge: Challenge): Record<string, string> {
+  private generateFileSystem(challenge: Challenge, rootPkg?: any): Record<string, string> {
     const files: Record<string, string> = {};
 
     // Core files
@@ -77,18 +83,52 @@ export class ChallengeLoaderService {
     files[`${componentPath}.html`] = this.getChallengeComponentHtml(challenge);
     files[`${componentPath}.scss`] = this.getChallengeComponentScss();
 
-    // Config files
-    files['package.json'] = this.getPackageJson();
+    // Config files - pass root package for version extraction
+    files['package.json'] = this.getPackageJson(rootPkg);
     files['tsconfig.json'] = this.getTsConfig();
     files['angular.json'] = this.getAngularJson();
 
     // Category-specific scaffolding
-    if (challenge.categoryId === 'angular-forms') {
-      files['src/app/models/.gitkeep'] = '# Add your models here';
-      files['src/app/validators/.gitkeep'] = '# Add custom validators here';
-    } else if (challenge.categoryId === 'rxjs-api') {
-      files['src/app/services/.gitkeep'] = '# Add your services here';
-      files['src/app/models/.gitkeep'] = '# Add data models here';
+    switch (challenge.categoryId) {
+      case 'angular-forms':
+        files['src/app/models/form-data.model.ts'] = '// Add your form data models here\nexport interface FormData {\n  // Define your form structure\n}\n';
+        files['src/app/validators/custom.validators.ts'] = '// Add your custom validators here\nimport { AbstractControl, ValidationErrors, ValidatorFn } from \'@angular/forms\';\n\nexport class CustomValidators {\n  // Example: static customValidator(): ValidatorFn { ... }\n}\n';
+        break;
+
+      case 'rxjs-api':
+        files['src/app/services/data.service.ts'] = '// Add your HTTP services here\nimport { Injectable } from \'@angular/core\';\nimport { HttpClient } from \'@angular/common/http\';\n\n@Injectable({ providedIn: \'root\' })\nexport class DataService {\n  constructor(private http: HttpClient) {}\n}\n';
+        files['src/app/models/data.model.ts'] = '// Add your data models here\nexport interface DataModel {\n  // Define your data structure\n}\n';
+        break;
+
+      case 'angular-core':
+        files['src/app/services/app.service.ts'] = '// Add your services here\nimport { Injectable } from \'@angular/core\';\n\n@Injectable({ providedIn: \'root\' })\nexport class AppService {\n  // Service logic here\n}\n';
+        files['src/app/components/shared.component.ts'] = '// Add reusable components here\nimport { Component } from \'@angular/core\';\n\n@Component({\n  selector: \'app-shared\',\n  standalone: true,\n  template: `<!-- Component template -->`\n})\nexport class SharedComponent {}\n';
+        files['src/app/directives/custom.directive.ts'] = '// Add custom directives here\nimport { Directive } from \'@angular/core\';\n\n@Directive({\n  selector: \'[appCustom]\',\n  standalone: true\n})\nexport class CustomDirective {}\n';
+        files['src/app/pipes/custom.pipe.ts'] = '// Add custom pipes here\nimport { Pipe, PipeTransform } from \'@angular/core\';\n\n@Pipe({\n  name: \'custom\',\n  standalone: true\n})\nexport class CustomPipe implements PipeTransform {\n  transform(value: unknown, ...args: unknown[]): unknown {\n    return value;\n  }\n}\n';
+        break;
+
+      case 'angular-routing':
+        files['src/app/pages/home.page.ts'] = '// Add page components here\nimport { Component } from \'@angular/core\';\n\n@Component({\n  selector: \'app-home\',\n  standalone: true,\n  template: `<h1>Home Page</h1>`\n})\nexport class HomePage {}\n';
+        files['src/app/guards/auth.guard.ts'] = '// Add route guards here\nimport { CanActivateFn } from \'@angular/router\';\n\nexport const authGuard: CanActivateFn = (route, state) => {\n  return true;\n};\n';
+        files['src/app/resolvers/data.resolver.ts'] = '// Add route resolvers here\nimport { ResolveFn } from \'@angular/router\';\n\nexport const dataResolver: ResolveFn<any> = (route, state) => {\n  return null;\n};\n';
+        break;
+
+      case 'angular-signals':
+        files['src/app/services/signal.service.ts'] = '// Add signal-based services here\nimport { Injectable, signal } from \'@angular/core\';\n\n@Injectable({ providedIn: \'root\' })\nexport class SignalService {\n  data = signal<any>(null);\n}\n';
+        files['src/app/models/data.model.ts'] = '// Add your data models here\nexport interface DataModel {\n  // Define your data structure\n}\n';
+        break;
+
+      case 'community':
+        files['src/app/services/app.service.ts'] = '// Add your services here\nimport { Injectable } from \'@angular/core\';\n\n@Injectable({ providedIn: \'root\' })\nexport class AppService {\n  // Service logic here\n}\n';
+        files['src/app/models/data.model.ts'] = '// Add your data models here\nexport interface DataModel {\n  // Define your data structure\n}\n';
+        files['src/app/components/shared.component.ts'] = '// Add reusable components here\nimport { Component } from \'@angular/core\';\n\n@Component({\n  selector: \'app-shared\',\n  standalone: true,\n  template: `<!-- Component template -->`\n})\nexport class SharedComponent {}\n';
+        break;
+
+      default:
+        // Default scaffolding for unknown categories
+        files['src/app/services/app.service.ts'] = '// Add your services here\nimport { Injectable } from \'@angular/core\';\n\n@Injectable({ providedIn: \'root\' })\nexport class AppService {\n  // Service logic here\n}\n';
+        files['src/app/models/data.model.ts'] = '// Add your data models here\nexport interface DataModel {\n  // Define your data structure\n}\n';
+        break;
     }
 
     return files;
@@ -106,6 +146,49 @@ export class ChallengeLoaderService {
       map(config => {
         this.challengesCache = config;
         return config;
+      })
+    );
+  }
+
+  /**
+   * Fetches root package.json with caching to get current dependency versions.
+   */
+  private getRootPackageJson(): Observable<any> {
+    if (this.rootPackageCache) {
+      return of(this.rootPackageCache);
+    }
+
+    return this.http.get<any>('/package.json').pipe(
+      map(pkg => {
+        this.rootPackageCache = pkg;
+        return pkg;
+      }),
+      catchError(error => {
+        console.error('[ChallengeLoader] Failed to load package.json, using fallback versions:', error);
+        // Fallback to default versions if package.json not accessible
+        const fallback = {
+          dependencies: {
+            '@angular/animations': '^19.0.0',
+            '@angular/common': '^19.0.0',
+            '@angular/compiler': '^19.0.0',
+            '@angular/core': '^19.0.0',
+            '@angular/forms': '^19.0.0',
+            '@angular/platform-browser': '^19.0.0',
+            '@angular/platform-browser-dynamic': '^19.0.0',
+            '@angular/router': '^19.0.0',
+            'rxjs': '~7.8.0',
+            'tslib': '^2.3.0',
+            'zone.js': '~0.15.0'
+          },
+          devDependencies: {
+            '@angular-devkit/build-angular': '^19.0.0',
+            '@angular/cli': '^19.0.0',
+            '@angular/compiler-cli': '^19.0.0',
+            'typescript': '~5.6.0'
+          }
+        };
+        this.rootPackageCache = fallback;
+        return of(fallback);
       })
     );
   }
@@ -361,7 +444,11 @@ export class ${componentName} {
 }`;
   }
 
-  private getPackageJson(): string {
+  private getPackageJson(rootPkg?: any): string {
+    // Extract versions from root package.json or use cached values
+    const deps = rootPkg?.dependencies || {};
+    const devDeps = rootPkg?.devDependencies || {};
+
     return JSON.stringify({
       name: 'angular-challenge',
       version: '19.0.0',
@@ -371,22 +458,23 @@ export class ${componentName} {
         build: 'ng build'
       },
       dependencies: {
-        '@angular/animations': '^19.0.0',
-        '@angular/common': '^19.0.0',
-        '@angular/compiler': '^19.0.0',
-        '@angular/core': '^19.0.0',
-        '@angular/forms': '^19.0.0',
-        '@angular/platform-browser': '^19.0.0',
-        '@angular/platform-browser-dynamic': '^19.0.0',
-        'rxjs': '~7.8.1',
-        'tslib': '^2.7.0',
-        'zone.js': '~0.15.0'
+        '@angular/animations': deps['@angular/animations'] || '^19.0.0',
+        '@angular/common': deps['@angular/common'] || '^19.0.0',
+        '@angular/compiler': deps['@angular/compiler'] || '^19.0.0',
+        '@angular/core': deps['@angular/core'] || '^19.0.0',
+        '@angular/forms': deps['@angular/forms'] || '^19.0.0',
+        '@angular/platform-browser': deps['@angular/platform-browser'] || '^19.0.0',
+        '@angular/platform-browser-dynamic': deps['@angular/platform-browser-dynamic'] || '^19.0.0',
+        '@angular/router': deps['@angular/router'] || '^19.0.0',
+        'rxjs': deps['rxjs'] || '~7.8.0',
+        'tslib': deps['tslib'] || '^2.3.0',
+        'zone.js': deps['zone.js'] || '~0.15.0'
       },
       devDependencies: {
-        '@angular-devkit/build-angular': '^19.0.0',
-        '@angular/cli': '^19.0.0',
-        '@angular/compiler-cli': '^19.0.0',
-        'typescript': '~5.6.0'
+        '@angular-devkit/build-angular': devDeps['@angular-devkit/build-angular'] || '^19.0.0',
+        '@angular/cli': devDeps['@angular/cli'] || '^19.0.0',
+        '@angular/compiler-cli': devDeps['@angular/compiler-cli'] || '^19.0.0',
+        'typescript': devDeps['typescript'] || '~5.6.0'
       }
     }, null, 2);
   }

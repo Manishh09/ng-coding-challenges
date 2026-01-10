@@ -33,7 +33,7 @@
     <!-- Main Content Area -->
     <div class="playground-content">
       <!-- Left Panel: File Tree + Editor -->
-      <div class="editor-panel" [class.active]="selectedPanel() === 'editor'">
+      <div [style.display]="'none'" class="editor-panel" [class.active]="selectedPanel() === 'editor'">
         <!-- File Tree -->
         <div class="file-tree">
           <div class="file-tree-header">Files</div>

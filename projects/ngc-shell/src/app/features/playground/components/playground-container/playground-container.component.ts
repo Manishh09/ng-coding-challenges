@@ -170,8 +170,6 @@ export class PlaygroundContainerComponent {
     view: 'default' as const,
     hideNavigation: false,
     hideDevTools: false,
-    devToolsHeight: 50,
-    terminalHeight: 50,
     showSidebar: true,
   }));
 

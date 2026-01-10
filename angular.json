@@ -129,13 +129,26 @@
               {
                 "glob": "**/*",
                 "input": "projects/ngc-shell/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min/vs",
+                "output": "assets/monaco/vs"
+              },
+              {
+                "glob": "package.json",
+                "input": ".",
+                "output": "/"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "projects/ngc-shell/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "externalDependencies": [
+              "monaco-editor"
+            ]
           },
           "configurations": {
             "production": {

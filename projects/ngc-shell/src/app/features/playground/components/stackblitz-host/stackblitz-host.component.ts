@@ -136,9 +136,7 @@ export class StackblitzHostComponent {
     theme?: 'light' | 'dark';
     hideNavigation?: boolean;
     hideDevTools?: boolean;
-    devToolsHeight?: number;
     showSidebar?: boolean;
-    terminalHeight?: number;
     view?: 'default' | 'preview' | 'editor';
     height?: number;
     [key: string]: any;
@@ -146,9 +144,7 @@ export class StackblitzHostComponent {
     theme: 'dark',
     hideNavigation: false,
     hideDevTools: false,
-    devToolsHeight: 50,
     showSidebar: true,
-    terminalHeight: 50,
     view: 'default',
   });
 
@@ -253,15 +249,14 @@ export class StackblitzHostComponent {
         container,
         project,
         {
-          ...this.options(),
-          forceEmbedLayout: true,    // Ensure embedded mode (no new tab)
-          clickToLoad: false,        // Auto-load without user interaction
+          forceEmbedLayout: true,         // Ensure embedded mode (no new tab)
+          clickToLoad: false,             // Auto-load without user interaction
           openFile: this.options().openFile || 'src/app/app.component.ts',
-          hideNavigation: false,     // Show file explorer
-          hideDevTools: false,       // Show terminal/console
-          devToolsHeight: 50,        // Terminal takes 50% of height
-          terminalHeight: 50,        // Ensure terminal is visible
-          showSidebar: true,         // Show file explorer sidebar
+          hideNavigation: false,          // Show file explorer
+          hideDevTools: false,            // Show console/terminal panel
+          showSidebar: true,              // Show file explorer sidebar
+          view: this.options().view || 'default',  // Default view (editor + preview)
+          theme: this.options().theme || 'dark',   // Editor theme
         }
       );
 
@@ -352,7 +347,7 @@ export class StackblitzHostComponent {
     return {
       title: `Challenge ${this.challengeId()}`,
       description: 'Angular Coding Challenge',
-      template: 'angular-cli' as const,
+      template: 'node' as const,  // Use 'node' instead of 'angular-cli' to respect package.json versions
       files: this.files(),
       settings: {
         compile: {

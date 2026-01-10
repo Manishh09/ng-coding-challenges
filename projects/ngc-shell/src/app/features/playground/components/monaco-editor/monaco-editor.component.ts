@@ -16,6 +16,25 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import * as monaco from 'monaco-editor';
 
+// Configure Monaco Editor workers
+(self as any).MonacoEnvironment = {
+  getWorkerUrl: function (moduleId: string, label: string) {
+    if (label === 'json') {
+      return './assets/monaco/vs/language/json/json.worker.js';
+    }
+    if (label === 'css' || label === 'scss' || label === 'less') {
+      return './assets/monaco/vs/language/css/css.worker.js';
+    }
+    if (label === 'html' || label === 'handlebars' || label === 'razor') {
+      return './assets/monaco/vs/language/html/html.worker.js';
+    }
+    if (label === 'typescript' || label === 'javascript') {
+      return './assets/monaco/vs/language/typescript/ts.worker.js';
+    }
+    return './assets/monaco/vs/editor/editor.worker.js';
+  }
+};
+
 /**
  * Monaco Editor Wrapper Component
  *
