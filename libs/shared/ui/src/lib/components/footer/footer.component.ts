@@ -29,7 +29,7 @@ export interface FooterLink {
 const QUICK_LINKS: FooterLink[] = [
   {
     text: 'GitHub',
-    icon: 'code_off',
+    icon: 'code',
     url: 'https://github.com/Manishh09/ng-coding-challenges',
     external: true,
     section: 'github',
