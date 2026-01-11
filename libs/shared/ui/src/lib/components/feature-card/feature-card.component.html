@@ -1,0 +1,27 @@
+<button
+  type="button"
+  class="featured-card"
+  [class]="customClass()"
+  [disabled]="disabled()"
+  [attr.aria-label]="ariaLabel"
+  (click)="onCardClick()"
+  matRipple
+  [matRippleDisabled]="disabled()"
+>
+  <div class="featured-card__header">
+    <div class="featured-icon" aria-hidden="true">
+      <mat-icon>{{ icon() }}</mat-icon>
+    </div>
+    @if (count()) {
+      <span class="featured-count">{{ countLabel }}</span>
+    }
+  </div>
+  
+  <h3 class="featured-card__title">{{ title() }}</h3>
+  <p class="featured-card__description">{{ description() }}</p>
+  
+  <span class="featured-cta">
+    {{ ctaText() }}
+    <mat-icon aria-hidden="true">{{ ctaIcon() }}</mat-icon>
+  </span>
+</button>

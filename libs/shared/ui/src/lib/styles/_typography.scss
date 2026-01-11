@@ -1,34 +1,14 @@
-@use 'sass:map';
+/**
+ * Typography Module (Legacy Redirect)
+ *
+ * This file has been deprecated in favor of the new token-based architecture.
+ * All typography tokens are now in: tokens/_typography.scss
+ *
+ * This file now forwards all typography functionality from the tokens module
+ * to maintain backward compatibility with existing imports.
+ *
+ * @deprecated Use @use './tokens/typography' instead
+ */
 
-// Typography variables
-$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-
-// Expose CSS variables for typography
-@mixin typography-css-vars() {
-  --font-family-primary: #{$font-family-primary};
-  --font-family-mono: #{$font-family-mono};
-}
-
-// Apply global typography styles
-@mixin apply-typography() {
-  body {
-    font-family: var(--font-family-primary);
-    line-height: 1.6;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  code, pre, kbd, samp {
-    font-family: var(--font-family-mono);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 0.5rem 0;
-    line-height: 1.2;
-    font-weight: 700;
-  }
-
-  p { margin: 0 0 1rem 0; }
-}
+// Forward all typography functionality from the new token module
+@forward './tokens/typography';

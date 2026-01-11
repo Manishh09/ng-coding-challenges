@@ -1,54 +1,75 @@
-# Pull Request Template
+# 🧩 Pull Request Template
 
 ## 📝 Description
 
-- Ensure your branch is up to date with the latest `develop`.
-- Describe your changes clearly in the PR description.
-- Link related issues (if any) using GitHub keywords (e.g., closes #123).
-- Be responsive to code review feedback and update your PR accordingly.
+- Ensure your branch is **rebased or merged** with the latest `develop`.
+- Clearly describe your changes below and link related issues (e.g., closes #123).
+- Address reviewer feedback promptly and update your PR as needed.
+
+**Branch Name:** `feature/add/core/challenge-04-server-side-search`
 
 **What does this PR do?**  
-<!-- Please provide a brief summary of the changes -->
+<!-- Provide a concise summary of changes -->
 
 **Related Issue:** Closes #<!-- Issue number -->
 
 ---
 
-## 🎯 Type of Change  
-<!-- Check one that applies -->
+## 🎯 Type of Change
+<!-- Check all that apply -->
 - [ ] 🐛 Bug fix  
 - [ ] ✨ New feature  
 - [ ] 🆕 New challenge  
+- [ ] 📂 Category update (e.g., core, routing, rxjs-api)  
 - [ ] 📝 Documentation  
 - [ ] 🎨 UI/Style changes  
+- [ ] ⚙️ Build/Tooling update  
 - [ ] 🛑 Breaking change  
+
+---
+
+## 🧭 Impacted Areas
+<!-- Mention which apps/libraries are affected -->
+- [ ] ngc-core  
+- [ ] ngc-routing  
+- [ ] ngc-rxjs-api  
+- [ ] libs/shared  
 
 ---
 
 ## ✅ Checklist
 
-### Testing
-- [ ] Tests pass locally (e.g., `npm test`)  
-- [ ] Manual testing completed  
-- [ ] Works on mobile/tablet devices
+### 🧪 Testing
 
-### Code Quality  
+- [ ] ✅ Unit tests pass locally (`npm test`)  
+- [ ] 🧪 Manually tested in browser  
+- [ ] 📱 Verified on mobile/tablet  
+- [ ] 🔄 Behavior consistent after navigation/reload  
+
+### 🧱 Code Quality  
+
 - [ ] No `console.log` statements  
 - [ ] TypeScript compiles without errors  
 - [ ] Follows Angular style guide  
-- [ ] No memory leaks (unsubscribed observables)  
+- [ ] Proper RxJS unsubscription (no memory leaks)  
 
-### Documentation
-- [ ] Updated README if needed  
-- [ ] Added comments for complex logic  
+### 📝 Documentation
+
+- [ ] Updated README or docs if needed  
+- [ ] Added inline comments for complex logic  
 - [ ] Challenge documentation updated (if applicable)  
 
 ---
 
-## 📝 Additional Notes  
+## 📸 Screenshots / Demo
+<!-- Add screenshots, GIFs, or Loom links if relevant -->
+
+---
+
+## 📝 Additional Notes
 <!-- Anything else reviewers should know -->
 
 ---
 
-*Tip: Keep PRs focused and small to make reviews faster and easier.*  
-_Please ensure appropriate labels are added to your PR (e.g., bug, feature, docs)._
+💡 *Tip: Keep PRs focused and small for faster reviews.*  
+🏷️ *Add relevant labels such as `bug`, `feature`, or `docs`.*

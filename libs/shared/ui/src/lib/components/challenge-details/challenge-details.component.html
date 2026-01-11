@@ -1,0 +1,172 @@
+@if (challengeDetails(); as c) {
+<!-- =============================================================================
+     Challenge Details Component
+     Displays comprehensive information about a specific challenge
+     ============================================================================= -->
+<div class="details-container fade-in">
+    <!-- Breadcrumb Navigation -->
+    <ng-coding-challenges-breadcrumbs [items]="breadcrumbItems()" />
+
+    <!-- Challenge Header Section -->
+    <header class="details-header">
+        <h1 class="title">{{ c.title }}</h1>
+        <div class="tags-row">
+            @if (c.difficulty) {
+            <span class="badge difficulty" [class]="c.difficulty.toLowerCase()">
+                {{ c.difficulty }}
+            </span>
+            }
+            <span class="badge category">{{ c.category }}</span>
+            @for (tag of c.tags; track tag) {
+            <span class="badge tag">{{ tag }}</span>
+            }
+        </div>
+    </header>
+
+    <div class="details-grid">
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- About This Challenge Section -->
+            <section class="section about">
+                <h2>About this Challenge</h2>
+                <mat-divider></mat-divider>
+                <p class="description-text">{{ c.longDescription }}</p>
+            </section>
+
+            <!-- Requirements Section -->
+            <section class="section requirements">
+                <h2>Requirements</h2>
+                <mat-divider></mat-divider>
+                @for(req of c.requirementList; track req) {
+                 <ul class="requirements-list">
+                    <li>{{ req }}</li>
+                </ul>
+                }
+
+                <button
+                    (click)="openRequirement()"
+                    class="requirements-link"
+                    [disabled]="!c.requirementDoc"
+                >
+                    <span>See full requirements doc</span>
+                    <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </section>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- PRIMARY: StackBlitz Launch Card -->
+            <div class="launch-card launch-card--primary">
+                <div class="launch-card__header">
+                    <div class="launch-card__icon">
+                        <mat-icon>electric_bolt</mat-icon>
+                    </div>
+                    <h3 class="launch-card__title">Start Coding</h3>
+                </div>
+
+                <p class="launch-card__description">
+                    Launch the challenge in an interactive StackBlitz IDE and start building your solution
+                </p>
+
+                <button
+                    mat-flat-button
+                    class="launch-btn launch-btn--stackblitz"
+                    [disabled]="launching()"
+                    (click)="launchStackBlitz()"
+                    [attr.aria-label]="'Open ' + c.title + ' in StackBlitz coding environment'">
+                    @if (launching()) {
+                        <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
+                        <span>Opening StackBlitz...</span>
+                    } @else {
+                        <ng-container>
+                            <mat-icon>code</mat-icon>
+                            <span>Code in StackBlitz</span>
+                        </ng-container>
+                    }
+                </button>
+
+                <div class="launch-card__badge">
+                    <mat-icon>speed</mat-icon>
+                    <span>Ready to code</span>
+                </div>
+            </div>
+
+            <!-- SECONDARY: Workspace Preview Card -->
+            <div class="launch-card launch-card--secondary">
+                <div class="launch-card__header">
+                    <div class="launch-card__icon">
+                        <mat-icon>visibility</mat-icon>
+                    </div>
+                    <h3 class="launch-card__title">Preview Solution</h3>
+                </div>
+
+                <p class="launch-card__description">
+                    See the expected output and user flow before you start building
+                </p>
+
+                <button
+                    mat-stroked-button
+                    color="primary"
+                    class="launch-btn launch-btn--workspace"
+                    (click)="launchWorkspace()"
+                    [attr.aria-label]="'Preview expected output for ' + c.title">
+                    <mat-icon>play_circle_outline</mat-icon>
+                    <span>View Demo</span>
+                </button>
+
+                <div class="launch-card__hint">
+                    <mat-icon>info_outline</mat-icon>
+                    <span>Great for understanding requirements</span>
+                </div>
+            </div>
+
+            <!-- Learning Outcomes -->
+            <div class="sidebar-card">
+                <h3>Learning Outcomes</h3>
+                <ul class="outcomes-list">
+                    @for (outcome of c.learningOutcomes; track outcome) {
+                    <li>
+                        <mat-icon class="check-icon">check_circle_outline</mat-icon>
+                        <span>{{ outcome }}</span>
+                    </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="sidebar-card">
+                <h3>Tech Stack</h3>
+                <div class="tech-stack-list">
+                    @for (tech of c.techStack; track tech) {
+                    <div class="tech-item">
+                        <mat-icon class="code-icon">code</mat-icon>
+                        <span>{{ tech }}</span>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Author -->
+            @if (c.author) {
+            <div class="sidebar-card author-card">
+                <h3>Author</h3>
+                <div class="author-info">
+                    <div class="avatar-placeholder">
+                        {{ c.author.name.charAt(0) }}
+                    </div>
+                    <div class="author-details">
+                        <span class="author-name">{{ c.author.name }}</span>
+                        <a [href]="c.author.profileUrl" class="view-profile">View Profile</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </aside>
+    </div>
+</div>
+} @else {
+<div class="loading-state">
+    <p>Loading challenge details...</p>
+</div>
+}

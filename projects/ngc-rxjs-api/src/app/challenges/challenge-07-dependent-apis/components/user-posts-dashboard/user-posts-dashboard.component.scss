@@ -1,0 +1,91 @@
+.user-posts-dashboard-container {
+  padding: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+  // box-shadow: 0 2px 5px var(--shadow-color);
+  background-color: var(--surface-color);
+}
+
+/* Status messages */
+.status {
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+
+  &.loading {
+    background: var(--status-info-alpha-10);
+    color: var(--status-info-dark);
+  }
+
+  &.error {
+    background: var(--status-error-alpha-10);
+    color: var(--status-error-dark);
+  }
+
+  &.empty {
+    background: var(--surface-tertiary);
+    color: var(--text-tertiary);
+  }
+}
+
+/* Table styling */
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
+
+
+  th,
+  td {
+    border: 1px solid var(--outline-color);
+    padding: 0.75rem;
+  }
+
+  th {
+    background-color: var(--surface-variant-color);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--surface-variant-color);
+  }
+
+  tr:hover {
+    background-color: var(--interactive-secondary-hover);
+  }
+
+  .count {
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+/* Posts list inside table cell */
+.posts-list {
+  margin: 0;
+  padding-left: 1rem;
+
+  li {
+    margin: 2px 0;
+    font-size: 0.85rem;
+  }
+
+  .no-posts {
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .nav-wrapper {
+    margin-top: 0.5rem;
+  }
+}

@@ -1,0 +1,52 @@
+@if (hasError()) {
+  <div class="error-boundary" role="alert" aria-live="assertive">
+    <div class="error-boundary__container">
+      <div class="error-boundary__icon-wrapper">
+        <mat-icon class="error-boundary__icon" aria-hidden="true">
+          {{ errorIcon() }}
+        </mat-icon>
+      </div>
+
+      <div class="error-boundary__content">
+        <h3 class="error-boundary__title">
+          {{ errorTitle() }}
+        </h3>
+
+        <p class="error-boundary__message">
+          {{ getDefaultMessage() }}
+        </p>
+
+        <div class="error-boundary__actions" role="group" aria-label="Error recovery actions">
+          @if (showRetry()) {
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              (click)="onRetry()"
+              class="error-boundary__button"
+              aria-label="Retry failed operation"
+            >
+              <mat-icon aria-hidden="true">refresh</mat-icon>
+              {{ retryText() }}
+            </button>
+          }
+
+          @if (showReload()) {
+            <button
+              mat-stroked-button
+              type="button"
+              (click)="onReload()"
+              class="error-boundary__button"
+              aria-label="Reload the page"
+            >
+              <mat-icon aria-hidden="true">sync</mat-icon>
+              {{ reloadText() }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <ng-content></ng-content>
+}
