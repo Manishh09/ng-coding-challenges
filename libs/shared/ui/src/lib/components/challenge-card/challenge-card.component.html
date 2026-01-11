@@ -1,41 +1,56 @@
-<mat-card class="challenge-card" [class.challenge-card--latest]="isLatestChallenge()">
-  <div class="challenge-card__halo" aria-hidden="true"></div>
+<mat-card class="challenge-card" [class]="'difficulty-' + difficultyClass()"
+  [class.challenge-card--latest]="isLatestChallenge()">
+  <!-- Left Side: Main Content -->
+  <div class="challenge-card__content">
+    <!-- Header: Title + Badges -->
+    <div class="challenge-card__header">
+      <h3 class="challenge-card__title">
+        {{ challengeName() }}
+      </h3>
 
-  <!-- Top Section: Challenge ID + Badge -->
-  <div class="challenge-card__header">
-    <div class="challenge-card__header-left">
-      <span class="challenge-card__id">{{ challengeIdText() }}</span>
+      <div class="challenge-card__badges">
+        <span class="badge difficulty" [class]="difficultyClass()">
+          {{ challenge().difficulty }}
+        </span>
+
+        @if (hasNewBadge()) {
+        <span class="badge new-badge">
+          <mat-icon class="new-icon">sparkles</mat-icon>
+          New
+        </span>
+        }
+      </div>
     </div>
-    <div class="challenge-card__header-right">
-      @if (hasNewBadge()) {
-      <span class="challenge-card__badge">
-        <mat-icon aria-hidden="true">sparkles</mat-icon>
-        New
-      </span>
+
+    <!-- Description -->
+    <p class="challenge-card__description">
+      {{ challenge().description }}
+    </p>
+
+    <!-- Footer Meta: Time + Tags -->
+    <div class="challenge-card__meta">
+      @if (challenge().estimatedTime; as time) {
+      <div class="meta-item time">
+        <mat-icon class="meta-icon">schedule</mat-icon>
+        <span>{{ time.replace('minutes', 'mins').replace('expected', '') }}</span>
+      </div>
+      }
+
+      <!-- Tags (Show first 3) -->
+      @if (challenge().tags; as tags) {
+      @for (tag of tags.slice(0, 3); track tag) {
+      <div class="meta-item tag">
+         {{ tag }}
+      </div>
+      }
       }
     </div>
   </div>
 
-  <!-- Below Section: Title + Description -->
-  <div class="challenge-card__body">
-    <h3 class="challenge-card__title">
-      {{ challengeName() }}
-    </h3>
-    <p class="challenge-card__description">
-      {{ challenge().description }}
-    </p>
-  </div>
-
-  <mat-card-actions class="challenge-card__actions" role="group" aria-label="Challenge actions">
-    <button 
-      mat-flat-button 
-      color="primary" 
-      type="button" 
-      class="challenge-card__view-details-btn"
-      (click)="viewDetails()" 
-      aria-label="View challenge details">
-      <mat-icon aria-hidden="true">visibility</mat-icon>
+  <!-- Right Side: Action Button -->
+  <div class="challenge-card__actions">
+    <button mat-flat-button color="primary" class="challenge-card__view-btn" (click)="viewDetails()">
       View Details
     </button>
-  </mat-card-actions>
+  </div>
 </mat-card>

@@ -40,7 +40,9 @@
       "@ngc-rxjs-api": ["projects/ngc-rxjs-api/src/public-api.ts"],
       "@ngc-core": ["projects/ngc-core/src/public-api.ts"],
       "@ngc-routing": ["projects/ngc-routing/src/public-api.ts"],
-      "@ngc-forms": ["projects/ngc-forms/src/public-api.ts"]
+      "@ngc-forms": ["projects/ngc-forms/src/public-api.ts"],
+      "@ngc-signals": ["projects/ngc-signals/src/public-api.ts"],
+      "@ngc-community": ["projects/ngc-community/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

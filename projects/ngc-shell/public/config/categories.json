@@ -3,8 +3,8 @@
   "lastUpdated": "2025-11-30T00:00:00Z",
   "metadata": {
     "author": {
-      "name": "Manish Kumar",
-      "avatar": "/assets/avatars/manish.jpg",
+      "name": "Manish Boge",
+      "avatar": "https://avatars.githubusercontent.com/u/46419064?v=4",
       "profileUrl": "https://github.com/Manishh09"
     },
     "repository": "https://github.com/Manishh09/ng-coding-challenges"
@@ -104,6 +104,54 @@
       "metadata": {
         "color": "#4CAF50",
         "gradient": "linear-gradient(135deg, #a8e063 0%, #56ab2f 100%)"
+      }
+    },
+    {
+      "id": 5,
+      "slug": "angular-signals",
+      "title": "Angular Signals",
+      "description": "Reactive state management with Angular Signals",
+      "icon": "bolt",
+      "order": 5,
+      "enabled": true,
+      "route": {
+        "path": "angular-signals",
+        "moduleName": "@ngc-signals",
+        "exportName": "NGC_SIGNALS_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Signals",
+        "Computed",
+        "Effects"
+      ],
+      "metadata": {
+        "color": "#FF9800",
+        "gradient": "linear-gradient(135deg, #ffd89b 0%, #ff9800 100%)"
+      }
+    },
+    {
+      "id": 6,
+      "slug": "community",
+      "title": "Community",
+      "description": "Community-contributed Angular challenges",
+      "icon": "people",
+      "order": 6,
+      "enabled": true,
+      "route": {
+        "path": "community",
+        "moduleName": "@ngc-community",
+        "exportName": "NGC_COMMUNITY_ROUTES"
+      },
+      "techStack": [
+        "Angular 19+",
+        "Community Driven",
+        "TypeScript",
+        "Best Practices"
+      ],
+      "metadata": {
+        "color": "#9C27B0",
+        "gradient": "linear-gradient(135deg, #f093fb 0%, #9c27b0 100%)"
       }
     }
   ]

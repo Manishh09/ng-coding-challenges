@@ -18,7 +18,7 @@ import { AsyncPipe } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule
-],
+  ],
   templateUrl: './client-side-search.component.html',
   styleUrl: './client-side-search.component.scss'
 })
@@ -27,47 +27,37 @@ export class ClientSideSearchComponent {
   filteredUsers$!: Observable<User[]>;
   searchControl = new FormControl('');
   private destroyRef = inject(DestroyRef);
-  error: string = '';
+  error: string | null = null;
   loading: boolean = false;
 
   constructor(private userService: UserService) { }
 
-  ngOnInitV2(): void {
-    // Fetch users once
-    this.userService.getUsers().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(users => {
-      this.users = users;
-    });
+  ngOnInit(): void {
+    this.loading = true;
+    this.error = null;
 
-    // Set up filtered stream
+    this.userService.getUsers()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: users => {
+          this.users = users;
+          this.loading = false;
+        },
+        error: () => {
+          this.error = 'Failed to load users';
+          this.loading = false;
+        }
+      });
+
     this.filteredUsers$ = this.searchControl.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
       distinctUntilChanged(),
-      takeUntilDestroyed(this.destroyRef),
-      map(searchTerm => this.getSearchedUsers(searchTerm as string))
+      map(searchTerm => this.getSearchedUsers(searchTerm as string)),
+      takeUntilDestroyed(this.destroyRef) // Unsubscribe on destroy
     );
   }
 
-  ngOnInit(): void {
-    this.filteredUsers$ = this.userService.getUsers().pipe(
-      tap(users => this.users = users),  // store fetched users
-      catchError(() => {
-        this.error = 'Failed to load users';
-        this.loading = false;
-        return of([] as User[]);
-      }),
-      switchMap(() =>
-        this.searchControl.valueChanges.pipe(
-          startWith(''),
-          debounceTime(300),
-          distinctUntilChanged(),
-          map(searchTerm => this.getSearchedUsers(searchTerm ?? '')),
-          takeUntilDestroyed(this.destroyRef)
-        )
-      ),
-      takeUntilDestroyed(this.destroyRef)
-    );
-  }
 
 
   getSearchedUsers(searchTerm: string): User[] {

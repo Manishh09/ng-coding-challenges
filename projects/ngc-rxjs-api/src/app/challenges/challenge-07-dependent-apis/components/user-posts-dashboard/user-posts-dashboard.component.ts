@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { UserWithPosts } from '../../models/user-posts.model';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
-import { catchError, forkJoin, map, merge, mergeMap, of } from 'rxjs';
+import { catchError, forkJoin, map, merge, mergeMap, of, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-posts-dashboard',
@@ -10,10 +10,11 @@ import { catchError, forkJoin, map, merge, mergeMap, of } from 'rxjs';
   templateUrl: './user-posts-dashboard.component.html',
   styleUrls: ['./user-posts-dashboard.component.scss']
 })
-export class UserPostsDashboardComponent {
+export class UserPostsDashboardComponent implements OnInit, OnDestroy {
   usersWithPosts: UserWithPosts[] = [];
   isLoading = false;
   error: string | null = null;
+  private destroy$ = new Subject<void>();
 
   // services injection can be done here
   private userService = inject(UserService);
@@ -55,6 +56,7 @@ export class UserPostsDashboardComponent {
           ),
         );
       }),
+      takeUntil(this.destroy$) // unsubscribe when component is destroyed
     ).subscribe({
       next: usersWithPosts => {
         this.isLoading = false;
@@ -66,14 +68,15 @@ export class UserPostsDashboardComponent {
         }));
         this.error = null;
       },
-      error: err => {
+      error: () => {
         this.error = 'Failed to load user posts';
         this.isLoading = false;
       }
     });
   }
 
-
-
-
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

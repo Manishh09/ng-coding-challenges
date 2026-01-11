@@ -77,7 +77,7 @@ See the Architecture Guide [ARCHITECTURE.md](docs/ARCHITECTURE.md) for more deta
 
 - Node.js (v18 or higher recommended)
 - npm (v9 or higher recommended)
-- Angular CLI (v19.2.12 or compatible)
+- Angular CLI (v19.2.17 or compatible)
 
 ### Installation
 
@@ -143,13 +143,36 @@ See [CREATE CHALLENGE TEMPLATE](docs/CREATE_CHALLENGE.md) for more details on ch
 ## 📚 Documentation
 
 - Setup and run the application: [SETUP_AND_RUN_APP_GUIDE.md](docs/SETUP_AND_RUN_APP_GUIDE.md)
-- Contributing guidelines: [CONTRIBUTING.md](docs/CONTRIBUTING.md)
+- Contributing guidelines: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - Branch naming conventions: [BRANCH_NAMING_GUIDE.md](docs/BRANCH_NAMING_GUIDE.md)
 - Angular best practices: [ANGULAR_BEST_PRACTICES.md](docs/ANGULAR_BEST_PRACTICES.md)
 - Git commit message guidelines: [GIT_COMMIT_MESSAGES.md](docs/GIT_COMMIT_MESSAGES.md)
 - Create Challenge Guide: [CREATE_CHALLENGE.md](docs/CREATE_CHALLENGE.md)
-- Pull Request Process: [PULL_REQUEST_TEMPLATE.md](docs/PULL_REQUEST_TEMPLATE.md)
+- Pull Request Process: [PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file for guidelines.
+Contributions are welcome! We have multiple ways to contribute:
+
+### General Contributions
+
+- Bug fixes, documentation, features, and improvements
+- See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
+
+### Community Challenges 🌟
+
+**Share your Angular expertise!** Contribute challenges to help others learn and ace interviews.
+
+- **Category**: `ngc-community` - dedicated to community-driven challenges
+- **Topics**: Any Angular concept (Components, Services, Forms, RxJS, Routing, Signals, Testing, etc.)
+- **Benefits**: Share knowledge, build portfolio, help the community grow
+
+**Get Started**:
+
+1. Read the [Community Challenges Guide](docs/COMMUNITY_CHALLENGES.md)
+2. Run `npm run create:challenge` and select `ngc-community`
+3. Create your challenge and submit a PR
+
+📚 [Full Community Challenges Documentation](docs/COMMUNITY_CHALLENGES.md)
+
+---

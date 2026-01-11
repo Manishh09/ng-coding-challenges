@@ -8,19 +8,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
  * @example
  * ```html
  * <!-- Simple spinner -->
- * <ng-coding-challenges-loading-spinner />
+ * <ngc-ui-loading-spinner />
  *
  * <!-- With message -->
- * <ng-coding-challenges-loading-spinner message="Loading challenges..." />
+ * <ngc-ui-loading-spinner message="Loading challenges..." />
  *
  * <!-- With projected content -->
- * <ng-coding-challenges-loading-spinner>
+ * <ngc-ui-loading-spinner>
  *   <p>Custom loading message</p>
- * </ng-coding-challenges-loading-spinner>
+ * </ngc-ui-loading-spinner>
  * ```
  */
 @Component({
-  selector: 'ng-coding-challenges-loading-spinner',
+  selector: 'ngc-ui-loading-spinner',
   standalone: true,
   imports: [MatProgressSpinnerModule],
   templateUrl: './loading-spinner.component.html',

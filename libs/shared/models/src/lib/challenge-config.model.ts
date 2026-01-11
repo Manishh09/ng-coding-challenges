@@ -3,15 +3,19 @@
  * Optimized structure with category-keyed and slug-keyed nested objects for O(1) lookups
  */
 
+import type { ChallengeCategoryId } from './challenge.model';
+
 /**
  * Difficulty level of a challenge
  */
-export type ChallengeDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+export type ChallengeDifficulty = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 
 /**
  * Category identifier for challenges (JSON config version)
+ * Uses the same type as ChallengeCategoryId for consistency
+ * CategorySlug and ChallengeCategoryId are intentionally the same
  */
-export type CategorySlug = 'rxjs-api' | 'angular-core' | 'angular-routing' | 'angular-forms';
+export type CategorySlug = ChallengeCategoryId;
 
 /**
  * Author information for challenges
@@ -59,6 +63,7 @@ export interface ChallengeData {
   requirementList: string[];
   links: ChallengeLinks;
   workspace: ChallengeWorkspace;
+  isNew?: boolean;
 }
 
 /**

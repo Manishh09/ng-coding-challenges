@@ -16,6 +16,18 @@ const CHALLENGE_COMPONENTS = {
   'email-availability-check': () =>
     import('./challenges/challenge-14-email-availability-check/components/email-form/email-form.component')
       .then(m => m.EmailFormComponent),
+  'date-range-validation': () =>
+    import('./challenges/challenge-15-date-range-validation/components/leave-form/leave-form.component')
+      .then(m => m.LeaveFormComponent),
+  'dynamic-form-array': () =>
+    import('./challenges/challenge-16-dynamic-form-array/components/experience-form/experience-form.component')
+      .then(m => m.ExperienceFormComponent),
+  'custom-input-cva': () =>
+    import('./challenges/challenge-17-custom-input-cva/components/demo-form/demo-form.component')
+      .then(m => m.DemoFormComponent),
+  'server-driven-dynamic-form': () =>
+    import('./challenges/challenge-18-server-driven-dynamic-form/components/dynamic-form/dynamic-form.component')
+      .then(m => m.DynamicFormComponent),
 };
 
 /**

@@ -80,6 +80,22 @@ export const routes: Routes = [
           import('@ngc-forms').then(m => m.NGC_FORMS_ROUTES),
         data: { categoryId: 'angular-forms', categoryName: 'Angular Forms Challenges' }
       },
+
+      // Angular Signals Category (lazy loaded sub-app)
+      {
+        path: 'angular-signals',
+        loadChildren: () =>
+          import('@ngc-signals').then(m => m.NGC_SIGNALS_ROUTES),
+        data: { categoryId: 'angular-signals', categoryName: 'Angular Signals Challenges' }
+      },
+
+      // Community Category (lazy loaded sub-app)
+      {
+        path: 'community',
+        loadChildren: () =>
+          import('@ngc-community').then(m => m.NGC_COMMUNITY_ROUTES),
+        data: { categoryId: 'community', categoryName: 'Community Challenges' }
+      },
     ],
   },
 

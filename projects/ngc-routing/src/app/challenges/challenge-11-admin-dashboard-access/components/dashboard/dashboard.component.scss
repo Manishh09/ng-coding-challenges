@@ -7,23 +7,49 @@
 .admin-card {
   width: 100%;
   max-width: 960px;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
-.admin-nav {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.tab-navigation {
   display: flex;
   gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+
+  button {
+    flex: 1;
+    max-width: 200px;
+  }
 }
 
-.admin-nav a {
-  text-decoration: none;
+.tab-content {
+  margin-top: 1.5rem;
 }
 
 @media (max-width:600px) {
-  .admin-nav {
+  .tab-navigation {
     flex-direction: column;
+
+    button {
+      max-width: 100%;
+    }
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }

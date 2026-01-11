@@ -24,7 +24,7 @@ import { SEARCH_DIALOG_CONFIG } from '../../constants/search.constants';
  * - Theme toggle integration
  */
 @Component({
-  selector: 'ng-coding-challenges-header',
+  selector: 'ngc-ui-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

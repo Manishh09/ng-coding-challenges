@@ -49,7 +49,7 @@ const FALLBACK_META: CategoryMeta = {
 };
 
 @Component({
-  selector: 'app-challenge-category-card',
+  selector: 'ngc-ui-challenge-category-card',
   templateUrl: './challenge-category-card.component.html',
   styleUrls: ['./challenge-category-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

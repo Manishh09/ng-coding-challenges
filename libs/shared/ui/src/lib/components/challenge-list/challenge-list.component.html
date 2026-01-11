@@ -1,47 +1,46 @@
-<section
-  class="challenge-list"
-  id="challengeList"
-  aria-labelledby="challengeList-title"
->
-
-  <header [style.display]="'none'" class="challenge-list-header">
-    <div class="challenge-list-header-content">
-      <button
-        mat-button
-        routerLink="/challenges"
-        class="challenge-list-button challenge-list-button-back"
-        aria-label="Go back to Challenges"
-        type="button"
-      >
-        <mat-icon aria-hidden="true">arrow_back</mat-icon>
-        <span class="challenge-list-button-label">Back</span>
-      </button>
-
-      <h2 class="challenge-list-title" id="challengeList-title">{{ title() }}</h2>
-    </div>
-  </header>
-
-  <div class="challenge-list-cards" [attr.role]="'challenge-list'">
+<section class="challenge-list" id="challengeList" aria-label="Challenge collection">
+  <div class="challenge-list-cards">
     @if (loading() && challenges().length !== 0) {
-      <!-- Skeleton loaders for loading state -->
-      @for (i of [1,2,3]; track i) {
-        <app-skeleton-loader variant="card"></app-skeleton-loader>
-      }
+    <!-- Skeleton loaders for loading state -->
+    @for (i of [1,2,3]; track i) {
+    <ngc-ui-skeleton-loader variant="card"></ngc-ui-skeleton-loader>
+    }
     } @else {
-      @for (challenge of challenges(); track challenge.id) {
-        <ng-coding-challenges-challenge-card
-          [challenge]="challenge"
-          [newBadgeChallengeIds]="newBadgeChallengeIds()"
-        >
-        </ng-coding-challenges-challenge-card>
+    @for (challenge of challenges(); track challenge.id) {
+    <ngc-ui-challenge-card [challenge]="challenge">
+    </ngc-ui-challenge-card>
 
-      } @empty {
-        <div class="challenge-list-empty" role="status">
-          <p class="challenge-list-empty-text">
-            No challenges available at the moment.
-          </p>
-        </div>
+    } @empty {
+    <div class="challenge-list-empty" role="status" aria-live="polite">
+      @if (categoryId() === 'community') {
+      <div class="empty-state-community">
+        <mat-icon class="empty-icon">emoji_people</mat-icon>
+        <h3 class="empty-title">Be the First to Contribute!</h3>
+        <p class="empty-description">
+          This category thrives on community contributions.
+          Your challenge could help many developers learn Angular and ace Interviews!
+        </p>
+        <a href="https://github.com/Manishh09/ng-coding-challenges/blob/develop/docs/COMMUNITY_CHALLENGES.md"
+          target="_blank" rel="noopener noreferrer" class="empty-cta-button"
+          aria-label="Learn how to contribute to community challenges">
+          <mat-icon>lightbulb</mat-icon>
+          <span>Learn How to Contribute</span>
+        </a>
+      </div>
+      } @else {
+      <div class="empty-state-default">
+        <mat-icon class="empty-icon">schedule</mat-icon>
+        <h3 class="challenge-list-empty-text">
+          Coming Soon!
+        </h3>
+        <p class="empty-description">
+          We're crafting exciting challenges for this category.
+          Meanwhile, you can explore other categories.
+        </p>
+      </div>
       }
+    </div>
+    }
     }
   </div>
 </section>

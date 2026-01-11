@@ -1,94 +1,45 @@
-# Challenge 01: Fetch and Display Products
+# Challenge 01: Product List
 
-## Description
+**Estimated Time:** 20-30 minutes
+**Difficulty:** Beginner
 
-Your task is to build a small Angular feature that fetches product data from a public API and displays it in a structured format.
+## 1. Challenge 🎯
 
----
+**Scenario:**
+You are building an inventory dashboard for an e-commerce platform. The store manager needs a quick way to view all available products, their prices, and ratings to make restocking decisions.
 
-## Requirements
+**Task:**
+Create an Angular component that fetches product data from a public API and displays it in a clean, structured table.
 
-### APIs
+## 2. Requirements 📋
 
-- Use the following REST API endpoint to get product data:  
-  `https://fakestoreapi.com/products`
+* [ ] **Service Layer**: Create `ProductService` to fetch data using `HttpClient`.
+* [ ] **Component Layer**: Create `ProductListComponent` to display the data.
+* [ ] **Reactive**: Use the `AsyncPipe` in the template (avoid manual `.subscribe()`).
+* [ ] **Typing**: Define a `Product` interface for type safety.
+* **API Endpoint**: `https://fakestoreapi.com/products`
 
-- Each product object contains the following fields (not exhaustive):
-  - `id` (number)
-  - `title` (string)
-  - `price` (number)
-  - `category` (string)
-  - `rating` (object: `{ rate: number, count: number }`)
+## 3. Expected Output 🖼️
 
-You may define a **TypeScript interface (`Product`)** to model this structure.
+* **Header**: Display "Total Products: X" above the list.
+* **Table**: A table with the following columns:
+  * Title
+  * Category
+  * Price (formatted as Currency)
+  * Rating (Rate & Count)
+* **States**:
+  * show "Loading..." while fetching.
+  * Show "No products found" if the list is empty.
 
-### Example Models
+## 4. Edge Cases / Constraints ⚠️
 
-```typescript
-// product.model.ts
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: Rating;
-}
+* **Error Handling**: If the API fails, display a user-friendly error message.
+* **Performance**: Ensure the API is called only once on initialization.
+* **Constraint**: Do not use any external UI libraries (Material/Bootstrap) for this challenge—use plain CSS.
 
-// rating.model.ts
-export interface Rating {
-  rate: number;
-  count: number;
-}
-```
+## 5. Success Criteria ✅
 
----
-
-### Architecture
-
-- **Service Layer**:
-
-  - Implement a service named `ProductService`.
-  - Add a method `getProducts(): Observable<Product[]>` to fetch products data.
-  - Use Angular’s `HttpClient` to fetch data from the API.
-  - Ensure all API logic is contained in the service (not inside the component).
-
-- **Component Layer:**
-
-  - Create a component named `ProductListComponent`.
-  - In `ngOnInit()`, call `ProductService.getProducts()` to load data.
-  - Do not manually subscribe in the TypeScript file. Instead, expose the observable to the template and use the `async` pipe.
-
----
-
-### UI Requirements
-
-- Display the **total number of products** above the results (e.g., “Total Products: 20”).
-- Show product details in a simple **HTML table** with the following columns:
-  - Title
-  - Category
-  - Price (formatted as local currency)
-  - Rating (show both `rate` and `count`)
-
----
-
-## Constraints & Expectations
-
-- Use **Angular best practices** for code organization.
-- Avoid hard-coding data; all values should be pulled from the API.
-- Use **TypeScript interfaces** for strong typing.
-- Use **async pipe** to handle observables in the template (instead of `.subscribe()` in TypeScript).
-- The table should display clean, readable data but does not need advanced styling.
-
----
-
-## Best Practices
-
-- Use Angular’s best practices: services for API logic, Observables for async work, and `async` pipe in templates.
-- Correct use of Angular **HttpClient** and **RxJS**
-- Clean separation of concerns (service vs component)
-- Type safety with **interfaces**
-- Proper usage of **component lifecycle** (`ngOnInit`)
-- Idiomatic Angular template binding and use of **async pipe**
-- Code readability and maintainability
+* [ ] Application compiles and runs without errors.
+* [ ] Data is successfully fetched and displayed in a table.
+* [ ] The `async` pipe is used in the HTML.
+* [ ] Currency pipe is used for the price.

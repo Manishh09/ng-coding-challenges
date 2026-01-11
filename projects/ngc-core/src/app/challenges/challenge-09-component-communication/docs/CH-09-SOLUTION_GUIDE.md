@@ -1,51 +1,67 @@
-# Challenge 09 - Solution Approach Guide
+# Solution: Signal Communication
 
-## 1. APIs
+## 🧠 Approach
+We follow the strict **Unidirectional Data Flow**:
+*   **Data Up**: Child emits event (`output()`).
+*   **Data Down**: Parent binds property (`signal`).
+1.  **Service**: Load categories.
+2.  **Selector (Child)**: `output<string>()` to send selection.
+3.  **Parent**: Listen to event `(selectionChange)="val.set($event)"` and pass `[value]="val()"`.
+4.  **Display (Child)**: `input<string>()` to receive value.
 
-- Use `https://fakestoreapi.com/products/categories` to fetch product categories.
-- Handle API errors with fallback static categories.
+## 🚀 Step-by-Step Implementation
 
-## 2. Model
-
-- Define a simple model:
-
-```ts
-export interface ProductCategory {
-  category: string;
-  name: string;
+### Step 1: Create the Service
+```typescript
+@Injectable({ providedIn: 'root' })
+export class CategoryService {
+  private http = inject(HttpClient);
+  getCategories() {
+    return this.http.get<string[]>('https://fakestoreapi.com/products/categories')
+      .pipe(catchError(() => of(['Default 1', 'Default 2'])));
+  }
 }
 ```
 
+### Step 2: The Selector Component (Provider)
+```typescript
+@Component({ ... })
+export class SelectorComponent {
+  // Output API
+  categorySelected = output<string>();
 
-## 3. Service
-- Create `ProductService` to:  
-- Fetch categories from API using `HttpClient`.  
-- Return fallback categories if API call fails.  
-- Keep service injectable and reusable.
+  categories = toSignal(inject(CategoryService).getCategories());
 
-## 4. Components
-- **ProductSelectorComponent (Provider)**
-- Fetch categories via `ProductService`.  
-- Show categories in a dropdown (`mat-select`).  
-- Provide input field for custom products.  
-- Emit selected or typed product via `@Output` using signals.  
-- Use Angular’s new `@for` and `@if` directives for template flow.  
+  onSelect(cat: string) {
+    this.categorySelected.emit(cat);
+  }
+}
+```
 
-- **ProductDashboardComponent (Parent)**
-- Store selected product in an Angular signal.  
-- Listen to emitted events from selector and update signal.  
-- Pass the signal value to display component via signal-friendly `@Input`.
+### Step 3: The Display Component (Receiver)
+```typescript
+@Component({ ... })
+export class DisplayComponent {
+  // Input API
+  category = input.required<string>();
+}
+```
 
-- **ProductDisplayComponent (Receiver)**
-- Receive product via `@Input`.  
-- Display product or fallback message using `@if`.
+### Step 4: The Parent Component (Mediator)
+```typescript
+@Component({
+  template: `
+    <app-selector (categorySelected)="selectedCategory.set($event)" />
+    <app-display [category]="selectedCategory()" />
+  `
+})
+export class ParentComponent {
+  selectedCategory = signal<string>('None');
+}
+```
 
-## 5. UI & UX
-- Create a Select Control to bind the category data from API.
-- Create an Input Field to enter the product that is related to the selected category.
-- Show loading indicator when fetching categories.  
-- Show error message and fallback categories if API fails.  
-- Reset input field after sending custom product. ( if required )  
-- Use Angular Material controls (`mat-select`, `mat-input`, `mat-button`) for consistency. OR use  simple HTML elements.
-- Layout components with simple, clear SCSS styles.
+## 🌟 Best Practices Used
+*   **Mediator Pattern**: Siblings never talk directly. Prevents spaghetti code.
+*   **Signal Inputs/Outputs**: The modern, type-safe way to handle props and events in Angular 17+.
+*   **Validation**: `input.required` ensures the component isn't used incorrectly.
 

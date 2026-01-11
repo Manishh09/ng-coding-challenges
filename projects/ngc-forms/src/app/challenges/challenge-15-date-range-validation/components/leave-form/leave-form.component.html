@@ -1,0 +1,228 @@
+<div class="leave-form-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <h1>Leave Request Form</h1>
+
+  </div>
+
+  <!-- Success Message -->
+  @if (showSuccessMessage()) {
+    <div class="success-message" role="alert">
+      <div class="success-icon">✓</div>
+      <div class="success-content">
+        <h3>Success!</h3>
+        <p>{{ successMessage() }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Main Content: Two Column Layout -->
+  <div class="content-grid">
+
+    <!-- Left Column: Leave Request Form -->
+    <div class="form-section">
+      <div class="card">
+        <h2>Leave Request</h2>
+        <p class="card-description">Submit your leave request with valid date range</p>
+
+        <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- Leave Type Selection -->
+          <div class="form-group">
+            <label for="leaveType" class="form-label">
+              Leave Type <span class="required">*</span>
+            </label>
+            <select
+              id="leaveType"
+              formControlName="leaveType"
+              class="form-control">
+              @for (type of leaveTypes; track type.value) {
+                <option [value]="type.value">
+                  {{ type.label }}
+                  @if (type.maxDays) {
+                    <span>(Max: {{ type.maxDays }} days)</span>
+                  }
+                </option>
+              }
+            </select>
+            @if (getLeaveTypeError(); as errorMsg) {
+              <div class="error-message">
+                {{ errorMsg }}
+              </div>
+            }
+          </div>
+
+          <!-- Start Date -->
+          <div class="form-group">
+            <label for="startDate" class="form-label">
+              Start Date <span class="required">*</span>
+            </label>
+            <input
+              type="date"
+              id="startDate"
+              formControlName="startDate"
+              class="form-control" />
+
+            @if (getStartDateError(); as errorMsg) {
+              <div class="error-message">
+                {{ errorMsg }}
+              </div>
+            }
+          </div>
+
+          <!-- End Date -->
+          <div class="form-group">
+            <label for="endDate" class="form-label">
+              End Date <span class="required">*</span>
+            </label>
+            <input
+              type="date"
+              id="endDate"
+              formControlName="endDate"
+              class="form-control" />
+
+            @if (getEndDateError(); as errorMsg) {
+              <div class="error-message">
+                {{ errorMsg }}
+              </div>
+            }
+          </div>
+
+          <!-- Cross-Field Validation Error (FormGroup Level) -->
+          @if (getGroupError(); as errorMsg) {
+            <div class="group-error-message" role="alert">
+              <div class="error-icon">⚠</div>
+              <div class="error-content">
+                <strong>Date Range Error:</strong>
+                <p>{{ errorMsg }}</p>
+              </div>
+            </div>
+          }
+
+          <!-- Max Days Warning (Business Rule) -->
+          @if (getMaxDaysWarning(); as warningMsg) {
+            <div class="group-error-message" role="alert" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;">
+              <div class="error-icon" style="color: #f59e0b;">⚠</div>
+              <div class="error-content">
+                <strong style="color: #92400e;">Leave Type Limit Exceeded:</strong>
+                <p style="color: #92400e;">{{ warningMsg }}</p>
+              </div>
+            </div>
+          }
+
+          <!-- Reason Textarea -->
+          <div class="form-group">
+            <label for="reason" class="form-label">
+              Reason for Leave <span class="required">*</span>
+            </label>
+            <textarea
+              id="reason"
+              formControlName="reason"
+              class="form-control"
+              rows="4"
+              placeholder="Provide a detailed reason for your leave request (minimum 10 characters)"></textarea>
+
+            <div class="character-count">
+              {{ getCharacterCount() }} / 500 characters
+            </div>
+
+            @if (getReasonError(); as errorMsg) {
+              <div class="error-message">
+                {{ errorMsg }}
+              </div>
+            }
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="leaveForm.invalid || exceedsMaxDays()">
+              Submit Leave Request
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="onReset()">
+              Reset Form
+            </button>
+          </div>
+
+          <!-- Form Status Helper -->
+          <div class="form-status">
+            @if (submitted() && leaveForm.invalid) {
+              <p class="status-error">
+                Please fix all validation errors before submitting
+              </p>
+            }
+            @if (leaveForm.valid && !exceedsMaxDays()) {
+              <p class="status-success">
+                Form is valid and ready to submit
+              </p>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Right Column: Validation Rules & Examples -->
+    <div class="info-section">
+
+      <!-- Key Concept Card -->
+      <div class="card info-card">
+        <h3>🎯 Key Concept: Cross-Field Validation</h3>
+        <p>
+          Unlike previous challenges where validators checked individual fields,
+          this challenge uses a <strong>FormGroup-level validator</strong>.
+        </p>
+
+        <div class="concept-comparison">
+          <div class="comparison-item">
+            <h4>❌ Control-Level Validation</h4>
+            <code>formControlName: ['', [Validators.required]]</code>
+            <p>Validates one field in isolation</p>
+          </div>
+
+          <div class="comparison-item highlight">
+            <h4>✅ Group-Level Validation</h4>
+            <code>fb.group(&#123;...&#125;, &#123; validators: [dateRangeValidator()] &#125;)</code>
+            <p>Validates relationships between fields</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test Cases Card -->
+      <div class="card test-card">
+        <h3>🧪 Test These Scenarios</h3>
+        <ol class="test-list">
+          <li>
+            <strong>Valid Range:</strong> Start date before end date
+            <span class="expected">✓ Should be valid</span>
+          </li>
+          <li>
+            <strong>Same Date:</strong> Start and end date are identical
+            <span class="expected">✗ Should show error</span>
+          </li>
+          <li>
+            <strong>Reversed Range:</strong> End date before start date
+            <span class="expected">✗ Should show error</span>
+          </li>
+          <li>
+            <strong>Past Dates:</strong> Dates in the past
+            <span class="expected">✗ Should show individual field errors</span>
+          </li>
+          <li>
+            <strong>Exceeds Limit:</strong> More days than allowed for leave type
+            <span class="expected">⚠ Should show warning, disable submit</span>
+          </li>
+          <li>
+            <strong>Empty Fields:</strong> One or both dates empty
+            <span class="expected">✗ Required validation triggers</span>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</div>

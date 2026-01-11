@@ -10,6 +10,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { take } from 'rxjs/operators';
 import {
   ChallengeCategoryService,
   ChallengesService,
@@ -18,9 +19,9 @@ import {
 import { Challenge } from '@ng-coding-challenges/shared/models';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
 import { HeroStatsComponent } from '../hero-stats/hero-stats.component';
-import { MetricCardComponent } from '../metric-card/metric-card.component';
-import { FeatureCardComponent } from '../feature-card/feature-card.component';
 import { LatestCardComponent } from '../latest-card/latest-card.component';
+import { ChallengeDifficulty } from '@ng-coding-challenges/shared/models';
+import { getCategoryIcon } from '../../utils/category-utils';
 
 type LandingMetric = {
   icon: string;
@@ -44,6 +45,7 @@ type SpotlightChallenge = {
   description: string;
   categoryId: string;
   categoryLabel: string;
+  difficulty: ChallengeDifficulty;
   route: readonly string[];
 };
 
@@ -56,7 +58,7 @@ const ROUTES = {
 };
 
 @Component({
-  selector: 'ng-coding-challenges-landing-page',
+  selector: 'ngc-ui-landing-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -66,8 +68,6 @@ const ROUTES = {
     MatButtonModule,
     SectionHeaderComponent,
     HeroStatsComponent,
-    MetricCardComponent,
-    FeatureCardComponent,
     LatestCardComponent
   ],
   templateUrl: './landing-page.component.html',
@@ -83,7 +83,7 @@ export class LandingPageComponent {
 
   // ========== Inputs ==========
   /** Hero illustration image path (configurable) */
-  readonly heroIllustration = input<string>('/angular-mascot.webp');
+  readonly heroIllustration = input<string>('/angular_mascot_coder.webp');
 
   /** Hero illustration alt text for accessibility */
   readonly heroAltText = input<string>('Developer coding illustration');
@@ -136,16 +136,23 @@ export class LandingPageComponent {
       return;
     }
 
-    // Convert Observable to value via subscription
-    latestChallenge.subscribe(latest => {
-      if (latest) {
-        // Construct dynamic route safely
-        const { category, id } = latest;
-        this.router.navigate([`${ROUTES.challenges}/${category}/${id}`]);
-      } else {
-        this.notificationService.info('No challenges available yet. Check back soon!');
+    // Use take(1) to automatically complete the subscription after first emission
+    latestChallenge.pipe(take(1)).subscribe({
+      next: latest => {
+        if (latest) {
+          // Construct dynamic route safely
+          const { category, link } = latest;
+          this.router.navigate([`${ROUTES.challenges}/${category}/${link}`]);
+        } else {
+          this.notificationService.info('No challenges available yet. Check back soon!');
+          this.router.navigate([ROUTES.challenges]);
+        }
+      },
+      error: error => {
+        console.error('Error fetching latest challenge:', error);
+        this.notificationService.error('Failed to load latest challenge');
         this.router.navigate([ROUTES.challenges]);
-      }
+      },
     });
   }
 
@@ -162,7 +169,7 @@ export class LandingPageComponent {
     return [
       {
         icon: 'bolt',
-        value: `${this.totalChallenges()}+`,
+        value: `${this.totalChallenges()}`,
         label: 'Hands-on challenges',
         helper: 'Build UI & data flows that mirror real Angular projects.',
       },
@@ -211,9 +218,10 @@ export class LandingPageComponent {
       .reverse()
       .map((challenge) => ({
         id: challenge.id,
-        title: challenge.title,
+        title: challenge.title.split(':')[1].trim() ?? challenge.title,
         description: challenge.description,
         categoryId: challenge.category,
+        difficulty: challenge.difficulty,
         categoryLabel: this.getCategoryMeta(challenge.category).title,
         route: [
           ROUTES.challenges,
@@ -229,7 +237,7 @@ export class LandingPageComponent {
       title: entry?.name ?? this.formatCategoryId(categoryId),
       description:
         entry?.description ?? `Discover Angular ${this.formatCategoryId(categoryId)} challenges.`,
-      icon: entry?.icon ?? this.getCategoryIcon(categoryId),
+      icon: entry?.icon ?? getCategoryIcon(categoryId),
     };
   }
 
@@ -238,14 +246,5 @@ export class LandingPageComponent {
       .split('-')
       .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
       .join(' ');
-  }
-
-  private getCategoryIcon(categoryId: string): string {
-    const iconMap: Record<string, string> = {
-      'rxjs-api': 'sync_alt',
-      'angular-core': 'account_tree',
-      'angular-routing': 'alt_route',
-    };
-    return iconMap[categoryId] ?? 'auto_awesome';
   }
 }

@@ -1,105 +1,43 @@
-# Challenge 06: User Todos with Status Filter
+# Challenge 06: Data Joining & Filtering
 
-## Description
+**Estimated Time:** 30-45 minutes
+**Difficulty:** Intermediate
 
-Build an Angular component that fetches **todos** and **users** from the JSONPlaceholder API, merges these datasets using RxJS `combineLatest`, and displays a todo list enriched with corresponding user names. Implement a status filter for todos and present the data in an Angular Material table or a simple table.
+## 1. Challenge 🎯
 
----
+**Scenario:**
+You have two separate APIs: one for "Todos" and one for "Users". The "Tokens" only have a `userId`, not the user's name. You need to show a dashboard of tasks with the *User Name* displayed, and filter them by status.
 
-## Requirements
+**Task:**
+Fetch both datasets in parallel, join them locally (like a SQL JOIN), and filter the result reactively.
 
-### APIs
+## 2. Requirements 📋
 
-- Fetch todos from:  
-  `https://jsonplaceholder.typicode.com/todos`
+* [ ] **RxJS**: Use `combineLatest` to join the streams: `Todos` + `Users` + `FilterState`.
+* [ ] **Filtering**: Default to 'All'. Support 'Completed' and 'Pending'.
+* [ ] **Data Join**: Map `todo.userId` to `user.name`.
+* **API Endpoints**:
+  * `https://jsonplaceholder.typicode.com/todos`
+  * `https://jsonplaceholder.typicode.com/users`
 
-- Fetch users from:  
-  `https://jsonplaceholder.typicode.com/users`
+## 3. Expected Output 🖼️
 
-### Example Models
+* **Filter Control**: A dropdown at the top (All / Completed / Pending).
+* **Table**:
+  * Task Title
+  * **Mapped User Name** (Crucial part)
+  * Status (Completed/Pending)
 
-```ts
-export interface User {
-  id: number;
-  name: string;
-  // Add additional fields if needed
-}
+## 4. Edge Cases / Constraints ⚠️
 
-export interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+* **Missing User**: If a User ID doesn't exist in the Users list, handle gracefully (e.g., "Unknown User").
+* **Performance**: Do not make new API calls when changing the filter.
+* **Constraint**: No nested subscribes. Use Stream Combination.
 
-export interface TodoWithUser extends Todo {
-  userName: string;
-}
-```
----
+## 5. Success Criteria ✅
 
-
-### Functional Requirements
-
-- Use a service to fetch users and todos via HTTP.
-- Use RxJS `combineLatest([todos$, users$])` to create a combined, enriched stream of `TodoWithUser` objects mapping todos to their user's name.
-- Manage filter state (`all`, `completed`, `pending`) using Angular Signals (`signal`, `toObservable`, `toSignal`).
-- Use `combineLatest([todosWithUser$, filter$])` to create a filtered todos list based on selected status.
-- Default filter state should be `all`.
-
----
-
-## UI / Template Requirements
-
-- Implement a standalone Angular 19 component with separate `.ts`, `.html`, and `.scss` files.
-- Use Angular's `inject()` function for dependency injection instead of constructor injection.
-- Convert filtered todos observable into a Signal for template binding.
-- Use Angular’s latest template control flow syntax:
-  - `@for` to iterate and render the todo list.
-  - `@if` to conditionally render a “No data available” message when the filtered list is empty.
-- Use Angular Material components for:
-  - Toolbar with a status filter dropdown (`MatSelect`).
-  - Table (`MatTable`) to display:
-    - User Name
-    - Todo Title
-    - Completion Status, styled with chips (green for completed, orange for pending).
-- Wrap the content inside a Material card (`MatCard`) for a polished UI.
-
----
-
-## Architecture: Component & Service Layers
-
-- **Service Layer**  
-  - Create a service to fetch todos and users from APIs.  
-  - Return observables for both resources.
-
-- **Component Layer**  
-  - Fetch data streams and combine them using `combineLatest`.  
-  - Manage filter state with Signals.  
-  - Bind the filtered todos Signal directly to the template.  
-  - Use the `inject()` function for dependency injection.
-
----
-
-## Constraints & Expectations
-
-- Use Angular’s `HttpClient` module for API calls.
-- Use RxJS `combineLatest` to merge users and todos.
-- Manage component state reactively with Angular Signals.
-- Use Angular Material for UI consistency and accessibility.
-- Avoid manual subscription management; prefer reactive and declarative patterns.
-- Follow Angular 19 and best practices in component design.
-- Provide a responsive and user-friendly UI.
-- Properly handle empty states and loading indicators if applicable.
-
----
-
-## Best Practices
-
-- Centralize API calls within Angular services for separation of concerns.
-- Create services services for users, todos and a facade service to manage both services
-- Use the latest Angular features like Signals and standalone components effectively.
-- Optimize observable streams using RxJS operators and avoid redundant or unnecessary API calls.
-- Ensure clean, readable, and maintainable code with clear separation between service and component logic.
- - Use Angular’s new control flow directives (`@for`, `@if`) for streamlined templates.
-
+* [ ] Correct User Name appears next to each Todo.
+* [ ] Changing filter updates the list instantly.
+* [ ] `combineLatest` is used.
+* [ ] Two services are used to fetch the data for Todos and Users to maintain the separation of concerns.
+* [ ] facade pattern is used to handle the data fetching from the services

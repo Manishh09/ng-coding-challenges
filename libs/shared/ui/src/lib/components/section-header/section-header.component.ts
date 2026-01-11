@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
  * 
  * @example
  * ```html
- * <ng-coding-challenges-section-header
+ * <ngc-ui-section-header
  *   eyebrow="Why teams choose us"
  *   heading="Ship faster with focused practice"
  *   summary="Each challenge mirrors a production use-case"
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
  * ```
  */
 @Component({
-  selector: 'ng-coding-challenges-section-header',
+  selector: 'ngc-ui-section-header',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './section-header.component.html',

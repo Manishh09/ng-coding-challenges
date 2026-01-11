@@ -1,323 +1,264 @@
 /* =============================================================================
- * Challenge Card Component
- * =============================================================================
- * Displays individual challenge information with hover interactions.
- * Uses BEM naming convention for clarity and maintainability.
+ * Challenge Card Component Styles
  * ============================================================================= */
 
-/* -----------------------------------------------------------------------------
- * Host Element
- * ----------------------------------------------------------------------------- */
 :host {
   display: block;
-  height: 100%;
-  animation: fadeIn 0.45s var(--animation-easing);
+  /* Card margin bottom if needed, or handled by parent grid/list gap */
 }
 
-/* -----------------------------------------------------------------------------
- * Card Container
- * ----------------------------------------------------------------------------- */
 .challenge-card {
-  /* Layout */
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* Mobile-first: Stack vertically */
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--surface-card, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   overflow: hidden;
+  gap: 16px;
 
-  /* Visual styling - Elevated Surface */
-  background: var(--surface-secondary);
+  /* Subtle border + prominent left accent */
+  border: 1px solid var(--border-primary) !important;
+  border-left: 5px solid var(--difficulty-color) !important;
 
-  border: 1px solid var(--border-primary);
-  border-radius: 24px; // Ample radius for "Friendly" UI
-  box-shadow: var(--shadow-sm);
-  color: var(--text-primary);
-
-  /* Animation & transitions */
-  transition:
-    transform 0.3s var(--animation-easing),
-    box-shadow 0.3s var(--animation-easing),
-    border-color 0.2s linear;
-  will-change: transform, box-shadow;
-
-  /* Hover state - Soft Lift & Glow */
+  /* Hover Effect */
   &:hover {
-    transform: translateY(-2px); // Subtle lift
-    box-shadow: var(--shadow-xl);
-    border-color: var(--interactive-primary);
-    background: linear-gradient(to bottom,
-        var(--surface-secondary),
-        var(--surface-tertiary));
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px var(--border-primary), 0 4px 6px -2px var(--border-primary) !important;
+    border-left-color: var(--difficulty-color);
   }
 
-  /* Focus state for accessibility */
-  &:focus-within {
-    outline: 2px solid var(--interactive-primary);
-    outline-offset: 4px;
-    border-color: var(--interactive-primary);
-  }
-
-  /* Latest challenge variant */
-  &--latest {
-    border-color: var(--interactive-primary);
-    background: linear-gradient(165deg,
-        var(--surface-secondary) 0%,
-        var(--color-primary-alpha-5) 100%);
-    box-shadow: var(--shadow-md);
+  /* Desktop Layout: Horizontal */
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    gap: 20px;
   }
 }
 
 /* -----------------------------------------------------------------------------
- * Decorative Halo Effect
+ * Difficulty Variations (Color Mapping)
  * ----------------------------------------------------------------------------- */
-/* -----------------------------------------------------------------------------
- * Decorative Noise Texture
- * ----------------------------------------------------------------------------- */
-.challenge-card__halo {
-  position: absolute;
-  inset: 0;
-  // Subtle Noise Texture via SVG or URL (simulated here with repeating gradient for now)
-  background-image:
-    radial-gradient(at 0% 0%, var(--color-primary-alpha-10) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, var(--color-secondary-alpha-10) 0px, transparent 50%);
-  opacity: 0.6;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  transition: opacity 0.3s ease;
-
-  .challenge-card:hover & {
-    opacity: 0.9;
-  }
+.difficulty-expert {
+  --difficulty-color: var(--electric-violet, #8b5cf6);
+  --badge-bg: var(--status-expert-alpha-10, #f3e8ff);
+  --badge-text: var(--status-expert-dark, #6b21a8);
 }
 
-/* -----------------------------------------------------------------------------
- * Header Section
- * ----------------------------------------------------------------------------- */
-.challenge-card__header {
-  /* Layout */
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-md);
-  min-height: 52px;
-  padding: var(--spacing-md);
-
-  /* Visual styling */
-  background: transparent; // Clean header
-  border-bottom: 1px solid var(--border-primary);
-  padding-bottom: var(--spacing-md); // Visual separation
+.difficulty-advanced {
+  --difficulty-color: var(--hot-red,#b91c1c);
+  /* Red */
+  --badge-bg: var(--status-error-alpha-10, #fee2e2);
+  --badge-text: var(--status-error-dark, #b91c1c);
 }
 
-.challenge-card__header-left {
-  display: flex;
-  align-items: center;
+.difficulty-intermediate {
+  --difficulty-color: var(--status-warning-dark, #c2410c);
+  /* Orange */
+  --badge-bg: var(--status-warning-alpha-10, #ffedd5);
+  --badge-text: var(--status-warning-dark, #c2410c);
+}
+
+.difficulty-beginner {
+  --difficulty-color: var(--status-success-dark, #15803d);
+  /* Green */
+  --badge-bg: var(--status-success-alpha-10, #dcfce7);
+  --badge-text: var(--status-success-dark, #15803d);
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Content Section (Left)
+ * ----------------------------------------------------------------------------- */
+.challenge-card__content {
   flex: 1;
   min-width: 0;
-  /* Enable text truncation */
-}
-
-.challenge-card__header-right {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-/* Challenge ID (e.g., "Challenge-01") */
-.challenge-card__id {
-  font-family: var(--font-family-mono, 'Courier New', monospace);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-
-  @media (min-width: 768px) {
-    font-size: 0.9375rem;
-  }
-}
-
-/* "New" Badge */
-.challenge-card__badge {
-  /* Layout */
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  white-space: nowrap;
-
-  /* Typography */
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-on-primary);
-
-  /* Visual styling - Ruby red accent for high emphasis */
-  background: var(--gradient-accent);
-  border-radius: var(--border-radius-pill);
-  box-shadow: 0 2px 8px rgba(224, 17, 95, 0.3);
-
-  /* Animation */
-  animation: pulse 2s ease-in-out infinite;
-
-  mat-icon {
-    font-size: 14px;
-    width: 14px;
-    height: 14px;
-  }
-}
-
-/* Badge pulse animation */
-@keyframes pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.02);
-    opacity: 0.95;
-  }
-}
-
-/* ==========================================
-   Body Section (Title & Description)
-   ========================================== */
-.challenge-card__body {
-  position: relative;
-  z-index: 1;
-  flex: 1;
+  /* Prevent text overflow issues */
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+  gap: 8px;
+}
 
-  @media (min-width: 768px) {
-    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xl);
-  }
+.challenge-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 .challenge-card__title {
-  position: relative;
-  z-index: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
   margin: 0;
-  padding: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
   line-height: 1.4;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; // Limit to 2 lines
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  word-break: break-word;
 
   @media (min-width: 768px) {
     font-size: 1.25rem;
   }
 }
 
+.challenge-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Badges - Aligned with challenge-details page styling */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid transparent;
+  transition: transform var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 5px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+.new-badge {
+  background: linear-gradient(135deg, #FF6B6B 0%, #EE5D5D 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-pill);
+  box-shadow: 0 1px 3px rgba(255, 107, 107, 0.3);
+
+  .new-icon {
+    font-size: 12px;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 5px 12px;
+  }
+}
+
+/* Description */
 .challenge-card__description {
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.875rem;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.5;
+
+  /* Truncate to 2 lines */
   display: -webkit-box;
-  -webkit-line-clamp: 3; // Limit to 3 lines
-  line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
-  @media (min-width: 768px) {
-    font-size: 1rem;
-  }
-}
-
-/* ==========================================
-   Actions
-   ========================================== */
-.challenge-card__actions {
-  display: flex;
-  justify-content: center;
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
-  background: transparent;
-  border-top: none;
-
-  @media (min-width: 768px) {
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-xl);
-  }
-}
-
-.challenge-card__view-details-btn {
-  width: 100%;
-  max-width: 100%;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  padding: 14px 28px;
-  border-radius: var(--border-radius-md);
-  background: var(--gradient-primary) !important;
-  color: var(--text-on-primary) !important;
-  box-shadow: 0 2px 8px var(--color-primary-alpha-30),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transition: transform var(--animation-duration-fast) var(--animation-easing),
-    box-shadow var(--animation-duration-fast) var(--animation-easing),
-    background var(--animation-duration-fast) var(--animation-easing);
-  position: relative;
   overflow: hidden;
+  max-width: 800px;
+  /* readable line length */
 
-  // Subtle shine effect
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent);
-    transition: left 0.5s ease;
+  @media (min-width: 768px) {
+    font-size: 0.9375rem;
+  }
+}
+
+/* Meta Info (Duration, Tags) */
+.challenge-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-tertiary, #94a3b8);
+  font-weight: 500;
+
+  &.time,
+  &.tag {
+    background: var(--surface-tertiary);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    border-radius: var(--border-radius-pill);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    border: 1px solid var(--border-primary);
+    transition: all var(--animation-duration-fast) var(--animation-easing);
+
+    &:hover {
+      background: var(--surface-secondary);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      padding: 5px 12px;
+      font-size: 0.7rem;
+    }
   }
 
-
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px var(--color-primary-alpha-30),
-      inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  .meta-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
   }
+}
 
-  &:focus-visible {
-    outline: 2px solid var(--color-primary-alpha-60);
-    outline-offset: 2px;
+/* -----------------------------------------------------------------------------
+ * Actions Section (Right)
+ * ----------------------------------------------------------------------------- */
+.challenge-card__actions {
+  flex-shrink: 0;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: auto;
+    padding-left: 24px;
   }
+}
 
-  mat-icon {
-    margin-right: var(--spacing-sm);
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
+.challenge-card__view-btn {
+  width: 100%;
+  height: 44px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: var(--bright-blue, #2563eb) !important;
+  /* Button Blue */
+  color: white !important;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #1d4ed8 !important;
+    /* Darker Blue */
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
   }
 
   @media (min-width: 768px) {
     width: auto;
-    min-width: 200px;
-    font-size: 1rem;
-    padding: 16px 32px;
-  }
-
-  @media (min-width: 1024px) {
-    min-width: 220px;
+    min-width: 140px;
   }
 }
 

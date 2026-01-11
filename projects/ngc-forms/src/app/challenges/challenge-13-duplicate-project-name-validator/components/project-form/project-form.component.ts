@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
@@ -20,11 +20,11 @@ export class ProjectFormComponent implements OnInit {
   showSuccessMessage = signal(false);
   successMessage = signal('');
 
-  constructor(
-    private fb: FormBuilder,
-    public projectService: ProjectService
-  ) {}
+  // use inject function
+  fb = inject(FormBuilder);
+  projectService = inject(ProjectService);
 
+  // initialize the form on component init
   ngOnInit(): void {
     this.initializeForm();
   }
@@ -81,13 +81,6 @@ export class ProjectFormComponent implements OnInit {
     });
   }
 
-  /**
-   * Reset success/error messages
-   */
-  private resetMessages(): void {
-    this.submitted.set(false);
-    this.showSuccessMessage.set(false);
-  }
 
   /**
    * Check if a form control has a specific error

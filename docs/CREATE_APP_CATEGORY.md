@@ -90,6 +90,86 @@ projects/
             └── challenges/         # 📁 Challenge container (empty)
 ```
 
+### Step 5: Update Category Constants (IMPORTANT)
+
+After creating a new category app, you **MUST** update the category constants to register it in the system:
+
+**File to Update**: `libs/shared/models/src/lib/challenge.model.ts`
+
+**Action Required**:
+
+Add your new category to the `CHALLENGE_CATEGORY_IDS` array:
+
+```typescript
+export const CHALLENGE_CATEGORY_IDS = [
+  'rxjs-api',
+  'angular-core',
+  'angular-routing',
+  'angular-forms',
+  'angular-signals',
+  'community',
+  'your-new-category', // ← Add here
+] as const;
+```
+
+**Why This Matters**:
+
+This array is the **single source of truth** for all category IDs. TypeScript types (`ChallengeCategoryId` and `CategorySlug`) are automatically derived from this array using:
+
+```typescript
+export type ChallengeCategoryId = (typeof CHALLENGE_CATEGORY_IDS)[number];
+```
+
+**What Gets Updated Automatically**:
+
+✅ Type definitions in `libs/shared/models/src/lib/challenge.model.ts`  
+✅ Type definitions in `libs/shared/models/src/lib/challenge-config.model.ts`  
+✅ Type guards in `libs/shared/ui/src/lib/utils/type-guards.ts`  
+✅ Category validation across the application  
+
+**No Need to Manually Update**:
+
+❌ `ChallengeCategoryId` type definition  
+❌ `CategorySlug` type definition  
+❌ Type guard arrays  
+❌ Adapter mappings  
+
+**Additional Configuration** (if needed):
+
+You may also want to update in `libs/shared/ui/src/lib/constants/constants.ts`:
+
+1. **Category Icon Mapping**:
+
+   ```typescript
+   export const CATEGORY_ICON_MAP: Record<string, string> = {
+     // ... existing
+     'your-new-category': 'your_material_icon',
+   };
+   ```
+
+2. **Category Badge Styling**:
+
+   ```typescript
+   export const CATEGORY_BADGE_CLASS_MAP: Record<string, string> = {
+     // ... existing
+     'your-new-category': 'badge-your-category',
+   };
+   ```
+
+**Other Integration Points**:
+
+1. **Shell Routing**: `projects/ngc-shell/src/app/app.routes.ts`
+2. **Categories Config**: `projects/ngc-shell/public/config/categories.json`
+3. **TypeScript Paths**: `tsconfig.json` (add path mapping for `@ngc-your-category`)
+
+**Verification**:
+
+After updating, TypeScript should automatically recognize your new category throughout the codebase. Run the following to ensure no build errors:
+
+```bash
+npm run build:libs
+```
+
 ---
 
 ## 🏗️ Architecture Benefits
