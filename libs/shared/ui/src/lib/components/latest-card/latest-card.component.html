@@ -1,23 +1,6 @@
 <mat-card class="latest-card">
-  <!-- Top Section: Challenge ID + Badges -->
+  <!-- Header Section: Title + Difficulty Badge -->
   <mat-card-header class="latest-card__header">
-    <div class="latest-card__header-left">
-      <span class="latest-card__id">Challenge {{ challengeId().toString().padStart(2, '0') }}</span>
-    </div>
-    <div class="latest-card__header-right">
-      <span class="badge category">{{ categoryLabel() }}</span>
-      @if (difficulty()) {
-        <span class="badge difficulty"
-              [class]="difficulty().toLowerCase()"
-              [attr.aria-label]="'Difficulty level: ' + difficulty()">
-          {{ difficulty() }}
-        </span>
-      }
-    </div>
-  </mat-card-header>
-
-  <!-- Body Section: Title + Description -->
-  <mat-card-content class="latest-card__body">
     @switch (headingLevel()) {
       @case ('h2') {
         <h2 class="latest-card__title">{{ title() }}</h2>
@@ -29,7 +12,19 @@
         <h4 class="latest-card__title">{{ title() }}</h4>
       }
     }
+    @if (difficulty()) {
+      <span class="badge difficulty"
+            [class]="difficulty().toLowerCase()"
+            [attr.aria-label]="'Difficulty level: ' + difficulty()">
+        {{ difficulty() }}
+      </span>
+    }
+  </mat-card-header>
+
+  <!-- Body Section: Description + Category -->
+  <mat-card-content class="latest-card__body">
     <p class="latest-card__description">{{ description() }}</p>
+    <span class="badge category">{{ categoryLabel() }}</span>
   </mat-card-content>
 
   <!-- Actions Section -->

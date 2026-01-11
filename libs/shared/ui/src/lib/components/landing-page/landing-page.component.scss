@@ -662,36 +662,28 @@
   }
 }
 
-.latest-grid {
+.latest-cards {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: var(--spacing-lg);
-  align-items: stretch;
   width: 100%;
 
-  // Tablet and up: Use grid layout for multi-column
-  @media (min-width: 901px) {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    
-    // Prevent cards from growing too wide in production builds
+  & > * {
+    flex: 1 1 300px;
+   // max-width: 340px;
+    min-width: 280px;
+  }
+
+  @media (max-width: 900px) {
+    gap: var(--spacing-md);
+
     & > * {
-      max-width: 420px;
-      justify-self: center;
+      flex: 1 1 100%;
+      max-width: 100%;
+      min-width: 100%;
     }
   }
 
-  // Large tablet: smaller minmax for better fit
-  @media (min-width: 901px) and (max-width: 1200px) {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-
-  // Mobile and small tablet: flexbox ensures full-width cards
-  @media (max-width: 900px) {
-    gap: var(--spacing-md);
-  }
-
-  // Extra small mobile: tighter spacing
   @media (max-width: 600px) {
     gap: var(--spacing-sm);
   }
@@ -812,7 +804,7 @@
     flex-direction: column;
   }
 
-  .latest-grid {
+  .latest-cards {
     gap: var(--spacing-sm);
   }
 }

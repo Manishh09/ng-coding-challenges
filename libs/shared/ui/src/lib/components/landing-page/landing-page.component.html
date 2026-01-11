@@ -75,7 +75,7 @@
     <ngc-ui-section-header eyebrow="Fresh drops" heading="Launch the latest Angular challenges" summary="Stay sharp with new problems sourced from real client work and Angular
         community questions." headingId="latest-title" />
 
-    <div class="latest-grid">
+    <div class="latest-cards" role="list">
       @for (challenge of latestChallenges(); track challenge.id) {
       <ngc-ui-latest-card [challengeId]="challenge.id" [categoryLabel]="challenge.categoryLabel"
         [title]="challenge.title.split(':')[1].trim()" [difficulty]="challenge.difficulty"
