@@ -218,7 +218,7 @@ export class LandingPageComponent {
       .reverse()
       .map((challenge) => ({
         id: challenge.id,
-        title: challenge.title,
+        title: challenge.title.split(':')[1].trim() ?? challenge.title,
         description: challenge.description,
         categoryId: challenge.category,
         difficulty: challenge.difficulty,

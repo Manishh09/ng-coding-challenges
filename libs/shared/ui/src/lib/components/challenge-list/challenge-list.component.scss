@@ -123,11 +123,11 @@
     transition: transform var(--animation-duration-fast) var(--animation-easing);
   }
 
-  &>*:focus-within {
-    outline: 2px solid var(--color-primary-alpha-40);
-    outline-offset: 4px;
-    border-radius: var(--border-radius-xl);
-  }
+  // &>*:focus-within {
+  //   outline: 2px solid var(--color-primary-alpha-40);
+  //   outline-offset: 4px;
+  //   border-radius: var(--border-radius-xl);
+  // }
 
   @for $i from 1 through 12 {
     &>*:nth-child(#{$i}) {
@@ -195,8 +195,7 @@
     margin-top: var(--spacing-sm);
     min-height: 44px;
     background: var(--interactive-primary);
-    color: var(--color-surface);
-    border-radius: var(--border-radius-lg);
+    color: white;
     text-decoration: none;
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-md);

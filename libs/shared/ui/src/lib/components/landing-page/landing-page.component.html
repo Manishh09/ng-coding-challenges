@@ -78,7 +78,7 @@
     <div class="latest-cards" role="list">
       @for (challenge of latestChallenges(); track challenge.id) {
       <ngc-ui-latest-card [challengeId]="challenge.id" [categoryLabel]="challenge.categoryLabel"
-        [title]="challenge.title.split(':')[1].trim()" [difficulty]="challenge.difficulty"
+        [title]="challenge.title" [difficulty]="challenge.difficulty"
         [description]="challenge.description" buttonText="View Details" buttonIcon="visibility"
         (actionClick)="launchChallenge(challenge.route)" />
       } @empty {

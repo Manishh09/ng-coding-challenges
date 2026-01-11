@@ -34,10 +34,10 @@
   }
 
   // Focus-within for accessibility
-  &:focus-within {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-  }
+  // &:focus-within {
+  //   outline: 2px solid var(--color-primary);
+  //   outline-offset: 2px;
+  // }
 }
 
 /* -----------------------------------------------------------------------------
@@ -99,7 +99,7 @@
   }
 
   &.category {
-    background: var(--color-primary-alpha-20);
+    // background: var(--color-primary-alpha-20);
     color: var(--interactive-primary);
     border: 1px solid var(--color-primary-alpha-30);
     align-self: flex-start;

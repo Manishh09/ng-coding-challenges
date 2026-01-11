@@ -22,13 +22,13 @@
   gap: 16px;
 
   /* Subtle border + prominent left accent */
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-left: 4px solid var(--difficulty-color) !important;
+  border: 2px solid var(--border-primary) !important;
+  border-left: 5px solid var(--difficulty-color) !important;
 
   /* Hover Effect */
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px var(--border-color), 0 4px 6px -2px var(--border-color) !important;
+    box-shadow: 0 10px 15px -3px var(--border-primary), 0 4px 6px -2px var(--border-primary) !important;
     border-left-color: var(--difficulty-color);
   }
 

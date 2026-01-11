@@ -533,7 +533,6 @@
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-lg);
   border: 1px solid var(--border-primary);
-  cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
@@ -554,7 +553,7 @@
   letter-spacing: 0.12em;
   color: var(--color-primary);
   font-weight: 600;
-  margin-bottom: var(--spacing-2xs);
+  margin-bottom: var(--spacing-xs);
   text-align: center !important;
 }
 
@@ -648,8 +647,8 @@
   max-width: var(--max-width-section); // 1280px - standard for landing page sections
   margin: 0 auto;
   padding: 0 var(--spacing-2xl); // Desktop: 48px - matches header and footer
-  width: 100%;
-  padding-bottom: var(--spacing-4xl); // 64px bottom spacing
+  // width: 100%;
+  padding-bottom: var(--spacing-2xl); // 64px bottom spacing
 
   @media (max-width: 1024px) {
     padding: 0 var(--spacing-xl); // Tablet: 32px - matches header
@@ -668,16 +667,16 @@
   gap: var(--spacing-lg);
   width: 100%;
 
-  & > * {
+  &>* {
     flex: 1 1 300px;
-   // max-width: 340px;
+    // max-width: 340px;
     min-width: 280px;
   }
 
   @media (max-width: 900px) {
     gap: var(--spacing-md);
 
-    & > * {
+    &>* {
       flex: 1 1 100%;
       max-width: 100%;
       min-width: 100%;
