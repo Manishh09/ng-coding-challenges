@@ -41,7 +41,7 @@
   line-height: 1.2;
   color: var(--text-primary);
   margin: 0;
-  
+
   // Smooth gradient text effect (optional enhancement)
   background: linear-gradient(
     135deg,
@@ -62,7 +62,7 @@
   line-height: 1.7;
   color: var(--text-secondary);
   margin: 0;
-  
+
   // Animation
   animation: fadeInUp 0.6s var(--animation-easing) 0.2s forwards;
   opacity: 0;
@@ -77,7 +77,7 @@
 @media (min-width: 768px) {
   .section-heading {
     gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: var(--spacing-xl);
   }
 
   .section-eyebrow {
@@ -88,7 +88,7 @@
 // Desktop and up
 @media (min-width: 1024px) {
   .section-heading {
-    margin-bottom: var(--spacing-4xl);
+    margin-bottom: var(--spacing-2xl);
   }
 }
 
