@@ -1,0 +1,72 @@
+<div class="challenge-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <span class="brand-logo">🎬</span>
+      <span class="brand-name">BookMyShow</span>
+    </div>
+    <h1 class="title">Movie Seat Selector</h1>
+    <p class="subtitle">Select the number of seats for your booking</p>
+  </div>
+
+  <!-- Seat Counter -->
+  <div class="counter-section">
+    <h2 class="section-title">How many seats?</h2>
+    <div class="counter">
+      <button
+        class="counter-btn decrement"
+        [disabled]="isAtMin()"
+        (click)="decrement()"
+        aria-label="Decrease seat count">
+        −
+      </button>
+
+      <span class="seat-badge">{{ seats() }}</span>
+
+      <button
+        class="counter-btn increment"
+        [disabled]="isAtMax()"
+        (click)="increment()"
+        aria-label="Increase seat count">
+        +
+      </button>
+    </div>
+    <button class="reset-btn" (click)="reset()" [disabled]="isAtMin()">
+      Reset
+    </button>
+  </div>
+
+  <!-- Price Breakdown -->
+  <div class="breakdown-card">
+    <h2 class="section-title">Price Breakdown</h2>
+    <table class="breakdown-table">
+      <tbody>
+        <tr>
+          <td class="label">Seats</td>
+          <td class="value">{{ priceBreakdown().seats }}</td>
+        </tr>
+        <tr>
+          <td class="label">Price per seat</td>
+          <td class="value">{{ priceBreakdown().pricePerSeat | currency:'INR':'symbol':'1.0-0' }}</td>
+        </tr>
+        <tr class="total-row">
+          <td class="label">Total</td>
+          <td class="value total-price">{{ priceBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary & Proceed -->
+  <div class="summary-card">
+    <div class="summary-info">
+      <span class="summary-badge">🎟️ {{ seats() }} {{ seats() === 1 ? 'Seat' : 'Seats' }}</span>
+      <span class="summary-total">{{ totalPrice() | currency:'INR':'symbol':'1.0-0' }}</span>
+    </div>
+    <button
+      class="proceed-btn"
+      [disabled]="seats() < 1 || totalPrice() <= 0">
+      Proceed to Pay
+    </button>
+  </div>
+</div>

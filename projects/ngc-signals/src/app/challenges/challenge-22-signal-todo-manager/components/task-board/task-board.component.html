@@ -1,0 +1,164 @@
+<div class="challenge-container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="title">Sprint Board</h1>
+    <p class="subtitle">Jira-Style Task Manager</p>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stats-row">
+      <span class="stat">
+        <span class="stat-label">Total</span>
+        <span class="stat-value">{{ boardStats().total }}</span>
+      </span>
+      <span class="stat">
+        <span class="stat-label">Todo</span>
+        <span class="stat-value todo">{{ boardStats().todoCount }}</span>
+      </span>
+      <span class="stat">
+        <span class="stat-label">In Progress</span>
+        <span class="stat-value in-progress">{{ boardStats().inProgressCount }}</span>
+      </span>
+      <span class="stat">
+        <span class="stat-label">Done</span>
+        <span class="stat-value done">{{ boardStats().doneCount }}</span>
+      </span>
+    </div>
+    <div class="velocity-bar">
+      <div class="velocity-fill" [style.width.%]="boardStats().completionRate"></div>
+    </div>
+    <span class="velocity-label">Sprint velocity: {{ boardStats().completionRate }}% complete</span>
+  </div>
+
+  <!-- Add Task Form -->
+  <form class="add-task-form" (submit)="$event.preventDefault(); addTask()">
+    <input
+      class="task-input"
+      type="text"
+      placeholder="New task title..."
+      [value]="newTaskTitle()"
+      (input)="onTitleInput($event)" />
+    <select
+      class="priority-select"
+      [value]="newTaskPriority()"
+      (change)="onPriorityChange($event)">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+    <button
+      class="add-btn"
+      type="submit"
+      [disabled]="!newTaskTitle().trim()">
+      + Add
+    </button>
+  </form>
+
+  <!-- Priority Filter -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    @for (f of ['all', 'low', 'medium', 'high']; track f) {
+      <button
+        class="filter-chip"
+        [class.active]="priorityFilter() === f"
+        [attr.data-priority]="f"
+        (click)="setFilter($any(f))">
+        {{ f === 'all' ? 'All' : f }}
+      </button>
+    }
+  </div>
+
+  <!-- Kanban Columns -->
+  <div class="board">
+    <!-- Todo Column -->
+    <div class="column">
+      <div class="column-header todo">
+        <span class="column-title">Todo</span>
+        <span class="column-count">{{ todoTasks().length }}</span>
+      </div>
+      <div class="column-body">
+        @for (task of todoTasks(); track task.id) {
+          <div class="task-card" [attr.data-priority]="task.priority">
+            <div class="card-top" (click)="toggleExpand(task.id)">
+              <span class="card-title">{{ task.title }}</span>
+              <span class="priority-badge" [attr.data-priority]="task.priority">{{ task.priority }}</span>
+            </div>
+            @if (expandedTaskId() === task.id) {
+              <div class="card-actions">
+                @for (target of getMoveTargets(task.status); track target.status) {
+                  <button class="move-btn" [attr.data-status]="target.status" (click)="moveTask(task.id, target.status)">
+                    Move to {{ target.label }}
+                  </button>
+                }
+                <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
+              </div>
+            }
+          </div>
+        } @empty {
+          <div class="empty-column">No tasks</div>
+        }
+      </div>
+    </div>
+
+    <!-- In Progress Column -->
+    <div class="column">
+      <div class="column-header in-progress">
+        <span class="column-title">In Progress</span>
+        <span class="column-count">{{ inProgressTasks().length }}</span>
+      </div>
+      <div class="column-body">
+        @for (task of inProgressTasks(); track task.id) {
+          <div class="task-card" [attr.data-priority]="task.priority">
+            <div class="card-top" (click)="toggleExpand(task.id)">
+              <span class="card-title">{{ task.title }}</span>
+              <span class="priority-badge" [attr.data-priority]="task.priority">{{ task.priority }}</span>
+            </div>
+            @if (expandedTaskId() === task.id) {
+              <div class="card-actions">
+                @for (target of getMoveTargets(task.status); track target.status) {
+                  <button class="move-btn" [attr.data-status]="target.status" (click)="moveTask(task.id, target.status)">
+                    Move to {{ target.label }}
+                  </button>
+                }
+                <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
+              </div>
+            }
+          </div>
+        } @empty {
+          <div class="empty-column">No tasks</div>
+        }
+      </div>
+    </div>
+
+    <!-- Done Column -->
+    <div class="column">
+      <div class="column-header done">
+        <span class="column-title">Done</span>
+        <span class="column-count">{{ doneTasks().length }}</span>
+      </div>
+      <div class="column-body">
+        @for (task of doneTasks(); track task.id) {
+          <div class="task-card" [attr.data-priority]="task.priority">
+            <div class="card-top" (click)="toggleExpand(task.id)">
+              <span class="card-title">{{ task.title }}</span>
+              <span class="priority-badge" [attr.data-priority]="task.priority">{{ task.priority }}</span>
+            </div>
+            @if (expandedTaskId() === task.id) {
+              <div class="card-actions">
+                @for (target of getMoveTargets(task.status); track target.status) {
+                  <button class="move-btn" [attr.data-status]="target.status" (click)="moveTask(task.id, target.status)">
+                    Move to {{ target.label }}
+                  </button>
+                }
+                <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
+              </div>
+            }
+          </div>
+        } @empty {
+          <div class="empty-column">No tasks</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

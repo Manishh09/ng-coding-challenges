@@ -1,0 +1,83 @@
+<div class="challenge-container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="title">Naukri Job Search</h1>
+    <p class="subtitle">RxJS + Signals Interop</p>
+  </div>
+
+  <!-- Search Bar -->
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Search jobs by title or company..."
+    [value]="searchKeyword()"
+    (input)="onSearch($event)" />
+
+  <!-- Filters -->
+  <div class="filters">
+    <select class="filter-select" [value]="jobType()" (change)="onTypeChange($event)">
+      <option value="all">All Types</option>
+      <option value="full-time">Full-time</option>
+      <option value="part-time">Part-time</option>
+      <option value="contract">Contract</option>
+      <option value="internship">Internship</option>
+    </select>
+
+    <input
+      class="filter-input"
+      type="text"
+      placeholder="Location"
+      [value]="location()"
+      (input)="onLocationInput($event)" />
+
+    <div class="salary-filter">
+      <label class="salary-label">Min ₹{{ minSalary() }}L</label>
+      <input
+        class="salary-range"
+        type="range"
+        min="0"
+        max="40"
+        step="2"
+        [value]="minSalary()"
+        (input)="onSalaryChange($event)" />
+    </div>
+
+    <button class="clear-btn" (click)="clearFilters()">Clear</button>
+  </div>
+
+  <!-- Stats -->
+  @if (!isLoading()) {
+    <div class="stats-row">
+      Showing {{ jobStats().filtered }} of {{ jobStats().total }} jobs
+    </div>
+  }
+
+  <!-- Job List -->
+  <div class="job-list">
+    @if (isLoading()) {
+      @for (i of [1, 2, 3]; track i) {
+        <div class="skeleton-card">
+          <div class="skeleton-line title"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line medium"></div>
+        </div>
+      }
+    } @else {
+      @for (job of filteredJobs(); track job.id) {
+        <div class="job-card">
+          <div class="job-top">
+            <span class="job-title">{{ job.title }}</span>
+            <span class="job-salary">₹{{ job.salary }}L/yr</span>
+          </div>
+          <span class="job-company">{{ job.company }}</span>
+          <div class="job-tags">
+            <span class="tag location">{{ job.location }}</span>
+            <span class="tag type">{{ job.type }}</span>
+          </div>
+        </div>
+      } @empty {
+        <div class="empty">No jobs match your filters</div>
+      }
+    }
+  </div>
+</div>

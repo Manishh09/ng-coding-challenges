@@ -8,9 +8,21 @@ import { challengeListResolver, challengeDetailsResolver } from '@ng-coding-chal
  * Add new challenges here as they are created
  */
 const CHALLENGE_COMPONENTS: Record<string, () => Promise<any>> = {
-  // Example: 'signal-basics': () =>
-  //   import('./challenges/challenge-XX-signal-basics/components/signal-demo/signal-demo.component')
-  //     .then(m => m.SignalDemoComponent),
+  'signal-primitives-counter': () =>
+    import('./challenges/challenge-20-signal-primitives-counter/components/seat-selector/seat-selector.component')
+      .then(m => m.SeatSelectorComponent),
+  'live-character-counter': () =>
+    import('./challenges/challenge-21-live-character-counter/components/post-composer/post-composer.component')
+      .then(m => m.PostComposerComponent),
+  'signal-todo-manager': () =>
+    import('./challenges/challenge-22-signal-todo-manager/components/task-board/task-board.component')
+      .then(m => m.TaskBoardComponent),
+  'signal-shopping-cart': () =>
+    import('./challenges/challenge-23-signal-shopping-cart/components/swiggy-cart/swiggy-cart.component')
+      .then(m => m.SwiggyCartComponent),
+  'rxjs-signal-interop': () =>
+    import('./challenges/challenge-24-rxjs-signal-interop/components/job-search/job-search.component')
+      .then(m => m.JobSearchComponent),
 };
 
 /**

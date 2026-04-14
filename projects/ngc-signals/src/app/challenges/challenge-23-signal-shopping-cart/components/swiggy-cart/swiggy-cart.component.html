@@ -1,0 +1,163 @@
+<div class="challenge-container">
+  <!-- Restaurant Header -->
+  <div class="header">
+    <div class="brand">
+      <span class="brand-icon">🍽️</span>
+      <div class="brand-text">
+        <span class="brand-name">{{ restaurant.name }}</span>
+        <span class="brand-tag">{{ restaurant.cuisine }}</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="meta-badge">★ {{ restaurant.rating }}</span>
+      <span class="meta-badge">{{ restaurant.deliveryTime }}</span>
+      <span class="meta-badge">₹{{ restaurant.costForTwo }} for two</span>
+    </div>
+    @if (!isEmpty()) {
+      <span class="item-count-badge">{{ itemCount() }} items</span>
+    }
+  </div>
+
+  <div class="layout">
+    <!-- Menu Panel -->
+    <div class="menu-panel">
+      <h2 class="section-title">Menu</h2>
+      <div class="menu-list">
+        @for (item of menu; track item.id) {
+          <div class="menu-item">
+            <div class="menu-info">
+              <div class="menu-name-row">
+                <span class="veg-indicator" [class.non-veg]="!item.isVeg"></span>
+                <span class="menu-name">{{ item.name }}</span>
+                @if (item.isBestseller) {
+                  <span class="bestseller-tag">Bestseller</span>
+                }
+              </div>
+              <span class="menu-price">{{ item.price | currency:'INR':'symbol':'1.0-0' }}</span>
+              <span class="menu-desc">{{ item.description }}</span>
+            </div>
+            <div class="menu-action">
+              @if (getCartQty(item.id) > 0) {
+                <span class="in-cart-badge">{{ getCartQty(item.id) }} in cart</span>
+              }
+              <button class="menu-add-btn" (click)="addItem(item)">
+                ADD
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel">
+      <h2 class="section-title">Your Cart</h2>
+
+      @if (isEmpty()) {
+        <div class="empty-cart">
+          <span class="empty-icon">🛒</span>
+          <p>Your cart is empty</p>
+          <p class="empty-hint">Add items from the menu to get started</p>
+        </div>
+      } @else {
+        <!-- Suggestion Banner -->
+        @if (cartSuggestion()) {
+          <div class="suggestion-banner"
+            [class.unlocked]="isFreeDeliveryUnlocked()">
+            {{ cartSuggestion() }}
+          </div>
+        }
+
+        <!-- Cart Items -->
+        <div class="cart-items">
+          @for (item of cartItems(); track item.id) {
+            <div class="cart-row">
+              <span class="cart-item-name">{{ item.name }}</span>
+              <div class="qty-control">
+                <button
+                  class="qty-btn"
+                  (click)="updateQuantity(item.id, -1)"
+                  [disabled]="item.quantity <= 1">−</button>
+                <span class="qty-value">{{ item.quantity }}</span>
+                <button
+                  class="qty-btn"
+                  (click)="updateQuantity(item.id, +1)"
+                  [disabled]="item.quantity >= 10">+</button>
+              </div>
+              <span class="cart-item-total">{{ item.price * item.quantity | currency:'INR':'symbol':'1.0-0' }}</span>
+              <button class="remove-btn" (click)="removeItem(item.id)" aria-label="Remove item">✕</button>
+            </div>
+          }
+        </div>
+
+        <!-- Coupon Input -->
+        <div class="coupon-section">
+          <div class="coupon-input-row">
+            <input
+              class="coupon-input"
+              type="text"
+              placeholder="Enter coupon code"
+              [value]="couponCode()"
+              (input)="onCouponInput($event)" />
+            @if (couponDiscount() > 0) {
+              <span class="coupon-applied">SWIGGY20 applied!</span>
+            } @else if (couponCode().length > 0) {
+              <span class="coupon-hint">Try SWIGGY20</span>
+            }
+          </div>
+          <div class="coupon-list">
+            @for (coupon of availableCoupons; track coupon.code) {
+              <div class="coupon-chip" (click)="applyCoupon(coupon.code)">
+                <span class="coupon-code">{{ coupon.code }}</span>
+                <span class="coupon-label">{{ coupon.label }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Bill Breakdown -->
+        <div class="bill-section">
+          <h3 class="bill-title">Bill Details</h3>
+          <div class="bill-row">
+            <span>Item Total</span>
+            <span>{{ subtotal() | currency:'INR':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="bill-row">
+            <span>Delivery Fee</span>
+            <span [class.strikethrough]="isDeliveryFree()">
+              {{ DELIVERY_FEE | currency:'INR':'symbol':'1.0-0' }}
+            </span>
+            @if (isDeliveryFree()) {
+              <span class="free-tag">FREE</span>
+            }
+          </div>
+          @if (couponDiscount() > 0) {
+            <div class="bill-row savings-row">
+              <span>Coupon Discount (SWIGGY20)</span>
+              <span>−{{ couponDiscount() | currency:'INR':'symbol':'1.0-0' }}</span>
+            </div>
+          }
+          <div class="bill-row">
+            <span>GST (5%)</span>
+            <span>{{ gst() | currency:'INR':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="bill-row total-row">
+            <span>Grand Total</span>
+            <span>{{ grandTotal() | currency:'INR':'symbol':'1.0-0' }}</span>
+          </div>
+          @if (savings() > 0) {
+            <div class="savings-banner">
+              You're saving {{ savings() | currency:'INR':'symbol':'1.0-0' }} on this order!
+            </div>
+          }
+        </div>
+
+        <!-- Actions -->
+        <div class="cart-actions">
+          <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
+          <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+      }
+    </div>
+  </div>
+</div>
