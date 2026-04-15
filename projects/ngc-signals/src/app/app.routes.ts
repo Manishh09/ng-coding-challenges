@@ -23,6 +23,9 @@ const CHALLENGE_COMPONENTS: Record<string, () => Promise<any>> = {
   'rxjs-signal-interop': () =>
     import('./challenges/challenge-24-rxjs-signal-interop/components/job-search/job-search.component')
       .then(m => m.JobSearchComponent),
+  'custom-signal-store': () =>
+    import('./challenges/challenge-25-custom-signal-store/components/booking-flow/booking-flow.component')
+      .then(m => m.BookingFlowComponent),
 };
 
 /**

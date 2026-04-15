@@ -1,0 +1,203 @@
+<div class="challenge-container">
+  <h1 class="title">MakeMyTrip Booking</h1>
+
+  <!-- Stepper with connectors -->
+  <div class="stepper">
+    @for (step of [
+      { n: 1, label: 'Select' },
+      { n: 2, label: 'Travellers' },
+      { n: 3, label: 'Review' },
+      { n: 4, label: 'Payment' }
+    ]; track step.n) {
+      @if (step.n > 1) {
+        <span class="step-connector" [class.done]="currentStep() >= step.n"></span>
+      }
+      <button
+        class="step-btn"
+        [class.active]="currentStep() === step.n"
+        [class.done]="currentStep() > step.n"
+        [disabled]="step.n > 1 && !isStepAccessible(step.n)"
+        (click)="goTo(step.n)">
+        @if (currentStep() > step.n) {
+          <span class="step-check">&#10003;</span>
+        } @else {
+          <span class="step-num">{{ step.n }}</span>
+        }
+        <span class="step-label">{{ step.label }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Step 1: Select Flight -->
+  @if (currentStep() === 1) {
+    <div class="step-panel">
+      <h2 class="step-title">Select a Flight</h2>
+      <p class="step-desc">DEL → BOM &middot; {{ flights.length }} flights available</p>
+      <div class="flight-list">
+        @for (f of flights; track f.id) {
+          <div class="flight-card"
+            [class.selected]="store.selectedFlight()?.id === f.id"
+            (click)="pickFlight(f)">
+            <div class="flight-row">
+              <span class="airline">{{ f.airline }}</span>
+              @if (store.selectedFlight()?.id === f.id) {
+                <span class="selected-check">&#10003;</span>
+              }
+              <span class="fare">{{ f.baseFare | currency:'INR':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="flight-row route">
+              <span>{{ f.from }} &middot; {{ f.departure }}</span>
+              <span class="arrow">→</span>
+              <span>{{ f.to }} &middot; {{ f.arrival }}</span>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="nav-row end">
+        <button class="primary-btn" [disabled]="!store.selectedFlight()" (click)="next()">Next</button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 2: Travellers -->
+  @if (currentStep() === 2) {
+    <div class="step-panel">
+      <h2 class="step-title">Add Travellers</h2>
+      <p class="step-desc">{{ store.selectedFlight()?.airline }} &middot; {{ store.selectedFlight()?.from }} → {{ store.selectedFlight()?.to }}</p>
+
+      <div class="add-form">
+        <input class="input" placeholder="Name" [value]="tName()" (input)="onNameInput($event)" />
+        <input class="input small" type="number" placeholder="Age" [value]="tAge() ?? ''" (input)="onAgeInput($event)" min="1" />
+        <button class="add-btn" (click)="addTraveller()">+ Add</button>
+      </div>
+
+      @if (store.travellers().length > 0) {
+        <div class="traveller-list">
+          @for (t of store.travellers(); track t.id; let i = $index) {
+            <div class="traveller-row">
+              <span class="traveller-num">{{ i + 1 }}</span>
+              <span class="traveller-info">{{ t.name }} <span class="age-tag">{{ t.age }} yrs</span></span>
+              <button class="remove-btn" (click)="store.removeTraveller(t.id)">&#10005;</button>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="hint">Add at least one traveller to continue</p>
+      }
+
+      <div class="nav-row">
+        <button class="secondary-btn" (click)="prev()">Back</button>
+        <button class="primary-btn" [disabled]="!store.isBookingValid()" (click)="next()">Next</button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 3: Review & Promo -->
+  @if (currentStep() === 3) {
+    <div class="step-panel">
+      <h2 class="step-title">Review & Apply Promo</h2>
+
+      <div class="review-card">
+        <div class="review-row">
+          <span class="label">Flight</span>
+          <span>{{ store.selectedFlight()?.airline }} &middot; {{ store.selectedFlight()?.from }} → {{ store.selectedFlight()?.to }}</span>
+        </div>
+        <div class="review-row">
+          <span class="label">Travellers ({{ store.travellers().length }})</span>
+          <span class="traveller-names">
+            @for (t of store.travellers(); track t.id; let last = $last) {
+              {{ t.name }}@if (!last) {, }
+            }
+          </span>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-row">
+          <span class="label">Base Fare ({{ store.fareBreakdown().travellersCount }} pax)</span>
+          <span>{{ store.fareBreakdown().subtotal | currency:'INR':'symbol':'1.0-0' }}</span>
+        </div>
+        <div class="review-row">
+          <span class="label">Taxes (12%)</span>
+          <span>{{ store.fareBreakdown().taxes | currency:'INR':'symbol':'1.0-0' }}</span>
+        </div>
+        @if (store.fareBreakdown().promoDiscount > 0) {
+          <div class="review-row discount">
+            <span class="label">Promo ({{ store.promoCode() | uppercase }})</span>
+            <span>&minus;{{ store.fareBreakdown().promoDiscount | currency:'INR':'symbol':'1.0-0' }}</span>
+          </div>
+        }
+        <div class="review-divider"></div>
+        <div class="review-row total">
+          <span class="label">Total</span>
+          <span>{{ store.fareBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <div class="promo-row">
+        <input class="input" placeholder="Enter promo code" [value]="promoInput()" (input)="onPromoInput($event)" />
+        <button class="add-btn" [disabled]="!promoInput().length" (click)="applyPromo()">Apply</button>
+      </div>
+      @if (store.promoCode() && store.fareBreakdown().promoDiscount === 0) {
+        <p class="hint error">Invalid promo code</p>
+      }
+
+      <div class="promo-hints">
+        @for (p of promoCodes; track p.code) {
+          <button class="promo-chip" (click)="applyPromoChip(p.code)">
+            <span class="promo-chip-code">{{ p.code }}</span>
+            <span class="promo-chip-label">{{ p.label }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="nav-row">
+        <button class="secondary-btn" (click)="prev()">Back</button>
+        <button class="primary-btn" (click)="next()">Proceed to Pay</button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 4: Payment -->
+  @if (currentStep() === 4) {
+    <div class="step-panel">
+      <h2 class="step-title">Payment</h2>
+
+      <div class="payment-card">
+        <!-- Flight summary -->
+        <p class="payment-flight">{{ store.selectedFlight()?.airline }} &middot; {{ store.selectedFlight()?.from }} → {{ store.selectedFlight()?.to }} &middot; {{ store.fareBreakdown().travellersCount }} pax</p>
+
+        <p class="total-display">{{ store.fareBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</p>
+
+        @switch (store.paymentStatus()) {
+          @case ('pending') {
+            <button class="primary-btn pay-btn" (click)="pay()">Pay Now</button>
+          }
+          @case ('processing') {
+            <div class="status-block processing">
+              <span class="spinner"></span>
+              <p class="status">Processing payment...</p>
+            </div>
+          }
+          @case ('success') {
+            <div class="status-block success">
+              <span class="success-icon">&#10003;</span>
+              <p class="status">Booking Confirmed!</p>
+              <p class="booking-ref">Ref: {{ bookingRef() }}</p>
+            </div>
+          }
+          @case ('failed') {
+            <div class="status-block failed">
+              <p class="status">Payment failed — state rolled back</p>
+              <button class="primary-btn" (click)="retryPayment()">Retry</button>
+            </div>
+          }
+        }
+      </div>
+
+      <div class="nav-row">
+        @if (store.paymentStatus() !== 'processing' && store.paymentStatus() !== 'success') {
+          <button class="secondary-btn" (click)="prev()">Back</button>
+        }
+      </div>
+    </div>
+  }
+</div>
