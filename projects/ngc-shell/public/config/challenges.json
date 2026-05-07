@@ -1196,43 +1196,41 @@
           "componentName": "BookingFlowComponent"
         }
       },
-      "signal-performance-untracked": {
+      "signal-live-dashboard": {
         "id": 26,
         "isNew": true,
-        "slug": "signal-performance-untracked",
-        "title": "Challenge 26: Zerodha — Live Market Dashboard Performance Fix",
+        "slug": "signal-live-dashboard",
+        "title": "Challenge 26: Zerodha — Live Market Watch",
         "categoryId": "angular-signals",
-        "difficulty": "Advanced",
+        "difficulty": "Intermediate",
         "enabled": true,
         "order": 7,
-        "description": "You've joined Zerodha's frontend team. The live stock dashboard re-renders on every price tick and users report lag. Diagnose and fix three signal performance anti-patterns using untracked() and OnPush.",
-        "longDescription": "Zerodha's market dashboard receives price ticks every 500ms for 50+ stocks. A junior developer wired it up with signals but missed three critical performance anti-patterns: an effect that re-runs on every tick even for unrelated UI state, a computed() with an over-broad dependency set that recomputes the entire portfolio on every single tick, and components missing ChangeDetectionStrategy.OnPush. You'll diagnose each issue, apply untracked(), split the over-broad computed, and add OnPush — the exact performance review a senior Angular engineer would conduct in a production incident.",
+        "description": "You're on Zerodha's frontend team. Build the live market watch dashboard — a service-driven signal that ticks every 1.5s, with computed() signals for portfolio stats and ChangeDetectionStrategy.OnPush for optimal performance.",
+        "longDescription": "Real trading dashboards push price updates every second. In this challenge you'll build Zerodha's market watch from scratch: a StockTickerService that holds stock prices in a private signal and exposes them via asReadonly(), a StockDashboardComponent that derives portfolio total, gainers, and losers using computed(), and ChangeDetectionStrategy.OnPush so Angular only re-checks the component when a signal it reads actually changes. You'll also wire up the live ticker with setInterval and clean it up in ngOnDestroy — a common production pattern every Angular developer must know.",
         "tags": [
-          "untracked",
+          "computed",
+          "asReadonly",
           "OnPush",
-          "Performance",
-          "Effect Optimization",
-          "Change Detection"
+          "signal",
+          "Service"
         ],
-        "estimatedTime": "45-60 minutes",
+        "estimatedTime": "30-45 minutes",
         "prerequisites": [
-          "All previous signal challenges completed",
-          "Understanding of Angular change detection",
-          "ChangeDetectionStrategy basics"
+          "Challenges 20–25 completed",
+          "Angular services and dependency injection"
         ],
         "learningOutcomes": [
-          "Use untracked() to read a signal inside effect() without registering a dependency",
-          "Split an over-broad computed() into narrower computeds to reduce recomputation",
-          "Apply ChangeDetectionStrategy.OnPush with signals for optimal CD performance",
-          "Measure effect re-run frequency using a render counter variable",
-          "Identify the three most common signal performance anti-patterns",
-          "Understand which signals should and should not be tracked inside an effect"
+          "Expose service state as read-only using signal.asReadonly()",
+          "Derive portfolio stats with computed() — portfolioTotal, gainersCount, losersCount",
+          "Apply ChangeDetectionStrategy.OnPush with signals for efficient change detection",
+          "Manage a setInterval ticker across ngOnInit and ngOnDestroy without memory leaks",
+          "Inject a signal-based service and read its readonly signal in a component"
         ],
         "requirementList": [
-          "Given the broken StockDashboardComponent with anti-pattern #1 — an effect() that reads both the price signal (needed) and a UI theme signal (not needed) — fix it using untracked(() => theme()) and verify via console log count that the effect no longer fires on theme changes",
-          "Fix anti-pattern #2: a single portfolioSummary computed() that reads all 50 stock signals — split it into stockComputeds (one per stock) and a portfolioTotal computed that reads only the individual computeds — verify via a recompute counter that an unrelated stock tick no longer invalidates the whole portfolio",
-          "Fix anti-pattern #3: all four dashboard components are using default CD strategy — add ChangeDetectionStrategy.OnPush to all four; use a renderCount variable (not a signal) incremented in ngDoCheck to prove the render count drops from N×ticks to 1×tick for unaffected components",
-          "Add a DevTools-friendly renderLog signal that appends { component, timestamp } on each re-render — display the log in a collapsible panel so interviewers can visually verify the performance improvement in real time"
+          "Build StockTickerService with private signal<Stock[]> for 4 stocks and expose it via asReadonly() — implement a tick() method that uses stocks.update() to apply a small random price change to each stock on every call",
+          "In StockDashboardComponent inject the service and create three computed() signals: portfolioTotal (sum of all prices), gainersCount (stocks where change > 0), losersCount (stocks where change < 0)",
+          "Start a setInterval calling ticker.tick() every 1500ms in ngOnInit — toggle it on/off with an isLive signal and a Pause/Resume button — clear the interval in ngOnDestroy",
+          "Add ChangeDetectionStrategy.OnPush to the component and display the live stock table with ▲ green / ▼ red colour for price changes alongside the three computed stat cards"
         ],
         "links": {
           "requirement": "projects/ngc-signals/src/app/challenges/challenge-26-signal-performance-untracked/docs/CH-26-REQUIREMENT.md",

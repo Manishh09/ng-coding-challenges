@@ -26,6 +26,9 @@ const CHALLENGE_COMPONENTS: Record<string, () => Promise<any>> = {
   'custom-signal-store': () =>
     import('./challenges/challenge-25-custom-signal-store/components/booking-flow/booking-flow.component')
       .then(m => m.BookingFlowComponent),
+  'signal-live-dashboard': () =>
+    import('./challenges/challenge-26-signal-performance-untracked/components/stock-dashboard/stock-dashboard.component')
+      .then(m => m.StockDashboardComponent),
 };
 
 /**

@@ -1,0 +1,66 @@
+<div class="dashboard">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <span class="logo">Z</span>
+      <div>
+        <h1>Zerodha Kite</h1>
+        <p>Live Market Watch — <code>computed()</code> &amp; <code>OnPush</code></p>
+      </div>
+    </div>
+    <button class="btn-live" [class.paused]="!isLive()" (click)="toggleLive()">
+      <span class="dot" [class.paused]="!isLive()"></span>
+      {{ isLive() ? 'Live' : 'Paused' }}
+    </button>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats">
+
+    <div class="stat-card">
+      <span class="stat-label">Portfolio Total</span>
+      <span class="stat-value">₹{{ portfolioTotal() | number:'1.0-0' }}</span>
+    </div>
+
+    <div class="stat-card green">
+      <span class="stat-label">▲ Gainers</span>
+      <span class="stat-value">{{ gainersCount() }}</span>
+    </div>
+
+    <div class="stat-card red">
+      <span class="stat-label">▼ Losers</span>
+      <span class="stat-value">{{ losersCount() }}</span>
+    </div>
+
+  </div>
+
+  <!-- Stock Table -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Company</th>
+          <th class="r">Price (₹)</th>
+          <th class="r">Change (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (stock of stocks(); track stock.symbol) {
+          <tr>
+            <td class="symbol">{{ stock.symbol }}</td>
+            <td class="muted">{{ stock.name }}</td>
+            <td class="r mono" [class.up]="stock.change > 0" [class.dn]="stock.change < 0">
+              {{ stock.price | number:'1.0-0' }}
+            </td>
+            <td class="r mono" [class.up]="stock.change > 0" [class.dn]="stock.change < 0">
+              {{ stock.change > 0 ? '+' : '' }}{{ stock.change }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
