@@ -1,139 +1,143 @@
-<div class="challenge-container">
-  <!-- Restaurant Header -->
-  <div class="header">
-    <div class="brand">
-      <span class="brand-icon">🍽️</span>
-      <div class="brand-text">
-        <span class="brand-name">{{ restaurant.name }}</span>
-        <span class="brand-tag">{{ restaurant.cuisine }}</span>
-      </div>
-    </div>
+<!-- Restaurant Header -->
+<mat-card class="header-card">
+  <mat-card-header>
+    <div mat-card-avatar class="brand-avatar">🍽️</div>
+    <mat-card-title>
+      {{ restaurant.name }}
+      @if (!isEmpty()) {
+        <span class="item-badge" [matBadge]="itemCount()" matBadgeColor="warn" matBadgeSize="small">
+        </span>
+      }
+    </mat-card-title>
+    <mat-card-subtitle>{{ restaurant.cuisine }}</mat-card-subtitle>
     <div class="header-meta">
-      <span class="meta-badge">★ {{ restaurant.rating }}</span>
-      <span class="meta-badge">{{ restaurant.deliveryTime }}</span>
-      <span class="meta-badge">₹{{ restaurant.costForTwo }} for two</span>
+      <span class="meta-chip">★ {{ restaurant.rating }}</span>
+      <span class="meta-chip">{{ restaurant.deliveryTime }}</span>
+      <span class="meta-chip">₹{{ restaurant.costForTwo }} for two</span>
     </div>
-    @if (!isEmpty()) {
-      <span class="item-count-badge">{{ itemCount() }} items</span>
-    }
-  </div>
+  </mat-card-header>
+</mat-card>
 
-  <div class="layout">
-    <!-- Menu Panel -->
-    <div class="menu-panel">
-      <h2 class="section-title">Menu</h2>
-      <div class="menu-list">
-        @for (item of menu; track item.id) {
+<div class="layout">
+
+  <!-- Menu Panel -->
+  <div class="menu-panel">
+    <h2 class="panel-title">Menu</h2>
+    @for (item of menu; track item.id) {
+      <mat-card class="menu-item-card">
+        <mat-card-content>
           <div class="menu-item">
             <div class="menu-info">
               <div class="menu-name-row">
-                <span class="veg-indicator" [class.non-veg]="!item.isVeg"></span>
+                <span class="veg-dot" [class.non-veg]="!item.isVeg"></span>
                 <span class="menu-name">{{ item.name }}</span>
                 @if (item.isBestseller) {
-                  <span class="bestseller-tag">Bestseller</span>
+                  <span class="bestseller-tag">★ Bestseller</span>
                 }
               </div>
-              <span class="menu-price">{{ item.price | currency:'INR':'symbol':'1.0-0' }}</span>
-              <span class="menu-desc">{{ item.description }}</span>
+              <p class="menu-price">{{ item.price | currency:'INR':'symbol':'1.0-0' }}</p>
+              <p class="menu-desc">{{ item.description }}</p>
             </div>
             <div class="menu-action">
               @if (getCartQty(item.id) > 0) {
-                <span class="in-cart-badge">{{ getCartQty(item.id) }} in cart</span>
+                <span class="in-cart">{{ getCartQty(item.id) }} in cart</span>
               }
-              <button class="menu-add-btn" (click)="addItem(item)">
-                ADD
-              </button>
+              <button mat-stroked-button color="primary" (click)="addItem(item)">ADD</button>
             </div>
           </div>
-        }
-      </div>
-    </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
 
-    <!-- Cart Panel -->
-    <div class="cart-panel">
-      <h2 class="section-title">Your Cart</h2>
+  <!-- Cart Panel -->
+  <div class="cart-panel">
+    <h2 class="panel-title">Your Cart</h2>
 
-      @if (isEmpty()) {
-        <div class="empty-cart">
-          <span class="empty-icon">🛒</span>
+    @if (isEmpty()) {
+      <mat-card class="empty-card">
+        <mat-card-content class="empty-content">
+          <mat-icon class="empty-icon">shopping_cart</mat-icon>
           <p>Your cart is empty</p>
           <p class="empty-hint">Add items from the menu to get started</p>
-        </div>
-      } @else {
-        <!-- Suggestion Banner -->
-        @if (cartSuggestion()) {
-          <div class="suggestion-banner"
-            [class.unlocked]="isFreeDeliveryUnlocked()">
-            {{ cartSuggestion() }}
-          </div>
-        }
+        </mat-card-content>
+      </mat-card>
+    } @else {
 
-        <!-- Cart Items -->
-        <div class="cart-items">
+      <!-- Suggestion Banner -->
+      @if (cartSuggestion()) {
+        <div class="suggestion-banner" [class.unlocked]="isFreeDeliveryUnlocked()">
+          {{ cartSuggestion() }}
+        </div>
+      }
+
+      <!-- Cart Items -->
+      <mat-card class="cart-items-card">
+        <mat-card-content>
           @for (item of cartItems(); track item.id) {
             <div class="cart-row">
-              <span class="cart-item-name">{{ item.name }}</span>
+              <span class="cart-name">{{ item.name }}</span>
               <div class="qty-control">
-                <button
-                  class="qty-btn"
-                  (click)="updateQuantity(item.id, -1)"
-                  [disabled]="item.quantity <= 1">−</button>
-                <span class="qty-value">{{ item.quantity }}</span>
-                <button
-                  class="qty-btn"
-                  (click)="updateQuantity(item.id, +1)"
-                  [disabled]="item.quantity >= 10">+</button>
+                <button mat-icon-button (click)="updateQuantity(item.id, -1)" [disabled]="item.quantity <= 1">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="qty-val">{{ item.quantity }}</span>
+                <button mat-icon-button (click)="updateQuantity(item.id, +1)" [disabled]="item.quantity >= 10">
+                  <mat-icon>add</mat-icon>
+                </button>
               </div>
-              <span class="cart-item-total">{{ item.price * item.quantity | currency:'INR':'symbol':'1.0-0' }}</span>
-              <button class="remove-btn" (click)="removeItem(item.id)" aria-label="Remove item">✕</button>
+              <span class="cart-total">{{ item.price * item.quantity | currency:'INR':'symbol':'1.0-0' }}</span>
+              <button mat-icon-button (click)="removeItem(item.id)" aria-label="Remove">
+                <mat-icon>close</mat-icon>
+              </button>
             </div>
           }
-        </div>
+        </mat-card-content>
+      </mat-card>
 
-        <!-- Coupon Input -->
-        <div class="coupon-section">
-          <div class="coupon-input-row">
-            <input
-              class="coupon-input"
-              type="text"
-              placeholder="Enter coupon code"
-              [value]="couponCode()"
-              (input)="onCouponInput($event)" />
+      <!-- Coupon -->
+      <mat-card class="coupon-card">
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="coupon-field">
+            <mat-label>Enter coupon code</mat-label>
+            <input matInput [value]="couponCode()" (input)="onCouponInput($event)" />
             @if (couponDiscount() > 0) {
-              <span class="coupon-applied">SWIGGY20 applied!</span>
+              <mat-hint>✅ SWIGGY20 applied!</mat-hint>
             } @else if (couponCode().length > 0) {
-              <span class="coupon-hint">Try SWIGGY20</span>
+              <mat-hint>Try SWIGGY20</mat-hint>
             }
-          </div>
-          <div class="coupon-list">
-            @for (coupon of availableCoupons; track coupon.code) {
-              <div class="coupon-chip" (click)="applyCoupon(coupon.code)">
-                <span class="coupon-code">{{ coupon.code }}</span>
-                <span class="coupon-label">{{ coupon.label }}</span>
-              </div>
-            }
-          </div>
-        </div>
+          </mat-form-field>
 
-        <!-- Bill Breakdown -->
-        <div class="bill-section">
-          <h3 class="bill-title">Bill Details</h3>
+          <mat-chip-set>
+            @for (coupon of availableCoupons; track coupon.code) {
+              <mat-chip (click)="applyCoupon(coupon.code)">
+                {{ coupon.code }} — {{ coupon.label }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Bill Breakdown -->
+      <mat-card class="bill-card">
+        <mat-card-header>
+          <mat-card-title>Bill Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
           <div class="bill-row">
             <span>Item Total</span>
             <span>{{ subtotal() | currency:'INR':'symbol':'1.0-0' }}</span>
           </div>
           <div class="bill-row">
             <span>Delivery Fee</span>
-            <span [class.strikethrough]="isDeliveryFree()">
-              {{ DELIVERY_FEE | currency:'INR':'symbol':'1.0-0' }}
+            <span>
+              <span [class.strikethrough]="isDeliveryFree()">{{ DELIVERY_FEE | currency:'INR':'symbol':'1.0-0' }}</span>
+              @if (isDeliveryFree()) { <span class="free-tag">FREE</span> }
             </span>
-            @if (isDeliveryFree()) {
-              <span class="free-tag">FREE</span>
-            }
           </div>
           @if (couponDiscount() > 0) {
             <div class="bill-row savings-row">
-              <span>Coupon Discount (SWIGGY20)</span>
+              <span>Coupon (SWIGGY20)</span>
               <span>−{{ couponDiscount() | currency:'INR':'symbol':'1.0-0' }}</span>
             </div>
           }
@@ -141,23 +145,22 @@
             <span>GST (5%)</span>
             <span>{{ gst() | currency:'INR':'symbol':'1.0-0' }}</span>
           </div>
+          <mat-divider class="bill-divider" />
           <div class="bill-row total-row">
-            <span>Grand Total</span>
-            <span>{{ grandTotal() | currency:'INR':'symbol':'1.0-0' }}</span>
+            <strong>Grand Total</strong>
+            <strong>{{ grandTotal() | currency:'INR':'symbol':'1.0-0' }}</strong>
           </div>
           @if (savings() > 0) {
-            <div class="savings-banner">
-              You're saving {{ savings() | currency:'INR':'symbol':'1.0-0' }} on this order!
-            </div>
+            <p class="savings-banner">🎉 You're saving {{ savings() | currency:'INR':'symbol':'1.0-0' }}!</p>
           }
-        </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-stroked-button (click)="clearCart()">Clear Cart</button>
+          <button mat-flat-button color="primary">Proceed to Checkout</button>
+        </mat-card-actions>
+      </mat-card>
 
-        <!-- Actions -->
-        <div class="cart-actions">
-          <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
-          <button class="checkout-btn">Proceed to Checkout</button>
-        </div>
-      }
-    </div>
+    }
   </div>
+
 </div>

@@ -8,12 +8,16 @@ import {
   signal,
 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { StockTickerService } from '../../services/stock-ticker.service';
 
 @Component({
   selector: 'app-stock-dashboard',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, MatCardModule, MatButtonModule, MatIconModule, MatTableModule],
   templateUrl: './stock-dashboard.component.html',
   styleUrl: './stock-dashboard.component.scss',
   /**
@@ -27,6 +31,7 @@ export class StockDashboardComponent implements OnInit, OnDestroy {
 
   // ── Source Signal (from service) ────────────────────────────────────────────
   readonly stocks = this.ticker.stocks;
+  readonly displayedColumns = ['symbol', 'name', 'price', 'change'];
   readonly isLive = signal(true);
 
   // ── Computed Signals ────────────────────────────────────────────────────────

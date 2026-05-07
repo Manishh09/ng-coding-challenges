@@ -1,72 +1,67 @@
-<div class="challenge-container">
-  <!-- Header -->
-  <div class="header">
-    <div class="brand">
-      <span class="brand-logo">🎬</span>
-      <span class="brand-name">BookMyShow</span>
+<mat-card class="seat-card">
+  <mat-card-header>
+    <div mat-card-avatar class="brand-avatar">🎬</div>
+    <mat-card-title>BookMyShow</mat-card-title>
+    <mat-card-subtitle>Movie Seat Selector — Select the number of seats for your booking</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <!-- Seat Counter -->
+    <div class="counter-section">
+      <p class="section-label">How many seats?</p>
+      <div class="counter">
+        <button mat-icon-button color="warn"
+          [disabled]="isAtMin()"
+          (click)="decrement()"
+          aria-label="Decrease seat count">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+
+        <span class="seat-badge">{{ seats() }}</span>
+
+        <button mat-icon-button color="primary"
+          [disabled]="isAtMax()"
+          (click)="increment()"
+          aria-label="Increase seat count">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </div>
+      <button mat-stroked-button (click)="reset()" [disabled]="isAtMin()">Reset</button>
     </div>
-    <h1 class="title">Movie Seat Selector</h1>
-    <p class="subtitle">Select the number of seats for your booking</p>
-  </div>
 
-  <!-- Seat Counter -->
-  <div class="counter-section">
-    <h2 class="section-title">How many seats?</h2>
-    <div class="counter">
-      <button
-        class="counter-btn decrement"
-        [disabled]="isAtMin()"
-        (click)="decrement()"
-        aria-label="Decrease seat count">
-        −
-      </button>
+    <mat-divider class="my-divider" />
 
-      <span class="seat-badge">{{ seats() }}</span>
+    <!-- Price Breakdown -->
+    <div class="breakdown-section">
+      <p class="section-label">Price Breakdown</p>
 
-      <button
-        class="counter-btn increment"
-        [disabled]="isAtMax()"
-        (click)="increment()"
-        aria-label="Increase seat count">
-        +
-      </button>
+      <div class="breakdown-row">
+        <span>Seats</span>
+        <span>{{ priceBreakdown().seats }}</span>
+      </div>
+      <div class="breakdown-row">
+        <span>Price per seat</span>
+        <span>{{ priceBreakdown().pricePerSeat | currency:'INR':'symbol':'1.0-0' }}</span>
+      </div>
+
+      <mat-divider class="my-divider" />
+
+      <div class="breakdown-row total">
+        <strong>Total</strong>
+        <strong class="total-price">{{ priceBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</strong>
+      </div>
     </div>
-    <button class="reset-btn" (click)="reset()" [disabled]="isAtMin()">
-      Reset
-    </button>
-  </div>
 
-  <!-- Price Breakdown -->
-  <div class="breakdown-card">
-    <h2 class="section-title">Price Breakdown</h2>
-    <table class="breakdown-table">
-      <tbody>
-        <tr>
-          <td class="label">Seats</td>
-          <td class="value">{{ priceBreakdown().seats }}</td>
-        </tr>
-        <tr>
-          <td class="label">Price per seat</td>
-          <td class="value">{{ priceBreakdown().pricePerSeat | currency:'INR':'symbol':'1.0-0' }}</td>
-        </tr>
-        <tr class="total-row">
-          <td class="label">Total</td>
-          <td class="value total-price">{{ priceBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </mat-card-content>
 
-  <!-- Summary & Proceed -->
-  <div class="summary-card">
-    <div class="summary-info">
-      <span class="summary-badge">🎟️ {{ seats() }} {{ seats() === 1 ? 'Seat' : 'Seats' }}</span>
-      <span class="summary-total">{{ totalPrice() | currency:'INR':'symbol':'1.0-0' }}</span>
-    </div>
-    <button
-      class="proceed-btn"
+  <mat-divider />
+
+  <mat-card-actions align="end">
+    <span class="summary-label">🎟️ {{ seats() }} {{ seats() === 1 ? 'Seat' : 'Seats' }}</span>
+    <button mat-flat-button color="primary"
       [disabled]="seats() < 1 || totalPrice() <= 0">
       Proceed to Pay
     </button>
-  </div>
-</div>
+  </mat-card-actions>
+</mat-card>

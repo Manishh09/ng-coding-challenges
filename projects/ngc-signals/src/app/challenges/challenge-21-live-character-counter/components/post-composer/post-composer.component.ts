@@ -1,9 +1,14 @@
 import { Component, signal, computed, effect } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 type PostStrength = 'too short' | 'good' | 'long';
 
 @Component({
   selector: 'app-post-composer',
+  imports: [MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule],
   templateUrl: './post-composer.component.html',
   styleUrl: './post-composer.component.scss'
 })

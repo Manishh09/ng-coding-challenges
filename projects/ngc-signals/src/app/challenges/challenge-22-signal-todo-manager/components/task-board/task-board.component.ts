@@ -1,8 +1,18 @@
 import { Component, signal, computed } from '@angular/core';
 import { Task, TaskPriority, TaskStatus, PriorityFilter, BoardStats } from '../../models/task.model';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-task-board',
+  imports: [MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule, MatProgressBarModule, MatDividerModule],
   templateUrl: './task-board.component.html',
   styleUrl: './task-board.component.scss'
 })

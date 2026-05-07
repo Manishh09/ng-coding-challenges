@@ -1,11 +1,21 @@
 import { Component, signal, computed } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { debounceTime, distinctUntilChanged, switchMap, startWith } from 'rxjs/operators';
 import { Job } from '../../models/job.model';
 import { JobService } from '../../services/job.service';
 
 @Component({
   selector: 'app-job-search',
+  imports: [MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSliderModule, MatChipsModule, MatProgressSpinnerModule, MatIconModule],
   templateUrl: './job-search.component.html',
   styleUrl: './job-search.component.scss'
 })

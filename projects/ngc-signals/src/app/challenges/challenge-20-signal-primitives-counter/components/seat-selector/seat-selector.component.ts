@@ -1,9 +1,13 @@
 import { Component, signal, computed, effect } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-seat-selector',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, MatCardModule, MatButtonModule, MatIconModule, MatDividerModule],
   templateUrl: './seat-selector.component.html',
   styleUrl: './seat-selector.component.scss'
 })

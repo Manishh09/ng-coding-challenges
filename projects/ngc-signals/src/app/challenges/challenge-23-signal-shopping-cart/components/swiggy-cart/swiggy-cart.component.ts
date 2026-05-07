@@ -1,11 +1,19 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBadgeModule } from '@angular/material/badge';
 import { CartItem, MenuItem, OrderSummary, Restaurant, Coupon } from '../../models/cart.model';
 import { SwiggyMenuService } from '../../services/swiggy-menu.service';
 
 @Component({
   selector: 'app-swiggy-cart',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDividerModule, MatChipsModule, MatBadgeModule],
   templateUrl: './swiggy-cart.component.html',
   styleUrl: './swiggy-cart.component.scss'
 })

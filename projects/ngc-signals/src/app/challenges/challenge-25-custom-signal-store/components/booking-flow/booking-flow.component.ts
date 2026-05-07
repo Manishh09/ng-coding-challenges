@@ -1,12 +1,21 @@
 import { Component, inject, signal } from '@angular/core';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BookingStore } from '../../services/booking.store';
 import { FlightDataService } from '../../services/flight-data.service';
 import { Flight } from '../../models/booking.model';
 
 @Component({
   selector: 'app-booking-flow',
-  imports: [CurrencyPipe, UpperCasePipe],
+  imports: [CurrencyPipe, UpperCasePipe, MatStepperModule, MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatListModule, MatDividerModule, MatProgressSpinnerModule],
   templateUrl: './booking-flow.component.html',
   styleUrl: './booking-flow.component.scss'
 })
