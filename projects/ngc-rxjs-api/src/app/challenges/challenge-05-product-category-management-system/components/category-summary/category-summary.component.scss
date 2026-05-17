@@ -1,8 +1,4 @@
-.summary-card {
-      padding: 1rem;
-      margin-top: 1rem;
+.list-content { padding: 0 !important; }
 
-    }
-    h2 {
-      font-weight: 600;
-    }
+.item-text { color: var(--on-surface-color); }
+.item-icon { color: var(--on-surface-variant-color); }

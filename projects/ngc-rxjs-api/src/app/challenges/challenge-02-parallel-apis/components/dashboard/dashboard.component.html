@@ -1,55 +1,83 @@
-<div class="challenge-container">
+<div class="page">
 
-  <!-- Dashboard Container -->
-  <div class="dashboard-container">
-
-    @if (loading) {
-    <div>Loading...</div>
-    }
-
-    @if (errorObj.hasError) {
-    <div class="error-message">
-      <p>Error: {{ errorObj.message }}</p>
+  <!-- Loading -->
+  @if (loading) {
+    <div class="loading-center">
+      <mat-spinner diameter="40" />
+      <p>Loading dashboard data...</p>
     </div>
-    }
+  }
 
+  <!-- Error -->
+  @if (errorObj.hasError) {
+    <mat-card>
+      <mat-card-content class="error-content">
+        <mat-icon class="icon-error">error_outline</mat-icon>
+        <p class="error-text">{{ errorObj.message }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
 
-    @if (!loading && !errorObj.hasError) {
+  @if (!loading && !errorObj.hasError) {
 
-
-    <div class="stats-section">
-      <p>Total Users: {{ users.length }}</p>
-      <p>Total Posts: {{ posts.length }}</p>
+    <!-- Stats -->
+    <div class="stats-row">
+      <mat-card>
+        <mat-card-content class="stat-content">
+          <p class="stat-label">Total Users</p>
+          <p class="stat-value">{{ users.length }}</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-content class="stat-content">
+          <p class="stat-label">Total Posts</p>
+          <p class="stat-value">{{ posts.length }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
 
-    <div class="user-posts-container">
-      <div class="user-list">
+    <!-- Data columns -->
+    <div class="data-row">
 
-        <h3>User List</h3>
-        <ul>
-          @for (user of users; track user.id) {
-          <li>{{ user.name }}</li>
-          }
-          @empty {
-          <li>No users available.</li>
-          }
-        </ul>
-      </div>
-      <div class="post-list">
+      <mat-card>
+        <mat-card-content class="list-content">
+          <p class="list-heading">Users</p>
+          <mat-list>
+            @for (user of users; track user.id) {
+              <mat-list-item>
+                <mat-icon class="item-icon" matListItemIcon>person</mat-icon>
+                <span class="item-text" matListItemTitle>{{ user.name }}</span>
+              </mat-list-item>
+            }
+            @empty {
+              <mat-list-item>
+                <span class="item-text" matListItemTitle>No users available.</span>
+              </mat-list-item>
+            }
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
 
-        <h3>Post List</h3>
-        <ul>
-          @for (post of posts; track post.id) {
-          <li>{{ post.title }}</li>
-          }
-          @empty {
-          <li>No posts available.</li>
-          }
-        </ul>
-      </div>
+      <mat-card>
+        <mat-card-content class="list-content">
+          <p class="list-heading">Posts</p>
+          <mat-list>
+            @for (post of posts; track post.id) {
+              <mat-list-item>
+                <mat-icon class="item-icon" matListItemIcon>article</mat-icon>
+                <span class="item-text" matListItemTitle>{{ post.title }}</span>
+              </mat-list-item>
+            }
+            @empty {
+              <mat-list-item>
+                <span class="item-text" matListItemTitle>No posts available.</span>
+              </mat-list-item>
+            }
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
     </div>
-    }
-
-  </div>
+  }
 
 </div>

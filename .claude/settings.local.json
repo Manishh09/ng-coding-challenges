@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"d:\\\\manish\\\\Workspace\\\\Angular\\\\ng-coding-challenges\" -name \"angular.json\" -type f -exec head -50 {} \\\\;)"
+    ]
+  }
+}

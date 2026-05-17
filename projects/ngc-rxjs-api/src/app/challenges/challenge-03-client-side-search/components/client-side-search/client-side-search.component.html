@@ -1,47 +1,57 @@
-<div class="challenge-container">
-  <!-- Search Container -->
-  <div class="client-search-container">
-    <!-- Search Input -->
-    <div class="search-container">
-      <mat-form-field appearance="outline">
+<div class="page">
+
+  <!-- Search -->
+  <mat-card>
+    <mat-card-content class="search-content">
+      <mat-form-field appearance="outline" class="search-field">
         <mat-label>Search users</mat-label>
-        <input matInput [formControl]="searchControl" placeholder="Search Users..e.g: Nic" />
+        <input matInput [formControl]="searchControl" placeholder="e.g. Nic" />
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-    </div>
+    </mat-card-content>
+  </mat-card>
 
-    @if (loading) {
-    <div>Loading...</div>
-    }
-
-    @if (error) {
-    <div class="error-message">
-      <p>Error: {{ error }}</p>
+  <!-- Loading -->
+  @if (loading) {
+    <div class="loading-center">
+      <mat-spinner diameter="40" />
+      <p class="muted-text">Loading users...</p>
     </div>
-    }
-    <!-- User List -->
-    @if (filteredUsers$ | async; as filteredUsers) {
+  }
+
+  <!-- Error -->
+  @if (error) {
+    <mat-card>
+      <mat-card-content class="error-content">
+        <mat-icon class="icon-error">error_outline</mat-icon>
+        <p class="error-text">{{ error }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Results -->
+  @if (filteredUsers$ | async; as filteredUsers) {
     @if (filteredUsers.length > 0) {
-    <div class="user-list">
-      @for (user of filteredUsers; track user.id) {
-      <mat-card class="user-card">
-        <mat-card-title class="user-name">{{ user.name }}</mat-card-title>
-        <!-- Can be displayed if needed -->
-        <!-- <mat-card-content>
-                  <p>Email: {{ user.email }}</p>
-                  <p>Phone: {{ user.phone }}</p>
-                  <p>Website: {{ user.website }}</p>
-                </mat-card-content> -->
+      <mat-card>
+        <mat-card-content class="list-content">
+          <mat-list>
+            @for (user of filteredUsers; track user.id) {
+              <mat-list-item>
+                <mat-icon class="item-icon" matListItemIcon>person</mat-icon>
+                <span class="item-text" matListItemTitle>{{ user.name }}</span>
+              </mat-list-item>
+            }
+          </mat-list>
+        </mat-card-content>
       </mat-card>
-      }
-    </div>
-    } @else {
-
-    @if(!error){
-
-    <p class="no-results">No users found.</p>
+    } @else if (!error) {
+      <mat-card>
+        <mat-card-content class="empty-content">
+          <mat-icon class="empty-icon">person_search</mat-icon>
+          <p class="muted-text">No users found</p>
+        </mat-card-content>
+      </mat-card>
     }
-    }
-    }
-  </div>
+  }
 
 </div>

@@ -1,102 +1,65 @@
-
-.user-todos-container {
-    border-top: 1px solid var(--outline-color);
-    padding: 1rem;
-
-    width: 85%;
-    margin: auto;
-   // box-shadow: 0 2px 5px var(--shadow-color);
-    background-color: var(--surface-color);
-
-    .filter-container {
-        margin: 1rem 0;
-        text-align: left;
-        background-color: var(--surface-color);
-    }
-
-    .view-mode {
-        margin: 1rem 0;
-        text-align: left;
-        background-color: var(--surface-color) !important;
-        color: var(--text-primary);
-
-        span {
-            color: var(--text-primary);
-            margin-right: 1rem;
-        }
-
-        mat-radio-button {
-            margin-right: 1rem;
-            outline: none;
-
-            ::ng-deep .mdc-form-field {
-                color: var(--text-primary);
-            }
-
-            ::ng-deep .mdc-radio .mdc-radio__background {
-                border-color: var(--text-primary);
-            }
-
-        }
-    }
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: var(--surface-secondary);
+  color: var(--on-surface-color);
 }
 
-
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    box-shadow: 0 2px 5px var(--shadow-color);
-    border-radius: 4px;
-    overflow: hidden;
-    color: var(--on-surface-color);
-    background-color: var(--surface-color);
-
-
-    th,
-    td {
-        border: 1px solid var(--outline-color);
-        padding: 0.75rem;
-        text-align: left;
-    }
-
-    th {
-        background-color: var(--surface-variant-color);
-        font-weight: 600;
-    }
-
-    tr:nth-child(even) {
-        background-color: var(--surface-variant-color);
-    }
-
-    tr:hover {
-        background-color: var(--interactive-secondary-hover);
-    }
-
-    tbody {
-        .completed {
-            color: var(--status-success, #4caf50);
-        }
-
-        .pending {
-            color: var(--status-error, #f44336);
-        }
-    }
-
-
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-
-
-@media (max-width: 768px) {
-
-    .nav-wrapper {
-        margin-top: 0.5rem;
-    }
-
-    .view-mode {
-        display: flex;
-        flex-direction: column;
-    }
+// ── Controls ──────────────────────────────────────────────────────────────────
+.controls-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 4px !important;
 }
+
+.view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.view-label { font-size: 0.875rem; color: var(--on-surface-variant-color); }
+
+// Radio button label text — host element is in consumer template so
+// setting the MDC CSS variable here cascades into Material's internals.
+.radio-opt { --mat-radio-label-text-color: var(--on-surface-color); }
+
+// ── Table ─────────────────────────────────────────────────────────────────────
+.table-content { padding: 0 !important; }
+.todos-table   { width: 100%; }
+
+// th/td are in the consumer template → _ngcontent-xxx is stamped → these rules apply
+.col-header { color: var(--on-surface-variant-color); }
+.col-cell   { color: var(--on-surface-color); }
+
+.task-cell { max-width: 320px; white-space: normal; font-size: 0.875rem; }
+
+// Chip text is set via CSS custom property on the chip host (also in template)
+.chip-done    { --mdc-chip-label-text-color: #16a34a; }
+.chip-pending { --mdc-chip-label-text-color: #dc2626; }
+
+// ── Loading / empty ───────────────────────────────────────────────────────────
+.loading-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.muted-text { color: var(--on-surface-variant-color); margin: 0; }
+
+.no-data { text-align: center; color: var(--text-tertiary); padding: 1rem; }

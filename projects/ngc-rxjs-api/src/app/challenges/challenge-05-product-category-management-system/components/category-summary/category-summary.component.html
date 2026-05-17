@@ -1,11 +1,17 @@
-<mat-card class="summary-card">
-  <h3>Category Summary</h3>
-  <p>Total Categories: {{ categories().length }}</p>
-
-  <h3>Category List</h3>
-  <ul>
-    @for (cat of categories(); track cat.id) {
-      <li>{{ cat.name }}</li>
-    }
-  </ul>
+<mat-card>
+  <mat-card-content class="list-content">
+    <mat-list>
+      @for (cat of categories(); track cat.id) {
+        <mat-list-item>
+          <mat-icon class="item-icon" matListItemIcon>label</mat-icon>
+          <span class="item-text" matListItemTitle>{{ cat.name }}</span>
+        </mat-list-item>
+      }
+      @empty {
+        <mat-list-item>
+          <span class="item-text" matListItemTitle>No categories available.</span>
+        </mat-list-item>
+      }
+    </mat-list>
+  </mat-card-content>
 </mat-card>

@@ -1,66 +1,61 @@
-<div class="challenge-container">
-
-  <!-- User Posts Dashboard Section -->
-  <div class="user-posts-dashboard-container">
+<div class="page">
 
   <!-- Loading -->
-  @if(isLoading){
-
-  <div class="status loading">
-    Loading users and posts...
-  </div>
+  @if (isLoading) {
+    <div class="loading-center">
+      <mat-spinner diameter="40" />
+      <p class="muted-text">Loading users and posts...</p>
+    </div>
   }
 
   <!-- Error -->
-  @if(error){
-
-  <div class="status error">
-    {{ error }}
-  </div>
+  @if (error) {
+    <mat-card>
+      <mat-card-content class="error-content">
+        <mat-icon class="icon-error">error_outline</mat-icon>
+        <p class="error-text">{{ error }}</p>
+      </mat-card-content>
+    </mat-card>
   }
 
-  <!-- Table -->
-  @if(!isLoading && !error && usersWithPosts.length){
-
-  <table class="users-table">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Posts Count</th>
-        <th>Posts</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      @for(user of usersWithPosts; track user.id){
-      <tr>
-        <td>{{ user.firstName }} {{ user.lastName }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <ul>
-            @for(post of user.posts; track post.id){
-            <li>{{ post.title }}</li>
-            }
-            @if (user.posts.length === 0) {
-            <li class="no-posts">No posts</li>
-            }
-          </ul>
-        </td>
-        <td>{{ user.posts.length }}</td>
-      </tr>
+  <!-- User cards -->
+  @if (!isLoading && !error && usersWithPosts.length) {
+    <div class="users-grid">
+      @for (user of usersWithPosts; track user.id) {
+        <mat-card>
+          <mat-card-content>
+            <p class="user-name">{{ user.firstName }} {{ user.lastName }}</p>
+            <p class="user-email">{{ user.email }}</p>
+            <mat-chip-set>
+              <mat-chip class="posts-chip">{{ user.posts.length }} posts</mat-chip>
+            </mat-chip-set>
+            <mat-list dense class="posts-list">
+              @for (post of user.posts; track post.id) {
+                <mat-list-item class="post-item">
+                  <mat-icon class="post-icon" matListItemIcon>article</mat-icon>
+                  <span class="post-title" matListItemTitle>{{ post.title }}</span>
+                </mat-list-item>
+              }
+              @empty {
+                <mat-list-item>
+                  <span class="no-posts" matListItemTitle>No posts</span>
+                </mat-list-item>
+              }
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
       }
-    </tbody>
-  </table>
+    </div>
   }
 
-  <!-- Empty state -->
-  @if(!isLoading && !error && usersWithPosts.length === 0){
-  <div class="status empty">
-    No users available
-  </div>
+  <!-- Empty -->
+  @if (!isLoading && !error && usersWithPosts.length === 0) {
+    <mat-card>
+      <mat-card-content class="empty-content">
+        <mat-icon class="empty-icon">people_outline</mat-icon>
+        <p class="muted-text">No users available</p>
+      </mat-card-content>
+    </mat-card>
   }
-</div>
+
 </div>

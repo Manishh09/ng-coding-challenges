@@ -1,91 +1,74 @@
-.user-posts-dashboard-container {
-  padding: 1rem;
-  width: 85%;
-  margin: 1rem auto;
-  // box-shadow: 0 2px 5px var(--shadow-color);
-  background-color: var(--surface-color);
-}
-
-/* Status messages */
-.status {
-  text-align: center;
-  margin: 1rem 0;
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
-  font-size: 0.95rem;
-
-  &.loading {
-    background: var(--status-info-alpha-10);
-    color: var(--status-info-dark);
-  }
-
-  &.error {
-    background: var(--status-error-alpha-10);
-    color: var(--status-error-dark);
-  }
-
-  &.empty {
-    background: var(--surface-tertiary);
-    color: var(--text-tertiary);
-  }
-}
-
-/* Table styling */
-.users-table {
+:host {
+  display: block;
   width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  box-shadow: 0 2px 5px var(--shadow-color);
-  border-radius: 4px;
-  overflow: hidden;
+  min-height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: var(--surface-secondary);
   color: var(--on-surface-color);
-  background-color: var(--surface-color);
-
-
-  th,
-  td {
-    border: 1px solid var(--outline-color);
-    padding: 0.75rem;
-  }
-
-  th {
-    background-color: var(--surface-variant-color);
-    font-weight: 600;
-  }
-
-  tr:nth-child(even) {
-    background-color: var(--surface-variant-color);
-  }
-
-  tr:hover {
-    background-color: var(--interactive-secondary-hover);
-  }
-
-  .count {
-    text-align: center;
-    font-weight: bold;
-  }
 }
 
-/* Posts list inside table cell */
-.posts-list {
-  margin: 0;
-  padding-left: 1rem;
-
-  li {
-    margin: 2px 0;
-    font-size: 0.85rem;
-  }
-
-  .no-posts {
-    color: var(--text-tertiary);
-    font-style: italic;
-  }
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-@media (max-width: 768px) {
-
-  .nav-wrapper {
-    margin-top: 0.5rem;
-  }
+// ── Loading ───────────────────────────────────────────────────────────────────
+.loading-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
 }
+
+.muted-text { color: var(--on-surface-variant-color); margin: 0; }
+
+// ── Error ─────────────────────────────────────────────────────────────────────
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 12px !important;
+}
+
+.icon-error { color: var(--status-error); }
+.error-text { color: var(--status-error); margin: 0; }
+
+// ── User cards grid ───────────────────────────────────────────────────────────
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.user-name  { font-weight: 600; font-size: 0.95rem; margin: 0 0 0.1rem; color: var(--on-surface-color); }
+.user-email { font-size: 0.8rem; margin: 0 0 0.5rem; color: var(--on-surface-variant-color); }
+
+// Chip — set MDC CSS variable on the host (in consumer template → gets _ngcontent-xxx)
+// so the value cascades into Material's internal label element
+.posts-chip { --mdc-chip-label-text-color: var(--on-surface-color); }
+
+// ── Post list ─────────────────────────────────────────────────────────────────
+.posts-list { padding: 0 !important; }
+
+.post-item  { height: auto !important; align-items: flex-start !important; }
+
+// mat-icon and span[matListItemTitle] are in consumer template → _ngcontent-xxx applied
+.post-icon  { font-size: 1rem; width: 1rem; height: 1rem; margin-top: 2px; color: var(--on-surface-variant-color); }
+.post-title { font-size: 0.8rem; white-space: normal; line-height: 1.4; color: var(--on-surface-color); }
+.no-posts   { font-size: 0.8rem; font-style: italic; color: var(--text-tertiary); }
+
+// ── Empty state ───────────────────────────────────────────────────────────────
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem !important;
+  gap: 0.5rem;
+}
+
+.empty-icon { color: var(--text-tertiary); font-size: 2.5rem; width: 2.5rem; height: 2.5rem; }

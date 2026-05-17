@@ -1,126 +1,49 @@
-.server-search-container {
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: var(--surface-secondary);
+  color: var(--on-surface-color);
+}
 
-  width: 85%;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid var(--outline-color, #e0e0e0);
-  border-radius: 8px;
-  background-color: var(--surface-color, #ffffff);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-
+  gap: 1rem;
 }
 
-.search-input {
-  width: 100%;
-  max-width: 100%;
-  padding: 0.6rem 0.8rem;
-  font-size: 1rem;
-  border: 1px solid var(--outline-color, #e0e0e0);
-  border-radius: 4px;
-  outline: none;
-  background-color: var(--surface-color, #ffffff);
-  color: var(--on-surface-color, #212121);
-  box-sizing: border-box;
-  /* Critical fix: includes padding in width calculation */
-  display: block;
-  /* Ensures proper block display */
-  min-width: 0;
-  /* Prevents input from extending beyond container */
-  flex: 1 1 auto;
-  /* Allows input to shrink if needed */
+.search-content { padding-bottom: 4px !important; }
+.search-field   { width: 100%; }
+.list-content   { padding: 0 !important; }
 
+// ── Explicitly-coloured template elements ─────────────────────────────────────
+.item-text  { color: var(--on-surface-color); }
+.item-icon  { color: var(--on-surface-variant-color); }
+.muted-text { color: var(--on-surface-variant-color); margin: 0; }
+.error-text { color: var(--status-error); margin: 0; }
+.icon-error { color: var(--status-error); }
 
-
-  &::placeholder {
-    color: var(--on-surface-variant-color, #616161);
-  }
+// ── Loading ───────────────────────────────────────────────────────────────────
+.loading-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
 }
 
-.search-input:focus {
-  border-color: var(--primary-color, #dd0031);
-  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 221, 0, 49), 0.1);
+// ── Empty & Error cards ───────────────────────────────────────────────────────
+.empty-content,
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem !important;
+  gap: 0.5rem;
 }
 
-ul {
-  list-style: none;
-  margin: 1rem 0 0 0;
-  padding: 0;
-}
-
-li {
-  padding: 0.5rem;
-  border-bottom: 1px solid var(--outline-color, #e0e0e0);
-  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-
-  // Use on-surface-color in light mode
-  color: var(--on-surface-color, #212121);
-
-  &:hover {
-    background-color: rgba(var(--on-surface-color-rgb, 33, 33, 33), 0.05);
-  }
-}
-
-li:last-child {
-  border-bottom: none;
-}
-
-p {
-  margin-top: 0.8rem;
-  font-size: 0.95rem;
-  color: var(--on-surface-color, #212121);
-  transition: color 0.3s ease;
-}
-
-.error {
-  color: var(--warn-color, #f44336);
-  font-weight: bold;
-  margin-top: 0.5rem;
-}
-
-// Use on-surface-color in light mode
-.loading,
-.error,
-.no-results {
-  color: var(--on-surface-variant-color, #616161);
-}
-
-/* Dark theme specific styles */
-:host-context(.dark-theme) {
-  li {
-    color: var(--primary-color, #dd0031);
-
-    &:hover {
-      background-color: rgba(var(--primary-color-rgb, 221, 0, 49), 0.05);
-    }
-  }
-
-  .loading,
-  .error,
-  .no-results {
-    color: var(--primary-color, #dd0031);
-  }
-}
-
-// Simple responsive adjustment
-@media (max-width: 768px) {
-
-  .header {
-    margin-top: 48px;
-    margin-bottom: 24px;
-  }
-
-  .search-container {
-
-    margin: 1rem auto;
-    padding: 0.75rem;
-    width: 85%;
-  }
-
-  .search-input {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.7rem;
-  }
-}
+.empty-icon { color: var(--text-tertiary); font-size: 2.5rem; width: 2.5rem; height: 2.5rem; }

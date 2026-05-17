@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, Input, signal } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-category-summary',
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatListModule, MatIconModule],
   templateUrl: './category-summary.component.html',
   styleUrl: './category-summary.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

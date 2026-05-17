@@ -1,92 +1,45 @@
-.product-list-container {
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  font-family: Roboto, sans-serif;
+  background: var(--surface-secondary);
+  color: var(--on-surface-color);
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loading-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: var(--on-surface-color, #212121);
-  margin: auto;
-
-  width: 85%;
+  padding: 3rem;
+  gap: 1rem;
+  color: var(--on-surface-variant-color);
 }
 
-.product-count {
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.table-content { padding: 0 !important; }
 
-  p {
-    font-size: 1rem;
-    color: var(--primary-color, #3f51b5);
-  }
+.product-table { width: 100%; }
+
+.r { text-align: right !important; }
+
+.title-cell {
+  max-width: 260px;
+  white-space: normal;
+  font-size: 0.875rem;
 }
 
-.product-table-wrapper {
-  width: 100%;
-}
+.price-cell { font-weight: 600; color: var(--primary-color); }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  box-shadow: 0 2px 5px var(--shadow-color, rgba(0, 0, 0, 0.1));
-  border-radius: 4px;
-  overflow: hidden;
-  color: var(--on-surface-color, #212121);
-  background-color: var(--surface-color, #ffffff);
-}
+.rating-value { font-weight: 500; color: #f57c00; margin-right: 4px; }
+.rating-count { color: var(--on-surface-variant-color); font-size: 0.8rem; }
 
-th,
-td {
-  border: 1px solid var(--outline-color, #e0e0e0);
-  padding: 0.75rem;
-  text-align: left;
-}
-
-th {
-  background-color: var(--surface-variant-color, #f4f4f4);
-  font-weight: 500;
-}
-
-tr:nth-child(even) {
-  background-color: var(--surface-variant-color, #f9f9f9);
-}
-
-tr:hover {
-  background-color: var(--hover-color, rgba(0, 0, 0, 0.02));
-}
-
-.category-badge {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--surface-variant-color, #e8eaf6);
-  color: var(--primary-color, #3f51b5);
-  border-radius: 16px;
-  font-size: 0.8rem;
-  text-transform: capitalize;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  .rating-value {
-    font-weight: 500;
-    color: var(--secondary-color, #f57c00);
-  }
-
-  .rating-count {
-    color: var(--on-surface-variant-color, #757575);
-    font-size: 0.85rem;
-  }
-}
-
-
-
-
-.empty {
-  text-align: center;
-  font-size: 1.1rem;
-  margin-top: 2rem;
-  color: var(--on-surface-color, #212121);
-}
+.empty { text-align: center; padding: 2rem; color: var(--text-tertiary); }
