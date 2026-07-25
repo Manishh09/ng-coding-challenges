@@ -4,11 +4,23 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs';
 import { User } from '../../models/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
- @Component({
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+@Component({
   selector: 'app-server-side-search',
   imports: [
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatListModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './server-side-search.component.html',
   styleUrl: './server-side-search.component.scss'

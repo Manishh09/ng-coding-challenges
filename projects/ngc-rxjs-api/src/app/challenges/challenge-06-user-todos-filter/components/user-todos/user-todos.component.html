@@ -1,111 +1,122 @@
-<div class="challenge-container">
+<div class="page">
 
-  <!-- User Todos Section -->
-  <div class="user-todos-container">
-    <!-- Filter Dropdown -->
-    <div class="filter-container">
-        <mat-form-field appearance="fill">
-            <mat-label>Filter by Status</mat-label>
-            <mat-select [value]="filterStatus()" (selectionChange)="onFilterChange($event.value)">
-                <mat-option value="all">All</mat-option>
-                <mat-option value="completed">Completed</mat-option>
-                <mat-option value="pending">Pending</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
+  <!-- Controls -->
+  <mat-card>
+    <mat-card-content class="controls-content">
 
-    <!-- For UI Separation only - STARTS HERE -->
-    <div class="view-mode">
-        <span>View Mode:</span>
-        <mat-radio-group [value]="viewMode()" (change)="onViewModeChange($event.value)">
-            <mat-radio-button value="basic">Basic Filter</mat-radio-button>
-            <mat-radio-button value="advanced">Advanced Filter</mat-radio-button>
-        </mat-radio-group>
-    </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Filter by Status</mat-label>
+        <mat-select [value]="filterStatus()" (selectionChange)="onFilterChange($event.value)">
+          <mat-option value="all">All</mat-option>
+          <mat-option value="completed">Completed</mat-option>
+          <mat-option value="pending">Pending</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- For UI Separation only - ENDS HERE -->
+      <mat-radio-group class="view-toggle" [value]="viewMode()" (change)="onViewModeChange($event.value)">
+        <span class="view-label">View:</span>
+        <mat-radio-button class="radio-opt" value="basic">Basic Filter</mat-radio-button>
+        <mat-radio-button class="radio-opt" value="advanced">Advanced Filter</mat-radio-button>
+      </mat-radio-group>
 
-    <!-- ===== Basic Inline Filtering ===== -->
-    @if(viewMode() === 'basic') {
+    </mat-card-content>
+  </mat-card>
+
+  <!-- ===== Basic Inline Filtering ===== -->
+  @if (viewMode() === 'basic') {
     @let todos = todosWithUsers$ | async;
-    <div class="basic-filtering">
 
-        <h3>Basic Inline Filtering</h3>
-        @if (todos?.length === 0) {
-        <p>No data available</p>
-        }
-        @else {
-        <table>
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Task</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (todo of todos; track todo.id) {
-                @if (
+    @if (todos === null) {
+      <div class="loading-center">
+        <mat-spinner diameter="40" />
+        <p class="muted-text">Loading todos...</p>
+      </div>
+    } @else if (todos.length === 0) {
+      <p class="no-data">No data available</p>
+    } @else {
+      <mat-card>
+        <mat-card-content class="table-content">
+          <table mat-table [dataSource]="todos" class="todos-table">
+
+            <ng-container matColumnDef="user">
+              <th mat-header-cell *matHeaderCellDef class="col-header">User</th>
+              <td mat-cell *matCellDef="let t" class="col-cell">{{ t.userName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="task">
+              <th mat-header-cell *matHeaderCellDef class="col-header">Task</th>
+              <td mat-cell *matCellDef="let t" class="col-cell task-cell">{{ t.title }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef class="col-header">Status</th>
+              <td mat-cell *matCellDef="let t">
+                <mat-chip-set>
+                  <mat-chip [class.chip-done]="t.completed" [class.chip-pending]="!t.completed">
+                    {{ t.completed ? 'Completed' : 'Pending' }}
+                  </mat-chip>
+                </mat-chip-set>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['user', 'task', 'status']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['user', 'task', 'status'];"
+              [style.display]="
                 filterStatus() === 'all' ||
-                (filterStatus() === 'completed' && todo.completed) ||
-                (filterStatus() === 'pending' && !todo.completed)
-                ) {
-                <tr>
-                    <td>{{ todo.userName }}</td>
-                    <td>{{ todo.title }}</td>
-                    <td>
-                        <mat-chip>
-                            <span [ngClass]="todo.completed ? 'completed' : 'pending'"> {{ todo.completed ?
-                                'Completed' : 'Pending' }} </span>
-                        </mat-chip>
-                    </td>
-                </tr>
-                }
-                }
-            </tbody>
-        </table>
-        }
-    </div>
-    }
+                (filterStatus() === 'completed' && row.completed) ||
+                (filterStatus() === 'pending' && !row.completed) ? '' : 'none'">
+            </tr>
 
-    <!-- ===== Advanced Signal-Based Filtering ===== -->
-    @if(viewMode() === 'advanced') {
+          </table>
+        </mat-card-content>
+      </mat-card>
+    }
+  }
+
+  <!-- ===== Advanced Signal-Based Filtering ===== -->
+  @if (viewMode() === 'advanced') {
     @let filtered = filteredTodos$() | async;
-    <div class="advanced-filtering">
 
-        <h3>Advanced Signal-Based Filtering</h3>
-        @if (filtered?.length === 0) {
-        <p>No data available</p>
-        }
+    @if (filtered === null) {
+      <div class="loading-center">
+        <mat-spinner diameter="40" />
+        <p class="muted-text">Loading todos...</p>
+      </div>
+    } @else if (filtered.length === 0) {
+      <p class="no-data">No data available</p>
+    } @else {
+      <mat-card>
+        <mat-card-content class="table-content">
+          <table mat-table [dataSource]="filtered" class="todos-table">
 
-        @else {
-        <table>
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Task</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (todo of filtered; track todo.id) {
-                <tr>
-                    <td>{{ todo.userName }}</td>
-                    <td>{{ todo.title }}</td>
-                    <td>
-                        <mat-chip>
-                            <span [ngClass]="todo.completed ? 'completed' : 'pending'"> {{ todo.completed ?
-                                'Completed' : 'Pending' }} </span>
-                        </mat-chip>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-        }
-    </div>
+            <ng-container matColumnDef="user">
+              <th mat-header-cell *matHeaderCellDef class="col-header">User</th>
+              <td mat-cell *matCellDef="let t" class="col-cell">{{ t.userName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="task">
+              <th mat-header-cell *matHeaderCellDef class="col-header">Task</th>
+              <td mat-cell *matCellDef="let t" class="col-cell task-cell">{{ t.title }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef class="col-header">Status</th>
+              <td mat-cell *matCellDef="let t">
+                <mat-chip-set>
+                  <mat-chip [class.chip-done]="t.completed" [class.chip-pending]="!t.completed">
+                    {{ t.completed ? 'Completed' : 'Pending' }}
+                  </mat-chip>
+                </mat-chip-set>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['user', 'task', 'status']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['user', 'task', 'status'];"></tr>
+
+          </table>
+        </mat-card-content>
+      </mat-card>
     }
+  }
 
-
-</div>
 </div>

@@ -915,8 +915,383 @@
       }
     },
     "angular-signals": {
+      "signal-primitives-counter": {
+        "id": 20,
+        "isNew": true,
+        "slug": "signal-primitives-counter",
+        "title": "Challenge 20: BookMyShow — Movie Seat Selector",
+        "categoryId": "angular-signals",
+        "difficulty": "Beginner",
+        "enabled": true,
+        "order": 1,
+        "description": "You're a developer at BookMyShow. Build the seat quantity selector used in the movie booking flow using Angular's core signal primitives — signal(), computed(), and effect().",
+        "longDescription": "The BookMyShow seat selector lets users pick 1–10 seats per booking. Before payment, the UI must reactively show a live price breakdown, disable +/- buttons at boundaries, and track selection changes for the analytics team. This real-world scenario introduces Angular's three foundational signal primitives: signal() for mutable state, computed() for derived pricing, and effect() for analytics side effects — exactly how a production Angular team would implement this today.",
+        "tags": [
+          "signal",
+          "computed",
+          "effect",
+          "Reactive State"
+        ],
+        "estimatedTime": "20-30 minutes",
+        "prerequisites": [
+          "Basic Angular knowledge",
+          "Standalone components"
+        ],
+        "learningOutcomes": [
+          "Create and update signals using set() and update()",
+          "Enforce min/max boundaries inside update() without extra conditionals",
+          "Derive pricing state with computed() that auto-updates reactively",
+          "Run analytics side effects with effect() and understand its execution timing",
+          "Disable template buttons based on computed boundary signals",
+          "Read signal values in templates without subscribing"
+        ],
+        "requirementList": [
+          "Build a seat counter using signal<number>(1) — implement increment and decrement clamped to min(1) and max(10) using update(); add a reset() that reverts to 1",
+          "Add computed() signals: totalPrice (seats × ₹250), isAtMin, isAtMax, priceBreakdown ({ seats, pricePerSeat, total }) — disable the +/- buttons based on boundary computeds",
+          "Implement effect() that logs { seatsSelected, totalPrice, timestamp } to the console on every change — simulating the analytics event dispatch BookMyShow would fire",
+          "Display a selection summary card: seat count badge, price breakdown table, and a 'Proceed to Pay' button that is only enabled when seats ≥ 1 and totalPrice > 0"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-20-signal-primitives-counter/docs/CH-20-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-20-signal-primitives-counter/docs/CH-20-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-20-signal-primitives-counter"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-20-signal-primitives-counter/components/seat-selector/seat-selector.component",
+          "componentName": "SeatSelectorComponent"
+        }
+      },
+      "live-character-counter": {
+        "id": 21,
+        "isNew": true,
+        "slug": "live-character-counter",
+        "title": "Challenge 21: X (Twitter) — Post Composer",
+        "categoryId": "angular-signals",
+        "difficulty": "Beginner",
+        "enabled": true,
+        "order": 2,
+        "description": "You're on X's (Twitter) web team. Build the post composer box with a live character counter, progress ring, and post-strength indicator using signals and computed().",
+        "longDescription": "X's post composer is one of the most recognisable UI patterns in the industry — a textarea with a live countdown, a circular progress ring that shifts from green to amber to red, and a disabled Post button until valid content exists. In this challenge you'll bind a signal to the textarea, chain multiple computed() signals from it for remaining chars, percentage, and post strength — and use effect() to trigger a warning when the limit is breached. This is a near-identical pattern to what the X frontend team ships.",
+        "tags": [
+          "signal",
+          "computed",
+          "effect",
+          "Template Binding"
+        ],
+        "estimatedTime": "20-30 minutes",
+        "prerequisites": [
+          "Challenge 20 completed",
+          "Angular template event binding"
+        ],
+        "learningOutcomes": [
+          "Bind signal state to textarea input events using (input)",
+          "Chain multiple computed() signals from a single source signal",
+          "Derive percentage, remaining count, and status category with computed()",
+          "Use effect() for threshold-based side effects",
+          "Apply conditional CSS classes using computed status signals",
+          "Enable/disable the submit button reactively from a computed"
+        ],
+        "requirementList": [
+          "Create signal<string>('') bound to a textarea — compute charsUsed, charsRemaining (max 280), percentageUsed, isNearLimit (>80%), and isOverLimit (>100%) — prevent post beyond 280 chars",
+          "Render a circular SVG progress ring whose stroke changes color: teal (0–79%) → amber (80–99%) → red (100%) — driven entirely by computed signals, no manual DOM manipulation",
+          "Implement effect() that fires a console warning when percentageUsed crosses 90% — simulating X's internal telemetry that tracks composer engagement drop-off",
+          "Add a postStrength computed() returning 'too short' (<10 chars) | 'good' (10–200) | 'long' (>200) — display as a label beneath the composer; disable the 'Post' button when content is empty or over limit"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-21-live-character-counter/docs/CH-21-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-21-live-character-counter/docs/CH-21-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-21-live-character-counter"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-21-live-character-counter/components/post-composer/post-composer.component",
+          "componentName": "PostComposerComponent"
+        }
+      },
+      "signal-todo-manager": {
+        "id": 22,
+        "isNew": true,
+        "slug": "signal-todo-manager",
+        "title": "Challenge 22: Jira-Style Task Board",
+        "categoryId": "angular-signals",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 3,
+        "description": "You've joined a startup as the sole frontend developer. The product manager wants a Jira-style task board with signal-driven columns, live stats, and priority filtering — to be built in one sprint.",
+        "longDescription": "Every product company uses some variant of this: a three-column Kanban board (Todo → In Progress → Done) with task creation, status transitions, priority tags, and a live velocity bar. In this challenge you'll manage all task state inside a signal<Task[]>, derive each board column with computed(), and wire up a priority filter as its own signal that combines with the task list to produce filtered views. This is the kind of feature a startup frontend engineer would be asked to build and demo within hours.",
+        "tags": [
+          "signal",
+          "computed",
+          "Filtering",
+          "CRUD",
+          "Kanban"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Challenges 20 and 21 completed",
+          "TypeScript interfaces"
+        ],
+        "learningOutcomes": [
+          "Manage arrays inside signals using update() with immutable spread patterns",
+          "Derive Kanban column data with separate computed() signals per status",
+          "Combine two independent signals (tasks + priority filter) into one computed output",
+          "Implement move-to-column action by updating task status inside the signal array",
+          "Derive aggregate velocity stats (total, done %, in-progress count) with computed()",
+          "Use a signal-based priority filter that narrows all columns simultaneously"
+        ],
+        "requirementList": [
+          "Create signal<Task[]> with Task interface { id, title, priority: 'low'|'medium'|'high', status: 'todo'|'in-progress'|'done' } — implement addTask, deleteTask, and moveTask(id, newStatus) using immutable update() patterns",
+          "Add signal<'all'|'low'|'medium'|'high'> for priority filter — create three computed() signals (todoTasks, inProgressTasks, doneTasks) each filtering by both status and priority — all three must react when either signal changes",
+          "Build a computed boardStats() returning { total, todoCount, inProgressCount, doneCount, completionRate } — display as a live progress bar above the board showing sprint velocity",
+          "Add drag-to-move UX: clicking a task card shows Move To buttons for the other two columns — each triggers moveTask() which updates the signal and reactively re-renders only the affected columns"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-22-signal-todo-manager/docs/CH-22-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-22-signal-todo-manager/docs/CH-22-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-22-signal-todo-manager"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-22-signal-todo-manager/components/task-board/task-board.component",
+          "componentName": "TaskBoardComponent"
+        }
+      },
+      "signal-shopping-cart": {
+        "id": 23,
+        "isNew": true,
+        "slug": "signal-shopping-cart",
+        "title": "Challenge 23: Swiggy — Food Delivery Cart",
+        "categoryId": "angular-signals",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 4,
+        "description": "You're a frontend engineer at Swiggy. Build the cart sidebar — add/remove items, update quantities, apply a coupon code, and show a fully reactive price breakdown with delivery fee and GST.",
+        "longDescription": "The Swiggy cart is a masterclass in derived state: every price shown on screen is a function of items × quantities, with conditional delivery fee (free above ₹299), GST, coupon discounts, and a savings badge. None of these are stored — they're all derived. In this challenge you'll model the cart as a signal<CartItem[]> and chain computed() signals to produce each line of the price breakdown reactively — the pattern used by every major e-commerce frontend team in India today.",
+        "tags": [
+          "signal",
+          "computed",
+          "Cart",
+          "Derived State Chaining",
+          "Coupon Logic"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Challenge 22 completed",
+          "Understanding of computed() chaining"
+        ],
+        "learningOutcomes": [
+          "Chain computed() signals where each depends on the previous derived value",
+          "Update nested object properties inside a signal array with immutable patterns",
+          "Model conditional business logic (delivery fee threshold, coupon) inside computed()",
+          "Derive itemCount and isEmpty with computed() to control empty state UI",
+          "Implement quantity increment/decrement with min(1) guard inside update()",
+          "Compose a final orderSummary computed() from multiple intermediate computeds"
+        ],
+        "requirementList": [
+          "Create signal<CartItem[]> — implement addItem (merge if exists), removeItem, updateQuantity (min 1, max 10), and clearCart — all via immutable update(); show a restaurant header with item count badge",
+          "Build a chained computed() price pipeline: itemCount → subtotal → deliveryFee (₹40, waived if subtotal ≥ ₹299) → couponDiscount (signal<string> coupon code, 20% off for 'SWIGGY20') → GST (5% on discounted subtotal) → grandTotal",
+          "Display a Swiggy-style bill breakdown panel: subtotal, delivery fee (struck-through when waived), savings in green, GST, and grand total — each line reactive to cart changes with no manual recalculation",
+          "Add a computed cartSuggestion() that returns a progress message: '₹X away from free delivery' when subtotal < ₹299, or 'You've unlocked free delivery!' when met — display as an animated banner above the bill"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-23-signal-shopping-cart/docs/CH-23-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-23-signal-shopping-cart/docs/CH-23-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-23-signal-shopping-cart"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-23-signal-shopping-cart/components/swiggy-cart/swiggy-cart.component",
+          "componentName": "SwiggyCartComponent"
+        }
+      },
+      "rxjs-signal-interop": {
+        "id": 24,
+        "isNew": true,
+        "slug": "rxjs-signal-interop",
+        "title": "Challenge 24: Naukri — Job Search with Live Filters",
+        "categoryId": "angular-signals",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 5,
+        "description": "You're a frontend developer at Naukri. Build the job search page — debounced keyword search via API, live filter signals for location and job type, and a computed result list — bridging RxJS and Signals.",
+        "longDescription": "Naukri's job search combines two patterns that must coexist: a debounced HTTP search (where RxJS operators shine) and a client-side filter panel (where Signals shine). This challenge teaches you the critical bridge: toSignal() to pull the HTTP Observable response into a Signal for template use, and toObservable() to push the search keyword Signal into an RxJS pipe for debouncing and switchMap. You'll know exactly when to use each — a skill that distinguishes senior Angular developers in interviews.",
+        "tags": [
+          "toSignal",
+          "toObservable",
+          "RxJS Interop",
+          "HttpClient",
+          "Live Filters"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Challenges 20–23 completed",
+          "Understanding of HttpClient and RxJS operators"
+        ],
+        "learningOutcomes": [
+          "Convert an HttpClient Observable to a Signal using toSignal() with initialValue",
+          "Convert a Signal to an Observable using toObservable() to apply RxJS operators",
+          "Apply debounceTime(400) + distinctUntilChanged + switchMap on a toObservable() search stream",
+          "Derive a loading state using toSignal() with startWith(null) and a computed()",
+          "Combine an API-sourced signal with local filter signals using computed()",
+          "Articulate clearly why the search stays in RxJS while filters live in Signals"
+        ],
+        "requirementList": [
+          "Create signal<string>('') for the search keyword — convert it with toObservable() → debounceTime(400) → distinctUntilChanged() → switchMap(keyword => http.get('/jobs?q=keyword')) — convert the result back with toSignal({ initialValue: [] }) for template use without async pipe",
+          "Add three filter signals: signal<string>('all') for jobType, signal<string>('') for location, signal<number>(0) for minSalary — build a computed filteredJobs() that applies all three filters on top of the API result signal",
+          "Implement a loading state: wrap the HTTP stream with startWith(null) before toSignal() — derive isLoading computed(() => rawJobs() === null) — show a skeleton loader when true, the job list when false",
+          "Build a computed jobStats() returning { total, filtered, showing } — display as 'Showing 12 of 48 jobs' above the list — add a clearFilters() that resets all filter signals to defaults in one action"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-24-rxjs-signal-interop/docs/CH-24-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-24-rxjs-signal-interop/docs/CH-24-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-24-rxjs-signal-interop"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-24-rxjs-signal-interop/components/job-search/job-search.component",
+          "componentName": "JobSearchComponent"
+        }
+      },
+      "custom-signal-store": {
+        "id": 25,
+        "isNew": true,
+        "slug": "custom-signal-store",
+        "title": "Challenge 25: MakeMyTrip — Flight Booking Signal Store",
+        "categoryId": "angular-signals",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 6,
+        "description": "You're architecting MakeMyTrip's multi-step flight booking flow. Build a custom signal-based store from scratch to manage shared booking state across Search, Results, Traveller, and Payment steps.",
+        "longDescription": "MakeMyTrip's booking flow spans four steps — each step reads and writes shared state: selected flight, traveller details, fare breakdown, and payment status. Managing this with component inputs/outputs becomes a nightmare. In this challenge you'll build a reusable custom signal store — a service with a private writable signal, readonly exposure via asReadonly(), computed selectors, and typed action methods — exactly the pattern NgRx SignalStore implements under the hood. Understanding this makes you a far better consumer of NgRx and a stronger system designer in interviews.",
+        "tags": [
+          "Signal Store",
+          "Custom Store",
+          "asReadonly",
+          "Selectors",
+          "Multi-step Flow"
+        ],
+        "estimatedTime": "45-60 minutes",
+        "prerequisites": [
+          "All previous signal challenges completed",
+          "Angular services and dependency injection",
+          "TypeScript generics"
+        ],
+        "learningOutcomes": [
+          "Encapsulate writable signal as private — expose state via asReadonly()",
+          "Build typed selector methods returning computed() signals from store state",
+          "Create a generic SignalStore<T> base class with TypeScript generics",
+          "Structure action methods that mutate private state through update()",
+          "Share store state across multiple routed components via a service",
+          "Implement a computed fareBreakdown selector that depends on multiple state slices"
+        ],
+        "requirementList": [
+          "Build a BookingStore service with private signal<BookingState>(initialState) — expose state as asReadonly(); implement typed actions: selectFlight(flight), addTraveller(traveller), removeTraveller(id), applyPromoCode(code), setPaymentStatus(status) — each calling update() on private state",
+          "Create computed selectors: selectedFlight(), travellers(), fareBreakdown() (base fare × travellers + taxes − promo discount), isBookingValid() (flight selected + ≥1 traveller + valid details) — fareBreakdown must depend on both the flight signal and promo code signal",
+          "Build a 4-step booking UI consuming only BookingStore — each step component injects the store and reads the relevant selector; the stepper's Next button uses isBookingValid() to guard progression",
+          "Add a bookingSnapshot() method that captures current state for an optimistic update pattern — if payment fails, call rollback() to restore the snapshot using signal.set(snapshot)"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-25-custom-signal-store/docs/CH-25-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-25-custom-signal-store/docs/CH-25-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-25-custom-signal-store"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-25-custom-signal-store/components/booking-flow/booking-flow.component",
+          "componentName": "BookingFlowComponent"
+        }
+      },
+      "signal-live-dashboard": {
+        "id": 26,
+        "isNew": true,
+        "slug": "signal-live-dashboard",
+        "title": "Challenge 26: Zerodha — Live Market Watch",
+        "categoryId": "angular-signals",
+        "difficulty": "Intermediate",
+        "enabled": true,
+        "order": 7,
+        "description": "You're on Zerodha's frontend team. Build the live market watch dashboard — a service-driven signal that ticks every 1.5s, with computed() signals for portfolio stats and ChangeDetectionStrategy.OnPush for optimal performance.",
+        "longDescription": "Real trading dashboards push price updates every second. In this challenge you'll build Zerodha's market watch from scratch: a StockTickerService that holds stock prices in a private signal and exposes them via asReadonly(), a StockDashboardComponent that derives portfolio total, gainers, and losers using computed(), and ChangeDetectionStrategy.OnPush so Angular only re-checks the component when a signal it reads actually changes. You'll also wire up the live ticker with setInterval and clean it up in ngOnDestroy — a common production pattern every Angular developer must know.",
+        "tags": [
+          "computed",
+          "asReadonly",
+          "OnPush",
+          "signal",
+          "Service"
+        ],
+        "estimatedTime": "30-45 minutes",
+        "prerequisites": [
+          "Challenges 20–25 completed",
+          "Angular services and dependency injection"
+        ],
+        "learningOutcomes": [
+          "Expose service state as read-only using signal.asReadonly()",
+          "Derive portfolio stats with computed() — portfolioTotal, gainersCount, losersCount",
+          "Apply ChangeDetectionStrategy.OnPush with signals for efficient change detection",
+          "Manage a setInterval ticker across ngOnInit and ngOnDestroy without memory leaks",
+          "Inject a signal-based service and read its readonly signal in a component"
+        ],
+        "requirementList": [
+          "Build StockTickerService with private signal<Stock[]> for 4 stocks and expose it via asReadonly() — implement a tick() method that uses stocks.update() to apply a small random price change to each stock on every call",
+          "In StockDashboardComponent inject the service and create three computed() signals: portfolioTotal (sum of all prices), gainersCount (stocks where change > 0), losersCount (stocks where change < 0)",
+          "Start a setInterval calling ticker.tick() every 1500ms in ngOnInit — toggle it on/off with an isLive signal and a Pause/Resume button — clear the interval in ngOnDestroy",
+          "Add ChangeDetectionStrategy.OnPush to the component and display the live stock table with ▲ green / ▼ red colour for price changes alongside the three computed stat cards"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-26-signal-performance-untracked/docs/CH-26-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-26-signal-performance-untracked/docs/CH-26-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-26-signal-performance-untracked"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-26-signal-performance-untracked/components/stock-dashboard/stock-dashboard.component",
+          "componentName": "StockDashboardComponent"
+        }
+      },
+      "rxjs-to-signals-migration": {
+        "id": 27,
+        "isNew": true,
+        "slug": "rxjs-to-signals-migration",
+        "title": "Challenge 27: HDFC Bank — Account Dashboard Migration",
+        "categoryId": "angular-signals",
+        "difficulty": "Advanced",
+        "enabled": true,
+        "order": 8,
+        "description": "HDFC's Angular team is modernising their account dashboard from BehaviorSubject-based services to Angular Signals. You've been given the legacy code — migrate it incrementally without breaking existing behaviour.",
+        "longDescription": "This is the most common scenario in large Angular enterprises in 2025: a legacy BehaviorSubject-driven feature that needs incremental migration to Signals. HDFC's account dashboard service has four BehaviorSubjects (accounts$, selectedAccount$, transactions$, filter$), combineLatest derivations, and async pipes throughout the template. You'll migrate them step by step — replace BehaviorSubjects with signals, remove async pipes, replace combineLatest with computed(), and keep the transaction fetch as an Observable bridged via toSignal(). The critical skill this challenge tests: knowing which parts to migrate and which to leave as RxJS — and being able to articulate why to an interviewer.",
+        "tags": [
+          "Migration",
+          "BehaviorSubject",
+          "toSignal",
+          "toObservable",
+          "Incremental Modernisation"
+        ],
+        "estimatedTime": "60 minutes",
+        "prerequisites": [
+          "All previous signal challenges completed",
+          "Strong RxJS fundamentals",
+          "Challenge 24 completed"
+        ],
+        "learningOutcomes": [
+          "Replace BehaviorSubject<T> with signal<T>() in an Angular service",
+          "Replace .next() with .set() / .update() and getValue() with signal reads",
+          "Remove async pipe from templates and read signals directly",
+          "Replace combineLatest([a$, b$]) with computed() combining two signals",
+          "Bridge an HTTP Observable into a signal using toSignal() with error handling",
+          "Keep WebSocket streams as Observables and bridge into signals via toSignal()",
+          "Document migration decisions with inline comments explaining the why"
+        ],
+        "requirementList": [
+          "Migrate AccountService: replace BehaviorSubject<Account[]>(accounts$), BehaviorSubject<Account|null>(selectedAccount$), and BehaviorSubject<string>(filter$) to signal equivalents — update all .next() calls to .set()/.update() and remove all .getValue() calls — the template must work without async pipe after migration",
+          "Replace combineLatest([accounts$, filter$]).pipe(map(...)) with a computed filteredAccounts() that reacts to both signals — replace combineLatest([selectedAccount$, transactions$]) with a computed accountWithTransactions() — verify both compute correctly without subscriptions",
+          "Keep the HTTP transaction fetch as an Observable — replace the manual subscribe() + ngOnDestroy unsubscribe pattern with toSignal(http.get('/transactions'), { initialValue: [] }) — add error handling using catchError before toSignal()",
+          "The account balance WebSocket stream must stay as an Observable (real-time streams are RxJS's domain) — bridge it into the template using toSignal(balanceWs$, { initialValue: null }) — add a comment block explaining this architectural decision for each migrated and un-migrated piece"
+        ],
+        "links": {
+          "requirement": "projects/ngc-signals/src/app/challenges/challenge-27-rxjs-to-signals-migration/docs/CH-27-REQUIREMENT.md",
+          "solution": "projects/ngc-signals/src/app/challenges/challenge-27-rxjs-to-signals-migration/docs/CH-27-SOLUTION_GUIDE.md",
+          "github": "projects/ngc-signals/src/app/challenges/challenge-27-rxjs-to-signals-migration"
+        },
+        "workspace": {
+          "componentPath": "./challenges/challenge-27-rxjs-to-signals-migration/components/account-dashboard/account-dashboard.component",
+          "componentName": "AccountDashboardComponent"
+        }
+      }
     },
-    "community": {
-    }
+    "community": {}
   }
 }

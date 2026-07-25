@@ -1,0 +1,164 @@
+<div class="board-container">
+
+  <!-- Header -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>Sprint Board</mat-card-title>
+      <mat-card-subtitle>Jira-Style Task Manager</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Velocity Progress -->
+      <div class="velocity-row">
+        <div class="stats-row">
+          <span class="stat-chip">Total <strong>{{ boardStats().total }}</strong></span>
+          <span class="stat-chip todo">Todo <strong>{{ boardStats().todoCount }}</strong></span>
+          <span class="stat-chip in-progress">In Progress <strong>{{ boardStats().inProgressCount }}</strong></span>
+          <span class="stat-chip done">Done <strong>{{ boardStats().doneCount }}</strong></span>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="boardStats().completionRate" />
+        <span class="velocity-label">Sprint velocity: {{ boardStats().completionRate }}% complete</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Add Task Form -->
+  <mat-card class="add-card">
+    <mat-card-content>
+      <form class="add-form" (submit)="$event.preventDefault(); addTask()">
+        <mat-form-field appearance="outline" class="title-field">
+          <mat-label>New task title</mat-label>
+          <input matInput [value]="newTaskTitle()" (input)="onTitleInput($event)" placeholder="Enter task..." />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="priority-field">
+          <mat-label>Priority</mat-label>
+          <mat-select [value]="newTaskPriority()" (selectionChange)="newTaskPriority.set($event.value)">
+            <mat-option value="low">Low</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="high">High</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="!newTaskTitle().trim()">
+          <mat-icon>add</mat-icon> Add
+        </button>
+      </form>
+
+      <!-- Priority Filter Chips -->
+      <mat-chip-set aria-label="Priority filter">
+        @for (f of ['all', 'low', 'medium', 'high']; track f) {
+          <mat-chip
+            [highlighted]="priorityFilter() === f"
+            [class]="'chip-' + f"
+            (click)="setFilter($any(f))">
+            {{ f === 'all' ? 'All' : f }}
+          </mat-chip>
+        }
+      </mat-chip-set>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Kanban Board -->
+  <div class="board">
+
+    <!-- Todo Column -->
+    <div class="column">
+      <div class="column-header todo">
+        <span>Todo</span>
+        <span class="col-count">{{ todoTasks().length }}</span>
+      </div>
+      @for (task of todoTasks(); track task.id) {
+        <mat-card class="task-card" [attr.data-priority]="task.priority">
+          <mat-card-content>
+            <div class="card-top" (click)="toggleExpand(task.id)">
+              <span class="card-title">{{ task.title }}</span>
+              <span class="priority-badge" [class]="'p-' + task.priority">{{ task.priority }}</span>
+            </div>
+            @if (expandedTaskId() === task.id) {
+              <mat-divider class="card-divider" />
+              <div class="card-actions">
+                @for (target of getMoveTargets(task.status); track target.status) {
+                  <button mat-stroked-button (click)="moveTask(task.id, target.status)">
+                    → {{ target.label }}
+                  </button>
+                }
+                <button mat-icon-button color="warn" (click)="deleteTask(task.id)" aria-label="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      } @empty {
+        <div class="empty-column">No tasks</div>
+      }
+    </div>
+
+    <!-- In Progress Column -->
+    <div class="column">
+      <div class="column-header in-progress">
+        <span>In Progress</span>
+        <span class="col-count">{{ inProgressTasks().length }}</span>
+      </div>
+      @for (task of inProgressTasks(); track task.id) {
+        <mat-card class="task-card" [attr.data-priority]="task.priority">
+          <mat-card-content>
+            <div class="card-top" (click)="toggleExpand(task.id)">
+              <span class="card-title">{{ task.title }}</span>
+              <span class="priority-badge" [class]="'p-' + task.priority">{{ task.priority }}</span>
+            </div>
+            @if (expandedTaskId() === task.id) {
+              <mat-divider class="card-divider" />
+              <div class="card-actions">
+                @for (target of getMoveTargets(task.status); track target.status) {
+                  <button mat-stroked-button (click)="moveTask(task.id, target.status)">
+                    → {{ target.label }}
+                  </button>
+                }
+                <button mat-icon-button color="warn" (click)="deleteTask(task.id)" aria-label="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      } @empty {
+        <div class="empty-column">No tasks</div>
+      }
+    </div>
+
+    <!-- Done Column -->
+    <div class="column">
+      <div class="column-header done">
+        <span>Done</span>
+        <span class="col-count">{{ doneTasks().length }}</span>
+      </div>
+      @for (task of doneTasks(); track task.id) {
+        <mat-card class="task-card" [attr.data-priority]="task.priority">
+          <mat-card-content>
+            <div class="card-top" (click)="toggleExpand(task.id)">
+              <span class="card-title">{{ task.title }}</span>
+              <span class="priority-badge" [class]="'p-' + task.priority">{{ task.priority }}</span>
+            </div>
+            @if (expandedTaskId() === task.id) {
+              <mat-divider class="card-divider" />
+              <div class="card-actions">
+                @for (target of getMoveTargets(task.status); track target.status) {
+                  <button mat-stroked-button (click)="moveTask(task.id, target.status)">
+                    → {{ target.label }}
+                  </button>
+                }
+                <button mat-icon-button color="warn" (click)="deleteTask(task.id)" aria-label="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      } @empty {
+        <div class="empty-column">No tasks</div>
+      }
+    </div>
+
+  </div>
+</div>

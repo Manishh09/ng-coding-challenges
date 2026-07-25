@@ -1,5 +1,9 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { finalize, tap } from 'rxjs';
+import { finalize } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { DashboardService } from '../../services/dashboard.service';
 import { Post } from '../../models/post';
 import { User } from '../../models/user';
@@ -8,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatListModule, MatProgressSpinnerModule, MatIconModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

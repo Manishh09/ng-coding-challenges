@@ -4,10 +4,17 @@ import { Order } from '../../models/order.model';
 import { ProductService } from '../../services/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CheckoutFacadeService } from '../../services/checkuot-facade.service';
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-checkout',
-  imports: [MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, MatCheckboxModule, MatListModule, MatProgressSpinnerModule, MatDividerModule, MatIconModule, CurrencyPipe],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
@@ -42,21 +49,18 @@ export class CheckoutComponent {
     });
   }
 
+  isSelected(product: Product): boolean {
+    return this.selectedProducts().some(p => p.id === product.id);
+  }
+
   // select product for checkout
-  onProductSelect(event: Event, product: Product): void {
-    const input = event.target as HTMLInputElement;
-
-
-    if (input.checked) {
-      // Add product if not already selected
+  onProductSelect(checked: boolean, product: Product): void {
+    if (checked) {
       if (!this.selectedProducts().some(p => p.id === product.id)) {
         this.selectedProducts.update(products => [...products, product]);
       }
     } else {
-      // Remove product
-      this.selectedProducts.update(products =>
-        products.filter(p => p.id !== product.id)
-      );
+      this.selectedProducts.update(products => products.filter(p => p.id !== product.id));
     }
   }
 

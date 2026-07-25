@@ -1,19 +1,25 @@
-import { Component, inject, OnDestroy, OnInit, HostBinding } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, MatCardModule, MatTableModule, MatChipsModule, MatProgressSpinnerModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit, OnDestroy {
 
   protected productList: Product[] = [];
+  protected loading = true;
+  readonly displayedColumns = ['id', 'title', 'category', 'price', 'rating'];
 
   // inject ProductService
   #productService = inject(ProductService);
@@ -43,13 +49,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
         if (products) {
           this.productList = products;
         }
-        console.log('Products fetched successfully', this.productList);
+        this.loading = false;
       },
-      error: (err) => {
-        console.error('Error fetching products:', err);
-      },
-      complete: () => {
-        console.log('Product fetch completed');
+      error: () => {
+        this.loading = false;
       }
     });
   }

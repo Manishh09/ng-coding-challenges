@@ -1,0 +1,157 @@
+$mmt-blue: #0770e3;
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  font-family: Roboto, sans-serif;
+  background: #f5f5f5;
+}
+
+.booking-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.booking-card { }
+
+.brand-avatar {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ── Step body ──────────────────────────────────────────────────────────────────
+.step-body {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.step-hint {
+  font-size: 0.85rem;
+  color: rgba(0,0,0,.6);
+  margin: 0;
+}
+
+// ── Flight cards ───────────────────────────────────────────────────────────────
+.flight-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.flight-card {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+
+  &.selected { border-color: $mmt-blue; }
+
+  mat-card-content { padding-bottom: 12px !important; }
+}
+
+.flight-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.airline { font-weight: 600; flex: 1; }
+.fare { font-weight: 700; color: $mmt-blue; }
+.check-icon { font-size: 1.1rem; width: 1.1rem; height: 1.1rem; }
+
+.flight-route {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: rgba(0,0,0,.6);
+
+  mat-icon { font-size: 1rem; width: 1rem; height: 1rem; }
+}
+
+// ── Add traveller form ─────────────────────────────────────────────────────────
+.add-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+
+  mat-form-field { flex: 1; min-width: 120px; }
+  .age-field { flex: 0 0 90px; min-width: 90px; }
+}
+
+.traveller-list { border: 1px solid rgba(0,0,0,.12); border-radius: 4px; }
+
+.hint-text { color: rgba(0,0,0,.54); font-size: 0.85rem; margin: 0; }
+
+// ── Review ────────────────────────────────────────────────────────────────────
+.review-card mat-card-content { padding-bottom: 12px !important; }
+
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding: 0.35rem 0;
+
+  &.total { font-size: 1rem; padding-top: 0.5rem; }
+  &.discount { color: #16a34a; }
+}
+
+.review-label { color: rgba(0,0,0,.6); }
+.review-divider { margin: 0.5rem 0; }
+
+// ── Promo ─────────────────────────────────────────────────────────────────────
+.promo-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+
+  .promo-field { flex: 1; }
+}
+
+.error-hint { color: #dc2626; font-size: 0.8rem; margin: 0; }
+
+.promo-chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  .promo-chip { font-size: 0.75rem; }
+}
+
+// ── Payment ───────────────────────────────────────────────────────────────────
+.payment-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem !important;
+}
+
+.payment-flight { color: rgba(0,0,0,.6); font-size: 0.85rem; margin: 0 0 0.5rem; }
+.payment-total { font-size: 2rem; font-weight: 700; color: $mmt-blue; margin: 0 0 1rem; }
+.pay-btn { width: 100%; }
+
+.status-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  &.success .status-icon { font-size: 3rem; width: 3rem; height: 3rem; color: #16a34a; }
+  &.failed  .status-icon { font-size: 3rem; width: 3rem; height: 3rem; color: #dc2626; }
+}
+
+.status-text { font-weight: 600; margin: 0; }
+.booking-ref { color: rgba(0,0,0,.6); font-size: 0.85rem; margin: 0; }
+
+// ── Navigation row ────────────────────────────────────────────────────────────
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+
+  &.end { justify-content: flex-end; }
+}

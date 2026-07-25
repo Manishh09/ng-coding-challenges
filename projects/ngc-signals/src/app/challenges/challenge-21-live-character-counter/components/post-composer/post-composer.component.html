@@ -1,0 +1,76 @@
+<mat-card class="composer-card"
+  [class.near-limit]="isNearLimit() && !isOverLimit()"
+  [class.over-limit]="isOverLimit()">
+
+  <mat-card-header>
+    <div mat-card-avatar class="brand-avatar">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path fill="currentColor"
+          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    </div>
+    <mat-card-title>Post Composer</mat-card-title>
+    <mat-card-subtitle>280 character limit</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="composer-field">
+      <textarea matInput
+        rows="5"
+        placeholder="What is happening?!"
+        [value]="content()"
+        (input)="onInput($event)">
+      </textarea>
+    </mat-form-field>
+
+    <!-- Footer bar -->
+    <div class="composer-footer">
+      <!-- SVG Progress Ring -->
+      <div class="progress-ring-wrapper">
+        <svg class="progress-ring" width="32" height="32" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" [attr.r]="radius" fill="none" stroke="#e5e7eb" stroke-width="3" />
+          <circle class="progress-arc" cx="20" cy="20"
+            [attr.r]="radius" fill="none"
+            [attr.stroke]="ringColor()" stroke-width="3" stroke-linecap="round"
+            [attr.stroke-dasharray]="circumference"
+            [attr.stroke-dashoffset]="strokeDashoffset()" />
+        </svg>
+        @if (isNearLimit()) {
+          <span class="remaining-count" [class.over]="isOverLimit()">{{ charsRemaining() }}</span>
+        }
+      </div>
+
+      <span class="char-count"
+        [class.warn]="isNearLimit() && !isOverLimit()"
+        [class.error]="isOverLimit()">
+        {{ charsUsed() }} / 280
+      </span>
+
+      <div class="composer-actions">
+        @if (charsUsed() > 0) {
+          <button mat-stroked-button (click)="clearPost()">Clear</button>
+        }
+        <button mat-flat-button color="primary" [disabled]="!canPost()">Post</button>
+      </div>
+    </div>
+
+    <!-- Post Strength -->
+    <div class="strength-row">
+      <span>Post Strength:</span>
+      <span class="strength-chip"
+        [class.too-short]="postStrength() === 'too short'"
+        [class.good]="postStrength() === 'good'"
+        [class.long]="postStrength() === 'long'">
+        {{ postStrength() }}
+      </span>
+      <span class="strength-hint">
+        @switch (postStrength()) {
+          @case ('too short') { Minimum 10 characters }
+          @case ('good')      { Great length for engagement }
+          @case ('long')      { Consider trimming for impact }
+        }
+      </span>
+    </div>
+  </mat-card-content>
+
+</mat-card>

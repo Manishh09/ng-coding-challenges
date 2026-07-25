@@ -101,3 +101,118 @@
         }
     }
 }
+
+// ============================================================================
+// TEXT COLOUR FIXES
+// Material's built-in dark-theme cascade loses the specificity battle in this
+// project.  We pin each MDC token directly to our theme-aware CSS variables
+// (--on-surface-color etc.) so they auto-flip between light and dark mode
+// without any body.dark-mode scoping needed here.
+// ============================================================================
+
+// ── Input (typed text + caret) ───────────────────────────────────────────────
+.mdc-text-field__input,
+.mat-mdc-input-element {
+    color: var(--on-surface-color) !important;
+    caret-color: var(--primary-color) !important;
+}
+
+// ── Floating label ────────────────────────────────────────────────────────────
+.mdc-floating-label,
+.mat-mdc-floating-label {
+    color: var(--on-surface-variant-color) !important;
+}
+
+// ── Outlined border ───────────────────────────────────────────────────────────
+.mdc-text-field--outlined:not(.mdc-text-field--focused) {
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+        border-color: var(--outline-color) !important;
+    }
+}
+
+// ── Select: trigger value + arrow ─────────────────────────────────────────────
+.mat-mdc-select-value,
+.mat-mdc-select-value-text,
+.mat-mdc-select-min-line {
+    color: var(--on-surface-color) !important;
+}
+
+.mat-mdc-select-arrow svg {
+    fill: var(--on-surface-variant-color) !important;
+}
+
+// ── Select: dropdown panel (rendered in CDK overlay at body level) ────────────
+.mat-mdc-select-panel,
+.mdc-menu-surface.mat-mdc-select-panel {
+    background: var(--surface-secondary) !important;
+    border: 1px solid var(--border-primary) !important;
+}
+
+.mat-mdc-option {
+    color: var(--on-surface-color) !important;
+
+    .mdc-list-item__primary-text {
+        color: var(--on-surface-color) !important;
+    }
+
+    &:hover:not(.mdc-list-item--disabled) {
+        background: var(--interactive-secondary) !important;
+    }
+
+    &.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+        background: var(--state-selected-bg) !important;
+    }
+}
+
+// ── Table: row + header backgrounds + text ────────────────────────────────────
+.mat-mdc-header-row {
+    background: var(--surface-secondary) !important;
+}
+
+.mat-mdc-row {
+    background: var(--surface-secondary) !important;
+
+    &:hover {
+        background: var(--surface-tertiary) !important;
+    }
+}
+
+.mat-mdc-header-cell {
+    color: var(--on-surface-variant-color) !important;
+    border-bottom-color: var(--outline-color) !important;
+}
+
+.mat-mdc-cell {
+    color: var(--on-surface-color) !important;
+    border-bottom-color: var(--outline-color) !important;
+}
+
+// ── List items ────────────────────────────────────────────────────────────────
+.mat-mdc-list-item-title,
+.mdc-list-item__primary-text {
+    color: var(--on-surface-color) !important;
+}
+
+.mat-mdc-list-item-line,
+.mdc-list-item__secondary-text {
+    color: var(--on-surface-variant-color) !important;
+}
+
+// ── Chip label ────────────────────────────────────────────────────────────────
+.mdc-evolution-chip__text-label,
+.mat-mdc-chip .mdc-evolution-chip__text-label {
+    color: var(--on-surface-color) !important;
+}
+
+// ── Radio button label ────────────────────────────────────────────────────────
+.mdc-form-field > label,
+.mat-internal-form-field > label {
+    color: var(--on-surface-color) !important;
+}
+
+// ── Checkbox label ────────────────────────────────────────────────────────────
+.mat-mdc-checkbox .mdc-form-field label {
+    color: var(--on-surface-color) !important;
+}

@@ -1,0 +1,223 @@
+<div class="booking-page">
+  <mat-card class="booking-card">
+    <mat-card-header>
+      <div mat-card-avatar class="brand-avatar">✈️</div>
+      <mat-card-title>MakeMyTrip Booking</mat-card-title>
+      <mat-card-subtitle>DEL → BOM · Signal Store Demo</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-stepper linear [selectedIndex]="currentStep() - 1"
+        (selectionChange)="goTo($event.selectedIndex + 1)">
+
+        <!-- Step 1: Select Flight -->
+        <mat-step label="Select Flight" [completed]="!!store.selectedFlight()">
+          <div class="step-body">
+            <p class="step-hint">{{ flights.length }} flights available</p>
+
+            <div class="flight-list">
+              @for (f of flights; track f.id) {
+                <mat-card class="flight-card"
+                  [class.selected]="store.selectedFlight()?.id === f.id"
+                  (click)="pickFlight(f)">
+                  <mat-card-content>
+                    <div class="flight-row">
+                      <span class="airline">{{ f.airline }}</span>
+                      @if (store.selectedFlight()?.id === f.id) {
+                        <mat-icon class="check-icon" color="primary">check_circle</mat-icon>
+                      }
+                      <span class="fare">{{ f.baseFare | currency:'INR':'symbol':'1.0-0' }}</span>
+                    </div>
+                    <div class="flight-route">
+                      <span>{{ f.from }} · {{ f.departure }}</span>
+                      <mat-icon>arrow_forward</mat-icon>
+                      <span>{{ f.to }} · {{ f.arrival }}</span>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              }
+            </div>
+
+            <div class="nav-row end">
+              <button mat-flat-button color="primary" matStepperNext
+                [disabled]="!store.selectedFlight()" (click)="next()">
+                Next <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-step>
+
+        <!-- Step 2: Travellers -->
+        <mat-step label="Travellers" [completed]="store.isBookingValid()">
+          <div class="step-body">
+            <p class="step-hint">{{ store.selectedFlight()?.airline }} · {{ store.selectedFlight()?.from }} → {{ store.selectedFlight()?.to }}</p>
+
+            <div class="add-form">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput [value]="tName()" (input)="onNameInput($event)" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="age-field">
+                <mat-label>Age</mat-label>
+                <input matInput type="number" [value]="tAge() ?? ''" (input)="onAgeInput($event)" min="1" />
+              </mat-form-field>
+              <button mat-stroked-button color="primary" (click)="addTraveller()">
+                <mat-icon>person_add</mat-icon> Add
+              </button>
+            </div>
+
+            @if (store.travellers().length > 0) {
+              <mat-list class="traveller-list">
+                @for (t of store.travellers(); track t.id; let i = $index) {
+                  <mat-list-item>
+                    <mat-icon matListItemIcon>person</mat-icon>
+                    <span matListItemTitle>{{ t.name }}</span>
+                    <span matListItemLine>{{ t.age }} yrs</span>
+                    <button mat-icon-button matListItemMeta color="warn"
+                      (click)="store.removeTraveller(t.id)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-list-item>
+                }
+              </mat-list>
+            } @else {
+              <p class="hint-text">Add at least one traveller to continue</p>
+            }
+
+            <div class="nav-row">
+              <button mat-stroked-button (click)="prev()">
+                <mat-icon>chevron_left</mat-icon> Back
+              </button>
+              <button mat-flat-button color="primary" [disabled]="!store.isBookingValid()" (click)="next()">
+                Next <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-step>
+
+        <!-- Step 3: Review & Promo -->
+        <mat-step label="Review">
+          <div class="step-body">
+
+            <mat-card class="review-card">
+              <mat-card-content>
+                <div class="review-row">
+                  <span class="review-label">Flight</span>
+                  <span>{{ store.selectedFlight()?.airline }} · {{ store.selectedFlight()?.from }} → {{ store.selectedFlight()?.to }}</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Travellers ({{ store.travellers().length }})</span>
+                  <span>
+                    @for (t of store.travellers(); track t.id; let last = $last) {
+                      {{ t.name }}@if (!last) {, }
+                    }
+                  </span>
+                </div>
+                <mat-divider class="review-divider" />
+                <div class="review-row">
+                  <span class="review-label">Base Fare ({{ store.fareBreakdown().travellersCount }} pax)</span>
+                  <span>{{ store.fareBreakdown().subtotal | currency:'INR':'symbol':'1.0-0' }}</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Taxes (12%)</span>
+                  <span>{{ store.fareBreakdown().taxes | currency:'INR':'symbol':'1.0-0' }}</span>
+                </div>
+                @if (store.fareBreakdown().promoDiscount > 0) {
+                  <div class="review-row discount">
+                    <span class="review-label">Promo ({{ store.promoCode() | uppercase }})</span>
+                    <span>−{{ store.fareBreakdown().promoDiscount | currency:'INR':'symbol':'1.0-0' }}</span>
+                  </div>
+                }
+                <mat-divider class="review-divider" />
+                <div class="review-row total">
+                  <strong>Total</strong>
+                  <strong>{{ store.fareBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</strong>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <div class="promo-row">
+              <mat-form-field appearance="outline" class="promo-field">
+                <mat-label>Promo Code</mat-label>
+                <input matInput [value]="promoInput()" (input)="onPromoInput($event)" placeholder="e.g. MMT200" />
+              </mat-form-field>
+              <button mat-stroked-button [disabled]="!promoInput().length" (click)="applyPromo()">Apply</button>
+            </div>
+
+            @if (store.promoCode() && store.fareBreakdown().promoDiscount === 0) {
+              <p class="error-hint">Invalid promo code</p>
+            }
+
+            <div class="promo-chips">
+              @for (p of promoCodes; track p.code) {
+                <button mat-stroked-button class="promo-chip" (click)="applyPromoChip(p.code)">
+                  <strong>{{ p.code }}</strong> · {{ p.label }}
+                </button>
+              }
+            </div>
+
+            <div class="nav-row">
+              <button mat-stroked-button (click)="prev()">
+                <mat-icon>chevron_left</mat-icon> Back
+              </button>
+              <button mat-flat-button color="primary" (click)="next()">
+                Proceed to Pay <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-step>
+
+        <!-- Step 4: Payment -->
+        <mat-step label="Payment">
+          <div class="step-body">
+            <mat-card class="payment-card">
+              <mat-card-content>
+                <p class="payment-flight">
+                  {{ store.selectedFlight()?.airline }} · {{ store.selectedFlight()?.from }} → {{ store.selectedFlight()?.to }} · {{ store.fareBreakdown().travellersCount }} pax
+                </p>
+                <p class="payment-total">{{ store.fareBreakdown().total | currency:'INR':'symbol':'1.0-0' }}</p>
+
+                @switch (store.paymentStatus()) {
+                  @case ('pending') {
+                    <button mat-flat-button color="primary" class="pay-btn" (click)="pay()">
+                      <mat-icon>payment</mat-icon> Pay Now
+                    </button>
+                  }
+                  @case ('processing') {
+                    <div class="status-block">
+                      <mat-spinner diameter="36" />
+                      <p>Processing payment...</p>
+                    </div>
+                  }
+                  @case ('success') {
+                    <div class="status-block success">
+                      <mat-icon class="status-icon">check_circle</mat-icon>
+                      <p class="status-text">Booking Confirmed!</p>
+                      <p class="booking-ref">Ref: {{ bookingRef() }}</p>
+                    </div>
+                  }
+                  @case ('failed') {
+                    <div class="status-block failed">
+                      <mat-icon class="status-icon">error</mat-icon>
+                      <p class="status-text">Payment failed — state rolled back</p>
+                      <button mat-stroked-button color="warn" (click)="retryPayment()">Retry</button>
+                    </div>
+                  }
+                }
+              </mat-card-content>
+            </mat-card>
+
+            @if (store.paymentStatus() !== 'processing' && store.paymentStatus() !== 'success') {
+              <div class="nav-row">
+                <button mat-stroked-button (click)="prev()">
+                  <mat-icon>chevron_left</mat-icon> Back
+                </button>
+              </div>
+            }
+          </div>
+        </mat-step>
+
+      </mat-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

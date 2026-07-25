@@ -1,79 +1,49 @@
-.client-search-container {
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: var(--surface-secondary);
+  color: var(--on-surface-color);
+}
 
-  border-radius: 4px;
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-content { padding-bottom: 4px !important; }
+.search-field   { width: 100%; }
+.list-content   { padding: 0 !important; }
+
+// ── Explicitly-coloured template elements (bypass Material MDC token system) ──
+.item-text  { color: var(--on-surface-color); }
+.item-icon  { color: var(--on-surface-variant-color); }
+.muted-text { color: var(--on-surface-variant-color); margin: 0; }
+.error-text { color: var(--status-error); margin: 0; }
+.icon-error { color: var(--status-error); }
+
+// ── Loading ───────────────────────────────────────────────────────────────────
+.loading-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 1rem auto auto auto;
-  width: 85%;
+  padding: 3rem;
+  gap: 1rem;
 }
 
-.user-name {
-  font-weight: 200 !important;
-  font-size: medium;
-}
-
-.error-message {
-  color: var(--warn-color, #dc3545);
-}
-
-
-.search-container {
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 16px;
-
-  mat-form-field {
-    width: 100%;
-  }
-}
-
-.user-list {
+// ── Empty & Error cards ───────────────────────────────────────────────────────
+.empty-content,
+.error-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  width: 100%;
+  padding: 2rem !important;
+  gap: 0.5rem;
 }
 
-.user-card {
-  width: 100%;
-  padding: 12px;
-
-}
-
-.no-results {
-  color: #888;
-  font-style: italic;
-  margin-top: 20px;
-}
-
-
-
-@media (max-width: 768px) {
-
-  .search-container {
-    mat-form-field {
-      width: 90%;
-    }
-
-    .user-list {
-      width: 100% !important;
-    }
-  }
-}
-
-@media (max-width: 484px) {
-
-
-  .search-container {
-    mat-form-field {
-      width: 100% !important;
-    }
-
-    .user-list {
-      width: 100% !important;
-    }
-  }
-}
+.empty-icon { color: var(--text-tertiary); font-size: 2.5rem; width: 2.5rem; height: 2.5rem; }

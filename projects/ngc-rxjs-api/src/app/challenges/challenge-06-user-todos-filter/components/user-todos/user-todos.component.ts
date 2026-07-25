@@ -1,15 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
-import { UserTodoFacadeService } from '../../services/user-todo-facade.service';
- import { CommonModule, NgClass } from "@angular/common";
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UserTodoFacadeService } from '../../services/user-todo-facade.service';
 @Component({
   selector: 'app-user-todos',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, MatRadioModule, MatChipsModule, MatTableModule, MatSelectModule, NgClass],
+  imports: [AsyncPipe, CommonModule, MatCardModule, MatRadioModule, MatChipsModule, MatTableModule, MatSelectModule, MatFormFieldModule, MatProgressSpinnerModule],
   templateUrl: './user-todos.component.html',
   styleUrls: ['./user-todos.component.scss']
 })

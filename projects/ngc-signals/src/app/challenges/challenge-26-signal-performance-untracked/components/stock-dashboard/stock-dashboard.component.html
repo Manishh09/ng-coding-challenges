@@ -1,0 +1,86 @@
+<div class="dashboard-page">
+
+  <!-- Header -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <div mat-card-avatar class="brand-avatar">Z</div>
+      <mat-card-title>Zerodha Kite</mat-card-title>
+      <mat-card-subtitle>Live Market Watch · <code>computed()</code> &amp; <code>OnPush</code></mat-card-subtitle>
+      <div class="header-actions">
+        <button mat-flat-button [color]="isLive() ? 'primary' : undefined"
+          [class.paused]="!isLive()" (click)="toggleLive()">
+          <mat-icon>{{ isLive() ? 'pause' : 'play_arrow' }}</mat-icon>
+          {{ isLive() ? 'Live' : 'Paused' }}
+        </button>
+      </div>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Stats -->
+  <div class="stats-row">
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-label">Portfolio Total</p>
+        <p class="stat-value">₹{{ portfolioTotal() | number:'1.0-0' }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card gainers">
+      <mat-card-content>
+        <p class="stat-label">
+          <mat-icon class="stat-icon">trending_up</mat-icon> Gainers
+        </p>
+        <p class="stat-value gain">{{ gainersCount() }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card losers">
+      <mat-card-content>
+        <p class="stat-label">
+          <mat-icon class="stat-icon">trending_down</mat-icon> Losers
+        </p>
+        <p class="stat-value loss">{{ losersCount() }}</p>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <!-- Stock Table -->
+  <mat-card>
+    <mat-card-content class="table-content">
+      <table mat-table [dataSource]="stocks()" class="stock-table">
+
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef>Symbol</th>
+          <td mat-cell *matCellDef="let s" class="symbol-cell">{{ s.symbol }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Company</th>
+          <td mat-cell *matCellDef="let s" class="name-cell">{{ s.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef class="r">Price (₹)</th>
+          <td mat-cell *matCellDef="let s" class="r mono"
+            [class.up]="s.change > 0" [class.dn]="s.change < 0">
+            {{ s.price | number:'1.0-0' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="change">
+          <th mat-header-cell *matHeaderCellDef class="r">Change (₹)</th>
+          <td mat-cell *matCellDef="let s" class="r mono"
+            [class.up]="s.change > 0" [class.dn]="s.change < 0">
+            {{ s.change > 0 ? '+' : '' }}{{ s.change }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -1,68 +1,96 @@
-.dashboard-container {
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: var(--surface-secondary);
+  color: var(--on-surface-color);
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// ── Loading ───────────────────────────────────────────────────────────────────
+.loading-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: var(--on-surface-color, #212121);
-  margin: auto;
+  padding: 3rem;
+  gap: 1rem;
 
-  width: 85%;
+  p { color: var(--on-surface-variant-color); margin: 0; }
 }
 
-.stats-section {
-  margin: 20px 0;
-  width: 100%;
-  text-align: left;
+// ── Error ─────────────────────────────────────────────────────────────────────
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 12px !important;
 }
 
-.user-posts-container {
-  width: 100%;
-  text-align: center;
+.icon-error { color: var(--status-error); }
+.error-text { color: var(--status-error); margin: 0; }
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
+.stat-content { padding-bottom: 12px !important; }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 30px 0;
-
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant-color);
+  margin: 0 0 0.25rem;
 }
 
-li {
-  padding: 10px;
-  margin: 5px 0;
-  background-color: var(--surface-variant-color, #f8f9fa);
-  border-left: 4px solid var(--primary-color, #007bff);
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-  color: var(--on-surface-color, #212121);
-
-  &:hover {
-    background-color: var(--hover-color, #e9ecef);
-  }
-
-  :host-context(.dark-theme) &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--primary-color);
 }
 
-
-
-// Loading state
-:host:has([data-loading]) div:first-child {
-  color: var(--primary-color, #007bff);
+// ── Data columns ──────────────────────────────────────────────────────────────
+.data-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-// Error state
-:host:has([data-error]) div:first-child {
-  color: var(--warn-color, #dc3545);
-  background-color: var(--error-bg, #f8d7da);
-  border: 1px solid var(--error-border, #f5c6cb);
-  border-radius: 4px;
+.list-content { padding: 0 !important; }
+
+.list-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant-color);
+  margin: 0;
+  padding: 0.75rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--outline-color);
 }
 
-// Dark theme adjustments
-:host-context(.dark-theme):has([data-error]) div:first-child {
-  background-color: rgba(220, 53, 69, 0.2);
-  border-color: rgba(220, 53, 69, 0.4);
+// ── List item text — explicit colors so they work in both light & dark mode
+//    These spans live in THIS component's template so the encapsulated
+//    selectors reach them without ::ng-deep.
+// ─────────────────────────────────────────────────────────────────────────────
+.item-text {
+  color: var(--on-surface-color);
+}
+
+.item-icon {
+  color: var(--on-surface-variant-color);
 }

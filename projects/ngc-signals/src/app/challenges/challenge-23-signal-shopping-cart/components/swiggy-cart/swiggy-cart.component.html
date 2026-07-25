@@ -1,0 +1,166 @@
+<!-- Restaurant Header -->
+<mat-card class="header-card">
+  <mat-card-header>
+    <div mat-card-avatar class="brand-avatar">🍽️</div>
+    <mat-card-title>
+      {{ restaurant.name }}
+      @if (!isEmpty()) {
+        <span class="item-badge" [matBadge]="itemCount()" matBadgeColor="warn" matBadgeSize="small">
+        </span>
+      }
+    </mat-card-title>
+    <mat-card-subtitle>{{ restaurant.cuisine }}</mat-card-subtitle>
+    <div class="header-meta">
+      <span class="meta-chip">★ {{ restaurant.rating }}</span>
+      <span class="meta-chip">{{ restaurant.deliveryTime }}</span>
+      <span class="meta-chip">₹{{ restaurant.costForTwo }} for two</span>
+    </div>
+  </mat-card-header>
+</mat-card>
+
+<div class="layout">
+
+  <!-- Menu Panel -->
+  <div class="menu-panel">
+    <h2 class="panel-title">Menu</h2>
+    @for (item of menu; track item.id) {
+      <mat-card class="menu-item-card">
+        <mat-card-content>
+          <div class="menu-item">
+            <div class="menu-info">
+              <div class="menu-name-row">
+                <span class="veg-dot" [class.non-veg]="!item.isVeg"></span>
+                <span class="menu-name">{{ item.name }}</span>
+                @if (item.isBestseller) {
+                  <span class="bestseller-tag">★ Bestseller</span>
+                }
+              </div>
+              <p class="menu-price">{{ item.price | currency:'INR':'symbol':'1.0-0' }}</p>
+              <p class="menu-desc">{{ item.description }}</p>
+            </div>
+            <div class="menu-action">
+              @if (getCartQty(item.id) > 0) {
+                <span class="in-cart">{{ getCartQty(item.id) }} in cart</span>
+              }
+              <button mat-stroked-button color="primary" (click)="addItem(item)">ADD</button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel">
+    <h2 class="panel-title">Your Cart</h2>
+
+    @if (isEmpty()) {
+      <mat-card class="empty-card">
+        <mat-card-content class="empty-content">
+          <mat-icon class="empty-icon">shopping_cart</mat-icon>
+          <p>Your cart is empty</p>
+          <p class="empty-hint">Add items from the menu to get started</p>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+
+      <!-- Suggestion Banner -->
+      @if (cartSuggestion()) {
+        <div class="suggestion-banner" [class.unlocked]="isFreeDeliveryUnlocked()">
+          {{ cartSuggestion() }}
+        </div>
+      }
+
+      <!-- Cart Items -->
+      <mat-card class="cart-items-card">
+        <mat-card-content>
+          @for (item of cartItems(); track item.id) {
+            <div class="cart-row">
+              <span class="cart-name">{{ item.name }}</span>
+              <div class="qty-control">
+                <button mat-icon-button (click)="updateQuantity(item.id, -1)" [disabled]="item.quantity <= 1">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="qty-val">{{ item.quantity }}</span>
+                <button mat-icon-button (click)="updateQuantity(item.id, +1)" [disabled]="item.quantity >= 10">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <span class="cart-total">{{ item.price * item.quantity | currency:'INR':'symbol':'1.0-0' }}</span>
+              <button mat-icon-button (click)="removeItem(item.id)" aria-label="Remove">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Coupon -->
+      <mat-card class="coupon-card">
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="coupon-field">
+            <mat-label>Enter coupon code</mat-label>
+            <input matInput [value]="couponCode()" (input)="onCouponInput($event)" />
+            @if (couponDiscount() > 0) {
+              <mat-hint>✅ SWIGGY20 applied!</mat-hint>
+            } @else if (couponCode().length > 0) {
+              <mat-hint>Try SWIGGY20</mat-hint>
+            }
+          </mat-form-field>
+
+          <mat-chip-set>
+            @for (coupon of availableCoupons; track coupon.code) {
+              <mat-chip (click)="applyCoupon(coupon.code)">
+                {{ coupon.code }} — {{ coupon.label }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Bill Breakdown -->
+      <mat-card class="bill-card">
+        <mat-card-header>
+          <mat-card-title>Bill Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="bill-row">
+            <span>Item Total</span>
+            <span>{{ subtotal() | currency:'INR':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="bill-row">
+            <span>Delivery Fee</span>
+            <span>
+              <span [class.strikethrough]="isDeliveryFree()">{{ DELIVERY_FEE | currency:'INR':'symbol':'1.0-0' }}</span>
+              @if (isDeliveryFree()) { <span class="free-tag">FREE</span> }
+            </span>
+          </div>
+          @if (couponDiscount() > 0) {
+            <div class="bill-row savings-row">
+              <span>Coupon (SWIGGY20)</span>
+              <span>−{{ couponDiscount() | currency:'INR':'symbol':'1.0-0' }}</span>
+            </div>
+          }
+          <div class="bill-row">
+            <span>GST (5%)</span>
+            <span>{{ gst() | currency:'INR':'symbol':'1.0-0' }}</span>
+          </div>
+          <mat-divider class="bill-divider" />
+          <div class="bill-row total-row">
+            <strong>Grand Total</strong>
+            <strong>{{ grandTotal() | currency:'INR':'symbol':'1.0-0' }}</strong>
+          </div>
+          @if (savings() > 0) {
+            <p class="savings-banner">🎉 You're saving {{ savings() | currency:'INR':'symbol':'1.0-0' }}!</p>
+          }
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-stroked-button (click)="clearCart()">Clear Cart</button>
+          <button mat-flat-button color="primary">Proceed to Checkout</button>
+        </mat-card-actions>
+      </mat-card>
+
+    }
+  </div>
+
+</div>

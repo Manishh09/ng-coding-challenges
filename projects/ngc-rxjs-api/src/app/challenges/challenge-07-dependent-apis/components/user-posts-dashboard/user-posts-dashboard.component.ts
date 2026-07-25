@@ -2,11 +2,17 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { UserWithPosts } from '../../models/user-posts.model';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
-import { catchError, forkJoin, map, merge, mergeMap, of, Subject, takeUntil } from 'rxjs';
+import { catchError, forkJoin, map, mergeMap, of, Subject, takeUntil } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-user-posts-dashboard',
-  imports: [],
+  imports: [MatCardModule, MatTableModule, MatListModule, MatProgressSpinnerModule, MatIconModule, MatChipsModule],
   templateUrl: './user-posts-dashboard.component.html',
   styleUrls: ['./user-posts-dashboard.component.scss']
 })

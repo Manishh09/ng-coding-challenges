@@ -1,28 +1,55 @@
-<div class="challenge-container">
+<div class="page">
 
-  <!-- Search Container -->
-  <div class="server-search-container">
+  <!-- Search input -->
+  <mat-card>
+    <mat-card-content class="search-content">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search users</mat-label>
+        <input matInput [formControl]="searchControl" placeholder="e.g. Emma" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
 
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="loading-center">
+      <mat-spinner diameter="40" />
+      <p class="muted-text">Searching...</p>
+    </div>
+  }
 
-    <input type="text" [formControl]="searchControl" placeholder="Search users...e.g: Emma" class="search-input" />
+  <!-- Error -->
+  @if (error()) {
+    <mat-card>
+      <mat-card-content class="error-content">
+        <mat-icon class="icon-error">error_outline</mat-icon>
+        <p class="error-text">{{ error() }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
 
-    @if (loading()) {
-    <p class="loading">Loading...</p>
-    }
-
-    @if (error()) {
-    <p class="error">{{ error() }}</p>
-    }
-
-    @if (!loading() && users().length) {
-    <ul>
-      @for (user of users(); track user.id) {
-      <li>{{ user.firstName }} {{ user.lastName }}</li>
-      }
-    </ul>
-    } @else if (!loading() && users().length === 0 && hasSearched()) {
-    <p class="no-results">No results found.</p>
-    }
-  </div>
+  <!-- Results -->
+  @if (!loading() && users().length) {
+    <mat-card>
+      <mat-card-content class="list-content">
+        <mat-list>
+          @for (user of users(); track user.id) {
+            <mat-list-item>
+              <mat-icon class="item-icon" matListItemIcon>person</mat-icon>
+              <span class="item-text" matListItemTitle>{{ user.firstName }} {{ user.lastName }}</span>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  } @else if (!loading() && users().length === 0 && hasSearched()) {
+    <mat-card>
+      <mat-card-content class="empty-content">
+        <mat-icon class="empty-icon">person_search</mat-icon>
+        <p class="muted-text">No results found</p>
+      </mat-card-content>
+    </mat-card>
+  }
 
 </div>

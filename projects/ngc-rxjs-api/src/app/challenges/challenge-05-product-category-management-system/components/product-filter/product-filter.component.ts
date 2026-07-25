@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { Category } from '../../models/category.model';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
@@ -8,7 +9,7 @@ import { CategoryService } from '../../services/category.service';
 @Component({
   selector: 'app-product-filter',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, MatOptionModule],
+  imports: [MatCardModule, MatFormFieldModule, MatSelectModule, MatOptionModule],
   templateUrl: './product-filter.component.html',
   styleUrl: './product-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

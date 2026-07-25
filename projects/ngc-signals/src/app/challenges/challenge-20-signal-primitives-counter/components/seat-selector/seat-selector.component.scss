@@ -1,0 +1,77 @@
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  font-family: Roboto, sans-serif;
+}
+
+.seat-card {
+  width: 100%;
+  max-width: 480px;
+}
+
+.brand-avatar {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-label {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.counter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 0;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.seat-badge {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #e23744;
+  min-width: 3rem;
+  text-align: center;
+  line-height: 1;
+}
+
+.breakdown-section {
+  padding: 0.5rem 0;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+
+  &.total { padding-top: 0.75rem; }
+}
+
+.total-price {
+  color: #e23744;
+  font-size: 1.1rem;
+}
+
+.my-divider { margin: 0.75rem 0; }
+
+.summary-label {
+  flex: 1;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.6);
+  padding-left: 0.5rem;
+}

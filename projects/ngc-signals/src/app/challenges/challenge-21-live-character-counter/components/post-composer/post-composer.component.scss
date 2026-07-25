@@ -1,0 +1,101 @@
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  font-family: Roboto, sans-serif;
+}
+
+.composer-card {
+  width: 100%;
+  max-width: 560px;
+}
+
+.brand-avatar {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ── Composer border states ────────────────────────────────────────────────────
+.composer-card {
+  &.near-limit { border-color: #f59e0b; }
+  &.over-limit { border-color: #ef4444; }
+}
+
+// ── Textarea full width ───────────────────────────────────────────────────────
+.composer-field {
+  width: 100%;
+}
+
+// ── Footer bar ────────────────────────────────────────────────────────────────
+.composer-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.progress-ring-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.progress-arc { transition: stroke-dashoffset 0.2s ease, stroke 0.2s ease; }
+
+.remaining-count {
+  position: absolute;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #1d9bf0;
+  &.over { color: #ef4444; }
+}
+
+.char-count {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+  flex: 1;
+  &.warn  { color: #f59e0b; }
+  &.error { color: #ef4444; font-weight: 600; }
+}
+
+.composer-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+// ── Strength bar ──────────────────────────────────────────────────────────────
+.strength-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+
+  .strength-chip {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+
+    &.too-short { background: #fee2e2; color: #dc2626; }
+    &.good      { background: #dcfce7; color: #16a34a; }
+    &.long      { background: #fef3c7; color: #d97706; }
+  }
+
+  .strength-hint {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 0.75rem;
+  }
+}
