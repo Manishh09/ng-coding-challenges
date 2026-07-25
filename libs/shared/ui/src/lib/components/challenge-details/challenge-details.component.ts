@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, computed, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,9 +12,9 @@ import { ChallengesService, ChallengeCategoryService, StackblitzService } from '
 import { ChallengeDetails, Challenge } from '@ng-coding-challenges/shared/models';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { BreadcrumbsComponent, BreadcrumbItem } from '../breadcrumbs/breadcrumbs.component';
+import { LOADING_CONFIG } from '../../constants/loading.constants';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { LOADING_CONFIG } from '../../constants/loading.constants';
 import { ChallengeDetailsRouteData } from '../../models/route-data.interface';
 
 /**
@@ -58,8 +58,19 @@ export class ChallengeDetailsComponent {
   private readonly categoryService = inject(ChallengeCategoryService);
   private readonly stackblitzService = inject(StackblitzService);
 
-  // Loading state for StackBlitz launch
+  // Loading state for the live editor launch
   readonly launching = signal<boolean>(false);
+
+  constructor() {
+    // Warm the challenge's requirement doc so it can be embedded verbatim when
+    // the learner launches the live editor.
+    effect(() => {
+      const c = this.challengeDetails();
+      if (c) {
+        this.stackblitzService.prefetchChallenge(c);
+      }
+    });
+  }
 
   // Get route data (contains resolved challenge data from resolver)
   private readonly routeData = toSignal(this.route.data);
@@ -142,7 +153,9 @@ export class ChallengeDetailsComponent {
   }
 
   /**
-   * Launch challenge in StackBlitz IDE
+   * Launch the challenge in the live coding editor.
+   * Boots a StackBlitz project from the challenge's own starter files and opens
+   * it in a new browser tab.
    */
   async launchStackBlitz(): Promise<void> {
     const c = this.challengeDetails();
@@ -150,18 +163,9 @@ export class ChallengeDetailsComponent {
 
     this.launching.set(true);
     try {
-      await this.stackblitzService.openChallengeInStackblitz({
-        id: c.id,
-        title: c.title,
-        category: c.category,
-        gitHub: c.gitHub,
-        description: c.description || '',
-        difficulty: c.difficulty || '',
-        tags: c.tags || [],
-        link: c.link || ''
-      });
+      await this.stackblitzService.openChallengeInStackblitz(c);
     } catch (error) {
-      console.error('Failed to launch StackBlitz:', error);
+      console.error('Failed to launch live editor:', error);
     } finally {
       // Keep launching state for a moment to show feedback
       setTimeout(() => this.launching.set(false), LOADING_CONFIG.LONG_DELAY_MS);

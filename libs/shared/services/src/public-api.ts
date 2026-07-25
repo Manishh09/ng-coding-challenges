@@ -34,6 +34,12 @@ export * from './lib/notification/notification.service';
 export * from './lib/stackblitz/stackblitz.service';
 export * from './lib/loading/loading.service';
 
+// Live Editor (provider-agnostic; boots self-contained projects — no external repo)
+export * from './lib/live-editor/live-editor.types';
+export * from './lib/live-editor/live-editor.token';
+export * from './lib/live-editor/stackblitz-live-editor.provider';
+export * from './lib/live-editor/challenge-starter.service';
+
 // Interceptors
 export * from './lib/interceptors/router-loading.interceptor';
 
