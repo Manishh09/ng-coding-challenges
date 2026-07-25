@@ -36,6 +36,41 @@ export interface Author {
 }
 
 /**
+ * Per-challenge starter definition for the live coding editor.
+ *
+ * The live editor boots a self-contained project from these files — it does NOT
+ * pull any external Git repository. A shared base Angular scaffold is generated
+ * automatically; anything defined here is layered on top of (and overrides) that
+ * base, so a challenge only needs to declare the files that make it unique.
+ *
+ * @example
+ * ```ts
+ * starter: {
+ *   openFile: 'src/app/product-list.component.ts',
+ *   files: {
+ *     'src/app/product-list.component.ts': '... starter code ...'
+ *   }
+ * }
+ * ```
+ */
+export interface ChallengeStarter {
+  /**
+   * Editor project template. Defaults to `'angular-cli'`.
+   * Use `'node'` for a full CLI (WebContainers) experience.
+   */
+  template?: string;
+  /**
+   * Files to add to (or override on) the base scaffold, keyed by project path.
+   * Values are the file contents as strings.
+   */
+  files?: Record<string, string>;
+  /** Extra npm dependencies merged into the scaffold's `package.json`. */
+  dependencies?: Record<string, string>;
+  /** File(s) to open initially (path, comma-separated list, or array). */
+  openFile?: string | string[];
+}
+
+/**
  * Base challenge interface for lists and previews.
  * Contains essential information needed for displaying challenges in cards or lists.
  */
@@ -53,6 +88,8 @@ export interface Challenge {
   requirement?: string;
   solutionGuide?: string;
   isNew?: boolean;
+  /** Per-challenge starter files for the live coding editor. */
+  starter?: ChallengeStarter;
 }
 
 /**

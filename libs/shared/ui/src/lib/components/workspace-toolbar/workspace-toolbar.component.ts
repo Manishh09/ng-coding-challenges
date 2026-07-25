@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, DestroyRef } from '@angular/core';
+import { Component, inject, signal, computed, effect, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StackblitzService, ChallengesService, ChallengeCategoryService } from '@ng-coding-challenges/shared/services';
+import { Challenge } from '@ng-coding-challenges/shared/models';
 import { LOADING_CONFIG } from '../../constants/loading.constants';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, switchMap, startWith } from 'rxjs/operators';
@@ -64,7 +65,7 @@ export class WorkspaceToolbarComponent {
   private readonly stackblitzService = inject(StackblitzService);
   private readonly destroyRef = inject(DestroyRef);
 
-  // Loading state for StackBlitz launch
+  // Loading state for the live editor launch
   readonly launching = signal<boolean>(false);
 
   /**
@@ -128,6 +129,17 @@ export class WorkspaceToolbarComponent {
     ),
     { initialValue: null }
   );
+
+  constructor() {
+    // Warm the challenge's requirement doc so it can be embedded verbatim when
+    // the learner launches the live editor.
+    effect(() => {
+      const c = this.challenge();
+      if (c) {
+        this.stackblitzService.prefetchChallenge(c);
+      }
+    });
+  }
 
   // Computed properties derived from challenge data
   readonly challengeTitle = computed(() => {
@@ -194,32 +206,32 @@ export class WorkspaceToolbarComponent {
   }
 
   /**
-   * Launch challenge in StackBlitz IDE
-   * Uses StackblitzService to open challenge in new window
+   * Launch the challenge in the live coding editor.
+   * Boots a StackBlitz project from the challenge's own starter files and opens
+   * it in a new browser tab. Prefers the fully-resolved challenge (which carries
+   * starter files); falls back to route-derived data when it isn't loaded yet.
    */
   async launchStackBlitz(): Promise<void> {
-    const gitHubPath = this.gitHub();
     const id = this.challengeId();
-    const title = this.challengeTitle();
-    const category = this.categoryId();
-    const difficulty = this.difficulty();
+    if (!id) return;
 
-    if (!gitHubPath || !id) return;
+    // The fetched challenge carries the starter files; prefer it when available.
+    const challenge: Challenge = this.challenge() ?? {
+      id,
+      title: this.challengeTitle(),
+      category: toChallengeCategoryId(this.categoryId()), // Type-safe conversion
+      gitHub: this.gitHub(),
+      description: this.description() || '',
+      difficulty: toDifficultyLevel(this.difficulty(), 'Beginner'), // Type-safe conversion with fallback
+      tags: this.tags() || [],
+      link: this.challengeSlug()
+    };
 
     this.launching.set(true);
     try {
-      await this.stackblitzService.openChallengeInStackblitz({
-        id,
-        title,
-        category: toChallengeCategoryId(category), // Type-safe conversion
-        gitHub: gitHubPath,
-        description: this.description() || '',
-        difficulty: toDifficultyLevel(difficulty, 'Beginner'), // Type-safe conversion with fallback
-        tags: this.tags() || [],
-        link: this.challengeSlug()
-      });
+      await this.stackblitzService.openChallengeInStackblitz(challenge);
     } catch (error) {
-      console.error('[WorkspaceToolbar] Failed to launch StackBlitz:', error);
+      console.error('[WorkspaceToolbar] Failed to launch live editor:', error);
     } finally {
       // Keep launching state for a moment to show feedback
       setTimeout(() => this.launching.set(false), LOADING_CONFIG.LONG_DELAY_MS);
